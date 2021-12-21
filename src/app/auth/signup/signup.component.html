@@ -1,0 +1,192 @@
+
+	<!--=======  breadcrumb area =======-->
+
+	<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="breadcrumb-title">Register</h1>
+
+					<!--=======  breadcrumb list  =======-->
+
+					<ul class="breadcrumb-list">
+						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active">REGISTER</li>
+					</ul>
+
+					<!--=======  End of breadcrumb list  =======-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--=======  End of breadcrumb area =======-->
+
+	<!--=============================================
+    =            shop page content         =
+    =============================================-->
+
+
+
+
+	<div class="login-area mb-20 mb-md-70 mb-sm-70 mb-xs-70 mb-xxs-70">
+		<div class="container">
+			<div class="row">
+                <div class="col-lg-2">
+					
+				</div>
+				<div class="col-lg-8 mb-md-50 mb-sm-50">
+                    <div class="lezada-form login-form--register">
+						<form  [formGroup]="registerForm" (ngSubmit)="onSubmit(addRecord)">
+							<div class="row">
+								<div class="col-lg-12">
+									<!--=======  login title  =======-->
+
+									<div class="section-title section-title--login text-center mb-50">
+										<h2 class="mb-20">Register</h2>
+										
+									</div>
+
+									<!--=======  End of login title  =======-->
+								</div>
+								<div class="col-lg-12 mb-30">
+									<label >Name <span class="required">*</span> </label>
+									<input type="text"   formControlName="fname" required>
+									<h6 class="form-text text-danger"
+									*ngIf="!registerForm.get('fname')?.valid && registerForm.get('fname')?.touched">
+								  *Enter the name</h6>
+								</div>
+								<div class="col-lg-12 mb-50">
+									<label for="regPassword">Email <span class="required">*</span> </label>
+									<input type="text" formControlName="email" required>
+									<h6 class="form-text text-danger"
+									*ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
+								  *Enter the correct email</h6>
+								</div>
+								<div class="col-lg-12 mb-30">
+									<label for="regEmail">Mobile <span class="required">*</span> </label>
+									<input type="text" formControlName="Mobile" required>
+									<h6 class="form-text text-danger"
+									*ngIf="!registerForm.get('Mobile')?.valid && registerForm.get('Mobile')?.touched">
+								  *Enter the mobile</h6>
+								</div>
+								
+								<div class="col-lg-12 mb-50">
+									<label for="regPassword">Password <span class="required">*</span> </label>
+									<input type="password" formControlName="password" required>
+									<h6 class="form-text text-danger"
+									*ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
+								  *Enter the password</h6>
+								</div>
+							
+								<div class="col-lg-12 mb-50">
+									<label for="regPassword">Confirm-Password<span class="required">*</span> </label>
+									<input type="password"   formControlName="confirmpassword" required>
+									<h6 class="form-text text-danger"
+									*ngIf="!registerForm.get('confirmpassword')?.valid && registerForm.get('confirmpassword')?.touched">
+								  *Enter the same password</h6>
+								</div>
+								
+								<div class="col-lg-12 mb-50">
+									<label for="regPassword">Register By<span class="required">*</span> </label>
+									<div class="form-group position-relative">
+										
+										<select class="form-control pl-5"  formControlName="register_by" required>
+											
+											<option *ngFor="let reg of Regby" [value]="reg.id">
+												{{reg.name}}
+											</option>
+										</select>
+										<h6 class="form-text text-danger"
+									*ngIf="!registerForm.get('register_by')?.valid && registerForm.get('register_by')?.touched">
+									*Please select</h6>
+									</div>
+								</div>
+								<div class="col-lg-12 mb-50">
+									<label for="regPassword">Buyer Type<span class="required">*</span> </label>
+									<div class="form-group position-relative">
+										
+										<select class="form-control pl-5" formControlName="buyer_type" required>
+											
+											<option *ngFor="let reg of buyer" [value]="reg.id">
+												{{reg.name}}
+											</option>
+										</select>
+										<h6 class="form-text text-danger"
+									*ngIf="!registerForm.get('buyer_type')?.valid && registerForm.get('buyer_type')?.touched">
+								  *Please select</h6>
+									</div>
+								</div>
+								<div class="col-lg-12 text-center mb-50">
+									<h6 class="form-text text-danger "
+									*ngIf="error2">
+									{{error2}}</h6>
+									<button class="lezada-button lezada-button--medium" >signup</button>
+								</div>
+                                <br>
+                                <div class="col-lg-12 text-center mb-30">
+                                    <p>if you already have an account!</p>
+									<button class="lezada-button lezada-button--medium" ><a href="/login" style="text-decoration: none; color: rgb(252, 248, 248);">login</a> </button>
+								</div>
+								
+
+							</div>
+						</form>
+					</div>
+
+				</div>
+				<ng-template #addRecord let-modal>
+                    <div class="modal-header editRowModal">
+                        <h4 class="modal-title" id="modal-basic-title">
+                            <div class="table-modal-header">
+                                <div class="modal-about">
+                                    <div class="font-weight-bold p-t-10 font-17">
+                                        Waiting For Otp</div>
+                                </div>
+                            </div>
+                        </h4>
+                        <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+                            <span aria-hidden="true"><i class="material-icons">close</i></span>
+                        </button> -->
+                    </div>
+                     <div class="modal-body">
+                          <form class="register-form" [formGroup]="otpform" (ngSubmit)="onAddRowSave(otpform)">
+                            <div class="row">
+                              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+                                <label>Verification Code<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" placeholder="otp" formControlName="otp" required>
+                                 <!-- <small class="form-text text-danger"
+                                  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
+                                  required</small>  -->
+                              </div>                      
+                            </div>
+                        
+                            <!-- <div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error1}}</div> -->
+                            <div class="modal-footer">
+                              <button type="submit" class="btn btn-primary">Verify</button>
+                             
+                              <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+                            </div>
+                          </form>
+                          <button  class="btn btn-success"  (click)="resend()">Resend</button>
+                        </div> 
+                </ng-template>
+				<div class="col-lg-2">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<!--=============================================
+	=            footer area         =
+	=============================================-->
+
+	
+	
+
+	<!--=====  End of footer area  ======-->
+
+
