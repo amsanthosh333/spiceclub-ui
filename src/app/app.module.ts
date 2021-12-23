@@ -14,22 +14,24 @@ import { FormsModule, } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { CategoryComponent } from './products/category/category.component';
 import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
-
+import { FeaturedComponent } from './products/featured/featured.component';
+import {IvyCarouselModule} from 'angular-responsive-carousel';
 @NgModule({
   declarations: [
-    AppComponent,
-    
+    AppComponent, 
     HeaderComponent,
     FooterComponent,
     HomeComponent,
     CategoryComponent,
-    BestsellersComponent
+    BestsellersComponent,
+    FeaturedComponent,
+    
   
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,AuthModule,
-    ReactiveFormsModule,NgbModule,FormsModule
+    ReactiveFormsModule,NgbModule,FormsModule,IvyCarouselModule,
    
   ],
   providers: [],

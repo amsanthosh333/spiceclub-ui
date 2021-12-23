@@ -24,13 +24,17 @@ export class HomeComponent implements OnInit {
   Banners: any;
   Todaysdeal: any;
   sliddder: any;
-   imggg= "https://neophroncrm.com/spiceclubnew/public/uploads/all/UDLqy0hIg1qmw8OlafXKE4bt9LxODcXMOPvTiabw.png"
+   imggg= 'https://neophroncrm.com/spiceclubnew/public/uploads/all/UDLqy0hIg1qmw8OlafXKE4bt9LxODcXMOPvTiabw.png'
   Bestsellpro: any;
+  Futuredpro: any;
+  photoo: any;
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService,private modalService: NgbModal,) { }
 
   ngOnInit(): void {
     this.viewdata();
+    this.viewbestsellpro();
     this.viewfuturedpro();
+    this.viewdata3();
     // this.viewdata2();
     // this.viewdata3();
     // this.viewdata4();
@@ -39,23 +43,42 @@ export class HomeComponent implements OnInit {
     this.request.getslider().subscribe((response: any) => { 
       this.Slider=response.data;
       console.log("slider.data",response.data);
-      console.log("slider",this.Slider[0].photo);
-this.sliddder=this.Slider[0].photo
+
+      this.photoo = this.Slider.map( (item:any) => item.photo);
+      console.log("photosss",this.photoo)
       setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
     });
   }
-  viewfuturedpro(){
+  viewbestsellpro(){
     this.request.getbestsellpro().subscribe((response: any) => {
       this.Bestsellpro=response.data.slice(0,8);
       console.log("best sellling",this.Bestsellpro);  
+    });
+  }
+  viewfuturedpro(){
+    this.request.getfuturedpro().subscribe((response: any) => {
+      this.Futuredpro=response.data;   
+      console.log("response.data",response);
+      console.log("allbrands",this.Futuredpro);
+   
     });
   }
   openquick(content:any){
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
+    });
+  }
+  viewdata3(){
+    this.request.getbanner().subscribe((response: any) => {
+      this.Banners=response.data;    
+       console.log("slider.data",response.data);
+      console.log("slider",this.Slider);
+      setTimeout(() => {
+        this.loadingIndicator = false;
+      }, 500);
     });
   }
 
