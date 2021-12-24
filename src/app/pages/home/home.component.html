@@ -2,38 +2,36 @@
     =            slider area         =
     =============================================-->
 
-<div class="slider-area mb-30">
+ <div class="slider-area mb-30">
 	<div class="container wide">
 		<div class="row">
 			<div class="col-lg-12">
 				<div id="rev_slider_4_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container"
 					data-alias="homepage-6" data-source="gallery">
-					<!-- START REVOLUTION SLIDER 5.4.7 auto mode -->
+				
 					<div id="rev_slider_4_1" class="rev_slider fullwidthabanner" style="display:none;"
 						data-version="5.4.7">
 						<ul>
-							<!-- SLIDE  -->
-							<li data-index="rs-10"   
+							
+							<li data-index="rs-10"    *ngFor="let img of photooo; let i = index"
 								data-transition="boxfade,boxslide,parallaxtoright,parallaxtoleft,parallaxtotop,parallaxtobottom,parallaxhorizontal,parallaxvertical"
 								data-slotamount="default,default,default,default,default,default,default,default"
 								data-hideafterloop="0" data-hideslideonmobile="off"
 								data-easein="default,default,default,default,default,default,default,default"
 								data-easeout="default,default,default,default,default,default,default,default"
 								data-masterspeed="700,default,default,default,default,default,default,default"
-								data-thumb="assets/images/spicebanner/banner1.jpeg" data-rotate="0,0,0,0,0,0,0,0"
+								data-thumb="" data-rotate="0,0,0,0,0,0,0,0"
 								data-saveperformance="off" data-title="Slide" data-param1="" data-param2=""
 								data-param3="" data-param4="" data-param5="" data-param6="" data-param7=""
 								data-param8="" data-param9="" data-param10="" data-description="">
-								<!-- MAIN IMAGE -->
-								<img src="assets/images/revimages/dummy.png" alt=""
-									data-lazyload="https://neophroncrm.com/spiceclubnew/public/uploads/all/Vcp3JrmWUsJH04QO9b14cRe0maSP03F87nsfHXaw.png"
+							
+								<img src="{{img}}" alt="iddsds"
+									data-lazyload=""
 									data-bgposition="center center" data-kenburns="on" data-duration="10000"
 									data-ease="Linear.easeNone" data-scalestart="100" data-scaleend="110"
 									data-rotatestart="0" data-rotateend="0" data-blurstart="0" data-blurend="0"
 									data-offsetstart="0 0" data-offsetend="0 0" class="rev-slidebg" data-no-retina>
-								<!-- LAYERS -->
-
-								<!-- LAYER NR. 1 -->
+							
 								<!-- <div class="tp-caption   tp-resizeme" id="slide-10-layer-13"
 									data-x="['left','center','left','left']" data-hoffset="['376','-301','81','32']"
 									data-y="['top','top','top','top']" data-voffset="['180','305','275','216']"
@@ -47,8 +45,8 @@
 									style="z-index: 5; white-space: nowrap; font-size: 24px; line-height: 36px; font-weight: 400; color: #ffffff; letter-spacing: 0px;font-family:Work Sans;">
 									Free delivery from Rs 500</div> -->
 
-								<!-- LAYER NR. 2 -->
-								<!-- <div class="tp-caption   tp-resizeme" id="slide-10-layer-3"
+						
+								<div class="tp-caption   tp-resizeme" id="slide-10-layer-3"
 									data-x="['left','center','center','left']" data-hoffset="['372','-209','-85','34']"
 									data-y="['top','middle','middle','top']" data-voffset="['230','0','-127','271']"
 									data-fontsize="['56','56','56','50']" data-width="none" data-height="none"
@@ -59,9 +57,9 @@
 									data-paddingbottom="[0,0,0,0]" data-paddingleft="[0,0,0,0]"
 									data-color="['#333','#333','#333','#333']"
 									style="z-index: 6; white-space: nowrap; font-size: 56px; line-height: 60px; font-weight: 300; color: #ffffff; letter-spacing: 0px;font-family:Work Sans;">
-									Premium Quality Productssss </div> -->
+									<span style="color: rgb(248, 248, 247);"> Welcome to spiceclub</span></div>
 
-								<!-- LAYER NR. 3 -->
+								
 								<div class="tp-caption Slider-button-alt rev-btn  tp-resizeme" id="slide-10-layer-20"
 									data-x="['left','center','center','left']" data-hoffset="['377','-358','-233','32']"
 									data-y="['top','top','top','top']" data-voffset="['338','457','427','368']"
@@ -72,25 +70,24 @@
 									data-paddingtop="[12,12,12,12]" data-paddingright="[35,35,35,35]"
 									data-paddingbottom="[12,12,12,12]" data-paddingleft="[35,35,35,35]"
 									style="z-index: 7; white-space: nowrap; letter-spacing: 1px;border-color:rgba(0,0,0,1);outline:none;box-shadow:none;box-sizing:border-box;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;cursor:pointer;">
-									<a class="revslider-button" href="products.html"> SHOP NOW</a>
+									<a class="revslider-button" href="products.html" style="text-decoration: none;color: rgb(253, 253, 250);"> SHOP NOW</a>
 								</div>
 							</li>
 
 						</ul>
 						<div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div>
 					</div>
-				</div><!-- END REVOLUTION SLIDER -->
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-
-<div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel">
-	<div class="carousel-inner">
+</div> 
+                                                            <!-- carousel-fade -->
+<!-- <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel" data-interval="3000"  style="margin-right: 10px; margin-left: 10px;">
+	<div class="carousel-inner" style=" width:100%;object-fit:cover " >
 	  <div class="carousel-item"
-	  *ngFor="let img of photoo; let i = index"
-			   [ngClass]="{'active': i == 0 }">
-			   <img src="https://neophroncrm.com/spiceclubnew/public/{{img}}" class="d-block w-50">
+	   *ngFor="let img of photoo; let i = index" [ngClass]="{'active': i == 0 }" style=" width:100%; ">
+			   <img src="{{img}}" class="d-block " style=" width: 100%; height:100%;object-fit:cover">
 			   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 				<span class="sr-only">Previous</span>
@@ -101,8 +98,10 @@
 			  </a>
 	  </div>      
 	</div>
-  <!-- carousel controls omitted -->
-  </div>
+
+  </div> -->
+  <br>
+  <br>
 <!--=====  End of slider area  ======-->
 
 
@@ -116,16 +115,24 @@
 	=============================================-->
 <app-category></app-category>
 
-
+<!--bestsellers-->
 <div class="banner-with-product-area mb-50 mb-md-80 mb-sm-60">
 	<div class="container wide">
 
 		<div class="row">
-			<div class="col-lg-12">
+			<div class="col-lg-2">	
+			</div>
+			<div class="col-lg-8">
 				<div class="section-title section-title--one text-center">
 					<h1>Best Seller Products</h1>
+					
 				</div>
 			</div>
+			<!-- class="col-lg-2 d-flex mb-3 align-items-baseline " -->
+			<div class="col-lg-2 " style="align-items: end;">
+				<a routerLink="/bestselling" class="ml-auto mr-0 btn btn-danger btn-sm shadow-md ">View all</a>
+			</div>
+			
 
 			<div class="col-lg-3 mb-md-80 mb-sm-60">
 				<!--=============================================
@@ -213,8 +220,6 @@
 </div>
 
 
-<!-- <app-bestsellers></app-bestsellers> -->
-
 <!-- Deal of the day -->
 <div class="countdown-timer-area mb-100 countdown-background countdown-bg-2 pt-100 pb-100">
 	<div class="container wide">
@@ -242,6 +247,7 @@
 <app-featured> </app-featured>
 
 
+<!-- banner -->
 <div class="hover-banner-area mb-20 mb-md-60 mb-sm-60  mb-100">
 	<div class="container wide">
 		<div class="row">
@@ -321,11 +327,6 @@
 		</div>
 	</div>
 </carousel>
-
-
-
-<!--=====  End of product carousel container  ======-->
-
 
 
 <!--=============================================

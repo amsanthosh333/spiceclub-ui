@@ -1,0 +1,642 @@
+
+
+	<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="breadcrumb-title">Shop</h1>
+
+					<!--=======  breadcrumb list  =======-->
+
+					<ul class="breadcrumb-list">
+						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active">Bestsellers</li>
+					</ul>
+
+					<!--=======  End of breadcrumb list  =======-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+		<!--=============================================
+    =            shop page content         =
+    =============================================-->
+
+	<div class="shop-page-wrapper">
+
+		<!--=======  shop page header  =======-->
+
+		<div class="shop-page-header">
+			<div class="container">
+				<div class="row align-items-center">
+
+					<div class="col-12 col-lg-7 col-md-10 d-none d-md-block">
+						<!--=======  fitler titles  =======-->
+						<div class="filter-title filter-title--type-two">
+							<ul class="product-filter-menu">
+								<li class="active" data-filter="*">All</li>
+								<li data-filter=".hot">hot products</li>
+								<li data-filter=".new">new products</li>
+								<li data-filter=".sale">sale products</li>
+							</ul>
+						</div>
+						<!--=======  End of fitler titles  =======-->
+					</div>
+
+					<div class="col-12 col-lg-5 col-md-2">
+						<!--=======  filter icons  =======-->
+
+						<div class="filter-icons">
+							<!--=======  filter dropdown  =======-->
+
+							<div class="single-icon filter-dropdown">
+                                <div class="col-md-12">
+                                    <select class="formrol pl-5" (change)="oncatChange($event.target)">
+                                        <option *ngFor="let tab of Sort" [value]="tab.id">
+                                            {{tab.value}}
+                                        </option>
+                                    </select>
+                                  </div>
+							</div>
+
+							<!--=======  End of filter dropdown  =======-->
+
+							<!--=======  grid icons  =======-->
+
+							<!-- <div class="single-icon grid-icons">
+								<a data-target="five-column" href="javascript:void(0)"><i class="ti-layout-grid4-alt"></i></a>
+								<a data-target="four-column" class="active" href="javascript:void(0)"><i
+										class="ti-layout-grid3-alt"></i></a>
+								<a data-target="three-column" href="javascript:void(0)"><i class="ti-layout-grid2-alt"></i></a>
+								<a data-target="list" href="javascript:void(0)"><i class="ti-view-list"></i></a>
+							</div> -->
+
+							<!--=======  End of grid icons  =======-->
+
+							<!--=======  advance filter icon  =======-->
+
+							<div class="single-icon advance-filter-icon">
+								<a href="javascript:void(0)" id="advance-filter-active-btn"><i class="ion-android-funnel"></i>
+									Filters</a>
+							</div>
+
+							<!--=======  End of advance filter icon  =======-->
+						</div>
+
+						<!--=======  End of filter icons  =======-->
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--=======  End of shop page header  =======-->
+
+		<!--=============================================
+        =            shop advance filter area         =
+        =============================================-->
+
+		<div class="shop-advance-filter-area" id="shop-advance-filter-area">
+			<div class="shop-advance-filter-wrapper pt-50">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-3 col-md-4 col-sm-6 mb-50">
+							<!--=======  single advance filte  =======-->
+
+							<div class="single-filter-widget">
+								<h2 class="single-filter-widget--title">Sort by</h2>
+								<ul class="single-filter-widget--list">
+									<li><a href="#">Default</a></li>
+									<li><a href="#">Popularity</a></li>
+									<li><a href="#">Average rating</a></li>
+									<li><a href="#">Newness</a></li>
+									<li><a href="#">Price: low to high</a></li>
+									<li><a href="#">Price: high to low</a></li>
+								</ul>
+							</div>
+
+							<!--=======  End of single advance filte  =======-->
+						</div>
+
+						<div class="col-lg-3 col-md-4 col-sm-6 mb-50">
+							<!--=======  single advance filte  =======-->
+
+							<div class="single-filter-widget">
+								<h2 class="single-filter-widget--title">Categories</h2>
+								<ul class="single-filter-widget--list single-filter-widget--list--category">
+									<li class="has-children">
+										<a href="products.html">Beverages</a> <span class="quantity">5</span>
+										<ul>
+											<li><a href="products.html">Tea</a></li>
+											<li><a href="products.html">Coffee</a></li>
+											<li><a href="products.html">Milk Shake</a></li>
+											<li><a href="products.html">Beverages</a></li>
+										</ul>
+									</li>
+									<li class="has-children">
+										<a href="products.html">Gourmet & Groceries</a> <span class="quantity">23</span>
+										<ul>
+											<li><a href="products.html">Instant Mixes</a></li>
+											<li><a href="products.html">Edible Oils</a></li>
+											<li><a href="products.html">Herbs & Seasonings</a></li>
+											<li><a href="products.html">Food Supplements</a></li>
+										</ul>
+									</li>
+									<li><a href="products.html">Masalas</a> <span class="quantity">12</span></li>
+								</ul>
+							</div>
+
+							<!--=======  End of single advance filte  =======-->
+						</div>
+
+						<div class="col-lg-3 col-md-4 col-sm-6 mb-50">
+							<!--=======  single advance filte  =======-->
+
+							<div class="single-filter-widget">
+								<h2 class="single-filter-widget--title">Price filter</h2>
+								<ul class="single-filter-widget--list">
+									<li><a href="#">All</a></li>
+									<li><a href="#">Rs 0.00 - Rs 70.00</a></li>
+									<li><a href="#">Rs 70.00 - Rs 140.00</a></li>
+									<li><a href="#">Rs 140.00 - Rs 210.00</a></li>
+									<li><a href="#">Rs 210.00 - Rs 280.00</a></li>
+									<li><a href="#">Rs 280.00 - Rs 350.00</a></li>
+								</ul>
+							</div>
+
+							<!--=======  End of single advance filte  =======-->
+						</div>
+
+
+						<div class="col-lg-3 col-md-4 col-sm-6 mb-50">
+							<!--=======  single advance filte  =======-->
+
+							<div class="single-filter-widget">
+								<h2 class="single-filter-widget--title">Brands</h2>
+								<ul class="single-filter-widget--list single-filter-widget--list--brand">
+									<li><a href="#">The Spice Club</a> <span class="quantity">(12)</span></li>
+									<li><a href="#">Satinanace</a> <span class="quantity">(15)</span></li>
+									<li><a href="#">Vilva</a> <span class="quantity">(13)</span></li>
+									<li><a href="#">The Spice Club</a> <span class="quantity">(12)</span></li>
+									<li><a href="#">Satinanace</a> <span class="quantity">(15)</span></li>
+									<li><a href="#">Vilva</a> <span class="quantity">(13)</span></li>
+								</ul>
+							</div>
+
+							<!--=======  End of single advance filte  =======-->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--=====  End of shop advance filter area  ======-->
+
+		<!--=============================================
+		=            shop page content         =
+		=============================================-->
+
+		<div class="shop-page-content mt-15 mb-15">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 order-2 order-lg-1">
+						<!--=======  page sidebar  =======-->
+
+						<div class="page-sidebar">
+							<!--=======  single sidebar widget  =======-->
+
+							<div class="single-sidebar-widget mb-40">
+								<!--=======  search widget  =======-->
+
+								<div class="search-widget">
+									<input placeholder="Search" type="text" class="browser-default search-field"
+                                     (click)='filterDatatable($event)' aria-label="Search box">
+								</div>
+
+								<!--=======  End of search widget  =======-->
+							</div>
+
+
+							<!--=======  End of single sidebarwidget  =======-->
+
+							<!--=======  single sidebar widget  =======-->
+
+							<div class="single-sidebar-widget mb-40">
+								<h2 class="single-sidebar-widget--title">Categories</h2>
+								<ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
+									<li class="has-children">
+										<a href="products.html">Beverages </a> <span class="quantity">5</span>
+										<ul>
+											<li><a href="products.html">Tea</a></li>
+											<li><a href="products.html">Coffee</a></li>
+											<li><a href="products.html">Green Tea</a></li>
+											<li><a href="products.html">Milk Mixes</a></li>
+										</ul>
+									</li>
+									<li class="has-children">
+										<a href="products.html">Groceries </a> <span class="quantity">23</span>
+										<ul>
+											<li><a href="products.html">Edible Oils</a></li>
+											<li><a href="products.html">Food Supplements</a></li>
+											<li><a href="products.html">Millets & Traditional Rice</a></li>
+											<li><a href="products.html">Herbs & Seasonings</a></li>
+										</ul>
+									</li>
+									<li><a href="products.html">WellBeing Products </a> <span class="quantity">12</span></li>
+									<li><a href="products.html">Organic Products </a> <span class="quantity">22</span></li>
+									<li><a href="products.html">Garden Products </a> <span class="quantity">14</span></li>
+								</ul>
+							</div>
+
+							<!--=======  End of single sidebar widget  =======-->
+
+							<!--=======  single sidebar widget  =======-->
+
+							<div class="single-sidebar-widget mb-40">
+								<h2 class="single-sidebar-widget--title">Filters</h2>
+								<div class="sidebar-price">
+									<div id="price-range"></div>
+									<div class="output-wrapper mt-20">
+										<input type="text" id="price-amount" class="price-amount" readonly>
+										<a class="price-range-button" href="#"><i class="ion-android-funnel"></i> Filter</a>
+									</div>
+								</div>
+							</div>
+
+							<!--=======  End of single sidebar widget  =======-->
+
+							<!--=======  single sidebar widget  =======-->
+
+							<div class="single-sidebar-widget mb-40">
+								<h2 class="single-sidebar-widget--title">Popular products</h2>
+
+								<!--=======  widget product wrapper  =======-->
+
+								<div class="widget-product-wrapper">
+									<!--=======  single widget product  =======-->
+									<div class="single-widget-product-wrapper">
+										<div class="single-widget-product">
+											<!--=======  image  =======-->
+
+											<div class="single-widget-product__image">
+												<a href="product_detail.html">
+													<img src="assets/images/products/prod1-f.jpeg" class="img-fluid" alt="">
+												</a>
+											</div>
+
+											<!--=======  End of image  =======-->
+
+											<!--=======  content  =======-->
+
+											<div class="single-widget-product__content">
+
+												<div class="single-widget-product__content__top">
+													<h3 class="product-title"><a href="product_detail.html">Demo Product</a></h3>
+                                                    <br>
+													<div class="price">
+														<span class="main-price discounted">Rs 270.00</span>
+														<span class="discounted-price">Rs 220.00</span>
+													</div>
+													<div class="rating">
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star-outline"></i>
+														<i class="ion-android-star-outline"></i>
+														<i class="ion-android-star-outline"></i>
+													</div>
+												</div>
+
+											</div>
+
+											<!--=======  End of content  =======-->
+										</div>
+									</div>
+
+									<!--=======  End of single widget product  =======-->
+
+									<!--=======  single widget product  =======-->
+									<div class="single-widget-product-wrapper">
+										<div class="single-widget-product">
+											<!--=======  image  =======-->
+
+											<div class="single-widget-product__image">
+												<a href="product_detail.html">
+                                                    <img src="assets/images/products/prod4-f.jpeg" class="img-fluid" alt="">
+												</a>
+											</div>
+
+											<!--=======  End of image  =======-->
+
+											<!--=======  content  =======-->
+
+											<div class="single-widget-product__content">
+
+												<div class="single-widget-product__content__top">
+													<h3 class="product-title"><a href="product_detail.html">Demo Product</a></h3>
+                                                    <br>
+													<div class="price">
+														<span class="main-price discounted">Rs 660.00</span>
+														<span class="discounted-price">Rs 600.00</span>
+													</div>
+													<div class="rating">
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+													</div>
+												</div>
+
+
+
+											</div>
+
+											<!--=======  End of content  =======-->
+										</div>
+									</div>
+
+									<!--=======  End of single widget product  =======-->
+
+									<!--=======  single widget product  =======-->
+									<div class="single-widget-product-wrapper">
+										<div class="single-widget-product">
+											<!--=======  image  =======-->
+
+											<div class="single-widget-product__image">
+												<a href="product_detail.html">
+                                                    <img src="assets/images/products/prod6-f.jpeg" class="img-fluid" alt="">
+												</a>
+											</div>
+
+											<!--=======  End of image  =======-->
+
+											<!--=======  content  =======-->
+
+											<div class="single-widget-product__content">
+
+												<div class="single-widget-product__content__top">
+													<h3 class="product-title"><a href="product_detail.html">Demo Product</a></h3>
+                                                    <br>
+													<div class="price">
+														<span class="main-price discounted">Rs 36.00</span>
+														<span class="discounted-price">Rs 33.00</span>
+													</div>
+													<div class="rating">
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star"></i>
+														<i class="ion-android-star-outline"></i>
+													</div>
+												</div>
+
+
+											</div>
+
+											<!--=======  End of content  =======-->
+										</div>
+									</div>
+									<!--=======  End of single widget product  =======-->
+								</div>
+
+								<!--=======  End of widget product wrapper  =======-->
+							</div>
+
+							<!--=======  End of single sidebar widget  =======-->
+
+							<!--=======  single sidebar widget  =======-->
+
+							<div class="single-sidebar-widget">
+								<h2 class="single-sidebar-widget--title">Tags</h2>
+
+								<div class="tag-container">
+									<a href="#">Spices</a>
+									<a href="#">Foods</a>
+									<a href="#">Supplements</a>
+									<a href="#">Honey</a>
+									<a href="#">Salt</a>
+									<a href="#">Sugar</a>
+									<a href="#">Oil</a>
+									<a href="#">Flakes</a>
+								</div>
+							</div>
+
+							<!--=======  End of single sidebar widget  =======-->
+						</div>
+
+						<!--=======  End of page sidebar  =======-->
+					</div>
+
+					<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80">
+
+						<div class="row product-isotope shop-product-wrap four-column">
+
+							<!--=======  single product  =======-->
+							<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"  *ngFor="let img of Bestsellpro | paginate: { itemsPerPage: 12, currentPage: p }">
+								<div class="single-product">
+									<!--=======  single product image  =======-->
+		
+									<div class="single-product__image">
+										<a class="image-wrap" href="products.html">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+												class="img-fluid" alt="">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+												class="img-fluid" alt="">
+										</a>
+		
+										<div class="single-product__floating-badges">
+											<!-- <span class="onsale">-10%</span> -->
+											<span class="hot" *ngIf="img.has_discount==true">hot</span>
+										</div>
+		
+										<div class="single-product__floating-icons">
+											<span class="wishlist"><a href="" data-tippy="Add to wishlist"
+													data-tippy-inertia="true" data-tippy-animation="shift-away"
+													data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
+													data-tippy-placement="left"><i
+														class="ion-android-favorite-outline"></i></a></span>
+		
+											<span class="compare"><a href="" data-tippy="Compare" data-tippy-inertia="true"
+													data-tippy-animation="shift-away" data-tippy-delay="50"
+													data-tippy-arrow="true" data-tippy-theme="sharpborder"
+													data-tippy-placement="left"><i
+														class="ion-ios-shuffle-strong"></i></a></span>
+		
+											<span class="quickview"><a class="cd-trigger" href="#qv-1" data-tippy="Quick View"
+													data-tippy-inertia="true" data-tippy-animation="shift-away"
+													data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
+													data-tippy-placement="left"><i class="ion-ios-search-strong"></i></a></span>
+										</div>
+									</div>
+									<!--=======  End of single product image  =======-->
+		
+									<!--=======  single product content  =======-->
+									<div class="single-product__content">
+										<div class="title">
+											<h3> <a href="">{{img.name}}</a></h3>
+											<a>Select options</a>
+										</div>
+										<div class="price">
+											<span class="main-price discounted">{{img.stroked_price}}</span>
+											<span class="discounted-price">{{img.main_price}}</span>
+										</div>
+									</div>
+		
+									<!--=======  End of single product content  =======-->
+								</div>
+
+								<div class="single-product--list">
+									<!--=======  single product image  =======-->
+
+									<div class="single-product__image">
+										<a class="image-wrap" href="product_detail.html">
+											<img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
+                                            <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
+										</a>
+
+										<div class="single-product__floating-badges">
+											<span class="onsale">-10%</span>
+											<span class="hot">hot</span>
+										</div>
+
+										<div class="single-product__floating-icons">
+											<span class="wishlist"><a href="#" data-tippy="Add to wishlist" data-tippy-inertia="true"
+													data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
+													data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+														class="ion-android-favorite-outline"></i></a></span>
+
+											<span class="compare"><a href="#" data-tippy="Compare" data-tippy-inertia="true"
+													data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
+													data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+														class="ion-ios-shuffle-strong"></i></a></span>
+
+											<span class="quickview"><a class="cd-trigger" href="#qv-1" data-tippy="Quick View"
+													data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
+													data-tippy-arrow="true" data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+														class="ion-ios-search-strong"></i></a></span>
+										</div>
+
+										
+
+									</div>
+
+									<!--=======  End of single product image  =======-->
+
+									<!--=======  single product content  =======-->
+
+									<div class="single-product__content">
+
+										<div class="title">
+											<h3> <a href="product_detail.html">High-waist Trousers</a></h3>
+										</div>
+										<div class="price">
+											<span class="main-price discounted">Rs 160.00</span>
+											<span class="discounted-price">Rs 180.00</span>
+										</div>
+										<p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
+											consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente eveniet consectetur
+											voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda veritatis,
+										</p>
+
+										<a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
+
+									</div>
+
+									<!--=======  End of single product content  =======-->
+								</div>
+							</div>
+                            <div id="pgg" style="text-align: center;">
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                            </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--=====  End of shop page content  ======-->
+	</div>
+
+<!--=============================================
+			=            quick view         =
+			=============================================-->
+	
+			<div  class="cd-quick-view">
+				<div class="cd-slider-wrapper">
+					<ul class="cd-slider">
+						<li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
+						<li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
+					</ul> <!-- cd-slider -->
+		
+					<ul class="cd-slider-pagination">
+						<li class="active"><a href="#0">1</a></li>
+						<li><a href="#1">2</a></li>
+					</ul> <!-- cd-slider-pagination -->
+		
+					<ul class="cd-slider-navigation">
+						<li><a class="cd-prev" href="#0">Prev</a></li>
+						<li><a class="cd-next" href="#0">Next</a></li>
+					</ul> <!-- cd-slider-navigation -->
+				</div> <!-- cd-slider-wrapper -->
+		
+				<div class="lezada-item-info cd-item-info ps-scroll">
+		
+					<h2 class="item-title">Demo Product One</h2>
+					<p class="price">
+						<span class="main-price discounted">Rs 360.00</span>
+						<span class="discounted-price">Rs 300.00</span>
+					</p>
+		
+					<p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in your daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making variety rices like Biriyani and Puloa.</p>
+		
+					<span class="quickview-title">Quantity:</span>
+					<div class="pro-qty d-inline-block mb-40">
+						<input type="text" value="1">
+					</div>
+		
+					<div class="add-to-cart-btn mb-25">
+		
+						<button class="lezada-button lezada-button--medium">add to cart</button>
+					</div>
+		
+					<div class="quick-view-other-info">
+						<table>
+							<tr class="single-info">
+								<td class="quickview-title">SKU: </td>
+								<td class="quickview-value">12345</td>
+							</tr>
+							<tr class="single-info">
+								<td class="quickview-title">Categories: </td>
+								<td class="quickview-value">
+									<a href="#">Edible Oils</a>,
+									<a href="#">Oils</a>,
+									<a href="#">Cooking Oils</a>
+								</td>
+							</tr>
+							<tr class="single-info">
+								<td class="quickview-title">Tags: </td>
+								<td class="quickview-value">
+									<a href="#">The Spice Club</a>,
+									<a href="#">Satinanace</a>
+								</td>
+							</tr>
+							<tr class="single-info">
+								<td class="quickview-title">Share on: </td>
+								<td class="quickview-value">
+									<ul class="quickview-social-icons">
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+										<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</div>
+		
+		
+				</div> <!-- cd-item-info -->
+				<a href="#0" class="cd-close">Close</a>
+			</div>

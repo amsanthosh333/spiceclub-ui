@@ -13,6 +13,9 @@ const routes: Routes = [
   { path :'login',component:LoginComponent},
   { path :'category',component:CategoryComponent},
   { path :'bestseller',component:BestsellersComponent},
+  { path: 'bestselling', loadChildren: () => import('./products/bestselling/bestselling.module').then(m => m.BestsellingModule) },
+  { path: 'shopbyproduct', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
+  { path: 'productdetail', loadChildren: () => import('./products/productdetail/productdetail.module').then(m => m.ProductdetailModule) },
 ];
 
 @NgModule({

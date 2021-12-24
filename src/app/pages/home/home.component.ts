@@ -3,7 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { RequestService } from 'src/app/services/request.service'; 
-
+import { OwlOptions } from 'ngx-owl-carousel-o';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -27,8 +27,21 @@ export class HomeComponent implements OnInit {
    imggg= 'https://neophroncrm.com/spiceclubnew/public/uploads/all/UDLqy0hIg1qmw8OlafXKE4bt9LxODcXMOPvTiabw.png'
   Bestsellpro: any;
   Futuredpro: any;
-  photoo: any;
-  constructor(private router: Router,private fb: FormBuilder,private request: RequestService,private modalService: NgbModal,) { }
+  photoo: any=[];
+  photooo:any = [
+    "https://neophroncrm.com/spiceclubnew/public/uploads/all/UDLqy0hIg1qmw8OlafXKE4bt9LxODcXMOPvTiabw.png",
+    "https://neophroncrm.com/spiceclubnew/public/uploads/all/Vcp3JrmWUsJH04QO9b14cRe0maSP03F87nsfHXaw.png"
+  ];
+  p1: any;
+  p2: any;
+  
+  
+  constructor(private router: Router,private fb: FormBuilder,private request: RequestService,private modalService: NgbModal,) {
+
+    // console.log("slidermmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.photoo);
+    // this.viewdata();
+    console.log("slidermmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.photooo);
+   }
 
   ngOnInit(): void {
     this.viewdata();
@@ -38,15 +51,18 @@ export class HomeComponent implements OnInit {
     // this.viewdata2();
     // this.viewdata3();
     // this.viewdata4();
+   
   }
+ 
+  
   viewdata(){
-    this.request.getslider().subscribe((response: any) => { 
+    this.request.getslider().subscribe((response: any) =>{ 
       this.Slider=response.data;
       console.log("slider.data",response.data);
-
-      this.photoo = this.Slider.map( (item:any) => item.photo);
+      
+      this.photoo = this.Slider.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.photo);
       console.log("photosss",this.photoo)
-      setTimeout(() => {
+       setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
     });

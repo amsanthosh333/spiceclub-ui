@@ -322,6 +322,8 @@ public addvarient(id: string,varient:any) {
 }
 public getsortprod(sort: string) {
   this.url = `${this.endPoint1}/products/search?sort_key=` + sort ;
+  console.log(this.url);
+  
   return this.http.get(this.url);
 }
 public filterdataa(category:any,min:any,max:any) {

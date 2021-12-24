@@ -16,6 +16,11 @@ import { CategoryComponent } from './products/category/category.component';
 import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
 import { FeaturedComponent } from './products/featured/featured.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+import {BestsellingModule} from './products/bestselling/bestselling.module';
+import { ShopbyproductModule } from './products/shopbyproduct/shopbyproduct.module';
+
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -31,7 +36,10 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
   imports: [
     BrowserModule,
     AppRoutingModule,AuthModule,
-    ReactiveFormsModule,NgbModule,FormsModule,IvyCarouselModule,
+    ReactiveFormsModule,NgbModule,
+    FormsModule,IvyCarouselModule,
+    CarouselModule,
+    BestsellingModule,ShopbyproductModule
    
   ],
   providers: [],
