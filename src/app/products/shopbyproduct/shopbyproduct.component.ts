@@ -62,7 +62,7 @@ export class ShopbyproductComponent implements OnInit {
   registerForm: any;
   sortForm:  FormGroup;
   Bestsellpro: any;
-  currentRate = 3;
+  currentRate = 0;
  
 starList: boolean[] = [true,true,true,true,true]; 
   rating: any;
@@ -96,6 +96,7 @@ starList: boolean[] = [true,true,true,true,true];
      
     });
   }
+  
   ngOnInit(): void {
     this.viewdata(1);
    this.viewbrand();
@@ -112,6 +113,7 @@ this.viewbestpro();
     message: ['',[Validators.required]],
  
   });
+  
   }
   get f() {
     return this.register.controls;
@@ -164,6 +166,7 @@ backk(){
 // this._location.back();
 this.page1=true;
 this.page2=false;
+
 }
 ontableChange(tbl_id:any) {
     console.log("hiii",tbl_id.value);
@@ -181,7 +184,22 @@ ontableChange(tbl_id:any) {
       console.log(error);
     });
   }
+   increaseValue() {
+    // let value = parseInt(document.getElementById('number').value, 10);
+    // value = isNaN(value) ? 0 : value;
+    // value++;
+    // document.getElementById('number').value = value;
+  }
+  
+   decreaseValue() {
+    // let value = parseInt(document.getElementById('number').value, 10);
+    // value = isNaN(value) ? 0 : value;
+    // value < 1 ? value = 1 : '';
+    // value--;
+    // document.getElementById('number').value = value;
+  }
   viewproductrow(img: any){
+    
     this.product_id=img.id
   console.log("detail", this.product_id);
   this.request.getproddetail(this.product_id).subscribe((response: any) => {
@@ -194,6 +212,7 @@ ontableChange(tbl_id:any) {
          this.photoos=this.Peoduct.photos
          this.colors=this.Peoduct.colors
          this.tags=this.Peoduct.tags
+         this.varprise=this.Peoduct.main_price
          console.log("res",this.Peoduct); 
          console.log("choise option",this.Peoduct.choice_options); 
   },
@@ -303,6 +322,7 @@ addtocart(_id:any){
       //   console.log("error",res);
   
       // }
+      console.log(this.varprise);
     }, (error: any) => {
       console.log("error",error);
     
@@ -326,12 +346,13 @@ addtocart(_id:any){
     console.log(edata2);  
     this.request.addreview(edata2).subscribe((res: any) => {
       console.log(res);
-      // if (res.message == 'Product added to cart successfully') {       
-      // }
-      // else  {
-      //   console.log("error",res);
+     if (res.message == 'Product added to cart successfully') {  
+        console.log("done",res);     
+     }
+       else  {
+        console.log("error",res);
   
-      // }
+     }
     }, (error: any) => {
       console.log("error",error);
     
