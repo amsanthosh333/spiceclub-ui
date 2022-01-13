@@ -1,0 +1,5 @@
+.offcanvas-cart-content-container .cart-product-wrapper .cart-product-container {
+    position: relative;
+    overflow: auto;
+    max-height: 450px;
+}

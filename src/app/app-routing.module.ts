@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
-import { CategoryComponent } from './products/category/category.component';
+
 
 const routes: Routes = [
   { path :'', redirectTo:'/home',pathMatch:'full'},
@@ -11,11 +11,21 @@ const routes: Routes = [
   // { path :'login',component:LoginComponent},
   { path :'home',component:HomeComponent},
   { path :'login',component:LoginComponent},
-  { path :'category',component:CategoryComponent},
+ 
   { path :'bestseller',component:BestsellersComponent},
   { path: 'bestselling', loadChildren: () => import('./products/bestselling/bestselling.module').then(m => m.BestsellingModule) },
   { path: 'shopbyproduct', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
-  { path: 'productdetail', loadChildren: () => import('./products/productdetail/productdetail.module').then(m => m.ProductdetailModule) },
+  { path: 'productdetail/:id', loadChildren: () => import('./products/productdetail/productdetail.module').then(m => m.ProductdetailModule) },
+  { path: 'wishlist', loadChildren: () => import('./profiledetails/wishlist/wishlist.module').then(m => m.WishlistModule) },
+  { path: 'cart', loadChildren: () => import('./profiledetails/cart/cart.module').then(m => m.CartModule) },
+  { path: 'checkout', loadChildren: () => import('./profiledetails/checkout/checkout.module').then(m => m.CheckoutModule) },
+  { path: 'blog', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
+  { path: 'recipe', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },
+  { path: 'brands/:id', loadChildren: () => import('./products/brands/brands.module').then(m => m.BrandsModule) },
+  { path: 'flash', loadChildren: () => import('./products/flash/flash.module').then(m => m.FlashModule) },
+  { path: 'category/:id', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
+  { path: 'daydeal', loadChildren: () => import('./products/daydeal/daydeal.module').then(m => m.DaydealModule) },
+  { path: 'monthdeal', loadChildren: () => import('./products/monthdeal/monthdeal.module').then(m => m.MonthdealModule) },
 ];
 
 @NgModule({

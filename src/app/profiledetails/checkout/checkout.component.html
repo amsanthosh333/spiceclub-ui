@@ -1,0 +1,259 @@
+	<!--=======  breadcrumb area =======-->
+
+	<div class="breadcrumb-area breadcrumb-bg-1 pt-50 pb-70 mb-30">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="breadcrumb-title">Checkout</h1>
+
+					<!--=======  breadcrumb list  =======-->
+
+					<ul class="breadcrumb-list">
+						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active">checkout</li>
+					</ul>
+
+					<!--=======  End of breadcrumb list  =======-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--=======  End of breadcrumb area =======-->
+
+	<!--=============================================
+	=            checkout page content         =
+	=============================================-->
+
+	<div class="checkout-page-area mb-130">
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div class="lezada-form">
+						<!-- Checkout Form s-->
+						<form action="#" class="checkout-form">
+							<div class="row row-40">
+
+								<div class="col-lg-7 mb-20">
+
+									<!-- Billing Address -->
+									<div id="billing-form" class="mb-40" >
+										<h4 class="checkout-title">Shipping Address</h4>
+
+										<div class="row">
+											<div class="checktotal" *ngFor="let Connectdtls of Address; let i=index">
+												<h6>Address{{i+1}}  </h6> 
+												<!-- *ngFor="let a of Cart" --> 
+												<div class="py-4"  style="padding-left: 25px; margin-right: 20px;border: 2px solid rgb(163, 163, 163);
+												border-radius: 0px;  " (click)="shippingcost(Connectdtls)" tabindex="1" >
+													<p class="clearfix">
+													  <span class="float-start">
+														Address : 
+													  </span>
+													  <span class="float-right text-muted" style="width: 60%;">
+														{{Connectdtls.address}}
+													  </span>
+													</p>
+													<p class="clearfix">
+													  <span class="float-start">
+														Country:
+													  </span>
+													  <span class="float-right text-muted" style="width: 60%;">
+														{{Connectdtls.country_name}}
+													  </span>
+													</p>
+											  
+													<p class="clearfix">
+													  <span class="float-start">
+													   State :
+													  </span>
+													  <span class="float-right text-muted" style="width: 60%;">
+														{{Connectdtls.state_name}}
+													  </span>
+													</p>
+											  
+													<p class="clearfix">
+													  <span class="float-start">
+													   City :
+													  </span>
+											  
+													  <span class="float-right text-muted" style="width: 60%;">
+														{{Connectdtls.city_name}}
+													  </span>
+											  
+													</p>
+													<p class="clearfix">
+													  <span class="float-start">
+														Postal_code :
+													  </span>
+													  <span class="float-right text-muted" style="width: 60%;">
+														{{Connectdtls.postal_code}}
+													  </span>
+											  
+													</p>
+											  
+													<p class="clearfix">
+													  <span class="float-start">
+														Mobile :
+													  </span>
+													  <span class="float-right text-muted" style="width: 60%;">
+													   {{Connectdtls.phone}}
+													  </span>
+											  
+													</p>
+												  </div>											
+												<br>
+											</div>
+
+											<!-- lazyloading -->
+											<div class="checktotal">
+												<ngx-skeleton-loader count="2"  [theme]="{ 
+													'border-radius': '5px',
+													height: '300px',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse" *ngIf="loader" ></ngx-skeleton-loader>
+											</div>
+										</div>
+									
+										<div class="col-12 mb-20">
+											<div class="check-box">
+												<input type="checkbox" id="create_account">
+												<label for="create_account">Use same address as billing <address></address></label>
+											</div>
+											<div class="check-box">
+												<input type="checkbox" id="shiping_address" data-shipping (click)="opennewaddress()">
+												<label for="shiping_address">Ship to Different Address</label>
+											</div>
+										</div>
+									</div>
+									
+									
+
+									<!-- Shipping Address -->
+									<div id="shipping-formm" class="mb-40" *ngIf="shippaddress"  style="padding-top: 20px;">
+										<h4 class="checkout-title">Shipping Address</h4>
+										<form  [formGroup]="register" (ngSubmit)="onAddRowSave(register)">
+										  <div class="row">					
+											  
+											<div class="col-md-6 col-12 mb-20">
+												<label class="shipplable">Phone no*</label>
+												<input type="text" placeholder="Phone number" formControlName="phone" required>
+											</div>
+
+											
+											<div class="col-md-6 col-12 mb-20">
+												<label class="shipplable">Country*</label>
+												<select class="nice-select" (change)="selectcountry($event)" formControlName="country">
+													<option value="" selected disabled>select</option>
+													<option *ngFor="let tab of Country" [value]="tab.id">{{tab.name}}</option>								
+												</select>
+											</div>
+											<div class="col-12 mb-20">
+												<label class="shipplable">Address*</label>
+												<input type="text" placeholder="Address line 1" formControlName="address">
+												<input type="text" placeholder="Address line 2" formControlName="address">
+											</div>
+
+											<div class="col-md-6 col-12 mb-20">
+												<label class="shipplable">State*</label>
+												<select class="nice-select"  (change)="selectstate($event)" formControlName="state">
+													<option value="" selected disabled>select</option>
+													<option *ngFor="let tab of State" [value]="tab.id">{{tab.name}}</option>								
+												</select>
+												<!-- <ng-select class="nice-select"  [items]="State" bindLabel="name" bindValue="id"
+												required placeholder="please select" >
+											  </ng-select> -->
+											</div>
+
+											<!-- <div class="col-md-6 col-12 mb-20">
+												<label class="shipplable">Town/City*</label>
+												<select class="nice-select">
+													<option value="" selected disabled>select</option>
+													<option *ngFor="let tab of City" [value]="tab.id">{{tab.name}}</option>									
+												</select>
+											</div> -->
+											<div class="col-md-6 col-12 mb-20">
+												<label class="shipplable" >Town/City*</label>
+												<ng-select class="nice-select" formControlName="city" [items]="City" bindLabel="name" bindValue="id"
+												required placeholder="" >
+											  </ng-select>
+											</div>
+											
+
+											<div class="col-md-6 col-12 mb-20">
+												<label class="shipplable">Zip Code*</label>
+												<input type="text" placeholder="Zip Code" formControlName="postal_code">
+											</div>
+											
+										</div>
+										<h6 class="form-text text-danger"
+													 style="height: 12px;">
+													<span *ngIf="error3">{{error3}}</span></h6>
+										<button class="lezada-button lezada-button--medium mt-10" type="submit">Save address </button>
+									</form>
+									</div>
+
+								</div>
+
+								<div class="col-lg-5">
+									<div class="row">
+
+										<!-- Cart Total -->
+										<div class="col-12 mb-60">
+
+											<h4 class="checkout-title">Cart Total</h4>
+
+											<div class="checkout-cart-total">
+												<h4>Product <span>Total</span></h4>
+												<!-- *ngFor="let a of Cart" -->
+												<ul  style="padding-left: 0px;">	
+													<div *ngFor="let a of Cart">
+														<li *ngFor="let b of a.cart_items">{{b.product_name}}<span>{{b.total}}</span></li>	
+													</div>						
+												</ul>											
+												<p>Sub Total <span>{{subtot}}</span></p>
+												<p>Shipping Fee <span>{{shippingfee}}</span></p>
+												<p>Tax <span>{{tax}}</span></p>
+												<h4>Grand Total <span>{{Grandtot}}</span></h4>
+											</div>
+										</div>
+
+										<!-- Payment Method -->
+									<div class="col-12">
+										<h4 class="checkout-title">Payment Method</h4>
+										<form  [formGroup]="terms" (ngSubmit)="placeorder(terms)">
+											<div class="checkout-payment-method" *ngFor="let b of Paymenttype">
+												<div class="single-method">	
+													<input type="radio" id="{{b.payment_type}}" [(ngModel)]="radioSelected"  value="{{b.payment_type_key}}" (change)="onItemChange(b.payment_type_key)" formControlName="type" >												
+											     	<label for="{{b.payment_type}}">{{b.name}}</label>
+													<!-- <p data-method="check">{{b.title}}</p> -->
+												</div>
+											</div>
+											
+												<div class="single-method mt-10">
+													<input type="checkbox" id="accept_terms" formControlName="terms" value="">
+													<label for="accept_terms"><span style="color: red;">*</span>I’ve read and accept the terms & conditions</label>
+													
+												</div>
+												<h6 class="form-text text-danger"
+													 style="height: 12px;">
+													<span *ngIf="error2">{{error2}}</span></h6>
+												
+												<button class="lezada-button lezada-button--medium mt-10" type="submit">Place order</button>
+												
+											 </form>
+											
+										 	
+										</div>
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--=====  End of checkout page content  ======-->

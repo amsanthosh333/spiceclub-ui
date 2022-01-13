@@ -1,13 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RequestService } from 'src/app/services/request.service'; 
 import { OwlOptions } from 'ngx-owl-carousel-o';
+import {Location} from '@angular/common';
+import { ThisReceiver } from '@angular/compiler';
+import { ToastrService } from 'ngx-toastr';
+
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { User } from 'src/app/models/user';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  providers: [ToastrService],
 })
 export class HomeComponent implements OnInit {
 
@@ -46,19 +55,51 @@ export class HomeComponent implements OnInit {
   register!: FormGroup;
   varient_value: any;
   quantityy: any;
-  
-  constructor(private router: Router,private fb: FormBuilder,private request: RequestService,private modalService: NgbModal,) {
+  Allbrands: any;
+  Allcat: any;
+  Homecat: any;
+  loader1 =true;
+  loader2=true;
+  loader3: boolean=true;
+  loader4: boolean=true;
+  loader5: boolean =true;
+  loader6: boolean=true;
 
-    // console.log("slidermmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.photoo);
-    // this.viewdata();
+  checkedColumns = {};
+  currentUserSubject: BehaviorSubject<User>;
+  currentUser: Observable<User>;
+ 
+  accesstoken: any;
+  tokentype: any;Proce: any;
+  currentdetail: User;
+  Wishlist: any;
+
+  constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
+    private request: RequestService,private toastr: ToastrService,private modalService: NgbModal,config: NgbRatingConfig,private _location: Location) {
+      this.currentUserSubject = new BehaviorSubject<User>(
+        JSON.parse(localStorage.getItem('currentUser')||'{}')
+        
+      );
+      console.log("currentuser details=", this.currentUserSubject);
+      this.currentUser = this.currentUserSubject.asObservable();
+       this.currentdetail = this.currentUserSubject.value;
+       this.userid=this.currentdetail.user?.id; 
+       this.accesstoken=this.currentdetail.access_token;
+       this.tokentype=this.currentdetail.token_type;
+  
     console.log("slidermmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.photooo);
    }
 
   ngOnInit(): void {
     this.viewdata();
+    this.viewcategorydata();
+    this.gethomeecat();
     this.viewbestsellpro();
     this.viewfuturedpro();
     this.viewdata3();
+    this.viewbrands();
+    
+   
     // this.viewdata2();
     // this.viewdata3();
     // this.viewdata4();
@@ -69,15 +110,13 @@ export class HomeComponent implements OnInit {
     });
    
   }
- 
-  
   viewdata(){
     this.request.getslider().subscribe((response: any) =>{ 
       this.Slider=response.data;
       console.log("slider.data",response.data);
-      
       this.photoo = this.Slider.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.photo);
       console.log("photosss",this.photoo)
+      this.loader1=false;
        setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
@@ -87,14 +126,24 @@ export class HomeComponent implements OnInit {
     this.request.getbestsellpro().subscribe((response: any) => {
       this.Bestsellpro=response.data.slice(0,8);
       console.log("best sellling",this.Bestsellpro);  
+       this.loader3=false;
     });
   }
   viewfuturedpro(){
     this.request.getfuturedpro().subscribe((response: any) => {
       this.Futuredpro=response.data;   
+      this.loader6=false;
       console.log("response.data",response);
       console.log("allbrands",this.Futuredpro);
    
+    });
+  }
+  gethomeecat(){
+    this.request.gethomecat().subscribe((response: any) => {
+      this.Homecat=response.data;
+      this.loader2=false;
+      console.log("response",response);
+      console.log("allcategory",this.Allcat);
     });
   }
   openquick(content:any){
@@ -105,7 +154,8 @@ export class HomeComponent implements OnInit {
   }
   viewdata3(){
     this.request.getbanner().subscribe((response: any) => {
-      this.Banners=response.data;    
+      this.Banners=response.data;  
+      this.loader4=false;  
        console.log("slider.data",response.data);
       console.log("slider",this.Slider);
       setTimeout(() => {
@@ -113,7 +163,12 @@ export class HomeComponent implements OnInit {
       }, 500);
     });
   }
-
+  proddetail(id:any){
+    // console.log("detail page",id);
+    window.scroll(0,0);
+    this.router.navigate(['productdetail', id]);
+    console.log("navigate to category");
+  }
   viewproductrow(img: any){
     
     this.product_id=img.id
@@ -131,6 +186,7 @@ export class HomeComponent implements OnInit {
          this.varprise=this.Peoduct.main_price
          console.log("res",this.Peoduct); 
          console.log("choise option",this.Peoduct.choice_options); 
+         window.scroll(0,0);
   },
    (error: any) => {
     console.log(error);
@@ -139,12 +195,14 @@ export class HomeComponent implements OnInit {
     console.log("relatedprod",response);
          this.Relatedprod=response.data;
          console.log("res",this.Relatedprod); 
+        
   },
    (error: any) => {
     console.log(error);
   });
    
   }
+
   selectvar(weight:any){
     this.varient_value=weight.replace(/\s/g, "")
     this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
@@ -168,6 +226,11 @@ export class HomeComponent implements OnInit {
     this.page1=true;
     this.page2=false;
     
+    }
+    gotodeals(){
+      this.router.navigate(['/daydeal']);
+      window.scroll(0,0)
+    console.log("navigate to deal");
     }
     addtocart(_id:any){
       let edata={
@@ -203,12 +266,15 @@ export class HomeComponent implements OnInit {
       console.log(edata4);  
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         console.log(res);
-        // if (res.message == 'Product added to cart successfully') {       
-        // }
-        // else  {
-        //   console.log("error",res);
+        if (res.message == 'Product is successfully added to your wishlist') {  
+         
+         this. addRecordSuccess();
+        }
+        else  {
+          this.toastr.success('', res.message);
+          console.log("error",res);
     
-        // }
+        }
       }, (error: any) => {
         console.log("error",error);
       
@@ -238,5 +304,71 @@ export class HomeComponent implements OnInit {
       });
     
     }
+      
+viewbrands(){
+  this.request.getallbrands().subscribe((response: any) => {
+    this.Allbrands=response.data;
+    this.page1=true,
+    this.page2=false,
+    console.log("response.data",response.data);
+    console.log("allbrands",this.Allbrands);
+    this.loader5=false
+    setTimeout(() => {
+      this.loadingIndicator = false;
+    }, 500);
+  });
+}
+brandnavigate(id:any){
+  window.scroll(0,0);
+  this.router.navigate(['brands', id]);
+  console.log("navigate to brand");
 
+}
+
+viewcategorydata(){
+  this.request.getallcat().subscribe((response: any) => {
+    this.Allcat=response.data;
+//     var Arr1 = this.Allcat,
+//     Arr2 = [],
+//     Arr3 = [];
+
+// for (var i=0;i<Arr1.length;i++){
+//     if ((i+2)%2==0) {
+//         Arr3.push(Arr1[i]);
+//         console.log("odd",Arr3);
+//         this.Alloddcat=Arr3
+//     }
+//     else {
+//         Arr2.push(Arr1[i]);
+//         this.Allevencat=Arr2
+//         console.log("even",Arr2);
+//     }
+// }
+
+// console.log(Arr2);
+    // this.page1=true,
+    // this.page2=false,
+    console.log("response",response);
+    console.log("allcategory",this.Allcat);
+    setTimeout(() => {
+      this.loadingIndicator = false;
+    }, 500);
+  });
+}
+catnavigate(id:any){
+  window.scroll(0,0);
+  this.router.navigate(['category', id]);
+  console.log("navigate to category");
+}
+
+addRecordSuccess() {
+  this.toastr.success('Added Successfully', '');
+  
+}
+editRecordSuccess() {
+  this.toastr.success('Edit Record Successfully', '');
+}
+deleteRecordSuccess() {
+  this.toastr.error(' Removed Successfully', '');
+}
 }

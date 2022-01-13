@@ -59,19 +59,7 @@
                                 </select>
                             </div>
 
-                            <!--=======  End of filter dropdown  =======-->
-
-                            <!--=======  grid icons  =======-->
-
-                            <!-- <div class="single-icon grid-icons">
-								<a data-target="five-column" href="javascript:void(0)"><i class="ti-layout-grid4-alt"></i></a>
-								<a data-target="four-column" class="active" href="javascript:void(0)"><i
-										class="ti-layout-grid3-alt"></i></a>
-								<a data-target="three-column" href="javascript:void(0)"><i class="ti-layout-grid2-alt"></i></a>
-								<a data-target="list" href="javascript:void(0)"><i class="ti-view-list"></i></a>
-							</div> -->
-
-                            <!--=======  End of grid icons  =======-->
+                       
 
                             <!--=======  advance filter icon  =====    (click)="opensort(sortRecord)"  ==-->
 
@@ -246,6 +234,7 @@
         <div class="shop-page-content mt-15 mb-15">
             <div class="container">
                 <div class="row">
+
                     <div class="col-lg-3 order-2 order-lg-1">
                         <!--=======  page sidebar  =======-->
 
@@ -266,17 +255,22 @@
 
                             <!--=======  End of single sidebarwidget  =======-->
 
-                            <!--=======  single sidebar widget  =======-->
+                            <!--=======  single sidebar widget  *ngIF="sideloader1" =======-->
 
                             <div class="single-sidebar-widget mb-40">
                                 <h2 class="single-sidebar-widget--title">Categories</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
                                     <li class="has-children" *ngFor="let img of Allcat">
-                                        <a href="products.html">{{img.name}}</a> <span
+                                        <a >{{img.name}}</a> <span
                                             class="quantity">{{img.number_of_children}}</span>
                                     </li>
+                                    <li  *ngIf="sideloader1">
+                                        <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
+                                    </li>
                                 </ul>
+                               
                             </div>
+                         
 
                             <!--=======  End of single sidebar widget  =======-->
 
@@ -304,8 +298,6 @@
                                 </form>
                             </div>
                             <br>
-
-
                             <!--=======  End of single sidebar widget  =======-->
 
                             <!--=======  single sidebar widget  =======-->
@@ -346,12 +338,56 @@
                                                     </div>
                                                     <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
                                                 </div>
-
                                             </div>
-
                                             <!--=======  End of content  =======-->
                                         </div>
+                                    </div>
 
+                                    <!--=======  End of single widget product  =======-->
+                                </div>
+                                <!-- lazyloading -->
+                                <div class="widget-product-wrapper" *ngIf="poploader">
+                                    <!--=======  single widget product  =======-->
+                                    <div class="single-widget-product-wrapper">
+                                        <div class="single-widget-product" 
+                                            style="padding-bottom: 17px;">
+                                            <div class="single-widget-product__image" style="height: 120px; weight:80px">                    
+                                                <ngx-skeleton-loader count="1"
+                                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                        </ngx-skeleton-loader>
+                                            </div>
+                                            <div class="single-widget-product__content">
+                                                <div class="single-widget-product__content__top">
+                                                    <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="single-widget-product" 
+                                        style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; weight:80px">                    
+                                            <ngx-skeleton-loader count="1"
+                                                        [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                    </ngx-skeleton-loader>
+                                        </div>
+                                        <div class="single-widget-product__content">
+                                            <div class="single-widget-product__content__top">
+                                                <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-widget-product" 
+                                    style="padding-bottom: 17px;">
+                                    <div class="single-widget-product__image" style="height: 120px; weight:80px">                    
+                                        <ngx-skeleton-loader count="1"
+                                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                </ngx-skeleton-loader>
+                                    </div>
+                                    <div class="single-widget-product__content">
+                                        <div class="single-widget-product__content__top">
+                                            <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
                                     </div>
 
                                     <!--=======  End of single widget product  =======-->
@@ -364,33 +400,11 @@
                                 </div>
                                 <!--=======  End of widget product wrapper  =======-->
                             </div>
-
-                            <!--=======  End of single sidebar widget  =======-->
-
-                            <!--=======  single sidebar widget  =======-->
-
-                            <div class="single-sidebar-widget">
-                                <h2 class="single-sidebar-widget--title">Tags</h2>
-
-                                <div class="tag-container">
-                                    <a href="#">Spices</a>
-                                    <a href="#">Foods</a>
-                                    <a href="#">Supplements</a>
-                                    <a href="#">Honey</a>
-                                    <a href="#">Salt</a>
-                                    <a href="#">Sugar</a>
-                                    <a href="#">Oil</a>
-                                    <a href="#">Flakes</a>
-                                </div>
-                            </div>
-
                             <!--=======  End of single sidebar widget  =======-->
                         </div>
-
-                        <!--=======  End of page sidebar  =======-->
                     </div>
 
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80">
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80" *ngIf="!poploader">
 
                         <div class="row product-isotope shop-product-wrap four-column">
 
@@ -401,6 +415,7 @@
 
                                     <div class="single-product__image">
                                         <a class="image-wrap" >
+                                           
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                                 class="img-fluid" alt="">
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
@@ -413,7 +428,7 @@
                                         </div>
 
                                         <div class="single-product__floating-icons">
-                                            <span (click)="addtowishlist(img.id)" class="wishlist"><a href=""
+                                            <span (click)="addtowishlist(img.id)" class="wishlist"><a 
                                                     data-tippy="Add to wishlist" data-tippy-inertia="true"
                                                     data-tippy-animation="shift-away" data-tippy-delay="50"
                                                     data-tippy-arrow="true" data-tippy-theme="sharpborder"
@@ -440,7 +455,7 @@
                                     <div class="single-product__content" (click)="viewproductrow(img)">
                                         <div class="title">
                                             <h3> <a href="">{{img.name}}</a></h3>
-                                            <a>View details</a>
+                                            <a style="color: red;">View details</a>
                                         </div>
                                         <div class="price">
                                             <span class="main-price discounted">{{img.stroked_price}}</span>
@@ -532,7 +547,19 @@
                         </div>
 
                     </div>
-
+          <!--  productslazyloading -->
+          <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="poploader">
+            <div class="row product-isotope shop-product-wrap four-column">
+                <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+                                    <div class="single-product" style="height: 250px; width: 200px;">          
+                                            <ngx-skeleton-loader count="1"
+                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                    </div>                                  
+                </div>   
+            </div>
+        </div>           
+         <!--  productslazyloading  end-->
                 </div>
             </div>
         </div>
@@ -817,11 +844,10 @@
                                         <div class="shop-product__block__title">Quantity: </div>
                                         <div class="shop-product__block__value">
                                             <div class="pro-qty d-inline-block mx-0 pt-0">
-                                                <a  class="dec qty-btn" style="text-decoration: none;">-</a>
-                                                <input type="text" value="1">
-                                                <a  class="inc qty-btn" style="text-decoration: none;">+</a>                               
-                                            </div>      
-                                                                                
+                                                <a  class="dec qty-btn" style="text-decoration: none;"  (click)="decreaseqty()" *ngIf="quantityyy!==0">-</a>
+                                                <input type="text" value="{{quantityyy}}">
+                                                <a  class="inc qty-btn" style="text-decoration: none;" (click)="increaseqty()" *ngIf="stocck!==0">+</a>                               
+                                            </div>                                               
                                         </div>
                                         <div class="shop-product__block__value">
                                             <div class=" d-inline-block pt-1 pl-15">
@@ -830,7 +856,13 @@
                                             </div>
                                         </div>
                                     </div>
+                                    <div class="shop-product__block shop-product__block--size mb-20">
+                                        <div class="shop-product__block__title">Total price: </div>
+                                        <div class="shop-product__block__value ">
+                                            <span style="color: red;"> Rs{{totalprice}} </span>
+                                        </div>
 
+                                    </div>
                                    
 
                                     <!--=======  End of shop product quantity block  =======-->
@@ -840,8 +872,8 @@
                                     <div class="shop-product__buttons mb-20" style="display: flex;
                                     align-items: center;
                                     justify-content: center;">
-                                        <a class="lezada-button lezada-button--medium"
-                                            (click)="addtocart(Peoduct.id)">add to cart</a>
+                                        <a class="lezada-button lezada-button--medium" *ngIf="stk!==0" (click)="addtocart(Peoduct.id)">add to cart</a>
+                                       <a class="lezada-button lezada-button--medium" *ngIf="stk==0" >out of stock</a>
                                         <!-- <a class="lezada-compare-button ml-20" href="#" data-tippy="Compare" data-tippy-inertia="true"
 											data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-placement="left"
 											data-tippy-arrow="true" data-tippy-theme="sharpborder"><i class="ion-ios-shuffle"></i></a> -->
@@ -849,41 +881,25 @@
 
                                     <!--=======  End of shop product buttons  =======-->
 
-                                    <!--=======  shop product brands  =======-->
-
-                                    <div class="shop-product__brands mb-10">
-
-                                        <a href="#">
-                                            <img src="assets/images/brands/sati.png" class="brandlogo_s" alt="">
-                                        </a>
-
-
-
-                                    </div>
-
-                                    <!--=======  End of shop product brands  =======-->
-
-                                    <!--=======  other info table  =======-->
-
                                     <div class="quick-view-other-info pb-0">
                                         <table>
 
                                             <tr class="single-info">
-                                                <td class="quickview-title">Unit: </td>
+                                                <td class="quickview-title" style="color: red;">Unit: </td>
                                                 <td class="quickview-value">
                                                     <a href="#">{{Peoduct.unit}}</a>,
 
                                                 </td>
                                             </tr>
                                             <tr class="single-info">
-                                                <td class="quickview-title">Tags: </td>
-                                                <td class="quickview-value" *ngFor="let a of tags">
-                                                    <a href="#">{{a}}</a>,
+                                                <td class="quickview-title" style="color: red;" >Tags: </td>
+                                                <td class="quickview-value" >
+                                                    <a *ngFor="let a of tags">{{a}},</a>
 
                                                 </td>
                                             </tr>
                                             <tr class="single-info">
-                                                <td class="quickview-title">Share on: </td>
+                                                <td class="quickview-title" style="color: red;">Share on: </td>
                                                 <td class="quickview-value">
                                                     <ul class="quickview-social-icons">
                                                         <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -1291,10 +1307,9 @@
             <div class="single-product" style="padding-left: 70px;">
                 <!--=======  single product image  =======-->
                 <div class="single-product__image" (click)="viewproductrow(img)">
-                    <a class="image-wrap" href="products.html">
+                    <a class="image-wrap">
                         <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}" class="img-fluid"
                             alt="">
-
                     </a>
 
                     <div class="single-product__floating-badges">
@@ -1319,7 +1334,7 @@
                 <div class="single-product__content" (click)="viewproductrow(img)">
                     <div class="title">
                         <h3> <a >{{img.name}}</a></h3>
-                        <a href="#">Select options</a>
+                        <a >Select options</a>
                     </div>
                     <div class="price">
                         <span class="main-price discounted">{{img.stroked_price}}</span>

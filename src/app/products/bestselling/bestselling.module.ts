@@ -4,7 +4,8 @@ import { CommonModule } from '@angular/common';
 import { BestsellingRoutingModule } from './bestselling-routing.module';
 import { BestsellingComponent } from './bestselling.component';
 import {NgxPaginationModule} from 'ngx-pagination'; 
-
+import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     BestsellingComponent
@@ -12,7 +13,7 @@ import {NgxPaginationModule} from 'ngx-pagination';
   imports: [
     CommonModule,
     BestsellingRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,    NgxSkeletonLoaderModule, ToastrModule.forRoot(),
   ]
 })
 export class BestsellingModule { }

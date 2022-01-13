@@ -1,0 +1,19 @@
+.shipplable{
+    opacity: 0.8;
+}
+.nice-select.ng-option{
+    color: red;
+}
+.nice-select.ng-dropdown-panel .scroll-host {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+.py-4:focus {
+    background:  #f2f2f2;;
+  
+}
+/* #f2f2f2; */

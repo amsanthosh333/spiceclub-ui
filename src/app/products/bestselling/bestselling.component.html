@@ -25,75 +25,6 @@
     =============================================-->
 
 	<div class="shop-page-wrapper">
-
-		<!--=======  shop page header  =======-->
-
-		<div class="shop-page-header">
-			<div class="container">
-				<div class="row align-items-center">
-
-					<div class="col-12 col-lg-7 col-md-10 d-none d-md-block">
-						<!--=======  fitler titles  =======-->
-						<div class="filter-title filter-title--type-two">
-							<ul class="product-filter-menu">
-								<li class="active" data-filter="*">All</li>
-								<li data-filter=".hot">hot products</li>
-								<li data-filter=".new">new products</li>
-								<li data-filter=".sale">sale products</li>
-							</ul>
-						</div>
-						<!--=======  End of fitler titles  =======-->
-					</div>
-
-					<div class="col-12 col-lg-5 col-md-2">
-						<!--=======  filter icons  =======-->
-
-						<div class="filter-icons">
-							<!--=======  filter dropdown  =======-->
-
-							<div class="single-icon filter-dropdown">
-                                <div class="col-md-12">
-                                    <select class="formrol pl-5" (change)="oncatChange($event.target)">
-                                        <option *ngFor="let tab of Sort" [value]="tab.id">
-                                            {{tab.value}}
-                                        </option>
-                                    </select>
-                                  </div>
-							</div>
-
-							<!--=======  End of filter dropdown  =======-->
-
-							<!--=======  grid icons  =======-->
-
-							<!-- <div class="single-icon grid-icons">
-								<a data-target="five-column" href="javascript:void(0)"><i class="ti-layout-grid4-alt"></i></a>
-								<a data-target="four-column" class="active" href="javascript:void(0)"><i
-										class="ti-layout-grid3-alt"></i></a>
-								<a data-target="three-column" href="javascript:void(0)"><i class="ti-layout-grid2-alt"></i></a>
-								<a data-target="list" href="javascript:void(0)"><i class="ti-view-list"></i></a>
-							</div> -->
-
-							<!--=======  End of grid icons  =======-->
-
-							<!--=======  advance filter icon  =======-->
-
-							<div class="single-icon advance-filter-icon">
-								<a href="javascript:void(0)" id="advance-filter-active-btn"><i class="ion-android-funnel"></i>
-									Filters</a>
-							</div>
-
-							<!--=======  End of advance filter icon  =======-->
-						</div>
-
-						<!--=======  End of filter icons  =======-->
-					</div>
-
-				</div>
-			</div>
-		</div>
-
-		<!--=======  End of shop page header  =======-->
-
 		<!--=============================================
         =            shop advance filter area         =
         =============================================-->
@@ -203,57 +134,17 @@
 				<div class="row">
 					<div class="col-lg-3 order-2 order-lg-1">
 						<!--=======  page sidebar  =======-->
-
-						<div class="page-sidebar">
+					<div class="page-sidebar">
 							<!--=======  single sidebar widget  =======-->
-
-							<div class="single-sidebar-widget mb-40">
-								<!--=======  search widget  =======-->
-
-								<div class="search-widget">
-									<input placeholder="Search" type="text" class="browser-default search-field"
-                                     (click)='filterDatatable($event)' aria-label="Search box">
-								</div>
-
-								<!--=======  End of search widget  =======-->
-							</div>
-
-
-							<!--=======  End of single sidebarwidget  =======-->
-
-							<!--=======  single sidebar widget  =======-->
-
 							<div class="single-sidebar-widget mb-40">
 								<h2 class="single-sidebar-widget--title">Categories</h2>
-								<ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
-									<li class="has-children">
-										<a href="products.html">Beverages </a> <span class="quantity">5</span>
-										<ul>
-											<li><a href="products.html">Tea</a></li>
-											<li><a href="products.html">Coffee</a></li>
-											<li><a href="products.html">Green Tea</a></li>
-											<li><a href="products.html">Milk Mixes</a></li>
-										</ul>
-									</li>
-									<li class="has-children">
-										<a href="products.html">Groceries </a> <span class="quantity">23</span>
-										<ul>
-											<li><a href="products.html">Edible Oils</a></li>
-											<li><a href="products.html">Food Supplements</a></li>
-											<li><a href="products.html">Millets & Traditional Rice</a></li>
-											<li><a href="products.html">Herbs & Seasonings</a></li>
-										</ul>
-									</li>
-									<li><a href="products.html">WellBeing Products </a> <span class="quantity">12</span></li>
-									<li><a href="products.html">Organic Products </a> <span class="quantity">22</span></li>
-									<li><a href="products.html">Garden Products </a> <span class="quantity">14</span></li>
+								<ul class="single-sidebar-widget--list single-sidebar-widget--list--category">				
 								</ul>
 							</div>
 
+
 							<!--=======  End of single sidebar widget  =======-->
-
 							<!--=======  single sidebar widget  =======-->
-
 							<div class="single-sidebar-widget mb-40">
 								<h2 class="single-sidebar-widget--title">Filters</h2>
 								<div class="sidebar-price">
@@ -316,89 +207,6 @@
 
 									<!--=======  End of single widget product  =======-->
 
-									<!--=======  single widget product  =======-->
-									<div class="single-widget-product-wrapper">
-										<div class="single-widget-product">
-											<!--=======  image  =======-->
-
-											<div class="single-widget-product__image">
-												<a href="product_detail.html">
-                                                    <img src="assets/images/products/prod4-f.jpeg" class="img-fluid" alt="">
-												</a>
-											</div>
-
-											<!--=======  End of image  =======-->
-
-											<!--=======  content  =======-->
-
-											<div class="single-widget-product__content">
-
-												<div class="single-widget-product__content__top">
-													<h3 class="product-title"><a href="product_detail.html">Demo Product</a></h3>
-                                                    <br>
-													<div class="price">
-														<span class="main-price discounted">Rs 660.00</span>
-														<span class="discounted-price">Rs 600.00</span>
-													</div>
-													<div class="rating">
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-													</div>
-												</div>
-
-
-
-											</div>
-
-											<!--=======  End of content  =======-->
-										</div>
-									</div>
-
-									<!--=======  End of single widget product  =======-->
-
-									<!--=======  single widget product  =======-->
-									<div class="single-widget-product-wrapper">
-										<div class="single-widget-product">
-											<!--=======  image  =======-->
-
-											<div class="single-widget-product__image">
-												<a href="product_detail.html">
-                                                    <img src="assets/images/products/prod6-f.jpeg" class="img-fluid" alt="">
-												</a>
-											</div>
-
-											<!--=======  End of image  =======-->
-
-											<!--=======  content  =======-->
-
-											<div class="single-widget-product__content">
-
-												<div class="single-widget-product__content__top">
-													<h3 class="product-title"><a href="product_detail.html">Demo Product</a></h3>
-                                                    <br>
-													<div class="price">
-														<span class="main-price discounted">Rs 36.00</span>
-														<span class="discounted-price">Rs 33.00</span>
-													</div>
-													<div class="rating">
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star"></i>
-														<i class="ion-android-star-outline"></i>
-													</div>
-												</div>
-
-
-											</div>
-
-											<!--=======  End of content  =======-->
-										</div>
-									</div>
-									<!--=======  End of single widget product  =======-->
 								</div>
 
 								<!--=======  End of widget product wrapper  =======-->
@@ -412,14 +220,7 @@
 								<h2 class="single-sidebar-widget--title">Tags</h2>
 
 								<div class="tag-container">
-									<a href="#">Spices</a>
-									<a href="#">Foods</a>
-									<a href="#">Supplements</a>
-									<a href="#">Honey</a>
-									<a href="#">Salt</a>
-									<a href="#">Sugar</a>
-									<a href="#">Oil</a>
-									<a href="#">Flakes</a>
+								
 								</div>
 							</div>
 
@@ -429,7 +230,7 @@
 						<!--=======  End of page sidebar  =======-->
 					</div>
 
-					<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80">
+					<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-30" *ngIf="!prodloader">
 
 						<div class="row product-isotope shop-product-wrap four-column">
 
@@ -452,7 +253,7 @@
 										</div>
 		
 										<div class="single-product__floating-icons">
-											<span class="wishlist"><a href="" data-tippy="Add to wishlist"
+											<span class="wishlist"><a (click)="addtowishlist(img.id)"  data-tippy="Add to wishlist"
 													data-tippy-inertia="true" data-tippy-animation="shift-away"
 													data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
 													data-tippy-placement="left"><i
@@ -552,6 +353,19 @@
                             </div>
 						</div>
 					</div>
+       <!--  productslazyloading -->
+	   <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
+		<div class="row product-isotope shop-product-wrap four-column">
+			<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+								<div class="single-product" style="height: 250px; width: 200px;">          
+										<ngx-skeleton-loader count="1"
+											[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+										</ngx-skeleton-loader>
+								</div>                                  
+			</div>   
+		</div>
+	</div>
+
 				</div>
 			</div>
 		</div>

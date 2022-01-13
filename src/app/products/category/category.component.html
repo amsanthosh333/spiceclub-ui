@@ -1,58 +1,580 @@
-	
-	<div class="product-category-container mb-100 mb-md-80 mb-sm-70">
-		<div class="container wide">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="section-title section-title--one text-center">
-						<h1>Categories</h1>
-					</div>
-					</div>
-				<div class="col-lg-12">
-					<div class="product-category-container--collectionhome-wrapper">
-						<div class="row justify-content-center" >
-							<div class="col-lg-2 col-md-6 col-12 mb-60" *ngFor="let img of Allcat;; let i = index" (onclick)="catnavigate()" >							
-								<div class="single-category single-category--one wow zoomIn">
+<div >
+    <div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15 ">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="breadcrumb-title">Shop</h1>
+                    <!--=======  breadcrumb list  =======-->
+                    <ul class="breadcrumb-list">
+                        <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                        <li class="breadcrumb-list__item breadcrumb-list__item--active">SHOP BY CATEGORY</li>
+                    </ul>
+                    <!--=======  End of breadcrumb list  =======-->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="shop-page-header">
+        <div class="container">
+            <div class="row align-items-center">
 
-                                    <div class="single-category__content single-category__content--one mt-10 mb-10" *ngIf="(i+2)%2==0">
-										<div class="title">
-											<p>{{img.name}}</p>
-											<a href="">+ {{img.name}}</a>
-										</div>
+                <div class="col-12 col-lg-12 col-md-5 d-none d-md-block pt-3">
+                    <!--=======  fitler titles  =======-->
+                    <div class="filter-title filter-title--type-two" >
+                        <ul class="product-filter-menu" style="text-align: center;"> 
+                            <li *ngFor="let img of  Topcat;let i = index"  [ngClass]="{'active': selectedItem === img.id}"
+                             (click)="viewcatprod(img,img.id,1,i)" >{{img.name}}</li>
+                           
+                        </ul>
+                    </div>
+                    <!--=======  End of fitler titles   =======-->
+                </div>
 
-										<p class="product-count">{{img.number_of_children}}</p>
-									</div>
-                                    
-									<div class="single-category__image single-category__image--one" style=" width:100%; height:200px;" (click)="catnavigate()">
-										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}" class="img-fluid" alt="" style=" width:100%; height:100%;object-fit:cover">
-									</div>
-									<div class="single-category__content single-category__content--one mt-10 mb-10" *ngIf="(i+2)%2!==0">
-										<div class="title">
-											<p>{{img.name}}</p>
-											<a href="">+{{img.name}}</a>
-										</div>
+            </div>
+        </div>
+    </div>
+    <!--=============================================
+    =            shop page content         =
+    =============================================-->
+    <div class="shop-page-wrapper mt-20">
+        <div class="shop-page-content mt-15 mb-15">
+            <div class="container">
+                <div class="row">
 
-										<p class="product-count">{{img.number_of_children}}</p>
-									</div>
+                    <div class="col-lg-3 order-2 order-lg-1" *ngIf="!sideloader">
+                        <!--=======  page sidebar  =======-->
+                        <div class="page-sidebar">
+                            <!--=======  single sidebar widget  =======-->
+                            <div class="single-sidebar-widget mb-40">
+                                <!--=======  search widget  =======-->
+                                <div class="search-widget">
+                                    <!-- <input placeholder="Search" type="text" class="browser-default search-field"
+                                         aria-label="Search box"> -->
+                                         <form  [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
+                                            <input type="search" formControlName="key" placeholder="Search products ...">
+                                            <button type="submit" ><i class="ion-android-search"></i></button>
+                                        </form>
+                                        <form  [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
+                                            <input type="search" formControlName="key" placeholder="Search sub products ...">
+                                            <button type="submit" ><i class="ion-android-search"></i></button>
+                                        </form>
+                                </div>
+                                <!--=======  End of search widget  (click)='filterDatatable($event)'  =======-->
+                            </div>
+                            <!--=======  End of single sidebarwidget  =======-->
+                            <!--=======  single sidebar widget  =======-->
+                            
 
-									<!--=======  End of single category content  =======-->
+                            <div class="single-filter-widget  mb-40">
+                                <h2 class="single-sidebar-widget--title mb-2" >Sub Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
+                                    <li  *ngFor="let cat of Subcat;let i = index"  (click)="viewsubcatprod(cat.id,1,i)" [ngClass]="{'active': subItem === i}">
+                                       {{cat.name}}
+                                    </li>
+                                </ul>
+                            </div>
+                           
 
-									<!--=======  banner-link  =======-->
+                            <div class="single-sidebar-widget mb-20">
+                                <h2 class="single-sidebar-widget--title mb-2">All Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
+                                    <li class="has-children" *ngFor="let img of Allcat;let i=index" [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod(img,img.id,1,i)">
+                                        {{img.name}}
+                                    </li>
+                                </ul>
+                            </div>
 
-									
+                            <!--=======  End of single sidebar widget  =======-->
 
-									<!--=======  End of banner-link  =======-->
-								</div>
+                            <div data-role="main" class="ui-content">
+                               
+                                <!-- <form [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
+                                    <div data-role="rangeslider">
+                                        <label for="price-min">Price:</label>
+                                        <input type="range" name="price-min" id="price-min" value="200" min="0"
+                                            max="1000" formControlName="min">
+                                        <label for="price-max">Price:</label>
+                                        <input type="range" name="price-max" id="price-max" value="800" min="0"
+                                            max="1000" formControlName="max">
+                                    </div>
+                                    <div class="single-icon advance-filter-icon" style="text-align: end;">
 
-								<!--=======  End of single category  =======-->
-							</div>
+                                        <a id="advance-filter-active-btn" type="submit"><i
+                                                class="ion-android-funnel"></i>
+                                            Filter </a>
+                                    </div>
 
-						
+                                </form> -->
+                            </div>
+                            <br>
 
-						
-						
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            <!--=======  End of single sidebar widget  =======-->
+                       
+                            <!-------------- <div class="single-sidebar-widget mb-40">
+                                <h2 class="single-sidebar-widget--title">Popular products</h2>
+
+                                <div class="widget-product-wrapper">
+                                    <div class="single-widget-product-wrapper">
+                                        <div class="single-widget-product" *ngFor="let img of Bestsellpro"
+                                            style="padding-bottom: 17px;" (click)="viewproductrow(img)">
+                                            <div class="single-widget-product__image">
+                                                <a >
+                                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                        class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+                                            <div class="single-widget-product__content">
+
+                                                <div class="single-widget-product__content__top">
+                                                    <h3 class="product-title"><a>{{img.name}}</a>
+                                                    </h3>
+                                                    <br>
+                                                    <div class="price">
+                                                        <span class="main-price discounted"
+                                                            *ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
+                                                        <span class="discounted-price">{{img.main_price}}</span>
+                                                    </div>
+                                                    <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center mt-30">
+                                        <a class="lezada-button lezada-button--medium lezada-button--icon--left"
+                                            routerLink="/bestselling"><i class="ion-android-add"></i> MORE</a>
+                                    </div>
+                                </div>
+                            </div> -->
+          
+                        </div>
+
+                        <!--=======  End of page sidebar  =======-->
+                    </div>
+
+                    <!-- sidebarlazyloading -->
+                    <div class="col-lg-3 order-2 order-lg-1" *ngIf="sideloader">
+                        <div class="page-sidebar">
+                            <div class="single-sidebar-widget mb-40">
+                                <div class="search-widget">
+                                         <form  [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
+                                            <input type="search" formControlName="key" placeholder="Search products ...">
+                                            <button type="submit" ><i class="ion-android-search"></i></button>
+                                        </form>
+                                        <form  [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
+                                            <input type="search" formControlName="key" placeholder="Search sub products ...">
+                                            <button type="submit" ><i class="ion-android-search"></i></button>
+                                        </form>
+                                </div>
+                            </div>                          
+                            <div class="single-filter-widget  mb-40">
+                                <h2 class="single-sidebar-widget--title mb-2" >Sub Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
+                                    <li>
+                                        <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
+                                    </li>
+                                </ul>
+                            </div>
+                           
+                            <div class="single-sidebar-widget mb-20">
+                                <h2 class="single-sidebar-widget--title mb-2">All Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
+                                   <li> <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader></li>
+                                </ul>
+                            </div>
+                            <div data-role="main" class="ui-content">
+
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                     <!-- sidebarlazyloading  end-->
+
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="!prodloader">
+
+                        <div class="row product-isotope shop-product-wrap four-column">
+
+                            <!--=======  single product  =======-->
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let img of Product">
+                                <div class="single-product">
+                                    <!--=======  single product image  =======-->
+
+                                    <div class="single-product__image">
+                                        <a class="image-wrap" >
+                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                class="img-fluid" alt="">
+                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                class="img-fluid" alt="">
+                                        </a>
+
+                                        <div class="single-product__floating-badges">
+                                            <!-- <span class="onsale">-10%</span> -->
+                                            <span class="hot" *ngIf="img.has_discount==true">hot</span>
+                                        </div>
+
+                                        <div class="single-product__floating-icons">
+                                            <!-- (click)="addtowishlist(img.id)" -->
+                                            <span  class="wishlist"  (click)="addtowishlist(img.id)" ><a 
+                                                    data-tippy="Add to wishlist" data-tippy-inertia="true"
+                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                    data-tippy-placement="left"><i
+                                                        class="ion-android-favorite-outline"></i></a></span>
+
+                                            <span class="quickview"><a class="cd-trigger" href="#qv-1"
+                                                    data-tippy="Quick View" data-tippy-inertia="true"
+                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                    data-tippy-placement="left"><i
+                                                        class="ion-ios-search-strong"></i></a></span>
+                                        </div>
+                                    </div>
+                                    <!--=======  End of single product image  =======-->
+
+                                    <!--=======  single product content  routerLink="/productdetail"  (click)="viewproductrow(img)"=======-->
+                                    <div class="single-product__content">
+                                        <div class="title">
+                                            <h3> <a href="">{{img.name}}</a></h3>
+                                            <a style="color: red;" (click)="proddetail(img.id)">View details</a>
+                                        </div>
+                                        <div class="price">
+                                            <span class="main-price discounted">{{img.stroked_price}}</span>
+                                            <span class="discounted-price">{{img.main_price}}</span>
+                                        </div>
+                                    </div>
+                                    <!--=======  End of single product content  =======-->
+                                </div>
+                                <div class="single-product--list">
+                                    <!--=======  single product image  =======-->
+
+                                    <div class="single-product__image">
+                                        <a class="image-wrap" href="product_detail.html">
+                                            <img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
+                                            <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
+                                        </a>
+
+                                        <div class="single-product__floating-badges">
+                                            <span class="onsale">-10%</span>
+                                            <span class="hot">hot</span>
+                                        </div>
+
+                                        <div class="single-product__floating-icons">
+                                            <span class="wishlist"><a href="#" data-tippy="Add to wishlist"
+                                                    data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                    data-tippy-delay="50" data-tippy-arrow="true"
+                                                    data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+                                                        class="ion-android-favorite-outline"></i></a></span>
+
+                                            <span class="compare"><a href="#" data-tippy="Compare"
+                                                    data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                    data-tippy-delay="50" data-tippy-arrow="true"
+                                                    data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+                                                        class="ion-ios-shuffle-strong"></i></a></span>
+
+                                            <span class="quickview"><a class="cd-trigger" href="#qv-1"
+                                                    data-tippy="Quick View" data-tippy-inertia="true"
+                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                    data-tippy-placement="bottom"><i
+                                                        class="ion-ios-search-strong"></i></a></span>
+                                        </div>
+
+
+
+                                    </div>
+
+                                    <!--=======  End of single product image  =======-->
+
+                                    <!--=======  single product content  =======-->
+
+                                    <div class="single-product__content">
+
+                                        <div class="title">
+                                            <h3> <a href="product_detail.html">High-waist Trousers</a></h3>
+                                        </div>
+                                        <div class="price">
+                                            <span class="main-price discounted">Rs 160.00</span>
+                                            <span class="discounted-price">Rs 180.00</span>
+                                        </div>
+                                        <p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                            Laudantium
+                                            consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente
+                                            eveniet consectetur
+                                            voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda
+                                            veritatis,
+                                        </p>
+
+                                        <a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
+
+                                    </div>
+
+                                    <!--=======  End of single product content  =======-->
+                                </div>
+                            </div>
+                        </div>
+                        <div id="pgg" *ngIf="Product?.length!=0">
+                            <ul class="pagination" style="justify-content: center;
+                            display: flex;">
+                                <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
+                                    *ngFor="let p of pagess" (click)="getpage(p.url)">
+                                    <a class="page-link">{{p.label}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="pggg"  *ngIf="Product?.length==0" style=" display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 200px;
+                        border: 3px solid rgb(139, 139, 139);">
+                            <div>
+                                <h5>
+                                    There is no product
+                                </h5>
+                            </div>
+                        </div>
+                    </div>
+                         <!--  productslazyloading -->
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
+                        <div class="row product-isotope shop-product-wrap four-column">
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+                                                <div class="single-product" style="height: 250px; width: 200px;">          
+                                                        <ngx-skeleton-loader count="1"
+                                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                        </ngx-skeleton-loader>
+                                                </div>                                  
+                            </div>   
+                        </div>
+                    </div>           
+                     <!--  productslazyloading  end-->
+                </div>
+                               <!-- lazyloading    -->
+               <!-- <div class="row">
+                    <div class="col-lg-3 order-2 order-lg-1">
+                        <div class="page-sidebar">
+                            <div class="single-sidebar-widget mb-40">
+                                <div class="search-widget">
+                                         <form  [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
+                                            <input type="search" formControlName="key" placeholder="Search products ...">
+                                            <button type="submit" ><i class="ion-android-search"></i></button>
+                                        </form>
+                                        <form  [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
+                                            <input type="search" formControlName="key" placeholder="Search sub products ...">
+                                            <button type="submit" ><i class="ion-android-search"></i></button>
+                                        </form>
+                                </div>
+                            </div>                          
+                            <div class="single-filter-widget  mb-40">
+                                <h2 class="single-sidebar-widget--title mb-2" >Sub Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
+                                    <li>
+                                        <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
+                                    </li>
+                                </ul>
+                            </div>
+                           
+                            <div class="single-sidebar-widget mb-20">
+                                <h2 class="single-sidebar-widget--title mb-2">All Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
+                                   <li> <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader></li>
+                                </ul>
+                            </div>
+                            <div data-role="main" class="ui-content">
+
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40">
+                        <div class="row product-isotope shop-product-wrap four-column">
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" >
+                                                <div class="single-product" style="height: 250px; width: 200px;">          
+                                                        <ngx-skeleton-loader count="1"
+                                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                        </ngx-skeleton-loader>
+                                                </div>                                  
+                            </div>   
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+        <!--=====  End of shop page content  ======-->
+    </div>
+
+    <!-- featuredcat -->
+<div class="product-category-container mb-100 mb-md-80 mb-sm-70">
+    <div class="container wide">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title section-title--one text-center">
+                    <h1>Featured Categories</h1>
+                </div>
+                </div>
+            <div class="col-lg-12">
+                <div class="product-category-container--collectionhome-wrapper">
+                    <div class="row justify-content-center" >
+                        <div class="col-lg-2 col-md-6 col-12 mb-60"  *ngFor="let img of Futurecatg; let i = index"  >							
+                            <div class="single-category single-category--one wow zoomIn">
+               
+                                <div class="single-category__image single-category__image--one" style=" width:100%; height:200px;" >
+                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}" class="img-fluid" alt="" style=" width:100%; height:100%;object-fit:cover">
+                                </div>
+                                <div class="single-category__content single-category__content--one mt-10 mb-10">
+                                    <div class="title" >
+                                        <p>{{img.name}}</p>	
+                                        <a  (click)="viewctopcatprod(img,img.id,1,i)" style="color: red;">view {{img.name}}</a>		
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12" *ngIf="loader1">
+                <div class="product-category-container--collectionhome-wrapper">
+                    <div class="row justify-content-center">
+                        <!-- Allcat   Homecat -->
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!--=============================================
+			=            quick view         =
+			=============================================-->
+
+    <div class="cd-quick-view">
+        <div class="cd-slider-wrapper">
+            <ul class="cd-slider">
+                <li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
+                <li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
+            </ul> <!-- cd-slider -->
+
+            <ul class="cd-slider-pagination">
+                <li class="active"><a href="#0">1</a></li>
+                <li><a href="#1">2</a></li>
+            </ul> <!-- cd-slider-pagination -->
+
+            <ul class="cd-slider-navigation">
+                <li><a class="cd-prev" href="#0">Prev</a></li>
+                <li><a class="cd-next" href="#0">Next</a></li>
+            </ul> <!-- cd-slider-navigation -->
+        </div> <!-- cd-slider-wrapper -->
+
+        <div class="lezada-item-info cd-item-info ps-scroll">
+
+            <h2 class="item-title">Demo Product One</h2>
+            <p class="price">
+                <span class="main-price discounted">Rs 360.00</span>
+                <span class="discounted-price">Rs 300.00</span>
+            </p>
+
+            <p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in
+                your
+                daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making
+                variety rices like Biriyani and Puloa.</p>
+
+            <span class="quickview-title">Quantity:</span>
+            <div class="pro-qty d-inline-block mb-40">
+                <input type="text" value="1">
+            </div>
+
+            <div class="add-to-cart-btn mb-25">
+
+                <button class="lezada-button lezada-button--medium">add to cart</button>
+            </div>
+
+            <div class="quick-view-other-info">
+                <table>
+                    <tr class="single-info">
+                        <td class="quickview-title">SKU: </td>
+                        <td class="quickview-value">12345</td>
+                    </tr>
+                    <tr class="single-info">
+                        <td class="quickview-title">Categories: </td>
+                        <td class="quickview-value">
+                            <a href="#">Edible Oils</a>,
+                            <a href="#">Oils</a>,
+                            <a href="#">Cooking Oils</a>
+                        </td>
+                    </tr>
+                    <tr class="single-info">
+                        <td class="quickview-title">Tags: </td>
+                        <td class="quickview-value">
+                            <a href="#">The Spice Club</a>,
+                            <a href="#">Satinanace</a>
+                        </td>
+                    </tr>
+                    <tr class="single-info">
+                        <td class="quickview-title">Share on: </td>
+                        <td class="quickview-value">
+                            <ul class="quickview-social-icons">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div> <!-- cd-item-info -->
+        <a href="#0" class="cd-close">Close</a>
+    </div>
+</div>
+<br>
+

@@ -121,7 +121,7 @@ import { signOut } from "firebase/auth";
               }
               if (res.message == "Successfully logged in") {
                 console.log("hiii you are logged in");
-                this.router.navigate(['/main']);
+                this.router.navigate(['/home']);
               }
             } else {
               console.log("Invalid Login");
@@ -147,6 +147,14 @@ import { signOut } from "firebase/auth";
             }
           );
       }
+    }
+    logout1(){
+      console.log("logggouttt") 
+      this.request.logout().subscribe( res=>{
+        console.log("res",res);
+        // if(res.message == "Successfully logged out"){
+        // this.router.navigate(['/login']);}
+      })
     }
     otpSubmit(content: any) {
       this.modalService.open(content, {

@@ -41,7 +41,7 @@
                                 </li>
 								<li class="menu-item" ><a routerLink="/shopbyproduct">ShopByProduct</a>                                
                                 </li>
-                                 <li class="menu-item-has-children"><a href="javascript:void(0)">WellBeing Products</a>
+                                 <!-- <li class="menu-item-has-children"><a href="javascript:void(0)">WellBeing Products</a>
                                     <ul class="sub-menu single-column-menu">
                                         <li><a href="">Aromotherapy</a></li>
                                         <li><a href="">Essential Oils</a></li>
@@ -58,11 +58,11 @@
                                         <li><a href="">Milk Mixes</a></li>
                                     </ul>
                                 </li>
-                               
-                                <li class="menu-item-has-children "><a href="blog.html">Blog</a>
+                                -->
+                                <li class="menu-item-has-children "><a routerLink="/blog">Blog</a>
                                     
                                 </li>
-                                <li class="menu-item-has-children "><a href="javascript:void(0)">Contact</a>
+                                <li class="menu-item-has-children "><a  routerLink="/recipe">Recipe</a>
                                     
                                 </li>
                                 <!-- <li class="menu-item"><a routerLink="login">Login</a>
@@ -102,20 +102,24 @@
                         <!--=======  End of single-icon  =======-->
                         <!--=======  single-icon  =======-->
 
-                        <div class="single-icon wishlist">
-                            <a href="javascript:void(0)" id="offcanvas-wishlist-icon">
+                        <div class="single-icon wishlist"  >
+                            <!-- <a href="javascript:void(0)" id="offcanvas-wishlist-icon">
                                 <i class="ion-android-favorite-outline"></i>
                                 <span class="count">2</span>
+                            </a> -->
+							<a href="javascript:void(0)"  id="offcanvas-wishlist-icon">
+                                <i class="ion-android-favorite-outline"></i>
+                                <span class="count">{{Wlength}}</span>
                             </a>
                         </div>
 
                         <!--=======  End of single-icon  =======-->
-                        <!--=======  single-icon  =======-->
+                        <!--=======  single-icon  routerLink="/cart" routerLink="/wishlist" =======-->
 
-                        <div class="single-icon cart">
+                        <div class="single-icon cart"  >
                             <a href="javascript:void(0)" id="offcanvas-cart-icon">
                                 <i class="ion-ios-cart"></i>
-                                <span class="count">3</span>
+                                <span class="count">{{cartlength}}</span>
                             </a>
                         </div>
                         <!--=======  End of single-icon  =======-->
@@ -129,8 +133,7 @@
 
             </div>
 
-            <!--=======  End of header bottom container  =======-->
-
+     
             <!-- Mobile Navigation Start Here -->
 
             <div class="site-mobile-navigation d-block d-lg-none">
@@ -310,7 +313,7 @@
 
 			<!--=======  End of overlay content container  =======-->
 		</div>
-	</div>
+	</div> 
 
 	<!--=======  End of about overlay  =======-->
 
@@ -334,99 +337,23 @@
 			<div class="offcanvas-cart-content-container">
 				<h3 class="cart-title">Wishlist</h3>
 
-				<div class="cart-product-wrapper">
-					<div class="cart-product-container  ps-scroll">
+				<div class="cart-product-wrapper" *ngIf="Wlength!==0">
+					<div class="cart-product-container  ps-scroll"  >
 						<!--=======  single cart product  =======-->
 
-						<div class="single-cart-product">
+						<div class="single-cart-product" *ngFor="let img of Wishlist">
 							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
+								<a (click)="deleteRecord(img.id)"><i class="ti-close"></i></a>
 							</span>
 							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
+								<a >
+									<img src="https://neophroncrm.com/spiceclubnew/public/{{img.product.thumbnail_image}}">
 								</a>
 							</div>
 							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="main-price discounted">Rs 200.00</span> <span class="discounted-price">Rs 180.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod6-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="main-price discounted">Rs 300.00</span> <span class="discounted-price">Rs 220.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod2-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="main-price discounted">Rs 100.00</span> <span class="discounted-price">Rs 80.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod2-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="main-price discounted">Rs 200.00</span> <span class="discounted-price">Rs 180.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod1-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="main-price discounted">Rs 200.00</span> <span class="discounted-price">Rs 180.00</span></p>
-
+								<h5><a>{{img.product.name}}</a></h5>
+								<p><span class="main-price discounted">{{img.product.base_price}}</span> 
+									<span class="discounted-price" style="color: red;" >{{img.product.base_price}}</span></p>
 							</div>
 						</div>
 
@@ -435,12 +362,23 @@
 
 					<!--=======  cart buttons  =======-->
 
-					<div class="cart-buttons">
-						<a href="shop-wishlist.html">view wishlist</a>
+					<div class="cart-buttons" >
+						<a (click)="gotowishlist()" class="closeoverlay">view wishlist <span>
+							
+						</span></a>
 					</div>
 
 					<!--=======  End of cart buttons  =======-->
 				</div>
+
+					<!-- empty -->
+					<div class="cart-product-wrapper" *ngIf="Wlength==0" 
+					style=" padding: 70px 0;
+					text-align: center; height: 450px;">
+					
+					<h6 style=" padding-top: 180px;"> Wishlist is empty</h6>
+				
+					</div>
 			</div>
 
 			<!--=======  End of offcanvas wishlist content container   =======-->
@@ -469,110 +407,37 @@
 			<div class="offcanvas-cart-content-container">
 				<h3 class="cart-title">Cart</h3>
 
-				<div class="cart-product-wrapper">
-					<div class="cart-product-container  ps-scroll">
+				<div class="cart-product-wrapper" *ngIf="cartlength!==0">
+					<div class="cart-product-container  ps-scroll" >
 						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
+						<div class="sdd" *ngFor="let img of Cart">
+						<div class="single-cart-product" *ngFor="let b of img.cart_items" >
+							
 							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
+								<a (click)="deleteRecord2(b.id)"><i class="ti-close"></i></a>
 							</span>
 							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod3-f.jpeg" class="img-fluid" alt="">
+								<a >
+									<img src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}">
 								</a>
 							</div>
 							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="cart-count">2 x </span> <span class="discounted-price">Rs 180.00</span></p>
-
+								<h5><a>{{b.product_name}}</a></h5>
+								<p><span class="main-price discounted">Rs{{b.price}}</span> 
+									<span class="discounted-price" style="color: red;" >Rs{{b.price}}</span></p>
 							</div>
 						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod2-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="cart-count">2 x </span> <span class="discounted-price">Rs 220.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="cart-count">2 x </span> <span class="discounted-price">Rs 80.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod6-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="cart-count">2 x </span> <span class="discounted-price">Rs 180.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
-						<!--=======  single cart product  =======-->
-
-						<div class="single-cart-product">
-							<span class="cart-close-icon">
-								<a href="#"><i class="ti-close"></i></a>
-							</span>
-							<div class="image">
-								<a href="products.html">
-									<img src="assets/images/products/prod7-f.jpeg" class="img-fluid" alt="">
-								</a>
-							</div>
-							<div class="content">
-								<h5><a href="products.html">Demo Product</a></h5>
-								<p><span class="cart-count">2 x </span> <span class="discounted-price">Rs 180.00</span></p>
-
-							</div>
-						</div>
-
-						<!--=======  End of single cart product  =======-->
 					</div>
+	
+					</div>
+
+					
 
 					<!--=======  subtotal calculation  =======-->
 
 					<p class="cart-subtotal">
 						<span class="subtotal-title">Subtotal:</span>
-						<span class="subtotal-amount">Rs 200.00</span>
+						<span class="subtotal-amount">{{subtot}}</span>
 					</p>
 
 					<!--=======  End of subtotal calculation  =======-->
@@ -580,19 +445,20 @@
 					<!--=======  cart buttons  =======-->
 
 					<div class="cart-buttons">
-						<a href="shop-cart.html">view cart</a>
-						<a href="shop-checkout.html">checkout</a>
+						<a (click)="gotocart()" class="closeoverlay">view cart</a>
+						<a (click)="gotocheckout()" class="closeoverlay">checkout</a>
 					</div>
 
-					<!--=======  End of cart buttons  =======-->
+			
+				</div>
 
-					<!--=======  free shipping text  =======-->
-
-					<p class="free-shipping-text">
-						Free Shipping on All Orders Over Rs 100!
-					</p>
-
-					<!--=======  End of free shipping text  =======-->
+				<!-- empty -->
+				<div class="cart-product-wrapper" *ngIf="cartlength==0" 
+				style=" padding: 70px 0;
+				text-align: center; height: 450px;">
+				
+                <h6 style=" padding-top: 180px;"> cart is empty</h6>
+			
 				</div>
 			</div>
 
@@ -636,4 +502,3 @@
 	<!--=======  End of search overlay  =======-->
 
 	<!--=====  End of overlay items  ======-->
-

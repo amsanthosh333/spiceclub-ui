@@ -1,0 +1,361 @@
+
+
+	<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="breadcrumb-title">Shop</h1>
+
+					<!--=======  breadcrumb list  =======-->
+
+					<ul class="breadcrumb-list">
+						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active">Deal of day</li>
+					</ul>
+
+					<!--=======  End of breadcrumb list  =======-->
+
+				</div>
+			</div>
+		</div> 
+	</div>
+
+		<!--=============================================
+    =            shop page content         =
+    =============================================-->
+
+	<div class="shop-page-wrapper">
+		<!--=============================================
+        =            shop advance filter area         =
+        =============================================-->
+
+		<div class="shop-page-content mt-15 mb-15">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 order-2 order-lg-1">
+						<!--=======  page sidebar  =======-->
+					<div class="page-sidebar">
+							<!--=======  End of single sidebar widget  =======-->
+
+							<!--=======  single sidebar widget  =======-->
+
+                            <div class="single-sidebar-widget mb-40 mt-30">
+                                <h2 class="single-sidebar-widget--title">Deal of the month</h2>
+
+                                <!--=======  widget product wrapper  =======-->
+
+                                <div class="widget-product-wrapper">
+                                    <!--=======  single widget product  =======-->
+                                    <div class="single-widget-product-wrapper">
+                                        <div class="single-widget-product" *ngFor="let img of Monthdealpro"
+                                            style="padding-bottom: 17px;">
+                                            <!--=======  image  =======-->
+
+                                            <div class="single-widget-product__image">
+                                                <a >
+                                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                        class="img-fluid" alt="">
+                                                </a>
+                                            </div>
+
+                                            <!--=======  End of image  =======-->
+
+                                            <!--=======  content  =======-->
+
+                                            <div class="single-widget-product__content">
+
+                                                <div class="single-widget-product__content__top">
+                                                    <h3 class="product-title"><a>{{img.name}}</a>
+                                                    </h3>
+                                                    <br>
+                                                    <div class="price">
+                                                        <span class="main-price discounted"
+                                                            *ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
+                                                        <span class="discounted-price">{{img.main_price}}</span>
+                                                    </div>
+                                                    <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
+                                                </div>
+                                            </div>
+                                            <!--=======  End of content  =======-->
+                                        </div>
+                                    </div>
+
+                                    <!--=======  End of single widget product  =======-->
+                                </div>
+                                <!-- lazyloading -->
+                                <div class="widget-product-wrapper" *ngIf="poploader">
+                                    <!--=======  single widget product  =======-->
+                                    <div class="single-widget-product-wrapper">
+                                        <div class="single-widget-product" 
+                                            style="padding-bottom: 17px;">
+                                            <div class="single-widget-product__image" style="height: 120px; width:80px">                    
+                                                <ngx-skeleton-loader count="1"
+                                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                        </ngx-skeleton-loader>
+                                            </div>
+                                            <div class="single-widget-product__content">
+                                                <div class="single-widget-product__content__top">
+                                                    <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="single-widget-product" 
+                                        style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; width:80px">                    
+                                            <ngx-skeleton-loader count="1"
+                                                        [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                    </ngx-skeleton-loader>
+                                        </div>
+                                        <div class="single-widget-product__content">
+                                            <div class="single-widget-product__content__top">
+                                                <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-widget-product" 
+                                    style="padding-bottom: 17px;">
+                                    <div class="single-widget-product__image" style="height: 120px; width:80px">                    
+                                        <ngx-skeleton-loader count="1"
+                                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                </ngx-skeleton-loader>
+                                    </div>
+                                    <div class="single-widget-product__content">
+                                        <div class="single-widget-product__content__top">
+                                            <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
+                                    </div>
+
+                                    <!--=======  End of single widget product  =======-->
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 text-center mt-30">
+                                        <a class="lezada-button lezada-button--medium lezada-button--icon--left"
+                                        routerLink="/monthdeal" ><i class="ion-android-add"></i> MORE</a>
+                                    </div>
+                                </div>
+                                <!--=======  End of widget product wrapper  =======-->
+                            </div>
+
+							<!--=======  End of single sidebar widget  =======-->
+
+						</div>
+
+						<!--=======  End of page sidebar  =======-->
+					</div>
+
+					<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-30" *ngIf="!prodloader">
+
+						<div class="row product-isotope shop-product-wrap four-column">
+
+							<!--=======  single product  =======-->
+							<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"  *ngFor="let img of Daydealpro | paginate: { itemsPerPage: 12, currentPage: p }">
+								<div class="single-product">
+									<!--=======  single product image  =======-->
+		
+									<div class="single-product__image">
+										<a class="image-wrap" href="products.html">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+												class="img-fluid" alt="">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+												class="img-fluid" alt="">
+										</a>
+		
+										<div class="single-product__floating-badges">
+											<!-- <span class="onsale">-10%</span> -->
+											<span class="hot" *ngIf="img.has_discount==true">hot</span>
+										</div>
+		
+										<div class="single-product__floating-icons">
+											<span class="wishlist"><a (click)="addtowishlist(img.id)"  data-tippy="Add to wishlist"
+													data-tippy-inertia="true" data-tippy-animation="shift-away"
+													data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
+													data-tippy-placement="left"><i
+														class="ion-android-favorite-outline"></i></a></span>
+		
+											<span class="quickview"><a class="cd-trigger" href="#qv-1" data-tippy="Quick View"
+													data-tippy-inertia="true" data-tippy-animation="shift-away"
+													data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
+													data-tippy-placement="left"><i class="ion-ios-search-strong"></i></a></span>
+										</div>
+									</div>
+									<!--=======  End of single product image  =======-->
+		
+									<!--=======  single product content  =======-->
+									<div class="single-product__content">
+										<div class="title">
+											<h3> <a href="">{{img.name}}</a></h3>
+											<a style="color: red;" (click)="proddetail(img.id)">view details</a>
+										</div>
+										<div class="price">
+											<span class="main-price discounted">{{img.stroked_price}}</span>
+											<span class="discounted-price">{{img.main_price}}</span>
+										</div>
+									</div>
+		
+									<!--=======  End of single product content  =======-->
+								</div>
+
+								<div class="single-product--list">
+									<!--=======  single product image  =======-->
+
+									<div class="single-product__image">
+										<a class="image-wrap" href="product_detail.html">
+											<img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
+                                            <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
+										</a>
+
+										<div class="single-product__floating-badges">
+											<span class="onsale">-10%</span>
+											<span class="hot">hot</span>
+										</div>
+
+										<div class="single-product__floating-icons">
+											<span class="wishlist"><a href="#" data-tippy="Add to wishlist" data-tippy-inertia="true"
+													data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
+													data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+														class="ion-android-favorite-outline"></i></a></span>
+
+											<span class="quickview"><a class="cd-trigger" href="#qv-1" data-tippy="Quick View"
+													data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
+													data-tippy-arrow="true" data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+														class="ion-ios-search-strong"></i></a></span>
+										</div>
+
+										
+
+									</div>
+
+									<!--=======  End of single product image  =======-->
+
+									<!--=======  single product content  =======-->
+
+									<div class="single-product__content">
+
+										<div class="title">
+											<h3> <a href="product_detail.html">High-waist Trousers</a></h3>
+										</div>
+										<div class="price">
+											<span class="main-price discounted">Rs 160.00</span>
+											<span class="discounted-price">Rs 180.00</span>
+										</div>
+										<p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
+											consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente eveniet consectetur
+											voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda veritatis,
+										</p>
+
+										<a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
+
+									</div>
+
+									<!--=======  End of single product content  =======-->
+								</div>
+							</div>
+                            <div id="pgg" style="text-align: center;">
+                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                
+                            </div>
+						</div>
+					</div>
+       <!--  productslazyloading -->
+	   <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
+		<div class="row product-isotope shop-product-wrap four-column">
+			<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+								<div class="single-product" style="height: 250px; width: 200px;">          
+										<ngx-skeleton-loader count="1"
+											[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+										</ngx-skeleton-loader>
+								</div>                                  
+			</div>   
+		</div>
+	</div>
+
+				</div>
+			</div>
+		</div>
+
+		<!--=====  End of shop page content  ======-->
+	</div>
+
+<!--=============================================
+			=            quick view         =
+			=============================================-->
+	
+			<div  class="cd-quick-view">
+				<div class="cd-slider-wrapper">
+					<ul class="cd-slider">
+						<li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
+						<li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
+					</ul> <!-- cd-slider -->
+		
+					<ul class="cd-slider-pagination">
+						<li class="active"><a href="#0">1</a></li>
+						<li><a href="#1">2</a></li>
+					</ul> <!-- cd-slider-pagination -->
+		
+					<ul class="cd-slider-navigation">
+						<li><a class="cd-prev" href="#0">Prev</a></li>
+						<li><a class="cd-next" href="#0">Next</a></li>
+					</ul> <!-- cd-slider-navigation -->
+				</div> <!-- cd-slider-wrapper -->
+		
+				<div class="lezada-item-info cd-item-info ps-scroll">
+		
+					<h2 class="item-title">Demo Product One</h2>
+					<p class="price">
+						<span class="main-price discounted">Rs 360.00</span>
+						<span class="discounted-price">Rs 300.00</span>
+					</p>
+		
+					<p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in your daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making variety rices like Biriyani and Puloa.</p>
+		
+					<span class="quickview-title">Quantity:</span>
+					<div class="pro-qty d-inline-block mb-40">
+						<input type="text" value="1">
+					</div>
+		
+					<div class="add-to-cart-btn mb-25">
+		
+						<button class="lezada-button lezada-button--medium">add to cart</button>
+					</div>
+		
+					<div class="quick-view-other-info">
+						<table>
+							<tr class="single-info">
+								<td class="quickview-title">SKU: </td>
+								<td class="quickview-value">12345</td>
+							</tr>
+							<tr class="single-info">
+								<td class="quickview-title">Categories: </td>
+								<td class="quickview-value">
+									<a href="#">Edible Oils</a>,
+									<a href="#">Oils</a>,
+									<a href="#">Cooking Oils</a>
+								</td>
+							</tr>
+							<tr class="single-info">
+								<td class="quickview-title">Tags: </td>
+								<td class="quickview-value">
+									<a href="#">The Spice Club</a>,
+									<a href="#">Satinanace</a>
+								</td>
+							</tr>
+							<tr class="single-info">
+								<td class="quickview-title">Share on: </td>
+								<td class="quickview-value">
+									<ul class="quickview-social-icons">
+										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+										<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+										<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+									</ul>
+								</td>
+							</tr>
+						</table>
+					</div>
+		
+		
+				</div> <!-- cd-item-info -->
+				<a href="#0" class="cd-close">Close</a>
+			</div>

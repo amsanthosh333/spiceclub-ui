@@ -1,0 +1,159 @@
+<div class="breadcrumb-area breadcrumb-bg-1 pt-50 pb-70 mb-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Shopping Cart</h1>
+
+                <!--=======  breadcrumb list  =======-->
+
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">shopping cart</li>
+                </ul>
+
+                <!--=======  End of breadcrumb list  =======-->
+
+            </div>
+        </div>
+    </div>
+</div>
+	<!--=============================================
+	=            cart page content         =
+	=============================================-->
+
+	<div class="shopping-cart-area mb-130">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 mb-30" >
+					<!--=======  cart table  =======-->
+                   
+					<div class="cart-table-container">
+						<table class="cart-table">
+							<thead>
+								<tr>
+									<th class="product-name" colspan="2">Product</th>
+									<th class="product-price">Price</th>
+									<th class="product-quantity">Quantity</th>
+									<th class="product-subtotal">Total</th>
+									<th class="product-remove">&nbsp;</th>
+								</tr>
+							</thead>
+
+							<tbody *ngFor="let a of Cart">
+								<tr *ngFor="let b of a.cart_items">
+									<td class="product-thumbnail">
+										<a>
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}" class="img-fluid" alt="">
+										</a>
+									</td>
+									<td class="product-name">
+										<a  style="text-decoration: none;">{{b.product_name}}</a>
+										<span class="product-variation">Color: Black</span>
+									</td>
+
+									<td class="product-price"><span class="price">{{b.price}}</span></td>
+
+									<td class="product-quantity">
+										<!-- <div class="pro-qty d-inline-block mx-0">
+											<input type="text" value="{{b.quantity}}">
+										</div> -->
+                                         <div class="row no-gutters align-items-center aiz-plus-minus mr-3" style="width: 130px;">
+                                            <button class="btn col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="minus" data-field="quantity" disabled="disabled">
+                                                <i class="las la-minus">-</i>
+                                            </button>
+                                            <input type="number" name="quantity" class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1" value="{{b.quantity}}" min="{{b.lower_limit}}" max="{{b.upper_limit}}" (change)="firstDropDownChanged($event,b.id)">
+                                            <button class="btn  col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="plus" data-field="quantity">
+                                                <i class="las la-plus">+</i>
+                                            </button>
+                                        </div>
+									</td>
+                                  
+									<td class="total-price"><span class="price">{{b.total}}</span></td>
+									<td class="product-remove">
+										<a (click)="deleteRecord(b.id)">
+											<i class="ion-android-close"></i>
+										</a>
+									</td>
+								</tr>
+								
+							</tbody>
+						</table>
+					</div>
+
+					<div class="cart-table-container">
+						<div id="tit" style="width: 100%;">
+							<ngx-skeleton-loader count="5"
+							  [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+							  *ngIf="loader"></ngx-skeleton-loader>
+						  </div>
+						 
+					</div>
+					<!--=======  End of cart table  =======-->
+				</div>
+				<div class="col-lg-12 mb-80">
+					<!--=======  coupon area  =======-->
+
+					<div class="cart-coupon-area pb-30">
+						<div class="row align-items-center">
+							<div class="col-lg-6 mb-md-30 mb-sm-30">
+								<!--=======  coupon form  =======-->
+
+								<div class="lezada-form coupon-form">
+									<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
+										<div class="row">
+											<div class="col-md-7 mb-sm-10">
+												<input type="text" placeholder="Enter your coupon code" formControlName="coupan" required>
+											</div>
+											<div class="col-md-5" >
+												<button class="lezada-button lezada-button--medium"  type="submit" *ngIf="applycou">apply coupon</button>
+                                                <button class="lezada-button lezada-button--medium" *ngIf="removecou" (click)="removecoupon()">remove</button>
+											</div>
+                                           
+										</div>
+									</form>
+                                    <div class="col-md-5" *ngIf="removecou" >
+                                        
+                                    </div>
+								</div>
+
+								<!--=======  End of coupon form  =======-->
+							</div>
+
+							<div class="col-lg-6 text-left text-lg-right">
+								<!--=======  update cart button  =======-->
+
+								<button class="lezada-button lezada-button--medium" (click)="updatecart()">update cart</button>
+
+								<!--=======  End of update cart button  =======-->
+							</div>
+						</div>
+					</div>
+
+					<!--=======  End of coupon area  =======-->
+				</div>
+
+				<div class="col-xl-4 offset-xl-8 col-lg-5 offset-lg-7">
+					<div class="cart-calculation-area">
+						<h2 class="mb-40">Cart totals</h2>
+
+						<table class="cart-calculation-table mb-30">
+							<tr>
+								<th>SUBTOTAL</th>
+								<td class="subtotal">{{subtot}}</td>
+							</tr>
+							<tr>
+								<th>TOTAL</th>
+								<td class="total">{{Grandtot}}</td>
+							</tr>
+						</table>
+
+						<div class="cart-calculation-button text-center">
+							<button class="lezada-button lezada-button--medium" routerLink="/checkout">proceed to checkout</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--=====  End of cart page content  ======-->

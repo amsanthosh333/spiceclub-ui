@@ -5,10 +5,13 @@ import { RequestService } from 'src/app/services/request.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user'; 
 import { HttpHeaders } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-bestselling',
   templateUrl: './bestselling.component.html',
-  styleUrls: ['./bestselling.component.css']
+  styleUrls: ['./bestselling.component.css'],
+  providers: [NgbRatingConfig,ToastrService],
 })
 export class BestsellingComponent implements OnInit {
   p: number = 1;
@@ -43,8 +46,11 @@ export class BestsellingComponent implements OnInit {
   stocck: any;
   searchh: any;
   sortprod: any;
+  prodcount=[1,2,3,4,5,6,7,8,9,10];
+  prodloader: boolean=true;
 
-  constructor(private router: Router,private fb: FormBuilder,private request: RequestService) {
+  constructor(private router: Router,private fb: FormBuilder,private request: RequestService
+    ,private toastr: ToastrService,) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')||'{}')
       
@@ -57,14 +63,16 @@ export class BestsellingComponent implements OnInit {
      this.tokentype=this.currentdetail.token_type;
    }
 
-
    ngOnInit(): void {
+    window.scroll(0,0);
     this.viewfuturedpro();
+    
       }
          
     viewfuturedpro(){
       this.request.getbestsellpro().subscribe((response: any) => {
         this.Bestsellpro=response.data;
+        this.prodloader=false;
         console.log("best sellling",this.Bestsellpro);  
       });
     }
@@ -106,6 +114,26 @@ export class BestsellingComponent implements OnInit {
       this.quantityy=data.target.value;
         return this.quantityy= this.quantityy; 
     }
+    addtowishlist(prd_id:any){
+      let edata4={
+        user_id:this.userid,
+        product_id:prd_id
+      }
+      console.log(edata4);  
+      this.request.addtowishlist(edata4).subscribe((res: any) => {
+        console.log(res);
+        if (res.message == 'Product is successfully added to your wishlist') {
+          console.log("success",res.message); 
+          this.addRecordSuccess() ;     
+        }
+        else  {
+          this.toastr.error(res.message);
+          console.log("error",res.message);
+        }
+      }, (error: any) => {
+        console.log("error",error);
+      });
+    }
     addtocart(_id:any){
       let edata={
         id : _id,
@@ -116,12 +144,15 @@ export class BestsellingComponent implements OnInit {
       console.log(edata);  
       this.request.addtocart(edata).subscribe((res: any) => {
         console.log(res);
-        if (res.message == 'Product added to cart successfully') {       
+        if (res.message == 'Product added to cart successfully') {  
+          this.addRecordSuccess();     
         }
         else if(res.message== 'Minimum 1 item(s) should be ordered'){
+          this.toastr.info(res.message);
           console.log("minimum 1");
         } 
         else if(res.message== 'Stock out'){
+          this.toastr.error(res.message);
           console.log("Stock out");
         }
         else  {
@@ -173,5 +204,15 @@ export class BestsellingComponent implements OnInit {
   });
 
     }
+    addRecordSuccess() {
+      this.toastr.success('Added Successfully', '');
+    }
+    editRecordSuccess() {
+      this.toastr.success('Edit Record Successfully', '');
+    }
+    deleteRecordSuccess() {
+      this.toastr.error(' Removed Successfully', '');
+    }
+
     
     }
