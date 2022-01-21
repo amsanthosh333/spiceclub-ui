@@ -1,0 +1,259 @@
+<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Orders</h1>
+                <!--=======  breadcrumb list  =======-->
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">Profile</a></li>
+                    <li class="breadcrumb-list__item"><a routerLink="/orders">Orders</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Detail</li>
+                </ul>
+                <!--=======  End of breadcrumb list  =======-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="col-lg-12 mb-45 ">
+    <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Order Details</h4>
+    <div class="checkout-cart-total  mr-100 ml-100 mt-1" *ngFor="let img of Detail">
+        <div class="row">
+            <div class="col-6">
+                <strong>Order Code:</strong>
+                <p style="margin-bottom: 10px; color: rgb(45, 89, 223);">{{img.code}}</p>
+
+                <strong>Order Date:</strong>
+                <p style="margin-bottom: 10px;">{{img.date}}</p>
+
+                <strong>Shipping Address:</strong>
+                <p><strong> Name:</strong> {{img.shipping_address.name}}</p>
+                <p><strong>Email:</strong> {{img.shipping_address.email}}</p>
+                <p><strong>Address:</strong> {{img.shipping_address.address}}</p>
+                <p><strong>Country:</strong> {{img.shipping_address.country}}</p>
+                <p><strong>State:</strong> {{img.shipping_address.state}}</p>
+                <p><strong>City:</strong> {{img.shipping_address.city}}</p>
+                <p><strong>Postal Code:</strong> {{img.shipping_address.postal_code}}</p>
+                <p><strong>Phone:</strong> {{img.shipping_address.phone}}</p>
+
+            </div>
+            <div class="col-6">
+                <strong>Shipping Type:</strong>
+                <p style="margin-bottom: 10px;">{{img?.shipping_type}}</p>
+
+                <strong>Payment Method:</strong>
+                <p style="margin-bottom: 10px;">{{img.payment_type}}
+                    <i *ngIf="img.payment_type=='Cash On Delivery'" class="bi bi-cash"
+                        style="color: rgb(5, 146, 16);"></i>
+                    <i *ngIf="img.payment_type!=='Cash On Delivery'" class="bi bi-credit-card-2-back-fill"
+                        style="color: rgb(252, 166, 8);;"></i>
+                </p>
+
+                <strong>Payment Status:</strong>
+                <p *ngIf="img.payment_status_string=='Unpaid'" style="margin-bottom: 10px;">
+                    {{img.payment_status_string}} <i class="bi bi-x-circle-fill" style="color: red;"></i></p>
+                <p *ngIf="img.payment_status_string!=='Unpaid'" style="margin-bottom: 10px;">
+                    {{img.payment_status_string}} <i class="bi bi-check-circle-fill"
+                        style="color: rgb(11, 192, 11);"></i></p>
+                <strong>Order Status:</strong>
+                <p style="margin-bottom: 10px;">{{img.delivery_status_string}}
+                    <i *ngIf="img.delivery_status_string=='OrderPlaced'" class="bi bi-x-circle-fill"
+                        style="color: rgb(231, 21, 32);"></i>
+                    <i *ngIf="img.delivery_status_string=='Order Placed'" class="bi bi-hand-thumbs-up-fill"
+                        style="color: rgb(21, 231, 21);"></i>
+                    <i *ngIf="img.delivery_status_string=='Confirmed'" class="bi bi-hand-thumbs-up-fill"
+                        style="color: rgb(45, 89, 223);"></i>
+                    <i *ngIf="img.delivery_status_string=='On Delivery'" class="bi bi-truck"
+                        style="color: rgb(252, 166, 8);;"></i>
+                    <i *ngIf="img.delivery_status_string=='Delivered'" class="bi bi-check-circle-fill"
+                        style="color: rgb(11, 192, 11);;"></i>
+                </p>
+
+                <strong>Delivery Status:</strong>
+                <p style="margin-bottom: 10px;">{{img.delivery_status}}
+                    <i class="bi bi-x-circle-fill" style="color: rgb(231, 21, 32);"></i>
+                    <i class="bi bi-exclamation-circle-fill" style="color: rgb(45, 89, 223);"></i>
+                    <i class="bi bi-check-circle-fill" style="color: rgb(11, 192, 11);;"></i>
+                </p>
+
+
+                <strong>Total:</strong>
+                <p style="margin-bottom: 10px; color: red;">{{img.grand_total}}</p>
+
+              
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="art-total  mr-110 ml-110 mt-1">
+    <ngx-skeleton-loader count="1" [theme]="{ 
+        'border-radius': '5px',
+        height: '350px',
+        'background-color': '##b9b8b8',
+        border: '1px solid white'
+      }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
+</div>
+
+
+
+<div class="col-lg-12 mb-45" style="height: 100px;">
+    <div class="containerr">
+        <span *ngFor="let item of counts;let i = index">
+            <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
+            <span class="circles" [class.active]="orderStatus == item"></span>
+            <span class="bar" *ngIf="(i != counts.length-1)"></span>
+        </span>
+    </div>
+</div>
+
+<!-- order items -->
+<div class="col-lg-12 mb-5 ">
+
+    <div class="cart-table-container ml-100 mr-100">
+        <h4 class="checkout-title mt-40">Order Items</h4>
+        <table class="cart-table" style="background-color: rgb(255, 255, 255);">
+            <thead>
+                <tr>
+                    <th class="product-name">
+                        <h6> <strong>Product</strong></h6>
+                    </th>
+                    <th class="product-price">
+                        <h6> <strong>Price</strong></h6>
+                    </th>
+                    <th class="product-price">
+                        <h6> <strong>Order status</strong></h6>
+                    </th>
+                    <th class="product-price">
+                        <h6> <strong>Payment status</strong></h6>
+                    </th>
+                    <th class="product-price">
+                        <h6> <strong>Delivery status</strong></h6>
+                    </th>
+                    <th class="product-price">&nbsp;</th>
+
+                </tr>
+            </thead>
+
+            <tbody *ngFor="let b of Items">
+                <tr>
+
+                    <td class="product-name  col-4">
+                        <a style="text-decoration: none; margin-top: 10px;">{{b.product_name}}</a>
+                        <span class="product-variation pb-3" *ngIf="b.variation!==null">{{b.quantity}} x {{b.variation}}
+                        </span>
+                        <span class="product-variation pb-3" *ngIf="b.variation==null">{{b.quantity}}</span>
+                    </td>
+
+                    <td class="product-price" style="padding-left: 13px;"><span class="price"
+                            style="color: red;">{{b.price}}</span></td>
+
+                    <td class="product-price" style="padding-left: 13px;"><span
+                            class="price">{{b.delivery_status_string}}</span></td>
+
+                    <td class="product-price" style="padding-left: 13px;"><span
+                            class="price">{{b.payment_status_string}}</span></td>
+
+                    <td class="product-name ">
+                        <a style="text-decoration: none; margin-top: 10px;">{{b.delivery_status}}</a>
+                        <span class="product-variation pb-3" *ngIf="b.delivery_status!=='delivered'"
+                            (click)="addreview(addRecord,b.id)" style="color: rgb(45, 89, 223); display:block ;">
+                            <a> <i class="ion-android-star"></i> Review
+                                this product </a></span>
+                    </td>
+
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="cart-table-container ml-100 mr-100">
+        <div id="tit" style="width: 100%;">
+            <ngx-skeleton-loader count="4"
+                [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+                *ngIf="loader"></ngx-skeleton-loader>
+        </div>
+
+    </div>
+    <!--=======  End of cart table  =======-->
+</div>
+
+<!-- price details -->
+<div class="col-lg-12 ">
+    <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Price Details</h4>
+            <div class="row ml-100 mr-100 mt-10 mb-0" *ngFor="let img of Detail" >
+                <!-- Cart Total -->
+                <div class="col-12 mb-1" style="padding: 0px;">
+                    <div class="checkout-cart-total" *ngFor="let a of Detail" style="padding: 60px;">
+                        <p>Sub Total <span style="font-weight: bold;" >{{a.subtotal}}</span></p>
+                        <p>Shipping Fee <span style="font-weight: bold;">{{a.shipping_cost}}</span></p>
+                        <p>Tax <span style="font-weight: bold;">{{a.tax}}</span></p>
+                        <p>Discount <span style="font-weight: bold;">{{a.coupon_discount}}</span></p>
+                        <h4>Grand Total <span style="font-weight: bold;">{{a.grand_total}}</span></h4>
+                    </div>
+                </div>
+        
+         
+            </div>
+   
+    </div>
+
+    <div class="art-total  mr-110 ml-110 mt-1">
+        <ngx-skeleton-loader count="1" [theme]="{ 
+            'border-radius': '5px',
+            height: '200px',
+            'background-color': '##b9b8b8',
+            border: '1px solid white'
+          }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
+    </div>
+<!-- sort poup -->
+<ng-template #addRecord let-modal>
+    <div class="modal-about mt-4 ml-4">
+        <div class="font-weight-bold p-t-10 font-17">
+            <h5>Leave your thought hear</h5>
+        </div>
+    </div>
+    <div class="modal-body" style="background-color: rgb(248, 250, 251);">
+        <form class="register-form" [formGroup]="register" (ngSubmit)="submitreview(register)">
+            <div class="row">
+                <div class="col-lg-12  mb-20">
+                    <span class="rating-title mr-30" style="opacity: 0.72;">YOUR RATING</span>
+                    <span class="product-rating">
+                        <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false" formControlName="rating"
+                            style="size: 10px; color: rgb(248, 141, 19); font-size: 1.9rem;">
+                        </ngb-rating>
+                    </span>
+                </div>
+                <div class="col-lg-12 text-center mb-20">
+                    <textarea cols="60" rows="9" formControlName="comment" placeholder="YOUR MESSAGE"></textarea>
+                </div>
+                <div class="col-lg-12 text-center">
+                    <h6><span *ngIf="error1" style="color: red;">{{error1}}</span>
+                    </h6>
+                    <button type="submit" class="lezada-button lezada-button--medium">send</button>
+                </div>
+            </div>
+            <!-- <div class="row">
+                <label>ratting<span class="text-danger">*</span></label>
+                <select class="sel" formControlName="rating">
+                    <option *ngFor='let v of _values2'>{{ v }}</option>
+                </select>
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <label> Comments </label>
+                    <textarea name="" class="form-control pl-2 " formControlName="comment" cols="30"
+                        rows="3 "></textarea>
+                </div>
+
+                <div class="col-12 md-12 mt-4" style="justify-content: center;">
+                    <button type="submit" class="btn btn-primary" style=" width:50%;
+                    margin-left:25%;
+                    margin-right:25%;">send</button>
+                </div>
+            </div> -->
+        </form>
+    </div>
+</ng-template>

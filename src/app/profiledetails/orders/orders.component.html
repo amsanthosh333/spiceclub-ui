@@ -3,16 +3,12 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="breadcrumb-title">Orders</h1>
-
-                <!--=======  breadcrumb list  =======-->
-
+               <!--=======  breadcrumb list  =======-->
                 <ul class="breadcrumb-list">
-                    <li class="breadcrumb-list__item"><a>Profile</a></li>
+                    <li class="breadcrumb-list__item"><a routerLink="/home">Profile</a></li>
                     <li class="breadcrumb-list__item breadcrumb-list__item--active">Purchase History</li>
                 </ul>
-
                 <!--=======  End of breadcrumb list  =======-->
-
             </div>
         </div>
     </div>
@@ -81,63 +77,101 @@
         </div>
     </div>
 </div> -->
-<div class="orderss mb-2 ml-100 mr-100 mt-40"  *ngFor="let img of Orders" style="border:1px solid rgb(212, 210, 210); background-color: white;"> 
-<div class="row " style=" margin-left: 5px; margin-right: 5px;">
-    <div class="col-12" style="height: 50px;"  > 
-   <div class="row">
-    <div class="col-2 " style="background-color: rgb(36, 169, 247);position:absolute;
-    top:20%; bottom:20%">{{img.code}}</div>
-    <div  class="col-9 " >
-        <span class="add-to-cart"  >
-            <button class="lezada-button lezada-button--small lezada-button--icon--left" >
-                <i class="ion-ios-cart-outline"></i>view</button>
-          </span>
-    </div>
-   </div>
-   
-    </div>
-    <div class="col-6 mt-1" style="border-top:1px solid rgb(212, 210, 210) ;" >
-        <div class="row">
-        <div class="col-6"> <h6>Order status:</h6></div> <div class="col-6"><h6>{{img.delivery_status_string}}</h6> </div> 
-        <div class="col-6"><h6>Delivery status:</h6> </div> <div class="col-6"><h6>{{img.delivery_status}}</h6>  </div> 
-    </div>
-</div>
-<div class="col-6 mt-1" style="border-top:1px solid rgb(212, 210, 210) ;"  >
-    <div class="row">
-    <div class="col-6"> <h6>Payment type:</h6></div> <div class="col-6"><h6>{{img.payment_type}}</h6> </div> 
-    <div class="col-6"><h6>Payment status</h6> </div> <div class="col-6"><h6>{{img.payment_status}}</h6>  </div> 
-</div>
-</div>
-  
-<div class="col-12 mt-2" style="border-top:1px solid rgb(212, 210, 210) ;"> 
-    <div class="row">
-        <div class="col-6"> <p>Ordered on {{img.date}}</p></div> <div class="col-6"><p>Total :{{img.grand_total}}</p> </div> 
-    
-    </div>
-  
-</div>
-</div>
-</div>
+<div class="orderss mb-2 ml-100 mr-100 mt-40" *ngFor="let img of Orders"
+    style="border:1px solid rgb(212, 210, 210); background-color: white;">
+    <div class="row " style=" margin-left: 5px; margin-right: 5px;">
+        <div class="col-12 mb-3 " style="height: 50px;border-bottom:1px solid rgb(212, 210, 210) ; ">
+            <div class="row mt-2 " >
+                <div class="col-10 ">
+                    <!-- <button type="button" class="btn btn-primary btn-lg btn-block" >
+        <span class="d-none d-md-inline-block">{{img.code}}</span>
+    </button> -->
+                    <button class="lezada-button lezada-button--small lezada-button--icon--left" style="user-select: text;">
+                        {{img.code}}</button>
+                </div>
+                <div class="col-2">
+                    <span class="add-to-cart" style="margin-left: auto;">
+                        <button class="lezada-button lezada-button--small lezada-button--icon--left" (click)="orderdetail(img.id)" >
+                            <i class="ion-ios-eye-outline"></i> view</button>
+                    </span>
+                </div>
+            </div>
 
+        </div>
+        <div class="col-6 mt-1">
+            <div class="row">
+                <div class="col-4">
+                    <h6>Order status:</h6>
+                </div>
+                <div class="col-8">
+                    <h6 *ngIf="img.delivery_status_string=='Order Placed'" style="color: rgb(9, 160, 9);"><strong>{{img.delivery_status_string}}</strong></h6>
+                    <h6 *ngIf="img.delivery_status_string!=='Order Placed'" style="color: rgb(18, 89, 240);"><strong>{{img.delivery_status_string}}</strong></h6>
+                </div>
+                <div class="col-4">
+                    <h6>Delivery status:</h6>
+                </div>
+                <div class="col-8">
+                    <h6 *ngIf="img.delivery_status!=='pending'" style="color: rgb(9, 160, 9);"> <strong>{{img.delivery_status}}</strong> </h6>
+                    <h6 *ngIf="img.delivery_status=='pending'" style="color: rgb(18, 89, 240);"> <strong>{{img.delivery_status}}</strong></h6>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 mt-1">
+            <div class="row">
+                <div class="col-4">
+                    <h6>Payment type:</h6>
+                </div>
+                <div class="col-8">
+                    <h6><strong>{{img.payment_type}}</strong> </h6>
+                </div>
+                <div class="col-4">
+                    <h6>Payment status:</h6>
+                </div>
+                <div class="col-8">                
+                    <h6 *ngIf="img.payment_status_string!=='Unpaid'" style="color: rgb(9, 160, 9);"><strong>{{img.payment_status_string}}</strong></h6>
+                    <h6 *ngIf="img.payment_status_string=='Unpaid'" style="color: rgb(18, 89, 240);"><strong>{{img.payment_status_string}}</strong></h6>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-12 mt-2" >
+            <div class="row" style="border-top:1px solid rgb(212, 210, 210) ; ">
+                <div class="col-10 mt-2">
+                    <h6>Ordered on <strong>{{img.date}}</strong></h6>
+                </div>
+                <div class="col-2 mt-2">
+                    <h6>Total : <strong>{{img.grand_total}}</strong> </h6>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="cart-table-container mb-2 ml-100 mr-100 mt-40">
+    <div id="tit" style="width: 100%;">
+        <ngx-skeleton-loader count="4"
+          [theme]="{  'border-radius': '4px',  height: '200px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+          *ngIf="loader"></ngx-skeleton-loader>
+      </div>
+     
+</div>
 
 <div class="login-area mb-20 mb-md-70 mb-sm-70 mb-xs-70 mb-xxs-70">
     <div class="container">
         <div class="row">
             <div class="col-lg-2">
-              
             </div>
-
-
             <div class="col-lg-8">
                 <div class="card-body" *ngFor="let Connectdtls of Orders">
                     <div class="card-header">
                         <h4>orders</h4>
                         <!-- <button (click)="editRow(Connectdtls ,editRecord )" >edit</button>
       <button (click)="deleteRow(Connectdtls)" >Delete</button> -->
-      <span class="add-to-cart">
-        <button class="lezada-button lezada-button--small lezada-button--icon--left" >
-            <i class="ion-ios-cart-outline"></i>view</button>
-      </span>
+                        <span class="add-to-cart">
+                            <button class="lezada-button lezada-button--small lezada-button--icon--left">
+                                <i class="ion-ios-cart-outline"></i>view</button>
+                        </span>
                     </div>
                     <div class="py-4" style="margin-left: 20px; margin-right: 20px;"
                         (click)="viewrow(Connectdtls,openRecord)">

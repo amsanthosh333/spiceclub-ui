@@ -162,7 +162,7 @@ export class CheckoutComponent implements OnInit {
       this.shippingfee=this.Summery.shipping_cost
       this.tax=this.Summery.tax
       console.log("summery",response);    
-      console.log("grand total",this.Summery.grand_total); 
+      console.log("grand total",this.Summery.grand_total);  
       this.grandtotal=this.Summery.grand_total
     });
   }

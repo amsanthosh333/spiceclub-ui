@@ -78,6 +78,13 @@ export class OrdersComponent implements OnInit {
       console.log("orders",this.Orders);         
     });
   }
+
+  orderdetail(id:any){
+    // console.log("detail page",id);
+    window.scroll(0,0);
+    this.router.navigate(['orderdetail', id]);
+    console.log("navigate to orderdetails");
+  }
   viewrow(Connectdtls:any,content: any){
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
@@ -90,7 +97,6 @@ this.prdid=Connectdtls.id;
 
 
   viewdetail(){
- 
      this.request.vieworderdetail(this.prdid).subscribe((response: any) => {
    
        this.Detail=response.data;
