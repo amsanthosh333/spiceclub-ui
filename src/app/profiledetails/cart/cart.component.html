@@ -48,27 +48,38 @@
 									</td>
 									<td class="product-name">
 										<a  style="text-decoration: none;">{{b.product_name}}</a>
-										<span class="product-variation">Color: Black</span>
+										<!-- <span class="product-variation">Color: Black</span> -->
 									</td>
 
-									<td class="product-price"><span class="price">{{b.price}}</span></td>
+									<td class="product-price" style="padding-left: 13px;"><span class="price">Rs {{b.price}}</span></td>
 
-									<td class="product-quantity">
+									<td class="product-quantity" style="padding-left: 4px;">
 										<!-- <div class="pro-qty d-inline-block mx-0">
 											<input type="text" value="{{b.quantity}}">
 										</div> -->
                                          <div class="row no-gutters align-items-center aiz-plus-minus mr-3" style="width: 130px;">
-                                            <button class="btn col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="minus" data-field="quantity" disabled="disabled">
-                                                <i class="las la-minus">-</i>
+                                            <!-- <button class="btn col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="minus" data-field="quantity" *ngIf="quantityy!=b.lower_limit" >
+                                                <i class="las la-minus" >-</i>
                                             </button>
-                                            <input type="number" name="quantity" class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1" value="{{b.quantity}}" min="{{b.lower_limit}}" max="{{b.upper_limit}}" (change)="firstDropDownChanged($event,b.id)">
-                                            <button class="btn  col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="plus" data-field="quantity">
-                                                <i class="las la-plus">+</i>
-                                            </button>
+										
+                                            <input type="number" name="quantity" class="col border-0 text-center flex-grow-1 fs-16 input-number" placeholder="1" [(ngModel)]="quantityy" value="{{b.quantity}}" min="{{b.lower_limit}}" max="{{b.upper_limit}}" (change)="firstDropDownChanged($event,b.id)">
+                                            <button class="btn  col-auto btn-icon btn-sm btn-circle btn-light" type="button" data-type="plus" data-field="quantity" *ngIf="quantityy!=b.upper_limit">
+                                                <i class="las la-plus" >+</i>
+                                            </button> -->
+											<div class="shop-product__block__value">
+												<div class="pro-qty d-inline-block mx-0 pt-0">
+												
+													<a  class="dec qty-btn" style="text-decoration: none;" type="submit" (click)="decreaseqty(b.id,b.quantity-1)"   (click)="b.quantity = b.quantity - 1" 
+													 *ngIf="b.quantity!=b.lower_limit">-</a>
+													<input type="text"   value="{{b.quantity}}"  >
+													<a  class="inc qty-btn" style="text-decoration: none;" (click)="b.quantity = b.quantity + 1"  (click)="increaseqty(b.id,b.quantity)" 
+													*ngIf="b.quantity!=b.upper_limit">+</a>                         
+												</div>                                               
+											</div>
                                         </div>
 									</td>
                                   
-									<td class="total-price"><span class="price">{{b.total}}</span></td>
+									<td class="total-price" style="padding-left: 13px;"><span class="price">Rs {{b.total}}</span></td>
 									<td class="product-remove">
 										<a (click)="deleteRecord(b.id)">
 											<i class="ion-android-close"></i>

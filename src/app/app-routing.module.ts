@@ -15,6 +15,7 @@ const routes: Routes = [
   { path :'bestseller',component:BestsellersComponent},
   { path: 'bestselling', loadChildren: () => import('./products/bestselling/bestselling.module').then(m => m.BestsellingModule) },
   { path: 'shopbyproduct', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
+  { path: 'shopbyproduct/:key', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
   { path: 'productdetail/:id', loadChildren: () => import('./products/productdetail/productdetail.module').then(m => m.ProductdetailModule) },
   { path: 'wishlist', loadChildren: () => import('./profiledetails/wishlist/wishlist.module').then(m => m.WishlistModule) },
   { path: 'cart', loadChildren: () => import('./profiledetails/cart/cart.module').then(m => m.CartModule) },
@@ -26,10 +27,12 @@ const routes: Routes = [
   { path: 'category/:id', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
   { path: 'daydeal', loadChildren: () => import('./products/daydeal/daydeal.module').then(m => m.DaydealModule) },
   { path: 'monthdeal', loadChildren: () => import('./products/monthdeal/monthdeal.module').then(m => m.MonthdealModule) },
+  { path: 'orders', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{onSameUrlNavigation: 'reload'})],
+
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

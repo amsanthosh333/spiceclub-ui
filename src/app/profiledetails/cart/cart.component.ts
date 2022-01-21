@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {NgForm} from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service'; 
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -66,6 +67,8 @@ export class CartComponent implements OnInit {
   removecou: boolean=false;
   loader: boolean=true;
   cartlength: any;
+  buyertypeid: any;
+  search!: FormGroup;
   // responseText: string;
 
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
@@ -79,6 +82,7 @@ export class CartComponent implements OnInit {
     this.currentUser = this.currentUserSubject.asObservable();
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user.id;
+     this.buyertypeid=this.currentdetail.user?.buyertypeid;
      this.accesstoken=this.currentdetail.access_token;
      this.tokentype=this.currentdetail.token_type;
      this.username=this.currentdetail.user.name;
@@ -100,6 +104,10 @@ export class CartComponent implements OnInit {
       coupan: ['',[Validators.required]],
    
     });
+
+    this.search = this.fb.group({ 
+      qtyyy: [''],
+      });
   }
   viewcart(){
     this.request.fetchusercart(this.userid).subscribe((response: any) => {
@@ -139,7 +147,8 @@ export class CartComponent implements OnInit {
     this.quantityy=data.target.value;
     let edata2={
       id:_id,
-      quantity:  this.quantityy
+      quantity:  this.quantityy,
+      buyertype:this.buyertypeid
     }
     console.log("edata2",edata2);
     
@@ -149,6 +158,41 @@ export class CartComponent implements OnInit {
        this.viewcart3();
      });
   }
+  increaseqty(_id:any,qty:string){
+    let edata2={
+      id:_id,
+      quantity:qty,
+      buyertype:this.buyertypeid
+    }
+    console.log("edata2",edata2);
+    
+     this.request.updatecart(edata2).subscribe((response:any) => {
+       console.log("response",response);
+       this.viewcart();
+       this.viewcart3();
+     });
+
+    }
+
+      decreaseqty(_id:any,qty:any){
+        let edata2={
+          id:_id,
+          quantity:qty,
+          buyertype:this.buyertypeid
+        }
+        console.log("edata2",edata2);
+       
+         this.request.updatecart(edata2).subscribe((response:any) => {
+           console.log("response",response);
+           this.viewcart();
+           this.viewcart3();
+         });
+       
+     
+        // console.log("-quntity",this.quantityyy);
+        // console.log("price",this.varprise.replace('Rs',''));
+        // console.log("totalprice",this.totalprice); 
+      }
   viewcart3(){
     this.request.fetchsummery(this.userid).subscribe((response: any) => {
       this.Summery=response;   

@@ -1,0 +1,330 @@
+<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Orders</h1>
+
+                <!--=======  breadcrumb list  =======-->
+
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item"><a>Profile</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Purchase History</li>
+                </ul>
+
+                <!--=======  End of breadcrumb list  =======-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- <div class="shopping-cart-area mb-30 mt-40">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cart-table-container">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th class="product-name">Date</th>
+                                <th class="product-price" colspan="">Code</th>
+                                <th class="product-subtotal">Payment Status</th>
+                                <th class="product-remove">Delivery Status</th>
+                                <th class="product-price" colspan="">Total</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr *ngFor="let img of Orders"> 
+
+                                <td class="product-price">
+                                    <a>{{img.date}}</a>
+                                </td>
+
+                                <td class="product-price" style="padding: 10px;">
+                                    <span class="price">{{img.code}}</span>
+                                </td>
+
+                                <td class="product-price">
+                                    <a>{{img.payment_status}}</a>
+                                </td>
+
+                                <td class="product-price">
+                                    <a>{{img.delivery_status}}</a> 
+                                </td>
+                                <td class="product-price">
+                                    <a>{{img.grand_total}}</a> 
+                                </td>
+
+                                <td class="add-to-cart">
+                                    <button class="lezada-button lezada-button--small lezada-button--icon--left" >
+                                        <i class="ion-ios-cart-outline"></i>view</button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cart-table-container">
+                    <div id="tit" style="width: 100%;">
+                        <ngx-skeleton-loader count="5"
+                            [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+                            *ngIf="loader"></ngx-skeleton-loader>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div> -->
+<div class="orderss mb-2 ml-100 mr-100 mt-40"  *ngFor="let img of Orders" style="border:1px solid rgb(212, 210, 210); background-color: white;"> 
+<div class="row " style=" margin-left: 5px; margin-right: 5px;">
+    <div class="col-12" style="height: 50px;"  > 
+   <div class="row">
+    <div class="col-2 " style="background-color: rgb(36, 169, 247);position:absolute;
+    top:20%; bottom:20%">{{img.code}}</div>
+    <div  class="col-9 " >
+        <span class="add-to-cart"  >
+            <button class="lezada-button lezada-button--small lezada-button--icon--left" >
+                <i class="ion-ios-cart-outline"></i>view</button>
+          </span>
+    </div>
+   </div>
+   
+    </div>
+    <div class="col-6 mt-1" style="border-top:1px solid rgb(212, 210, 210) ;" >
+        <div class="row">
+        <div class="col-6"> <h6>Order status:</h6></div> <div class="col-6"><h6>{{img.delivery_status_string}}</h6> </div> 
+        <div class="col-6"><h6>Delivery status:</h6> </div> <div class="col-6"><h6>{{img.delivery_status}}</h6>  </div> 
+    </div>
+</div>
+<div class="col-6 mt-1" style="border-top:1px solid rgb(212, 210, 210) ;"  >
+    <div class="row">
+    <div class="col-6"> <h6>Payment type:</h6></div> <div class="col-6"><h6>{{img.payment_type}}</h6> </div> 
+    <div class="col-6"><h6>Payment status</h6> </div> <div class="col-6"><h6>{{img.payment_status}}</h6>  </div> 
+</div>
+</div>
+  
+<div class="col-12 mt-2" style="border-top:1px solid rgb(212, 210, 210) ;"> 
+    <div class="row">
+        <div class="col-6"> <p>Ordered on {{img.date}}</p></div> <div class="col-6"><p>Total :{{img.grand_total}}</p> </div> 
+    
+    </div>
+  
+</div>
+</div>
+</div>
+
+
+<div class="login-area mb-20 mb-md-70 mb-sm-70 mb-xs-70 mb-xxs-70">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+              
+            </div>
+
+
+            <div class="col-lg-8">
+                <div class="card-body" *ngFor="let Connectdtls of Orders">
+                    <div class="card-header">
+                        <h4>orders</h4>
+                        <!-- <button (click)="editRow(Connectdtls ,editRecord )" >edit</button>
+      <button (click)="deleteRow(Connectdtls)" >Delete</button> -->
+      <span class="add-to-cart">
+        <button class="lezada-button lezada-button--small lezada-button--icon--left" >
+            <i class="ion-ios-cart-outline"></i>view</button>
+      </span>
+                    </div>
+                    <div class="py-4" style="margin-left: 20px; margin-right: 20px;"
+                        (click)="viewrow(Connectdtls,openRecord)">
+                        <p class="clearfix">
+                            <span class="float-start">
+                                code :
+                            </span>
+                            <span class="float-right text-muted" style="width: 60%;">
+                                {{Connectdtls.code}}
+                            </span>
+                        </p>
+                        <p class="clearfix">
+                            <span class="float-start">
+                                delivery_status:
+                            </span>
+                            <span class="float-right text-muted" style="width: 60%;">
+                                {{Connectdtls.delivery_status}}
+                            </span>
+                        </p>
+
+                        <p class="clearfix">
+                            <span class="float-start">
+                                date :
+                            </span>
+                            <span class="float-right text-muted" style="width: 60%;">
+                                {{Connectdtls.date}}
+                            </span>
+                        </p>
+
+                        <p class="clearfix">
+                            <span class="float-start">
+                                payment_status :
+                            </span>
+
+                            <span class="float-right text-muted" style="width: 60%;">
+                                {{Connectdtls.payment_status}}
+                            </span>
+
+                        </p>
+                        <p class="clearfix">
+                            <span class="float-start">
+                                grand_total :
+                            </span>
+                            <span class="float-right text-muted" style="width: 60%; color: red;">
+                                {{Connectdtls.grand_total}}
+                            </span>
+
+                        </p>
+
+                        <p class="clearfix">
+                            <span class="float-start">
+                                Mobile :
+                            </span>
+                            <span class="float-right text-muted" style="width: 60%;">
+                                {{Connectdtls.phone}}
+                            </span>
+
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2">
+
+            </div>
+        </div>
+    </div>
+</div>
+<ng-template #openRecord let-modal>
+    <div class="modal-header editRowModal">
+        <h4 class="modal-title" id="modal-basic-title">
+            <div class="table-modal-header">
+                <div class="modal-about">
+                    <div class="font-weight-bold p-t-10 font-17">
+                        order details </div>
+                </div>
+            </div>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true"><i class="material-icons">close</i></span>
+        </button>
+    </div>
+    <div class="modal-body" *ngFor="let Connectdtls of Detail">
+
+        <div class="py-4" style="margin-left: 20px; margin-right: 20px;">
+            <p class="clearfix">
+                <span class="float-start">
+                    delivery_status_string :
+                </span>
+                <span class="float-right text-muted" style="width: 60%;">
+                    {{Connectdtls.delivery_status_string}}
+                </span>
+            </p>
+            <p class="clearfix">
+                <span class="float-start">
+                    payment_type:
+                </span>
+                <span class="float-right text-muted" style="width: 60%;">
+                    {{Connectdtls.payment_type}}
+                </span>
+            </p>
+
+            <p class="clearfix">
+                <span class="float-start">
+                    date :
+                </span>
+                <span class="float-right text-muted" style="width: 60%;">
+                    {{Connectdtls.date}}
+                </span>
+            </p>
+
+            <div *ngFor="let i of Items" style="border-style: solid;
+        border-color: rgb(4, 17, 4);">
+
+                <p class="clearfix">
+                    <span class="float-start">
+                        product_name :
+                    </span>
+
+                    <span class="float-right text-muted" style="width: 60%;">
+                        {{i.product_name}}
+                    </span>
+
+                </p>
+                <p class="clearfix">
+                    <span class="float-start">
+                        quantity :
+                    </span>
+                    <span class="float-right text-muted" style="width: 60%; color: red;">
+                        {{i.quantity}}
+                    </span>
+
+                </p>
+
+                <p class="clearfix">
+                    <span class="float-start">
+                        price :
+                    </span>
+                    <span class="float-right text-muted" style="width: 60%;">
+                        {{i.price}}
+                    </span>
+                </p>
+                <button (click)="addreview(addRecord,i.id)">Add review</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+<ng-template #addRecord let-modal>
+    <div class="modal-header editRowModal">
+        <h4 class="modal-title" id="modal-basic-title">
+            <div class="table-modal-header">
+                <div class="modal-about">
+                    <div class="font-weight-bold p-t-10 font-17">
+                        add your review</div>
+                </div>
+            </div>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true"><i class="material-icons">close</i></span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="register-form" [formGroup]="register" (ngSubmit)="submitreview(register)">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+                    <label>ratting<span class="text-danger">*</span></label>
+                    <select class="sel" formControlName="rating">
+                        <option *ngFor='let v of _values2'>{{ v }}</option>
+                    </select>
+
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="form-group position-relative">
+                    <label> Comments </label>
+                    <textarea name="" class="form-control pl-2 " formControlName="comment" cols="30"
+                        rows="3 "></textarea>
+
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">submit review</button>
+
+            </div>
+        </form>
+
+    </div>
+</ng-template>

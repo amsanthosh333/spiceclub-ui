@@ -58,6 +58,7 @@ export class BlogComponent implements OnInit {
   sideloader2: boolean=true;
   allloader1: boolean=true;
   recipeloader: boolean=true;
+  imgloader: boolean=false;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,
     private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
@@ -94,13 +95,16 @@ export class BlogComponent implements OnInit {
   }
 viewallblog(page:any){
   this.loader1=true;
-
+  this.imgloader = false;
   this.request.getallblog(page).subscribe((res:any)=>{
     this.Blogs=res.data;
     this.loader1=false;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     console.log("allblog",this.Blogs);
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   }, (error: any) => {
     console.log("error",error);
   });
@@ -119,6 +123,7 @@ viewblogcat(){
 
 getblogbycatg(id:any,page=1){
   this.loader1=true;
+  this.imgloader = false;
   this.request.getblogbycat(id,page).subscribe((response: any) => {
     this.Blogs=response.data;
     this.loader1=false;
@@ -128,6 +133,9 @@ getblogbycatg(id:any,page=1){
     console.log("recipecategory",this.Blogs);
     this.page1=true;
     this.page2=false;
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   },
   (error: any) => {
     console.log("error",error);
@@ -135,6 +143,7 @@ getblogbycatg(id:any,page=1){
 }
 getpage(url:any){
   this.loader1=true;
+  this.imgloader = false;
   this.request.getpage(url).subscribe((response:any)=>{
     this.Blogs=response.data;
     this.loader1=false;
@@ -142,10 +151,14 @@ getpage(url:any){
     this.pagess=this.pagenation.links
     console.log("response",response);
     console.log("allproduct",this.Blogs);
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   })
 }
 getblogdetail(id:any){
   this.page1=false;
+  this.imgloader = false;
   window.scroll(0,0)
   this.page2=true;
   this.sideloader2=true;
@@ -159,10 +172,12 @@ getblogdetail(id:any){
     this.currentRatess=this.Peoduct.rating;
     console.log("currentRate",this.currentRatess);
     console.log("recipecategorydetail",this.Peoduct);
-   
     this.sideloader2=false;
     this.allloader1=false;
     this.recipeloader=false;
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 3000);
   },
   (error: any) => {
     console.log("error",error);
@@ -225,12 +240,18 @@ search1(form:FormGroup){
 let edata ={
   key :form.value.key
 }
+this.loader1=true;
+  this.imgloader = false;
 console.log(edata);
 this.request.searchblog(edata).subscribe((res:any)=>{
   this.Blogs=res.data;
   this.pagenation=res.meta   
   this.pagess=this.pagenation.links
+  this.loader1=false;
   console.log("allblog",this.Blogs);
+  setTimeout(() => {
+    this.imgloader = true;
+  }, 2000);
 }, (error: any) => {
   console.log("error",error);
 });
@@ -240,12 +261,18 @@ search2(form:FormGroup){
   let edata ={
     key :form.value.key
   }
+  this.loader1=true;
+  this.imgloader = false;
   console.log(edata);
   this.request.searchbyblog(edata).subscribe((res:any)=>{
     this.Blogs=res.data;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
+    this.loader1=false;
     console.log("allblog",this.Blogs);
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   }, (error: any) => {
     console.log("error",error);
   });
@@ -254,7 +281,6 @@ search2(form:FormGroup){
     // this._location.back();
     this.page1=true;
     this.page2=false;
-    
     }
 
     addRecordSuccess() {

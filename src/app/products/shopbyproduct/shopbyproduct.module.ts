@@ -9,7 +9,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
-
+import { Ng5SliderModule } from 'ng5-slider';
 @NgModule({
   declarations: [
     ShopbyproductComponent
@@ -18,7 +18,9 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     ShopbyproductRoutingModule,ReactiveFormsModule,NgbModule,
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),Ng5SliderModule
+    
   ]
+  
 })
 export class ShopbyproductModule { }

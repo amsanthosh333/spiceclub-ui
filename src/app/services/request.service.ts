@@ -366,6 +366,23 @@ public getcatprodbyid(id: string) {
   this.url = `${this.endPoint1}/products/category/` + id +`?page=1&name=`;
   return this.http.get(this.url);
 }
+
+public getbulckdisc(b_id: string,P_id:any) {
+  this.url = `${this.endPoint1}/buyertypepricing/bulkproduct?buyertype=` + b_id +`&product_id=`+ P_id;
+  return this.http.get(this.url);
+}
+public getdisc(b_id: string,P_id:any) {
+  this.url = `${this.endPoint1}/buyertypepricing?buyertype=` + b_id +`&product_id=`+ P_id;
+  return this.http.get(this.url);
+}
+public getdiscountprice(b_id: any, P_id:any, var_value:any, qty:any) {
+  console.log("varr",var_value);
+  
+  this.url = `${this.endPoint1}/products/discountprice?id=`+ P_id + `&variant=`+ var_value +`&quantity=`+ qty +`&buyertype=` + b_id ;
+  console.log("url",this.url);
+ 
+  return this.http.get(this.url);
+}
 //related product
 public getrelatedprod(id: string) {
   this.url = `${this.endPoint1}/products/related/` + id ;
@@ -381,8 +398,12 @@ public getsortprod(sort: string) {
   
   return this.http.get(this.url);
 }
-public filterdataa(category:any,min:any,max:any) {
-  this.url = `${this.endPoint1}/products/search?categories=` + category +`&brands=` +`&name=` +`&min=` + min +`&max=` +max ;
+public filterdataa(category:any,brand:any,min:any,max:any) {
+  this.url = `${this.endPoint1}/products/search?categories=` + category +`&brands=` + brand +`&name=` +`&min=` + min +`&max=` +max ;
+  return this.http.get(this.url);
+}
+public filterdataa2(min:any,max:any) {
+  this.url = `${this.endPoint1}/products/search?categories=&brands=&name=&min=` + min +`&max=` +max ;
   return this.http.get(this.url);
 }
 public filtersearchdataa(name:any) {

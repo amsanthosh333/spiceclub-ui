@@ -3,7 +3,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="breadcrumb-title">Blog</h1>
+                    <h1 class="breadcrumb-title">Recipe</h1>
 
                     <!--=======  breadcrumb list  =======-->
 
@@ -29,12 +29,6 @@
                     <!--=======  page sidebar  =======-->
 
                     <div class="page-sidebar">
-                        <!--=======  single sidebar widget  =======-->
-
-                        <!--=======  End of single sidebarwidget  =======-->
-
-                        <!--=======  single sidebar widget  =======-->
-
                         <div class="single-sidebar-widget mb-40">
                             <h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
 
@@ -79,11 +73,16 @@
                                 <div class="single-slider-post__image mb-30" style="height: 200px;  display: block;
                                     margin-left: auto;
                                     margin-right: auto;">
-                                    <a>
+                                    <ngx-skeleton-loader count="1" *ngIf="!imgloader"
+                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                    <a *ngIf="imgloader"  (click)="getrecipedetaill(img.id)">
                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                             class="img-fluid" alt="">
                                     </a>
                                 </div>
+
+                                
 
                                 <!--=======  End of image  =======-->
 
@@ -206,7 +205,7 @@
                         <div class="col-md-12 mb-40">
                             <div class="single-slider-post single-slider-post--sticky pb-0">
                                 <!--=======  image  =======-->
-
+                                
                                 <div class="single-slider-post__image single-slider-post--sticky__image mb-30" style="display: block;
                                     margin-left: auto;
                                     margin-right: auto;" *ngIf="!photoloader1">

@@ -62,6 +62,7 @@ export class RecipeComponent implements OnInit {
   sideloader2: boolean=true;
   discrloading: boolean=true;
   discriptloader: boolean=true;
+  imgloader: boolean=false;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
      
@@ -99,12 +100,17 @@ export class RecipeComponent implements OnInit {
     });
   }
   getallrecipe(page:any){
+    this.recipeloader=true;
+    this.imgloader = false;
   this.request.getallrecipe(page).subscribe((res:any)=>{
     this.Blogs=res.data;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     this.recipeloader=false;
     console.log("allrecipe",this.Blogs);
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   }, (error: any) => {
     console.log("error",error);
   });
@@ -124,6 +130,7 @@ getallrecipecat(){
 
 getrecipebycatg(id:any,page=1){
   this.recipeloader=true;
+  this.imgloader = false;
   this.request.getrecipebycat(id,page).subscribe((response: any) => {
     this.Blogs=response.data;
     this.pagenation=response.meta   
@@ -131,8 +138,12 @@ getrecipebycatg(id:any,page=1){
     this.recipeloader=false;
     console.log("response",response);
     console.log("recipe by category",this.Blogs);
+    
     this.page1=true;
     this.page2=false;
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   },
   (error: any) => {
     console.log("error",error);
@@ -140,6 +151,7 @@ getrecipebycatg(id:any,page=1){
 }
 getpage(url:any){
   this.recipeloader=true;
+  this.imgloader = false;
   this.request.getpage(url).subscribe((response:any)=>{
     this.Blogs=response.data;
     this.pagenation=response.meta;
@@ -147,6 +159,9 @@ getpage(url:any){
     this.recipeloader=false;
     console.log("response",response);
     console.log("allproduct",this.Blogs);
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   })
 }
 getrecipedetaill(id:any){
@@ -172,9 +187,12 @@ getrecipedetaill(id:any){
     // this.currentRatess=this.Peoduct.rating;
     console.log("recipecategorydetail",this.Peoduct);
     this.sideloader2=false;
-    this.photoloader1=false;
+   
     this.discrloading=false;
     this.discriptloader=false;
+    setTimeout(() => {
+      this.photoloader1=false;
+    }, 3000);
   },
   (error: any) => {
     console.log("error",error);
@@ -238,27 +256,38 @@ let edata ={
   key :form.value.key
 }
 console.log(edata);
+this.recipeloader=true;
+this.imgloader = false;
 this.request.searchblog(edata).subscribe((res:any)=>{
   this.Blogs=res.data;
   this.pagenation=res.meta   
   this.pagess=this.pagenation.links
   console.log("allblog",this.Blogs);
+  setTimeout(() => {
+    this.imgloader = true;
+  }, 2000);
 }, (error: any) => {
   console.log("error",error);
 });
 }
 
 search2(form:FormGroup){
+
   let edata ={
     key :form.value.key
   }
 
   console.log(edata);
+  this.recipeloader=true;
+  this.imgloader = false;
   this.request.searchbyblog(edata).subscribe((res:any)=>{
     this.Blogs=res.data;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     console.log("allblog",this.Blogs);
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
   }, (error: any) => {
     console.log("error",error);
   });

@@ -1,4 +1,4 @@
-<div >
+<div>
     <div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15 ">
         <div class="container">
             <div class="row">
@@ -14,18 +14,19 @@
             </div>
         </div>
     </div>
-    
+
     <div class="shop-page-header">
         <div class="container">
             <div class="row align-items-center">
 
                 <div class="col-12 col-lg-12 col-md-5 d-none d-md-block pt-3">
                     <!--=======  fitler titles  =======-->
-                    <div class="filter-title filter-title--type-two" >
-                        <ul class="product-filter-menu" style="text-align: center;"> 
-                            <li *ngFor="let img of  Topcat;let i = index"  [ngClass]="{'active': selectedItem === img.id}"
-                             (click)="viewcatprod(img,img.id,1,i)" >{{img.name}}</li>
-                           
+                    <div class="filter-title filter-title--type-two">
+                        <ul class="product-filter-menu" style="text-align: center;">
+                            <li *ngFor="let img of  Topcat;let i = index"
+                                [ngClass]="{'active': selectedItem === img.id}" (click)="viewcatprod(img,img.id,1,i)">
+                                {{img.name}}</li>
+
                         </ul>
                     </div>
                     <!--=======  End of fitler titles   =======-->
@@ -51,35 +52,40 @@
                                 <div class="search-widget">
                                     <!-- <input placeholder="Search" type="text" class="browser-default search-field"
                                          aria-label="Search box"> -->
-                                         <form  [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
-                                            <input type="search" formControlName="key" placeholder="Search products ...">
-                                            <button type="submit" ><i class="ion-android-search"></i></button>
-                                        </form>
-                                        <form  [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
-                                            <input type="search" formControlName="key" placeholder="Search sub products ...">
-                                            <button type="submit" ><i class="ion-android-search"></i></button>
-                                        </form>
+                                    <form [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
+                                        <input type="search" formControlName="key" placeholder="Search products ...">
+                                        <button type="submit"><i class="ion-android-search"></i></button>
+                                    </form>
+                                    <form [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
+                                        <input type="search" formControlName="key"
+                                            placeholder="Search sub products ...">
+                                        <button type="submit"><i class="ion-android-search"></i></button>
+                                    </form>
                                 </div>
                                 <!--=======  End of search widget  (click)='filterDatatable($event)'  =======-->
                             </div>
                             <!--=======  End of single sidebarwidget  =======-->
                             <!--=======  single sidebar widget  =======-->
-                            
+
 
                             <div class="single-filter-widget  mb-40">
-                                <h2 class="single-sidebar-widget--title mb-2" >Sub Category</h2>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
-                                    <li  *ngFor="let cat of Subcat;let i = index"  (click)="viewsubcatprod(cat.id,1,i)" [ngClass]="{'active': subItem === i}">
-                                       {{cat.name}}
+                                <h2 class="single-sidebar-widget--title mb-2">Sub Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+                                    style="padding-left: 0px;">
+                                    <li *ngFor="let cat of Subcat;let i = index" (click)="viewsubcatprod(cat.id,1,i)"
+                                        [ngClass]="{'active': subItem === i}">
+                                        {{cat.name}}
                                     </li>
                                 </ul>
                             </div>
-                           
+
 
                             <div class="single-sidebar-widget mb-20">
                                 <h2 class="single-sidebar-widget--title mb-2">All Category</h2>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
-                                    <li class="has-children" *ngFor="let img of Allcat;let i=index" [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod(img,img.id,1,i)">
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+                                    style="padding-left: 0px;">
+                                    <li class="has-children" *ngFor="let img of Allcat;let i=index"
+                                        [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod(img,img.id,1,i)">
                                         {{img.name}}
                                     </li>
                                 </ul>
@@ -88,7 +94,7 @@
                             <!--=======  End of single sidebar widget  =======-->
 
                             <div data-role="main" class="ui-content">
-                               
+
                                 <!-- <form [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
                                     <div data-role="rangeslider">
                                         <label for="price-min">Price:</label>
@@ -110,7 +116,7 @@
                             <br>
 
                             <!--=======  End of single sidebar widget  =======-->
-                       
+
                             <!-------------- <div class="single-sidebar-widget mb-40">
                                 <h2 class="single-sidebar-widget--title">Popular products</h2>
 
@@ -148,7 +154,7 @@
                                     </div>
                                 </div>
                             </div> -->
-          
+
                         </div>
 
                         <!--=======  End of page sidebar  =======-->
@@ -159,29 +165,34 @@
                         <div class="page-sidebar">
                             <div class="single-sidebar-widget mb-40">
                                 <div class="search-widget">
-                                         <form  [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
-                                            <input type="search" formControlName="key" placeholder="Search products ...">
-                                            <button type="submit" ><i class="ion-android-search"></i></button>
-                                        </form>
-                                        <form  [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
-                                            <input type="search" formControlName="key" placeholder="Search sub products ...">
-                                            <button type="submit" ><i class="ion-android-search"></i></button>
-                                        </form>
+                                    <form [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
+                                        <input type="search" formControlName="key" placeholder="Search products ...">
+                                        <button type="submit"><i class="ion-android-search"></i></button>
+                                    </form>
+                                    <form [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
+                                        <input type="search" formControlName="key"
+                                            placeholder="Search sub products ...">
+                                        <button type="submit"><i class="ion-android-search"></i></button>
+                                    </form>
                                 </div>
-                            </div>                          
+                            </div>
                             <div class="single-filter-widget  mb-40">
-                                <h2 class="single-sidebar-widget--title mb-2" >Sub Category</h2>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
+                                <h2 class="single-sidebar-widget--title mb-2">Sub Category</h2>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+                                    style="padding-left: 0px;">
                                     <li>
                                         <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
                                     </li>
                                 </ul>
                             </div>
-                           
+
                             <div class="single-sidebar-widget mb-20">
                                 <h2 class="single-sidebar-widget--title mb-2">All Category</h2>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
-                                   <li> <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader></li>
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+                                    style="padding-left: 0px;">
+                                    <li>
+                                        <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
+                                    </li>
                                 </ul>
                             </div>
                             <div data-role="main" class="ui-content">
@@ -190,7 +201,7 @@
                             <br>
                         </div>
                     </div>
-                     <!-- sidebarlazyloading  end-->
+                    <!-- sidebarlazyloading  end-->
 
                     <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="!prodloader">
 
@@ -202,12 +213,16 @@
                                     <!--=======  single product image  =======-->
 
                                     <div class="single-product__image">
-                                        <a class="image-wrap" >
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="">
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="">
-                                        </a>
+                                        <div class="imglazy">
+                                            <ngx-skeleton-loader count="1" *ngIf="!imgloader"
+                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                            <a class="image-wrap" *ngIf="imgloader" (click)="proddetail(img.id)">
+
+                                                <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                    class="img-fluid" alt="">
+                                            </a>
+                                        </div>
 
                                         <div class="single-product__floating-badges">
                                             <!-- <span class="onsale">-10%</span> -->
@@ -216,15 +231,15 @@
 
                                         <div class="single-product__floating-icons">
                                             <!-- (click)="addtowishlist(img.id)" -->
-                                            <span  class="wishlist"  (click)="addtowishlist(img.id)" ><a 
+                                            <span class="wishlist" (click)="addtowishlist(img.id)"><a
                                                     data-tippy="Add to wishlist" data-tippy-inertia="true"
                                                     data-tippy-animation="shift-away" data-tippy-delay="50"
                                                     data-tippy-arrow="true" data-tippy-theme="sharpborder"
                                                     data-tippy-placement="left"><i
                                                         class="ion-android-favorite-outline"></i></a></span>
 
-                                            <span class="quickview"><a class="cd-trigger" href="#qv-1"
-                                                    data-tippy="Quick View" data-tippy-inertia="true"
+                                            <span class="quickview" (click)="quickview(img.id,openRecord)"><a
+                                                    class="cd-trigger" data-tippy="Quick View" data-tippy-inertia="true"
                                                     data-tippy-animation="shift-away" data-tippy-delay="50"
                                                     data-tippy-arrow="true" data-tippy-theme="sharpborder"
                                                     data-tippy-placement="left"><i
@@ -234,7 +249,7 @@
                                     <!--=======  End of single product image  =======-->
 
                                     <!--=======  single product content  routerLink="/productdetail"  (click)="viewproductrow(img)"=======-->
-                                    <div class="single-product__content">
+                                    <div class="single-product__content" (click)="proddetail(img.id)">
                                         <div class="title">
                                             <h3> <a href="">{{img.name}}</a></h3>
                                             <a style="color: red;" (click)="proddetail(img.id)">View details</a>
@@ -323,7 +338,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div id="pggg"  *ngIf="Product?.length==0" style=" display: flex;
+                        <div id="pggg" *ngIf="Product?.length==0" style=" display: flex;
                         justify-content: center;
                         align-items: center;
                         height: 200px;
@@ -335,22 +350,22 @@
                             </div>
                         </div>
                     </div>
-                         <!--  productslazyloading -->
+                    <!--  productslazyloading -->
                     <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
                         <div class="row product-isotope shop-product-wrap four-column">
                             <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-                                                <div class="single-product" style="height: 250px; width: 200px;">          
-                                                        <ngx-skeleton-loader count="1"
-                                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                                        </ngx-skeleton-loader>
-                                                </div>                                  
-                            </div>   
+                                <div class="single-product" style="height: 250px; width: 200px;">
+                                    <ngx-skeleton-loader count="1"
+                                        [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
                         </div>
-                    </div>           
-                     <!--  productslazyloading  end-->
+                    </div>
+                    <!--  productslazyloading  end-->
                 </div>
-                               <!-- lazyloading    -->
-               <!-- <div class="row">
+                <!-- lazyloading    -->
+                <!-- <div class="row">
                     <div class="col-lg-3 order-2 order-lg-1">
                         <div class="page-sidebar">
                             <div class="single-sidebar-widget mb-40">
@@ -404,86 +419,90 @@
     </div>
 
     <!-- featuredcat -->
-<div class="product-category-container mb-100 mb-md-80 mb-sm-70">
-    <div class="container wide">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="section-title section-title--one text-center">
-                    <h1>Featured Categories</h1>
+    <div class="product-category-container mb-100 mb-md-80 mb-sm-70">
+        <div class="container wide">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-title section-title--one text-center">
+                        <h1>Featured Categories</h1>
+                    </div>
                 </div>
-                </div>
-            <div class="col-lg-12">
-                <div class="product-category-container--collectionhome-wrapper">
-                    <div class="row justify-content-center" >
-                        <div class="col-lg-2 col-md-6 col-12 mb-60"  *ngFor="let img of Futurecatg; let i = index"  >							
-                            <div class="single-category single-category--one wow zoomIn">
-               
-                                <div class="single-category__image single-category__image--one" style=" width:100%; height:200px;" >
-                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}" class="img-fluid" alt="" style=" width:100%; height:100%;object-fit:cover">
-                                </div>
-                                <div class="single-category__content single-category__content--one mt-10 mb-10">
-                                    <div class="title" >
-                                        <p>{{img.name}}</p>	
-                                        <a  (click)="viewctopcatprod(img,img.id,1,i)" style="color: red;">view {{img.name}}</a>		
+                <div class="col-lg-12">
+                    <div class="product-category-container--collectionhome-wrapper">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-2 col-md-6 col-12 mb-60" *ngFor="let img of Futurecatg; let i = index">
+                                <div class="single-category single-category--one wow zoomIn">
+
+                                    <div class="single-category__image single-category__image--one"
+                                        style=" width:100%; height:200px;" (click)="viewctopcatprod2(img,img.id,1,i)">
+                                        <img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+                                            class="img-fluid" alt="" style=" width:100%; height:100%;object-fit:cover">
+                                    </div>
+                                    <div class="single-category__content single-category__content--one mt-10 mb-10">
+                                        <div class="title">
+                                            <p>{{img.name}}</p>
+                                            <a (click)="viewctopcatprod2(img,img.id,1,i)" style="color: red;">view
+                                                {{img.name}}</a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-12" *ngIf="loader1">
-                <div class="product-category-container--collectionhome-wrapper">
-                    <div class="row justify-content-center">
-                        <!-- Allcat   Homecat -->
-                        <div class="col-lg-2 col-md-6 col-12 mb-60">
-                            <div class="single-category single-categow zoomIn">
-                                <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
-                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                <div class="col-lg-12" *ngIf="loader1">
+                    <div class="product-category-container--collectionhome-wrapper">
+                        <div class="row justify-content-center">
+                            <!-- Allcat   Homecat -->
+                            <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                <div class="single-category single-categow zoomIn">
+                                    <div class="single-category__image single-category__image--one"
+                                        style=" width:100%; height:200px;">
+                                        <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                    </ngx-skeleton-loader>
+                                        </ngx-skeleton-loader>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-12 mb-60">
-                            <div class="single-category single-categow zoomIn">
-                                <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
-                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                            <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                <div class="single-category single-categow zoomIn">
+                                    <div class="single-category__image single-category__image--one"
+                                        style=" width:100%; height:200px;">
+                                        <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                    </ngx-skeleton-loader>
+                                        </ngx-skeleton-loader>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-12 mb-60">
-                            <div class="single-category single-categow zoomIn">
-                                <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
-                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                            <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                <div class="single-category single-categow zoomIn">
+                                    <div class="single-category__image single-category__image--one"
+                                        style=" width:100%; height:200px;">
+                                        <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                    </ngx-skeleton-loader>
+                                        </ngx-skeleton-loader>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-12 mb-60">
-                            <div class="single-category single-categow zoomIn">
-                                <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
-                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                            <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                <div class="single-category single-categow zoomIn">
+                                    <div class="single-category__image single-category__image--one"
+                                        style=" width:100%; height:200px;">
+                                        <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                    </ngx-skeleton-loader>
+                                        </ngx-skeleton-loader>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-lg-2 col-md-6 col-12 mb-60">
-                            <div class="single-category single-categow zoomIn">
-                                <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
-                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                            <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                <div class="single-category single-categow zoomIn">
+                                    <div class="single-category__image single-category__image--one"
+                                        style=" width:100%; height:200px;">
+                                        <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                    </ngx-skeleton-loader>
+                                        </ngx-skeleton-loader>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -492,89 +511,180 @@
             </div>
         </div>
     </div>
-</div>
+
+
+    <!-- poup -->
+    <ng-template #openRecord let-modal>
+
+        <div class="modal-body" style="background-color: rgb(248, 250, 251);" >
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()"
+                style="padding-right: 15px;">
+                <span aria-hidden="true"><i class="ion-android-close"></i></span>
+            </button>
+            <div class="py-4" style="margin-left: 20px; margin-right: 20px;">
+                <div class="modal-body p-4 c-scrollbar-light">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="row gutters-10 flex-row-reverse"
+                                style="margin-right: 20px;border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
+                                <div class="col" style="margin-top: 35px;margin-bottom: 35px;">
+                                    <div class="aiz-carousel product-gallery slick-initialized slick-slider"
+                                        data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
+                                        <div class="carousel-box img-zoom rounded"
+                                            style="width: 100%; display: inline-block; position: relative; overflow: hidden;">
+                                            <img class="img-fluid ls-is-cached lazyloaded"
+                                                src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
+                                                data-src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}">
+                                            <img role="presentation" alt=""
+                                                src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
+                                                class="zoomImg"
+                                                style="position: absolute; top: -1224.65px; left: 0px; opacity: 0; width: 2250px; height: 2250px; border: none; max-width: none; max-height: none;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- <div class="col-auto w-90px">
+                                <div class="aiz-carousel carousel-thumb product-gallery-thumb slick-vertical slick-initialized slick-slider"
+                                    data-items="5" data-nav-for=".product-gallery" data-vertical="true"
+                                    data-focus-select="true">
+                                    <div class="slick-list draggable" style="height: 397.5px;">
+                                        <div class="slick-track"
+                                            style="opacity: 1; height: 239px; transform: translate3d(0px, 0px, 0px);">
+                                            <div class="slick-slide slick-current slick-active"
+                                                data-slick-index="0" aria-hidden="false"
+                                                style="width: 70px;">
+                                                <div>
+                                                    <div class="carousel-box c-pointer border p-1 rounded"
+                                                        style="width: 100%; display: inline-block;">
+                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
+                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slick-slide slick-active" data-slick-index="1"
+                                                aria-hidden="false" style="width: 70px;">
+                                                <div>
+                                                    <div class="carousel-box c-pointer border p-1 rounded"
+                                                        style="width: 100%; display: inline-block;">
+                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
+                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slick-slide slick-active" data-slick-index="2"
+                                                aria-hidden="false" style="width: 70px;">
+                                                <div>
+                                                    <div class="carousel-box c-pointer border p-1 rounded"
+                                                        style="width: 100%; display: inline-block;">
+                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
+                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
+                            <h2 class="item-title mb-4">{{Peoduct.name}}</h2>
+                            <p class="price">
+                                <span class="main-price discounted" style="text-decoration: line-through"
+                                *ngIf="Peoduct?.stroked_price!==prod_price">{{Peoduct?.stroked_price}}</span>   
+                                <span class="h5 discounted-price">{{prod_price}}</span>
+                                <span class="opacity-70">/{{Peoduct.unit}}</span>
+                            </p>
+                            <p class="description" [innerHTML]="Peoduct?.description">
+                                                {{Peoduct.description}}
+                            </p>                           
+                                <hr>
+
+                                <form id="option-choice-form">
+                                    <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
+                                    <input type="hidden" name="id" value="21">
+
+                                    <div class="row no-gutters ml-1">
+                                        <div class="col-3">
+                                            <div class="opacity-50 mt-2 " *ngFor="let a of choice">{{a.title}}:</div>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="shop-product__block__value" *ngFor="let a of choice">
+
+                                                <div class="shop-product-size-list">
+                                                    <span class="single-size" *ngFor="let b of a.options"
+                                                        (click)="selectvar(b)">{{b}}</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row no-gutters ml-1">
+                                        <div class="col-3">
+                                            <div class="opacity-50 mt-2">Quantity:</div>
+                                        </div>
+                                        <div class="col-9">
+                                            <div class="product-quantity d-flex align-items-center">
+                                                <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
+                                                    <a class="dec qty-btn" style="text-decoration: none;"
+                                                        (click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
+                                                    <input type="text" value="{{quantityyy}}" style="background: transparent;">
+                                                    <a class="inc qty-btn" style="text-decoration: none;"
+                                                        (click)="increaseqty()" *ngIf="stk>1">+</a>
+                                                </div>
+                                                <div class="avialable-amount opacity-60">
+                                                    &nbsp; (<span id="available-quantity">{{stocck}}</span> available)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <!-- <div class="row no-gutters pb-3" id="chosen_price_div">
+                                    <div class="col-3">
+                                        <div class="opacity-50">Total Price:</div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="product-price">
+                                            <strong id="chosen_price"
+                                                class="h5 fw-600 text-danger">Rs{{totalprice}}</strong>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                </form>
+                                <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
+                                    <button *ngIf="stk!==0" type="button"
+                                        class="btn btn-primary buy-now fw-600 add-to-cart" (click)="addtocart2()">
+                                        <i class="la la-shopping-cart"></i>
+                                        <span class="d-none d-md-inline-block"> Add to cart</span>
+                                    </button>
+                                    <button type="button" class="btn btn-danger buy-now fw-600 add-to-cart"
+                                        *ngIf="stk==0">
+                                        <i class="la la-shopping-cart"></i>
+                                        <span class="d-none d-md-inline-block"> Out of Stock</span>
+                                    </button>
+
+                                </div>
+
+                     
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
+
+
     <!--=============================================
 			=            quick view         =
 			=============================================-->
 
-    <div class="cd-quick-view">
-        <div class="cd-slider-wrapper">
-            <ul class="cd-slider">
-                <li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
-                <li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
-            </ul> <!-- cd-slider -->
 
-            <ul class="cd-slider-pagination">
-                <li class="active"><a href="#0">1</a></li>
-                <li><a href="#1">2</a></li>
-            </ul> <!-- cd-slider-pagination -->
 
-            <ul class="cd-slider-navigation">
-                <li><a class="cd-prev" href="#0">Prev</a></li>
-                <li><a class="cd-next" href="#0">Next</a></li>
-            </ul> <!-- cd-slider-navigation -->
-        </div> <!-- cd-slider-wrapper -->
-
-        <div class="lezada-item-info cd-item-info ps-scroll">
-
-            <h2 class="item-title">Demo Product One</h2>
-            <p class="price">
-                <span class="main-price discounted">Rs 360.00</span>
-                <span class="discounted-price">Rs 300.00</span>
-            </p>
-
-            <p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in
-                your
-                daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making
-                variety rices like Biriyani and Puloa.</p>
-
-            <span class="quickview-title">Quantity:</span>
-            <div class="pro-qty d-inline-block mb-40">
-                <input type="text" value="1">
-            </div>
-
-            <div class="add-to-cart-btn mb-25">
-
-                <button class="lezada-button lezada-button--medium">add to cart</button>
-            </div>
-
-            <div class="quick-view-other-info">
-                <table>
-                    <tr class="single-info">
-                        <td class="quickview-title">SKU: </td>
-                        <td class="quickview-value">12345</td>
-                    </tr>
-                    <tr class="single-info">
-                        <td class="quickview-title">Categories: </td>
-                        <td class="quickview-value">
-                            <a href="#">Edible Oils</a>,
-                            <a href="#">Oils</a>,
-                            <a href="#">Cooking Oils</a>
-                        </td>
-                    </tr>
-                    <tr class="single-info">
-                        <td class="quickview-title">Tags: </td>
-                        <td class="quickview-value">
-                            <a href="#">The Spice Club</a>,
-                            <a href="#">Satinanace</a>
-                        </td>
-                    </tr>
-                    <tr class="single-info">
-                        <td class="quickview-title">Share on: </td>
-                        <td class="quickview-value">
-                            <ul class="quickview-social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </div> <!-- cd-item-info -->
-        <a href="#0" class="cd-close">Close</a>
-    </div>
 </div>
 <br>
-

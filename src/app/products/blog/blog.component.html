@@ -1,28 +1,28 @@
 <div *ngIf="page1">
-<div class="breadcrumb-area breadcrumb-bg-1 pt-20 pb-20 mb-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="breadcrumb-title">Blog</h1>
+	<div class="breadcrumb-area breadcrumb-bg-1 pt-20 pb-20 mb-30">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="breadcrumb-title">Blog</h1>
 
-                <!--=======  breadcrumb list  =======-->
+					<!--=======  breadcrumb list  =======-->
 
-                <ul class="breadcrumb-list">
-                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Blog</li>
-                </ul>
+					<ul class="breadcrumb-list">
+						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active">Blog</li>
+					</ul>
 
-                <!--=======  End of breadcrumb list  =======-->
+					<!--=======  End of breadcrumb list  =======-->
 
-            </div>
-        </div>
-    </div>
-</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!--=============================================
 	=           blog page content         =
 	=============================================-->
 
-    <div class="blog-page-wrapper mb-100">
+	<div class="blog-page-wrapper mb-100">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 order-2 order-lg-1">
@@ -37,17 +37,19 @@
 
 						<div class="single-sidebar-widget mb-40" *ngIf="!loader">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category" *ngFor="let cat of Allcat">	
-								<li ><a  style="color: gray;" (click)="getblogbycatg(cat.id)" stty>{{cat.name}} </a> <span class="quantity" >12</span></li>	
+							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+								*ngFor="let cat of Allcat">
+								<li><a style="color: gray;" (click)="getblogbycatg(cat.id)" stty>{{cat.name}} </a> <span
+										class="quantity">12</span></li>
 							</ul>
-							
+
 						</div>
 						<div class="single-sidebar-widget mb-40" *ngIf="loader">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-							<ngx-skeleton-loader count="5" animation="pulse"  ></ngx-skeleton-loader>
-							
+							<ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
+
 						</div>
-						
+
 						<!--=======  End of single sidebar widget  =======-->
 
 
@@ -59,9 +61,10 @@
 							<!--=======  widget post wrapper  =======-->
 							<div class="widget-post-wrapper" *ngIf="!loader1">
 								<!--=======  single widget post  =======-->
-								<div class="single-widget-post"  *ngFor="let img of Blogs">
+								<div class="single-widget-post" *ngFor="let img of Blogs">
 									<div class="image">
-										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}" class="img-fluid" alt="">
+										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+											class="img-fluid" alt="">
 									</div>
 									<div class="content">
 										<h3 class="widget-post-title"><a href="#">{{img.name}}</a></h3>
@@ -70,14 +73,13 @@
 									</div>
 								</div>
 							</div>
-							   <!-- lazyloading  -->
-							   <div class="widget-post-wrapper" *ngIf="loader1">
+							<!-- lazyloading  -->
+							<div class="widget-post-wrapper" *ngIf="loader1">
 								<div class="single-widgost">
 									<div class="imag" style="height: 120px; width: 160px;">
-										<ngx-skeleton-loader count="3"
-											[theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
+										<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
 											 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"> </ngx-skeleton-loader>
-									</div>	
+									</div>
 								</div>
 							</div>
 
@@ -88,19 +90,23 @@
 					<!--=======  End of page sidebar  =======-->
 				</div>
 
-<!-- all blogs -->
+				<!-- all blogs -->
 				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!loader1">
-					<div class="row" >
+					<div class="row">
 
-						<div class="col-md-4 mb-60" *ngFor="let img of Blogs" >
+						<div class="col-md-4 mb-60" *ngFor="let img of Blogs">
 							<div class="single-slider-post">
 								<!--=======  image  style="height: 200px; width: 200px;"=======-->
 
-								<div class="single-slider-post__image mb-30"  style="height: 200px; width: 200px;  display: block;
+								<div class="single-slider-post__image mb-30" style="height: 200px; width: 200px;  display: block;
 								margin-left: auto;
 								margin-right: auto;">
-									<a >
-                                        <img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}" class="img-fluid" alt="">
+									<ngx-skeleton-loader count="1" *ngIf="!imgloader"
+										[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+									</ngx-skeleton-loader>
+									<a *ngIf="imgloader" (click)="getblogdetail(img.id)">
+										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+											class="img-fluid" alt="">
 									</a>
 								</div>
 
@@ -108,17 +114,19 @@
 
 								<!--=======  content  =======-->
 
-								<div class="single-slider-post__content">
+								<div class="single-slider-post__content" (click)="getblogdetail(img.id)">
 									<div class="post-date">
 										<i class="ion-android-calendar"></i>
-										<a > june 5, 2021</a>
-										 &nbsp;<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
+										<a> june 5, 2021</a>
+										&nbsp;<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+										</ngb-rating>
 									</div>
 									<h2 class="post-title" style=" height:80px; width: 100%;
-                                    overflow: hidden;" ><a >{{img.name}}SERGDGF SE dtgg th ff </a></h2>
+                                    overflow: hidden;"><a>{{img.name}} </a></h2>
 									<p class="post-excerpt" style=" height: 50px; width: 100%;
-                                    overflow: hidden;">{{img.short_description}}sfsdc seg gseweg  wetg ersgt  wet wetwet tefwet W4T</p>
-									<a  class="blog-readmore-btn" (click)="getblogdetail(img.id)">read more</a>
+                                    overflow: hidden;">{{img.short_description}}
+										</p>
+									<a class="blog-readmore-btn" (click)="getblogdetail(img.id)">read more</a>
 								</div>
 
 								<!--=======  End of content  =======-->
@@ -131,52 +139,52 @@
 						<div class="col-lg-12">
 							<!--=======  pagination  =======-->
 
-                            <div id="pgg">
-                                <ul class="pagination" style="justify-content: center;
+							<div id="pgg">
+								<ul class="pagination" style="justify-content: center;
                                 display: flex;">
-                                    <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
-                                        *ngFor="let p of pagess" (click)="getpage(p.url)">
-                                        <a class="page-link">{{p.label}}</a>
-                                    </li>
-                                </ul>
-                            </div>    
+									<li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
+										*ngFor="let p of pagess" (click)="getpage(p.url)">
+										<a class="page-link">{{p.label}}</a>
+									</li>
+								</ul>
+							</div>
 
 							<!--=======  End of pagination  =======-->
 						</div>
 					</div>
 				</div>
-				  <!-- bloglazyloading -->
-				  <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 " *ngIf="loader1">
-                    <div class="row product-isotope shop-product-wrap four-column">
-                        <div class="col-12 col-lg-4 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-                            <div class="single-product mb-20" style="height: 280px; width: 260px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-								
-                            </div>
-							<ngx-skeleton-loader count="2" animation="pulse"  ></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                </div>
-                <!--  bloglazyloading  end-->
+				<!-- bloglazyloading -->
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 " *ngIf="loader1">
+					<div class="row product-isotope shop-product-wrap four-column">
+						<div class="col-12 col-lg-4 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+							<div class="single-product mb-20" style="height: 280px; width: 260px;">
+								<ngx-skeleton-loader count="1"
+									[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+								</ngx-skeleton-loader>
+
+							</div>
+							<ngx-skeleton-loader count="2" animation="pulse"></ngx-skeleton-loader>
+						</div>
+					</div>
+				</div>
+				<!--  bloglazyloading  end-->
 			</div>
 		</div>
 	</div>
 
 
-	</div>
-	<!--=====  End of blog page content  ======-->
+</div>
+<!--=====  End of blog page content  ======-->
 
-	<!--============================================ blog details ====================================================-->
+<!--============================================ blog details ====================================================-->
 <div *ngIf="page2">
 	<div class="blog-page-wrapper mb-100">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 order-2 order-lg-1">
-					
+
 					<!--=======  page sidebar  =======-->
-				
+
 					<div class="page-sidebar mt-30">
 						<!--=======  single sidebar widget  =======-->
 
@@ -184,16 +192,18 @@
 
 						<div class="single-sidebar-widget mb-40 " *ngIf="!sideloader2">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category" *ngFor="let cat of Allcat">
-							
-								<li ><a  style="color: gray;" (click)="getblogbycatg(cat.id)" stty>{{cat.name}} </a> <span class="quantity" ></span></li>
-								
+							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+								*ngFor="let cat of Allcat">
+
+								<li><a style="color: gray;" (click)="getblogbycatg(cat.id)" stty>{{cat.name}} </a> <span
+										class="quantity"></span></li>
+
 							</ul>
-							
+
 						</div>
-						<div class="single-sidebar-widget mb-40" *ngIf="sideloader2" >
+						<div class="single-sidebar-widget mb-40" *ngIf="sideloader2">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-							<ngx-skeleton-loader count="5"  animation="pulse"></ngx-skeleton-loader>
+							<ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
 						</div>
 
 						<div class="single-sidebar-widget mb-40">
@@ -201,10 +211,11 @@
 
 							<!--=======  widget post wrapper  =======-->
 
-							<div class="widget-post-wrapper" *ngIf="!allloader1" >
-								<div class="single-widget-post"  *ngFor="let img of Blogs">
+							<div class="widget-post-wrapper" *ngIf="!allloader1">
+								<div class="single-widget-post" *ngFor="let img of Blogs">
 									<div class="image">
-										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}" class="img-fluid" alt="">
+										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+											class="img-fluid" alt="">
 									</div>
 									<div class="content">
 										<h3 class="widget-post-title"><a href="#">{{img.name}}</a></h3>
@@ -212,19 +223,18 @@
 										<p class="widget-post-date"></p>
 									</div>
 								</div>
-	<!--=======  End of single widget post  =======-->
+								<!--=======  End of single widget post  =======-->
 							</div>
-								   <!-- lazyloading  -->
-								   <div class="widget-post-wrapper" *ngIf="allloader1">
-									<div class="single-widgost">
-										<div class="imag" style="height: 120px; width: 160px;">
-											<ngx-skeleton-loader count="3"
-												[theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
+							<!-- lazyloading  -->
+							<div class="widget-post-wrapper" *ngIf="allloader1">
+								<div class="single-widgost">
+									<div class="imag" style="height: 120px; width: 160px;">
+										<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
 												 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"> </ngx-skeleton-loader>
-										</div>	
 									</div>
 								</div>
-							 
+							</div>
+
 							<!--=======  End of widget post wrapper  =======-->
 						</div>
 
@@ -234,8 +244,8 @@
 
 					<!--=======  End of page sidebar  =======-->
 				</div>
-			
-                <div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!recipeloader">
+
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!recipeloader">
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="shop-product__navigation " style="margin-bottom: 10px;">
@@ -248,11 +258,30 @@
 						<div class="col-md-12 mb-40">
 							<div class="single-slider-post single-slider-post--sticky pb-60">
 								<!--=======  image  =======-->
+								
 
 								<div class="single-slider-post__image single-slider-post--sticky__image mb-30" style="display: block;
 								margin-left: auto;
-								margin-right: auto;">
-                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.meta_img[0]}}" style="width:100%" class="img-fluid" alt="">
+								margin-right: auto;" *ngIf="!imgloader">
+						<div id="rev_slider_4_1_wrapper"
+							class="rev_slider_wrapper fullwidthbanner-container" data-alias="homepage-6"
+							data-source="gallery">
+							<ngx-skeleton-loader count="1"
+								[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+							</ngx-skeleton-loader>
+						</div>
+
+					</div>
+
+								<div class="single-slider-post__image single-slider-post--sticky__image mb-30" style="display: block;
+								margin-left: auto;
+								margin-right: auto;" *ngIf="imgloader">
+
+
+									<a >
+										<img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.meta_img[0]}}"
+											style="width:100%" class="img-fluid" alt="">
+									</a>
 								</div>
 
 								<!--=======  End of image  =======-->
@@ -266,8 +295,8 @@
 										<a href="#">{{Peoduct.slug}}</a>
 									</div>
 
-									<h2 class="post-title" ><a >{{Peoduct.name}}</a></h2>
-									
+									<h2 class="post-title"><a>{{Peoduct.name}}</a></h2>
+
 									<p class="mb-30" [innerHTML]="Peoduct.description">{{Peoduct.description}}</p>
 									<!--=======  End of post category  =======-->
 
@@ -276,7 +305,7 @@
 									<div class="post-info d-flex flex-wrap align-items-center mb-50">
 										<div class="post-user">
 											<i class="ion-android-person"></i> By
-											<a  class="textopacity"> SpiceClub</a>
+											<a class="textopacity"> SpiceClub</a>
 										</div>
 										<div class="post-date mb-0 pl-30">
 											<i class="ion-android-calendar"></i>
@@ -286,12 +315,12 @@
 											<i class="ion-android-star"></i>
 											<a class="textopacity"> {{Peoduct.rating}} Ratings </a>
 										</div>
-										
+
 										<div class="post-comment pl-30">
 											<i class="ion-ios-chatbubble-outline"></i>
 											<a class="textopacity"> {{commtotal}} Comments</a>
 										</div>
-										
+
 									</div>
 
 									<!--=======  End of post info  =======-->
@@ -301,21 +330,36 @@
 
 									<div class="single-blog-post-section">
 										<h3 class="mb-30">What is Green Coffee?</h3>
-										<p class="mb-30">This light green drink is unlike the black roasted coffee you’re used to drinking. Since green beans haven’t been roasted and remain in their raw form, it has a much milder flavor. Its taste profile is similar to that of a herbal tea.</p>
+										<p class="mb-30">This light green drink is unlike the black roasted coffee
+											you’re used to drinking. Since green beans haven’t been roasted and remain
+											in their raw form, it has a much milder flavor. Its taste profile is similar
+											to that of a herbal tea.</p>
 										<h3 class="mb-30">How does the Green Bean Coffee Powder Work?</h3>
 										<p class="mb-30">
-                                            Coffee beans, in their raw form, are rich in antioxidants and other active compounds. It contains chlorogenic acid—a potent antioxidant and anti-inflammatory compound. This compound is believed to aid in weight loss and is believed to have antioxidant properties, apart from helping lower blood pressure and improve metabolism.
-                                        </p>
+											Coffee beans, in their raw form, are rich in antioxidants and other active
+											compounds. It contains chlorogenic acid—a potent antioxidant and
+											anti-inflammatory compound. This compound is believed to aid in weight loss
+											and is believed to have antioxidant properties, apart from helping lower
+											blood pressure and improve metabolism.
+										</p>
 										<h3 class="mb-30">Green Coffee for Weight Loss </h3>
 										<p class="mb-30">
-                                            Coffee beans, in their raw form, are rich in antioxidants and other active compounds. It contains chlorogenic acid—a potent antioxidant and anti-inflammatory compound. This compound is believed to aid in weight loss and is believed to have antioxidant properties, apart from helping lower blood pressure and improve metabolism.
-                                        </p>
-									
+											Coffee beans, in their raw form, are rich in antioxidants and other active
+											compounds. It contains chlorogenic acid—a potent antioxidant and
+											anti-inflammatory compound. This compound is believed to aid in weight loss
+											and is believed to have antioxidant properties, apart from helping lower
+											blood pressure and improve metabolism.
+										</p>
+
 										<h3 class="mb-30">Green Coffee Beans Benefits</h3>
 										<p class="mb-30">
-                                            Coffee beans, in their raw form, are rich in antioxidants and other active compounds. It contains chlorogenic acid—a potent antioxidant and anti-inflammatory compound. This compound is believed to aid in weight loss and is believed to have antioxidant properties, apart from helping lower blood pressure and improve metabolism.
-                                        </p>
-									
+											Coffee beans, in their raw form, are rich in antioxidants and other active
+											compounds. It contains chlorogenic acid—a potent antioxidant and
+											anti-inflammatory compound. This compound is believed to aid in weight loss
+											and is believed to have antioxidant properties, apart from helping lower
+											blood pressure and improve metabolism.
+										</p>
+
 									</div>
 
 									<!--=======  End of single blog post section  =======-->
@@ -360,23 +404,29 @@
 
 
 						<div class="col-lg-12 mb-40">
-							
+
 							<!--=======  commenter info  =======-->
 							<ng-template #t let-fill="fill">
 								<span class="star" [class.full]="fill === 100">
-								  <span class="half" [style.width.%]="fill"><em class="fa fa-star text-warning"></em></span><em class="fa fa-star-o text-warning cursor"></em>
+									<span class="half" [style.width.%]="fill"><em
+											class="fa fa-star text-warning"></em></span><em
+										class="fa fa-star-o text-warning cursor"></em>
 								</span>
-							  </ng-template>
-							<h2 class="comment-title mb-30">Ratings  <span><ngb-rating  [(rate)]="currentRatess" [starTemplate]="t" [readonly]="true"  style="color: rgb(245, 153, 14);"></ngb-rating></span></h2>
+							</ng-template>
+							<h2 class="comment-title mb-30">Ratings <span>
+									<ngb-rating [(rate)]="currentRatess" [starTemplate]="t" [readonly]="true"
+										style="color: rgb(245, 153, 14);"></ngb-rating>
+								</span></h2>
 							<h2 class="comment-title mb-30">Comments <span>{{commtotal}} </span></h2>
-	
-	
+
+
 
 							<!--=======  single comment  =======-->
 
 							<div class="single-comment" *ngFor="let comm of Comments">
-								<div class="single-comment__image" >
-									<img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}" class="img-fluid" style="height: 70px;" alt="">
+								<div class="single-comment__image">
+									<img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
+										class="img-fluid" style="height: 70px;" alt="">
 								</div>
 								<div class="single-comment__content">
 
@@ -392,10 +442,10 @@
 										  <span class="half" [style.width.%]="fill">⭐</span>⭐
 										</span>
 									</ng-template> -->
-									
-									<ngb-rating [rate]="comm.rating"  style="color: rgb(245, 153, 14);"></ngb-rating>
-									<p class="message">{{comm.comment}}	</p>
-									
+
+									<ngb-rating [rate]="comm.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
+									<p class="message">{{comm.comment}} </p>
+
 									<!--=======  End of message  =======-->
 
 									<!--=======  reply link  =======-->
@@ -418,20 +468,23 @@
 							<div class="lezada-form comment-gorm">
 								<form [formGroup]="comment" (ngSubmit)="addcomment(comment)">
 									<div class="row">
-	
-										<div class="col-lg-12 mb-20">																
-											<span class="rating-title mr-30" style="opacity: 0.72;">YOUR RATING</span>                                                              
+
+										<div class="col-lg-12 mb-20">
+											<span class="rating-title mr-30" style="opacity: 0.72;">YOUR RATING</span>
 											<span class="product-rating">
-												<ngb-rating [max]="5" [(rate)]="currentRate"
-											[readonly]="false"  formControlName="rating"  style="size: 10px; color: rgb(248, 141, 19);"></ngb-rating >
+												<ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false"
+													formControlName="rating"
+													style="size: 10px; color: rgb(248, 141, 19);"></ngb-rating>
 											</span>
 										</div>
-										<div class="col-lg-12 mb-20">	
-											<textarea cols="30" rows="10" formControlName="comment" placeholder="YOUR MESSAGE"></textarea>
+										<div class="col-lg-12 mb-20">
+											<textarea cols="30" rows="10" formControlName="comment"
+												placeholder="YOUR MESSAGE"></textarea>
 										</div>
 										<div class="col-lg-12 text-center">
 											<h6><span *ngIf="error1" style="color: red;">{{error1}}</span></h6>
-											<button type="submit" class="lezada-button lezada-button--medium">submit</button>
+											<button type="submit"
+												class="lezada-button lezada-button--medium">submit</button>
 										</div>
 									</div>
 								</form>
@@ -442,301 +495,299 @@
 					</div>
 				</div>
 
-				        <!-- bloglazyloading -->
-						<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70"   *ngIf="recipeloader">
-							<div class="row">
-								<div class="col-lg-12">
-									<div class="shop-product__navigation " style="margin-bottom: 10px;">
-										<a><i class="ion-ios-arrow-thin-left" (click)="backk()" style="size: 0px;"></i></a>
-										<!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> (click)="backk()" -->
-									</div>
-									<br>
-									<br><br>
-								</div>
-								<div class="col-md-12 mb-40">
-									<div class="single-slider-post single-slider-post--sticky pb-0">
-										<!--=======  image  =======-->
-		
-										<!--=======  End of image  =======-->
-										<div class="single-slider-post__image single-slider-post--sticky__image mb-30" style="display: block;
+				<!-- bloglazyloading -->
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="recipeloader">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="shop-product__navigation " style="margin-bottom: 10px;">
+								<a><i class="ion-ios-arrow-thin-left" (click)="backk()" style="size: 0px;"></i></a>
+								<!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> (click)="backk()" -->
+							</div>
+							<br>
+							<br><br>
+						</div>
+						<div class="col-md-12 mb-40">
+							<div class="single-slider-post single-slider-post--sticky pb-0">
+								<!--=======  image  =======-->
+
+								<!--=======  End of image  =======-->
+								<div class="single-slider-post__image single-slider-post--sticky__image mb-30" style="display: block;
 											margin-left: auto;
-											margin-right: auto;" >
-											<div id="rev_slider_4_1_wrapper"
-												class="rev_slider_wrapper fullwidthbanner-container" data-alias="homepage-6"
-												data-source="gallery">
-												<ngx-skeleton-loader count="1"
-													[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-												</ngx-skeleton-loader>
-											</div>
-		
+											margin-right: auto;">
+									<div id="rev_slider_4_1_wrapper"
+										class="rev_slider_wrapper fullwidthbanner-container" data-alias="homepage-6"
+										data-source="gallery">
+										<ngx-skeleton-loader count="1"
+											[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+										</ngx-skeleton-loader>
+									</div>
+
+								</div>
+								<!--=======  content  =======-->
+
+								<div class="single-slider-post__content single-slider-post--sticky__content">
+									<!--=======  post category  =======-->
+									<div id="lazyy">
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '35px',
+													 width: '80%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="2" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '25px',
+													 width: '60%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+									</div>
+
+
+									<div class="post-info d-flex flex-wrap align-items-center mb-50">
+										<div class="post-user">
+											<i class="ion-android-person"></i> By
+											<a class="textopacity"> </a>
 										</div>
-										<!--=======  content  =======-->
-		
-										<div class="single-slider-post__content single-slider-post--sticky__content">
-											<!--=======  post category  =======-->	
-											<div id="lazyy">
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '35px',
-													 width: '80%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="2"  animation="pulse"></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '25px',
-													 width: '60%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-											</div>
+										<div class="post-date mb-0 pl-30">
+											<i class="ion-android-star"></i>
+											<a class="textopacity"> Ratings </a>
+										</div>
 
-		
-											<div class="post-info d-flex flex-wrap align-items-center mb-50">
-												<div class="post-user">
-													<i class="ion-android-person"></i> By
-													<a class="textopacity"> </a>
-												</div>
-												<div class="post-date mb-0 pl-30">
-													<i class="ion-android-star"></i>
-													<a class="textopacity"> Ratings </a>
-												</div>
-		
-												<div class="post-comment pl-30">
-													<i class="ion-ios-chatbubble-outline"></i>
-													<a class="textopacity"> Comments</a>
-												</div>
-		
-											</div>
-											<div id="asss" style="margin-top: 10px;" >
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '35px',
-													 width: '80%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="2"  animation="pulse"></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '25px',
-													 width: '60%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-											</div>
-											<div id="assh " style="margin-top: 10px;">
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '35px',
-													 width: '80%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="2"  animation="pulse"></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '25px',
-													 width: '60%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-											</div>
-											<div id="assss" style="margin-top: 10px;">
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '35px',
-													 width: '80%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="2"  animation="pulse"></ngx-skeleton-loader>
-												<ngx-skeleton-loader count="1" [theme]="{ 
-													'border-radius': '5px',
-													 height: '25px',
-													 width: '60%',
-													'background-color': '##b9b8b8',
-													border: '1px solid white'
-												  }"  animation="pulse" ></ngx-skeleton-loader>
-											</div>
-											
+										<div class="post-comment pl-30">
+											<i class="ion-ios-chatbubble-outline"></i>
+											<a class="textopacity"> Comments</a>
+										</div>
 
-											<div class="row">
-												<div class="col-lg-12">
-													<!--=======  shop product description tab  =======-->
-                   							<div class="shop-product__description-tab pt-10">
-														<div class="tab-content" id="nav-tabContent2">
-		
-															<div class="tab-paade" id="product-" role="tabpanel"
-																aria-labelledby="product-tab-3">
-																<!--=======  shop product reviews  =======-->
-		
-																<div class="shop-product__review"
-																	style="text-align: start; margin: 0px;">
-																	<ng-template #t let-fill="fill">
-																		<span class="star" [class.full]="fill === 100">
-																			<span class="half" [style.width.%]="fill"><em
-																					class="fa fa-star text-warning"></em></span><em
-																				class="fa fa-star-o text-warning cursor"></em>
-																		</span>
-																	</ng-template>
-																	<h2 class="comment-title mb-30">Ratings <span>
-																			<ngb-rating [(rate)]="currentRatess"
-																				[starTemplate]="t" [readonly]="true"
-																				style="color: rgb(245, 153, 14);"></ngb-rating>
-																		</span></h2>
-																	<h2 class="review-title mb-30">{{commtotal}} comments for
-																		this
-																		Product</h2>
-																	<div class="col-lg-12 mb-40">
-																		<div class="single-comment"
-																			>
-																			<div class="single-comment__image">
-																				<ngx-skeleton-loader count="1" [theme]="{ 
+									</div>
+									<div id="asss" style="margin-top: 10px;">
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '35px',
+													 width: '80%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="2" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '25px',
+													 width: '60%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+									</div>
+									<div id="assh " style="margin-top: 10px;">
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '35px',
+													 width: '80%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="2" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '25px',
+													 width: '60%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+									</div>
+									<div id="assss" style="margin-top: 10px;">
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '35px',
+													 width: '80%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="2" animation="pulse"></ngx-skeleton-loader>
+										<ngx-skeleton-loader count="1" [theme]="{ 
+													'border-radius': '5px',
+													 height: '25px',
+													 width: '60%',
+													'background-color': '##b9b8b8',
+													border: '1px solid white'
+												  }" animation="pulse"></ngx-skeleton-loader>
+									</div>
+
+
+									<div class="row">
+										<div class="col-lg-12">
+											<!--=======  shop product description tab  =======-->
+											<div class="shop-product__description-tab pt-10">
+												<div class="tab-content" id="nav-tabContent2">
+
+													<div class="tab-paade" id="product-" role="tabpanel"
+														aria-labelledby="product-tab-3">
+														<!--=======  shop product reviews  =======-->
+
+														<div class="shop-product__review"
+															style="text-align: start; margin: 0px;">
+															<ng-template #t let-fill="fill">
+																<span class="star" [class.full]="fill === 100">
+																	<span class="half" [style.width.%]="fill"><em
+																			class="fa fa-star text-warning"></em></span><em
+																		class="fa fa-star-o text-warning cursor"></em>
+																</span>
+															</ng-template>
+															<h2 class="comment-title mb-30">Ratings <span>
+																	<ngb-rating [(rate)]="currentRatess"
+																		[starTemplate]="t" [readonly]="true"
+																		style="color: rgb(245, 153, 14);"></ngb-rating>
+																</span></h2>
+															<h2 class="review-title mb-30">{{commtotal}} comments for
+																this
+																Product</h2>
+															<div class="col-lg-12 mb-40">
+																<div class="single-comment">
+																	<div class="single-comment__image">
+																		<ngx-skeleton-loader count="1" [theme]="{ 
 																					'border-radius': '40px',
 																					 height: '80px',
 																					 width: '80px',
 																					'background-color': '##b9b8b8',
 																					border: '1px solid white'
-																				  }"  appearance="circle"></ngx-skeleton-loader>
-																			</div>
-																			<div class="single-comment__content mt-10" >
-																				<ngx-skeleton-loader count="2" [theme]="{ 
-																					'border-radius': '5px',
-																					 height: '25px',
-																					 width: '52%',
-																					'background-color': '##b9b8b8',
-																					border: '1px solid white'
-																				  }"  animation="pulse" ></ngx-skeleton-loader>
-																			</div>
-																		</div>
-																		<div class="single-comment"
-																			>
-																			<div class="single-comment__image">
-																				<ngx-skeleton-loader count="1" [theme]="{ 
-																					'border-radius': '40px',
-																					 height: '80px',
-																					 width: '80px',
-																					'background-color': '##b9b8b8',
-																					border: '1px solid white'
-																				  }"  appearance="circle"></ngx-skeleton-loader>
-																			</div>
-																			<div class="single-comment__content mt-10" >
-																				<ngx-skeleton-loader count="2" [theme]="{ 
-																					'border-radius': '5px',
-																					 height: '25px',
-																					 width: '52%',
-																					'background-color': '##b9b8b8',
-																					border: '1px solid white'
-																				  }"  animation="pulse" ></ngx-skeleton-loader>
-																			</div>
-																		</div>
-																		<div class="single-comment"
-																			>
-																			<div class="single-comment__image">
-																				<ngx-skeleton-loader count="1" [theme]="{ 
-																					'border-radius': '40px',
-																					 height: '80px',
-																					 width: '80px',
-																					'background-color': '##b9b8b8',
-																					border: '1px solid white'
-																				  }"  appearance="circle"></ngx-skeleton-loader>
-																			</div>
-																			<div class="single-comment__content mt-10" >
-																				<ngx-skeleton-loader count="2" [theme]="{ 
-																					'border-radius': '5px',
-																					 height: '25px',
-																					 width: '52%',
-																					'background-color': '##b9b8b8',
-																					border: '1px solid white'
-																				  }"  animation="pulse" ></ngx-skeleton-loader>
-																			</div>
-																		</div>
+																				  }" appearance="circle"></ngx-skeleton-loader>
 																	</div>
-		
-																	<div class="col-lg-12">
-		
-																		<h2 class="comment-title mb-30">Leave your thought here
-																		</h2>
-																		<!--=======  comment form  =======-->
-		
-																		<div class="lezada-form comment-gorm">
-																			<form [formGroup]="comment"
-																				(ngSubmit)="addcomment(comment)">
-																				<div class="row">
-		
-																					<div class="col-lg-12 mb-20">
-																						<span class="rating-title mr-30"
-																							style="opacity: 0.72;">YOUR
-																							RATING</span>
-																						<span class="product-rating">
-																							<ngb-rating [max]="5"
-																								[(rate)]="currentRate"
-																								[readonly]="false"
-																								formControlName="rating"
-																								style="size: 10px; color: rgb(248, 141, 19);">
-																							</ngb-rating>
-																						</span>
-																					</div>
-																					<div class="col-lg-12 mb-20">
-																						<textarea cols="30" rows="10"
-																							formControlName="comment"
-																							placeholder="YOUR MESSAGE"></textarea>
-																					</div>
-																					<div class="col-lg-12 text-center">
-																						<h6><span *ngIf="error1"
-																								style="color: red;">{{error1}}</span>
-																						</h6>
-																						<button type="submit"
-																							class="lezada-button lezada-button--medium">submit</button>
-																					</div>
-																				</div>
-																			</form>
-																		</div>
+																	<div class="single-comment__content mt-10">
+																		<ngx-skeleton-loader count="2" [theme]="{ 
+																					'border-radius': '5px',
+																					 height: '25px',
+																					 width: '52%',
+																					'background-color': '##b9b8b8',
+																					border: '1px solid white'
+																				  }" animation="pulse"></ngx-skeleton-loader>
 																	</div>
-																</div>		<!--=======  End of shop product reviews  =======-->
+																</div>
+																<div class="single-comment">
+																	<div class="single-comment__image">
+																		<ngx-skeleton-loader count="1" [theme]="{ 
+																					'border-radius': '40px',
+																					 height: '80px',
+																					 width: '80px',
+																					'background-color': '##b9b8b8',
+																					border: '1px solid white'
+																				  }" appearance="circle"></ngx-skeleton-loader>
+																	</div>
+																	<div class="single-comment__content mt-10">
+																		<ngx-skeleton-loader count="2" [theme]="{ 
+																					'border-radius': '5px',
+																					 height: '25px',
+																					 width: '52%',
+																					'background-color': '##b9b8b8',
+																					border: '1px solid white'
+																				  }" animation="pulse"></ngx-skeleton-loader>
+																	</div>
+																</div>
+																<div class="single-comment">
+																	<div class="single-comment__image">
+																		<ngx-skeleton-loader count="1" [theme]="{ 
+																					'border-radius': '40px',
+																					 height: '80px',
+																					 width: '80px',
+																					'background-color': '##b9b8b8',
+																					border: '1px solid white'
+																				  }" appearance="circle"></ngx-skeleton-loader>
+																	</div>
+																	<div class="single-comment__content mt-10">
+																		<ngx-skeleton-loader count="2" [theme]="{ 
+																					'border-radius': '5px',
+																					 height: '25px',
+																					 width: '52%',
+																					'background-color': '##b9b8b8',
+																					border: '1px solid white'
+																				  }" animation="pulse"></ngx-skeleton-loader>
+																	</div>
+																</div>
+															</div>
+
+															<div class="col-lg-12">
+
+																<h2 class="comment-title mb-30">Leave your thought here
+																</h2>
+																<!--=======  comment form  =======-->
+
+																<div class="lezada-form comment-gorm">
+																	<form [formGroup]="comment"
+																		(ngSubmit)="addcomment(comment)">
+																		<div class="row">
+
+																			<div class="col-lg-12 mb-20">
+																				<span class="rating-title mr-30"
+																					style="opacity: 0.72;">YOUR
+																					RATING</span>
+																				<span class="product-rating">
+																					<ngb-rating [max]="5"
+																						[(rate)]="currentRate"
+																						[readonly]="false"
+																						formControlName="rating"
+																						style="size: 10px; color: rgb(248, 141, 19);">
+																					</ngb-rating>
+																				</span>
+																			</div>
+																			<div class="col-lg-12 mb-20">
+																				<textarea cols="30" rows="10"
+																					formControlName="comment"
+																					placeholder="YOUR MESSAGE"></textarea>
+																			</div>
+																			<div class="col-lg-12 text-center">
+																				<h6><span *ngIf="error1"
+																						style="color: red;">{{error1}}</span>
+																				</h6>
+																				<button type="submit"
+																					class="lezada-button lezada-button--medium">submit</button>
+																			</div>
+																		</div>
+																	</form>
+																</div>
 															</div>
 														</div>
-														<!--=======  End of tab content  =======-->
+														<!--=======  End of shop product reviews  =======-->
 													</div>
-								<!--=======  End of shop product description tab  =======-->
 												</div>
-												<div class="row mt-30 align-items-center">
-													<div class="col-md-6  text-md-left mb-sm-5">
-														<div class="post-tags">
-															<i class="ion-ios-pricetags"></i>
-															
-														</div>
-													</div>
-		
-													<div class="col-md-6  text-md-right mb-sm-5">
-														<div class="post-share">
-															<span style="color: rgb(111, 111, 112);">Share this post:</span>
-															<ul>
-																<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-																<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-																<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-																<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-															</ul>
-														</div>
-													</div>
+												<!--=======  End of tab content  =======-->
+											</div>
+											<!--=======  End of shop product description tab  =======-->
+										</div>
+										<div class="row mt-30 align-items-center">
+											<div class="col-md-6  text-md-left mb-sm-5">
+												<div class="post-tags">
+													<i class="ion-ios-pricetags"></i>
+
 												</div>
 											</div>
-											<!--=======  End of single blog post section  =======-->
-		
+
+											<div class="col-md-6  text-md-right mb-sm-5">
+												<div class="post-share">
+													<span style="color: rgb(111, 111, 112);">Share this post:</span>
+													<ul>
+														<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+														<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+														<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+														<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+													</ul>
+												</div>
+											</div>
 										</div>
-		
-										<!--=======  End of content  =======-->
 									</div>
+									<!--=======  End of single blog post section  =======-->
+
 								</div>
-		
+
+								<!--=======  End of content  =======-->
 							</div>
 						</div>
-						<!--  bloglazyloading  end-->
+
+					</div>
+				</div>
+				<!--  bloglazyloading  end-->
 			</div>
 		</div>
 	</div>
 
-		<!--=====  End of checkout page content  ======-->
-	</div>
+	<!--=====  End of checkout page content  ======-->
+</div>

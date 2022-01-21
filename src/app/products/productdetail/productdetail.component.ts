@@ -65,6 +65,11 @@ export class ProductdetailComponent implements OnInit {
   discriptloader: boolean=true;
   loader6: boolean=true;
   buyertypeid: any;
+  prod_price: any;
+  quantityyy2!: number;
+  Bulckdis: any;
+  discount: any;
+  varientt: any;
 
   constructor(private router: Router,private request: RequestService,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
    private modalService: NgbModal,config: NgbRatingConfig,private _location: Location,private toastr: ToastrService,) { 
@@ -80,9 +85,10 @@ export class ProductdetailComponent implements OnInit {
     this.currentUser = this.currentUserSubject.asObservable();
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user?.id; 
+     this.buyertypeid=this.currentdetail.user?.buyertypeid; 
      this.accesstoken=this.currentdetail.access_token;
      this.tokentype=this.currentdetail.token_type;
-     this.buyertypeid=this.currentdetail.user?.buyertypeid;
+    //  this.buyertypeid=this.currentdetail.user?.buyertypeid;
   }
 
   ngOnInit(): void {
@@ -91,8 +97,7 @@ export class ProductdetailComponent implements OnInit {
     this.viewproductrow(this.id);
      this.comment = this.fb.group({ 
       rating:['',[ Validators.required]],
-      comment: ['',[ Validators.required]],
-   
+      comment: ['',[ Validators.required]], 
     });
   }
   
@@ -169,11 +174,32 @@ export class ProductdetailComponent implements OnInit {
          this.Relatedprod=response.data;
          this.loader6=false;
          console.log("res",this.Relatedprod); 
+         this.viewbulkdiscount(this.product_id);
+         this.viewdiscount(this.product_id)
   },
    (error: any) => {
     console.log(error);
   });
-  
+  }
+  viewbulkdiscount(id:any){
+    this.request.getbulckdisc(this.buyertypeid,id).subscribe((response: any) => {  
+      console.log("relatedprod",response);
+           this.Bulckdis=response.data;
+           console.log("bulkdiscount",this.Bulckdis); 
+    },
+     (error: any) => {
+      console.log(error);
+    });
+  }
+  viewdiscount(id:any){
+    this.request.getdisc(this.buyertypeid,id).subscribe((response: any) => {  
+      console.log("relatedprod",response);
+           this.discount=response.data;
+           console.log("discount",this.discount); 
+    },
+     (error: any) => {
+      console.log(error);
+    });
   }
   firstDropDownChanged(data: any) 
 {
@@ -192,7 +218,8 @@ addtocart(_id:any){
     id : _id,
     variant:this?.varient_value.replace(/\s/g, ""),
     user_id: this.userid,
-    quantity: this.quantityy  
+    quantity: this.quantityy,
+    buyertype:this.buyertypeid,  
   }
   console.log(edata);  
   this.request.addtocart(edata).subscribe((res: any) => {
@@ -220,10 +247,26 @@ addtocart(_id:any){
 increaseqty(){
 this.quantityyy++;
 this.stocck--;
-this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
- this.totalprice=this.dec.toFixed(2)
-console.log("-dec",this.dec);
-  }
+// this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
+//  this.totalprice=this.dec.toFixed(2)
+// console.log("-dec",this.dec);
+
+let dataa={
+  a : this.buyertypeid,
+  b : this.product_id,
+  c : this.varient_value.replace(/\s/g, ""),
+   d:this.quantityyy
+}
+console.log("dataaa",dataa);
+
+this.request.getdiscountprice(this.buyertypeid,this.product_id,this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res:any)=>{
+  this.totalprice=res.price;
+  console.log("discount price",this.totalprice);
+  console.log("dis res",res);
+  
+  
+})
+}
   decreaseqty(){
     this.quantityyy--;
     this.stocck++;
@@ -235,12 +278,12 @@ console.log("-dec",this.dec);
   }
 
   selectvar(weight:any){
-    
     this.varient_value=weight.replace(/\s/g, "")
+
     this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
       console.log(res);
       this.varprise=res?.price_string; 
-      this.totalprice=(res?.price_string).replace('Rs','');
+      // this.totalprice=(res?.price_string).replace('Rs','');
       this.stocck=(res?.stock);
       this.quantityyy=0;
 
@@ -349,6 +392,132 @@ console.log("-dec",this.dec);
       }); }
     }
     }
+    quickview(id:any,content:any){
+      // this.totalprice=''
+        this.quantityyy2=1
+        this.product_id=id
+        this.request.getproddetail(this.product_id).subscribe((response: any) => {
+         
+          console.log("proddetaill",response);
+               this.Peoduct=response.data[0];
+               this.prod_price=this.Peoduct.main_price;
+               this.choice=this.Peoduct.choice_options;
+              //  this.stocck=(this.Peoduct.current_stock)-1;
+               this.stk=this.Peoduct.current_stock;
+               this.photoos=this.Peoduct.photos;
+               this.colors=this.Peoduct.colors;
+               this.tags=this.Peoduct.tags;
+               this.varprise=this.Peoduct.main_price;
+              //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
+               console.log("res",this.Peoduct); 
+               console.log("choise option",this.Peoduct.choice_options); 
+              //  console.log("stocck",this.stocck); 
+               console.log("stk",this.stk); 
+               if(this.Peoduct.current_stock==0){
+                this.stocck=0
+                
+               }
+               else {
+                this.stocck=(this.Peoduct.current_stock)-1;
+               }   
+              //  window.scroll(0,0);             
+              if(this.Peoduct.choice_options.length==0) {
+                console.log("empty"); 
+                this.varient_value=''
+              }
+              else{
+                this.varient_value=this.choice[0]?.options[0];
+              }
+               console.log("optiooooons",this.choice[0]?.options[0] );
+               
+                this.modalService.open(content, {
+                  ariaLabelledBy: 'modal-basic-title',
+                  size: 'lg',
+                });      
+              
+        },
+         (error: any) => {
+          console.log(error);
+        });
+        
+    }
+    increaseqty2(){
+      this.quantityyy2++;
+      this.stocck--;
+      // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
+      //  this.totalprice=this.dec.toFixed(2)
+      // console.log("-dec",this.dec);
+        }
+        decreaseqty2(){
+          this.quantityyy2--;
+          this.stocck++;
+          // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
+          // this.totalprice=this.dec.toFixed(2)
+          // // console.log("-quntity",this.quantityyy);
+          // // console.log("price",this.varprise.replace('Rs',''));
+          //  console.log("totalprice",this.totalprice);
+          
+        }
+        selectvar2(weight:any){
+          this.varient_value=weight.replace(/\s/g, "")
+          this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
+            console.log(res);
+            this.prod_price=res?.price_string;
+            this.totalprice=(res?.price_string).replace('Rs','');
+            this.varprise=res?.price_string;
+            this.stk=res?.stock;
+            if(res?.stock==0){
+              this.stocck=0
+              this.quantityyy2=0;
+             
+             }
+             else {
+              this.stocck=(res?.stock)-1;
+              this.quantityyy2=1;
+             }   
+
+            console.log(this.varprise);
+            console.log(this.stocck);
+            console.log(res?.stock);
+
+          }, (error: any) => {
+            console.log("error",error);
+          
+          });
+        }
+    addtocart2(){
+      let edata={
+        id : this.product_id,
+        variant:this.varient_value.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity: this.quantityyy2,
+        buyertype:this.buyertypeid,  
+      }
+      console.log(edata);  
+        
+      this.request.addtocart(edata).subscribe((res: any) => {
+        console.log("resssssssssssssss",res);
+        if (res.message == 'Product added to cart successfully') {    
+          console.log("Product added to cart successfully");
+          this.addRecordSuccess();
+             this.modalService.dismissAll();
+        }
+        else if (res.message=='Minimum 1 item(s) should be ordered'){
+          this.toastr.success( res.message);
+         
+        }
+        else if(res.message== 'Stock out'){
+          this.toastr.error(res.message);
+          console.log("Stock out");
+        }
+      },
+       (error: any) => {
+        this.toastr.error(error);
+        console.log("error",error);
+      
+      });
+    }
+
 
        addRecordSuccess() {
       this.toastr.success('Added Successfully', '');

@@ -1,284 +1,154 @@
-<div *ngIf="page1">
-    <div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Shop</h1>
+
+                <!--=======  breadcrumb list  =======-->
+
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">SHOP BY PRODUCTS</li>
+                </ul>
+
+                <!--=======  End of breadcrumb list  =======-->
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--=============================================
+    =            shop page content         =
+    =============================================-->
+
+<div class="shop-page-wrapper">
+    <!--=======  shop page header  =======-->
+    <div class="shop-page-header" style="padding: 0px;">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="breadcrumb-title">Shop</h1>
+            <div class="row align-items-center">
 
-                    <!--=======  breadcrumb list  =======-->
+                <div class="col-12 col-lg-7 col-md-10 d-none d-md-block">
+                    <!--=======  fitler titles  =======-->
+                    <div class="filter-title filter-title--type-two">
+                        <ul class="product-filter-menu">
+                            <li>All</li>
+                            <li (click)="viewtodaysdeal()">TodaysDeal</li>
+                            <li (click)="viewflashdeal()">Flashdeal</li>
+                            <!-- <li data-filter=".sale">sale products</li> -->
+                        </ul>
+                    </div>
+                    <!--=======  End of fitler titles  =======-->
+                </div>
 
-                    <ul class="breadcrumb-list">
-                        <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-                        <li class="breadcrumb-list__item breadcrumb-list__item--active">SHOP BY PRODUCTS</li>
-                    </ul>
+                <div class="col-12 col-lg-5 col-md-2">
+                    <!--=======  filter icons  =======-->
 
-                    <!--=======  End of breadcrumb list  =======-->
+                    <div class="filter-icons">
+                        <!--=======  filter dropdown  =======-->
+                        <nav class="site-nav center-menu" style="height: 80px;">
+                            <ul>
+                                <li class="menu-item-has-children"><a href="javascript:void(0)"><span
+                                            style="color: rgb(139, 139, 139);">Sorting</span></a>
+                                    <ul class="sub-menu single-column-menu">
+                                        <li *ngFor="let tab of Sort"><a (click)="onsortChange(tab.id)">
+                                                {{tab.value}}</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
+                        <!--=======  advance filter icon  =====    (click)="opensort(sortRecord)"  ==-->
 
+                        <div class="single-icon advance-filter-icon" (click)="opensort(sortRecord)">
+                            <a href="javascript:void(0)" id="advance-filter-active-btn"><i
+                                    class="ion-android-funnel"></i>
+                                Filters</a>
+                        </div>
+
+                        <!-- <div class="single-icon advance-filter-icon"  (click)="opennn()" >
+                                <a href="javascript:void(0)" id="advance-filter-active-btn"><i
+                                        class="ion-android-funnel"></i>
+                                    Filters</a>
+                            </div> -->
+
+                    </div>
+
+                    <!--=======  End of filter icons  =======-->
                 </div>
             </div>
         </div>
     </div>
 
-    <!--=============================================
-    =            shop page content         =
-    =============================================-->
+    <!--=======  End of shop page header  =======-->
 
-    <div class="shop-page-wrapper">
 
-        <!--=======  shop page header  =======-->
 
-        <div class="shop-page-header">
-            <div class="container">
-                <div class="row align-items-center">
+    <div class="shop-page-content mt-15 mb-15">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 order-2 order-lg-1" >
+                    <!--=======  page sidebar  =======-->
 
-                    <div class="col-12 col-lg-7 col-md-10 d-none d-md-block">
-                        <!--=======  fitler titles  =======-->
-                        <div class="filter-title filter-title--type-two">
-                            <ul class="product-filter-menu">
-                                <li class="active" data-filter="*">All</li>
-                                <li data-filter=".hot">hot products</li>
-                                <li data-filter=".new">new products</li>
-                                <li data-filter=".sale">sale products</li>
-                            </ul>
-                        </div>
-                        <!--=======  End of fitler titles  =======-->
-                    </div>
+                    <div class="page-sidebar">
+                        <!--=======  single sidebar widget  =======-->
 
-                    <div class="col-12 col-lg-5 col-md-2">
-                        <!--=======  filter icons  =======-->
+                        <div class="single-sidebar-widget mb-40">
+                            <!--=======  search widget  =======-->
 
-                        <div class="filter-icons">
-                            <!--=======  filter dropdown  =======-->
-
-                            <div class="single-icon filter-dropdown">
-                                <select class="nice-select" (change)="onsortChange($event.target)">
-                                    <option value="0"> Default sorting </option>
-                                    <option *ngFor="let tab of Sort" [value]="tab.id">
-                                        {{tab.value}}
-                                    </option>
-                                </select>
+                            <div class="search-widget">
+                                <input placeholder="Search" type="text" class="browser-default search-field"
+                                    (click)='filterDatatable($event)' aria-label="Search box">
                             </div>
 
-                       
-
-                            <!--=======  advance filter icon  =====    (click)="opensort(sortRecord)"  ==-->
-
-                            <div class="single-icon advance-filter-icon" (click)="opensort(sortRecord)">
-
-                                <a href="javascript:void(0)" id="advance-filter-active-btn"><i
-                                        class="ion-android-funnel"></i>
-                                    Filters</a>
-                            </div>
-
-
-                            <!--=======  End of advance filter icon  =======-->
-                        </div>
-
-                        <!--=======  End of filter icons  =======-->
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <ng-template #sortRecord let-modal>
-            <div class="modal-header editRowModal">
-                <h4 class="modal-title" id="modal-basic-title">
-                    <div class="table-modal-header">
-                        <div class="modal-about">
-                            <div class="font-weight-bold p-t-10 font-17">
-                                SORT</div>
-                        </div>
-                    </div>
-                </h4>
-                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-                    <span aria-hidden="true"><i class="material-icons">close</i></span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form class="register-form" [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
-                    <div class="row">
-                        <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12 mb-1">
-                            <label>min<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="" formControlName="min">
-                            <label>max<span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" placeholder="" formControlName="max">
+                            <!--=======  End of search widget  =======-->
                         </div>
 
 
-                        <div class="col-md-12">
-                            <label>category</label>
-                            <select class="formrol pl-5" formControlName="category">
-                                <option *ngFor="let tab of Allcat" [value]="tab.id">
-                                    {{tab.name}}
-                                </option>
-                            </select>
-                        </div>
-                    </div>
+                        <!--=======  End of single sidebarwidget  =======-->
 
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Apply</button>
+                        <!--=======  single sidebar widget  *ngIF="sideloader1" =======-->
 
-
-                    </div>
-                </form>
-
-            </div>
-        </ng-template>
-        <!--=======  End of shop page header  =======-->
-
-        <!--=============================================
-        =            shop advance filter area         =
-        =============================================-->
-
-        <div class="shop-advance-filter-area" id="shop-advance-filter-area">
-            <div class="shop-advance-filter-wrapper pt-50">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                            <!--=======  single advance filte  =======-->
-
-                            <div class="single-filter-widget">
-                                <h2 class="single-filter-widget--title">Sortby</h2>
-                                <ul class="single-filter-widget--list">
-                                    <li><a href="#">Default</a></li>
-                                    <li><a href="#">Popularity</a></li>
-                                    <li><a href="#">Average rating</a></li>
-                                    <li><a href="#">Newness</a></li>
-                                    <li><a href="#">Price: low to high</a></li>
-                                    <li><a href="#">Price: high to low</a></li>
-                                </ul>
-                            </div>
-
-                            <!--=======  End of single advance filte  =======-->
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                            <!--=======  single advance filte  =======-->
-
-                            <div class="single-filter-widget">
-                                <h2 class="single-filter-widget--title">Categories</h2>
-                                <ul class="single-filter-widget--list single-filter-widget--list--category">
-                                    <li class="has-children">
-                                        <a href="products.html">Beverages</a> <span class="quantity">5</span>
-                                        <ul>
-                                            <li><a href="products.html">Tea</a></li>
-                                            <li><a href="products.html">Coffee</a></li>
-                                            <li><a href="products.html">Milk Shake</a></li>
-                                            <li><a href="products.html">Beverages</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="has-children">
-                                        <a href="products.html">Gourmet & Groceries</a> <span class="quantity">23</span>
-                                        <ul>
-                                            <li><a href="products.html">Instant Mixes</a></li>
-                                            <li><a href="products.html">Edible Oils</a></li>
-                                            <li><a href="products.html">Herbs & Seasonings</a></li>
-                                            <li><a href="products.html">Food Supplements</a></li>
-                                        </ul>
-                                    </li>
-                                    <li><a href="products.html">Masalas</a> <span class="quantity">12</span></li>
-                                </ul>
-                            </div>
-
-                            <!--=======  End of single advance filte  =======-->
-                        </div>
-
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                            <!--=======  single advance filte  =======-->
-
-                            <div class="single-filter-widget">
-                                <h2 class="single-filter-widget--title">Price filter</h2>
-                                <ul class="single-filter-widget--list">
-                                    <li><a href="#">All</a></li>
-                                    <li><a href="#">Rs 0.00 - Rs 70.00</a></li>
-                                    <li><a href="#">Rs 70.00 - Rs 140.00</a></li>
-                                    <li><a href="#">Rs 140.00 - Rs 210.00</a></li>
-                                    <li><a href="#">Rs 210.00 - Rs 280.00</a></li>
-                                    <li><a href="#">Rs 280.00 - Rs 350.00</a></li>
-                                </ul>
-                            </div>
-
-                            <!--=======  End of single advance filte  =======-->
-                        </div>
-
-
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                            <!--=======  single advance filte  =======-->
-
-                            <div class="single-filter-widget">
-                                <h2 class="single-filter-widget--title">Brands</h2>
-                                <ul class="single-filter-widget--list single-filter-widget--list--brand">
-                                    <li><a href="#">The Spice Club</a> <span class="quantity">(12)</span></li>
-                                    <li><a href="#">Satinanace</a> <span class="quantity">(15)</span></li>
-                                    <li><a href="#">Vilva</a> <span class="quantity">(13)</span></li>
-                                    <li><a href="#">The Spice Club</a> <span class="quantity">(12)</span></li>
-                                    <li><a href="#">Satinanace</a> <span class="quantity">(15)</span></li>
-                                    <li><a href="#">Vilva</a> <span class="quantity">(13)</span></li>
-                                </ul>
-                            </div>
-
-                            <!--=======  End of single advance filte  =======-->
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!--=====  End of shop advance filter area  ======-->
-
-        <!--=============================================
-		=            shop page content         =
-		=============================================-->
-
-        <div class="shop-page-content mt-15 mb-15">
-            <div class="container">
-                <div class="row">
-
-                    <div class="col-lg-3 order-2 order-lg-1">
-                        <!--=======  page sidebar  =======-->
-
-                        <div class="page-sidebar">
-                            <!--=======  single sidebar widget  =======-->
-
-                            <div class="single-sidebar-widget mb-40">
-                                <!--=======  search widget  =======-->
-
-                                <div class="search-widget">
-                                    <input placeholder="Search" type="text" class="browser-default search-field"
-                                        (click)='filterDatatable($event)' aria-label="Search box">
-                                </div>
-
-                                <!--=======  End of search widget  =======-->
-                            </div>
-
-
-                            <!--=======  End of single sidebarwidget  =======-->
-
-                            <!--=======  single sidebar widget  *ngIF="sideloader1" =======-->
-
-                            <div class="single-sidebar-widget mb-40">
+                        <!-- <div class="single-sidebar-widget mb-40">
                                 <h2 class="single-sidebar-widget--title">Categories</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
-                                    <li class="has-children" *ngFor="let img of Allcat">
-                                        <a >{{img.name}}</a> <span
+                                    <li class="has-children" *ngFor="let img of Allcat" >
+                                        <a (click)="getprodofcategory(img.id,1)" >{{img.name}}</a> <span
                                             class="quantity">{{img.number_of_children}}</span>
                                     </li>
                                     <li  *ngIf="sideloader1">
                                         <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
                                     </li>
-                                </ul>
-                               
+                                </ul>            
+                            </div> -->
+
+                        <div class="single-sidebar-widget mb-40">
+                            <h2 class="single-sidebar-widget--title">Brands</h2>
+                            <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
+                                <li class="has-children" *ngFor="let img of Allbrands">
+                                    <a (click)="getprodofbrand(img.id,1)">{{img.name}}</a>
+                                </li>
+                                <!-- <li  *ngIf="sideloader1">
+                                        <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
+                                    </li> -->
+                            </ul>
+                            <div *ngIf="sideloader1">
+                                <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
                             </div>
-                         
 
-                            <!--=======  End of single sidebar widget  =======-->
-
-                            <!--=======  single sidebar widget  =======-->
+                        </div>
 
 
+                        <!--=======  End of single sidebar widget  =======-->
 
-                            <div data-role="main" class="ui-content">
+                        <!--=======  single sidebar widget  =======-->
+                        <div class="single-sidebar-widget mb-40">
+                            <h2 class="single-sidebar-widget--title">Price Filter</h2>
+                            <ng5-slider [(value)]="minValue" [(highValue)]="maxValue" [options]="options"
+                                (click)="pricerange()"></ng5-slider>
+                        </div>
+
+                        <!-- <div data-role="main" class="ui-content">
                                 <form [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
                                     <div data-role="rangeslider">
                                         <label for="price-min">Price:</label>
@@ -296,78 +166,59 @@
                                     </div>
 
                                 </form>
-                            </div>
-                            <br>
-                            <!--=======  End of single sidebar widget  =======-->
+                            </div> -->
+                        <br>
 
-                            <!--=======  single sidebar widget  =======-->
 
-                            <div class="single-sidebar-widget mb-40">
-                                <h2 class="single-sidebar-widget--title">Popular products</h2>
+                        <div class="single-sidebar-widget mb-40">
+                            <h2 class="single-sidebar-widget--title">Popular products</h2>
 
-                                <!--=======  widget product wrapper  =======-->
+                            <!--=======  widget product wrapper  =======-->
 
-                                <div class="widget-product-wrapper">
-                                    <!--=======  single widget product  =======-->
-                                    <div class="single-widget-product-wrapper">
-                                        <div class="single-widget-product" *ngFor="let img of Bestsellpro"
-                                            style="padding-bottom: 17px;" (click)="viewproductrow(img)">
-                                            <!--=======  image  =======-->
+                            <div class="widget-product-wrapper">
+                                <!--=======  single widget product  =======-->
+                                <div class="single-widget-product-wrapper">
+                                    <div class="single-widget-product" *ngFor="let img of Bestsellpro"
+                                        style="padding-bottom: 17px;" (click)="proddetail(img.id)">
+                                        <!--=======  image  =======-->
 
-                                            <div class="single-widget-product__image">
-                                                <a >
-                                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                        class="img-fluid" alt="">
-                                                </a>
-                                            </div>
-
-                                            <!--=======  End of image  =======-->
-
-                                            <!--=======  content  =======-->
-
-                                            <div class="single-widget-product__content">
-
-                                                <div class="single-widget-product__content__top">
-                                                    <h3 class="product-title"><a>{{img.name}}</a>
-                                                    </h3>
-                                                    <br>
-                                                    <div class="price">
-                                                        <span class="main-price discounted"
-                                                            *ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
-                                                        <span class="discounted-price">{{img.main_price}}</span>
-                                                    </div>
-                                                    <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
-                                                </div>
-                                            </div>
-                                            <!--=======  End of content  =======-->
+                                        <div class="single-widget-product__image">
+                                            <a>
+                                                <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                    class="img-fluid" alt="">
+                                            </a>
                                         </div>
+                                        <div class="single-widget-product__content">
+
+                                            <div class="single-widget-product__content__top">
+                                                <h3 class="product-title"><a>{{img.name}}</a>
+                                                </h3>
+                                                <br>
+                                                <div class="price">
+                                                    <span class="main-price discounted"
+                                                        style="text-decoration:line-through"
+                                                        *ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
+                                                    <span class="discounted-price">{{img.main_price}}</span>
+                                                </div>
+                                                <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+                                                </ngb-rating>
+                                            </div>
+                                        </div>
+                                        <!--=======  End of content  =======-->
                                     </div>
-
-                                    <!--=======  End of single widget product  =======-->
                                 </div>
-                                <!-- lazyloading -->
-                                <div class="widget-product-wrapper" *ngIf="poploader">
-                                    <!--=======  single widget product  =======-->
-                                    <div class="single-widget-product-wrapper">
-                                        <div class="single-widget-product" 
-                                            style="padding-bottom: 17px;">
-                                            <div class="single-widget-product__image" style="height: 120px; weight:80px">                    
-                                                <ngx-skeleton-loader count="1"
-                                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                                        </ngx-skeleton-loader>
-                                            </div>
-                                            <div class="single-widget-product__content">
-                                                <div class="single-widget-product__content__top">
-                                                    <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="single-widget-product" 
-                                        style="padding-bottom: 17px;">
-                                        <div class="single-widget-product__image" style="height: 120px; weight:80px">                    
+
+                                <!--=======  End of single widget product  =======-->
+                            </div>
+                            <!-- lazyloading -->
+                            <div class="widget-product-wrapper" *ngIf="poploader">
+                                <!--=======  single widget product  =======-->
+                                <div class="single-widget-product-wrapper">
+                                    <div class="single-widget-product" style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; width:80px">
                                             <ngx-skeleton-loader count="1"
-                                                        [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                                    </ngx-skeleton-loader>
+                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
                                         </div>
                                         <div class="single-widget-product__content">
                                             <div class="single-widget-product__content__top">
@@ -375,974 +226,561 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="single-widget-product" 
-                                    style="padding-bottom: 17px;">
-                                    <div class="single-widget-product__image" style="height: 120px; weight:80px">                    
-                                        <ngx-skeleton-loader count="1"
-                                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                                </ngx-skeleton-loader>
-                                    </div>
-                                    <div class="single-widget-product__content">
-                                        <div class="single-widget-product__content__top">
-                                            <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                    </div>
-
-                                    <!--=======  End of single widget product  =======-->
-                                </div>
-                                <div class="row">
-                                    <div class="col-lg-12 text-center mt-30">
-                                        <a class="lezada-button lezada-button--medium lezada-button--icon--left"
-                                            routerLink="/bestselling"><i class="ion-android-add"></i> MORE</a>
-                                    </div>
-                                </div>
-                                <!--=======  End of widget product wrapper  =======-->
-                            </div>
-                            <!--=======  End of single sidebar widget  =======-->
-                        </div>
-                    </div>
-
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80" *ngIf="!poploader">
-
-                        <div class="row product-isotope shop-product-wrap four-column">
-
-                            <!--=======  single product  =======-->
-                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let img of Product">
-                                <div class="single-product">
-                                    <!--=======  single product image  =======-->
-
-                                    <div class="single-product__image">
-                                        <a class="image-wrap" >
-                                           
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="">
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="">
-                                        </a>
-
-                                        <div class="single-product__floating-badges">
-                                            <!-- <span class="onsale">-10%</span> -->
-                                            <span class="hot" *ngIf="img.has_discount==true">hot</span>
-                                        </div>
-
-                                        <div class="single-product__floating-icons">
-                                            <span (click)="addtowishlist(img.id)" class="wishlist"><a 
-                                                    data-tippy="Add to wishlist" data-tippy-inertia="true"
-                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                    data-tippy-placement="left"><i
-                                                        class="ion-android-favorite-outline"></i></a></span>
-
-                                             <!-- <span class="compare"><a href="" data-tippy="Compare" data-tippy-inertia="true"
-                                                data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                data-tippy-placement="left"><i
-                                                    class="ion-ios-shuffle-strong"></i></a></span> -->
-
-                                            <span class="quickview"><a class="cd-trigger" href="#qv-1"
-                                                    data-tippy="Quick View" data-tippy-inertia="true"
-                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                    data-tippy-placement="left"><i
-                                                        class="ion-ios-search-strong"></i></a></span>
-                                        </div>
-                                    </div>
-                                    <!--=======  End of single product image  =======-->
-
-                                    <!--=======  single product content  routerLink="/productdetail"=======-->
-                                    <div class="single-product__content" (click)="viewproductrow(img)">
-                                        <div class="title">
-                                            <h3> <a href="">{{img.name}}</a></h3>
-                                            <a style="color: red;">View details</a>
-                                        </div>
-                                        <div class="price">
-                                            <span class="main-price discounted">{{img.stroked_price}}</span>
-                                            <span class="discounted-price">{{img.main_price}}</span>
-                                        </div>
-                                    </div>
-
-                                    <!--=======  End of single product content  =======-->
-                                </div>
-
-                                <div class="single-product--list">
-                                    <!--=======  single product image  =======-->
-
-                                    <div class="single-product__image">
-                                        <a class="image-wrap" href="product_detail.html">
-                                            <img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
-                                            <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
-                                        </a>
-
-                                        <div class="single-product__floating-badges">
-                                            <span class="onsale">-10%</span>
-                                            <span class="hot">hot</span>
-                                        </div>
-
-                                        <div class="single-product__floating-icons">
-                                            <span class="wishlist"><a href="#" data-tippy="Add to wishlist"
-                                                    data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                    data-tippy-delay="50" data-tippy-arrow="true"
-                                                    data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-                                                        class="ion-android-favorite-outline"></i></a></span>
-
-                                            <span class="compare"><a href="#" data-tippy="Compare"
-                                                    data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                    data-tippy-delay="50" data-tippy-arrow="true"
-                                                    data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-                                                        class="ion-ios-shuffle-strong"></i></a></span>
-
-                                            <span class="quickview"><a class="cd-trigger" href="#qv-1"
-                                                    data-tippy="Quick View" data-tippy-inertia="true"
-                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                    data-tippy-placement="bottom"><i
-                                                        class="ion-ios-search-strong"></i></a></span>
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <!--=======  End of single product image  =======-->
-
-                                    <!--=======  single product content  =======-->
-
-                                    <div class="single-product__content">
-
-                                        <div class="title">
-                                            <h3> <a href="product_detail.html">High-waist Trousers</a></h3>
-                                        </div>
-                                        <div class="price">
-                                            <span class="main-price discounted">Rs 160.00</span>
-                                            <span class="discounted-price">Rs 180.00</span>
-                                        </div>
-                                        <p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                            Laudantium
-                                            consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente
-                                            eveniet consectetur
-                                            voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda
-                                            veritatis,
-                                        </p>
-
-                                        <a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
-
-                                    </div>
-
-                                    <!--=======  End of single product content  =======-->
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div id="pgg">
-                            <ul class="pagination" style="justify-content: center;
-                            display: flex;">
-                                <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
-                                    *ngFor="let p of pagess" (click)="getpage(p.url)">
-                                    <a class="page-link">{{p.label}}</a>
-                                </li>
-                            </ul>
-                        </div>
-
-                    </div>
-          <!--  productslazyloading -->
-          <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="poploader">
-            <div class="row product-isotope shop-product-wrap four-column">
-                <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-                                    <div class="single-product" style="height: 250px; width: 200px;">          
+                                    <div class="single-widget-product" style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; width:80px">
                                             <ngx-skeleton-loader count="1"
                                                 [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                             </ngx-skeleton-loader>
-                                    </div>                                  
-                </div>   
+                                        </div>
+                                        <div class="single-widget-product__content">
+                                            <div class="single-widget-product__content__top">
+                                                <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-widget-product" style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; width:80px">
+                                            <ngx-skeleton-loader count="1"
+                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                        <div class="single-widget-product__content">
+                                            <div class="single-widget-product__content__top">
+                                                <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--=======  End of single widget product  =======-->
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-12 text-center mt-30">
+                                    <a class="lezada-button lezada-button--medium lezada-button--icon--left"
+                                        routerLink="/bestselling"><i class="ion-android-add"></i> MORE</a>
+                                </div>
+                            </div>
+                            <!--=======  End of widget product wrapper  =======-->
+                        </div>
+                        <!--=======  End of single sidebar widget  =======-->
+                    </div>
+                </div>
+               
+                <!-- sidebarlazyloading  end-->
+                <!-- *ngIf="prodloader" -->
+                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="!prodloader">
+
+                    <div class="row product-isotope shop-product-wrap four-column">
+
+                        <!--=======  single product   =======-->
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let img of Product">
+                            <div class="single-product">
+                                <!--=======  single product image  =======-->
+
+                                <div class="single-product__image">
+                                    <div class="imglazy">
+                                        <ngx-skeleton-loader count="1" *ngIf="!imgloader"
+                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                        </ngx-skeleton-loader>
+                                        <a class="image-wrap" *ngIf="imgloader" (click)="proddetail(img.id)">
+
+                                            <!-- <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                class="img-fluid" alt=""> -->
+                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                class="img-fluid" alt="">
+                                        </a>
+                                    </div>
+
+
+
+
+
+                                    <div class="single-product__floating-badges">
+                                        <!-- <span class="onsale">-10%</span> -->
+                                        <span class="hot" *ngIf="img.has_discount==true">hot</span>
+                                    </div>
+
+                                    <div class="single-product__floating-icons">
+                                        <span (click)="addtowishlist(img.id)" class="wishlist"><a
+                                                data-tippy="Add to wishlist" data-tippy-inertia="true"
+                                                data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                data-tippy-placement="left"><i
+                                                    class="ion-android-favorite-outline"></i></a></span>
+
+                                        <span class="quickview" (click)="quickview(img.id,openRecord)"><a
+                                                class="cd-trigger" data-tippy="Quick View" data-tippy-inertia="true"
+                                                data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                data-tippy-placement="left"><i
+                                                    class="ion-ios-search-strong"></i></a></span>
+                                    </div>
+                                </div>
+                                <!--=======  End of single product image  =======-->
+
+                                <!--=======  single product content  routerLink="/productdetail"=======-->
+                                <div class="single-product__content" (click)="proddetail(img.id)">
+                                    <div class="title">
+                                        <h3> <a href="">{{img.name}}</a></h3>
+                                        <a style="color: red;">View details</a>
+                                    </div>
+                                    <div class="price">
+                                        <span class="main-price discounted">{{img.stroked_price}}</span>
+                                        <span class="discounted-price">{{img.main_price}}</span>
+                                    </div>
+                                </div>
+
+                                <!--=======  End of single product content  =======-->
+                            </div>
+
+                            <div class="single-product--list">
+                                <!--=======  single product image  =======-->
+
+                                <div class="single-product__image">
+                                    <a class="image-wrap" href="product_detail.html">
+                                        <img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
+                                        <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
+                                    </a>
+
+                                    <div class="single-product__floating-badges">
+                                        <span class="onsale">-10%</span>
+                                        <span class="hot">hot</span>
+                                    </div>
+
+                                    <div class="single-product__floating-icons">
+                                        <span class="wishlist"><a href="#" data-tippy="Add to wishlist"
+                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                data-tippy-delay="50" data-tippy-arrow="true"
+                                                data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
+                                                    class="ion-android-favorite-outline"></i></a></span>
+
+                                        <span class="compare"><a href="#" data-tippy="Compare" data-tippy-inertia="true"
+                                                data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                data-tippy-placement="bottom"><i
+                                                    class="ion-ios-shuffle-strong"></i></a></span>
+
+                                        <span class="quickview"><a class="cd-trigger" href="#qv-1"
+                                                data-tippy="Quick View" data-tippy-inertia="true"
+                                                data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                data-tippy-placement="bottom"><i
+                                                    class="ion-ios-search-strong"></i></a></span>
+                                    </div>
+
+
+
+                                </div>
+
+                                <!--=======  End of single product image  =======-->
+
+                                <!--=======  single product content  =======-->
+
+                                <div class="single-product__content">
+
+                                    <div class="title">
+                                        <h3> <a href="product_detail.html">High-waist Trousers</a></h3>
+                                    </div>
+                                    <div class="price">
+                                        <span class="main-price discounted">Rs 160.00</span>
+                                        <span class="discounted-price">Rs 180.00</span>
+                                    </div>
+                                    <p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+                                        Laudantium
+                                        consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente
+                                        eveniet consectetur
+                                        voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda
+                                        veritatis,
+                                    </p>
+
+                                    <a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
+
+                                </div>
+
+                                <!--=======  End of single product content  =======-->
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="pgg">
+                        <ul class="pagination" style="justify-content: center;
+                            display: flex;">
+                            <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
+                                *ngFor="let p of pagess" (click)="getpage(p.url)">
+                                <a class="page-link">{{p.label}}</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!--  productslazyloading -->
+                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
+                    <div class="row product-isotope shop-product-wrap four-column">
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+                            <div class="single-product" style="height: 250px; width: 200px;">
+                                <ngx-skeleton-loader count="1"
+                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                </ngx-skeleton-loader>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--  productslazyloading  end-->
             </div>
-        </div>           
-         <!--  productslazyloading  end-->
+        </div>
+    </div>
+
+    <!--=====  End of shop page content  ======-->
+</div>
+<!-- dummy -->
+<ng-template #sortRecordd let-modal>
+    <div class="modal-content">
+
+
+        <div class="modal-body">
+            <form class="register-form" [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
+                <div class="row">
+                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+                        <label>min<span class="text-danger">*</span></label>
+
+                        <div class="search-widget">
+                            <input type="text" class="form-control" placeholder="" formControlName="min" >
+                        </div>
+                        <label>max<span class="text-danger">*</span></label>
+                        <div class="search-widget">
+                            <input type="text" class="form-control" placeholder="" formControlName="max">
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 md-12">
+                        <label>category</label>
+                        <select class="formrol pl-5" formControlName="category">
+                            <option *ngFor="let tab of Allcat" [value]="tab.id">
+                                {{tab.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Apply</button>
+
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+</ng-template>
+
+<!-- sort poup -->
+<ng-template #sortRecord let-modal>
+
+    <div class="modal-body" style="background-color: rgb(248, 250, 251);">
+        <form class="register-form" [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
+            <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <label>Minimun<span class="text-danger">*</span></label>
+
+                    <div class="search-widget">
+                        <input type="text" class="form-control" placeholder="" formControlName="min">
+                    </div>
+                    <label>Maximum<span class="text-danger">*</span></label>
+                    <div class="search-widget">
+                        <input type="text" class="form-control" placeholder="" formControlName="max">
+                    </div>
+                </div>
+
+                <div class="col-12 md-12">
+                    <label>Category</label><br>
+                    <select class="formrol pl-5 col-12" formControlName="category"
+                        style="background-color: transparent;Border: none;border-bottom:inset">
+                        <option *ngFor="let tab of Allcat" [value]="tab.id"
+                            style="background-color:rgb(227, 227, 228);Border: none;">
+                            {{tab.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-12 md-12">
+                    <label>Brand</label><br>
+                    <select class="formrol pl-5 col-12" formControlName="brand"
+                        style="background-color: transparent;Border: none;border-bottom:inset">
+                        <option *ngFor="let tab of Allbrands" [value]="tab.id"
+                            style="background-color:rgb(227, 227, 228);Border: none;">
+                            {{tab.name}}
+                        </option>
+                    </select>
+                </div>
+                <div class="col-12 md-12 mt-4" style="justify-content: center;">
+                    <button type="submit" class="btn btn-primary" style=" width:50%;
+                    margin-left:25%;
+                    margin-right:25%;">Apply</button>
+
+
+                </div>
+            </div>
+
+            <!-- <div class="modal-footer" style="justify-content: center;">
+                <button type="submit" class="btn btn-primary">Apply</button>
+
+
+            </div> -->
+        </form>
+
+    </div>
+</ng-template>
+<!--quickview poup -->
+<ng-template #openRecord let-modal>
+
+    <div class="modal-body" style="background-color: rgb(248, 250, 251);">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
+            <span aria-hidden="true"><i class="ion-android-close"></i></span>
+        </button>
+        <div class="py-4" style="margin-left: 20px; margin-right: 20px;">
+            <div class="modal-body p-4 c-scrollbar-light">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row gutters-10 flex-row-reverse"
+                            style="margin-right: 20px;border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
+                            <div class="col" style="margin-top: 35px;margin-bottom: 35px;">
+                                <div class="aiz-carousel product-gallery slick-initialized slick-slider"
+                                    data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
+                                    <div class="carousel-box img-zoom rounded"
+                                        style="width: 100%; display: inline-block; position: relative; overflow: hidden;">
+                                        <img class="img-fluid ls-is-cached lazyloaded"
+                                            src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
+                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}">
+                                        <img role="presentation" alt=""
+                                            src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
+                                            class="zoomImg"
+                                            style="position: absolute; top: -1224.65px; left: 0px; opacity: 0; width: 2250px; height: 2250px; border: none; max-width: none; max-height: none;">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="col-auto w-90px">
+                                <div class="aiz-carousel carousel-thumb product-gallery-thumb slick-vertical slick-initialized slick-slider"
+                                    data-items="5" data-nav-for=".product-gallery" data-vertical="true"
+                                    data-focus-select="true">
+                                    <div class="slick-list draggable" style="height: 397.5px;">
+                                        <div class="slick-track"
+                                            style="opacity: 1; height: 239px; transform: translate3d(0px, 0px, 0px);">
+                                            <div class="slick-slide slick-current slick-active"
+                                                data-slick-index="0" aria-hidden="false"
+                                                style="width: 70px;">
+                                                <div>
+                                                    <div class="carousel-box c-pointer border p-1 rounded"
+                                                        style="width: 100%; display: inline-block;">
+                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
+                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slick-slide slick-active" data-slick-index="1"
+                                                aria-hidden="false" style="width: 70px;">
+                                                <div>
+                                                    <div class="carousel-box c-pointer border p-1 rounded"
+                                                        style="width: 100%; display: inline-block;">
+                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
+                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="slick-slide slick-active" data-slick-index="2"
+                                                aria-hidden="false" style="width: 70px;">
+                                                <div>
+                                                    <div class="carousel-box c-pointer border p-1 rounded"
+                                                        style="width: 100%; display: inline-block;">
+                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
+                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
+                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
+                        <h2 class="item-title mb-4">{{Peoduct.name}}</h2>
+                        <p class="price">
+                            <span class="main-price discounted" style="text-decoration: line-through"
+                                *ngIf="Peoduct?.stroked_price!==prod_price">{{Peoduct?.stroked_price}}</span>
+                            <span class="h5 discounted-price">{{prod_price}}</span>
+                            <span class="opacity-70">/{{Peoduct.unit}}</span>
+                        </p>
+                        <p class="description" [innerHTML]="Peoduct?.description">
+                            {{Peoduct.description}}
+                        </p>
+                        <hr>
+
+                        <form id="option-choice-form">
+                            <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
+                            <input type="hidden" name="id" value="21">
+
+                            <div class="row no-gutters ml-1">
+                                <div class="col-3">
+                                    <div class="opacity-50 mt-2 " *ngFor="let a of choice">{{a.title}}:</div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="shop-product__block__value" *ngFor="let a of choice">
+
+                                        <div class="shop-product-size-list">
+                                            <span class="single-size" *ngFor="let b of a.options"
+                                                (click)="selectvar(b)">{{b}}</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row no-gutters ml-1">
+                                <div class="col-3">
+                                    <div class="opacity-50 mt-2">Quantity:</div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="product-quantity d-flex align-items-center">
+                                        <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
+                                            <a class="dec qty-btn" style="text-decoration: none;"
+                                                (click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
+                                            <input type="text" value="{{quantityyy}}" style="background: transparent;">
+                                            <a class="inc qty-btn" style="text-decoration: none;"
+                                                (click)="increaseqty()" *ngIf="stk>1">+</a>
+                                        </div>
+                                        <div class="avialable-amount opacity-60">
+                                            &nbsp; (<span id="available-quantity">{{stocck}}</span> available)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <!-- <div class="row no-gutters pb-3" id="chosen_price_div">
+                                    <div class="col-3">
+                                        <div class="opacity-50">Total Price:</div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="product-price">
+                                            <strong id="chosen_price"
+                                                class="h5 fw-600 text-danger">Rs{{totalprice}}</strong>
+                                        </div>
+                                    </div>
+                                </div> -->
+                        </form>
+                        <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
+                            <button *ngIf="stk!==0" type="button" class="btn btn-primary buy-now fw-600 add-to-cart"
+                                (click)="addtocart2()">
+                                <i class="la la-shopping-cart"></i>
+                                <span class="d-none d-md-inline-block"> Add to cart</span>
+                            </button>
+                            <button type="button" class="btn btn-danger buy-now fw-600 add-to-cart" *ngIf="stk==0">
+                                <i class="la la-shopping-cart"></i>
+                                <span class="d-none d-md-inline-block"> Out of Stock</span>
+                            </button>
+
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>
-
-        <!--=====  End of shop page content  ======-->
     </div>
-
-    <!--=============================================
+</ng-template>
+<!--=============================================
 			=            quick view         =
 			=============================================-->
 
-    <div class="cd-quick-view">
-        <div class="cd-slider-wrapper">
-            <ul class="cd-slider">
-                <li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
-                <li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
-            </ul> <!-- cd-slider -->
+<div class="cd-quick-view">
+    <div class="cd-slider-wrapper">
+        <ul class="cd-slider">
+            <li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
+            <li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
+        </ul> <!-- cd-slider -->
 
-            <ul class="cd-slider-pagination">
-                <li class="active"><a href="#0">1</a></li>
-                <li><a href="#1">2</a></li>
-            </ul> <!-- cd-slider-pagination -->
+        <ul class="cd-slider-pagination">
+            <li class="active"><a href="#0">1</a></li>
+            <li><a href="#1">2</a></li>
+        </ul> <!-- cd-slider-pagination -->
 
-            <ul class="cd-slider-navigation">
-                <li><a class="cd-prev" href="#0">Prev</a></li>
-                <li><a class="cd-next" href="#0">Next</a></li>
-            </ul> <!-- cd-slider-navigation -->
-        </div> <!-- cd-slider-wrapper -->
+        <ul class="cd-slider-navigation">
+            <li><a class="cd-prev" href="#0">Prev</a></li>
+            <li><a class="cd-next" href="#0">Next</a></li>
+        </ul> <!-- cd-slider-navigation -->
+    </div> <!-- cd-slider-wrapper -->
 
-        <div class="lezada-item-info cd-item-info ps-scroll">
+    <div class="lezada-item-info cd-item-info ps-scroll">
 
-            <h2 class="item-title">Demo Product One</h2>
-            <p class="price">
-                <span class="main-price discounted">Rs 360.00</span>
-                <span class="discounted-price">Rs 300.00</span>
-            </p>
+        <h2 class="item-title">Demo Product One</h2>
+        <p class="price">
+            <span class="main-price discounted">Rs 360.00</span>
+            <span class="discounted-price">Rs 300.00</span>
+        </p>
 
-            <p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in
-                your
-                daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making
-                variety rices like Biriyani and Puloa.</p>
+        <p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in
+            your
+            daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making
+            variety rices like Biriyani and Puloa.</p>
 
-            <span class="quickview-title">Quantity:</span>
-            <div class="pro-qty d-inline-block mb-40">
-                <input type="text" value="1">
-            </div>
+        <span class="quickview-title">Quantity:</span>
+        <div class="pro-qty d-inline-block mb-40">
+            <input type="text" value="1">
+        </div>
 
-            <div class="add-to-cart-btn mb-25">
+        <div class="add-to-cart-btn mb-25">
 
-                <button class="lezada-button lezada-button--medium">add to cart</button>
-            </div>
+            <button class="lezada-button lezada-button--medium">add to cart</button>
+        </div>
 
-            <div class="quick-view-other-info">
-                <table>
-                    <tr class="single-info">
-                        <td class="quickview-title">SKU: </td>
-                        <td class="quickview-value">12345</td>
-                    </tr>
-                    <tr class="single-info">
-                        <td class="quickview-title">Categories: </td>
-                        <td class="quickview-value">
-                            <a href="#">Edible Oils</a>,
-                            <a href="#">Oils</a>,
-                            <a href="#">Cooking Oils</a>
-                        </td>
-                    </tr>
-                    <tr class="single-info">
-                        <td class="quickview-title">Tags: </td>
-                        <td class="quickview-value">
-                            <a href="#">The Spice Club</a>,
-                            <a href="#">Satinanace</a>
-                        </td>
-                    </tr>
-                    <tr class="single-info">
-                        <td class="quickview-title">Share on: </td>
-                        <td class="quickview-value">
-                            <ul class="quickview-social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                            </ul>
-                        </td>
-                    </tr>
-                </table>
-            </div>
+        <div class="quick-view-other-info">
+            <table>
+                <tr class="single-info">
+                    <td class="quickview-title">SKU: </td>
+                    <td class="quickview-value">12345</td>
+                </tr>
+                <tr class="single-info">
+                    <td class="quickview-title">Categories: </td>
+                    <td class="quickview-value">
+                        <a href="#">Edible Oils</a>,
+                        <a href="#">Oils</a>,
+                        <a href="#">Cooking Oils</a>
+                    </td>
+                </tr>
+                <tr class="single-info">
+                    <td class="quickview-title">Tags: </td>
+                    <td class="quickview-value">
+                        <a href="#">The Spice Club</a>,
+                        <a href="#">Satinanace</a>
+                    </td>
+                </tr>
+                <tr class="single-info">
+                    <td class="quickview-title">Share on: </td>
+                    <td class="quickview-value">
+                        <ul class="quickview-social-icons">
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
 
-        </div> <!-- cd-item-info -->
-        <a href="#0" class="cd-close">Close</a>
-    </div>
+    </div> <!-- cd-item-info -->
+    <a href="#0" class="cd-close">Close</a>
 </div>
+
 
 
 
 
 <!--------------------------------------- product detail page ------------------------------------>
-
-
-
-<div *ngIf="page2">
-    <div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <h1 class="breadcrumb-title">Shop</h1>
-
-                    <!--=======  breadcrumb list  =======-->
-
-                    <ul class="breadcrumb-list">
-                        <li class="breadcrumb-list__item"><a href="index.html">HOME</a></li>
-                        <li class="breadcrumb-list__item " (click)="backk()">SHOP BY PRODUCTS</li>
-                        <li class="breadcrumb-list__item breadcrumb-list__item--active">PRODUCT DETAILS</li>
-                    </ul>
-                    <!--=======  End of breadcrumb list  =======-->
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="shop-page-wrapper mt-50 mb-50">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  shop product content  =======-->
-
-                    <div class="shop-product">
-                        <div class="row pb-50">
-                            <div class="col-lg-6 mb-md-70 mb-sm-70">
-                                <!--=======  shop product big image gallery  =======-->
-
-                                <div class="shop-product__big-image-gallery-wrapper mb-30">
-
-                                    <!--=======  shop product gallery icons  =======-->
-
-                                    <div
-                                        class="single-product__floating-badges single-product__floating-badges--shop-product">
-                                        <span class="hot" *ngIf="Peoduct.has_discount==true">hot</span>
-                                    </div>
-
-
-                                    <div class="shop-product-rightside-icons">
-                                        <span class="wishlist-icon">
-                                            <a (click)="addtowishlist(Peoduct.id)" data-tippy="Add to wishlist"
-                                                data-tippy-placement="left" data-tippy-inertia="true"
-                                                data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
-                                                    class="ion-android-favorite-outline"></i></a>
-                                        </span>
-                                        <!-- <span class="enlarge-icon">
-											<a class="btn-zoom-popup" data-tippy="Click to enlarge" data-tippy-placement="left"
-												data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
-												data-tippy-arrow="true" data-tippy-theme="sharpborder"><i class="ion-android-expand"></i></a>
-										</span> -->
-                                    </div>
-
-                                    <!--=======  End of shop product gallery icons  =======-->
-
-                                    <div class="shop-product__big-image-gallery-slider">
-
-                                        <!--=======  single image  =======-->
-
-                                        <div class="single-image">
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
-                                                class="img-fluid" alt="">
-                                        </div>
-
-                                        <!--=======  End of single image  =======-->
-
-                                    </div>
-
-                                </div>
-
-                                <!--=======  End of shop product big image gallery  =======-->
-
-                                <!--=======  shop product small image gallery  =======-->
-
-                                <div class="shop-product__small-image-gallery-wrapper">
-
-                                    <div class="shop-product__small-image-gallery-slider">
-
-                                        <!--=======  single image  =======-->
-
-                                        <!-- <div class="single-image">
-											<img src="assets/images/products/prod6-f.jpeg" class="img-fluid" alt="">
-										</div> -->
-
-                                        <!--=======  End of single image  =======-->
-                                    </div>
-
-                                </div>
-
-                                <!--=======  End of shop product small image gallery  =======-->
-                            </div>
-
-                            <div class="col-lg-6">
-                                <!--=======  shop product description  =======-->
-
-                                <div class="shop-product__description">
-                                    <!--=======  shop product navigation  =======-->
-
-                                    <div class="shop-product__navigation">
-                                        <a><i class="ion-ios-arrow-thin-left" (click)="backk()"></i></a>
-                                        <!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> -->
-                                    </div>
-
-                                    <!--=======  End of shop product navigation  =======-->
-
-                                    <!--=======  shop product rating  =======-->
-
-                                    <div class="shop-product__rating mb-15">
-                                        <ngb-rating [rate]="Peoduct.rating"></ngb-rating>
-
-                                        <span class="review-link ml-20">
-                                            <a href="#">({{Peoduct.rating}} customer reviews)</a>
-                                        </span>
-                                    </div>
-
-                                    <!--=======  End of shop product rating  =======-->
-
-                                    <!--=======  shop product title  =======-->
-
-                                    <div class="shop-product__title mb-15">
-                                        <h2>{{Peoduct.name}}</h2>
-                                    </div>
-
-                                    <!--=======  End of shop product title  =======-->
-
-                                    <!--=======  shop product price  =======-->
-
-                                    <div class="shop-product__price mb-30">
-                                        <span class="main-price discounted"
-                                            *ngIf="Peoduct.stroked_price==Peoduct.main_price">{{Peoduct.stroked_price}}</span>
-                                        <span class="discounted-price">{{Peoduct.main_price}}</span>
-                                    </div>
-
-                                    <!--=======  End of shop product price  =======-->
-
-                                    <!--=======  shop product short description  =======-->
-                                    <!-- <pre [innerHTML]="Peoduct.description">{{Peoduct.description}}</pre> -->
-                                    <div class="shop-product__short-desc mb-50" [innerHTML]="Peoduct.description">
-                                        
-                                        {{Peoduct.description}}
-                                    </div>
-
-                                    <!--=======  End of shop product short description  =======-->
-
-                                    <!--=======  shop product size block  =======-->
-                                    <div class="shop-product__block shop-product__block--size mb-20">
-                                        <div class="shop-product__block__title">Varient price: </div>
-                                        <div class="shop-product__block__value ">
-                                            <span style="color: red;"> {{varprise}} </span>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="shop-product__block shop-product__block--size mb-20">
-
-                                        <div class="shop-product__block__title" *ngFor="let a of choice">{{a.title}}:
-                                        </div>
-
-                                        <div class="shop-product__block__value" *ngFor="let a of choice">
-
-                                            <div class="shop-product-size-list">
-                                                <span class="single-size" *ngFor="let b of a.options"
-                                                    (click)="selectvar(b)">{{b}}</span>
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    <!--=======  End of shop product size block  =======-->
-
-                                    <!--=======  shop product color block  =======-->
-                                    <!--=======  End of shop product color block  =======-->
-
-                                    <!--=======  shop product quantity block  =======-->
-
-                                    <div class="shop-product__block shop-product__block--quantity mb-40">
-                                        <div class="shop-product__block__title">Quantity: </div>
-                                        <div class="shop-product__block__value">
-                                            <div class="pro-qty d-inline-block mx-0 pt-0">
-                                                <a  class="dec qty-btn" style="text-decoration: none;"  (click)="decreaseqty()" *ngIf="quantityyy!==0">-</a>
-                                                <input type="text" value="{{quantityyy}}">
-                                                <a  class="inc qty-btn" style="text-decoration: none;" (click)="increaseqty()" *ngIf="stocck!==0">+</a>                               
-                                            </div>                                               
-                                        </div>
-                                        <div class="shop-product__block__value">
-                                            <div class=" d-inline-block pt-1 pl-15">
-
-                                                <span style="opacity: 0.3;"> (availabe={{stocck}}) </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="shop-product__block shop-product__block--size mb-20">
-                                        <div class="shop-product__block__title">Total price: </div>
-                                        <div class="shop-product__block__value ">
-                                            <span style="color: red;"> Rs{{totalprice}} </span>
-                                        </div>
-
-                                    </div>
-                                   
-
-                                    <!--=======  End of shop product quantity block  =======-->
-
-                                    <!--=======  shop product buttons  =======-->
-
-                                    <div class="shop-product__buttons mb-20" style="display: flex;
-                                    align-items: center;
-                                    justify-content: center;">
-                                        <a class="lezada-button lezada-button--medium" *ngIf="stk!==0" (click)="addtocart(Peoduct.id)">add to cart</a>
-                                       <a class="lezada-button lezada-button--medium" *ngIf="stk==0" >out of stock</a>
-                                        <!-- <a class="lezada-compare-button ml-20" href="#" data-tippy="Compare" data-tippy-inertia="true"
-											data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-placement="left"
-											data-tippy-arrow="true" data-tippy-theme="sharpborder"><i class="ion-ios-shuffle"></i></a> -->
-                                    </div>
-
-                                    <!--=======  End of shop product buttons  =======-->
-
-                                    <div class="quick-view-other-info pb-0">
-                                        <table>
-
-                                            <tr class="single-info">
-                                                <td class="quickview-title" style="color: red;">Unit: </td>
-                                                <td class="quickview-value">
-                                                    <a href="#">{{Peoduct.unit}}</a>,
-
-                                                </td>
-                                            </tr>
-                                            <tr class="single-info">
-                                                <td class="quickview-title" style="color: red;" >Tags: </td>
-                                                <td class="quickview-value" >
-                                                    <a *ngFor="let a of tags">{{a}},</a>
-
-                                                </td>
-                                            </tr>
-                                            <tr class="single-info">
-                                                <td class="quickview-title" style="color: red;">Share on: </td>
-                                                <td class="quickview-value">
-                                                    <ul class="quickview-social-icons">
-                                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                                    </ul>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </div>
-
-                                    <!--=======  End of other info table  =======-->
-                                </div>
-
-                                <!--=======  End of shop product description  =======-->
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <!--=======  shop product description tab  =======-->
-
-                                <div class="shop-product__description-tab pt-10">
-                                    <!--=======  tab navigation  =======-->
-
-                                    <div class="tab-product-navigation tab-product-navigation--product-desc mb-20">
-                                        <div class="nav nav-tabs justify-content-center" id="nav-tab2" role="tablist">
-                                            <a class="nav-item nav-link active" id="product-tab-1" data-toggle="tab"
-                                                href="#product-series-1" role="tab" aria-selected="true">Description</a>
-                                            <a class="nav-item nav-link" id="product-tab-2" data-toggle="tab"
-                                                href="#product-series-2" role="tab" aria-selected="false">Additional
-                                                information</a>
-                                            <a class="nav-item nav-link" id="product-tab-3" data-toggle="tab"
-                                                href="#product-series-3" role="tab" aria-selected="false">Rating
-                                                {{Peoduct.rating_count}}</a>
-                                        </div>
-                                    </div>
-
-                                    <!--=======  End of tab navigation  =======-->
-
-                                    <!--=======  tab content  =======-->
-
-                                    <div class="tab-content" id="nav-tabContent2">
-
-                                        <div class="tab-pane fade show active" id="product-series-1" role="tabpanel"
-                                            aria-labelledby="product-tab-1">
-                                            <!--=======  shop product long description  =======-->
-
-                                            <div class="shop-product__long-desc mb-20"  [innerHTML]="Peoduct.description">
-                                                <p>
-                                                    {{Peoduct.description}}
-
-                                                </p>
-                                            </div>
-
-                                            <!--=======  End of shop product long description  =======-->
-                                        </div>
-
-                                        <div class="tab-pane fade" id="product-series-2" role="tabpanel"
-                                            aria-labelledby="product-tab-2">
-                                            <!--=======  shop product additional information  =======-->
-
-                                            <div class="shop-product__additional-info">
-                                                <table class="shop-attributes">
-                                                    <tbody>
-                                                        <tr *ngFor="let a of choice">
-                                                            <th>{{a.title}}:</th>
-                                                            <td>
-                                                                <p *ngFor="let b of a.options">{{b}}</p>
-                                                            </td>
-                                                        </tr>
-
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
-                                            <!--=======  End of shop product additional information  =======-->
-                                        </div>
-
-                                        <div class="tab-pane fade" id="product-series-3" role="tabpanel"
-                                            aria-labelledby="product-tab-3">
-                                            <!--=======  shop product reviews  =======-->
-
-                                            <div class="shop-product__review">
-                                                <h2 class="review-title mb-20">{{Peoduct.rating_count}}reviews for this
-                                                    Product</h2>
-
-                                                <!--=======  single review  =======-->
-
-                                                <div class="single-review">
-                                                    <div class="single-review__image">
-                                                        <img src="assets/images/user/user1.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="single-review__content">
-                                                        <!--=======  rating  =======-->
-
-
-
-                                                        <!--=======  End of rating  =======-->
-
-                                                        <!--=======  username and date  =======-->
-
-                                                        <p class="username">Ramesh Kumar<span class="date">/ April 5,
-                                                                2018</span></p>
-
-                                                        <!--=======  End of username and date  =======-->
-
-                                                        <!--=======  message  =======-->
-
-                                                        <p class="message">
-                                                            Test Demo Review Message
-                                                        </p>
-
-                                                        <!--=======  End of message  =======-->
-                                                    </div>
-                                                </div>
-
-                                                <!--=======  End of single review  =======-->
-
-                                                <!--=======  single review  =======-->
-
-                                                <div class="single-review">
-                                                    <div class="single-review__image">
-                                                        <img src="assets/images/user/user2.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="single-review__content">
-                                                        <!--=======  rating  =======-->
-
-                                                        <div class="shop-product__rating">
-                                                            <span class="product-rating">
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="ion-android-star-outline"></i>
-                                                            </span>
-                                                        </div>
-
-                                                        <!--=======  End of rating  =======-->
-
-                                                        <!--=======  username and date  =======-->
-
-                                                        <p class="username">Ravi Shankar<span class="date">/ April 7,
-                                                                2018</span></p>
-
-                                                        <!--=======  End of username and date  =======-->
-
-                                                        <!--=======  message  =======-->
-
-                                                        <p class="message">
-                                                            Test Demo Review Message
-                                                        </p>
-
-                                                        <!--=======  End of message  =======-->
-                                                    </div>
-                                                </div>
-
-                                                <!--=======  End of single review  =======-->
-
-                                                <!--=======  single review  =======-->
-
-                                                <div class="single-review">
-                                                    <div class="single-review__image">
-                                                        <img src="assets/images/user/user3.jpg" class="img-fluid"
-                                                            alt="">
-                                                    </div>
-                                                    <div class="single-review__content">
-                                                        <!--=======  rating  =======-->
-
-                                                        <div class="shop-product__rating">
-                                                            <span class="product-rating">
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="active ion-android-star"></i>
-                                                                <i class="ion-android-star-outline"></i>
-                                                            </span>
-                                                        </div>
-
-                                                        <!--=======  End of rating  =======-->
-
-                                                        <!--=======  username and date  =======-->
-
-                                                        <p class="username">Arun Kumar<span class="date">/ April 5,
-                                                                2018</span></p>
-
-                                                        <!--=======  End of username and date  =======-->
-
-                                                        <!--=======  message  =======-->
-
-                                                        <p class="message">
-                                                            Test Demo Review Message
-                                                        </p>
-
-                                                        <!--=======  End of message  =======-->
-                                                    </div>
-                                                </div>
-
-                                                <!--=======  End of single review  =======-->
-
-                                                <h2 class="review-title mb-20">Add a review</h2>
-                                                <p class="text-center">Your email address will not be published.
-                                                    Required fields are marked *
-                                                </p>
-
-                                                <!--=======  review form  =======-->
-
-                                                <div class="lezada-form lezada-form--review">
-                                                    <form [formGroup]="register" (ngSubmit)="submitreview(register)">
-                                                        <div class="row">
-                                                            <div class="col-lg-6 mb-20">
-                                                                <input type="text" placeholder="Name ">
-                                                            </div>
-                                                         
-
-                                                            <div class="col-lg-12 mb-20">																
-                                                                <span class="rating-title mr-30" style="opacity: 0.6;">YOUR RATING</span>                                                              
-																<span class="product-rating">
-																	<ngb-rating [max]="5" [(rate)]="currentRate"
-                                                                [readonly]="false"  formControlName="rating" style="size: 10px; color: rgb(248, 141, 19);"></ngb-rating >
-																</span>
-															</div>
-
-                                                            
-                                                          
-
-                                                            <!-- <div class="col-lg-12 mb-20">
-                                                                <span class="rating-title mr-30">YOUR RATING</span>
-                                                                <span class="product-rating">
-
-                                                                    <i class="active ion-android-star-outline"></i>
-                                                                    <i class="active ion-android-star-outline"></i>
-                                                                    <i class="active ion-android-star-outline"></i>
-                                                                    <i class="active ion-android-star-outline"></i>
-                                                                    <i class="active ion-android-star-outline"></i>
-                                                                </span>
-                                                            </div> -->
-                                                            <div class="col-lg-12 mb-20">
-                                                                <textarea cols="30" rows="10"
-                                                                    placeholder="Your review *"
-                                                                    formControlName="comment"></textarea>
-                                                            </div>
-                                                            <div class="col-lg-12 text-center">
-                                                                <button type="submit"
-                                                                    class="lezada-button lezada-button--medium">submit</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-
-                                                <!--=======  End of review form  =======-->
-
-
-                                            </div>
-
-                                            <!--=======  End of shop product reviews  =======-->
-                                        </div>
-
-                                    </div>
-
-                                    <!--=======  End of tab content  =======-->
-                                </div>
-
-                                <!--=======  End of shop product description tab  =======-->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--=======  End of shop product content  =======-->
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- FAQ -->
-    <div class="faq-area">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="faq-wrapper">
-
-
-                        <!--=======  single faq  =======-->
-
-                        <div class="single-faq mb-20">
-                            <h2 class="faq-title mb-20">FAQ</h2>
-                            <div class="accordion" id="shippingInfo">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link"
-                                                style="background-color: #cd2126;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
-                                                data-toggle="collapse" data-target="#collapseOne" aria-expanded="true"
-                                                aria-controls="collapseOne">
-                                                What Shipping Methods are Available?
-                                            </button>
-                                        </h5>
-                                    </div>
-
-                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
-                                        data-parent="#shippingInfo">
-                                        <div class="card-body">
-                                            <p>Depending on the item(s) you purchase on garageclothing.com and the
-                                                location to which the
-                                                item(s) will be delivered, different shipping methods will be available.
-                                                At checkout, you will
-                                                be prompted to choose a variety of shipping methods.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed"
-                                                style="background-color: #cd2126;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
-                                                data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false"
-                                                aria-controls="collapseTwo">
-                                                Do You Ship Internationally?
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
-                                        data-parent="#shippingInfo">
-                                        <div class="card-body">
-                                            <p>At the moment, we only ship to Canada and the United States. For
-                                                international orders, please
-                                                contact internationalorders@dynamite.ca.
-                                                If you have any questions, please don’t hesitate to contact our Customer
-                                                Experience Department
-                                                by mail or by phone at 1-888-882-1138 (Canada) and 1-888-342-7243 (USA).
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingThree">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed"
-                                                style="background-color: #cd2126;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
-                                                data-toggle="collapse" data-target="#collapseThree"
-                                                aria-expanded="false" aria-controls="collapseThree">
-                                                How to Track My Order?
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
-                                        data-parent="#shippingInfo">
-                                        <div class="card-body">
-                                            <p>Once your order has been shipped, you will receive an email with your
-                                                tracking and shipping
-                                                information. Simply click on the link in the email or select the ‘track
-                                                order’ option here and
-                                                enter your order number and email address or sign into your account.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="card">
-                                    <div class="card-header" id="headingFour">
-                                        <h5 class="mb-0">
-                                            <button class="btn btn-link collapsed"
-                                                style="background-color: #cd2126;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
-                                                data-toggle="collapse" data-target="#collapseFour" aria-expanded="false"
-                                                aria-controls="collapseFour">
-                                                How Long Will It Take To Get My Package?
-                                            </button>
-                                        </h5>
-                                    </div>
-                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
-                                        data-parent="#shippingInfo">
-                                        <div class="card-body">
-                                            <p>We ship only on business days. Business days are from Monday to Friday,
-                                                excluding holidays. Any
-                                                order placed after 12 P.M. ET will be processed the following business
-                                                day. Due to a high volume
-                                                period, your order may take longer than anticipated. For remote
-                                                locations, please add an
-                                                additional 2-5 business day to each shipping method’s expected delivery
-                                                time. If you are not
-                                                sure whether your location is remote, please click here for all the
-                                                details.</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single faq  =======-->
-
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- related -->
-
-    <div class="col-lg-12">
-        <div class="section-title section-title--one text-center">
-            <h1>Related Products</h1>
-        </div>
-    </div>
-    <carousel style="height: 300px;">
-        <div class="carousel-cell" *ngFor="let img of Relatedprod">
-            <div class="single-product" style="padding-left: 70px;">
-                <!--=======  single product image  =======-->
-                <div class="single-product__image" (click)="viewproductrow(img)">
-                    <a class="image-wrap">
-                        <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}" class="img-fluid"
-                            alt="">
-                    </a>
-
-                    <div class="single-product__floating-badges">
-                        <!-- <span class="onsale">-10%</span> -->
-                        <span class="hot" *ngIf="img.has_discount==true">hot</span>
-                    </div>
-
-                    <div class="single-product__floating-icons">
-                        <span class="wishlist"><a  data-tippy="Add to wishlist" data-tippy-inertia="true"
-                                data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
-                                data-tippy-theme="sharpborder" data-tippy-placement="left"><i
-                                    class="ion-android-favorite-outline"></i></a></span>
-
-
-                        <span class="quickview"><a class="cd-trigger" href="#qv-1" data-tippy="Quick View"
-                                data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
-                                data-tippy-arrow="true" data-tippy-theme="sharpborder" data-tippy-placement="left"><i
-                                    class="ion-ios-search-strong"></i></a></span>
-                    </div>
-                </div>
-
-                <div class="single-product__content" (click)="viewproductrow(img)">
-                    <div class="title">
-                        <h3> <a >{{img.name}}</a></h3>
-                        <a >Select options</a>
-                    </div>
-                    <div class="price">
-                        <span class="main-price discounted">{{img.stroked_price}}</span>
-                        <span class="discounted-price">{{img.main_price}}</span>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </carousel>
-</div>

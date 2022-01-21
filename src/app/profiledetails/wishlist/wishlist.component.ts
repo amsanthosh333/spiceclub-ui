@@ -42,6 +42,7 @@ export class WishlistComponent implements OnInit {
   outofstackbtn: boolean=false;
   addcartbtn: boolean=true;
   loader: boolean=true;
+  buyertypeid: any;
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService, 
     private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -52,6 +53,7 @@ export class WishlistComponent implements OnInit {
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user.id;
      this.accesstoken=this.currentdetail.access_token;
+     this.buyertypeid=this.currentdetail.user?.buyertypeid;
      this.tokentype=this.currentdetail.token_type;
      console.log("currentuserid=", this.userid);
    }
@@ -190,7 +192,8 @@ export class WishlistComponent implements OnInit {
           id : this.product_id,
           variant:this.varient_value.replace(/\s/g, ""),
           user_id: this.userid,
-          quantity: this.quantityyy
+          quantity: this.quantityyy,
+          buyertype:this.buyertypeid,  
         }
         console.log(edata);  
           

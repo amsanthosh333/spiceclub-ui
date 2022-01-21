@@ -2,6 +2,16 @@
 .inc qty-btn{
   pointer-events:none;
 }
+.imglazy{
+  height: 240px;
+  width: 200px;
+}
+
+/* .modal-content {
+height: 50px;
+width: 40px;
+} */
+
 /* form {
     width: 300px;
     margin: 0 auto;

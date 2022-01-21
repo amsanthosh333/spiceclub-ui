@@ -1,27 +1,22 @@
 
+
+
+
+
+
 <header class="header header-wide-topbar header-sticky border-bottom-0">
-
     <!--=======  header bottom  =======-->
-
     <div class="header-bottom pt-md-40 pb-md-40 pt-sm-40 pb-sm-40">
         <div class="container wide">
-
-
             <!--=======  header bottom container  =======-->
-
-            <div class="header-bottom-container">
-
+            <div class="header-bottom-container" style="height: 100px;">
                 <!--=======  logo with off canvas  =======-->
-
                 <div class="logo-with-offcanvas d-flex">
-
-
-
-                    <!--=======  logo   =======-->
-
-                    <div class="logo">
-                        <a href="index.html">
-                            <img src="assets/images/spicelogo.jpeg" class="img-fluid sitelogo" alt="">
+                   <!--=======  logo   =======-->
+                    <div class="logo ml-3">
+					
+                        <a href="index.html" >
+                            <img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="">
                         </a>
                     </div>
 
@@ -39,7 +34,11 @@
                                 <li class="menu-item"><a routerLink="/home">Home</a>
                                     
                                 </li>
+
 								<li class="menu-item" ><a routerLink="/shopbyproduct">ShopByProduct</a>                                
+                                </li>
+
+								<li class="menu-item" ><a routerLink="/category/33">ShopByCategory</a>                                
                                 </li>
                                  <!-- <li class="menu-item-has-children"><a href="javascript:void(0)">WellBeing Products</a>
                                     <ul class="sub-menu single-column-menu">
@@ -59,10 +58,10 @@
                                     </ul>
                                 </li>
                                 -->
-                                <li class="menu-item-has-children "><a routerLink="/blog">Blog</a>
+                                <li class="menu-item"><a routerLink="/blog">Blog</a>
                                     
                                 </li>
-                                <li class="menu-item-has-children "><a  routerLink="/recipe">Recipe</a>
+                                <li class="menu-item"><a  routerLink="/recipe">Recipe</a>
                                     
                                 </li>
                                 <!-- <li class="menu-item"><a routerLink="login">Login</a>
@@ -93,12 +92,17 @@
                         <!--=======  End of single-icon  =======-->
                         <!--=======  single-icon  =======-->
 
-                        <div class="single-icon user-login">
+                        <!-- <div class="single-icon user-login">
                             <a routerLink="login">
                                 <i class="ion-android-person"></i>
                             </a>
-                        </div>
+                        </div> -->
 
+						<div class="single-icon user-login">
+							<a href="javascript:void(0)"  id="offcanvas-about-icon">
+                                <i class="ion-android-person"></i>      
+                            </a>
+                        </div>
                         <!--=======  End of single-icon  =======-->
                         <!--=======  single-icon  =======-->
 
@@ -208,8 +212,6 @@
 
 
 
-
-
    
 <!-- <div class="newsletter-overlay-area">
     <div class="newsletter-content newsletter-content-bg-1" id="newsletter-content">
@@ -251,62 +253,83 @@
 
 	<!--=======  about overlay  =======-->
 
-	<div class="header-offcanvas about-overlay" id="about-overlay">
+	<div class="header-offcanvas about-overlay" id="about-overlay" >
 		<div class="overlay-close inactive"></div>
-		<div class="overlay-content">
-
-			<!--=======  close icon  =======-->
-
-			<span class="close-icon" id="about-close-icon">
-				<a href="javascript:void(0)">
-					<i class="ti-close"></i>
-				</a>
-			</span>
-
-			<!--=======  End of close icon  =======-->
-
-			<!--=======  overlay content container  =======-->
-
-			<div class="overlay-content-container d-flex flex-column justify-content-between h-100">
+		<div class="overlay-content" style="padding: 0px 20px;"  >
+			<div class="overlay-content-container d-flex flex-column justify-content-between h-10">
 				<!--=======  widget wrapper  =======-->
 
-				<div class="widget-wrapper">
+				<div class="widget-wrapper" >
+					<div class="logo-with-offcanvas d-flex" >
+						<!--=======  logo   =======-->
+						 <div class="logo" >
+							
+								 <img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="" style=" display: block;
+								 margin-left: auto;
+								 margin-right: auto;
+								 width:50%;">	
+						 </div>
+						 <!--=======  End of logo   =======-->
+					 </div>
+					 <hr>
 					<!--=======  single widget  =======-->
 
-					<div class="single-widget">
-						<h2 class="widget-title">About Us</h2>
-						<p>At Lezada, we put a strong emphasis on simplicity, quality and usefulness of fashion products over other
-							factors. Our fashion items never get outdated. They are not short-lived as normal fashion clothes.</p>
+					<div class="single-widget mt-4" >
+						<div class="single-comment" >
+							<div class="single-comment__image">
+								<img src="https://neophroncrm.com/spiceclubnew/public/{{currentdetail.user.avatar_original}}"
+									class="img-fluid" style="height: 70px;" alt="">
+							</div>
+							<div class="single-comment__content pl-2 mt-2">
+								<!--=======  username and date  =======-->
+								<strong class="username">{{currentdetail.user.name}}</strong>
+									<p class="email" style="color: blue;">{{currentdetail.user.email}}</p>
+								<!--=======  End of username and date  =======-->
+								<!--=======  End of message  =======-->
+							</div>
+					    	</div>
+						<hr>
 					</div>
-
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/home">
+						<h6 class="col-2"><i class="ion-ios-home"></i></h6>
+						<h6 class="col-8"> <a>Home</a> </h6>
+					</div>
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/login">
+						<h6 class="col-2"><i class="ion-android-person"></i> </h6>
+						<h6 class="col-8"> <a>Profile</a></h6>
+					</div>
+					
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/wishlist">
+						<h6 class="col-2"><i class="ion-android-favorite"></i> </h6>
+						<h6 class="col-8"><a>My Wishlist</a></h6>
+					</div>
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/cart">
+						<h6 class="col-2"><i class="ion-android-cart"></i> </h6>
+						<h6 class="col-8"><a>Cart</a></h6>
+					</div>
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/orders">
+						<h6 class="col-2"><i class="ion-android-list"></i> </h6>
+						<h6 class="col-8"><a>Orders</a></h6>
+					</div>
+					<div class="row mb-3 ml-4" >
+						<h6 class="col-2"><i class="ion-android-folder"></i> </h6>
+						<h6 class="col-8"><a>Wallet</a></h6>
+					</div>
+					<div class="row mb-3 ml-4">
+						<h6 class="col-2"><i class="ion-android-chat"></i> </h6>
+						<h6 class="col-8"><a>Messages</a></h6>
+					</div>
+					<hr>
+					<div class="row mb-2 ml-4">
+						<h6 class="col-2"><i class="ion-android-exit 180deg"></i> </h6>
+						<h6 class="col-8"><a>Logout</a></h6>
+					</div>
+					
 					<!--=======  End of single widget  =======-->
 				</div>
 
-				<!--=======  End of widget wrapper  =======-->
-
-				<!--=======  contact widget  =======-->
-
-				<div class="contact-widget">
-					<p class="email"><a href="mailto:contact@lezada.com">contact@lezada.com</a></p>
-					<p class="phone">(+00) 123 567990</p>
-
-					<div class="social-icons">
-						<ul>
-							<li><a href="//www.twitter.com" data-tippy="Twitter" data-tippy-inertia="true"
-									data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" target="_blank"><i
-										class="fa fa-twitter"></i></a></li>
-							<li><a href="//www.facebook.com" data-tippy="Facebook" data-tippy-inertia="true"
-									data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" target="_blank"><i
-										class="fa fa-facebook"></i></a></li>
-							<li><a href="//www.instagram.com" data-tippy="Instagram" data-tippy-inertia="true"
-									data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" target="_blank"><i
-										class="fa fa-instagram"></i></a></li>
-							<li><a href="//www.youtube.com" data-tippy="Youtube" data-tippy-inertia="true"
-									data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true" target="_blank"><i
-										class="fa fa-youtube-play"></i></a></li>
-						</ul>
-					</div>
-				</div>
+			
+				
 
 				<!--=======  End of contact widget  =======-->
 			</div>
@@ -362,10 +385,8 @@
 
 					<!--=======  cart buttons  =======-->
 
-					<div class="cart-buttons" >
-						<a (click)="gotowishlist()" class="closeoverlay">view wishlist <span>
-							
-						</span></a>
+					<div class="cart-buttons"  >
+						<a  class="closewishlist" (click)="gotowishlist()">view wishlist </a>
 					</div>
 
 					<!--=======  End of cart buttons  =======-->
@@ -471,25 +492,25 @@
 
 	<!--=======  search overlay  =======-->
 
-	<div class="search-overlay" id="search-overlay">
-
+	<div class="search-overlay" id="search-overlay" >
 		<!--=======  close icon  =======-->
-
 		<span class="close-icon search-close-icon">
 			<a href="javascript:void(0)" id="search-close-icon">
 				<i class="ti-close"></i>
 			</a>
 		</span>
 
-		<!--=======  End of close icon  =======-->
-
-		<!--=======  search overlay content  =======-->
-
 		<div class="search-overlay-content">
 			<div class="input-box">
-				<form action="index.html">
-					<input type="search" placeholder="Search Products...">
+				<!-- <form action="index.html" >
+					<input type="search" placeholder="Search Products..."  (click)='filterDatatable($event)'>
+				</form> -->
+				<div class="search-widget">
+				<form   [formGroup]="search" (ngSubmit)="search1(search)">
+					<input type="search" style="height: 100px; padding-right: 50px;" formControlName="key" placeholder="Search products ..." > 
+					<button class="closesearch" type="submit" style="size: 100px; margin-top: 30px;"><i class="ion-android-search" style="font-size: 50px;"></i></button>
 				</form>
+			</div>
 			</div>
 			<div class="search-hint">
 				<span># Hit enter to search or ESC to close</span>
@@ -502,3 +523,85 @@
 	<!--=======  End of search overlay  =======-->
 
 	<!--=====  End of overlay items  ======-->
+
+	<!-- =            quick view         =
+	=============================================--> 
+	<div id="qv-1"  class="cd-quick-view">
+		<div class="cd-slider-wrapper">
+			<ul class="cd-slider">
+                <li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
+                <li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
+			</ul> <!-- cd-slider -->
+
+			<ul class="cd-slider-pagination">
+				<li class="active"><a href="#0">1</a></li>
+				<li><a href="#1">2</a></li>
+			</ul> <!-- cd-slider-pagination -->
+
+			<ul class="cd-slider-navigation">
+				<li><a class="cd-prev" href="#0">Prev</a></li>
+				<li><a class="cd-next" href="#0">Next</a></li>
+			</ul> <!-- cd-slider-navigation -->
+		</div> <!-- cd-slider-wrapper -->
+
+		<div class="lezada-item-info cd-item-info ps-scroll">
+
+			<h2 class="item-title">Demo Product One</h2>
+			<p class="price">
+				<span class="main-price discounted">Rs 360.00</span>
+				<span class="discounted-price">Rs 300.00</span>
+			</p>
+
+			<p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in your daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making variety rices like Biriyani and Puloa.</p>
+
+			<span class="quickview-title">Quantity:</span>
+			<div class="pro-qty d-inline-block mb-40">
+				<input type="text" value="1">
+			</div>
+
+			<div class="add-to-cart-btn mb-25">
+
+				<button class="lezada-button lezada-button--medium">add to cart</button>
+			</div>
+
+			<div class="quick-view-other-info">
+				<table>
+					<tr class="single-info">
+						<td class="quickview-title">SKU: </td>
+						<td class="quickview-value">12345</td>
+					</tr>
+					<tr class="single-info">
+						<td class="quickview-title">Categories: </td>
+						<td class="quickview-value">
+							<a href="#">Edible Oils</a>,
+							<a href="#">Oils</a>,
+							<a href="#">Cooking Oils</a>
+						</td>
+					</tr>
+					<tr class="single-info">
+						<td class="quickview-title">Tags: </td>
+						<td class="quickview-value">
+							<a href="#">The Spice Club</a>,
+							<a href="#">Satinanace</a>
+						</td>
+					</tr>
+					<tr class="single-info">
+						<td class="quickview-title">Share on: </td>
+						<td class="quickview-value">
+							<ul class="quickview-social-icons">
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+								<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+
+		</div> <!-- cd-item-info -->
+		<a href="#0" class="cd-close">Close</a>
+	</div>
+
+	<!--=====  End of quick view  ======-->

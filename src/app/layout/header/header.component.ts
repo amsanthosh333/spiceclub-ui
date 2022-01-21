@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -7,14 +7,17 @@ import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
- declare var jQuery: any;
+  declare var jQuery: any;
+// declare var $: any;
+// import 'jqueryui';
+// import  $ from 'jquery';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   providers: [NgbRatingConfig,ToastrService],
 })
-
 
 export class HeaderComponent implements OnInit {
 
@@ -36,6 +39,9 @@ export class HeaderComponent implements OnInit {
   Grandtot: any;
   subtot: any;
   grandtotal: any;
+  searchh: any;
+  searchoverlay: boolean=true;
+  search!: FormGroup;
 
   constructor(private router: Router,private fb: FormBuilder,private toastr: ToastrService,private request: RequestService, 
     private modalService: NgbModal,) { 
@@ -58,6 +64,84 @@ export class HeaderComponent implements OnInit {
     this. viewcartcount();
     this. viewcart();
     this.viewcart3();
+
+    this.search = this.fb.group({ 
+      key: [''],
+      });
+
+      $(window).ready(function (){
+  
+        var init = function(){
+        popup();
+        readProductData();
+        };
+        
+        var isDone = true;
+        
+        var popup = function(){
+          var $items = $('.mini-carousel ul');
+          var $linkClick = $('.mini-carousel ul li a');
+          $('.video-player').hide();
+          $('.btn-view').on('click', function(){
+            $('#quick-view-pop-up').fadeToggle();
+            $('#quick-view-pop-up').css({"top":"34px", "left":"314px"});
+            $('.mask').fadeToggle();
+          });
+          $('.mask').on('click', function(){
+            $('.mask').fadeOut();
+            $('#quick-view-pop-up').fadeOut();
+          });
+          $('.quick-view-close').on('click', function(){
+            $('.mask').fadeOut();
+            $('#quick-view-pop-up').fadeOut();
+          });
+          
+          $('.prev').on('click', function(){
+                  //animate on UL element of small image on the left
+                if(!isDone) return;
+            if($items.position().top === 0){
+              $items.css({'top':'-125px'});
+              $items.children('li').last().prependTo($items);
+            }
+                isDone = false;
+            $('.mini-carousel ul').animate({
+              top: "+=125px"
+            }, 200 ,  function(){
+                    isDone = true;
+                });
+                $('.image-large ul li').last().prependTo($('.image-large ul'));
+          });
+      
+          $('.next').on('click', function(){
+              //animate on UL element of class 'mini-carousel'
+            if(!isDone) return;
+            
+                if($items.position().top === 0){
+                  $items.css({'top': '125px'});
+              $items.children('li').first().appendTo($items);
+                }      		
+                isDone = false;
+                $('.mini-carousel ul').animate({
+              top: "-=125px"
+            }, 300 ,  function(){
+                  isDone = true;
+                });	
+            $('.image-large ul li').first().appendTo($('.image-large ul'));
+          });
+          $('.quick-view-video').on('click', function(){
+            $('.video-player').toggle();
+            $('.image-large ul').toggle();
+          });
+        };
+        var readProductData = function(){
+          $.getJSON("winners.json", function(result){
+            $.each(result, function(val){
+              // console.log(val.key);
+            });
+          });
+        };
+        init();
+      });
 
     ( ($) => {
       ("use strict");
@@ -124,7 +208,7 @@ export class HeaderComponent implements OnInit {
         $("body").addClass("active-body-search-overlay");
       });
     
-      $("#about-close-icon, .overlay-close").on("click", function () {
+      $("#about-close-icon, .overlay-close, #closeabout").on("click", function () {
         $("#about-overlay").toggleClass("active-about-overlay");
         $(".overlay-close").addClass("inactive").removeClass("active");
         $("body").removeClass("active-body-search-overlay");
@@ -141,7 +225,7 @@ export class HeaderComponent implements OnInit {
         }
       );
     
-      $("#wishlist-close-icon, .wishlist-overlay-close ,.closeoverlay").on("click", function () {
+      $(" .closewishlist ,  #wishlist-close-icon, .wishlist-overlay-close").on("click", function () {
         $("#wishlist-overlay").removeClass("active-wishlist-overlay");
         $(".wishlist-overlay-close").addClass("inactive").removeClass("active");
         $("body").removeClass("active-body-search-overlay");
@@ -186,7 +270,7 @@ export class HeaderComponent implements OnInit {
         $("body").addClass("active-body-search-overlay");
       });
     
-      $("#cart-close-icon, .cart-overlay-close,.closeoverlay").on("click", function () {
+      $("#cart-close-icon, .cart-overlay-close, .closeoverlay").on("click", function () {
         $("#cart-overlay").removeClass("active-cart-overlay");
         $(".cart-overlay-close").addClass("inactive").removeClass("active");
         $("body").removeClass("active-body-search-overlay");
@@ -199,7 +283,7 @@ export class HeaderComponent implements OnInit {
         $("body").addClass("active-body-search-overlay");
       });
     
-      $("#search-close-icon").on("click", function () {
+      $("#search-close-icon , .closesearch").on("click", function () {
         $("#search-overlay").removeClass("active-search-overlay");
         $("body").removeClass("active-body-search-overlay");
       });
@@ -1425,7 +1509,14 @@ export class HeaderComponent implements OnInit {
     
       /*=====  End of background image  ======*/
     })(jQuery);
+
       }
+compone(){
+  
+  console.log("heeeeeeeellllllllllloooooooooooo");
+  
+}
+
       viewwishlist(){
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
           this.Wishlist=response.data; 
@@ -1525,7 +1616,35 @@ export class HeaderComponent implements OnInit {
       deleteRecordSuccess() {
         this.toastr.error(' Removed Successfully', '');
       }
+
+      filterDatatable(event:any){           
+        console.log(event.target.value)
+        if(event.target.value==''){
+         console.log("type something");
+        }
+        else{
+          let key = event.target.value;
+          window.scroll(0,0);
+          this.router.navigate(['shopbyproduct', key]);
+          console.log("navigate to shop by product");
+        }   } 
+
+        search1(form:FormGroup){
     
+          let key =form.value.key;
+          console.log("keyyyy1111111",key);
+          
+          if(key==''){
+            console.log("type something");
+           }
+           else{ 
+             window.scroll(0,0);
+             this.router.navigate(['shopbyproduct', key]);
+             console.log("navigate to shop by product");
+           }
+  
+           }
+           
 }
 
 

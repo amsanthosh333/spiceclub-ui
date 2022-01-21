@@ -21,6 +21,7 @@ import {BestsellingModule} from './products/bestselling/bestselling.module';
 import { ShopbyproductModule } from './products/shopbyproduct/shopbyproduct.module';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,7 @@ import { ToastrModule } from 'ngx-toastr';
     NgxSkeletonLoaderModule,ToastrModule.forRoot({
       // timeOut: 1000,
       // positionClass: 'toast-bottom-right'
-    })
+    }),RouterModule
    
   ],
   providers: [],
