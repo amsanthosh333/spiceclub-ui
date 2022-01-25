@@ -299,6 +299,14 @@ public placeorder(body:any) {
   this.url = `${this.endPoint1}/order/store`;
   return this.http.post(this.url,body,{headers:headers});
 }
+// razorpay
+public razorpay1(body:any) {
+  const headers = new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
+  this.url = `${this.endPoint1}razorpay/pay-with-razorpay`;
+  return this.http.post(this.url,body,{headers:headers});
+}
 //category
 public getallcat() {
   this.url = `${this.endPoint1}/categories`;

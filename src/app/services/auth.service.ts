@@ -5,21 +5,22 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 
-// function _window() : any {
-//   return window;
-// }
+function _window() : any {
+  return window;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+  
   encryptdata(request: string) {
     throw new Error('Method not implemented.');
   }
 
-//   get nativeWindow() : any {
-//     return _window();
-//  }
+  get nativeWindow() : any {
+    return _window();
+ }
 
   url: string | undefined;
   private currentUserSubject: BehaviorSubject<User>;

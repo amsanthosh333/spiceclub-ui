@@ -8,11 +8,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { PaymentService } from 'src/app/services/payment.service';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css'],
-  providers: [ToastrService],
+  providers: [ToastrService,PaymentService],
+ 
 })
 export class CheckoutComponent implements OnInit {
 
@@ -85,11 +87,12 @@ export class CheckoutComponent implements OnInit {
   tax: any;
   address_id: any;
   loader: boolean=true;
+  grandtotal_value: any;
   // responseText: string;
 
   constructor(private http: HttpClient,private router: Router, private modalService: NgbModal,
     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
-    private toastr: ToastrService, private toast: ToastrService) {
+    private toastr: ToastrService, private toast: ToastrService ,private payservice:PaymentService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')||'{}')
     );   
@@ -164,6 +167,7 @@ export class CheckoutComponent implements OnInit {
       console.log("summery",response);    
       console.log("grand total",this.Summery.grand_total);  
       this.grandtotal=this.Summery.grand_total
+      this.grandtotal_value=this.Summery.grand_total_value
     });
   }
   getaddress(){
@@ -262,7 +266,8 @@ export class CheckoutComponent implements OnInit {
       console.log("paymentttttype",this.payytype)
       this.request.placeorder(edata).subscribe((response: any) => {
         console.log("Placeorder",response); 
-        this.combined_orderid =response.combined_order_id 
+        console.log("combined_orderid",this.combined_orderid); 
+        this.combined_orderid =response.combined_order_id ;
         if(response.result==true){
          console.log("billdesk");
          
@@ -271,27 +276,29 @@ export class CheckoutComponent implements OnInit {
         else{
           console.log("fail",response.message);
           this.toastr.error(response.message);
-
         }
       });
 }
  else if(this.payytype=="razorpay"){
   console.log("paymenttttype",this.payytype)
   this.request.placeorder(edata).subscribe((response: any) => {
-    console.log("Placeorder",response); 
-    this.combined_orderid =response.combined_order_id  
-    if(response.result==true){
-       console.log("razorpay");
-       
-      // this.razorpay()
-    }
+    console.log("Placeorder response",response); 
+    this.combined_orderid =response.combined_order_id 
+    if(response.result==true){ 
+       let edata1={
+        payment_type:this.payytype,
+        combined_order_id:this.combined_orderid,
+        amount:this.grandtotal_value,
+        user_id:this.userid
+       }
+       this.razorpayment1(edata1);
+      }
     else{
       console.log("fail",response.message);
       this.toastr.error(response.message);
     }
   });
-}
-  
+}  
   else{ 
     this.request.placeorder(edata).subscribe((response: any) => {
       console.log("Placeorder",response); 
@@ -307,7 +314,15 @@ export class CheckoutComponent implements OnInit {
     });
   }
 }
+}
+
+  razorpayment1(edata1:any){
+    console.log("edata1",edata1);
+    this.request.razorpay1(edata1).subscribe((response: any) => {
+    console.log("razorpay1 response",response);
+});
   }
+
   opennewaddress(){
     this.shippaddress=!this.shippaddress
     this.viewcountry();
@@ -429,4 +444,106 @@ deleteRecordSuccess() {
   this.toastr.error(' Removed Successfully', '');
 }
 
+
+// razorpay site
+payWithRazor(order_id:any) {
+  const options: any = {
+    key: 'rzp_test_7Hdkaz1xFGPomB',
+    amount: 125500, 
+    currency: 'INR',
+    name: 'san', 
+    description: 'hiii', 
+    image: '.assets/images/LOGOWHITE.jpg', 
+    order_id: "", 
+    modal: {   
+      escape: false,
+    },
+    notes: {    
+    },
+    theme: {
+      color: '#0c238a'
+    }
+  };
+  options.handler = ((response: any, error: any) => {
+    options.response = response;
+    console.log(response);
+    console.log(options);
+    // call your backend api to verify payment signature & capture transaction
+  });
+  options.modal.ondismiss = (() => {
+    // handle the case when user closes the form while transaction is in progress
+    console.log('Transaction cancelled.');
+  });
+  const rzp = new this.payservice.nativeWindow.Razorpay(options);
+  rzp.open();
 }
+
+// "amount": this.grandtotal.replace('Rs',""),
+
+// demo spoicce
+initPay() {
+ let options = {
+    "key": "rzp_test_7Hdkaz1xFGPomB", 
+    "amount": this.grandtotal.replace('Rs',""),
+    "currency": "INR",
+    "name": "Acme Corp",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": "",
+    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+    "handler": function (response: { razorpay_payment_id: any; razorpay_order_id: any; razorpay_signature: any; }){
+      alert(response.razorpay_payment_id);
+      alert(response.razorpay_order_id);
+      alert(response.razorpay_signature)
+  },
+    "prefill": {
+        "name": this.username,
+        "email": this.useremail,
+        "contact": this.userphone
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+  console.log("options,",options)
+  let rzp1 = new this.payservice.nativeWindow.Razorpay(options);
+  rzp1.open();
+  console.log("works");
+}
+
+//youtube
+ options = {
+  "key": "rzp_test_7Hdkaz1xFGPomB", 
+  "amount": "5000", 
+  "currency": "INR",
+  "name": "Acme Corp",
+  "description": "Test Transaction",
+  "image": "https://example.com/your_logo",
+  "order_id": "", 
+  "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+  "prefill": {
+      "name": "santo ",
+      "email": "santo.kumar@example.com",
+      "contact": "9999999999"
+  },
+  "notes": {
+      "address": "Razorpay Corporate Office"
+  },
+  "theme": {
+      "color": "#3399cc"
+  }
+};
+rzp1: any;
+pay(){
+ this.rzp1 = new this.authService.nativeWindow.Razorpay(this.options);
+
+  this.rzp1.open();
+
+
+}
+}
+
+

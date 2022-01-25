@@ -60,23 +60,38 @@
                         style="color: rgb(11, 192, 11);"></i></p>
                 <strong>Order Status:</strong>
                 <p style="margin-bottom: 10px;">{{img.delivery_status_string}}
-                    <i *ngIf="img.delivery_status_string=='OrderPlaced'" class="bi bi-x-circle-fill"
+                    <i *ngIf="img.delivery_status_string=='Cancelled'" class="bi bi-x-circle-fill"
                         style="color: rgb(231, 21, 32);"></i>
                     <i *ngIf="img.delivery_status_string=='Order Placed'" class="bi bi-hand-thumbs-up-fill"
                         style="color: rgb(21, 231, 21);"></i>
                     <i *ngIf="img.delivery_status_string=='Confirmed'" class="bi bi-hand-thumbs-up-fill"
                         style="color: rgb(45, 89, 223);"></i>
-                    <i *ngIf="img.delivery_status_string=='On Delivery'" class="bi bi-truck"
+                        <i *ngIf="img.delivery_status=='Pending'" class="bi bi-exclamation-circle-fill"
+                        style="color: rgb(45, 89, 223);"></i> 
+                    <i *ngIf="img.delivery_status_string=='On The Way'" class="bi bi-truck"
                         style="color: rgb(252, 166, 8);;"></i>
                     <i *ngIf="img.delivery_status_string=='Delivered'" class="bi bi-check-circle-fill"
                         style="color: rgb(11, 192, 11);;"></i>
+                        <i *ngIf="img.delivery_status_string=='Picked Up'" class="bi bi-bag-check-fill"
+                        style="color: rgb(209, 98, 7);;"></i>
                 </p>
 
                 <strong>Delivery Status:</strong>
                 <p style="margin-bottom: 10px;">{{img.delivery_status}}
-                    <i class="bi bi-x-circle-fill" style="color: rgb(231, 21, 32);"></i>
-                    <i class="bi bi-exclamation-circle-fill" style="color: rgb(45, 89, 223);"></i>
-                    <i class="bi bi-check-circle-fill" style="color: rgb(11, 192, 11);;"></i>
+                    <i *ngIf="img.delivery_status=='cancelled'" class="bi bi-x-circle-fill"
+                    style="color: rgb(231, 21, 32);"></i>
+                <i *ngIf="img.delivery_status=='order_placed'" class="bi bi-hand-thumbs-up-fill"
+                    style="color: rgb(21, 231, 21);"></i>
+                <i *ngIf="img.delivery_status=='confirmed'" class="bi bi-hand-thumbs-up-fill"
+                    style="color: rgb(45, 89, 223);"></i>
+                    <i *ngIf="img.delivery_status=='pending'" class="bi bi-exclamation-circle-fill"
+                    style="color: rgb(45, 89, 223);"></i>  
+                <i *ngIf="img.delivery_status=='on_the_way'" class="bi bi-truck"
+                    style="color: rgb(252, 166, 8);;"></i>
+                <i *ngIf="img.delivery_status=='delivered'" class="bi bi-check-circle-fill"
+                    style="color: rgb(11, 192, 11);;"></i>
+                    <i *ngIf="img.delivery_status=='picked_up'" class="bi bi-bag-check-fill"
+                    style="color: rgb(209, 98, 7);;"></i>
                 </p>
 
 
@@ -160,7 +175,7 @@
                     <td class="product-name ">
                         <a style="text-decoration: none; margin-top: 10px;">{{b.delivery_status}}</a>
                         <span class="product-variation pb-3" *ngIf="b.delivery_status!=='delivered'"
-                            (click)="addreview(addRecord,b.id)" style="color: rgb(45, 89, 223); display:block ;">
+                            (click)="addreview(addRecord,b.product_id)" style="color: rgb(45, 89, 223); display:block ;">
                             <a> <i class="ion-android-star"></i> Review
                                 this product </a></span>
                     </td>

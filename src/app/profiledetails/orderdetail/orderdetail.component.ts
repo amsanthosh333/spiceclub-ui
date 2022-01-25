@@ -20,7 +20,7 @@ export class OrderdetailComponent implements OnInit {
  
 
   //Demo purpose only, Data might come from Api calls/service
-  public counts = ["Order Placed","Confirmed","On Delivery","Delivered "];
+  public counts = ["Order Placed","Confirmed","Picked Up","On The Way","On Delivery","Delivered "];
   //  public orderStatus ="Order Placed"
   currentRate = 0;
   currentUserSubject: BehaviorSubject<User>;
@@ -88,7 +88,7 @@ export class OrderdetailComponent implements OnInit {
   viewdetail(){
     this.request.vieworderdetail(this.ord_id).subscribe((response: any) => {
       this.Detail=response.data;
-      this.orderStatus=this.Detail[0].delivery_status_string
+      this.orderStatus=this.Detail[0].delivery_status_string;
       console.log("dftgdf",this.orderStatus);
       
       console.log("order detaillllllll",this.Detail);   
