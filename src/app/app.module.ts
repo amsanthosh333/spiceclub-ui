@@ -22,7 +22,7 @@ import { ShopbyproductModule } from './products/shopbyproduct/shopbyproduct.modu
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
-
+import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -42,7 +42,7 @@ import { RouterModule } from '@angular/router';
     NgxSkeletonLoaderModule,ToastrModule.forRoot({
       // timeOut: 1000,
       // positionClass: 'toast-bottom-right'
-    }),RouterModule
+    }),RouterModule,NgImageSliderModule
    
   ],
   providers: [],

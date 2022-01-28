@@ -1,8 +1,32 @@
-
-
+.breadcrumb-list__item{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+strong{
+  color: #070707 ;
+	font-family: 'Poppins', sans-serif;
+}
+h6 strong{
+  color:  #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+span{
+  color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+th{
+  color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+tr{
+  color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
 p{
     border-bottom: none;
     padding: 0px;
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
 }
 .someclass{
         height: 15px;

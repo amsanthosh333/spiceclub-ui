@@ -29,6 +29,8 @@ const routes: Routes = [
   { path: 'monthdeal', loadChildren: () => import('./products/monthdeal/monthdeal.module').then(m => m.MonthdealModule) },
   { path: 'orders', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
   { path: 'orderdetail/:id', loadChildren: () => import('./profiledetails/orderdetail/orderdetail.module').then(m => m.OrderdetailModule) },
+  { path: 'profile', loadChildren: () => import('./profiledetails/profile/profile.module').then(m => m.ProfileModule) },
+  { path: 'wallet', loadChildren: () => import('./profiledetails/wallet/wallet.module').then(m => m.WalletModule) },
   
 ];
 

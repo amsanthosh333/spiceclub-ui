@@ -6,7 +6,7 @@
 
                 <!--=======  breadcrumb list  =======-->
 
-                <ul class="breadcrumb-list">
+                <ul class="breadcrumb-list" style="padding-left: 0px;">
                     <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
                     <li class="breadcrumb-list__item breadcrumb-list__item--active">SHOP BY PRODUCTS</li>
                 </ul>
@@ -123,9 +123,9 @@
                             </div> -->
 
                         <div class="single-sidebar-widget mb-40">
-                            <h2 class="single-sidebar-widget--title">Brands</h2>
-                            <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
-                                <li class="has-children" *ngFor="let img of Allbrands">
+                            <h2 class="single-sidebar-widget--title mb-2" >Brands</h2>
+                            <ul class="single-sidebar-widget--list single-sidebar-widget--list--category " style="padding-left: 0px;">
+                                <li class="has-children" *ngFor="let img of Allbrands" >
                                     <a (click)="getprodofbrand(img.id,1)">{{img.name}}</a>
                                 </li>
                                 <!-- <li  *ngIf="sideloader1">
@@ -333,72 +333,7 @@
                                 <!--=======  End of single product content  =======-->
                             </div>
 
-                            <div class="single-product--list">
-                                <!--=======  single product image  =======-->
-
-                                <div class="single-product__image">
-                                    <a class="image-wrap" href="product_detail.html">
-                                        <img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
-                                        <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
-                                    </a>
-
-                                    <div class="single-product__floating-badges">
-                                        <span class="onsale">-10%</span>
-                                        <span class="hot">hot</span>
-                                    </div>
-
-                                    <div class="single-product__floating-icons">
-                                        <span class="wishlist"><a href="#" data-tippy="Add to wishlist"
-                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                data-tippy-delay="50" data-tippy-arrow="true"
-                                                data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-                                                    class="ion-android-favorite-outline"></i></a></span>
-
-                                        <span class="compare"><a href="#" data-tippy="Compare" data-tippy-inertia="true"
-                                                data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                data-tippy-placement="bottom"><i
-                                                    class="ion-ios-shuffle-strong"></i></a></span>
-
-                                        <span class="quickview"><a class="cd-trigger" href="#qv-1"
-                                                data-tippy="Quick View" data-tippy-inertia="true"
-                                                data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                data-tippy-placement="bottom"><i
-                                                    class="ion-ios-search-strong"></i></a></span>
-                                    </div>
-
-
-
-                                </div>
-
-                                <!--=======  End of single product image  =======-->
-
-                                <!--=======  single product content  =======-->
-
-                                <div class="single-product__content">
-
-                                    <div class="title">
-                                        <h3> <a href="product_detail.html">High-waist Trousers</a></h3>
-                                    </div>
-                                    <div class="price">
-                                        <span class="main-price discounted">Rs 160.00</span>
-                                        <span class="discounted-price">Rs 180.00</span>
-                                    </div>
-                                    <p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                        Laudantium
-                                        consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente
-                                        eveniet consectetur
-                                        voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda
-                                        veritatis,
-                                    </p>
-
-                                    <a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
-
-                                </div>
-
-                                <!--=======  End of single product content  =======-->
-                            </div>
+                            
                         </div>
 
                     </div>
@@ -482,19 +417,19 @@
         <form class="register-form" [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
             <div class="row">
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
-                    <label>Minimun<span class="text-danger">*</span></label>
+                    <label class="sorttext">Minimun<span class="text-danger">*</span></label>
 
                     <div class="search-widget">
                         <input type="text" class="form-control" placeholder="" formControlName="min">
                     </div>
-                    <label>Maximum<span class="text-danger">*</span></label>
+                    <label class="sorttext" >Maximum<span class="text-danger">*</span></label>
                     <div class="search-widget">
                         <input type="text" class="form-control" placeholder="" formControlName="max">
                     </div>
                 </div>
 
                 <div class="col-12 md-12">
-                    <label>Category</label><br>
+                    <label class="sorttext">Category</label><br>
                     <select class="formrol pl-5 col-12" formControlName="category"
                         style="background-color: transparent;Border: none;border-bottom:inset">
                         <option *ngFor="let tab of Allcat" [value]="tab.id"
@@ -504,7 +439,7 @@
                     </select>
                 </div>
                 <div class="col-12 md-12">
-                    <label>Brand</label><br>
+                    <label class="sorttext">Brand</label><br>
                     <select class="formrol pl-5 col-12" formControlName="brand"
                         style="background-color: transparent;Border: none;border-bottom:inset">
                         <option *ngFor="let tab of Allbrands" [value]="tab.id"

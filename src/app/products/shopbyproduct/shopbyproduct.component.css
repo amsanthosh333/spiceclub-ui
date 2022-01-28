@@ -6,7 +6,18 @@
   height: 240px;
   width: 200px;
 }
-
+.has-children a {
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+.sorttext{
+  color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+.breadcrumb-list__item{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
 /* .modal-content {
 height: 50px;
 width: 40px;

@@ -1,3 +1,19 @@
+/* .menu-item li{
+	color: rgb(106, 107, 107);
+} */
+ .menu-item a {
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+
+.cart-title{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+.username{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
 .offcanvas-cart-content-container .cart-product-wrapper .cart-product-container {
     position: relative;
     overflow: auto;

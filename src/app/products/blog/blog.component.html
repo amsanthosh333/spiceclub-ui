@@ -7,7 +7,7 @@
 
 					<!--=======  breadcrumb list  =======-->
 
-					<ul class="breadcrumb-list">
+					<ul class="breadcrumb-list" style="padding-left: 0px;">
 						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
 						<li class="breadcrumb-list__item breadcrumb-list__item--active">Blog</li>
 					</ul>
@@ -31,7 +31,7 @@
 					<div class="page-sidebar">
 						<div class="single-sidebar-widget mb-40" *ngIf="!loader">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;"
 								*ngFor="let cat of Allcat">
 								<li><a style="color: gray;" (click)="getblogbycatg(cat.id)" stty>{{cat.name}} </a> <span
 										class="quantity">12</span></li>
@@ -171,7 +171,27 @@
 <!--=====  End of blog page content  ======-->
 
 <!--============================================ blog details ====================================================-->
-<div *ngIf="page2">
+<div *ngIf="page2"> 
+	<div class="breadcrumb-area breadcrumb-bg-1 pt-20 pb-20 mb-30">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h1 class="breadcrumb-title">Blog</h1>
+
+					<!--=======  breadcrumb list  =======-->
+
+					<ul class="breadcrumb-list" style="padding-left: 0px;">
+						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active">Blog Details</li>
+					</ul>
+
+					<!--=======  End of breadcrumb list  =======-->
+
+				</div>
+			</div>
+		</div>
+	</div>
+<div >	
 	<div class="blog-page-wrapper mb-100">
 		<div class="container">
 			<div class="row">
@@ -784,4 +804,5 @@
 	</div>
 
 	<!--=====  End of checkout page content  ======-->
+</div>
 </div>

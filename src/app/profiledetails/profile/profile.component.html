@@ -1,0 +1,241 @@
+<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Profile</h1>
+                <!--=======  breadcrumb list  =======-->
+                <ul class="breadcrumb-list" style="padding-left: 0px;">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Profile</li>
+                </ul>
+                <!--=======  End of breadcrumb list  =======-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12 mb-15 mt-2" >
+
+    <div class="checkout-cart-total  mr-100 ml-100 mt-1">
+        <div class="row" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
+            <div class="col-12 mb-" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
+                <div class="single-widget mt-4" style="border: none;">
+                    <div class="singlomment">
+                        <div class="single-comment__image">
+                            <img src="https://neophroncrm.com/spiceclubnew/public/{{currentdetail.user.avatar_original}}"
+                                class="img-fluid" style="height: 100px;" alt="">
+                            <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
+                                    class="bi bi-pen-fill"></i></span>
+                            <!-- (click)="editprofileimg(profileimageRecord)" -->
+                        </div>
+                        <div class="single-comment__content pl-2 mt-2">
+                            <strong class="username">{{currentdetail.user.name}}</strong>
+                            <p class="email" style="color: blue;">{{currentdetail.user.email}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="singlomment">
+                    <div class="single-comment__content pl-2 mt-2 mb-3">
+                        <button class="btn btn-success" style="border-radius: 30px;">Check Balance</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">{{cartlength}}</strong>
+                    <p class="eml">In your cart</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">{{Wlength}}</strong>
+                    <p class="eml">In your wishlist</p>
+                </div>
+            </div>
+            <div class="col-4">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">{{orderlength}}</strong>
+                    <p class="eml">In your ordered</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3" style="text-align: center;">
+            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder()">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">
+                        <h2 style="padding: 0px; margin: 0px;">
+                            <i class="bi bi-file-earmark-medical-fill" style="color: green;"></i>
+                        </h2>
+                    </strong>
+                    <p class="eml">Orders</p>
+                </div>
+            </div>
+            <div class="col-4" style="border: 1px solid #eceaea;" (click)="editprofile(changeRecord)">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">
+                        <h2 style="padding: 0px; margin: 0px;">
+                            <i class="bi bi-person-circle" style="color: rgb(17, 50, 243);"></i>
+                        </h2>
+                    </strong>
+                    <p class="eml">Profile</p>
+                </div>
+            </div>
+            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoaddress()">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">
+                        <h2 style="padding: 0px; margin: 0px;">
+                            <i class="bi bi-geo-alt-fill" style="color: rgb(250, 116, 39);"></i>
+                        </h2>
+                    </strong>
+                    <p class="eml">Address</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row mt-3" style="text-align: center;">
+            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder()">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">
+                        <h2 style="padding: 0px; margin: 0px;">
+                            <i class="bi bi-handbag-fill" style="color: rgb(240, 20, 31);"></i>
+                        </h2>
+                    </strong>
+                    <p class="eml">Purchase History</p>
+                </div>
+            </div>
+            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotowallet()">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">
+                        <h2 style="padding: 0px; margin: 0px;">
+                            <i class="bi bi-wallet-fill" style="color: rgb(158, 75, 7);"></i>
+                        </h2>
+                    </strong>
+                    <p class="eml">Wallet</p>
+                </div>
+            </div>
+            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoaddress()">
+             
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- <div class="art-total  mr-110 ml-110 mt-1">
+    <ngx-skeleton-loader count="1" [theme]="{ 
+        'border-radius': '5px',
+        height: '450px',
+        'background-color': '##b9b8b8',
+        border: '1px solid white'
+      }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
+</div> -->
+
+<ng-template #changeRecord let-modal>
+    <div class="modal-header editRowModal">
+        <h4 class="modal-title p-0" id="modal-basic-title">
+            <div class="table-modal-header">
+                <div class="modal-about">
+                    <div class="font-weight-bold p-t-10 ml-3 font-17">
+                        Edit profile </div>
+                </div>
+            </div>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true"><i class="ion-android-close"></i></span>
+        </button>
+    </div>
+    <!-- <div class="proimg" style="text-align: center;">
+    <div class="single-comment__image">
+        <img src="https://neophroncrm.com/spiceclubnew/public/{{currentdetail.user.avatar_original}}"
+            class="img-fluid" style="height: 100px;" alt="">           
+    </div> 
+    <button class="btn btn-light" (click)="editprofileimg(profileimageRecord)" >Edit profile image</button>
+</div> -->
+
+    <div class="modal-body">
+
+        <div class="card-body" style="margin-left: 50px;margin-right: 50px;">
+            <p class="text-muted">Basic Information</p>
+            <form class="edit-form" [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)">
+
+                <div class="form-group">
+                    <label class="labell">Name</label>
+                    <input type="text" formControlName="name" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="labell">New Password</label>
+                    <input type="password" formControlName="password" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="labell">Confirm Password</label>
+                    <input type="password" class="form-control" formControlName="confirm_password" required>
+                </div>
+                <!-- <div *ngIf="error2" class="alert alert-danger mb-3 msl-3">{{error2}}</div> -->
+                <div class="form-group">
+                    <h6 class="form-text text-danger" style="height: 12px;">
+                        <span *ngIf="error3">{{error3}}</span>
+                    </h6>
+                    <button class="btn btn-danger btn-lg btn-block" type="submit">
+                        Update Profile
+                    </button>
+                </div>
+            </form>
+        </div>
+        <br>
+    </div>
+</ng-template>
+
+<ng-template #profileimageRecord let-modal>
+    <div class="modal-header editRowModal">
+        <h4 class="modal-title" id="modal-basic-title">
+            <div class="table-modal-header">
+                <div class="table-modal-header">
+                    <div class="modal-about">
+                        <div class="font-weight-bold p-t-10 ml-3 font-17">
+                            Select profile picture</div>
+                    </div>
+                </div>
+            </div>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true"><i class="ion-android-close"></i></span>
+        </button>
+    </div>
+    <br>
+    <div class="modal-body">
+        <div class="card-body" style="margin-left: 50px;margin-right: 50px;">
+            <form>
+                <div class="form-group">
+                    <fieldset class="form-group">
+                        <!-- {{imageError}} -->
+                        <div class="custom-file fileInputProfileWrap">
+                            <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
+                            <div class="img-space">
+
+                                <!-- <ng-container *ngIf="isImageSaved; else elseTemplate">
+                                <img [src]="cardImageBase64" />
+                            </ng-container> -->
+                                <ng-template #elseTemplate>
+
+                                    <!-- <img src="./../../assets/placeholder.png" class="img-responsive"> -->
+                                </ng-template>
+                                <br>
+                                <button class="btn btn-danger btn-md btn-block" (click)="changeproimg()">
+                                    save
+                                </button>
+
+                            </div>
+                        </div>
+                    </fieldset>
+                </div>
+                <!-- <a class="btn btn-danger" (click)="removeImage()" *ngIf="isImageSaved">Remove</a> -->
+            </form>
+
+        </div>
+        <br>
+    </div>
+</ng-template>

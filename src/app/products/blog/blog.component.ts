@@ -144,6 +144,7 @@ getblogbycatg(id:any,page=1){
 getpage(url:any){
   this.loader1=true;
   this.imgloader = false;
+  window.scroll(0,0);
   this.request.getpage(url).subscribe((response:any)=>{
     this.Blogs=response.data;
     this.loader1=false;

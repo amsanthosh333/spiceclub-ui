@@ -1,8 +1,17 @@
-li.active {color: red}
-.active{
+li.has-children.active {color: red}
+li.has-children.active{
     color: red;
 }
 .imglazy{
     height: 240px;
     width: 200px;
   }
+
+   li.has-children {
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+.breadcrumb-list__item{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}

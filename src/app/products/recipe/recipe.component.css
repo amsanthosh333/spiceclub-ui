@@ -18,7 +18,10 @@
   .text-warning {
     color: #ff902b !important;
   }
-
+  .breadcrumb-list__item{
+    color: #474747 ;
+    font-family: 'Poppins', sans-serif;
+  }
   .shop-product__long-desc p {
     
 }

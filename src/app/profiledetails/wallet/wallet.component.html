@@ -1,0 +1,137 @@
+<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15"  >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Wallet</h1>
+                <!--=======  breadcrumb list  =======-->
+                <ul class="breadcrumb-list"  style="padding-left: 0px;">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Wallet</li>
+                </ul>
+                <!--=======  End of breadcrumb list  =======-->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-lg-12 mb-15 mt-2" *ngIf="!loader">
+    <div class="checkout-cart-total  mr-100 ml-100 mt-1">
+        <div class="row" style="text-align: center;">
+            <div class="col-12">
+                <div class="single-comment__content pl-2 mt-2">
+                    <strong class="username">
+                        <h5 style="padding: 0px; margin: 0px;" style="color: white;">
+                            Wallet Balance
+                        </h5>
+                        <strong>
+                            <h2 style="padding: 0px; margin: 0px;" style="color: white; font-weight: 900;">
+                                {{Wallet?.balance}}
+                            </h2>
+                        </strong>
+                    </strong>
+                    <p class="eml" style="color: white;">Last Recharge : {{Wallet.last_recharged}}</p>
+                </div>
+                <br>
+                <button class="btn btn-success" (click)="openrecharge(Recharge)"> Recharge </button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="art-total  mr-110 ml-110 mt-1">
+    <ngx-skeleton-loader count="1" [theme]="{ 
+        'border-radius': '5px',
+        height: '350px',
+        'background-color': '##b9b8b8',
+        border: '1px solid white'
+      }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
+</div>
+
+
+
+<div class="col-lg-12 mb-5 ">
+
+    <div class="cart-table-container  ml-100 mr-100">
+        <h4 class="checkout-title mt-40 mb-10">Wallet Recharge History</h4>
+        <div class="checkout-cart-tota" style="padding: 20px;">
+            <table class="cart-table" style="background-color: rgb(255, 255, 255);">
+                <thead>
+                    <tr>
+                        <th class="product-price">&nbsp;#&nbsp;</th>
+                        <th class="product-name">
+                            <h6> <strong>Date</strong></h6>
+                        </th>
+                        <th class="product-price">
+                            <h6> <strong>Payment Method</strong></h6>
+                        </th>
+                        <th class="product-price">
+                            <h6> <strong>Amount</strong></h6>
+                        </th>
+                        <th class="product-price">
+                            <h6> <strong>Approval</strong></h6>
+                        </th>
+
+                       
+
+                    </tr>
+                </thead>
+
+                <tbody *ngFor="let b of History; let i= index">
+                    <tr>
+                        <td class="product-price col-2">
+                            <a style="text-decoration: none; padding-left: 5px;">{{i+1}}</a> </td>
+
+                        <td class="product-price" style="padding-left: 10px;">
+                            <a style="text-decoration: none;  ">{{b.date}}</a> </td>
+
+                        <td class="product-name" style="padding-left: 13px;"><span class="price"
+                                >{{b.payment_method}}</span></td>
+
+                        <td class="product-name" style="padding-left: 13px;"><span class="price"
+                                style="color: red;">{{b.amount}}</span></td>
+
+                        <td class="product-price" style="padding-left: 13px;"><span
+                                class="price">{{b.approval_string}}</span></td>
+                    </tr>
+
+                </tbody>
+            </table>
+            <ngx-skeleton-loader count="4"
+                [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+                *ngIf="loader"></ngx-skeleton-loader>
+        </div>
+    </div>
+    <!--=======  End of cart table  =======-->
+</div>
+
+<ng-template #Recharge let-modal >
+    <!-- <div class="modal-header editRowModal">
+ 
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true"><i class="ion-android-close"></i></span>
+        </button>
+    </div> -->
+   
+
+    <div class="modal-body" >
+
+        <div class="card-body mt-2" >
+            <form class="edit-form" [formGroup]="rechargeForm" (ngSubmit)="onproceed(rechargeForm)">
+                <div class="form-group">
+                    <label class="labell">Amount</label>
+                    <input type="text" formControlName="name" placeholder="Enter the amount"class="form-control" required>
+                </div> 
+                <div class="form-group">
+                    <h6 class="form-text text-danger" style="height: 12px;">
+                        <span *ngIf="error3">{{error3}}</span>
+                    </h6>
+                    <button class="btn btn-danger btn-sm btn-block" type="submit">
+                        Proceed
+                    </button>
+                    <button class="btn btn-primary btn-sm btn-block" type="submit" (click)="modal.dismiss()">
+                        close
+                    </button>
+                </div>
+            </form>
+        </div>
+        <br>
+    </div>
+</ng-template>

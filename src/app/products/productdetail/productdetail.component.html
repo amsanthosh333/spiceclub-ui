@@ -7,7 +7,7 @@
 
                     <!--=======  breadcrumb list  =======-->
 
-                    <ul class="breadcrumb-list">
+                    <ul class="breadcrumb-list" style="padding-left: 0px;">
                         <li class="breadcrumb-list__item"><a href="index.html">HOME</a></li>
                         <!-- <li class="breadcrumb-list__item " (click)="backk()" >SHOP BY BRANDS</li> -->
                         <li class="breadcrumb-list__item breadcrumb-list__item--active">PRODUCT DETAILS</li>
@@ -34,9 +34,10 @@
 
                                     <!--=======  shop product gallery icons   *ngIf="Peoduct?.has_discount==true"  =======-->
 
-                                    <div
-                                        class="single-product__floating-badges single-product__floating-badges--shop-product" *ngFor="let d of discount">
-                                        <span class="hot"  *ngIf="Peoduct?.has_discount==true" >{{d.discount_percentage}}%</span>
+                                    <div class="single-product__floating-badges single-product__floating-badges--shop-product"
+                                        *ngFor="let d of discount">
+                                        <span class="hot"
+                                            *ngIf="Peoduct?.has_discount==true">{{d.discount_percentage}}%</span>
                                     </div>
 
 
@@ -110,7 +111,16 @@
 
                                     <!--=======  End of shop product navigation  =======-->
 
+                                    <!--=======  shop product rating  =======-->
 
+                                    <div class="shop-product__rating mb-15">
+                                        <ngb-rating style="font-size: 1.9rem; color:rgb(245, 153, 14);"
+                                            [rate]="Peoduct?.rating"></ngb-rating>
+
+                                        <span class="review-link ml-20">
+                                            <a href="#">({{Peoduct?.rating}} customer reviews)</a>
+                                        </span>
+                                    </div>
 
                                     <!--=======  End of shop product rating  =======-->
 
@@ -121,15 +131,7 @@
                                     </div>
 
                                     <!--=======  End of shop product title  =======-->
-                                    <!--=======  shop product rating  =======-->
 
-                                    <div class="shop-product__rating mb-15">
-                                        <ngb-rating style="font-size: 1.9rem; color:rgb(245, 153, 14);" [rate]="Peoduct?.rating"></ngb-rating>
-
-                                        <span class="review-link ml-20">
-                                            <a href="#">({{Peoduct?.rating}} customer reviews)</a>
-                                        </span>
-                                    </div>
                                     <!--=======  shop product price  =======-->
 
                                     <div class="shop-product__price mb-30">
@@ -146,9 +148,10 @@
 
                                         {{Peoduct?.description}}
                                     </div>
-                                    <div class="shop-product__short-desc mb-50" >
+                                    <div class="shop-product__short-desc mb-50">
 
-                                     <p style="color: blue;" *ngFor="let a of Bulckdis">Order minimun {{a.min_qty}} to {{a.max_qty}} quantity to get {{a.discount_percentage}}% Discount </p>
+                                        <p style="color: blue;" *ngFor="let a of Bulckdis">Order minimun {{a.min_qty}}
+                                            to {{a.max_qty}} quantity to get {{a.discount_percentage}}% Discount </p>
                                     </div>
                                     <!--=======  End of shop product short description  =======-->
 
@@ -171,7 +174,7 @@
                                     <div class="shop-product__block shop-product__block--size mb-20">
                                         <div class="shop-product__block__title">Varient price: </div>
                                         <div class="shop-product__block__value ">
-                                            <span > {{varprise}} </span>
+                                            <span> {{varprise}} </span>
                                         </div>
 
                                     </div>
@@ -212,7 +215,8 @@
                                     <div class="shop-product__block shop-product__block--size mb-20">
                                         <div class="shop-product__block__title">Total price: </div>
                                         <div class="shop-product__block__value ">
-                                            <span style="color: red;"> Rs{{totalprice}}</span><i *ngIf="">including discount</i>
+                                            <span style="color: red;"> Rs{{totalprice}}</span><i *ngIf="">including
+                                                discount</i>
                                         </div>
 
                                     </div>
@@ -286,13 +290,15 @@
 
                                     <!--=======  shop product rating  =======-->
 
-                                    <!-- <div class="shop-product__rating mb-15">
-                                        <ngb-rating [rate]="Peoduct?.rating"></ngb-rating>
+                                 
+                                    <div class="shop-product__rating mb-15">
+                                        <ngb-rating style="font-size: 1.9rem; color:rgb(245, 153, 14);"
+                                            [rate]="Peoduct?.rating"></ngb-rating>
 
                                         <span class="review-link ml-20">
                                             <a href="#">({{Peoduct?.rating}} customer reviews)</a>
                                         </span>
-                                    </div> -->
+                                    </div>
 
                                     <!--=======  End of shop product rating  =======-->
 
@@ -308,13 +314,7 @@
                                     </div>
 
                                     <!--=======  End of shop product title  =======-->
-                                    <div class="shop-product__rating mb-15">
-                                        <ngb-rating style="font-size: 1.9rem; color:rgb(245, 153, 14);" [rate]="Peoduct?.rating"></ngb-rating>
-
-                                        <span class="review-link ml-20">
-                                            <a href="#">({{Peoduct?.rating}} customer reviews)</a>
-                                        </span>
-                                    </div>
+                                  
                                     <!--=======  shop product price  =======-->
 
                                     <div class="shop-product__price mb-10">
@@ -728,7 +728,7 @@
                             <!-- <span class="onsale">-10%</span> -->
                             <span class="hot" *ngIf="img.has_discount==true">hot</span>
                         </div>
-                        
+
 
                         <div class="single-product__floating-icons">
                             <span class="wishlist"><a data-tippy="Add to wishlist" data-tippy-inertia="true"

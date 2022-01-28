@@ -9,15 +9,15 @@
     <div class="header-bottom pt-md-40 pb-md-40 pt-sm-40 pb-sm-40">
         <div class="container wide">
             <!--=======  header bottom container  =======-->
-            <div class="header-bottom-container" style="height: 100px;">
+            <div class="header-bottom-container" style="height: 90px;">
                 <!--=======  logo with off canvas  =======-->
-                <div class="logo-with-offcanvas d-flex">
+                <div class="logo-with-offcanvas d-flex " >
                    <!--=======  logo   =======-->
-                    <div class="logo ml-3">
+                    <div class="logo ml-3" style="padding-left: 30px;">
 					
-                        <a href="index.html" >
-                            <img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="">
-                        </a>
+                       
+                            <img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="" >
+                     
                     </div>
 
                     <!--=======  End of logo   =======-->
@@ -25,7 +25,7 @@
 
                 <!--=======  End of logo with off canvas  =======-->
 
-                <!--=======  header bottom navigation  =======-->
+                <!--=======  header bottom navigation    style=" color: #474747 ;font-family: 'Poppins', sans-serif;"  =======-->
 
                 <div class="header-bottom-navigation">
                     <div class="site-main-nav d-none d-lg-block">
@@ -35,10 +35,10 @@
                                     
                                 </li>
 
-								<li class="menu-item" ><a routerLink="/shopbyproduct">ShopByProduct</a>                                
+								<li class="menu-item" ><a routerLink="/shopbyproduct" >ShopByProduct</a>                                
                                 </li>
 
-								<li class="menu-item" ><a routerLink="/category/33">ShopByCategory</a>                                
+								<li class="menu-item" ><a routerLink="/category/33" >ShopByCategory</a>                                
                                 </li>
                                  <!-- <li class="menu-item-has-children"><a href="javascript:void(0)">WellBeing Products</a>
                                     <ul class="sub-menu single-column-menu">
@@ -58,7 +58,7 @@
                                     </ul>
                                 </li>
                                 -->
-                                <li class="menu-item"><a routerLink="/blog">Blog</a>
+                                <li class="menu-item"><a routerLink="/blog" >Blog</a>
                                     
                                 </li>
                                 <li class="menu-item"><a  routerLink="/recipe">Recipe</a>
@@ -283,7 +283,7 @@
 							<div class="single-comment__content pl-2 mt-2">
 								<!--=======  username and date  =======-->
 								<strong class="username">{{currentdetail.user.name}}</strong>
-									<p class="email" style="color: blue;">{{currentdetail.user.email}}</p>
+									<p class="eml" style="color: blue;">{{currentdetail.user.email}}</p>
 								<!--=======  End of username and date  =======-->
 								<!--=======  End of message  =======-->
 							</div>
@@ -294,7 +294,7 @@
 						<h6 class="col-2"><i class="ion-ios-home"></i></h6>
 						<h6 class="col-8"> <a>Home</a> </h6>
 					</div>
-					<div class="row mb-3 ml-4" id="closeabout" routerLink="/login">
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/profile">
 						<h6 class="col-2"><i class="ion-android-person"></i> </h6>
 						<h6 class="col-8"> <a>Profile</a></h6>
 					</div>
@@ -311,7 +311,7 @@
 						<h6 class="col-2"><i class="ion-android-list"></i> </h6>
 						<h6 class="col-8"><a>Orders</a></h6>
 					</div>
-					<div class="row mb-3 ml-4" >
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/wallet" >
 						<h6 class="col-2"><i class="ion-android-folder"></i> </h6>
 						<h6 class="col-8"><a>Wallet</a></h6>
 					</div>
@@ -346,19 +346,17 @@
 		<div class="wishlist-overlay-close inactive"></div>
 		<div class="wishlist-overlay-content">
 			<!--=======  close icon  =======-->
-
 			<span class="close-icon" id="wishlist-close-icon">
 				<a href="javascript:void(0)">
 					<i class="ion-android-close"></i>
 				</a>
 			</span>
-
 			<!--=======  End of close icon  =======-->
 
 			<!--=======  offcanvas wishlist content container  =======-->
 
 			<div class="offcanvas-cart-content-container">
-				<h3 class="cart-title">Wishlist</h3>
+				<h3 class="cart-title" >Wishlist</h3>
 
 				<div class="cart-product-wrapper" *ngIf="Wlength!==0">
 					<div class="cart-product-container  ps-scroll"  >
@@ -366,7 +364,7 @@
 
 						<div class="single-cart-product" *ngFor="let img of Wishlist">
 							<span class="cart-close-icon">
-								<a (click)="deleteRecord(img.id)"><i class="ti-close"></i></a>
+								<a (click)="deleteRecord(img.id)"><i class="ion-android-close"></i></a>
 							</span>
 							<div class="image">
 								<a >
@@ -374,6 +372,7 @@
 								</a>
 							</div>
 							<div class="content">
+								<p style="height: 15px;"></p>
 								<h5><a>{{img.product.name}}</a></h5>
 								<p><span class="main-price discounted">{{img.product.base_price}}</span> 
 									<span class="discounted-price" style="color: red;" >{{img.product.base_price}}</span></p>
@@ -385,7 +384,7 @@
 
 					<!--=======  cart buttons  =======-->
 
-					<div class="cart-buttons"  >
+					<div class="cart-buttons">
 						<a  class="closewishlist" (click)="gotowishlist()">view wishlist </a>
 					</div>
 
@@ -435,7 +434,7 @@
 						<div class="single-cart-product" *ngFor="let b of img.cart_items" >
 							
 							<span class="cart-close-icon">
-								<a (click)="deleteRecord2(b.id)"><i class="ti-close"></i></a>
+								<a (click)="deleteRecord2(b.id)"><i class="ion-android-close"></i></a>
 							</span>
 							<div class="image">
 								<a >
@@ -443,6 +442,7 @@
 								</a>
 							</div>
 							<div class="content">
+								<p style="height: 15px;"></p>
 								<h5><a>{{b.product_name}}</a></h5>
 								<p><span class="main-price discounted">Rs{{b.price}}</span> 
 									<span class="discounted-price" style="color: red;" >Rs{{b.price}}</span></p>
@@ -465,7 +465,7 @@
 
 					<!--=======  cart buttons  =======-->
 
-					<div class="cart-buttons">
+					<div class="cart-buttons" >
 						<a (click)="gotocart()" class="closeoverlay">view cart</a>
 						<a (click)="gotocheckout()" class="closeoverlay">checkout</a>
 					</div>
@@ -496,7 +496,7 @@
 		<!--=======  close icon  =======-->
 		<span class="close-icon search-close-icon">
 			<a href="javascript:void(0)" id="search-close-icon">
-				<i class="ti-close"></i>
+				<i class="ion-android-close"></i>
 			</a>
 		</span>
 

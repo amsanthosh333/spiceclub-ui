@@ -57,8 +57,6 @@ export class HeaderComponent implements OnInit {
        console.log("currentuserid=", this.userid);
     }
 
-
-    
   ngOnInit(): void {
     this.viewwishlist();
     this. viewcartcount();
@@ -225,7 +223,7 @@ export class HeaderComponent implements OnInit {
         }
       );
     
-      $(" .closewishlist ,  #wishlist-close-icon, .wishlist-overlay-close").on("click", function () {
+      $(".closewishlist ,  #wishlist-close-icon, .wishlist-overlay-close").on("click", function () {
         $("#wishlist-overlay").removeClass("active-wishlist-overlay");
         $(".wishlist-overlay-close").addClass("inactive").removeClass("active");
         $("body").removeClass("active-body-search-overlay");
@@ -275,6 +273,8 @@ export class HeaderComponent implements OnInit {
         $(".cart-overlay-close").addClass("inactive").removeClass("active");
         $("body").removeClass("active-body-search-overlay");
       });
+
+      
     
       /* activate and deactivate search overlay*/
     
@@ -290,12 +290,12 @@ export class HeaderComponent implements OnInit {
     
       /*----------  multilevel menu  ----------*/
     
-      $("#dl-menu").dlmenu({
-        animationClasses: {
-          classin: "dl-animate-in-2",
-          classout: "dl-animate-out-2"
-        }
-      });
+      // $("#dl-menu").dlmenu({
+      //   animationClasses: {
+      //     classin: "dl-animate-in-2",
+      //     classout: "dl-animate-out-2"
+      //   }
+      // });
     
       /*----------  overlay menu   ----------*/
     
@@ -1546,6 +1546,9 @@ compone(){
           this.toastr.info('Cart is empty', '');
         }
         else{
+          $("#cart-overlay").removeClass("active-cart-overlay");
+          $(".cart-overlay-close").addClass("inactive").removeClass("active");
+          $("body").removeClass("active-body-search-overlay");
           this.router.navigate(['/cart']);
         }
       }
@@ -1554,11 +1557,17 @@ compone(){
           this.toastr.info('Wishlist is empty', '');
         }
         else{
+          $("#wishlist-overlay").removeClass("active-wishlist-overlay");
+          $(".wishlist-overlay-close").addClass("inactive").removeClass("active");
+          $("body").removeClass("active-body-search-overlay");
           this.router.navigate(['/wishlist']);
         }
       }
       gotocheckout(){
-        this.router.navigate(['/checkout']);
+        $("#cart-overlay").removeClass("active-cart-overlay");
+          $(".cart-overlay-close").addClass("inactive").removeClass("active");
+          $("body").removeClass("active-body-search-overlay");
+          this.router.navigate(['/checkout']);
       }
       deleteRecord(id:any) {
         console.log("row",id);

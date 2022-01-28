@@ -93,7 +93,7 @@ export class CartComponent implements OnInit {
    }
 
   ngOnInit(): void {
-
+    window.scroll(0,0)
     this.accessCode = 'YOURACCESSCODEGOESHERE';
 
     this.viewcart();

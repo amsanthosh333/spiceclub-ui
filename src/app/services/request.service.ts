@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { HttpClient, HttpParams,HttpErrorResponse } from '@angular/common/http';
+import { BehaviorSubject, Observable, ObservableInput, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
 import { catchError} from 'rxjs/operators';
+import {  throwError } from 'rxjs';
+import {  retry } from 'rxjs/operators';
+import { error } from '@angular/compiler/src/util';
+
 
 @Injectable({
   providedIn: 'root'
@@ -20,6 +24,7 @@ export class RequestService {
   accesstoken: any;
   tokentype: any;
   extractData:any;
+  handleError!: (err: any, caught: Observable<Object>) => ObservableInput<any>;
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -299,14 +304,59 @@ public placeorder(body:any) {
   this.url = `${this.endPoint1}/order/store`;
   return this.http.post(this.url,body,{headers:headers});
 }
+
+
+
+
 // razorpay
 public razorpay1(body:any) {
-  const headers = new HttpHeaders()
-  .set('content-type', 'application/json')
-  .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
-  this.url = `${this.endPoint1}razorpay/pay-with-razorpay`;
-  return this.http.post(this.url,body,{headers:headers});
+  this.url = `${this.endPoint1}/razorpay/pay-with-razorpay`;
+  return this.http.post(this.url,body);
 }
+
+
+public razorpay3() {
+  this.url = `${this.endPoint1}/razorpay/pay-with-razorpay?payment_type=cart_payment&combined_order_id=111&amount=82&user_id=8`;
+  console.log("urlll",this.url);
+  window.open(this.url);
+  return this.http.get<any>(`https://neophroncrm.com/spiceclubnew/api/v2/razorpay/payment`)
+}
+
+
+// razorpay test
+public razorpay2(body:any): Observable<any> {
+  this.url = `${this.endPoint1}/razorpay/pay-with-razorpay`;
+ 
+  console.log("usrlll",this.url);
+  
+  return this.http.post(this.url,body) .pipe(map((response: any) => response.json())
+    // .catchError(this.handleErrorr)
+  );;
+}
+
+private handleErrorr(error: HttpErrorResponse) {
+  if (error.error instanceof ErrorEvent) {
+    console.log(error.error.message)
+
+  } else {
+    console.log(error.status)
+  }
+  return throwError(
+    console.log('Something is wrong!'));
+};
+
+// paymentstatus api 
+ razorpayment(id:any) {
+  this.url = `${this.endPoint1}/razorpay/payment?razorpay_payment_id=`+ id;
+  console.log("url",this.url);
+  return this.http.get(this.url);
+}
+razsuccess(body:any) {
+  this.url = `${this.endPoint1}/razorpay/success`;
+  console.log("url",this.url);
+  return this.http.post(this.url,body);
+}
+
 //category
 public getallcat() {
   this.url = `${this.endPoint1}/categories`;
@@ -425,6 +475,10 @@ public filtersearchdataa(name:any) {
 }
 public getallflashdeal() {
   this.url = `${this.endPoint1}/flash-deals`;
+  return this.http.get(this.url);
+}
+public gettodaysoffer() {
+  this.url = `${this.endPoint1}/todayoffer`;
   return this.http.get(this.url);
 }
 //review

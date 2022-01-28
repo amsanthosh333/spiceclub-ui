@@ -137,7 +137,7 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  window.scroll(0,0);
+    window.scroll(0,0);
     this.keyy = this.route.snapshot.params['key'];
     console.log("keyyyyyyyyyyyyyy", this.keyy);
     if (this.keyy !==undefined) {
@@ -372,6 +372,7 @@ export class ShopbyproductComponent implements OnInit {
       this.Product=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
+      window.scroll(0,0);
       this.prodloader=false;
       console.log("response",response);
       console.log("allproduct",this.Product);

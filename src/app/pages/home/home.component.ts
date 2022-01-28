@@ -83,8 +83,16 @@ export class HomeComponent implements OnInit {
   totalprice: any;
   loadingg: boolean=true;
   myCompOneObj: any;
+  Todaysoffer: any;
   
 
+  photooobann:any = [
+    {image:'assets/images/banners/ban1.jpeg'},
+    {image:'assets/images/banners/ban2.jpeg'},
+    {image:'assets/images/banners/ban3.jpeg'}
+     ];
+
+   
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private toastr: ToastrService,private modalService: NgbModal,
     config: NgbRatingConfig,private _location: Location) {
@@ -106,17 +114,18 @@ export class HomeComponent implements OnInit {
   
     console.log("slidermmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm",this.photooo);
 
+
   
    }
 
   ngOnInit(): void {
     
-  
-    // myCompOneObj.viewwishlist();
+   // myCompOneObj.viewwishlist();
     setTimeout(() => {
       this.loadingg = false;
     }, 2000);
     this.viewdata();
+    this.viewtodayoffer();
     this.viewcategorydata();
     this.gethomeecat();
     this.viewbestsellpro();
@@ -126,20 +135,12 @@ export class HomeComponent implements OnInit {
 // this.viewdata2();
     // this.viewdata3();
     // this.viewdata4();
-
-    
- 
-
     this.register = this.fb.group({ 
       rating:[''],
       comment: [''],
    
     });
-
-  
   }
- 
-
   viewdata(){
     this.request.getslider().subscribe((response: any) =>{ 
       this.Slider=response.data;
@@ -151,6 +152,14 @@ export class HomeComponent implements OnInit {
        setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
+    });
+  }
+
+  viewtodayoffer(){
+    this.request.gettodaysoffer().subscribe((response: any) => {
+      this.Todaysoffer=response.data;
+      console.log("Todaysoffer",this.Todaysoffer);  
+       this.loader3=false;
     });
   }
   viewbestsellpro(){
@@ -225,15 +234,12 @@ export class HomeComponent implements OnInit {
   this.request.getrelatedprod(this.product_id).subscribe((response: any) => {  
     console.log("relatedprod",response);
          this.Relatedprod=response.data;
-         console.log("res",this.Relatedprod); 
-        
+         console.log("res",this.Relatedprod);     
   },
    (error: any) => {
     console.log(error);
-  });
-   
+  }); 
   }
-
   // selectvar(weight:any){
   //   this.varient_value=weight.replace(/\s/g, "")
   //   this.request.addvarient(this.product_id,weight).subscribe((res: any) => {

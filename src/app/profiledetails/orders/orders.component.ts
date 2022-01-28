@@ -9,6 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { windows } from 'ngx-bootstrap-icons';
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -37,6 +38,8 @@ export class OrdersComponent implements OnInit {
   userphone: any;
   useremail: any;
   loader:boolean=true;
+  pagenation: any;
+  pagess: any;
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService,) {
@@ -59,6 +62,7 @@ export class OrdersComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scroll(0,0)
     this.getorders();
 
     this.register = this.fb.group({ 
@@ -74,9 +78,25 @@ export class OrdersComponent implements OnInit {
   getorders(){
     this.request.fetchOrders(this.userid).subscribe((response: any) => {
       this.Orders=response.data;  
+      this.pagenation = response.meta
+      this.pagess = this.pagenation.links
       this.loader=false; 
       console.log("orders",this.Orders);         
     });
+  }
+
+  getpage(url:any){
+    // this.loader=true;
+    
+    this.request.getpage(url).subscribe((response:any)=>{
+      this.Orders=response.data;  
+      this.pagenation=response.meta;  
+      this.pagess=this.pagenation.links;
+      window.scroll(0,0);
+
+      console.log("response",response);
+     
+    })
   }
 
   orderdetail(id:any){

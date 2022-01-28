@@ -121,11 +121,13 @@ export class BrandsComponent implements OnInit {
   }
   getpage(url:any){
     this.prodloader=true;
+    window.scroll(0,0);
   this.imgloader = false;
     this.request.getpage(url).subscribe((response:any)=>{
       this.Product=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
+      
       this.prodloader=false;
 
       setTimeout(() => {

@@ -17,3 +17,19 @@
   
 }
 /* #f2f2f2; */
+.breadcrumb-list__item{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+span{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+label{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+.checkout-title{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}

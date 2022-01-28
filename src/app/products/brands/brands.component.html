@@ -7,7 +7,7 @@
 
                     <!--=======  breadcrumb list  =======-->
 
-                    <ul class="breadcrumb-list">
+                    <ul class="breadcrumb-list"  style="padding-left: 0px;">
                         <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
                         <li class="breadcrumb-list__item breadcrumb-list__item--active">SHOP BY Brands</li>
                     </ul>
@@ -56,7 +56,7 @@
                             <div class="single-sidebar-widget mb-20">
                                 <h2 class="single-sidebar-widget--title">Top Brands</h2>
                                 <div class="widget-post-wrapper" >                              
-                                    <div class="single-widgost"  *ngFor="let cat of Topbrands">
+                                    <div class="single-widgost"  *ngFor="let cat of Topbrands" >
                                         <!-- <div class="imag" (click)="viewdata(cat.id,1)" >
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{cat.banner}}" class="img-fluid" alt="" style="height: 100px; width: 150px; ">
                                         </div> -->
@@ -69,7 +69,7 @@
                                 <br>
                                 <br>
                                 <h2 class="single-sidebar-widget--title">All Brands</h2>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
                                     <li class="has-children" *ngFor="let img of Allbrands">
                                         <a style="color: rgb(114, 113, 113);" (click)="viewdata(img.id,1)">{{img.name}}</a> 
                                     </li>

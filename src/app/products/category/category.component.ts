@@ -71,6 +71,7 @@ export class CategoryComponent implements OnInit {
   stocck!: number;
   varient_value!: string;
   buyertypeid: any;
+  navloader: boolean=true;
   constructor(private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,
     config: NgbRatingConfig,private _location: Location) {
@@ -119,6 +120,7 @@ viewallcategory(){
 viewtopcategory(){
   this.request.gettopcat().subscribe((response: any) => {
     this.Topcat=response.data;
+    this.navloader=false
     console.log("allcategory",this.Allcat);
   },
   (error: any) => {
@@ -160,6 +162,7 @@ getprodofcategory(id:any,page:any){
 getpage(url:any){
   this.prodloader=true;
   this.imgloader = false;
+  window.scroll(0,0);
   this.request.getpage(url).subscribe((response:any)=>{
     this.Product=response.data;
     this.pagenation=response.meta;  
@@ -294,9 +297,7 @@ console.log("subcattttttttid",id);
    
   });
 }
-
 search1(form:FormGroup,page=1){
-    
   let key =form.value.key
   this.prodloader=true;
   this.imgloader = false;
@@ -314,7 +315,6 @@ search1(form:FormGroup,page=1){
   }, (error: any) => {
     console.log("error",error);
   });
-
    }
    searchform2(form:FormGroup,page=1){
     
