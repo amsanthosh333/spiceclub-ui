@@ -7,11 +7,13 @@ import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription} from 'rxjs'
   declare var jQuery: any;
 // declare var $: any;
 // import 'jqueryui';
 // import  $ from 'jquery';
 import * as $ from 'jquery';
+import { SharedService } from 'src/app/services/shared.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -42,9 +44,21 @@ export class HeaderComponent implements OnInit {
   searchh: any;
   searchoverlay: boolean=true;
   search!: FormGroup;
+  userlogin!:boolean;
+
+   ClickEventSubscription!:Subscription;
 
   constructor(private router: Router,private fb: FormBuilder,private toastr: ToastrService,private request: RequestService, 
-    private modalService: NgbModal,) { 
+    private modalService: NgbModal,private sharedService: SharedService ) {
+
+      // this.ClickEventSubscription=this.sharedService.getClickEvent().subscribe(()=>{
+      //   this.viewwishlist();
+      //   this. viewcartcount();
+      //   this. viewcart();
+      //   this.viewcart3();
+
+      // })
+      
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser')||'{}')     
       );
@@ -55,6 +69,13 @@ export class HeaderComponent implements OnInit {
        this.accesstoken=this.currentdetail.access_token;
        this.tokentype=this.currentdetail.token_type;
        console.log("currentuserid=", this.userid);
+
+       if(this.userid==Number){
+        this.userlogin=true;
+       }
+       else{
+        this.userlogin=false;
+       }
     }
 
   ngOnInit(): void {
@@ -1537,7 +1558,9 @@ compone(){
       }
       viewcartcount(){
         this.request.cartcount(this.userid).subscribe((response: any) => {
-          this.cartlength=response.cartcount;   
+          this.cartlength=response.cartcount; 
+          console.log("cartlength",this.cartlength);
+            
 
         });
       }

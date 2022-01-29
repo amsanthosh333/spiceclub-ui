@@ -8,6 +8,10 @@ import {Location} from '@angular/common';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
+import{ SharedService} from 'src/app/services/shared.service'
+
+
+
 @Component({
   selector: 'app-productdetail',
   templateUrl: './productdetail.component.html',
@@ -72,7 +76,8 @@ export class ProductdetailComponent implements OnInit {
   varientt: any;
 
   constructor(private router: Router,private request: RequestService,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
-   private modalService: NgbModal,config: NgbRatingConfig,private _location: Location,private toastr: ToastrService,) { 
+   private modalService: NgbModal,config: NgbRatingConfig,private _location: Location,
+   private toastr: ToastrService,private sharedService: SharedService) { 
    
     config.max = 5;
     config.readonly = true;
@@ -112,6 +117,7 @@ export class ProductdetailComponent implements OnInit {
       if (res.message == 'Product is successfully added to your wishlist') {
         console.log("success",res.message); 
         this.addRecordSuccess() ;     
+        this.sharedService.sendClickEvent();
       }
       else  {
         this.toastr.error(res.message);
@@ -226,6 +232,7 @@ addtocart(_id:any){
     console.log(res);
     if (res.message == 'Product added to cart successfully') {  
       this.addRecordSuccess();     
+      this.sharedService.sendClickEvent();
     }
     else if(res.message== 'Minimum 1 item(s) should be ordered'){
       this.toastr.info(res.message);
@@ -501,6 +508,7 @@ this.request.getdiscountprice(this.buyertypeid,this.product_id,this.varient_valu
           console.log("Product added to cart successfully");
           this.addRecordSuccess();
              this.modalService.dismissAll();
+             this.sharedService.sendClickEvent();
         }
         else if (res.message=='Minimum 1 item(s) should be ordered'){
           this.toastr.success( res.message);

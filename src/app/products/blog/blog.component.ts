@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user'; 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -59,8 +59,9 @@ export class BlogComponent implements OnInit {
   allloader1: boolean=true;
   recipeloader: boolean=true;
   imgloader: boolean=false;
+  keyy: any;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
-    private request: RequestService,private modalService: NgbModal,
+    private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
     private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
      
       config.max = 5;
@@ -79,8 +80,21 @@ export class BlogComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.viewallblog(1);
-    this.viewblogcat();
+    window.scroll(0,0);
+    this.keyy = this.route.snapshot.params['key'];
+    console.log("keyyyyyyyyyyyyyy", this.keyy);
+    if (this.keyy !==undefined) {
+      this.getblogbycatg(this.keyy);
+      this.viewallblog(1);
+      this.viewblogcat();
+    }
+    else {
+      console.log("elseeeeeeeee");   
+      this.viewallblog(1);
+      this.viewblogcat();
+    }
+
+   
     this.comment = this.fb.group({ 
       rating:['',[ Validators.required]],
       comment: ['',[ Validators.required]],
@@ -141,6 +155,12 @@ getblogbycatg(id:any,page=1){
     console.log("error",error);
   });
 }
+getblogbycatg2(id:any){
+  window.scroll(0,0);
+  this.router.navigate(['blog', id]);
+  this.getblogbycatg(id)
+  console.log("navigate to blog");
+}
 getpage(url:any){
   this.loader1=true;
   this.imgloader = false;
@@ -157,7 +177,7 @@ getpage(url:any){
     }, 2000);
   })
 }
-getblogdetail(id:any){
+getblogdetailold(id:any){
   this.page1=false;
   this.imgloader = false;
   window.scroll(0,0)
@@ -184,6 +204,12 @@ getblogdetail(id:any){
     console.log("error",error);
   });
   this.getcommentsss();
+}
+getblogdetail(id:any){
+  window.scroll(0,0);
+  this.router.navigate(['blogdetails', id]);
+
+  console.log("navigate to blogdetails");
 }
 
 getcommentsss(){

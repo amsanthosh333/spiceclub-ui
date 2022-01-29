@@ -2,15 +2,19 @@
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
-p{
+.comment-title{
     color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
-label{
+.review-title{
     color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
-option{
+.username{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+.message{
     color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }

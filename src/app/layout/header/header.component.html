@@ -13,11 +13,8 @@
                 <!--=======  logo with off canvas  =======-->
                 <div class="logo-with-offcanvas d-flex " >
                    <!--=======  logo   =======-->
-                    <div class="logo ml-3" style="padding-left: 30px;">
-					
-                       
-                            <img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="" >
-                     
+                    <div class="logo ml-3" style="padding-left: 30px;">			               
+                            <img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="" >                    
                     </div>
 
                     <!--=======  End of logo   =======-->
@@ -76,13 +73,13 @@
 
                 <!--=======  headeer right container  =======-->
 
-                <div class="header-right-container">
+
+
+                <div class="header-right-container" >
 
                     <!--=======  header right icons  =======-->
 
-                    <div class="header-right-icons d-flex justify-content-end align-items-center h-100">
-                        <!--=======  single-icon  =======-->
-
+                    <div  class="header-right-icons d-flex justify-content-end align-items-center h-100">
                         <div class="single-icon search">
                             <a href="javascript:void(0)" id="search-icon">
                                 <i class="ion-ios-search-strong"></i>
@@ -103,22 +100,13 @@
                                 <i class="ion-android-person"></i>      
                             </a>
                         </div>
-                        <!--=======  End of single-icon  =======-->
-                        <!--=======  single-icon  =======-->
 
                         <div class="single-icon wishlist"  >
-                            <!-- <a href="javascript:void(0)" id="offcanvas-wishlist-icon">
-                                <i class="ion-android-favorite-outline"></i>
-                                <span class="count">2</span>
-                            </a> -->
 							<a href="javascript:void(0)"  id="offcanvas-wishlist-icon">
                                 <i class="ion-android-favorite-outline"></i>
                                 <span class="count">{{Wlength}}</span>
                             </a>
                         </div>
-
-                        <!--=======  End of single-icon  =======-->
-                        <!--=======  single-icon  routerLink="/cart" routerLink="/wishlist" =======-->
 
                         <div class="single-icon cart"  >
                             <a href="javascript:void(0)" id="offcanvas-cart-icon">
@@ -126,12 +114,45 @@
                                 <span class="count">{{cartlength}}</span>
                             </a>
                         </div>
-                        <!--=======  End of single-icon  =======-->
+
                     </div>
                     <!--=======  End of header right icons  =======-->
 
-                </div>
+				</div>
+			
 
+				<!--if  user is not login -->
+				<div class="header-right-container" *ngIf="userlogin" >
+				<div  class="header-right-icons d-flex justify-content-end align-items-center h-100">
+					<div class="single-icon search">
+						<a href="javascript:void(0)" id="search-icon">
+							<i class="ion-ios-search-strong"></i>
+						</a>
+					</div>
+
+					<!--=======  End of single-icon  =======-->
+					<!--=======  single-icon  =======-->
+
+					<div class="single-icon user-login">
+						<a routerLink="login">
+							<i class="ion-android-person"></i>
+						</a>
+					</div>
+
+					<div class="single-icon wishlist"  >
+						<a   id="offcanvas-wishlist-icon">
+							<i class="ion-android-favorite-outline"></i>               
+						</a>
+					</div>
+
+					<div class="single-icon cart"  >
+						<a id="offcanvas-cart-icon">
+							<i class="ion-ios-cart"></i>   
+						</a>
+					</div>
+
+				</div>
+			</div>
                 <!--=======  End of headeer right container  =======-->
 
 

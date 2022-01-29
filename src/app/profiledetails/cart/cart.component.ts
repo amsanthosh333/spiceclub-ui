@@ -9,6 +9,13 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+
+import{ SharedService} from 'src/app/services/shared.service'
+
+
+// import{ SharedService} from 'src/app/services/shared.service'
+// private sharedService: SharedService
+// this.sharedService.sendClickEvent();
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
@@ -73,7 +80,7 @@ export class CartComponent implements OnInit {
 
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
      private authService: AuthService,private fb: FormBuilder,private request: RequestService,
-     private toastr: ToastrService, private toast: ToastrService,) {
+     private toastr: ToastrService, private toast: ToastrService,private sharedService: SharedService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')||'{}')
       
@@ -133,6 +140,7 @@ export class CartComponent implements OnInit {
         this.viewcart();
         this.viewcart3();
         this.deleteRecordSuccess();
+        this.sharedService.sendClickEvent();
       }
       else{
         this.toastr.error(response.message);

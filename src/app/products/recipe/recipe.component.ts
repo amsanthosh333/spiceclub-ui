@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router,ParamMap } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user'; 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -63,8 +63,10 @@ export class RecipeComponent implements OnInit {
   discrloading: boolean=true;
   discriptloader: boolean=true;
   imgloader: boolean=false;
+  keyy: any;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
-    private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
+    private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
+    private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
      
       config.max = 5;
       config.readonly = true;
@@ -84,9 +86,22 @@ export class RecipeComponent implements OnInit {
      }
 
   ngOnInit(): void {
-  
-    this.getallrecipe(1);
+    window.scroll(0,0);
+    this.keyy = this.route.snapshot.paramMap.get('id');
+    console.log("keyyyyyyyyyyyyyy", this.keyy);
+    if (this.keyy !==undefined) {
+      console.log("iffffffffffffff",this.keyy); 
+      this.getrecipebycatg(this.keyy);
+      
     this.getallrecipecat();
+    }
+    else {
+      console.log("elseeeeeeeee");   
+      this.getallrecipe(1);
+      this.getallrecipecat();
+    }
+  
+    
     this.comment = this.fb.group({ 
       rating:['',[ Validators.required]],
       comment: ['',[ Validators.required]],
@@ -137,7 +152,7 @@ getrecipebycatg(id:any,page=1){
     this.pagess=this.pagenation.links;
     this.recipeloader=false;
     console.log("response",response);
-    console.log("recipe by category",this.Blogs);
+    console.log("recipe by category",id,this.Blogs);
     
     this.page1=true;
     this.page2=false;
@@ -148,6 +163,13 @@ getrecipebycatg(id:any,page=1){
   (error: any) => {
     console.log("error",error);
   });
+}
+getrecipebycatg2(id:any){
+  window.scroll(0,0);
+  this.router.navigate(['recipe', id]);
+  console.log("rec",id);
+  this.getrecipebycatg(id)
+  console.log("navigate to blog");
 }
 getpage(url:any){
   this.recipeloader=true;
@@ -165,7 +187,7 @@ getpage(url:any){
     }, 2000);
   })
 }
-getrecipedetaill(id:any){
+getrecipedetaillold(id:any){
    this.page1=false;
   window.scroll(0,0);
   this.page2=true;
@@ -199,7 +221,11 @@ getrecipedetaill(id:any){
   });
   this.getcommentsss();
 }
-
+getrecipedetaill(id:any){
+  window.scroll(0,0);
+  this.router.navigate(['recipedetails', id]);
+  console.log("navigate to recipedetails");
+}
 getcommentsss(){
   this.request.getcomments(this.blog_id).subscribe((response: any) => {
     this.Comments=response.data;

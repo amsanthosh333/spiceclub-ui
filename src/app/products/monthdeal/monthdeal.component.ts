@@ -7,6 +7,8 @@ import { User } from 'src/app/models/user';
 import { HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
+import{ SharedService} from 'src/app/services/shared.service'
+
 @Component({
   selector: 'app-monthdeal',
   templateUrl: './monthdeal.component.html',
@@ -62,7 +64,8 @@ export class MonthdealComponent implements OnInit {
   tags: any;
   totalprice: any;
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
-    ,private toastr: ToastrService,config: NgbRatingConfig,private modalService: NgbModal) {
+    ,private toastr: ToastrService,config: NgbRatingConfig,private modalService: NgbModal,
+    private sharedService: SharedService) {
 
       config.max = 5;
       config.readonly = true;
@@ -118,7 +121,8 @@ export class MonthdealComponent implements OnInit {
       console.log(res);
       if (res.message == 'Product is successfully added to your wishlist') {
         console.log("success",res.message); 
-        this.addRecordSuccess() ;     
+        this.addRecordSuccess() ;  
+        this.sharedService.sendClickEvent();   
       }
       else  {
         this.toastr.error(res.message);
@@ -139,7 +143,8 @@ export class MonthdealComponent implements OnInit {
     this.request.addtocart(edata).subscribe((res: any) => {
       console.log(res);
       if (res.message == 'Product added to cart successfully') {  
-        this.addRecordSuccess();     
+        this.addRecordSuccess(); 
+        this.sharedService.sendClickEvent();    
       }
       else if(res.message== 'Minimum 1 item(s) should be ordered'){
         this.toastr.info(res.message);
@@ -266,6 +271,7 @@ export class MonthdealComponent implements OnInit {
         console.log("Product added to cart successfully");
         this.addRecordSuccess();
            this.modalService.dismissAll();
+           this.sharedService.sendClickEvent();
       }
       else if (res.message=='Minimum 1 item(s) should be ordered'){
         this.toastr.success( res.message);

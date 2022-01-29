@@ -7,6 +7,10 @@ import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+
+import{ SharedService} from 'src/app/services/shared.service'
+
+
 @Component({
   selector: 'app-wishlist',
   templateUrl: './wishlist.component.html',
@@ -44,7 +48,8 @@ export class WishlistComponent implements OnInit {
   loader: boolean=true;
   buyertypeid: any;
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService, 
-    private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,) {
+    private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,
+    private sharedService: SharedService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')||'{}')     
     );
@@ -83,6 +88,7 @@ export class WishlistComponent implements OnInit {
             console.log("deleted");
             this.deleteRecordSuccess();
             this.viewwishlist();
+            this.sharedService.sendClickEvent();
           }
           else{
             this.toastr.error( response.message);
@@ -204,6 +210,7 @@ export class WishlistComponent implements OnInit {
             console.log("Product added to cart successfully");
             this.addRecordSuccess();
                this.modalService.dismissAll();
+               this.sharedService.sendClickEvent();
           }
           else if (res.message=='Minimum 1 item(s) should be ordered'){
             this.toastr.success( res.message);

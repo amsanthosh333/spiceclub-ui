@@ -590,7 +590,7 @@ export class CheckoutComponent implements OnInit {
       payment_type: "cart_payment",
       combined_order_id: this.combined_orderid,
       amount: this.grandtotal_value,
-      user_id: this.userid
+      user_id: this.userid,
     }
     console.log("edata4",edata4);
     

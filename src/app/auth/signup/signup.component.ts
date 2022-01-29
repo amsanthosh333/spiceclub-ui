@@ -56,24 +56,18 @@ export class SignupComponent implements OnInit {
       otp: ['', [Validators.required]], 
     });
   }
-  get f1() {
-   
+  get f1() {  
     return this.otpform.controls;
   }
   get f() {
-    return this.registerForm.controls;
-    
+    return this.registerForm.controls;  
   }
   getbyertype(){
-    this.request.getbyertype().subscribe((res:any)=>
-    {
-      console.log("buertype",res)
-      this.buyer=res.data;
+    this.request.getbyertype().subscribe((res:any)=> {
+      this.buyer=res.data
+      console.log("buertype",this.buyer) 
     },
-    (error: any) => {
-      console.log(error);
-    })
-    
+   )  
   }
   onSubmit(content: any) {
    

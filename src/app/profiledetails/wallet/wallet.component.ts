@@ -9,6 +9,7 @@ import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { windows } from 'ngx-bootstrap-icons';
 import { ConfirmedValidator } from 'src/app/auth/confirmedValidator';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
@@ -41,8 +42,14 @@ export class WalletComponent implements OnInit {
   Wallet: any;
   History: any;
   rechargeForm: FormGroup;
+  paymentdetails: any;
+  razpaysuccess: any;
+  username: any;
+  userphone: any;
+  useremail: any;
+  rechargeamount: any;
   constructor( private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
-    private modalService: NgbModal,) {
+    private modalService: NgbModal,private authService: AuthService) {
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser') || '{}')
       );
@@ -52,6 +59,9 @@ export class WalletComponent implements OnInit {
       this.userid = this.currentdetail.user?.id;
       this.accesstoken = this.currentdetail.access_token;
       this.tokentype = this.currentdetail.token_type;
+      this.username = this.currentdetail.user.name;
+      this.userphone = this.currentdetail.user.phone;
+      this.useremail = this.currentdetail.user.email;
       console.log("currentuserid=", this.userid);
 
       this.rechargeForm = this.fb.group({
@@ -63,6 +73,7 @@ export class WalletComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    window.scroll(0,0)
     this.getwallet();
     this.getrechargehistory();
   }
@@ -91,49 +102,105 @@ export class WalletComponent implements OnInit {
 }
 onproceed(form: FormGroup) {   
     this.error3=''
-    if (this.editForm.invalid) {
-      if (!this.editForm.get('name')?.valid) {
-        this.error3 = '* Enter your Name';
-      }
-      else if (!this.editForm.get('password')?.valid) {
-        this.error3 = '* Enter newpassword';
-      }
-      else if (!this.editForm.get('confirm_password')?.valid) {
-        this.error3 = '* Reenter  newpassword';
-      }
-      else if(this.editForm.invalid){
-        this.error3="* Password and Confirm Password must be match."
-        console.log(" * Password and Confirm Password must be match.", );
-      }
- 
+    if (this.rechargeForm.invalid) {  
+      this.error3="* Enter amount"
       // form.reset();
       return;
     }
      else {
-      const edata = {
-        id: this.userid,
-        name: form.value.name,
-        password: form.value.password,
-      }
-      console.log("edata",edata)
-      // this.request.updateProfile(edata).subscribe((response: any) => {
-      //   console.log("res",response)
-      //   // if (res[0].status == 'success') {
-      //   //   this.modalService.dismissAll();
-  
-      //   //   form.reset();
-          
-      //   //   return true;
-      //   // }
-      //   // else if (res[0].status == 'error') {
-      //   //   this.modalService.dismissAll();
-      //   // }
+      
+       this.rechargeamount= form.value.amount,      
+     
+      console.log("rechargeamount",this.rechargeamount) 
 
-      // }, (error) => {
-      //   console.log(error);
-      //   this.modalService.dismissAll();
-      // });
+    
+        let options = {
+          "key": "rzp_test_DYDr3B0KYe4086",
+          "amount": form.value.amount*100,
+          "currency": "INR",
+          "name": "Spice Club",
+          "description": "Wallet Recharge",
+          "image": "assets/images/LOGOWHITE.jpg",
+          "order_id":"",
+          // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+          // "handler": function (response: { razorpay_payment_id: any; razorpay_order_id: any; razorpay_signature: any; }) {
+          //   alert(response.razorpay_payment_id);
+          //   alert(response.razorpay_order_id);
+          //   alert(response.razorpay_signature)
+          //   console.log("razzzerrespnse",response.razorpay_payment_id);
+          //   // this.razorpayid = response.razorpay_payment_id
+            
+          // },
+          // "handler": this.paymentResponseHander(response);
+          
+          "prefill": {
+            "name": this.username,
+            "email": this.useremail,
+            "contact": this.userphone
+          },
+          "notes": {
+            "address": "Razorpay Corporate Office"
+          },
+          "theme": {
+            "color": "#f0240a"
+          },
+          "handler": (response: any) => {
+           this. razpaysuccess= response
+           console.log("razorpay respppp",this.razpaysuccess);
+           this.razorpaypayment();
+          }  
+        };
+        console.log("options,", options)
+        
+        let rzp1 = new this.authService.nativeWindow.Razorpay(options);
+        rzp1.open(); 
+        console.log("works");
     }
   }
 
+  razorpaypayment(){
+    console.log("success",this.razpaysuccess.razorpay_payment_id); 
+    this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
+      console.log("razorpay1 response", response);
+      if(response.result==true){
+        this.paymentdetails=response.payment_details 
+      //  this.addRecordSuccess()
+      //   this.toastr.success('Added Successfullyyyy', '');
+        console.log(this.paymentdetails);
+        
+        this.razorpaysuccess();
+      }
+
+    }, );
+  }
+  razorpaysuccess(){
+    let edata4={
+      payment_details:this.paymentdetails,
+      payment_type: "wallet_payment",
+      amount: this.rechargeamount, 
+      user_id: this.userid
+    }
+    console.log("edata4",edata4);
+    
+    this.request.razsuccess(edata4).subscribe((response:any)=>{
+      console.log("success response",response);
+      if(response.message=="Payment is successful"){ 
+        console.log(response.message);
+        this.modalService.dismissAll()
+        this.toastr.success('Payment is successful',''); 
+        alert(response.message)
+        this.getwallet();
+          this.getrechargehistory();
+      }
+      else{
+        console.log(response.message);
+        alert(response.message)
+        this.modalService.dismissAll()
+        this.toastr.error('This payment has already been captured','');
+      }
+    })
+  }
+
 }
+
+

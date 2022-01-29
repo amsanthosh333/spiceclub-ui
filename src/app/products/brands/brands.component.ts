@@ -7,6 +7,8 @@ import {Location} from '@angular/common';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
+ import{ SharedService} from 'src/app/services/shared.service'
+
 @Component({
   selector: 'app-brands',
   templateUrl: './brands.component.html',
@@ -62,7 +64,7 @@ export class BrandsComponent implements OnInit {
 
   constructor(private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,
-    config: NgbRatingConfig,private _location: Location) {
+    config: NgbRatingConfig,private _location: Location, private sharedService: SharedService) {
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser')||'{}')
         
@@ -148,6 +150,7 @@ export class BrandsComponent implements OnInit {
       if (res.message == 'Product is successfully added to your wishlist') {
         console.log("success",res.message); 
         this.addRecordSuccess() ;     
+        this.sharedService.sendClickEvent();
       }
       else  {
         this.toastr.error(res.message);
@@ -300,6 +303,7 @@ export class BrandsComponent implements OnInit {
           console.log("Product added to cart successfully");
           this.addRecordSuccess();
              this.modalService.dismissAll();
+             this.sharedService.sendClickEvent();
         }
         else if (res.message=='Minimum 1 item(s) should be ordered'){
           this.toastr.success( res.message);

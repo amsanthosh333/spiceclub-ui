@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import{ SharedService} from 'src/app/services/shared.service'
 
 declare var jQuery: any;
 @Component({
@@ -95,7 +96,7 @@ export class HomeComponent implements OnInit {
    
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private toastr: ToastrService,private modalService: NgbModal,
-    config: NgbRatingConfig,private _location: Location) {
+    config: NgbRatingConfig,private _location: Location,private sharedService: SharedService) {
 
       this.loader1=true;
       this.loader2=true;
@@ -140,6 +141,10 @@ export class HomeComponent implements OnInit {
       comment: [''],
    
     });
+  }
+
+  clickme(){
+   this.sharedService.sendClickEvent();
   }
   viewdata(){
     this.request.getslider().subscribe((response: any) =>{ 
@@ -306,6 +311,7 @@ export class HomeComponent implements OnInit {
         if (res.message == 'Product is successfully added to your wishlist') {  
          
          this. addRecordSuccess();
+         this.sharedService.sendClickEvent();
          
         }
         else  {
@@ -506,8 +512,9 @@ addtocart2(){
     console.log("resssssssssssssss",res);
     if (res.message == 'Product added to cart successfully') {    
       console.log("Product added to cart successfully");
-      this.addRecordSuccess();
+      this.addRecordSuccess();  
          this.modalService.dismissAll();
+         this.sharedService.sendClickEvent();
     }
     else if (res.message=='Minimum 1 item(s) should be ordered'){
       this.toastr.success( res.message);

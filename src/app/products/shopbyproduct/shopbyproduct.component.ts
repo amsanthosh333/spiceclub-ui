@@ -12,6 +12,10 @@ import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import { Options, LabelType } from 'ng5-slider';
 declare var jQuery: any;
+
+import{ SharedService} from 'src/app/services/shared.service'
+
+
 @Component({
   selector: 'app-shopbyproduct',
   templateUrl: './shopbyproduct.component.html',
@@ -106,7 +110,7 @@ export class ShopbyproductComponent implements OnInit {
   sideloader: boolean=true;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
-    private toastr: ToastrService, private toast: ToastrService, private _location: Location,
+    private toastr: ToastrService,private sharedService: SharedService, private toast: ToastrService, private _location: Location,
     private route: ActivatedRoute) {
 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
@@ -456,6 +460,7 @@ export class ShopbyproductComponent implements OnInit {
       console.log(res);
       if (res.message == 'Product added to cart successfully') {
         this.addRecordSuccess();
+        this.sharedService.sendClickEvent();
       }
       else if (res.message == 'Minimum 1 item(s) should be ordered') {
         this.toastr.info(res.message);
@@ -518,6 +523,7 @@ export class ShopbyproductComponent implements OnInit {
       if (res.message == 'Product is successfully added to your wishlist') {
         console.log("success", res.message);
         this.addRecordSuccess();
+        this.sharedService.sendClickEvent();
       }
       else {
         this.toastr.error(res.message);
@@ -793,6 +799,7 @@ export class ShopbyproductComponent implements OnInit {
         console.log("Product added to cart successfully");
         this.addRecordSuccess();
            this.modalService.dismissAll();
+           this.sharedService.sendClickEvent();
       }
       else if (res.message=='Minimum 1 item(s) should be ordered'){
         this.toastr.success( res.message);

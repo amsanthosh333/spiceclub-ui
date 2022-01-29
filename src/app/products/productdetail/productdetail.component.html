@@ -1,4 +1,4 @@
-<div>
+
     <div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
         <div class="container">
             <div class="row">
@@ -27,7 +27,7 @@
 
                     <div class="shop-product">
                         <div class="row pb-50">
-                            <div class="col-lg-6 mb-md-70 mb-sm-70">
+                            <div class="col-lg-4 mb-md-70 mb-sm-70">
                                 <!--=======  shop product big image gallery  =======-->
 
                                 <div class="shop-product__big-image-gallery-wrapper mb-30">
@@ -59,9 +59,7 @@
                                     <!--=======  End of shop product gallery icons  =======-->
 
                                     <div class="shop-product__big-image-gallery-slider" *ngIf=!photoloader>
-
                                         <!--=======  single image  =======-->
-
                                         <div class="single-image">
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct?.thumbnail_image}}"
                                                 class="img-fluid" alt="">
@@ -72,7 +70,7 @@
 
                                     <!--photo lazyloading  -->
                                     <div class="shop-product__big-image-gallery-slider" *ngIf=photoloader>
-                                        <div class="single-image" style="height: 550px; width: 400px;">
+                                        <div class="single-image" style="height: 550px; width: 300px;">
                                             <ngx-skeleton-loader count="1"
                                                 [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                             'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
@@ -98,7 +96,7 @@
                                 <!--=======  End of shop product small image gallery  =======-->
                             </div>
 
-                            <div class="col-lg-6" *ngIf=!contentloader>
+                            <div class="col-lg-8" *ngIf=!contentloader>
                                 <!--=======  shop product description  =======-->
 
                                 <div class="shop-product__description">
@@ -144,7 +142,7 @@
 
                                     <!--=======  shop product short description  =======-->
 
-                                    <div class="shop-product__short-desc mb-50" [innerHTML]="Peoduct?.description">
+                                    <div id="desc" class="shop-product__short-desc mb-50" [innerHTML]="Peoduct?.description">
 
                                         {{Peoduct?.description}}
                                     </div>
@@ -161,7 +159,7 @@
                                         <div class="shop-product__block__value col-12 ">
                                             <div class="row">
                                                 <div class="col-8 mt-2 ">
-                                                    <strong style="padding-left: 75px;"> {{Peoduct?.brand.name}}
+                                                    <strong style="padding-left: 117px;"> {{Peoduct?.brand.name}}
                                                     </strong>
                                                 </div>
                                                 <div class="col-4">
@@ -275,7 +273,7 @@
                             </div>
 
                             <!-- content lazyloading -->
-                            <div class="col-lg-6" *ngIf=contentloader>
+                            <div class="col-lg-8" *ngIf=contentloader>
                                 <!--=======  shop product description  =======-->
 
                                 <div class="shop-product__description">
@@ -422,7 +420,7 @@
 
                                                 <div class="shop-product__long-desc mb-20"
                                                     [innerHTML]="Peoduct?.description" *ngIf="!discriptloader">
-                                                    <p>
+                                                    <p >
                                                         {{Peoduct?.description}}
 
                                                     </p>
@@ -461,7 +459,7 @@
                                                 </div>
                                                 <div class="shop-product__additional-info" *ngIf="choice?.length==0"
                                                     style="text-align: center;">
-                                                    <h5>No Additional info present !</h5>
+                                                    <h5 >No Additional info present !</h5>
                                                 </div>
 
                                                 <!--=======  End of shop product additional information  =======-->
@@ -707,6 +705,7 @@
                 </div>
             </div>
         </div>
+
         <!-- related -->
 
         <div class="col-lg-12">
@@ -731,7 +730,7 @@
 
 
                         <div class="single-product__floating-icons">
-                            <span class="wishlist"><a data-tippy="Add to wishlist" data-tippy-inertia="true"
+                            <span class="wishlist"><a (click)="addtowishlist(img.id)" data-tippy="Add to wishlist" data-tippy-inertia="true"
                                     data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
                                     data-tippy-theme="sharpborder" data-tippy-placement="left"><i
                                         class="ion-android-favorite-outline"></i></a></span>
