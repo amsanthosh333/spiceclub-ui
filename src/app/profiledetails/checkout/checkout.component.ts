@@ -9,6 +9,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from 'src/app/services/payment.service';
+import{ SharedService} from 'src/app/services/shared.service'
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -98,7 +99,8 @@ export class CheckoutComponent implements OnInit {
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
-    private toastr: ToastrService, private toast: ToastrService, private payservice: PaymentService) {
+    private toastr: ToastrService, private toast: ToastrService, 
+    private sharedService: SharedService,private payservice: PaymentService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
@@ -312,7 +314,9 @@ export class CheckoutComponent implements OnInit {
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
             this.toastr.success(response.message);
+            this.sharedService.sendClickEvent();
             this.router.navigate(['/home']);
+            
           }
           else {
             console.log("fail", response.message);
@@ -600,7 +604,9 @@ export class CheckoutComponent implements OnInit {
         console.log(response.message);
         this.toastr.success('Payment is successful',''); 
         alert(response.message)
+        this.sharedService.sendClickEvent();
         this.router.navigate(['/home']);
+
       }
       else{
         console.log(response.message);

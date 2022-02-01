@@ -43,7 +43,6 @@ export class RequestService {
   logout() { 
     this.url = `${this.endPoint1}/auth/logout`;
     const headers = new HttpHeaders()
-
     .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
     localStorage.removeItem('currentUser');
     this.currentUserSubject.next(null!);
@@ -157,6 +156,18 @@ fetchsummery(id:any) {
   this.url = `${this.endPoint1}/cart-summary/` + id;
   return this.http.get(this.url,{headers:headers});
 }
+
+public checkwishlist(prodid:any,userid:any){
+  const headers = new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('X-Requested-With', 'XMLHttpRequest') 
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken)
+  
+  this.url = `${this.endPoint1}/wishlists-check-product?product_id=`+prodid+`&user_id=`+ userid;
+console.log("urllll",this.url)
+  return this.http.get(this.url, {headers:headers});
+
+}
 public addtowishlist(body: any) {
   const headers = new HttpHeaders()
       .set('content-type', 'application/json')
@@ -195,6 +206,18 @@ public addtowishlist(body: any) {
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
     this.url = `${this.endPoint1}/wishlists/` + id;
     return this.http.delete(this.url,{headers:headers});
+}
+//maximum prize
+public getmaximumprice(){
+  this.url = `${this.endPoint1}/products/maxprice`;
+  return this.http.get(this.url);
+}
+//profileee
+public fetchuserprofile(id:any){
+  
+  this.url = `${this.endPoint1}/profile/getprofile/` + id;
+  console.log("stssss",this.url)
+  return this.http.get(this.url);  
 }
 // address
 public addaddress(body:any) {

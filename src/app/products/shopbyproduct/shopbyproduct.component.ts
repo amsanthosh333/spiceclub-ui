@@ -31,11 +31,10 @@ export class ShopbyproductComponent implements OnInit {
   prodloader: boolean = true;
 
   minValue: number = 0;
-  maxValue: number = 1000;
+  maxValue: number = 10000;
   options: Options = {
     floor: 0,
-    ceil: 500,
-
+    ceil: 2000 ,
   };
  
   p: number = 1;
@@ -108,6 +107,7 @@ export class ShopbyproductComponent implements OnInit {
   prod_price: any;
 
   sideloader: boolean=true;
+  maximumprize: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
     private toastr: ToastrService,private sharedService: SharedService, private toast: ToastrService, private _location: Location,
@@ -149,6 +149,8 @@ export class ShopbyproductComponent implements OnInit {
       this.viewbrand();
       this.viewcat();
       this.viewbestpro();
+      this.maximunprice();
+      // this.maxxxx();
     }
     else {
       console.log("elseeeeeeeee");   
@@ -156,6 +158,7 @@ export class ShopbyproductComponent implements OnInit {
       this.viewbrand();
       this.viewcat();
       this.viewbestpro();
+      this.maximunprice();
     }
     this.register = this.fb.group({
       rating: [''],
@@ -167,6 +170,8 @@ export class ShopbyproductComponent implements OnInit {
       message: ['', [Validators.required]],
 
     });
+
+   
   }
   get f() {
     return this.register.controls;
@@ -280,7 +285,7 @@ export class ShopbyproductComponent implements OnInit {
       this.sideloader1=false;
       
       console.log("response", response);
-      console.log("Allbrands", this.Allbrands);
+      console.log("Allbrands", this.Allbrands); 
     });
   }
   viewflashdeal(){
@@ -300,6 +305,12 @@ export class ShopbyproductComponent implements OnInit {
     //   console.log("error",error);
     // });
   }
+  viewalldeal(){
+    this.viewdata(1);
+    // this.viewbrand();
+    // this.viewcat();
+    // this.viewbestpro();
+  }
 
   viewtodaysdeal(){
     this.prodloader=true;
@@ -318,11 +329,68 @@ export class ShopbyproductComponent implements OnInit {
       console.log("error",error);
     });
   }
+  viewdealofday(){
+    this.prodloader=true;
+    this.imgloader = false;
+    this.request. getdaydealpro().subscribe((response: any) => {
+      this.Product=response.data;
+        this.pagenation=response?.meta   ;
+        this.pagess=this.pagenation?.links;
+        this.prodloader=false;
+        console.log("allcatproduct",this.Product);
+        setTimeout(() => {
+          this.imgloader = true;
+        }, 2000);
+    },
+    (error: any) => {
+      console.log("error",error);
+    });
+  }
+  viewdealofmonth(){
+    this.prodloader=true;
+    this.imgloader = false;
+    this.request. getmonthdealpro().subscribe((response: any) => {
+      this.Product=response.data;
+        this.pagenation=response?.meta   ;
+        this.pagess=this.pagenation?.links;
+        this.prodloader=false;
+        console.log("allcatproduct",this.Product);
+        setTimeout(() => {
+          this.imgloader = true;
+        }, 2000);
+    },
+    (error: any) => {
+      console.log("error",error);
+    });
+  }
+  maximunprice(){
+  
+    this.request.getmaximumprice().subscribe((response: any) => {
+      this.maximumprize=response.price;
+     
+      // this.options.ceil=this.maximumprize;
+      console.log("maximunprize",this.maximumprize);
+      console.log("maximunprize",response);
+      let opts: Options = {
+        floor: 0,
+        ceil: this.maximumprize,
+        getPointerColor: ()=>{return 'red'},
+        getSelectionBarColor: () => {return 'red'}
+        };
+        this.options = opts;
+     
+    },
+
+    (error: any) => {
+      console.log("error",error);
+    });
+    
+  }
+ 
   backk() {
     // this._location.back();
     this.page1 = true;
     this.page2 = false;
-
   }
   getprodofcategory(id:any,page:any){
     this.prodloader=true;

@@ -169,39 +169,7 @@
 
 									<!--=======  single blog post section  =======-->
 
-									<div class="single-blog-post-section">
-										<h3 class="mb-30">What is Green Coffee?</h3>
-										<p class="mb-30">This light green drink is unlike the black roasted coffee
-											you’re used to drinking. Since green beans haven’t been roasted and remain
-											in their raw form, it has a much milder flavor. Its taste profile is similar
-											to that of a herbal tea.</p>
-										<h3 class="mb-30">How does the Green Bean Coffee Powder Work?</h3>
-										<p class="mb-30">
-											Coffee beans, in their raw form, are rich in antioxidants and other active
-											compounds. It contains chlorogenic acid—a potent antioxidant and
-											anti-inflammatory compound. This compound is believed to aid in weight loss
-											and is believed to have antioxidant properties, apart from helping lower
-											blood pressure and improve metabolism.
-										</p>
-										<h3 class="mb-30">Green Coffee for Weight Loss </h3>
-										<p class="mb-30">
-											Coffee beans, in their raw form, are rich in antioxidants and other active
-											compounds. It contains chlorogenic acid—a potent antioxidant and
-											anti-inflammatory compound. This compound is believed to aid in weight loss
-											and is believed to have antioxidant properties, apart from helping lower
-											blood pressure and improve metabolism.
-										</p>
-
-										<h3 class="mb-30">Green Coffee Beans Benefits</h3>
-										<p class="mb-30">
-											Coffee beans, in their raw form, are rich in antioxidants and other active
-											compounds. It contains chlorogenic acid—a potent antioxidant and
-											anti-inflammatory compound. This compound is believed to aid in weight loss
-											and is believed to have antioxidant properties, apart from helping lower
-											blood pressure and improve metabolism.
-										</p>
-
-									</div>
+									
 
 									<!--=======  End of single blog post section  =======-->
 
@@ -265,7 +233,11 @@
 							<!--=======  single comment  =======-->
 
 							<div class="single-comment" *ngFor="let comm of Comments">
-								<div class="single-comment__image">
+								<div class="single-comment__image" *ngIf="(comm.avatar=='')">
+									<img src="https://www.pngitem.com/pimgs/m/504-5040528_empty-profile-picture-png-transparent-png.png"
+										class="img-fluid" style="height: 65px;" alt="">
+								</div>
+								<div class="single-comment__image" *ngIf="(comm.avatar!=='')">
 									<img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
 										class="img-fluid" style="height: 70px;" alt="">
 								</div>

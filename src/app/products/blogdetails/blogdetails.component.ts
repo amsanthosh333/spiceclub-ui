@@ -77,6 +77,12 @@ export class BlogdetailsComponent implements OnInit {
     this.getblogdetail(this.id)
     this.viewallblog(1);
     this.viewblogcat();
+
+    this.comment = this.fb.group({ 
+      rating:['',[ Validators.required]],
+      comment: ['',[ Validators.required]],
+   
+    });
   }
   viewallblog(page:any){
     this.loader1=true;
@@ -151,6 +157,7 @@ export class BlogdetailsComponent implements OnInit {
     });
   }
   addcomment(form: FormGroup){
+
     this.error1 = '';
     if (this.comment.invalid) {
   
@@ -164,8 +171,12 @@ export class BlogdetailsComponent implements OnInit {
       return;
     }
     else{
-      if ((this.comment.get('rating'))?.value!=Number){
+      if ((this.comment.get('rating'))?.value == 0){
+        console.log("valueee",(this.comment.get('rating'))?.value);
+        
         form.value.rating=0
+      }
+      else{
         let edata2={
           blog_id: this.blog_id,
           user_id: this.userid,
@@ -178,6 +189,7 @@ export class BlogdetailsComponent implements OnInit {
       if (res.message == 'Comment  Submitted') {       
         this.toastr.success('Comment  Submitted', '');
         this.getcommentsss();
+    this.comment.reset();
       }
       else  {
         this.toastr.error(res.message);
@@ -187,7 +199,8 @@ export class BlogdetailsComponent implements OnInit {
     }, (error: any) => {
       console.log("error",error);
     
-    }); }
+    });
+   }
   } 
   }
   getblogbycatg(id:any){

@@ -41,6 +41,10 @@ export class ProfileComponent implements OnInit {
   filename: any;
   profilee: any;
   res: any;
+  profiledetail: any;
+  loader2: boolean=true;
+  loader1: boolean=true;
+  loader3: boolean=true;
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal,) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -67,22 +71,32 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getprofile();
     this.viewwishlist();
     this. viewcartcount();
     this.getorders();
-
+  }
+  getprofile(){
+    this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
+      this.profiledetail = response;
+      this.loader=false;
+      console.log("profile detsil",this.profiledetail);
+      
+    });
   }
 
   viewwishlist() {
     this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
       this.Wishlist = response.data;
       this.Wlength = this.Wishlist.length;
+      this.loader2=false
       this.loader = false;
     });
   }
   viewcartcount() {
     this.request.cartcount(this.userid).subscribe((response: any) => {
       this.cartlength = response.cartcount;
+      this.loader1=false
 
     });
   }
@@ -90,6 +104,7 @@ export class ProfileComponent implements OnInit {
     this.request.fetchOrders(this.userid).subscribe((response: any) => {
       this.Orders=response.meta;  
       this.orderlength = this.Orders.total;
+      this.loader3=false
          
     });
   }

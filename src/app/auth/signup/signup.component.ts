@@ -8,10 +8,12 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
  import { ConfirmedValidator } from '../confirmedValidator';
+ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
-  styleUrls: ['./signup.component.css']
+  styleUrls: ['./signup.component.css'],
+  providers: [ToastrService],
 })
 export class SignupComponent implements OnInit {
 //  buyer= [  
@@ -29,15 +31,13 @@ export class SignupComponent implements OnInit {
   userid: any;
   buyer: any;
   error2: any;
+  error3: any;
   constructor( private router: Router,private fb: FormBuilder,private request: RequestService, 
-     private authService: AuthService,private formBuilder: FormBuilder,private modalService: NgbModal,) {
+     private authService: AuthService,private toastr: ToastrService,private formBuilder: FormBuilder,private modalService: NgbModal,) {
     this.registerForm = this.formBuilder.group({
       fname: ['', Validators.required], 
       Mobile: ['', [Validators.required]],
-      email: [
-        '',
-        [Validators.required, Validators.email, Validators.minLength(5)],
-      ],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(5)], ],
       password: ['', Validators.required], 
       confirmpassword: ['', Validators.required],
       register_by: ['', Validators.required],
@@ -96,12 +96,14 @@ export class SignupComponent implements OnInit {
           if (res.message == "Registration Successful. Please verify and log in to your account.") {
             console.log("registerForm",""+res.result);
             console.log("response",res);
+            this.toastr.success('Registration Successfully', '');
             this.modalService.open(content, {
               ariaLabelledBy: 'modal-basic-title',
-              size: 'lg',
+              size: 'md',
             });
           }else if(res.message == "User already exists.") {
             console.log("user alredy exist");
+          
             this.error2 = res.message
             
           }
@@ -117,6 +119,11 @@ export class SignupComponent implements OnInit {
   }
 
   onAddRowSave(form: FormGroup) {
+    this.error3 = '';
+    if (this.otpform.invalid) {
+      console.log("form invalid",);   
+       this.error3 = '* Enter OTP';
+     }
     let edata1={
       user_id: this.userid,
       verification_code:""+this.otpform.controls['otp'].value,
@@ -127,11 +134,12 @@ export class SignupComponent implements OnInit {
         console.log("responseee",""+res);
         if (res.message == "Code does not match, you can request for resending the code") { 
             console.log("Code does not match");
+            this.error3 = '*Code does not match,you can request for resending the code';
             // this.error1 = 'Incorrect OTP!!Please Try Again!!!!';  
          
         } else {
            console.log("Code matched");
-           this.router.navigate(['/main']);
+           this.router.navigate(['/home']);
           // this.error1 = 'Invalid Login';
         }
       },

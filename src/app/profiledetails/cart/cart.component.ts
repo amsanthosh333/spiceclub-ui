@@ -178,6 +178,7 @@ export class CartComponent implements OnInit {
        console.log("response",response);
        this.viewcart();
        this.viewcart3();
+       this.sharedService.sendClickEvent();
      });
 
     }
@@ -194,6 +195,7 @@ export class CartComponent implements OnInit {
            console.log("response",response);
            this.viewcart();
            this.viewcart3();
+           this.sharedService.sendClickEvent();
          });
        
      

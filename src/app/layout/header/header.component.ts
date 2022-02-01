@@ -51,13 +51,13 @@ export class HeaderComponent implements OnInit {
   constructor(private router: Router,private fb: FormBuilder,private toastr: ToastrService,private request: RequestService, 
     private modalService: NgbModal,private sharedService: SharedService ) {
 
-      // this.ClickEventSubscription=this.sharedService.getClickEvent().subscribe(()=>{
-      //   this.viewwishlist();
-      //   this. viewcartcount();
-      //   this. viewcart();
-      //   this.viewcart3();
+      this.ClickEventSubscription=this.sharedService.getClickEvent().subscribe(()=>{
+        this.viewwishlist();
+        this. viewcartcount();
+        this. viewcart();
+        this.viewcart3();
 
-      // })
+      })
       
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser')||'{}')     
@@ -1532,10 +1532,9 @@ export class HeaderComponent implements OnInit {
     })(jQuery);
 
       }
+
 compone(){
-  
   console.log("heeeeeeeellllllllllloooooooooooo");
-  
 }
 
       viewwishlist(){
@@ -1676,6 +1675,16 @@ compone(){
            }
   
            }
+
+           logout1(){
+            console.log("logggouttt") 
+            this.request.logout().subscribe( res=>{
+              console.log("res",res);
+              this.router.navigate(['/login']);
+              // if(res.message == "Successfully logged out"){
+              // this.router.navigate(['/login']);}
+            })
+          }
            
 }
 

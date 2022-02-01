@@ -54,21 +54,18 @@
                             <!--=======  single sidebar widget  =======-->
 
                             <div class="single-sidebar-widget mb-20">
-                                <h2 class="single-sidebar-widget--title">Top Brands</h2>
+                                <!-- <h2 class="single-sidebar-widget--title">Top Brands</h2>
                                 <div class="widget-post-wrapper" >                              
-                                    <div class="single-widgost"  *ngFor="let cat of Topbrands" >
-                                        <!-- <div class="imag" (click)="viewdata(cat.id,1)" >
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{cat.banner}}" class="img-fluid" alt="" style="height: 100px; width: 150px; ">
-                                        </div> -->
+                                    <div class="single-widgost"  *ngFor="let cat of Topbrands" >                                      
                                         <div class="con" (click)="viewdata(cat.id,1)">
                                             <h6 class="widget-positle"><a >{{cat.name}}</a></h6>
                                             <p class="widget-posate"></p>
                                         </div>
                                     </div>
                                 </div>
-                                <br>
-                                <br>
-                                <h2 class="single-sidebar-widget--title">All Brands</h2>
+                                <br> -->
+                              
+                                <h2 class="single-sidebar-widget--title" style="padding-bottom: 0px; margin-bottom: 20px;">All Brands</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
                                     <li class="has-children" *ngFor="let img of Allbrands">
                                         <a style="color: rgb(114, 113, 113);" (click)="viewdata(img.id,1)">{{img.name}}</a> 
@@ -167,14 +164,7 @@
                                     </form>
                                 </div>
                             </div>                          
-                            <div class="single-filter-widget  mb-40">
-                                <h2 class="single-sidebar-widget--title mb-2" >Top Brands</h2>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;">
-                                    <li>
-                                        <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
-                                    </li>
-                                </ul>
-                            </div>
+                         
                            
                             <div class="single-sidebar-widget mb-20">
                                 <h2 class="single-sidebar-widget--title mb-2">All Brands</h2>

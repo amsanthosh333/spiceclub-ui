@@ -89,6 +89,12 @@ export class RecipedetailsComponent implements OnInit {
     this.getrecipedetaill(this.id)
     this.getallrecipe(1);
     this.getallrecipecat();
+
+    this.comment = this.fb.group({ 
+      rating:['',[ Validators.required]],
+      comment: ['',[ Validators.required]],
+   
+    });
   }
   getallrecipe(page:any){
     this.recipeloader=true;
@@ -183,8 +189,10 @@ getrecipebycatg(id:any){
      return;
    }
    else{
-     if ((this.comment.get('rating'))?.value!=Number){
+     if ((this.comment.get('rating'))?.value==0){
        form.value.rating=0
+     }
+     else{
        let edata2={
          recipe_id: this.blog_id,
          user_id: this.userid,
@@ -197,6 +205,7 @@ getrecipebycatg(id:any){
      if (res.message == 'Comment  Submitted') {  
        this.toastr.success('Comment  Submitted', '');
        this.getcommentsss();
+       this.comment.reset();
      }
      else  {
        this.toastr.error(res.message);

@@ -5,6 +5,9 @@
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
+.pl-2, .px-2 {
+    padding-left: 0 ;
+}
 
 .cart-title{
 	color: #474747 ;

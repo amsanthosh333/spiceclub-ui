@@ -11,7 +11,6 @@ import { ToastrService } from 'ngx-toastr';
 import{ SharedService} from 'src/app/services/shared.service'
 
 
-
 @Component({
   selector: 'app-productdetail',
   templateUrl: './productdetail.component.html',
@@ -74,6 +73,7 @@ export class ProductdetailComponent implements OnInit {
   Bulckdis: any;
   discount: any;
   varientt: any;
+  iswishlistt: any;
 
   constructor(private router: Router,private request: RequestService,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
    private modalService: NgbModal,config: NgbRatingConfig,private _location: Location,
@@ -100,6 +100,7 @@ export class ProductdetailComponent implements OnInit {
     this.id = this.route.snapshot.params['id'];
     console.log("brand id",this.id);
     this.viewproductrow(this.id);
+    this.iswishlist(this.id)
      this.comment = this.fb.group({ 
       rating:['',[ Validators.required]],
       comment: ['',[ Validators.required]], 
@@ -118,6 +119,7 @@ export class ProductdetailComponent implements OnInit {
         console.log("success",res.message); 
         this.addRecordSuccess() ;     
         this.sharedService.sendClickEvent();
+        this.iswishlist(prd_id)
       }
       else  {
         this.toastr.error(res.message);
@@ -525,8 +527,6 @@ this.request.getdiscountprice(this.buyertypeid,this.product_id,this.varient_valu
       
       });
     }
-
-
        addRecordSuccess() {
       this.toastr.success('Added Successfully', '');
     }
@@ -535,6 +535,18 @@ this.request.getdiscountprice(this.buyertypeid,this.product_id,this.varient_valu
     }
     deleteRecordSuccess() {
       this.toastr.error(' Removed Successfully', '');
+    }
+
+    iswishlist(prodid:any){
+      this.request.checkwishlist(prodid,this.userid).subscribe((response: any) => {  
+        console.log("relatedprod",response);
+             this.iswishlistt=response;
+
+             console.log("iswishlistt",this.iswishlistt); 
+      },
+       (error: any) => {
+        console.log(error);
+      });
     }
 
 }

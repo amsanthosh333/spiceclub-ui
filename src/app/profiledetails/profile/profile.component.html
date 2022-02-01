@@ -19,21 +19,62 @@
     <div class="checkout-cart-total  mr-100 ml-100 mt-1">
         <div class="row" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
             <div class="col-12 mb-" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
-                <div class="single-widget mt-4" style="border: none;">
+                <div class="single-widget mt-4" style="border: none;" *ngIf="!loader">
                     <div class="singlomment">
-                        <div class="single-comment__image">
-                            <img src="https://neophroncrm.com/spiceclubnew/public/{{currentdetail.user.avatar_original}}"
+                        <div class="single-comment__image" *ngIf="(profiledetail?.profileimg=='')" >
+                            <img src="assets/images/empty profile.png"
+                                class="img-fluid" style="height: 100px;" alt="">
+                                <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
+                                    class="bi bi-pen-fill"></i></span>
+                        </div>
+                        <div class="single-comment__image" *ngIf="(profiledetail?.profileimg!=='')">
+                            <img src="https://neophroncrm.com/spiceclubnew/public/{{profiledetail?.profileimg}}"
                                 class="img-fluid" style="height: 100px;" alt="">
                             <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
                                     class="bi bi-pen-fill"></i></span>
                             <!-- (click)="editprofileimg(profileimageRecord)" -->
                         </div>
-                        <div class="single-comment__content pl-2 mt-2">
-                            <strong class="username">{{currentdetail.user.name}}</strong>
-                            <p class="email" style="color: blue;">{{currentdetail.user.email}}</p>
+                        <div class="single-comment__content pl-2 mt-2 mb-4">
+                            <strong class="username">{{profiledetail?.name}}</strong>
+                            <p class="email" style="color: blue;">{{profiledetail?.email}}</p>
                         </div>
                     </div>
+                   
                 </div>
+                <!-- lazyloading -->
+                <div class="single-widget mt-4" style="border: none;" *ngIf="loader">
+                    <div class="singlomment" >
+                        <div class="single-comment__image" >
+                            <ngx-skeleton-loader count="1" [theme]="{ 
+                                'border-radius': '75px',
+                                height: '100px',
+                                width: '100PX',
+                                'background-color': '#ffffff',
+                                border: '1px solid white'
+                              }" animation="pulse"></ngx-skeleton-loader>
+                                    
+                        </div>
+                      
+                        <div class="single-comment__content pl-2" >
+                            <ngx-skeleton-loader count="1" [theme]="{ 
+                                'border-radius': '5px',
+                                height: '25px',
+                                width: '170PX',
+                                'background-color': '#ffffff',
+                                border: '1px solid white'
+                              }" animation="pulse"></ngx-skeleton-loader>
+                        </div>
+                        <div class="single-comment__content pl-2" >
+                            <ngx-skeleton-loader count="1" [theme]="{ 
+                                'border-radius': '5px',
+                                height: '25px',
+                                width: '150PX',
+                                'background-color': '#ffffff',
+                                border: '1px solid white'
+                              }" animation="pulse"></ngx-skeleton-loader>
+                        </div>
+                    </div>
+                    </div>
                 <div class="singlomment">
                     <div class="single-comment__content pl-2 mt-2 mb-3">
                         <button class="btn btn-success" style="border-radius: 30px;" routerLink="/wallet">Check Balance</button>
@@ -43,18 +84,41 @@
 
             <div class="col-4">
                 <div class="single-comment__content pl-2 mt-2">
+                    <ngx-skeleton-loader *ngIf="loader1" count="1" [theme]="{ 
+                        'border-radius': '5px',
+                        height: '20px',
+                        width: '20px',
+                        'background-color': '#ffffff',
+                        border: '1px solid white',
+                        ' margin-bottom':'0px' 
+                      }" animation="pulse"></ngx-skeleton-loader>
                     <strong class="username">{{cartlength}}</strong>
                     <p class="eml">In your cart</p>
                 </div>
             </div>
             <div class="col-4">
                 <div class="single-comment__content pl-2 mt-2">
+                    <ngx-skeleton-loader count="1" *ngIf="loader2"[theme]="{ 
+                    'border-radius': '5px',
+                    height: '20px',
+                    width: '20px',
+                    'background-color': '#ffffff',
+                    border: '1px solid white',
+                    ' margin-bottom':'0px' }" animation="pulse"></ngx-skeleton-loader>
                     <strong class="username">{{Wlength}}</strong>
                     <p class="eml">In your wishlist</p>
                 </div>
             </div>
             <div class="col-4">
                 <div class="single-comment__content pl-2 mt-2">
+                    <ngx-skeleton-loader count="1" *ngIf="loader3" [theme]="{ 
+                        'border-radius': '5px',
+                        height: '20px',
+                        width: '20px',
+                        'background-color': '#ffffff',
+                        border: '1px solid white',
+                        ' margin-bottom':'0px' 
+                      }" animation="pulse"></ngx-skeleton-loader>
                     <strong class="username">{{orderlength}}</strong>
                     <p class="eml">In your ordered</p>
                 </div>

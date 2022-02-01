@@ -33,9 +33,11 @@
                     <!--=======  fitler titles  =======-->
                     <div class="filter-title filter-title--type-two">
                         <ul class="product-filter-menu">
-                            <li>All</li>
-                            <li (click)="viewtodaysdeal()">TodaysDeal</li>
-                            <li (click)="viewflashdeal()">Flashdeal</li>
+                            <li (click)="viewalldeal()">All</li>
+                            <li (click)="viewtodaysdeal()">Todaysdeal</li>
+                            <!-- <li (click)="viewflashdeal()">Flashdeal</li> -->
+                            <li (click)="viewdealofday()">Dealofday</li>
+                            <li (click)="viewdealofmonth()">Dealofmonth</li>
                             <!-- <li data-filter=".sale">sale products</li> -->
                         </ul>
                     </div>
@@ -338,7 +340,7 @@
 
                     </div>
 
-                    <div id="pgg">
+                    <div id="pgg" *ngIf="Product?.length!==0">
                         <ul class="pagination" style="justify-content: center;
                             display: flex;">
                             <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
@@ -346,6 +348,17 @@
                                 <a class="page-link">{{p.label}}</a>
                             </li>
                         </ul>
+                    </div>
+                    <div id="pggg" *ngIf="Product?.length==0" style=" display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    height: 200px;
+                    border: 3px solid rgb(139, 139, 139);">
+                        <div>
+                            <h5>
+                                There is no product
+                            </h5>
+                        </div>
                     </div>
 
                 </div>
@@ -419,16 +432,16 @@
                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
                     <label class="sorttext">Minimun<span class="text-danger">*</span></label>
 
-                    <div class="search-widget">
+                    <div class="search-widget mb-2">
                         <input type="text" class="form-control" placeholder="" formControlName="min">
                     </div>
                     <label class="sorttext" >Maximum<span class="text-danger">*</span></label>
-                    <div class="search-widget">
+                    <div class="search-widget  mb-2">
                         <input type="text" class="form-control" placeholder="" formControlName="max">
                     </div>
                 </div>
 
-                <div class="col-12 md-12">
+                <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Category</label><br>
                     <select class="formrol pl-5 col-12" formControlName="category"
                         style="background-color: transparent;Border: none;border-bottom:inset">
@@ -438,7 +451,7 @@
                         </option>
                     </select>
                 </div>
-                <div class="col-12 md-12">
+                <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Brand</label><br>
                     <select class="formrol pl-5 col-12" formControlName="brand"
                         style="background-color: transparent;Border: none;border-bottom:inset">
@@ -449,7 +462,7 @@
                     </select>
                 </div>
                 <div class="col-12 md-12 mt-4" style="justify-content: center;">
-                    <button type="submit" class="btn btn-primary" style=" width:50%;
+                    <button type="submit" class="btn btn-danger" style=" width:50%;
                     margin-left:25%;
                     margin-right:25%;">Apply</button>
 

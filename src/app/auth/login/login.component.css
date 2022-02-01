@@ -6,11 +6,19 @@ h2{
     color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
+option{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
 p{
     color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
 .reset-pass-link{
     color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+label{
+	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }

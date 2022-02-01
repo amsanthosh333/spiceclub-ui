@@ -42,12 +42,19 @@
 
 
                                     <div class="shop-product-rightside-icons">
-                                        <span class="wishlist-icon">
+                                        <span class="wishlist-icon" *ngIf="(iswishlistt?.is_in_wishlist==false)">
                                             <a (click)="addtowishlist(Peoduct?.id)" data-tippy="Add to wishlist"
                                                 data-tippy-placement="left" data-tippy-inertia="true"
                                                 data-tippy-animation="shift-away" data-tippy-delay="50"
                                                 data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
                                                     class="ion-android-favorite-outline"></i></a>
+                                        </span>
+                                        <span class="wishlist-icon" *ngIf="(iswishlistt?.is_in_wishlist==true)">
+                                            <a data-tippy="Add to wishlist"
+                                                data-tippy-placement="left" data-tippy-inertia="true"
+                                                data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
+                                                    class="ion-android-favorite" style="color: red;"></i></a>
                                         </span>
                                         <!-- <span class="enlarge-icon">
 											<a class="btn-zoom-popup" data-tippy="Click to enlarge" data-tippy-placement="left"
@@ -154,20 +161,34 @@
                                     <!--=======  End of shop product short description  =======-->
 
                                     <!--=======  shop product size block  =======-->
-                                    <div class="shop-product__block shop-product__block--size mb-10">
-                                        <div class="shop-product__block__title">Brand: </div>
-                                        <div class="shop-product__block__value col-12 ">
+                                    <div class="shop-product__block shop-product__block--size mb-10 ">
+                                        <div class="shop-product__block__title"  >Brand: </div>
+                                        <!-- <div class="shop-product__block__value ">
+                                            <span> {{Peoduct?.brand.name}} </span>
+                                        </div> -->
+                                        <div class="col-12">
+
+                                        
+                                        <div class="shop-product__block__value  ">
                                             <div class="row">
-                                                <div class="col-8 mt-2 ">
-                                                    <strong style="padding-left: 117px;"> {{Peoduct?.brand.name}}
+                                                <div class="col-2">
+
+                                                </div>
+                                                <div class="col-6 mt-2 " style="position: relative;height: 100px; width: 400px;">
+                                                    <strong style="margin: 0;
+                                                    position: absolute;
+                                                    top: 50%;
+                                                    transform: translateY(-50%);"> {{Peoduct?.brand.name}}
                                                     </strong>
                                                 </div>
-                                                <div class="col-4">
+                                                <div class="col-4" style="height: 100px; width: 200px;">
                                                     <img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct?.brand.logo}}"
-                                                        style="height: 40px; width: 40px; ">
+                                                        style="height: 100%; width:100%; ">
                                                 </div>
                                             </div>
                                         </div>
+                                    </div>
+                                      
                                     </div>
                                     <div class="shop-product__block shop-product__block--size mb-20">
                                         <div class="shop-product__block__title">Varient price: </div>
@@ -177,7 +198,7 @@
 
                                     </div>
 
-                                    <div class="shop-product__block shop-product__block--size mb-20">
+                                    <div class="shop-product__block shop-product__block--size mb-40 mt-40">
 
                                         <div class="shop-product__block__title" *ngFor="let a of choice">{{a.title}}:
                                         </div>
@@ -210,7 +231,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="shop-product__block shop-product__block--size mb-20">
+                                    <div class="shop-product__block shop-product__block--size mb-20 mt-40">
                                         <div class="shop-product__block__title">Total price: </div>
                                         <div class="shop-product__block__value ">
                                             <span style="color: red;"> Rs{{totalprice}}</span><i *ngIf="">including

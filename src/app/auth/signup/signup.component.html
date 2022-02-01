@@ -138,14 +138,14 @@
 				</div>
 				<ng-template #addRecord let-modal>
                     <div class="modal-header editRowModal">
-                        <h4 class="modal-title" id="modal-basic-title">
+                        <h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
                             <div class="table-modal-header">
                                 <div class="modal-about">
                                     <div class="font-weight-bold p-t-10 font-17">
-                                        Waiting For Otp</div>
+                                        Waiting For OTP </div>
                                 </div>
                             </div>
-                        </h4>
+                        </h6>
                         <!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
                             <span aria-hidden="true"><i class="material-icons">close</i></span>
                         </button> -->
@@ -163,13 +163,15 @@
                             </div>
                         
                             <!-- <div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error1}}</div> -->
-                            <div class="modal-footer">
-                              <button type="submit" class="btn btn-primary">Verify</button>
-                             
+                            <div class="modal-footer" style="justify-content: center;">
+								<h6 class="form-text text-danger"style="height: 12px;">
+									<span *ngIf="error3">{{error3}}</span></h6>
+                              <button type="submit" class="btn btn-danger">&nbsp;Verify&nbsp;</button>
+							  <button  class="btn btn-success"  (click)="resend()">Resend</button>
                               <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
                             </div>
                           </form>
-                          <button  class="btn btn-success"  (click)="resend()">Resend</button>
+                          
                         </div> 
                 </ng-template>
 				<div class="col-lg-2">

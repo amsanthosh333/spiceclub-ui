@@ -183,6 +183,8 @@ onproceed(form: FormGroup) {
     console.log("edata4",edata4);
     
     this.request.razsuccess(edata4).subscribe((response:any)=>{
+
+      
       console.log("success response",response);
       if(response.message=="Payment is successful"){ 
         console.log(response.message);

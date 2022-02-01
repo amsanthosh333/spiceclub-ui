@@ -137,11 +137,11 @@
                                     <div class="post-info d-flex flex-wrap align-items-center mb-50">
                                         <div class="post-user">
                                             <i class="ion-android-person"></i> By
-                                            <a class="textopacity"> {{Peoduct.added_by}}</a>
+                                            <a class="textopacity"> {{Peoduct?.added_by}}</a>
                                         </div>
                                         <div class="post-date mb-0 pl-30">
                                             <i class="ion-android-star"></i>
-                                            <a class="textopacity"> {{Peoduct.rating}} Ratings </a>
+                                            <a class="textopacity"> {{Peoduct?.rating}} Ratings </a>
                                         </div>
 
                                         <div class="post-comment pl-30">
@@ -312,9 +312,12 @@
 
                                                                 <!--=======  single comment  =======-->
 
-                                                                <div class="single-comment"
-                                                                    *ngFor="let comm of Comments">
-                                                                    <div class="single-comment__image">
+                                                                <div class="single-comment"  *ngFor="let comm of Comments">
+                                                                    <div class="single-comment__image" *ngIf="(comm.avatar=='')">
+                                                                        <img src="https://www.pngitem.com/pimgs/m/504-5040528_empty-profile-picture-png-transparent-png.png"
+                                                                            class="img-fluid" style="height: 65px;" alt="">
+                                                                    </div>
+                                                                    <div class="single-comment__image" *ngIf="(comm.avatar!=='')">
                                                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
                                                                             class="img-fluid" style="height: 70px;"
                                                                             alt="">
