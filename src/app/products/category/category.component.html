@@ -22,12 +22,11 @@
                 <div class="col-12 col-lg-12 col-md-5 d-none d-md-block pt-1" >
                     <!--=======  fitler titles  =======-->
                     <div class="filter-title filter-title--type-two">
-                        <ul class="product-filter-menu" style="text-align: center; margin-bottom: 0px;">
-                            <li *ngFor="let img of  Topcat;let i = index"
-                                [ngClass]="{'active': selectedItem === img.id}" (click)="viewcatprod(img,img.id,1,i)">
+                        <ul class="product-filter-menu" style=" margin-bottom: 0px;">
+                            <li *ngFor="let img of  Topcat;let i = index" style="padding-left: 0px;"
+                                [ngClass]="{'active': selectedItem === img.id}" (click)="viewcatprod2(img.id,i)">
                                 {{img.name}}</li>
                         </ul>
-
                     </div>
                     <!--=======  End of fitler titles   =======-->
                 </div>
@@ -68,11 +67,11 @@
                             <!--=======  single sidebar widget  =======-->
 
 
-                            <div class="single-filter-widget  mb-40">
+                            <div class="single-filter-widget  mb-40" *ngIf="(Subcat.length!==0)">
                                 <h2 class="single-sidebar-widget--title mb-2">Sub Category</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;">
-                                    <li class="has-children" *ngFor="let cat of Subcat;let i = index" (click)="viewsubcatprod(cat.id,1,i)"
+                                    style="padding-left: 0px;height: 275px;overflow-y: auto;">
+                                    <li class="has-children" *ngFor="let cat of Subcat;let i = index" (click)="viewsubcatprod2(cat.id,i)"
                                         [ngClass]="{'active': subItem === i}">
                                         {{cat.name}}
                                     </li>
@@ -80,12 +79,12 @@
                             </div>
 
 
-                            <div class="single-sidebar-widget mb-20">
+                            <div class="single-sidebar-widget mb-20" style="height: 200px;">
                                 <h2 class="single-sidebar-widget--title mb-2">All Category</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;">
+                                    style="padding-left: 0px;height: 350px;overflow-y: auto;">
                                     <li class="has-children" *ngFor="let img of Allcat;let i=index"
-                                        [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod(img,img.id,1,i)">
+                                        [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod3(img.id,i)">
                                         {{img.name}}
                                     </li>
                                 </ul>
@@ -208,7 +207,7 @@
                         <div class="row product-isotope shop-product-wrap four-column">
 
                             <!--=======  single product  =======-->
-                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let img of Product">
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let img of Product;let i = index">
                                 <div class="single-product">
                                     <!--=======  single product image  =======-->
 
@@ -227,16 +226,24 @@
                                         <div class="single-product__floating-badges">
                                             <!-- <span class="onsale">-10%</span> -->
                                             <span class="hot" *ngIf="img.has_discount==true">hot</span>
+                                            <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
                                         </div>
 
                                         <div class="single-product__floating-icons">
                                             <!-- (click)="addtowishlist(img.id)" -->
-                                            <span class="wishlist" (click)="addtowishlist(img.id)"><a
-                                                    data-tippy="Add to wishlist" data-tippy-inertia="true"
-                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
+                                            <span class="wishlist" *ngIf="(img.wishlist==1)"><a  data-tippy="Add to wishlist"
+                                                data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                data-tippy-placement="left">
+                                                <i [ngClass]="{'ion-android-favorite':likeddd[i]===true, 'ion-android-favorite-outline':likeddd[i]===false}"
+                                                (click)='toggle(img,i)'  style="color: rgb(214, 5, 5);"></i></a></span>
+
+                                                <span class="wishlist" *ngIf="(img.wishlist==0)"><a  data-tippy="Add to wishlist"
+                                                    data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
                                                     data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                    data-tippy-placement="left"><i
-                                                        class="ion-android-favorite-outline"></i></a></span>
+                                                    data-tippy-placement="left">
+                                                    <i  [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
+                                                    (click)='toggledelete(img,i)'  style="color: rgb(214, 5, 5);"></i></a></span>
 
                                             <span class="quickview" (click)="quickview(img.id,openRecord)"><a
                                                     class="cd-trigger" data-tippy="Quick View" data-tippy-inertia="true"
@@ -261,72 +268,7 @@
                                     </div>
                                     <!--=======  End of single product content  =======-->
                                 </div>
-                                <div class="single-product--list">
-                                    <!--=======  single product image  =======-->
-
-                                    <div class="single-product__image">
-                                        <a class="image-wrap" href="product_detail.html">
-                                            <img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
-                                            <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
-                                        </a>
-
-                                        <div class="single-product__floating-badges">
-                                            <span class="onsale">-10%</span>
-                                            <span class="hot">hot</span>
-                                        </div>
-
-                                        <div class="single-product__floating-icons">
-                                            <span class="wishlist"><a href="#" data-tippy="Add to wishlist"
-                                                    data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                    data-tippy-delay="50" data-tippy-arrow="true"
-                                                    data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-                                                        class="ion-android-favorite-outline"></i></a></span>
-
-                                            <span class="compare"><a href="#" data-tippy="Compare"
-                                                    data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                    data-tippy-delay="50" data-tippy-arrow="true"
-                                                    data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-                                                        class="ion-ios-shuffle-strong"></i></a></span>
-
-                                            <span class="quickview"><a class="cd-trigger" href="#qv-1"
-                                                    data-tippy="Quick View" data-tippy-inertia="true"
-                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                    data-tippy-placement="bottom"><i
-                                                        class="ion-ios-search-strong"></i></a></span>
-                                        </div>
-
-
-
-                                    </div>
-
-                                    <!--=======  End of single product image  =======-->
-
-                                    <!--=======  single product content  =======-->
-
-                                    <div class="single-product__content">
-
-                                        <div class="title">
-                                            <h3> <a href="product_detail.html">High-waist Trousers</a></h3>
-                                        </div>
-                                        <div class="price">
-                                            <span class="main-price discounted">Rs 160.00</span>
-                                            <span class="discounted-price">Rs 180.00</span>
-                                        </div>
-                                        <p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                                            Laudantium
-                                            consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente
-                                            eveniet consectetur
-                                            voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda
-                                            veritatis,
-                                        </p>
-
-                                        <a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
-
-                                    </div>
-
-                                    <!--=======  End of single product content  =======-->
-                                </div>
+                             
                             </div>
                         </div>
                         <div id="pgg" *ngIf="Product?.length!=0">
@@ -434,14 +376,14 @@
                                 <div class="single-category single-category--one wow zoomIn">
 
                                     <div class="single-category__image single-category__image--one"
-                                        style=" width:100%; height:200px;" (click)="viewctopcatprod2(img,img.id,1,i)">
+                                        style=" width:100%; height:200px;" (click)="viewctopcatprod4(img.id,i)">
                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
                                             class="img-fluid" alt="" style=" width:100%; height:100%;object-fit:cover">
                                     </div>
                                     <div class="single-category__content single-category__content--one mt-10 mb-10">
                                         <div class="title">
                                             <p>{{img.name}}</p>
-                                            <a (click)="viewctopcatprod2(img,img.id,1,i)" style="color: red;">view
+                                            <a (click)="viewctopcatprod4(img.id,i)" style="color: red;">view
                                                 {{img.name}}</a>
                                         </div>
                                     </div>

@@ -1,227 +1,258 @@
+<!--=======  breadcrumb area =======-->
 
-	<!--=======  breadcrumb area =======-->
+<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="breadcrumb-title">Login</h1>
 
-	<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="breadcrumb-title">Login</h1>
+				<!--=======  breadcrumb list  =======-->
 
-					<!--=======  breadcrumb list  =======-->
+				<ul class="breadcrumb-list" style="padding-left: 0px;">
+					<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+					<li class="breadcrumb-list__item breadcrumb-list__item--active">LOGIN</li>
+				</ul>
 
-					<ul class="breadcrumb-list" style="padding-left: 0px;">
-						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-						<li class="breadcrumb-list__item breadcrumb-list__item--active">LOGIN</li>
-					</ul>
+				<!--=======  End of breadcrumb list  =======-->
 
-					<!--=======  End of breadcrumb list  =======-->
-
-				</div>
 			</div>
 		</div>
 	</div>
+</div>
 
-	<!--=======  End of breadcrumb area =======-->
+<!--=======  End of breadcrumb area =======-->
 
-	<!--=============================================
+<!--=============================================
     =            shop page content         =
     =============================================-->
 
 
 
 
-	<div class="login-area mb-20 mb-md-70 mb-sm-70 mb-xs-70 mb-xxs-70 mt-2">
-		<div class="container">
-			<div class="row">
-                <div class="col-lg-2">
-				
-				</div>
-				<div class="col-lg-8 mb-md-50 mb-sm-50">
-					<div class="lezada-form login-form">
-						<form  [formGroup]="loginForm" (ngSubmit)="onSubmit(otpRecord)">
-							<div class="row">
-								<div class="col-lg-12">
-									<!--=======  login title  =======-->
-							
+<div class="login-area mb-20 mb-md-70 mb-sm-70 mb-xs-70 mb-xxs-70 mt-2">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-2">
 
-									<div class="section-title section-title--login text-center mb-50">
-										<h2 class="mb-20">Login</h2>
-										<p>Great to have you back!</p>
-									</div>
+			</div>
+			<div class="col-lg-8 mb-md-50 mb-sm-50">
+				<div class="lezada-form login-form">
+					<form [formGroup]="loginForm" (ngSubmit)="onSubmit(otpRecord)">
+						<div class="row">
+							<div class="col-lg-12">
+								<!--=======  login title  =======-->
 
-									<!--=======  End of login title  =======-->
-								</div>
-								<div class="col-lg-12 mb-60">
-									<input type="text" placeholder="email address" formControlName="username" required>
-                  
-								</div>
-								<div class="col-lg-12 mb-60">
-									<input type="password" placeholder="Password"  formControlName="password" required>
-								</div>
-							
-								<div class="col-lg-12 text-center mb-30">
-									<h6 class="form-text text-danger"
-									style="height: 12px;">
-								   <span *ngIf="error1">{{error1}}</span></h6>
-									<button class="lezada-button lezada-button--medium" >login</button>
+
+								<div class="section-title section-title--login text-center mb-50">
+									<h2 class="mb-20">Login</h2>
+									<p>Great to have you back!</p>
 								</div>
 
-								<!-- <div class="col-lg-12 ">
+								<!--=======  End of login title  =======-->
+							</div>
+							<div class="col-lg-12 mb-60">
+								<input type="text" placeholder="email address" formControlName="username" required>
+
+							</div>
+							<div class="col-lg-12 mb-60">
+								<input type="password" placeholder="Password" formControlName="password" required>
+							</div>
+
+							<div class="col-lg-12 text-center mb-30">
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error1">{{error1}}</span>
+								</h6>
+								<button class="lezada-button lezada-button--medium">login</button>
+							</div>
+
+							<!-- <div class="col-lg-12 ">
 									<input type="checkbox"> <span class="remember-text">Remember me</span>
 									
 								</div> -->
-                                <div class="col-lg-12 text-center mb-30">
-									<a  class="reset-pass-link" (click)="forgotpass(Forgotpassword)">Lost your password?</a>
-								</div>
-                                <div class="col-lg-12 text-center mb-30">
-                                    <p>If you don’t have an account, register now!</p>
-									<button class="lezada-button lezada-button--medium"  type="button"><a href="/signup" style="text-decoration: none; color: rgb(252, 248, 248);">signup</a> </button>
-								</div>
-                                <div class="col-lg-12 text-center mb-30">
-									
-									<a  class="reset-pass-link" (click)="loginotp(loginotpRequest)">Login with OTP</a>
-                                    <H6>OR</H6>
-                                    <i class="fa fa-facebook" style="color: rgb(8, 96, 228);"></i> <i class="fa fa-google" style="color: rgb(194, 207, 7);"></i> 
-								</div>
+							<div class="col-lg-12 text-center mb-30">
+								<a class="reset-pass-link" (click)="forgotpass(Forgotpassword)">Lost your password?</a>
 							</div>
-						</form>
+							<div class="col-lg-12 text-center mb-30">
+								<p>If you don’t have an account, register now!</p>
+								<button class="lezada-button lezada-button--medium" type="button"><a href="/signup"
+										style="text-decoration: none; color: rgb(252, 248, 248);">signup</a> </button>
+							</div>
+							<div class="col-lg-12 text-center ">
 
-						<ng-template #otpRecord let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Waiting for OTP </div>
-										</div>
+								<a class="reset-pass-link" (click)="loginotp(loginotpRequest)">Login with OTP</a>
+								<H6>OR</H6>
+								<!-- <i class="fa fa-facebook" style="color: rgb(8, 96, 228);"></i> <i class="fa fa-google" style="color: rgb(194, 207, 7);"></i>  -->
+							</div>
+
+							<!-- <div class="google-btn" >
+								<div class="google-icon-wrapper" (click)="loginWithGoogle(byertype)" >
+									<img class="google-icon"
+										src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
+								</div>
+								<p class="btn-text"><b>Sign in with google</b></p>
+							</div> -->
+							
+							<div style="text-align: center;">
+								<button class="loginBtn loginBtn--facebook" type="button" (click)="loginWithFacebook(byertype)" >
+									Login with Facebook
+								</button>
+
+								<button class="loginBtn loginBtn--google" type="button" (click)="loginWithGoogle(byertype)">
+									Login with Google
+								</button>
+							</div>
+
+
+							<!-- <button (click)="loginWithGoogle(byertype)" type="button" class="btn btn-warning">
+								Googlelogin</button> 
+							 <button (click)="loginWithFacebook(byertype)" type="button" class="btn btn-primary">
+								Facebooklogin</button> -->
+						</div>
+					</form>
+
+					<ng-template #otpRecord let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Waiting for OTP </div>
 									</div>
-								</h6>
-								<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								</div>
+							</h6>
+							<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
 									<span aria-hidden="true"><i class="material-icons">close</i></span>
 								</button> -->
-							</div>
-							 <div class="modal-body">
-								 <h6 style="color: green;"> Check your mail or phone</h6>
-								  <form class="register-form" [formGroup]="otpform" (ngSubmit)="onAddRowSave(otpform)">
-									<div class="row">
-									  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+						</div>
+						<div class="modal-body">
+							<h6 style="color: green;"> Check your mail or phone</h6>
+							<form class="register-form" [formGroup]="otpform" (ngSubmit)="onAddRowSave(otpform)">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
 										<label>Verification Code<span class="text-danger">*</span></label>
-										<input type="text" class="form-control" placeholder="otp" formControlName="otp" required>
-										 <!-- <small class="form-text text-danger"
+										<input type="text" class="form-control" placeholder="otp" formControlName="otp"
+											required>
+										<!-- <small class="form-text text-danger"
 										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
 										  required</small>  -->
-									  </div>                      
 									</div>
-								
-									<!-- <div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error1}}</div> -->
-									<h6 class="form-text text-danger"style="height: 12px;">
-								   <span *ngIf="error2">{{error2}}</span></h6>
-									<div class="modal-footer" style="justify-content: center;">
-									  <button type="submit" class="btn btn-primary ">  &nbsp; Verify&nbsp;</button>
-									  <button  class="btn btn-danger"  type="button" (click)="resend()">Resend</button>  
-									  <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+								</div>
+
+								<!-- <div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error1}}</div> -->
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error2">{{error2}}</span>
+								</h6>
+								<div class="modal-footer" style="justify-content: center;">
+									<button type="submit" class="btn btn-primary "> &nbsp; Verify&nbsp;</button>
+									<button class="btn btn-danger" type="button" (click)="resend()">Resend</button>
+									<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+								</div>
+							</form>
+
+						</div>
+					</ng-template>
+					<!-- <p>you can logout now</p> <button (click)="logout1()">Logout</button> -->
+					<ng-template #loginotpRequest let-modal>
+						<div class="modal-header editRowModal">
+							<h4 class="modal-title" id="modal-basic-title" style="padding: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Login with OTP</div>
 									</div>
-								  </form>
-								  
-								</div> 
-						</ng-template>
-						<!-- <p>you can logout now</p> <button (click)="logout1()">Logout</button> -->
-						<ng-template #loginotpRequest let-modal>
-							<div class="modal-header editRowModal">
-								<h4 class="modal-title" id="modal-basic-title"  style="padding: 0px;">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-											   Login with OTP</div>
-										</div>
-									</div>
-								</h4>
-								<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								</div>
+							</h4>
+							<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
 									<span aria-hidden="true"><i class="material-icons">close</i></span>
 								</button> -->
-							</div>
-							 <div class="modal-body">
-								<p class="form-text" style="color: green; ">* Enter your Registered mobile   number</p>
-								  <form class="register-form" [formGroup]="loginotpform" (ngSubmit)="requestloginotp(loginotpform,loginotpverify)">
-									<div class="row">
-									  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+						</div>
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">* Enter your Registered mobile number</p>
+							<form class="register-form" [formGroup]="loginotpform"
+								(ngSubmit)="requestloginotp(loginotpform,loginotpverify)">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
 										<!-- <label>Mobile<span class="text-danger">*</span></label> -->
-										<input type="text" class="form-control"  formControlName="phone" required>
-									  </div>                      
+										<input type="text" class="form-control" formControlName="phone" required>
 									</div>
-									<h6 class="form-text text-danger"style="height: 12px;">
-										<span *ngIf="error3">{{error3}}</span></h6>
-									<div class="modal-footer" style="justify-content: center; border: none;">	
-									  <button type="submit" class="btn btn-danger">Send OTP</button>
-									</div>
-								  </form>
-								  <!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
-								</div> 
-								
-						  </ng-template>
-
-						  <ng-template #loginotpverify let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Waiting for OTP</div>
-										</div>
-									</div>
+								</div>
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error3">{{error3}}</span>
 								</h6>
-								<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-									<span aria-hidden="true"><i class="material-icons"></i></span>
-								</button>
-							</div>
-							 <div class="modal-body">
-								<p class="form-text" style="color: green; ">* OTP code is sent to Mobile </p>
-								  <form class="register-form" [formGroup]="loginverifyform" (ngSubmit)="verifyloginotp(loginverifyform)">
-									<div class="row">
-									  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+								<div class="modal-footer" style="justify-content: center; border: none;">
+									<button type="submit" class="btn btn-danger">Send OTP</button>
+								</div>
+							</form>
+							<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
+						</div>
+
+					</ng-template>
+
+					<ng-template #loginotpverify let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Waiting for OTP</div>
+									</div>
+								</div>
+							</h6>
+							<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								<span aria-hidden="true"><i class="material-icons"></i></span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">* OTP code is sent to Mobile </p>
+							<form class="register-form" [formGroup]="loginverifyform"
+								(ngSubmit)="verifyloginotp(loginverifyform)">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
 										<label>OTP<span class="text-danger">*</span></label>
-										<input type="text" class="form-control" placeholder="" formControlName="otp_code" required>
-									  </div>                      
+										<input type="text" class="form-control" placeholder=""
+											formControlName="otp_code" required>
 									</div>
-									<h6 class="form-text text-danger"style="height: 12px;">
-										<span *ngIf="error5">{{error5}}</span></h6>
-									<div class="modal-footer"  style="justify-content: center; border: none;">
-									  <button type="submit" class="btn btn-danger">login </button>
-									</div>
-								  </form>
-								  <!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
-								</div> 
-						  </ng-template>
-
-						  <!-- forget form -->
-						  <ng-template #Forgotpassword let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;" >
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Forgot Password</div>
-										</div>
-									</div>
+								</div>
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error5">{{error5}}</span>
 								</h6>
-								<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-									<span aria-hidden="true"><i class="material-icons"></i></span>
-								</button>
-							</div>
-							 <div class="modal-body">
-								<p class="form-text" style="color: green; ">*We will send a code to reset your password </p>
-								<form class="validate-form" [formGroup]="forgotForm"   (ngSubmit)="onSubmit2(addRecord)">
-									<div class="row">
-									  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+								<div class="modal-footer" style="justify-content: center; border: none;">
+									<button type="submit" class="btn btn-danger">login </button>
+								</div>
+							</form>
+							<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
+						</div>
+					</ng-template>
+
+					<!-- forget form -->
+					<ng-template #Forgotpassword let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Forgot Password</div>
+									</div>
+								</div>
+							</h6>
+							<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								<span aria-hidden="true"><i class="material-icons"></i></span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">*We will send a code to reset your password </p>
+							<form class="validate-form" [formGroup]="forgotForm" (ngSubmit)="onSubmit2(addRecord)">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
 										<label>Email or phone<span class="text-danger">*</span></label>
-										<input type="text" class="form-control " formControlName="Mobile" required> 
-									  </div>    
-									  <div class="col-lg-12 ">
+										<input type="text" class="form-control " formControlName="Mobile" required>
+									</div>
+									<div class="col-lg-12 ">
 										<label for="regPassword">Send code by<span class="required">*</span> </label>
 										<div class="form-group position-relative">
-											
-											<select class="form-control pl-5"  formControlName="Type" required>
-												
+
+											<select class="form-control pl-5" formControlName="Type" required>
+
 												<option *ngFor="let meet of meetings" [value]="meet.id">
 													{{meet.value}}
 												</option>
@@ -231,81 +262,115 @@
 										*Please select</h6> -->
 										</div>
 									</div>
-									<h6 class="form-text text-danger"style="height: 12px;">
-										<span *ngIf="error6">{{error6}}</span></h6>
-									<div class="modal-footer"  style="justify-content: center; border: none;">
-									  <button type="submit" class="btn btn-danger">Send code </button>
+									<h6 class="form-text text-danger" style="height: 12px;">
+										<span *ngIf="error6">{{error6}}</span>
+									</h6>
+									<div class="modal-footer" style="justify-content: center; border: none;">
+										<button type="submit" class="btn btn-danger">Send code </button>
 									</div>
+								</div>
+							</form>
+							<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
+						</div>
+					</ng-template>
+					<!-- forgot form2 -->
+					<ng-template #addRecord let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Enter code and new password</div>
 									</div>
-								  </form>
-								  <!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
-								</div> 
-						  </ng-template>
-                         <!-- forgot form2 -->
-						  <ng-template #addRecord let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-											   Enter code and new password</div>
+								</div>
+							</h6>
+							<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								<span aria-hidden="true"><i class="material-icons"></i></span>
+							</button>
+						</div>
+						<!-- (ngSubmit)="onAddRowSave(passwordform)" [formGroup]="passwordform" -->
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">*A code is sent </p>
+							<form class="register-form" [formGroup]="passwordForm" (ngSubmit)="onAddRowSave2()">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>Verification Code<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" formControlName="otp" required>
+										<!-- <small class="form-text text-danger"
+										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
+										  required</small>  -->
+									</div>
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>New password<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" formControlName="newpassword" required>
+										<!-- <small class="form-text text-danger"
+										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
+										  required</small>  -->
+									</div>
+								</div>
+
+								<div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error7}}</div>
+								<div class="modal-footer" style="border: none;text-align: center;">
+									<button type="submit" class="btn btn-danger">Verify &nbsp;</button>
+									<button class="btn btn-success" (click)="resend2()">Resend</button>
+
+									<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+								</div>
+							</form>
+
+						</div>
+					</ng-template>
+
+					<!-- select buyertype -->
+					<ng-template #byertype let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title" style="padding-bottom: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Need to select buyertype</div>
+									</div>
+								</div>
+							</h6>
+						</div>
+						<div class="modal-body">
+							<form class="register-form" [formGroup]="byertypeform"
+								(ngSubmit)="submitbyertype(byertypeform)">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group position-relative">
+											<label>Buyer type <span class="text-danger">*</span></label>
+											<select class="form-control pl-5" formControlName="buyer_type" required>
+												<option value="" selected disabled>Please select</option>
+												<option *ngFor="let reg of buyer" [value]="reg.id">
+													{{reg.name}}
+												</option>
+											</select>
 										</div>
 									</div>
-								</h6>
-								<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-									<span aria-hidden="true"><i class="material-icons"></i></span>
-								</button>
-							</div>
-							<!-- (ngSubmit)="onAddRowSave(passwordform)" [formGroup]="passwordform" -->
-							 <div class="modal-body">
-								<p class="form-text" style="color: green; ">*A code is sent </p>
-								  <form class="register-form" [formGroup]="passwordForm" (ngSubmit)="onAddRowSave2()" >
-									<div class="row">
-									  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-										<label>Verification Code<span class="text-danger">*</span></label>
-										<input type="text" class="form-control"  formControlName="otp" required>
-										 <!-- <small class="form-text text-danger"
-										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
-										  required</small>  -->
-									  </div>    
-									  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-										<label>New password<span class="text-danger">*</span></label>
-										<input type="text" class="form-control"  formControlName="newpassword" required>
-										 <!-- <small class="form-text text-danger"
-										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
-										  required</small>  -->
-									  </div>                   
-									</div>
-								
-									<div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error7}}</div>
-									<div class="modal-footer" style="border: none;text-align: center;">
-									  <button type="submit" class="btn btn-danger">Verify &nbsp;</button>
-									  <button  class="btn btn-success"  (click)="resend2()">Resend</button>
-									
-									  <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
-									</div>
-								  </form>
-								  
-								</div> 
-						</ng-template>
-					</div>
+								</div>
+								<div class="modal-footer" style="justify-content: center;">
+									<button type="submit" style="width: 200px;" class="btn btn-danger">save</button>
+								</div>
+							</form>
+
+						</div>
+					</ng-template>
 				</div>
-				<div class="col-lg-2">
-				
-				</div>
+			</div>
+			<div class="col-lg-2">
+
 			</div>
 		</div>
 	</div>
+</div>
 
 
-	<!--=============================================
+<!--=============================================
 	=            footer area         =
 	=============================================-->
 
-	
-	
-
-	<!--=====  End of footer area  ======-->
 
 
-   
+
+<!--=====  End of footer area  ======-->

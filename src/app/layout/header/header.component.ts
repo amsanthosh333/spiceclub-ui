@@ -9,11 +9,13 @@ import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription} from 'rxjs'
   declare var jQuery: any;
+  
 // declare var $: any;
 // import 'jqueryui';
 // import  $ from 'jquery';
 import * as $ from 'jquery';
 import { SharedService } from 'src/app/services/shared.service';
+import { AuthService } from 'src/app/services/auth.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -49,15 +51,23 @@ export class HeaderComponent implements OnInit {
    ClickEventSubscription!:Subscription;
 
   constructor(private router: Router,private fb: FormBuilder,private toastr: ToastrService,private request: RequestService, 
-    private modalService: NgbModal,private sharedService: SharedService ) {
+    private modalService: NgbModal,private sharedService: SharedService, private authService: AuthService ) {
 
-      this.ClickEventSubscription=this.sharedService.getClickEvent().subscribe(()=>{
-        this.viewwishlist();
-        this. viewcartcount();
-        this. viewcart();
-        this.viewcart3();
-
-      })
+      if(this.userid!==0){
+        this.ClickEventSubscription=this.sharedService.getClickEvent().subscribe(()=>{
+          this.viewwishlist();
+          this. viewcartcount();
+          this. viewcart();
+          this.viewcart3();
+  
+        })
+      }
+      else{
+        this.currentUserSubject = new BehaviorSubject<User>(
+          JSON.parse(localStorage.getItem('currentUser')||'{}')     
+        );
+      }
+     
       
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser')||'{}')     
@@ -70,19 +80,20 @@ export class HeaderComponent implements OnInit {
        this.tokentype=this.currentdetail.token_type;
        console.log("currentuserid=", this.userid);
 
-       if(this.userid==Number){
-        this.userlogin=true;
+       if(this.userid==undefined){
+        this.userid=0;
        }
-       else{
-        this.userlogin=false;
-       }
+       
     }
 
   ngOnInit(): void {
+    
+    if(this.userid!==0){
     this.viewwishlist();
     this. viewcartcount();
     this. viewcart();
     this.viewcart3();
+  }
 
     this.search = this.fb.group({ 
       key: [''],
@@ -160,7 +171,10 @@ export class HeaderComponent implements OnInit {
           });
         };
         init();
-      });
+        
+      }
+      );
+      
 
     ( ($) => {
       ("use strict");
@@ -311,12 +325,12 @@ export class HeaderComponent implements OnInit {
     
       /*----------  multilevel menu  ----------*/
     
-      // $("#dl-menu").dlmenu({
-      //   animationClasses: {
-      //     classin: "dl-animate-in-2",
-      //     classout: "dl-animate-out-2"
-      //   }
-      // });
+      $("#dl-menu").dlmenu({
+        animationClasses: {
+          classin: "dl-animate-in-2",
+          classout: "dl-animate-out-2"
+        }
+      });
     
       /*----------  overlay menu   ----------*/
     
@@ -361,13 +375,13 @@ export class HeaderComponent implements OnInit {
       });
     
       /*----------   Mailchimp  ----------*/
-      $("#mc-form").ajaxChimp({
-        language: "en",
-        callback: mailChimpResponse,
-        // ADD YOUR MAILCHIMP URL BELOW HERE!
-        url:
-          "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
-      });
+      // $("#mc-form").ajaxChimp({
+      //   language: "en",
+      //   callback: mailChimpResponse,
+      //   // ADD YOUR MAILCHIMP URL BELOW HERE!
+      //   url:
+      //     "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
+      // });
     
       function mailChimpResponse(resp: { result: string; msg: string; }) {
         if (resp.result === "success") {
@@ -382,13 +396,13 @@ export class HeaderComponent implements OnInit {
         }
       }
     
-      $("#mc-form-2").ajaxChimp({
-        language: "en",
-        callback: mailChimpResponse2,
-        // ADD YOUR MAILCHIMP URL BELOW HERE!
-        url:
-          "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
-      });
+      // $("#mc-form-2").ajaxChimp({
+      //   language: "en",
+      //   callback: mailChimpResponse2,
+      //   // ADD YOUR MAILCHIMP URL BELOW HERE!
+      //   url:
+      //     "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
+      // });
     
       function mailChimpResponse2(resp: { result: string; msg: string; }) {
         if (resp.result === "success") {
@@ -506,15 +520,15 @@ export class HeaderComponent implements OnInit {
       var $grid = $(".grid-item");
       $grid.hide();
     
-      $masonry.imagesLoaded(function () {
-        $grid.fadeIn();
-        $masonry.masonry({
-          itemSelector: ".grid-item",
-          columnWidth: ".grid-item--width2",
-          percentPosition: true
-          //gutter: 10
-        });
-      });
+      // $masonry.imagesLoaded(function () {
+      //   $grid.fadeIn();
+      //   $masonry.masonry({
+      //     itemSelector: ".grid-item",
+      //     columnWidth: ".grid-item--width2",
+      //     percentPosition: true
+      //     //gutter: 10
+      //   });
+      // });
     
       /*----------  creative home masonry  ----------*/
     
@@ -522,16 +536,16 @@ export class HeaderComponent implements OnInit {
       var $gridCreativeHome = $(".grid-item");
       $grid.hide();
     
-      var $masonryCreativeHome = $(".masonry-category-layout--creativehome");
-      $masonryCreativeHome.imagesLoaded(function () {
-        $gridCreativeHome.fadeIn();
-        $masonryCreativeHome.masonry({
-          itemSelector: ".grid-item",
-          columnWidth: ".grid-item--width2",
-          percentPosition: true
-          //gutter: 30
-        });
-      });
+      // var $masonryCreativeHome = $(".masonry-category-layout--creativehome");
+      // $masonryCreativeHome.imagesLoaded(function () {
+      //   $gridCreativeHome.fadeIn();
+      //   $masonryCreativeHome.masonry({
+      //     itemSelector: ".grid-item",
+      //     columnWidth: ".grid-item--width2",
+      //     percentPosition: true
+      //     //gutter: 30
+      //   });
+      // });
     
       /*----------  blog post masonry  ----------*/
     
@@ -539,16 +553,16 @@ export class HeaderComponent implements OnInit {
       var $gridBlogPost = $(".grid-item");
       $grid.hide();
     
-      var $masonryBlogPost = $(".blog-post-wrapper--masonry");
-      $masonryBlogPost.imagesLoaded(function () {
-        $gridBlogPost.fadeIn();
-        $masonryBlogPost.masonry({
-          itemSelector: ".grid-item",
-          columnWidth: ".grid-item",
-          percentPosition: true
-          //gutter: 30
-        });
-      });
+      // var $masonryBlogPost = $(".blog-post-wrapper--masonry");
+      // $masonryBlogPost.imagesLoaded(function () {
+      //   $gridBlogPost.fadeIn();
+      //   $masonryBlogPost.masonry({
+      //     itemSelector: ".grid-item",
+      //     columnWidth: ".grid-item",
+      //     percentPosition: true
+      //     //gutter: 30
+      //   });
+      // });
     
       /*----------  WOW JS activation  ----------*/
     
@@ -583,50 +597,50 @@ export class HeaderComponent implements OnInit {
     
       jQuery(window).on("load", function () {
         // User Changeable Access
-        var instagramFeedGrid = function () {
-          $.instagramFeed({
-            username: "creative.devitems",
-            container: "#instagramFeed",
-            display_profile: false,
-            display_biography: false,
-            display_gallery: true,
-            callback: null,
-            styling: false,
-            items: 8
-          });
-        };
+        // var instagramFeedGrid = function () {
+        //   $.instagramFeed({
+        //     username: "creative.devitems",
+        //     container: "#instagramFeed",
+        //     display_profile: false,
+        //     display_biography: false,
+        //     display_gallery: true,
+        //     callback: null,
+        //     styling: false,
+        //     items: 8
+        //   });
+        // };
     
-        instagramFeedGrid();
+        // instagramFeedGrid();
     
-        var instagramFeedSlider = function () {
-          $.instagramFeed({
-            username: "portfolio.devitems",
-            container: "#instagramFeedTwo",
-            display_profile: false,
-            display_biography: false,
-            display_gallery: true,
-            callback: null,
-            styling: false,
-            items: 8
-          });
-        };
+        // var instagramFeedSlider = function () {
+        //   $.instagramFeed({
+        //     username: "portfolio.devitems",
+        //     container: "#instagramFeedTwo",
+        //     display_profile: false,
+        //     display_biography: false,
+        //     display_gallery: true,
+        //     callback: null,
+        //     styling: false,
+        //     items: 8
+        //   });
+        // };
     
-        instagramFeedSlider();
+        // instagramFeedSlider();
     
-        var instagramFeedSliderTwo = function () {
-          $.instagramFeed({
-            username: "creative.devitems",
-            container: "#instagramFeedThree",
-            display_profile: false,
-            display_biography: false,
-            display_gallery: true,
-            callback: null,
-            styling: false,
-            items: 8
-          });
-        };
+        // var instagramFeedSliderTwo = function () {
+        //   $.instagramFeed({
+        //     username: "creative.devitems",
+        //     container: "#instagramFeedThree",
+        //     display_profile: false,
+        //     display_biography: false,
+        //     display_gallery: true,
+        //     callback: null,
+        //     styling: false,
+        //     items: 8
+        //   });
+        // };
     
-        instagramFeedSliderTwo();
+        // instagramFeedSliderTwo();
     
         $("#instagramFeedThree").on("DOMNodeInserted", function (e: { target: { className: string; }; }) {
           if (e.target.className === "instagram_gallery") {
@@ -767,13 +781,13 @@ export class HeaderComponent implements OnInit {
     
       /*----------  magnific popup  ----------*/
     
-      $(".popup-video").magnificPopup({
-        type: "iframe",
-        mainClass: "mfp-fade",
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false
-      });
+      // $(".popup-video").magnificPopup({
+      //   type: "iframe",
+      //   mainClass: "mfp-fade",
+      //   removalDelay: 160,
+      //   preloader: false,
+      //   fixedContentPos: false
+      // });
     
       /*----------  smooth scroll on shoppable home  ----------*/
     
@@ -1123,11 +1137,11 @@ export class HeaderComponent implements OnInit {
     
       /*----------  sticky sidebar   ----------*/
     
-      $(".sidebar-sticky").stickySidebar({
-        topSpacing: 90,
-        bottomSpacing: -90,
-        minWidth: 768
-      });
+      // $(".sidebar-sticky").stickySidebar({
+      //   topSpacing: 90,
+      //   bottomSpacing: -90,
+      //   minWidth: 768
+      // });
     
       /*----------  isotope  ----------*/
     
@@ -1148,7 +1162,7 @@ export class HeaderComponent implements OnInit {
     
       /*----------   Nice Select  ----------*/
     
-      $(".nice-select").niceSelect();
+      // $(".nice-select").niceSelect();
     
       /*----------  sidebar category dropdown  ----------*/
     
@@ -1180,24 +1194,24 @@ export class HeaderComponent implements OnInit {
     
       /*----------  price filter  ----------*/
     
-      $("#price-range").slider({
-        range: true,
-        min: 25,
-        max: 350,
-        values: [25, 350],
-        slide: function (event: any, ui: { values: string[]; }) {
-          $("#price-amount").val(
-            "Price: " + "$" + ui.values[0] + " - $" + ui.values[1]
-          );
-        }
-      });
-      $("#price-amount").val(
-        "Price: " +
-          "$" +
-          $("#price-range").slider("values", 0) +
-          " - $" +
-          $("#price-range").slider("values", 1)
-      );
+      // $("#price-range").slider({
+      //   range: true,
+      //   min: 25,
+      //   max: 350,
+      //   values: [25, 350],
+      //   slide: function (event: any, ui: { values: string[]; }) {
+      //     $("#price-amount").val(
+      //       "Price: " + "$" + ui.values[0] + " - $" + ui.values[1]
+      //     );
+      //   }
+      // });
+      // $("#price-amount").val(
+      //   "Price: " +
+      //     "$" +
+      //     $("#price-range").slider("values", 0) +
+      //     " - $" +
+      //     $("#price-range").slider("values", 1)
+      // );
     
       /*----------  product view mode  ----------*/
     
@@ -1441,8 +1455,8 @@ export class HeaderComponent implements OnInit {
       /*----------  lightgallery and zoom activation  ----------*/
     
       //zoom
-      $(".shop-product__big-image-gallery-slider .single-image").zoom();
-      $(".shop-product__big-image-gallery-sticky .single-image").zoom();
+      // $(".shop-product__big-image-gallery-slider .single-image").zoom();
+      // $(".shop-product__big-image-gallery-sticky .single-image").zoom();
     
       //lightgallery
       var productThumb = $(
@@ -1527,8 +1541,7 @@ export class HeaderComponent implements OnInit {
           bgSource = element.data("bg");
         element.css("background-image", "url(" + bgSource + ")");
       });
-    
-      /*=====  End of background image  ======*/
+   
     })(jQuery);
 
       }
@@ -1617,6 +1630,7 @@ compone(){
             console.log("deleted");
             this.viewcart();
             this.viewcart3();
+            this.viewcartcount();
             this.deleteRecordSuccess();
           }
           else{
@@ -1678,12 +1692,19 @@ compone(){
 
            logout1(){
             console.log("logggouttt") 
-            this.request.logout().subscribe( res=>{
+            this.authService.logout().subscribe( res=>{
               console.log("res",res);
-              this.router.navigate(['/login']);
+              this.router.navigate(['/login'])
+              .then(() => {
+                window.location.reload();
+              });
+             
               // if(res.message == "Successfully logged out"){
               // this.router.navigate(['/login']);}
             })
+          }
+          logout() {
+            this.sharedService.sendlogout()
           }
            
 }

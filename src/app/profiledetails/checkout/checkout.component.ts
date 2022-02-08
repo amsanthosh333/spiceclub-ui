@@ -10,6 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from 'src/app/services/payment.service';
 import{ SharedService} from 'src/app/services/shared.service'
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -100,7 +101,7 @@ export class CheckoutComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService, 
-    private sharedService: SharedService,private payservice: PaymentService) {
+    private sharedService: SharedService,private payservice: PaymentService,private spinner: NgxSpinnerService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
@@ -574,6 +575,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   razorpaypayment(){
+    this.spinner.show();
     console.log("success",this.razpaysuccess.razorpay_payment_id); 
     this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
       console.log("razorpay1 response", response);
@@ -602,8 +604,9 @@ export class CheckoutComponent implements OnInit {
       console.log("success response",response);
       if(response.message=="Payment is successful"){ 
         console.log(response.message);
+        this.spinner.hide();
         this.toastr.success('Payment is successful',''); 
-        alert(response.message)
+        // alert(response.message)
         this.sharedService.sendClickEvent();
         this.router.navigate(['/home']);
 

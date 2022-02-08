@@ -1,6 +1,12 @@
 /* .menu-item li{
 	color: rgb(106, 107, 107);
 } */
+
+
+.ng-image-slider .ng-image-slider-container .main .next a{
+	text-decoration: none;
+	color:#474747
+}
  .menu-item a {
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;

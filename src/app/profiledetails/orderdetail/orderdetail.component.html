@@ -20,7 +20,7 @@
 
 <div class="col-lg-12 mb-45 " >
     <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Order Details</h4>
-    <div class="checkout-cart-total  mr-100 ml-100 mt-1" *ngFor="let img of Detail">
+    <div class="checkout-cart-total mt-1" style="margin-left: 8%; margin-right: 8%;" *ngFor="let img of Detail">
         <div class="row">
             <div class="col-6">
                 <strong>Order Code:</strong>
@@ -103,7 +103,7 @@
             
         </div>
     </div>
-    <div class="art-total  mr-100 ml-100 mt-1 ">
+    <div class="art-total   mt-1 "  style="margin-left: 8%; margin-right: 8%;">
         <ngx-skeleton-loader count="1" [theme]="{ 
             'border-radius': '5px',
             height: '350px',
@@ -116,8 +116,8 @@
 
 
 
-<div class="col-lg-12 mb-45" style="height: 100px;">
-    <div class="containerr">
+<div class="col-lg-12 mb-25" id="statusss" style="height: 80px; margin-right: 8%;">
+    <div class="containerr" id="status">
         <span *ngFor="let item of counts;let i = index">
             <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
             <span class="circles" [class.active]="orderStatus == item"></span>
@@ -127,9 +127,9 @@
 </div>
 
 <!-- order items -->
-<div class="col-lg-12 mb-5 ">
+<div class="col-lg-12 mb-5">
 
-    <div class="cart-table-container ml-100 mr-100">
+    <div class="cart-table-container" style="margin-left: 8%; margin-right: 8%;">
         <h4 class="checkout-title mt-40 mb-10" >Order Items</h4>
         <div class="checkout-cart-total"  style="padding: 20px;">
         <table class="cart-table" style="background-color: rgb(255, 255, 255);">
@@ -158,11 +158,11 @@
             <tbody *ngFor="let b of Items">
                 <tr>
 
-                    <td class="product-name  col-4">
+                    <td class="product-name" id="proname" style="width: 400px;">
                         <a style="text-decoration: none; margin-top: 10px;">{{b.product_name}}</a>
-                        <span class="product-variation pb-3" *ngIf="b.variation!==null">{{b.quantity}} x {{b.variation}}
+                        <span class="product-variation pb-" *ngIf="b.variation!==null">{{b.quantity}} x {{b.variation}}
                         </span>
-                        <span class="product-variation pb-3" *ngIf="b.variation==null">{{b.quantity}}</span>
+                        <span class="product-variation pb-" *ngIf="b.variation==null">Quantity: {{b.quantity}}</span>
                     </td>
 
                     <td class="product-price" style="padding-left: 13px;"><span class="price"
@@ -197,10 +197,10 @@
 <!-- price details -->
 <div class="col-lg-12 ">
     <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Price Details</h4>
-            <div class="row ml-100 mr-100 mt-10 mb-0" *ngFor="let img of Detail" >
+            <div class="row mt-10 mb-0" *ngFor="let img of Detail" style="margin-left: 5%; margin-right: 5%;" >
                 <!-- Cart Total -->
                 <div class="col-12 mb-1" style="padding: 0px;">
-                    <div class="checkout-cart-total" *ngFor="let a of Detail" style="padding: 60px;">
+                    <div class="checkout-cart-total" id="carttotl" *ngFor="let a of Detail" style="padding: 7%;">
                         <p>Sub Total <span style="font-weight: bold;" >{{a.subtotal}}</span></p>
                         <p>Shipping Fee <span style="font-weight: bold;">{{a.shipping_cost}}</span></p>
                         <p>Tax <span style="font-weight: bold;">{{a.tax}}</span></p>

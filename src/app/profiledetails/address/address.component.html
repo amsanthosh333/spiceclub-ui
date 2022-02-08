@@ -1,0 +1,328 @@
+<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Profile</h1>
+                <!--=======  breadcrumb list  =======-->
+                <ul class="breadcrumb-list" style="padding-left: 0px;">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Address</li>
+                </ul>
+                <!--=======  End of breadcrumb list  =======-->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div class="col-lg-12 mb-15 mt-2">
+    <div class="checkout-cart-total   mt-1" style="background-color:white ;margin-left: 5%; margin-right: 5%;" *ngIf="!loader">
+
+        <div class="addres1 mb-4" style="padding: 10px; background-color: white;" (click)="addaddresss(addRecord,map)">
+            <span style="color: #2874f0;;"><strong style="padding-left: 20px;">+ ADD A NEW ADDRESS</strong> </span>
+        </div>
+
+        <div class="addres1">
+            <div class="addresss" *ngFor="let Connectdtls of Address; let i=index">
+                <p> <strong>{{username}} </strong>  <strong> {{Connectdtls.phone}}</strong>
+
+                </p>
+                <span> {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
+                    {{Connectdtls.country_name}} -</span>
+                <p><strong> {{Connectdtls.postal_code}}</strong> 
+                <span class="add-to-cart" style="margin-left: auto;">
+                    <button style="background-color: rgb(201, 31, 8);border: 1px solid rgb(201, 31, 8);"
+                        class="lezada-button lezada-button--small lezada-button--icon--left"
+                        (click)="deleteRow(Connectdtls)">
+                        <i class="bi bi-trash-fill"></i> <span style="color: white;">Delete</span></button>
+                </span>
+                <span class="add-to-cart" style="margin-left: auto;">
+                    <button class="lezada-button lezada-button--small lezada-button--icon--left"
+                        (click)="editRow(Connectdtls ,editRecord )"
+                        style="background-color: rgb(30, 121, 206);border: 1px solid rgb(30, 121, 206);">
+                        <i class="bi bi-pencil-fill"></i> <span style="color: white;">Edit</span> </button>
+                </span>
+            </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cart-table-container mb-2  mt-50" style="margin-left: 5%; margin-right: 5%;">
+        <div id="tit" style="width: 100%;">
+            <ngx-skeleton-loader count="1"
+                [theme]="{  'border-radius': '4px',  height: '55px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+                *ngIf="loader"></ngx-skeleton-loader>
+            <ngx-skeleton-loader count="4"
+                [theme]="{  'border-radius': '4px',  height: '150px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white', 'margin-bottom':'0px'  }"
+                *ngIf="loader"></ngx-skeleton-loader>
+        </div>
+
+    </div>
+</div>
+
+
+
+<ng-template #addRecord let-modal>
+    <div class="modal-header editRowModal">
+        <h5 class="modal-title" id="modal-basic-title" style="padding-bottom: 0px;">
+            <div class="table-modal-header">
+
+                <div class="modal-about">
+                    <div class="font-weight-bold p-t-10 font-17">
+                        Add address</div>
+                </div>
+            </div>
+        </h5>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true"><i class="ion-close"></i></span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form class="register-form" [formGroup]="register" (ngSubmit)="onAddRowSave(register)"
+            style="margin-top: 20px; border-color: rgb(20, 20, 20); border: black; ">
+            <div class="row" style="margin-left: 30px;margin-right: 40px;  border: black; ">
+
+
+                <div class="col-md-12">
+                    <div class="form-group position-relative">
+                        <label>Address<span class="text-danger">*</span></label>
+                        <textarea name="" class="form-control pl-2" formControlName="address" cols="30"
+                            rows="3"></textarea>
+                        <h6 class="form-text text-danger"
+                            *ngIf="!register.get('address')?.valid && register.get('address')?.touched">
+                            *Enter address</h6>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>Country<span class="text-danger">*</span></label>
+                        <select class="form-control pl-5" formControlName="country">
+                            <option *ngFor="let tab of Country" [value]="tab.id">
+                                {{tab.name}}
+                            </option>
+                        </select>
+                        <h6 class="form-text text-danger"
+                            *ngIf="!register.get('country')?.valid && register.get('country')?.touched">
+                            *Select country</h6>
+
+                 
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>state<span class="text-danger">*</span></label>
+                        <select class="form-control pl-5" formControlName="state" (change)="selectstate($event)">
+                            
+                            <option *ngFor="let tab of State" [value]="tab.id">
+                                {{tab.name}}
+                            </option>
+                        </select>
+                        <h6 class="form-text text-danger"
+                            *ngIf="!register.get('state')?.valid && register.get('state')?.touched">
+                            *Select state</h6>
+                    
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>City<span class="text-danger">*</span></label>
+                      <select class="form-control pl-5" formControlName="city" required>
+                             <option *ngFor="let mem of City" [value]="mem.id">
+                                {{mem.name}}
+                            </option>
+                        </select> 
+
+                        <h6 class="form-text text-danger"
+                            *ngIf="!register.get('city')?.valid && register.get('city')?.touched">
+                            *Select city</h6>
+                    </div>
+                </div>
+
+                <!-- <div class="col-md-6 col-12 mb-20">
+                    <label class="shipplable" >Town/City*</label>
+                    <ng-select class="nice-select" formControlName="city" [items]="City" bindLabel="name" bindValue="id"
+                    required placeholder="" >
+                  </ng-select>
+                </div> -->
+                
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>Postal code<span class="text-danger">*</span></label>
+                        <input type="text" class="form-control pl-5" formControlName="postal_code">
+                        <h6 class="form-text text-danger"
+                            *ngIf="!register.get('postal_code')?.valid && register.get('postal_code')?.touched">
+                            *Enter postal code</h6>
+                        <!-- (change)="onPinChange($event.target.value)" -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>Mobile No <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control pl-5" formControlName="phone">
+                        <h6 class="form-text text-danger"
+                            *ngIf="!register.get('phone')?.valid && register.get('phone')?.touched">
+                            *Enter mobile number</h6>
+
+                    </div>
+                </div>
+
+                
+
+                <!-- row end -->
+            </div>
+            <div class="col-md-12" style="text-align: center;"><br>
+                <span class="add-to-cart" style="margin-left: auto;">
+                    <button style="background-color: rgb(201, 31, 8);border: 1px solid rgb(201, 31, 8); padding-top: 10px; padding-bottom: 10px;"
+                        class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
+                        Save</button>
+                </span>
+            </div>
+        </form>
+
+    </div>
+</ng-template>
+
+<!-- edit -->
+<ng-template #editRecord let-modal>
+    <div class="modal-header editRowModal">
+        <h4 class="modal-title" id="modal-basic-title" style="padding-bottom: 0px;">
+            <div class="table-modal-header">
+
+                <div class="modal-about">
+                    <div class="font-weight-bold p-t-10 font-17">
+                        Edit address</div>
+                </div>
+            </div>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true"><i class="ion-close"></i></span>
+        </button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)"
+            style="margin-top: 20px; border-color: rgb(20, 20, 20); border: black; ">
+            <div class="row" style="margin-left: 30px;margin-right: 40px;  border: black; ">
+
+                <div class="col-md-12 ">
+                    <div class="form-group position-relative">
+                        <label>Address</label>
+                        <textarea name="" class="form-control pl-2" formControlName="address" cols="30"
+                            rows="3"></textarea>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>Country</label>
+                        <select class="form-control pl-5" formControlName="country">
+                            <option *ngFor="let tab of Country" [value]="tab.id">
+                                {{tab.name}}
+                            </option>
+                        </select>
+
+                        <!-- <select class="form-control pl-5"    (change)="ontableChange($event.target.value)">
+        <option  [value]="Mtable_id" selected >JCOM V NGB TEST TABLE 1.O</option>
+        <option *ngFor="let tab of Tables" [value]="tab.table">
+          {{tab.table_name}}
+        </option>
+      </select>            (change)="ontableChange($event)"-->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>state<span class="text-danger">*</span></label>
+                        <select class="form-control pl-5" formControlName="state">
+                            <option *ngFor="let tab of State" [value]="tab.id">
+                                {{tab.name}}
+                            </option>
+                        </select>
+                        <!-- <ng-select formControlName="state"  placeholder="please select"  required>
+        <ng-option *ngFor="let car of State" [value]="car.id">{{car.name}}
+        </ng-option>
+      </ng-select> -->
+
+                        <!-- <select class="form-control pl-5" formControlName="to_member_id" required>                 
+        <option value="" selected disabled>Please select</option>
+        <option *ngFor="let mem of Members" [value]="mem.id">
+          {{mem.name}}
+        </option>
+      </select> -->
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>city<span class="text-danger">*</span></label>
+                        <!-- <ng-select formControlName="city" [items]="Members" bindLabel="name" bindValue="id"
+        required placeholder="please select">
+      </ng-select>  -->
+
+                        <select class="form-control pl-5" formControlName="city" required>
+
+                            <option *ngFor="let mem of City" [value]="mem.id">
+                                {{mem.name}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>Postal code</label>
+                        <input type="text" class="form-control pl-5" formControlName="postal_code">
+                        <!-- (change)="onPinChange($event.target.value)" -->
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group position-relative">
+                        <label>Mobile No <span class="text-danger">*</span></label>
+                        <input type="text" class="form-control pl-5" formControlName="phone">
+                    </div>
+                </div>
+                <div class="col-md-12" style="text-align: center;"><br>
+                    <span class="add-to-cart" style="margin-left: auto;">
+                        <button style="background-color: rgb(201, 31, 8);border: 1px solid rgb(201, 31, 8); padding-top: 10px; padding-bottom: 10px;"
+                            class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
+                            Save</button>
+                    </span>
+                </div>
+                <!-- row end -->
+            </div>
+        </form>
+
+    </div>
+</ng-template>
+
+<ng-template #map let-modal>
+<agm-map
+[latitude]="lat"
+[longitude]="lng"
+[zoom]="2"
+(mapClick)="addMarker($event.coords.lat, $event.coords.lng)"
+>
+<agm-marker
+  *ngFor="let marker of markers"
+  [latitude]="marker.lat"
+  [longitude]="marker.lng"
+  [opacity]="marker.alpha"
+  [markerDraggable]="true"
+  (markerClick)="selectMarker($event)"
+>
+</agm-marker>
+<agm-rectangle
+  [north]="max('lat')"
+  [east]="max('lng')"
+  [south]="min('lat')"
+  [west]="min('lng')"
+>
+</agm-rectangle>
+</agm-map>
+</ng-template>

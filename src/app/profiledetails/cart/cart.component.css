@@ -14,3 +14,10 @@ tr {
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
+
+@media (max-width : 990px) {
+	.lezada-button{
+		display: block;
+		margin: 0 auto;
+	}
+  }

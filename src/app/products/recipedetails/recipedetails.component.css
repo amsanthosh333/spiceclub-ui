@@ -77,3 +77,8 @@ td p{
 .rating__item::after {
   content: "";
 }
+@media (max-width : 990px) {
+  #bacck{
+    display: none;
+  }
+  }

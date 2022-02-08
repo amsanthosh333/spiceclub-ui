@@ -75,5 +75,27 @@ p{
   .text-warning {
     color: #ff902b !important;
   }
+  label{
+    color: #474747 ;
+    font-family: 'Poppins', sans-serif;
+  }
 
+  @media (max-width : 1200px) {  
+  #brandd {
+    padding-left:45px;
+    height: 20px;
+  }
+  #braandd {
+   padding-left: 0px;
+   display: none;
+   
+  }
+  #braaanddd {
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: -10px;
+   }
+  
+
+    }
  

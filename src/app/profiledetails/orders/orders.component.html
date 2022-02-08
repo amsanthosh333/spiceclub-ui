@@ -14,75 +14,29 @@
     </div>
 </div>
 
-
-<!-- <div class="shopping-cart-area mb-30 mt-40">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="cart-table-container">
-                    <table class="cart-table">
-                        <thead>
-                            <tr>
-                                <th class="product-name">Date</th>
-                                <th class="product-price" colspan="">Code</th>
-                                <th class="product-subtotal">Payment Status</th>
-                                <th class="product-remove">Delivery Status</th>
-                                <th class="product-price" colspan="">Total</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-                            <tr *ngFor="let img of Orders"> 
-
-                                <td class="product-price">
-                                    <a>{{img.date}}</a>
-                                </td>
-
-                                <td class="product-price" style="padding: 10px;">
-                                    <span class="price">{{img.code}}</span>
-                                </td>
-
-                                <td class="product-price">
-                                    <a>{{img.payment_status}}</a>
-                                </td>
-
-                                <td class="product-price">
-                                    <a>{{img.delivery_status}}</a> 
-                                </td>
-                                <td class="product-price">
-                                    <a>{{img.grand_total}}</a> 
-                                </td>
-
-                                <td class="add-to-cart">
-                                    <button class="lezada-button lezada-button--small lezada-button--icon--left" >
-                                        <i class="ion-ios-cart-outline"></i>view</button>
-                                </td>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="cart-table-container">
-                    <div id="tit" style="width: 100%;">
-                        <ngx-skeleton-loader count="5"
-                            [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
-                            *ngIf="loader"></ngx-skeleton-loader>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+<div id="pggg" *ngIf="(Orders.length==0)" style=" display: flex;
+justify-content: center;
+align-items: center;
+height: 200px;
+margin-right: 100px;
+margin-left: 100px;
+border: 3px solid rgb(139, 139, 139);">
+    <div>
+        <h5>
+            There is no order
+        </h5>
     </div>
-</div> -->
-<div class="orderss mb-2 ml-100 mr-100 mt-40" *ngFor="let img of Orders"
-    style="border:1px solid rgb(212, 210, 210); background-color: white;">
+</div>
+
+<div  *ngIf="(Orders.length!==0)">
+
+
+<div class="orderss mb-2  mt-40"  *ngFor="let img of Orders"
+    style="border:1px solid rgb(212, 210, 210); background-color: white; margin-left: 9%; margin-right: 9%;">
     <div class="row " style=" margin-left: 5px; margin-right: 5px;">
         <div class="col-12 mb-3 " style="height: 50px;border-bottom:1px solid rgb(212, 210, 210) ; ">
-            <div class="row mt-2 " >
-                <div class="col-10 ">
+            <div class="row mt-2 " id="firstrow" >
+                <div class="col-10 " style="padding-right: 0px;">
                     <!-- <button type="button" class="btn btn-primary btn-lg btn-block" >
         <span class="d-none d-md-inline-block">{{img.code}}</span>
     </button> -->
@@ -91,8 +45,8 @@
                 </div>
                 <div class="col-2">
                     <span class="add-to-cart" style="margin-left: auto;">
-                        <button class="lezada-button lezada-button--small lezada-button--icon--left" (click)="orderdetail(img.id)" >
-                            <i class="ion-ios-eye-outline"></i> view</button>
+                        <button class="lezada-button lezada-button--small lezada-button--icon--left"  (click)="orderdetail(img.id)" >
+                            <i class="ion-ios-eye-outline"></i><span style="color: white;"> view</span></button>
                     </span>
                 </div>
             </div>
@@ -135,12 +89,12 @@
         </div>
 
         <div class="col-12 mt-2" >
-            <div class="row" style="border-top:1px solid rgb(212, 210, 210) ; ">
-                <div class="col-10 mt-2">
+            <div class="row" id="lastrow" style="border-top:1px solid rgb(212, 210, 210) ;">
+                <div class="col-10 mt-2"  >
                     <h6>Ordered on <strong>{{img.date}}</strong></h6>
                 </div>
                 <div class="col-2 mt-2">
-                    <h6>Total : <strong style="color: red;">{{img.grand_total}}</strong> </h6>
+                    <h6 >Total: <strong style="color: red;">{{img.grand_total}}</strong> </h6>
                 </div>
 
             </div>
@@ -172,7 +126,7 @@
       </div>
      
 </div>
-
+</div>
 
 <ng-template #openRecord let-modal>
     <div class="modal-header editRowModal">

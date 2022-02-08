@@ -5,13 +5,23 @@ import { Observable,Subject } from 'rxjs';
 })
 export class SharedService {
   private subject = new Subject<any>();
-
+  private logoutsubject = new Subject<any>();
   sendClickEvent(){
     this.subject.next(value)
   }
   getClickEvent():Observable<any>{
   return this.subject.asObservable()
   
+}
+
+sendlogout(){
+  console.log("sendlogout");
+  
+  this.logoutsubject.next(value)
+}
+getlogout():Observable<any>{
+  console.log("getlogout");
+  return this.logoutsubject.asObservable()
 }
  
 } 

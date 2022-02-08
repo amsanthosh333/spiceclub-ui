@@ -22,6 +22,22 @@
     color: #474747 ;
     font-family: 'Poppins', sans-serif;
   }
-  .shop-product__long-desc p {
-    
-}
+ 
+
+@media (max-width : 800px) {  
+  .single-product__image{
+    text-align: -webkit-center;
+
+  }
+  .shop-product-wrap [class*="col"], .shop-product-wrap [class*="col-"] {
+    text-align: -webkit-center;
+  }
+  .single-slider-post__content{
+    padding-top: 50px;
+  }
+  #imggg{
+    height: 300px;
+  }
+    } 
+
+   

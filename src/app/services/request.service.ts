@@ -33,11 +33,16 @@ export class RequestService {
     console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
-    // this.userid = this.currentdetail?.user.id;
+     this.userid = this.currentdetail?.user?.id;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
     console.log("currentuser=", this.currentUser);
     console.log("currentusezr=", this.currentdetail.access_token);
+    if(this.userid==undefined){
+      console.log("iffff useris",this.userid);
+      
+      this.userid=0
+    }
   }
 
   logout() { 
@@ -45,6 +50,7 @@ export class RequestService {
     const headers = new HttpHeaders()
     .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
     localStorage.removeItem('currentUser');
+   
     this.currentUserSubject.next(null!);
     return this.http.get(this.url,{headers:headers})
   }
@@ -58,6 +64,7 @@ export class RequestService {
     this.url = `${this.endPoint1}/brands`;
     return this.http.get(this.url);
   }
+
   public gettopbrands() {
     this.url = `${this.endPoint1}/brands/top`;
     return this.http.get(this.url);
@@ -65,8 +72,8 @@ export class RequestService {
 
   public viewallbrands(link: string) {
     return this.http.get(link);
-
   }
+
   public viewbrandsproducd(link: string) {
     return this.http.get(link);
   }
@@ -181,15 +188,15 @@ public addtowishlist(body: any) {
   }
   // deals
   public gettodaysdeal() {
-    this.url = `${this.endPoint1}/products/todays-deal`;
+    this.url = `${this.endPoint1}/products/todays-deal?user_id=`+ this.userid;
     return this.http.get(this.url);
   }
   public getdaydealpro() {
-    this.url = `${this.endPoint1}/products/deal-of-day`;
+    this.url = `${this.endPoint1}/products/deal-of-day?user_id=`+ this.userid ;
     return this.http.get(this.url);
   }
   public getmonthdealpro() {
-    this.url = `${this.endPoint1}/products/deal-of-month`;
+    this.url = `${this.endPoint1}/products/deal-of-month?user_id=`+ this.userid ;
     return this.http.get(this.url);
   }
 
@@ -206,6 +213,13 @@ public addtowishlist(body: any) {
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
     this.url = `${this.endPoint1}/wishlists/` + id;
     return this.http.delete(this.url,{headers:headers});
+}
+deletewishproud2(id:any) {  
+  const headers = new HttpHeaders()
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken)
+  this.url = `${this.endPoint1}/wishlists-remove-product?product_id=`+id+`&user_id=` + this.userid;
+
+  return this.http.get(this.url,{headers:headers});
 }
 //maximum prize
 public getmaximumprice(){
@@ -285,12 +299,12 @@ public fetchcost(body:any) {
 }
 // futuredproduct
 public getfuturedpro() {
-  this.url = `${this.endPoint1}/products/featured`;
+  this.url = `${this.endPoint1}/products/featured?user_id=`+this.userid;
   return this.http.get(this.url);
 }
 // bestseling pro
 public getbestsellpro() {
-  this.url = `${this.endPoint1}/products/best-seller`;
+  this.url = `${this.endPoint1}/products/best-seller?user_id=`+this.userid;
   return this.http.get(this.url);
 }
 // orders
@@ -394,7 +408,9 @@ public gettopcat() {
   return this.http.get(this.url);
 }
 public getcatprod(id:any,page:any) {
-  this.url = `${this.endPoint1}/products/category/` + id +'?page='+ page +'&name=';
+  this.url = `${this.endPoint1}/products/category/` + id +'?page='+ page +'&name=&user_id='+ this.userid;
+  console.log("category url",this.url);
+  
   return this.http.get(this.url);
 }
 public getcatsearchprod(id:any,page:any,key:any) {
@@ -419,7 +435,7 @@ public getcatsubprod(link: string) {
 }
 // shopbyproducts
 public getallproducts(page:any) { 
-  this.url = `${this.endPoint1}/products?page=` + page;
+  this.url = `${this.endPoint1}/products?page=` + page+`&user_id=`+this.userid;
   return this.http.get(this.url,);
 }
 public getpage(link:any){
@@ -428,12 +444,12 @@ public getpage(link:any){
 // productbybrand
 
 public getbrandprod(id:string,page:any,) {
-  this.url = `${this.endPoint1}/products/brand/` + id +'?page='+ page;
+  this.url = `${this.endPoint1}/products/brand/` + id +'?page='+ page+`&user_id=`+this.userid;
   console.log("url",this.url)
   return this.http.get(this.url);
 }
 public getbrandsearchprod(id:string,page:any,key:any) {
-  this.url = `${this.endPoint1}/products/brand/` + id +'?page='+ page +'&name='+ key;
+  this.url = `${this.endPoint1}/products/brand/` + id +'?page='+ page +'&name='+ key+`&user_id=`+this.userid;
   console.log("url",this.url)
   return this.http.get(this.url);
 }
@@ -444,7 +460,7 @@ public getproddetail(id: string) {
   return this.http.get(this.url);
 }
 public getcatprodbyid(id: string) {
-  this.url = `${this.endPoint1}/products/category/` + id +`?page=1&name=`;
+  this.url = `${this.endPoint1}/products/category/` + id +`?page=1&name=`+`&user_id=`+ this.userid ;
   return this.http.get(this.url);
 }
 
@@ -466,34 +482,34 @@ public getdiscountprice(b_id: any, P_id:any, var_value:any, qty:any) {
 }
 //related product
 public getrelatedprod(id: string) {
-  this.url = `${this.endPoint1}/products/related/` + id ;
+  this.url = `${this.endPoint1}/products/related/` + id+`&user_id=`+ this.userid  ;
   return this.http.get(this.url);
 }
 public addvarient(id: string,varient:any) {
-  this.url = `${this.endPoint1}/products/variant/price?id=` + id +`&color=` +`&variants=` + varient;
+  this.url = `${this.endPoint1}/products/variant/price?id=` + id +`&color=` +`&variants=` + varient+`&user_id=`+ this.userid ;
   return this.http.get(this.url);
 }
 public getsortprod(sort: string) {
-  this.url = `${this.endPoint1}/products/search?sort_key=` + sort ;
+  this.url = `${this.endPoint1}/products/search?sort_key=` + sort+`&user_id=`+ this.userid  ;
   console.log(this.url);
   
   return this.http.get(this.url);
 }
 public filterdataa(category:any,brand:any,min:any,max:any) {
-  this.url = `${this.endPoint1}/products/search?categories=` + category +`&brands=` + brand +`&name=` +`&min=` + min +`&max=` +max ;
+  this.url = `${this.endPoint1}/products/search?categories=` + category +`&brands=` + brand +`&name=` +`&min=` + min +`&max=` +max+`&user_id=`+ this.userid  ;
   return this.http.get(this.url);
 }
 public filterdataa2(min:any,max:any) {
-  this.url = `${this.endPoint1}/products/search?categories=&brands=&name=&min=` + min +`&max=` +max ;
+  this.url = `${this.endPoint1}/products/search?categories=&brands=&name=&min=` + min +`&max=` +max+`&user_id=`+ this.userid ;
   return this.http.get(this.url);
 }
 public filtersearchdataa(name:any) {
-  this.url = `${this.endPoint1}/products/search?name=`  +name ;
+  this.url = `${this.endPoint1}/products/search?name=`  +name+`&user_id=`+ this.userid  ;
   return this.http.get(this.url);
 }
 //flashdeal
  public getprodbyflash(id: any,page:any) {
-  this.url = `${this.endPoint1}/flash-deal-products/`+id +'?page='+ page;
+  this.url = `${this.endPoint1}/flash-deal-products/`+id +'?page='+ page+`&user_id=`+ this.userid ;
   return this.http.get(this.url);
 }
 public getallflashdeal() {
@@ -501,7 +517,7 @@ public getallflashdeal() {
   return this.http.get(this.url);
 }
 public gettodaysoffer() {
-  this.url = `${this.endPoint1}/todayoffer`;
+  this.url = `${this.endPoint1}/todayoffer?user_id=`+this.userid;
   return this.http.get(this.url);
 }
 //review

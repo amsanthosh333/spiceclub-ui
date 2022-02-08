@@ -30,18 +30,22 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css",
-              "node_modules/bootstrap-icons/font/bootstrap-icons.css"
-             
+              "node_modules/bootstrap-icons/font/bootstrap-icons.css",
+              "node_modules/slick-carousel/slick/slick.scss",
+              "node_modules/slick-carousel/slick/slick-theme.scss",
+              "node_modules/ngx-sharebuttons/themes/circles.scss",
+              "node_modules/ngx-sharebuttons/themes/modern.scss",
+              "src/assets/css/plugins.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-               "node_modules/bootstrap/dist/js/bootstrap.min.js",
-               "src/assets/js/main.js",
-               "src/assets/js/vendor/jquery.min.js"
-            
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "src/assets/js/main.js",
+              "src/assets/js/vendor/jquery.min.js",
+              "src/assets/js/plugins.js",
+              "node_modules/slick-carousel/slick/slick.min.js"
             ]
           },
-          
           "configurations": {
             "production": {
               "budgets": [

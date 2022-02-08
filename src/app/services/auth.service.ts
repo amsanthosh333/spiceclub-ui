@@ -13,6 +13,11 @@ function _window() : any {
   providedIn: 'root'
 })
 export class AuthService {
+  currentdetail: User;
+  userid: any;
+  accesstoken: any;
+
+  tokentype: any;
   
   encryptdata(request: string) {
     throw new Error('Method not implemented.');
@@ -34,6 +39,10 @@ export class AuthService {
       JSON.parse(localStorage.getItem('currentUser')||'{}')
     );
     this.currentUser = this.currentUserSubject.asObservable();
+    this.currentdetail = this.currentUserSubject.value;
+    this.userid = this.currentdetail?.user?.id;
+   this.accesstoken = this.currentdetail.access_token;
+   this.tokentype = this.currentdetail.token_type;
    }
   public get currentUserValue(): User {
     return this.currentUserSubject.value;
@@ -47,7 +56,7 @@ export class AuthService {
      this.url = `${this.endPoint1}/auth/login`;
      return this.http.post<any>(this.url,{ email, password},{headers:headers}).pipe( 
        
-        map((user) => {
+        map((user) => { 
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
           console.log("currentuser:",user);
@@ -74,11 +83,20 @@ export class AuthService {
   }
 
   logout() { 
+    // this.url = `${this.endPoint1}/auth/logout`;
+    
+    // localStorage.removeItem('currentUser');
+    // this.currentUserSubject.next(null!);
+    // return this.http.get<any>(this.url)
+
     this.url = `${this.endPoint1}/auth/logout`;
+    const headers = new HttpHeaders()
+    .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
     
     localStorage.removeItem('currentUser');
+   
     this.currentUserSubject.next(null!);
-    return this.http.get<any>(this.url)
+    return this.http.get(this.url,{headers:headers})
   }
    adduser(body: any) {
     console.log('credentials2',body);

@@ -40,6 +40,10 @@
 	<!--=============================================
 	=            checkout page content         =
 	=============================================-->
+	<ngx-spinner   bdColor="rgba(51,51,51,0.8)"
+	size="large"
+	color="#e00707"
+	type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</p></ngx-spinner>
 
 	<div class="checkout-page-area mb-130">
 		<div class="container">
@@ -182,6 +186,8 @@
 											  </ng-select> -->
 											</div>
 
+											
+
 											<!-- <div class="col-md-6 col-12 mb-20">
 												<label class="shipplable">Town/City*</label>
 												<select class="nice-select">
@@ -252,10 +258,11 @@
 													
 												</div>
 												<h6 class="form-text text-danger"
-													 style="height: 12px;">
+													 style="height: 12px; text-align: center;">
 													<span *ngIf="error2" style="color: red;">{{error2}}</span></h6>
 												
-												<button class="lezada-button lezada-button--medium mt-10" type="submit">Place order</button>
+												<button class="lezada-button lezada-button--medium mt-10" type="submit" style=" display: block;
+												margin: 0 auto;">Place order</button>
 												
 											 </form>
 											

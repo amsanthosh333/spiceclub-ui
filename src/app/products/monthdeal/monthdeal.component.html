@@ -158,7 +158,7 @@
 						<div class="row product-isotope shop-product-wrap four-column">
 
 							<!--=======  single product  =======-->
-							<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"  *ngFor="let img of Monthdealpro  | paginate: { itemsPerPage: 12, currentPage: p }">
+							<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"  *ngFor="let img of Monthdealpro  | paginate: { itemsPerPage: 12, currentPage: p };let i=index">
 								<div class="single-product">
 									<!--=======  single product image  =======-->
 		
@@ -177,14 +177,26 @@
 										<div class="single-product__floating-badges">
 											<!-- <span class="onsale">-10%</span> -->
 											<span class="hot" *ngIf="img.has_discount==true">hot</span>
+											<!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span> -->
 										</div>
 		
 										<div class="single-product__floating-icons">
-											<span class="wishlist"><a (click)="addtowishlist(img.id)"  data-tippy="Add to wishlist"
-													data-tippy-inertia="true" data-tippy-animation="shift-away"
-													data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
-													data-tippy-placement="left"><i
-														class="ion-android-favorite-outline"></i></a></span>
+			
+											<span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
+												data-tippy-inertia="true" data-tippy-animation="shift-away"
+												data-tippy-delay="50" data-tippy-arrow="true"
+												data-tippy-theme="sharpborder" data-tippy-placement="left">
+												<i [ngClass]="{'ion-android-favorite':likeddd[i]===true, 'ion-android-favorite-outline':likeddd[i]===false}"
+													(click)='toggle(img,i)'
+													style="color: rgb(214, 5, 5);"></i></a></span>
+
+									    	<span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
+									  			data-tippy-inertia="true" data-tippy-animation="shift-away"
+												data-tippy-delay="50" data-tippy-arrow="true"
+												data-tippy-theme="sharpborder" data-tippy-placement="left">
+												<i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
+													(click)='toggledelete(img,i)'
+													style="color: rgb(214, 5, 5);"></i></a></span>
 		
 		
 											<span class="quickview" (click)="quickview(img.id,openRecord)"><a class="cd-trigger"  data-tippy="Quick View"

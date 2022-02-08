@@ -1,0 +1,76 @@
+.breadcrumb-list__item{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+label{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+option{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+/* .col-2{
+    background-color: rgb(251, 251, 250);
+} */
+.addresss{
+    background-color: white;
+    /* border: 1px solid rgb(161, 156, 156); */
+    padding: 20px;
+    padding-left: 30px;
+    border-bottom:1px solid #e0e0e0;
+}
+.addres1{
+    border: 1px solid #e0e0e0;
+}
+p{
+    border-bottom: none;
+}
+span{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+strong{
+	font-family: 'Poppins', sans-serif;
+}
+p strong{
+    color: #1d1d1d ;
+	font-family: 'Poppins', sans-serif;
+}
+.lezada-button{
+    padding-top: 1px;
+    padding-bottom: 1px;
+    margin-right: 10px;
+}
+.nice-select.ng-option{
+    color: red;
+}
+.nice-select.ng-dropdown-panel .scroll-host {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: block;
+    margin-top: 10px;
+    -webkit-overflow-scrolling: touch;
+}
+.nice-select{
+    padding-right: 305px;
+}
+agm-map { height: 600px;
+   }
+   @media (max-width: 650px) {
+    .lezada-button span {
+        display: none;
+    }
+}
+@media (max-width: 650px) {
+    .lezada-button {
+        border-radius:50px;
+    }
+}
+@media (max-width: 650px) {
+.lezada-button--icon--left i {
+    margin-right: 0px;
+}
+}
+

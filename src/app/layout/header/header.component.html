@@ -1,10 +1,6 @@
 
 
-
-
-
-
-<header class="header header-wide-topbar header-sticky border-bottom-0">
+<header class="header header-wide-topbar header-sticky border-bottom-0"  >
     <!--=======  header bottom  =======-->
     <div class="header-bottom pt-md-40 pb-md-40 pt-sm-40 pb-sm-40">
         <div class="container wide">
@@ -86,32 +82,32 @@
                             </a>
                         </div>
 
-                        <!--=======  End of single-icon  =======-->
-                        <!--=======  single-icon  =======-->
-
-                        <!-- <div class="single-icon user-login">
-                            <a routerLink="login">
-                                <i class="ion-android-person"></i>
-                            </a>
-                        </div> -->
-
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)"  id="offcanvas-about-icon">
-                                <i class="ion-android-person"></i>      
+                                <i class="ion-android-person" *ngIf="(userid!==0)"></i>      
+                            </a>
+							<a  id="offcanvaout-icon" routerLink="/login">
+                                <i class="ion-android-person" *ngIf="(userid==0)"></i>      
                             </a>
                         </div>
 
-                        <div class="single-icon wishlist"  >
-							<a href="javascript:void(0)"  id="offcanvas-wishlist-icon">
-                                <i class="ion-android-favorite-outline"></i>
-                                <span class="count">{{Wlength}}</span>
+                        <div class="single-icon wishlist"  >	
+							<a href="javascript:void(0)"  id="offcanvas-wishlist-icon">	
+                                <i class="ion-android-favorite-outline"  *ngIf="(userid!==0)"></i>
+                                <span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
+                            </a>
+							<a  id="offcanvashlist-icon" routerLink="/login">
+								<i class="ion-android-favorite-outline"  *ngIf="(userid==0)"></i>  
                             </a>
                         </div>
 
                         <div class="single-icon cart"  >
                             <a href="javascript:void(0)" id="offcanvas-cart-icon">
-                                <i class="ion-ios-cart"></i>
-                                <span class="count">{{cartlength}}</span>
+                                <i class="ion-ios-cart" *ngIf="(userid!==0)"></i>
+                                <span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
+                            </a>
+							<a  id="offcanart-icon" routerLink="/login">
+                                <i class="ion-ios-cart" *ngIf="(userid==0)"></i>  
                             </a>
                         </div>
 
@@ -154,11 +150,8 @@
 				</div>
 			</div>
                 <!--=======  End of headeer right container  =======-->
-
-
             </div>
-
-     
+    
             <!-- Mobile Navigation Start Here -->
 
             <div class="site-mobile-navigation d-block d-lg-none">
@@ -298,14 +291,14 @@
 					<div class="single-widget mt-4" >
 						<div class="single-comment" >
 							<div class="single-comment__image" *ngIf="(currentdetail.user?.avatar_original=='')">
-								<img src="assets/images/empty profile.png"
+								<img src="assets/images/user-profile.png"
 									class="img-fluid" style="height: 55px;" alt="">
 							</div>
 							<div class="single-comment__image" *ngIf="(currentdetail.user?.avatar_original!=='')">
 								<img src="https://neophroncrm.com/spiceclubnew/public/{{currentdetail.user?.avatar_original}}"
 									class="img-fluid" style="height: 70px;" alt="">
 							</div>
-							<div class="single-comment__content  mt-2">
+							<div class="single-comment__content  mt-2 pl-2">
 								<!--=======  username and date  =======-->
 								<strong class="username">{{currentdetail.user?.name}}</strong>
 									<p class="eml" style="color: blue;">{{currentdetail.user?.email}}</p>
@@ -340,7 +333,11 @@
 						<h6 class="col-2"><i class="ion-android-folder"></i> </h6>
 						<h6 class="col-8"><a>Wallet</a></h6>
 					</div>
-					<div class="row mb-3 ml-4">
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/address">
+						<h6 class="col-2"><i class="ion-android-pin"></i> </h6>
+						<h6 class="col-8"><a>Address</a></h6>
+					</div>
+					<div class="row mb-3 ml-4" id="closeabout" routerLink="/message">
 						<h6 class="col-2"><i class="ion-android-chat"></i> </h6>
 						<h6 class="col-8"><a>Messages</a></h6>
 					</div>
@@ -350,6 +347,11 @@
 						<h6 class="col-8"  (click)="logout1()"><a>Logout</a></h6>
 						
 					</div>
+					<!-- <div class="row mb-2 ml-4" id="closeabout">
+						<h6 class="col-2"><i class="ion-android-exit 180deg"></i> </h6>
+						<h6 class="col-8"  (click)="logout()"><a>social Logout</a></h6>
+						
+					</div> -->
 					
 					<!--=======  End of single widget  =======-->
 				</div>

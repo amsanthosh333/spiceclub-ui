@@ -9,6 +9,11 @@ import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { NgImageFullscreenViewModule } from 'ng-image-fullscreen-view';
+import { NgImageSliderModule } from 'ng-image-slider';
+import {ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons'
+import { ShareModule } from 'ngx-sharebuttons';
 
 @NgModule({
   declarations: [
@@ -17,8 +22,12 @@ import { ToastrModule } from 'ngx-toastr';
   imports: [
     CommonModule,
     ProductdetailRoutingModule,ReactiveFormsModule,NgbModule,
-    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
-    ToastrModule.forRoot(),
+    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,NgImageFullscreenViewModule,
+    ToastrModule.forRoot(),NgImageSliderModule,
+    ShareButtonsModule.withConfig({
+         debug:true,
+    }),ShareIconsModule,ShareModule
+
     
   ]
 })

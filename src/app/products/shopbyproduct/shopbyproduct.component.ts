@@ -99,15 +99,15 @@ export class ShopbyproductComponent implements OnInit {
   dec: any;
   outofstackbtn: boolean = false;
   addcartbtn: boolean = true;
- 
   prodcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  
   keyy: any;
   buyertypeid: any;
   prod_price: any;
-
   sideloader: boolean=true;
   maximumprize: any;
+  likedd=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
+  likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
+ 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
     private toastr: ToastrService,private sharedService: SharedService, private toast: ToastrService, private _location: Location,
@@ -129,6 +129,11 @@ export class ShopbyproductComponent implements OnInit {
     this.buyertypeid=this.currentdetail.user?.buyertypeid;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
+
+    
+    if(this.userid==undefined){
+      this.userid=0;
+     }
 
     this.sortForm = this.formBuilder.group({
       min: [''],
@@ -172,6 +177,29 @@ export class ShopbyproductComponent implements OnInit {
     });
 
    
+  }
+  toggle(img:any,index:any): void {
+    this.likeddd[index] = !this.likeddd[index];   
+    if(this.likeddd[index]==true){
+      console.log("true , add recrd");
+      this.addtowishlist(img.id);
+    }
+    else if( this.likeddd[index]==false){
+      console.log("false , delectrecord");
+      this.deleteRecord(img.id);
+    }
+  
+  }
+  toggledelete(img:any,index:any): void {
+    this.likedd[index] = !this.likedd[index];   
+    if(this.likedd[index]==true){
+      console.log("true , add recrd");
+      this.addtowishlist(img.id);
+    }
+    else if( this.likedd[index]==false){
+      console.log("false , delectrecord");
+      this.deleteRecord(img.id);
+    }
   }
   get f() {
     return this.register.controls;
@@ -374,8 +402,8 @@ export class ShopbyproductComponent implements OnInit {
       let opts: Options = {
         floor: 0,
         ceil: this.maximumprize,
-        getPointerColor: ()=>{return 'red'},
-        getSelectionBarColor: () => {return 'red'}
+        getPointerColor: ()=>{return '#cc020c'},
+        getSelectionBarColor: () => {return '#cc020c'}
         };
         this.options = opts;
      
@@ -436,6 +464,13 @@ export class ShopbyproductComponent implements OnInit {
     (error: any) => {
       console.log("error",error);
     });
+  }
+  getprodofbrand2(id:any,i:any){
+    window.scroll(0,0);
+    this.router.navigate(['shopbyproduct/brand/', id]);
+    console.log("brand",id);
+    this.getprodofbrand(id,1)
+   
   }
   getpage(url:any){
     this.prodloader=true;
@@ -581,6 +616,10 @@ export class ShopbyproductComponent implements OnInit {
     });
   }
   addtowishlist(prd_id: any) {
+    if(this.userid==0){
+      this.toastr.info('You need to login', '');
+    }
+    else{
     let edata4 = {
       user_id: this.userid,
       product_id: prd_id
@@ -602,6 +641,26 @@ export class ShopbyproductComponent implements OnInit {
       console.log("error", error);
 
     });
+  }
+  }
+  deleteRecord(id:any) {
+    console.log("deleteeerow",id);
+    this.request.deletewishproud2(id).subscribe((response: any) => {
+      console.log(response);
+      if(response.message=="Product is removed from wishlist"){
+        console.log("deleted",response.message);
+        this.deleteRecordSuccess();
+        this.sharedService.sendClickEvent();
+      }
+      else{
+        this.toastr.error( response.message);
+        console.log("error ,product is not deleted")
+        
+      }
+  
+     }, (error: any) => {
+       console.log(error);
+     });
   }
 
   addreview(content: any, _id: any) {
@@ -852,6 +911,10 @@ export class ShopbyproductComponent implements OnInit {
         });
       }
   addtocart2(){
+    if(this.userid==0){
+      this.toastr.info('You need to login', '');
+    }
+    else{
     let edata={
       id : this.product_id,
       variant:this.varient_value.replace(/\s/g, ""),
@@ -883,6 +946,7 @@ export class ShopbyproductComponent implements OnInit {
       console.log("error",error);
     
     });
+  }
   }
   addRecordSuccess() {
     this.toastr.success('Added Successfully', '');

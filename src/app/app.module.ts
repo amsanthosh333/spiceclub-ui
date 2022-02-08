@@ -23,6 +23,9 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { NgImageSliderModule } from 'ng-image-slider';
+import { SlickCarouselModule } from 'ngx-slick-carousel'; 
+
+
 @NgModule({
   declarations: [
     AppComponent, 
@@ -42,7 +45,8 @@ import { NgImageSliderModule } from 'ng-image-slider';
     NgxSkeletonLoaderModule,ToastrModule.forRoot({
       // timeOut: 1000,
       // positionClass: 'toast-bottom-right'
-    }),RouterModule,NgImageSliderModule
+    }),RouterModule,NgImageSliderModule,SlickCarouselModule
+    
    
   ],
   providers: [],

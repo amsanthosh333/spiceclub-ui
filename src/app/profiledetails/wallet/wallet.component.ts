@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { windows } from 'ngx-bootstrap-icons';
 import { ConfirmedValidator } from 'src/app/auth/confirmedValidator';
 import { AuthService } from 'src/app/services/auth.service';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-wallet',
   templateUrl: './wallet.component.html',
@@ -48,7 +49,7 @@ export class WalletComponent implements OnInit {
   userphone: any;
   useremail: any;
   rechargeamount: any;
-  constructor( private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
+  constructor(private spinner: NgxSpinnerService, private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal,private authService: AuthService) {
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -95,6 +96,7 @@ export class WalletComponent implements OnInit {
     });
   }
   openrecharge(content: any){
+    
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'sm',
@@ -159,6 +161,7 @@ onproceed(form: FormGroup) {
   }
 
   razorpaypayment(){
+    this.spinner.show();
     console.log("success",this.razpaysuccess.razorpay_payment_id); 
     this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
       console.log("razorpay1 response", response);
@@ -174,6 +177,11 @@ onproceed(form: FormGroup) {
     }, );
   }
   razorpaysuccess(){
+    // this.spinner.show();
+    // setTimeout(() => {
+    //   /** spinner ends after 5 seconds */
+    //   this.spinner.hide();
+    // }, 5000);
     let edata4={
       payment_details:this.paymentdetails,
       payment_type: "wallet_payment",
@@ -187,10 +195,11 @@ onproceed(form: FormGroup) {
       
       console.log("success response",response);
       if(response.message=="Payment is successful"){ 
-        console.log(response.message);
+        console.log(response.message); 
         this.modalService.dismissAll()
+        this.spinner.hide();
         this.toastr.success('Payment is successful',''); 
-        alert(response.message)
+        // alert(response.message)
         this.getwallet();
           this.getrechargehistory();
       }
@@ -198,7 +207,7 @@ onproceed(form: FormGroup) {
         console.log(response.message);
         alert(response.message)
         this.modalService.dismissAll()
-        this.toastr.error('This payment has already been captured','');
+        this.toastr.error('',response.message);
       }
     })
   }

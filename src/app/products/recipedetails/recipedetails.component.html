@@ -39,7 +39,7 @@
                             <h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
                             <div class="widget-post-wrapper" *ngIf="!sideloader2">
                                 <!--=======  single widget post  =======-->
-                                <div class="single-widgost" *ngFor="let cat of Allcat">
+                                <div class="single-widgost" *ngFor="let cat of Allcat" style="height: 450px;overflow-y: auto;">
                                     <div class="imag" (click)="getrecipebycatg(cat.id)">
                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{cat.banner}}"
                                             class="img-fluid" alt="" style="height: 100px; width: 150px; ">
@@ -71,7 +71,7 @@
 
                 <div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70">
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-12" id="bacck">
                             <div class="shop-product__navigation " style="margin-bottom: 10px;">
                                 <a><i class="ion-ios-arrow-thin-left" (click)="backk()" style="size: 0px;"></i></a>
                                 <!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> (click)="backk()" -->
@@ -314,12 +314,12 @@
 
                                                                 <div class="single-comment"  *ngFor="let comm of Comments">
                                                                     <div class="single-comment__image" *ngIf="(comm.avatar=='')">
-                                                                        <img src="https://www.pngitem.com/pimgs/m/504-5040528_empty-profile-picture-png-transparent-png.png"
-                                                                            class="img-fluid" style="height: 65px;" alt="">
+                                                                        <img src="assets/images/user-profile.png"
+                                                                            class="img-fluid" style="height: 70px;" alt="">
                                                                     </div>
                                                                     <div class="single-comment__image" *ngIf="(comm.avatar!=='')">
                                                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
-                                                                            class="img-fluid" style="height: 70px;"
+                                                                            class="img-fluid" style="height: 70px; width:70px;"
                                                                             alt="">
                                                                     </div>
                                                                     <div class="single-comment__content">

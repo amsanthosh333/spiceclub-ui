@@ -6,6 +6,34 @@
   .carousel-fade .active.carousel-item-end {
     transition: opacity 1s 2.6s;
   } */
+
+  .single-product__floating-badges {
+    position: absolute;
+    z-index: 9;
+    top: 0px;
+    left: 0px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.single-product__floating-badges span {
+  font-size: 12px;
+  /* font-weight: 500; */
+  line-height: 31.5px;
+  z-index: 3;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  margin-bottom: 10px;
+  text-align: center;
+  text-transform: lowercase;
+  color: #ffffff;
+  border-radius: 100%;
+}
   .title p{
     color: #474747 ;
     font-family: 'Poppins', sans-serif;
@@ -68,4 +96,60 @@ element.style {
    }
   } */
 
+  .slick-slider {  
+    width: 200px;  
+    margin: auto;  
+    
+  } 
+
+  
+.slider.round {
+  border-radius: none;
+}
+
+.sli{
+  padding-top: 20px;
+  padding-left: 30px;
+  padding-right: 39px;
+  
+}
+
+ .main {
+  overflow: hidden;
+  position: absolute;
+  height: 200px;
+  /* width: 100%; */
+}
+a.next.icons.next-icon {
+  text-decoration: none;
+ }
+ @media (max-width : 650px) {
+	#bestbtn a {
+		text-align: center;
+    margin-bottom: 10px;
+	}
+  }
+
+  @media (max-width : 650px) {
+    #bestbtn a {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  
+    }
+    @media (max-width : 1200px) {  
+      .sli{
+        padding-top: 20px;
+        padding-left: 0px;
+        padding-right: 20px;   
+      }
+      }
+       @media (max-width : 700px) {
+      .carousel-item{
+        height: 200px;      
+      }
+      #lazyy{
+        height: 200px;
+      }
+        } 
   

@@ -80,13 +80,15 @@ body{
   
   .circle-desc{
    position: absolute;
-   top:5.000em;
+   top:2.000em;
    font-size: 1.125em;
    width: auto;
    max-width:9.375em;
-   margin-left:-0.750em;
+   margin-left:-2rem;
    height:100px;
   }
+ 
+
   
   @media only screen and (max-width: 320px){
      body {
@@ -123,9 +125,53 @@ body{
   } 
   
   /* Extra large devices (large laptops and desktops, 1200px and up) */
-  @media only screen and (min-width: 1200px) {
+  /* @media only screen and (min-width: 1200px) {
      body {
        font-size:120%
     }
-  }
+  } */
+  @media (max-width :900px) {
+    strong{
+      font-size:0.8rem;
+    }
+    p strong{
+      font-size:0.7rem;
+    }
+    p {
+      font-size:0.6rem;
+    }
+   
+     #proname a {
+      padding-left: 10px;
+      padding-right: 10px;
+    }
+   .containerr #status{
+      width: 50px;
+
+    }
+   .col-12  #statusss{
+      margin-bottom: 20px;
+    }
+
+    .circles{
+      height: 0.538em;
+      width: 0.538em;
+      border: 0.118em solid #000;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .bar {
+      width: 12%;
+      margin-bottom: 0.196em
+    }
+    .circle-desc{
+      position: absolute;
+      top:5.000em;
+      font-size: 0.425em;
+      width: auto;
+      max-width:9.375em;
+      margin-left:-0.85rem;
+      height:30px;
+     }
+    }
   

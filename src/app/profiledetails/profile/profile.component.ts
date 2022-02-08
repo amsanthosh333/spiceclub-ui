@@ -115,11 +115,15 @@ export class ProfileComponent implements OnInit {
   }
   gotoaddress(){
     window.scroll(0,0);
-    this.router.navigate(['/orders']);
+    this.router.navigate(['/address']);
   }
   gotowallet(){
     window.scroll(0,0);
     this.router.navigate(['/wallet'])
+  }
+  gotochats(){
+    window.scroll(0,0);
+    this.router.navigate(['/message'])
   }
   editprofile(content: any){
       this.modalService.open(content, {
