@@ -18,6 +18,7 @@ import{ SharedService} from 'src/app/services/shared.service'
   providers: [ToastrService],
 })
 export class WishlistComponent implements OnInit {
+  loader: boolean=true;
   checkedColumns = {};
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
@@ -45,7 +46,7 @@ export class WishlistComponent implements OnInit {
   prod_price: any;
   outofstackbtn: boolean=false;
   addcartbtn: boolean=true;
-  loader: boolean=true;
+
   buyertypeid: any;
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService, 
     private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,
@@ -64,19 +65,19 @@ export class WishlistComponent implements OnInit {
    }
 
    ngOnInit(): void {
+   this. loader=true;
     window.scroll(0,0)
     this.viewwishlist();
       }
       viewwishlist(){
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
           this.Wishlist=response.data; 
-          this.loader=false ; 
+          this.loader=false ;
           console.log("Wishlist",response.data); 
-          // console.log("Wishlist", this.Wishlist[0].id);     
-          // this. processdata()
-          setTimeout(() => {
-            this.loadingIndicator = false;
-          }, 500);
+          // setTimeout(() => {
+          //   this.loader=false ;
+          // }, 1000);
+          
         });
       
       }
@@ -100,6 +101,13 @@ export class WishlistComponent implements OnInit {
            console.log(error);
          });
       }
+      proddetail(id:any){
+        console.log("detail page",id);
+        window.scroll(0,0);
+        this.router.navigate(['productdetail', id]);
+        console.log("navigate to category");
+      }
+
       addtocart1(_id:any,content:any){    
         this.totalprice=''
         this.quantityyy=1

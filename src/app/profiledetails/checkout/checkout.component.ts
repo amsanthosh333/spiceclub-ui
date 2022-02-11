@@ -96,6 +96,7 @@ export class CheckoutComponent implements OnInit {
   paymentResponseHander: any;
   razpaysuccess: any;
   paymentdetails: any;
+  indexx: any;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
@@ -130,6 +131,9 @@ export class CheckoutComponent implements OnInit {
       postal_code: ['', [Validators.required]],
 
     });
+    this.address = this.fb.group({
+      addresss: [''], 
+   })
   }
   ngOnInit(): void {
     this.viewsummery();
@@ -184,7 +188,10 @@ export class CheckoutComponent implements OnInit {
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
       this.Address = response.data;
       this.loader = false;
+      this.indexx =this.Address.findIndex((x:any) => x.set_default ==1);
       console.log("Address", this.Address);
+      console.log("Address index", this.indexx);
+      this.address_id=this.Address[this.indexx].id
 
     });
     // this.paymettype();
@@ -246,6 +253,7 @@ export class CheckoutComponent implements OnInit {
     const controls = f.controls;
 
   }
+
   placeorder(form: FormGroup) {
     this.error2 = '';
 
@@ -254,7 +262,8 @@ export class CheckoutComponent implements OnInit {
       this.error2 = '*please select address';
     }
 
-    else if (this.terms.invalid) {
+    else
+     if (this.terms.invalid) {
       if (!this.terms.get('type')?.valid) {
         this.error2 = '*please select paymenttype';
       }

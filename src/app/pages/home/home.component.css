@@ -97,7 +97,7 @@ element.style {
   } */
 
   .slick-slider {  
-    width: 200px;  
+    width: auto;  
     margin: auto;  
     
   } 

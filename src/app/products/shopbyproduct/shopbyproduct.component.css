@@ -51,6 +51,7 @@ option{
 	font-family: 'Poppins', sans-serif;
 }
 
+
 @media (max-width : 800px) {  
   .single-product__image{
     text-align: -webkit-center;

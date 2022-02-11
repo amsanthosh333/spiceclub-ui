@@ -14,26 +14,12 @@
     </div>
 </div>
 
-<div id="pggg" *ngIf="(Orders.length==0)" style=" display: flex;
-justify-content: center;
-align-items: center;
-height: 200px;
-margin-right: 100px;
-margin-left: 100px;
-border: 3px solid rgb(139, 139, 139);">
-    <div>
-        <h5>
-            There is no order
-        </h5>
-    </div>
-</div>
-
-<div  *ngIf="(Orders.length!==0)">
 
 
+<div *ngIf="!loader" >
 <div class="orderss mb-2  mt-40"  *ngFor="let img of Orders"
     style="border:1px solid rgb(212, 210, 210); background-color: white; margin-left: 9%; margin-right: 9%;">
-    <div class="row " style=" margin-left: 5px; margin-right: 5px;">
+    <div class="row " style=" margin-left: 5px; margin-right: 5px;" *ngIf="(Orders.length!==0)">
         <div class="col-12 mb-3 " style="height: 50px;border-bottom:1px solid rgb(212, 210, 210) ; ">
             <div class="row mt-2 " id="firstrow" >
                 <div class="col-10 " style="padding-right: 0px;">
@@ -105,7 +91,7 @@ border: 3px solid rgb(139, 139, 139);">
 
     </div>
 </div>
-<div class="pgn mt-4" style="justify-content: center;" *ngIf="!loader">
+<div class="pgn mt-4" style="justify-content: center;" *ngIf="(Orders.length!==0)" >
     <div class="col-12">
         <div id="pgg">
             <ul class="pagination" style="justify-content: center;
@@ -118,14 +104,27 @@ border: 3px solid rgb(139, 139, 139);">
         </div>
     </div>
 </div>
-<div class="cart-table-container mb-2 ml-100 mr-100 mt-40">
+<div id="pggg" *ngIf="(Orders.length==0)" style=" display: flex;
+justify-content: center;
+align-items: center;
+height: 200px;
+margin-right: 100px;
+margin-left: 100px;
+border: 3px solid rgb(139, 139, 139);">
+    <div>
+        <h5>
+            There is no order
+        </h5>
+    </div>
+</div>
+</div>
+<div class="cart-table-container mb-2 ml-100 mr-100 mt-40" *ngIf="loader">
     <div id="tit" style="width: 100%;">
         <ngx-skeleton-loader count="4"
           [theme]="{  'border-radius': '4px',  height: '200px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
-          *ngIf="loader"></ngx-skeleton-loader>
+          ></ngx-skeleton-loader>
       </div>
      
-</div>
 </div>
 
 <ng-template #openRecord let-modal>

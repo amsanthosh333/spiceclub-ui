@@ -81,7 +81,7 @@ export class MessageComponent implements OnInit {
     this.currentname=row.shop_name;
     this.currentlogo=row.shop_logo;
     this.request.getallmessages(row.id).subscribe((response: any) => {
-      this.page2=true;this.page1=false;
+      // this.page2=true;this.page1=false;
       this.Messages=response.data.reverse();   
       console.log("response",response);
       console.log("Messages",this.Messages);
@@ -136,7 +136,20 @@ export class MessageComponent implements OnInit {
     });
 
   }
-  
+  openchat(){
+    setTimeout(() => {
+      this.page1=false;
+      this.page2=true
+    }, 1000);
+    
+  }
+  openconv(){
+   
+      this.page2=false;
+      this.page1=true
+   
+   
+  }
  
 
 }

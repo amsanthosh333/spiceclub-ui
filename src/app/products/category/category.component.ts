@@ -9,11 +9,13 @@ import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import{ SharedService} from 'src/app/services/shared.service'
 
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css'],
   providers: [NgbRatingConfig,ToastrService],
+  
 })
 export class CategoryComponent implements OnInit {
   id: any;
@@ -76,7 +78,7 @@ export class CategoryComponent implements OnInit {
   navloader: boolean=true;
   likedd=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
   likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
- 
+  element!: HTMLElement;
   constructor(private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,
     config: NgbRatingConfig,private _location: Location,private sharedService: SharedService) {
@@ -575,5 +577,16 @@ search1(form:FormGroup,page=1){
     }
     deleteRecordSuccess() {
       this.toastr.error(' Removed Successfully', '');
+    }
+
+     myFunction() {
+      // let x = document.getElementById("myTopnav");
+     
+      this.element = document.getElementById('myTopnav') as HTMLElement;
+      if (this.element.className === "topnav") {
+        this.element.className += " responsive";
+      } else {
+        this.element.className = "topnav";
+      }
     }
 }

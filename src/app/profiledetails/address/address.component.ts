@@ -4,6 +4,7 @@ import {
   FormBuilder,
   FormControl,
   Validators,
+  FormArray,
 } from '@angular/forms';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
@@ -52,6 +53,11 @@ export class AddressComponent implements OnInit {
     { lat: 48.75606, lng: -118.859, alpha: 1 },
    
   ];
+  address: FormGroup;
+  paymentModeStatus: any;
+  indexx: any;
+  address_id: any;
+  radioSelected!: string;
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal,) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -76,6 +82,9 @@ export class AddressComponent implements OnInit {
      }
      );
 
+     this.address = this.fb.group({
+      addresss: [''], 
+   })
   }
   ngOnInit(): void {
     this.getaddress();
@@ -95,8 +104,7 @@ export class AddressComponent implements OnInit {
     });
 
 
-    this.editForm = this.fb.group({
-     
+    this.editForm = this.fb.group({ 
       address: ['', [Validators.required]],
       country: ['', [Validators.required]],
       state: ['',[Validators.required]],
@@ -127,11 +135,19 @@ export class AddressComponent implements OnInit {
     console.log('selected marker',this.selectedMarker);
     
   }
+
   getaddress(){
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
       this.Address=response.data;   
       this.loader=false
-      console.log("Address",this.Address);     
+      this.indexx =this.Address.findIndex((x:any) => x.set_default ==1);
+      console.log("Address", this.Address);
+      console.log("Address index", this.indexx);
+      this.address_id=this.Address[this.indexx].id
+      this.radioSelected = this.Address[this.indexx].id;
+     
+      console.log("Address",this.Address);  
+      window.scroll(0,0)   
     // this. processdata()    
     });
   }
@@ -211,7 +227,7 @@ export class AddressComponent implements OnInit {
   
     this.request.addaddress(edata).subscribe((res: any) => {
       console.log("address response",res);
-      if (res.status == 'Shipping information has been added successfully') {       
+      if (res.result == true) {       
         form.reset()
         this.getaddress()
         this.toastr.success('Added Successfully','');
@@ -257,7 +273,7 @@ export class AddressComponent implements OnInit {
     console.log("row",row.id);
     this.request.deleteaddress(row.id).subscribe((response: any) => {
       console.log(response); 
-      if (response.message == 'Shipping information has been deleted') {
+      if (response.result == true) {
         this.modalService.dismissAll();
         this.toastr.error('Removed Successfully','');
         this.getaddress(); 
@@ -267,11 +283,26 @@ export class AddressComponent implements OnInit {
         this.modalService.dismissAll();
         console.log("responnn",response);
       }   
-     }, (error: any) => {
-       console.log(error);
-     });
+     }, );
   }
-
+changeshippingaddress(a_id:any){ 
+  this.getaddress();
+  const edata = { 
+    user_id: this.userid,
+    id:a_id,   
+  }
+  console.log(edata);
+  this.request.makeshipingaddress(edata).subscribe((res: any) => {
+    console.log("shipping response",res);
+    if (res.result == true) {       
+      // this.toastr.success('Added Successfully','');    
+      console.log("shipping address updated"); 
+    }
+    else  {
+      console.log("something went wrong");
+    }
+  },);
+}
 
   onEditSave(form: FormGroup) {
 

@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
+import{ SharedService} from 'src/app/services/shared.service';
+import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-orderdetail',
   templateUrl: './orderdetail.component.html',
@@ -48,9 +50,11 @@ export class OrderdetailComponent implements OnInit {
   delivery_status: any;
   orderStatus: any;
   error1: any;
+  orderid: any;
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
-    private toastr: ToastrService, private toast: ToastrService,private route: ActivatedRoute) {
+    private toastr: ToastrService, private toast: ToastrService,private route: ActivatedRoute,
+    private sharedService: SharedService,private spinner: NgxSpinnerService,) {
    this.currentUserSubject = new BehaviorSubject<User>(
      JSON.parse(localStorage.getItem('currentUser')||'{}')
      
@@ -89,6 +93,7 @@ export class OrderdetailComponent implements OnInit {
     this.request.vieworderdetail(this.ord_id).subscribe((response: any) => {
       this.Detail=response.data;
       this.orderStatus=this.Detail[0].delivery_status_string;
+      this.orderid=this.Detail[0].id;
       console.log("dftgdf",this.orderStatus);
       
       console.log("order detaillllllll",this.Detail);   
@@ -193,6 +198,31 @@ export class OrderdetailComponent implements OnInit {
   });
  }
 }
+proddetail(id:any){
+  // console.log("detail page",id);
+  window.scroll(0,0);
+  this.router.navigate(['productdetail', id]);
+  console.log("navigate to category");
+}
+quickorder(){
+  this.spinner.show();
+  this.request.quickorder(this.orderid).subscribe((res:any)=>{
+    console.log("quickorder res",res)
+    if(res.result==true){
+      this.spinner.hide();
+      this.toastr.success('Added to cart', '');
+      this.sharedService.sendClickEvent();
+      this.router.navigate(['cart']);
+    }
+    else{
+      console.log("err",res.message);
+      this.spinner.hide();
+      this.toastr.info('', res.message);
+    }
+  });
  
+
+
+}
  
 }

@@ -288,6 +288,8 @@ deleteaddress(id:any) {
   const headers = new HttpHeaders()
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)
   this.url = `${this.endPoint1}/user/shipping/delete/` + id;
+  console.log(this.url);
+  
   return this.http.get(this.url,{headers:headers});
 }
 public fetchcost(body:any) {
@@ -297,6 +299,17 @@ public fetchcost(body:any) {
   this.url = `${this.endPoint1}/shipping_cost`;
   return this.http.post(this.url,body,{headers:headers});
 }
+
+public makeshipingaddress(body: any) {
+  const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', 'Bearer'+' '+ this.accesstoken)
+      // .set('Access-Control-Allow-Origin', '*')
+      this.url = `${this.endPoint1}/user/shipping/make_default`;
+      console.log("sts",this.url)
+      return this.http.post(this.url,body,{headers:headers});
+   
+  }
 // futuredproduct
 public getfuturedpro() {
   this.url = `${this.endPoint1}/products/featured?user_id=`+this.userid;

@@ -21,29 +21,17 @@
 	=            cart page content         =
 	=============================================-->
 
-<div id="pggg" *ngIf="(Cart.length==0)" style=" display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 200px;
-	margin-right: 100px;
-	margin-left: 100px;
-	border: 3px solid rgb(139, 139, 139);">
-	<div>
-		<h5>
-			Cart is empty
-		</h5>
-	</div>
-</div>
 
 
-<div class="shopping-cart-area mb-80" *ngIf="(Cart.length!==0)">
+
+<div class="shopping-cart-area mb-80" >
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 mb-30">
 				<!--=======  cart table  =======-->
 
-				<div class="cart-table-container">
-					<table class="cart-table">
+				<div class="cart-table-container" *ngIf="!loader">
+					<table class="cart-table" *ngIf="(Cart.length!==0)">
 						<thead>
 							<tr>
 								<th class="product-name" colspan="2">Product</th>
@@ -55,14 +43,14 @@
 						</thead>
 
 						<tbody *ngFor="let a of Cart">
-							<tr *ngFor="let b of a.cart_items">
-								<td class="product-thumbnail">
+							<tr *ngFor="let b of a.cart_items" >
+								<td class="product-thumbnail" (click)="proddetail(b.product_id)" >
 									<a>
 										<img src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}"
 											class="img-fluid" alt="">
 									</a>
 								</td>
-								<td class="product-name">
+								<td class="product-name" (click)="proddetail(b.product_id)">
 									<a style="text-decoration: none;">{{b.product_name}}</a>
 									<!-- <span class="product-variation">Color: Black</span> -->
 								</td>
@@ -99,22 +87,35 @@
 
 						</tbody>
 					</table>
+					<div id="pggg" *ngIf="(Cart.length==0)" style=" display: flex;
+	                       justify-content: center;
+	                       align-items: center;
+	                       height: 200px;
+                          	margin-right: 100px;
+                         	margin-left: 100px;
+                         	border: 3px solid rgb(139, 139, 139);">
+						<div>
+							<h5>
+								Cart is empty
+							</h5>
+						</div>
+					</div>
 				</div>
 
-				<div class="cart-table-container">
+				<div class="cart-table-container" *ngIf="loader">
 					<div id="tit" style="width: 100%;">
 						<ngx-skeleton-loader count="5"
-							[theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
-							*ngIf="loader"></ngx-skeleton-loader>
+							[theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+						</ngx-skeleton-loader>
 					</div>
 
 				</div>
 				<!--=======  End of cart table  =======-->
 			</div>
-			<div class="col-lg-12 mb-80">
+			<div class="col-lg-12 mb-80" *ngIf="!loader" >
 				<!--=======  coupon area  =======-->
 
-				<div class="cart-coupon-area pb-30">
+				<div class="cart-coupon-area pb-30" *ngIf="(Cart.length!==0)">
 					<div class="row align-items-center">
 						<div class="col-lg-6 mb-md-30 mb-sm-30">
 							<!--=======  coupon form  =======-->
@@ -157,8 +158,8 @@
 				<!--=======  End of coupon area  =======-->
 			</div>
 
-			<div class="col-xl-4 offset-xl-8 col-lg-5 offset-lg-7">
-				<div class="cart-calculation-area">
+			<div class="col-xl-4 offset-xl-8 col-lg-5 offset-lg-7" *ngIf="!loader" >
+				<div class="cart-calculation-area" *ngIf="(Cart.length!==0)" >
 					<h2 class="mb-40">Cart totals</h2>
 
 					<table class="cart-calculation-table mb-30">

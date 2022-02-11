@@ -9,6 +9,8 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 @NgModule({
   declarations: [
     CategoryComponent
@@ -17,7 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     CategoryRoutingModule,ReactiveFormsModule,NgbModule,
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(),CollapseModule,NgxNavbarModule
   ]
 })
 export class CategoryModule { }

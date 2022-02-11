@@ -33,3 +33,26 @@ label{
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
+input.radio {width: auto;}
+
+.billing-form{
+   
+    max-height:550px;
+    overflow-y:auto;
+}
+.ng-dropdown-panel .scroll-host {
+    overflow: hidden;
+    overflow-y: auto;
+    position: relative;
+    display: block;
+    -webkit-overflow-scrolling: touch;
+    margin-top: 20px;
+}
+.ng-dropdown-panel .ng-dropdown-panel-items {
+    display: block;
+    height: auto;
+    box-sizing: border-box;
+    max-height: 160px;
+    overflow-y: auto;
+    margin-top: 20px;
+}

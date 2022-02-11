@@ -37,9 +37,9 @@
 
                         <div class="single-sidebar-widget mb-30 mt-40">
                             <h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-                            <div class="widget-post-wrapper" *ngIf="!sideloader2">
+                            <div class="widget-post-wrapper" *ngIf="!sideloader2" style="height: 450px;overflow-y: auto;">
                                 <!--=======  single widget post  =======-->
-                                <div class="single-widgost" *ngFor="let cat of Allcat" style="height: 450px;overflow-y: auto;">
+                                <div class="single-widgost" *ngFor="let cat of Allcat" >
                                     <div class="imag" (click)="getrecipebycatg(cat.id)">
                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{cat.banner}}"
                                             class="img-fluid" alt="" style="height: 100px; width: 150px; ">
@@ -170,11 +170,10 @@
                                                         role="tablist">
                                                         <a class="nav-item nav-link active" id="product-tab-1"
                                                             data-toggle="tab" href="#product-series-1" role="tab"
-                                                            aria-selected="true">Directions</a>
+                                                            aria-selected="true">Guidance</a>
                                                         <a class="nav-item nav-link" id="product-tab-2"
                                                             data-toggle="tab" href="#product-series-2" role="tab"
-                                                            aria-selected="false">Additional
-                                                            information</a>
+                                                            aria-selected="false">Nutritional Facts</a>
                                                         <a class="nav-item nav-link" id="product-tab-3"
                                                             data-toggle="tab" href="#product-series-3" role="tab"
                                                             aria-selected="false">Rating
@@ -268,7 +267,7 @@
 
                                                         <div class="shop-product__additional-info">
 
-                                                            <h2 class="comment-title mb-30">Nutritional Facts</h2>
+                                                            <!-- <h2 class="comment-title mb-30">Nutritional Facts</h2> -->
                                                             <table class="shop-attributes"
                                                                 style="text-align: start; margin: 0px;">
                                                                 <tbody>

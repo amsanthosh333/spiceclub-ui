@@ -131,6 +131,7 @@ export class HomeComponent implements OnInit {
   likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   prd_id: any;
   brnd_id: any;
+  imgloader: boolean=true;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -254,7 +255,7 @@ export class HomeComponent implements OnInit {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data;
       console.log("Todaysoffer", this.Todaysoffer);
-      this.loader3 = false;
+      this.loader4 = false;
 
     });
   }
@@ -274,6 +275,9 @@ export class HomeComponent implements OnInit {
       this.Bestsellpro = response.data.slice(0, 8);
       console.log("best sellling", this.Bestsellpro);
       this.loader3 = false;
+      setTimeout(() => {
+        this.imgloader = false;
+      }, 3000);
     });
   }
   viewfuturedpro() {

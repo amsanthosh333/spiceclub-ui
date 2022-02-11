@@ -9,7 +9,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service'
-
+import { ViewportScroller } from "@angular/common";
 
 @Component({
   selector: 'app-productdetail',
@@ -92,9 +92,9 @@ export class ProductdetailComponent implements OnInit {
   allgalleryphotos: any = [];
   currenturl: any;
   productname: any;
-
+  element!: HTMLElement;
   constructor(private router: Router, private request: RequestService, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
-    private modalService: NgbModal, config: NgbRatingConfig, private _location: Location,
+    private modalService: NgbModal, config: NgbRatingConfig, private _location: Location,private scroller: ViewportScroller,
     private toastr: ToastrService, private sharedService: SharedService) {
 
     config.max = 5;
@@ -137,6 +137,13 @@ export class ProductdetailComponent implements OnInit {
 
     this.currenturl = this.router.url
 
+  }
+  scroll(){
+  console.log("dfgs");
+  // this.scroller.scrollToAnchor("targetRed");
+    // this.element = document.getElementById('shop-product__rating') as HTMLElement;
+    window.scrollTo({ top:900, behavior: 'smooth'});
+    // this.router.navigate([], { fragment: "sscroll" });
   }
 
   showLightbox(index: number) {

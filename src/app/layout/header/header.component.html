@@ -9,23 +9,50 @@
                 <!--=======  logo with off canvas  =======-->
                 <div class="logo-with-offcanvas d-flex " >
                    <!--=======  logo   =======-->
-                    <div class="logo ml-3" style="padding-left: 30px;">			               
+                    <div class="logo ml-3" id="loogo" >			               
                             <img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="" >                    
                     </div>
-
-                    <!--=======  End of logo   =======-->
                 </div>
 
-                <!--=======  End of logo with off canvas  =======-->
-
-                <!--=======  header bottom navigation    style=" color: #474747 ;font-family: 'Poppins', sans-serif;"  =======-->
-
+				<!-- <nav ngxNavbarDynamicExpand class="navbar-light bg-light" > 
+					<button
+					  class="navbar-toggler"
+					  type="button"
+					  (click)="collapse.toggle()"
+					  aria-controls="main-nav"
+					  aria-expanded="false"
+					  aria-label="Navigáció kapcsoló" >
+					  <span
+						class="navbar-toggler-icon d-flex align-items-center justify-content-center"
+					  >
+					  </span>
+					</button> 
+					<ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse" style="margin-left: 8%; margin-right: 8%;">
+					  <ul class="navbar-nav mr-auto">  
+						<li class="nav-item" >
+							<a routerLink="/home">Home</a>
+						</li>
+						<li class="nav-item" >
+							<a routerLink="/shopbyproduct" >ShopByProduct</a>
+						</li>
+						<li class="nav-item" >
+							<a routerLink="/category/33" >ShopByCategory</a>
+						</li>
+						<li class="nav-item" >
+							<a routerLink="/blog" >Blog</a>
+						</li>
+						<li class="nav-item" >
+							<a  routerLink="/recipe">Recipe</a>
+						</li>
+						
+					  </ul>
+					</ngx-navbar-collapse>
+				  </nav> -->
                 <div class="header-bottom-navigation">
                     <div class="site-main-nav d-none d-lg-block">
                         <nav class="site-nav center-menu">
                             <ul>
-                                <li class="menu-item"><a routerLink="/home">Home</a>
-                                    
+                                <li class="menu-item"><a routerLink="/home">Home</a>                                   
                                 </li>
 
 								<li class="menu-item" ><a routerLink="/shopbyproduct" >ShopByProduct</a>                                
@@ -33,35 +60,16 @@
 
 								<li class="menu-item" ><a routerLink="/category/33" >ShopByCategory</a>                                
                                 </li>
-                                 <!-- <li class="menu-item-has-children"><a href="javascript:void(0)">WellBeing Products</a>
-                                    <ul class="sub-menu single-column-menu">
-                                        <li><a href="">Aromotherapy</a></li>
-                                        <li><a href="">Essential Oils</a></li>
-                                        <li><a href="">Skin & Face Care</a></li>
-                                        <li><a href="">Natural Hair Care</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children"><a href="javascript:void(0)">Beverages</a>
-                                    <ul class="sub-menu single-column-menu">
-                                        <li><a href="">Tea</a></li>
-                                        <li><a href="">Green Tea</a></li>
-                                        <li><a href="">Blended Coffee</a></li>
-                                        <li><a href="">Green Coffee</a></li>
-                                        <li><a href="">Milk Mixes</a></li>
-                                    </ul>
-                                </li>
-                                -->
+                               
                                 <li class="menu-item"><a routerLink="/blog" >Blog</a>
                                     
                                 </li>
                                 <li class="menu-item"><a  routerLink="/recipe">Recipe</a>
                                     
                                 </li>
-                                <!-- <li class="menu-item"><a routerLink="login">Login</a>
-                                    
-                                </li> -->
                             </ul>
                         </nav>
+					
                     </div>
                 </div>
 
@@ -110,6 +118,26 @@
                                 <i class="ion-ios-cart" *ngIf="(userid==0)"></i>  
                             </a>
                         </div>
+						<div class="single-icon drop" >
+                            
+							<a  id="offcanart-icon" >
+                               
+									<div class="dropdown" style="float:right;" >
+										 <i class="bi bi-three-dots-vertical" ></i>
+										<div class="dropdown-content">
+										  
+											<a routerLink="/home">Home</a>
+											<a routerLink="/shopbyproduct" >ShopByProduct</a>
+											<a routerLink="/category/33" >ShopByCategory</a>
+											<a routerLink="/blog" >Blog</a>
+											<a  routerLink="/recipe">Recipe</a>
+											
+										</div>
+									  </div>
+								
+							
+                            </a>
+                        </div>
 
                     </div>
                     <!--=======  End of header right icons  =======-->
@@ -154,7 +182,7 @@
     
             <!-- Mobile Navigation Start Here -->
 
-            <div class="site-mobile-navigation d-block d-lg-none">
+            <!-- <div class="site-mobile-navigation d-block d-lg-none">
                 <div id="dl-menu" class="dl-menuwrapper site-mobile-nav">
                   
                     <button class="dl-trigger hamburger hamburger--spin">
@@ -162,7 +190,7 @@
                             <span class="hamburger-inner"></span>
                         </span>
                     </button>
-                  
+               
                     <ul class="dl-menu dl-menu-toggle">
                             <ul class="dl-submenu">
 
@@ -207,10 +235,27 @@
                     </ul>
                 </ul>
                 </div>
-            </div>
+            </div> -->
 
             <!-- Mobile Navigation End Here -->
+			<!-- <div class="site-mobile-navigation d-block d-lg-none">
+                <div id="dl-menu" class="dl-menuwrapper site-mobile-nav">
+                  
+					<div class="dropdown" style="float:right;" >
+						<button class="dropbtn">Left</button>
+						<div class="dropdown-content">
+						  
+							<a routerLink="/home">Home</a>
+							<a routerLink="/shopbyproduct" >ShopByProduct</a>
+							<a routerLink="/category/33" >ShopByCategory</a>
+							<a routerLink="/blog" >Blog</a>
+							<a  routerLink="/recipe">Recipe</a>
+							
+						</div>
+					  </div>
 
+                </div>
+            </div> -->
 
         </div>
     </div>

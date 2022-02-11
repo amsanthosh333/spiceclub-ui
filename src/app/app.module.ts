@@ -24,7 +24,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { SlickCarouselModule } from 'ngx-slick-carousel'; 
-
+import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 
 @NgModule({
   declarations: [
@@ -45,7 +45,7 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
     NgxSkeletonLoaderModule,ToastrModule.forRoot({
       // timeOut: 1000,
       // positionClass: 'toast-bottom-right'
-    }),RouterModule,NgImageSliderModule,SlickCarouselModule
+    }),RouterModule,NgImageSliderModule,SlickCarouselModule,NgxNavbarModule
     
    
   ],

@@ -15,12 +15,43 @@
         </div>
     </div>
 
-    <div class="shop-page-header">
-        <div class="container">
-            <div class="row align-items-center">
+    
+      <!-- <nav ngxNavbarDynamicExpand class="navbar-light bg-light" > 
+        <button
+          class="navbar-toggler"
+          type="button"
+          (click)="collapse.toggle()"
+          aria-controls="main-nav"
+          aria-expanded="false"
+          aria-label="Navigáció kapcsoló" >
+          <span
+            class="navbar-toggler-icon d-flex align-items-center justify-content-center"
+          >
+          </span>
+        </button> 
+        <ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse" style="margin-left: 8%; margin-right: 8%;">
+          <ul class="navbar-nav mr-auto">  
+            <li class="nav-item" *ngFor="let img of  Topcat;let i = index" [ngClass]="{'active': selectedItem === img.id}" (click)="viewcatprod2(img.id,i)">
+                {{img.name}}
+            </li>
+          </ul>
+        </ngx-navbar-collapse>
+      </nav> -->
 
+    <div class="shop-page-header">
+        <div class="dropdown" style="float:right;" > 
+           <h3><i class="bi bi-card-list"></i></h3> 
+           <div class="dropdown-content">
+             
+               <a *ngFor="let img of  Topcat;let i = index" (click)="viewcatprod2(img.id,i)"> {{img.name}}</a>
+               
+               
+           </div>
+         </div>
+        <div class="container">
+            <div class="row align-items-center" >
                 <div class="col-12 col-lg-12 col-md-5 d-none d-md-block pt-1" >
-                    <!--=======  fitler titles  =======-->
+                  
                     <div class="filter-title filter-title--type-two">
                         <ul class="product-filter-menu" style=" margin-bottom: 0px;">
                             <li *ngFor="let img of  Topcat;let i = index" style="padding-left: 0px;"
@@ -28,12 +59,12 @@
                                 {{img.name}}</li>
                         </ul>
                     </div>
-                    <!--=======  End of fitler titles   =======-->
+   
                 </div>
-
             </div>
         </div>
     </div>
+   
     <!--=============================================
     =            shop page content         =
     =============================================-->

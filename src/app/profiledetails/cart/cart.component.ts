@@ -182,6 +182,12 @@ export class CartComponent implements OnInit {
      });
 
     }
+    proddetail(id:any){
+      // console.log("detail page",id);
+      window.scroll(0,0);
+      this.router.navigate(['productdetail', id]);
+      console.log("navigate to category");
+    }
 
       decreaseqty(_id:any,qty:any){
         let edata2={

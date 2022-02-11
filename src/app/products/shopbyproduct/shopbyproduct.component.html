@@ -413,6 +413,7 @@
                     <div class="col-12 md-12">
                         <label>category</label>
                         <select class="formrol pl-5" formControlName="category">
+                            <option >All</option>
                             <option *ngFor="let tab of Allcat" [value]="tab.id">
                                 {{tab.name}}
                             </option>
@@ -451,9 +452,10 @@
 
                 <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Category</label><br>
-                    <select class="formrol pl-5 col-12" formControlName="category"
+                    <select class="formrol pl-5 col-12"  placeholder="All" formControlName="category"
                         style="background-color: transparent;Border: none;border-bottom:inset">
-                        <option *ngFor="let tab of Allcat" [value]="tab.id"
+                        <option value=null selected> <p> All</p></option>
+                        <option *ngFor="let tab of Allcat" [value]="tab.id" 
                             style="background-color:rgb(227, 227, 228);Border: none;">
                             {{tab.name}}
                         </option>
@@ -461,8 +463,9 @@
                 </div>
                 <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Brand</label><br>
-                    <select class="formrol pl-5 col-12" formControlName="brand"
+                    <select class="formrol pl-5 col-12" formControlName="brand" 
                         style="background-color: transparent;Border: none;border-bottom:inset">
+                        <option value=null selected> <p> All</p></option>
                         <option *ngFor="let tab of Allbrands" [value]="tab.id"
                             style="background-color:rgb(227, 227, 228);Border: none;">
                             {{tab.name}}

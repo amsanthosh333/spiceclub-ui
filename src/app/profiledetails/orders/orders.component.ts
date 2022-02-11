@@ -17,6 +17,7 @@ import { windows } from 'ngx-bootstrap-icons';
   providers: [ToastrService],
 })
 export class OrdersComponent implements OnInit {
+  loader:boolean=true;
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
   userid: any;
@@ -37,7 +38,7 @@ export class OrdersComponent implements OnInit {
   username: any;
   userphone: any;
   useremail: any;
-  loader:boolean=true;
+  
   pagenation: any;
   pagess: any;
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
