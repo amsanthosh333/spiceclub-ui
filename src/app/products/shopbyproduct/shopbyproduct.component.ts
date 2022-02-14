@@ -35,6 +35,7 @@ export class ShopbyproductComponent implements OnInit {
   options: Options = {
     floor: 0,
     ceil: 2000 ,
+    
   };
  
   p: number = 1;
@@ -80,7 +81,7 @@ export class ShopbyproductComponent implements OnInit {
   pagenation: any;
   pagess: any;
   stocck: any;
-  searchh: any;
+  searchh: any='';
   registerForm: any;
   sortForm: FormGroup;
   Bestsellpro: any;
@@ -107,6 +108,11 @@ export class ShopbyproductComponent implements OnInit {
   maximumprize: any;
   likedd=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
   likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
+  stocckkk: any;
+  sortval: any='';
+  brandd_id: any='';
+  categoryy_id: any='';
+  search: FormGroup;
  
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
@@ -143,6 +149,9 @@ export class ShopbyproductComponent implements OnInit {
 
     });
 
+    this.search = this.fb.group({ 
+      key: [''],
+      });
   }
 
   ngOnInit(): void {
@@ -234,11 +243,14 @@ export class ShopbyproductComponent implements OnInit {
     });
   }
   pricerange(){
+    console.log(this.brandd_id,'this.brandd_id');
+    
     console.log("minValue",this.minValue);
     console.log("maxValue",this.maxValue);
+    console.log("search",this.searchh);
     this.prodloader = true;
 
-    this.request.filterdataa2(this.minValue,this.maxValue ).subscribe((response: any) => {
+    this.request.filterdataa(this.categoryy_id,this.brandd_id,this.searchh,this.sortval,this.minValue,this.maxValue ).subscribe((response: any) => {
       console.log("response", response);
       this.Product = response.data;
       this.pagenation = response.meta
@@ -264,6 +276,8 @@ export class ShopbyproductComponent implements OnInit {
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.prodloader = false;
+      this.minValue=0
+      this.maxValue=10000
       console.log("response", response);
       console.log("allproduct", this.Product);
       setTimeout(() => {
@@ -348,6 +362,8 @@ export class ShopbyproductComponent implements OnInit {
         this.pagenation=response?.meta   ;
         this.pagess=this.pagenation?.links;
         this.prodloader=false;
+        this.minValue=0
+        this.maxValue=this.maximumprize
         console.log("allcatproduct",this.Product);
         setTimeout(() => {
           this.imgloader = true;
@@ -365,6 +381,8 @@ export class ShopbyproductComponent implements OnInit {
         this.pagenation=response?.meta   ;
         this.pagess=this.pagenation?.links;
         this.prodloader=false;
+        this.minValue=0
+        this.maxValue=this.maximumprize
         console.log("allcatproduct",this.Product);
         setTimeout(() => {
           this.imgloader = true;
@@ -382,6 +400,8 @@ export class ShopbyproductComponent implements OnInit {
         this.pagenation=response?.meta   ;
         this.pagess=this.pagenation?.links;
         this.prodloader=false;
+        this.minValue=0
+        this.maxValue=this.maximumprize
         console.log("allcatproduct",this.Product);
         setTimeout(() => {
           this.imgloader = true;
@@ -456,26 +476,26 @@ export class ShopbyproductComponent implements OnInit {
         this.pagenation=response.meta   ;
         this.pagess=this.pagenation.links;
         this.prodloader=false;
+        this.minValue=0
+        this.maxValue=this.maximumprize
         console.log("allcatproduct",this.Product);
         setTimeout(() => {
           this.imgloader = true;
         }, 2000);
     },
-    (error: any) => {
-      console.log("error",error);
-    });
+   );
   }
   getprodofbrand2(id:any,i:any){
     window.scroll(0,0);
-    this.router.navigate(['shopbyproduct/brand/', id]);
-    console.log("brand",id);
+   this.brandd_id=id;
+    // this.router.navigate(['shopbyproduct/brand/', id]);
+    console.log("this.brandd_id",this.brandd_id);
     this.getprodofbrand(id,1)
-   
   }
   getpage(url:any){
     this.prodloader=true;
     this.imgloader = false;
-    this.request.getpage(url).subscribe((response:any)=>{
+    this.request.getpage2(url,this.categoryy_id,this.brandd_id,this.searchh,this.sortval,this.minValue,this.maxValue).subscribe((response:any)=>{
       this.Product=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
@@ -730,16 +750,22 @@ export class ShopbyproductComponent implements OnInit {
   }
   apply(form: FormGroup) {
     this.prodloader = true;
+    this.brandd_id=form.value.brand,
+    this.categoryy_id=form.value.category
+    this.minValue= form.value.min
+    this.maxValue=form.value.max
     if(form.value.brand==null){
       form.value.brand= ''
+      this.brandd_id=''
     }
     if(form.value.category==null){
       form.value.category= ''
+      this.categoryy_id=''
     }
     console.log("submitted");
     console.log("submitted", form.value.category,form.value.brand, form.value.min, form.value.max);
 
-    this.request.filterdataa(form.value.category,form.value.brand, form.value.min, form.value.max).subscribe((response: any) => {
+    this.request.filterdataa3(form.value.category,form.value.brand, form.value.min, form.value.max).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
@@ -755,6 +781,22 @@ export class ShopbyproductComponent implements OnInit {
     });
 
   }
+  search1(form:FormGroup,page=1){
+    this.prodloader = true;
+    
+    this.searchh = form.value.key
+    this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response.meta
+      this.pagess = this.pagenation.links
+      this.prodloader = false;
+      console.log("response", response);
+      console.log("search", this.Product);
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    });
+     }
   filterDatatable(event: any) {
     this.prodloader = true;
     console.log(event.target.value)
@@ -799,8 +841,10 @@ export class ShopbyproductComponent implements OnInit {
   }
   onsortChange(val: any) {
     this.prodloader = true;
+    this.sortval=val
     console.log("value", val);
-    this.request.getsortprod(val).subscribe((response: any) => {
+    console.log("sort form", this.categoryy_id,this.brandd_id,this.searchh,val,this.minValue,this.maxValue);
+     this.request.filterdataa(this.categoryy_id,this.brandd_id,this.searchh,val,this.minValue,this.maxValue).subscribe((response: any) => {
       console.log("sort response", response);
       this.Product = response.data;
       this.pagenation = response.meta
@@ -817,55 +861,57 @@ export class ShopbyproductComponent implements OnInit {
 
   }
 
-  quickview(id:any,content:any){
+  quickview(id: any, content: any) {
     // this.totalprice=''
-      this.quantityyy=1
-      this.product_id=id
-      this.request.getproddetail(this.product_id).subscribe((response: any) => {
-       
-        console.log("proddetaill",response);
-             this.Peoduct=response.data[0];
-             this.prod_price=this.Peoduct.main_price;
-             this.choice=this.Peoduct.choice_options;
-            //  this.stocck=(this.Peoduct.current_stock)-1;
-             this.stk=this.Peoduct.current_stock;
-             this.photoos=this.Peoduct.photos;
-             this.colors=this.Peoduct.colors;
-             this.tags=this.Peoduct.tags;
-             this.varprise=this.Peoduct.main_price;
-            //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
-             console.log("res",this.Peoduct); 
-             console.log("choise option",this.Peoduct.choice_options); 
-            //  console.log("stocck",this.stocck); 
-             console.log("stk",this.stk); 
-             if(this.Peoduct.current_stock==0){
-              this.stocck=0
-              
-             }
-             else {
-              this.stocck=(this.Peoduct.current_stock)-1;
-             }   
-            //  window.scroll(0,0);             
-            if(this.Peoduct.choice_options.length==0) {
-              console.log("empty"); 
-              this.varient_value=''
-            }
-            else{
-              this.varient_value=this.choice[0]?.options[0];
-            }
-             console.log("optiooooons",this.choice[0]?.options[0] );
-             
-              this.modalService.open(content, {
-                ariaLabelledBy: 'modal-basic-title',
-                size: 'lg',
-              });      
-            
-      },
-       (error: any) => {
+    this.quantityyy = 0
+    this.product_id = id
+    this.request.getproddetail(this.product_id).subscribe((response: any) => {
+
+      console.log("proddetaill", response);
+      this.Peoduct = response.data[0];
+      this.prod_price = this.Peoduct.main_price;
+      this.choice = this.Peoduct.choice_options;
+      //  this.stocck=(this.Peoduct.current_stock)-1;
+      this.stk = this.Peoduct.current_stock;
+      this.stocckkk = this.Peoduct.current_stock;
+      this.photoos = this.Peoduct.photos;
+      this.colors = this.Peoduct.colors;
+      this.tags = this.Peoduct.tags;
+      this.varprise = this.Peoduct.main_price;
+      //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
+      console.log("res", this.Peoduct);
+      console.log("choise option", this.Peoduct.choice_options);
+      //  console.log("stocck",this.stocck); 
+      console.log("stk", this.stk);
+      if (this.Peoduct.current_stock == 0) {
+        this.stocck = 0
+
+      }
+      else {
+        this.stocck = (this.Peoduct.current_stock) ;
+      }
+      //  window.scroll(0,0);             
+      if (this.Peoduct.choice_options.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else {
+        this.varient_value = this.choice[0]?.options[0];
+      }
+      console.log("optiooooons", this.choice[0]?.options[0]);
+
+      this.modalService.open(content, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'lg',
+      });
+
+    },
+      (error: any) => {
         console.log(error);
       });
-      
+
   }
+
   increaseqty(){
     this.quantityyy++;
     this.stocck--;
@@ -883,6 +929,26 @@ export class ShopbyproductComponent implements OnInit {
         //  console.log("totalprice",this.totalprice);
         
       }
+      getValue(val: any) {
+        if (val<= 0) {
+          val = 1
+          console.log( "valif",val);
+        }
+        else if (val > this.stocckkk) {
+          val = this.stocckkk
+          console.log( "valel",val);
+        }
+        this.quantityyy = val
+        this.stocck = this.stocckkk - val
+    
+        console.log( "val",val);
+        console.log("this.stocckkk-val",this.stocckkk - val);
+        console.log("this.stocckkk",this.stocckkk);
+        console.log(this.stocck);
+        this.stocck
+    
+    
+      }
       selectvar(weight:any){
         this.varient_value=weight.replace(/\s/g, "")
         this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
@@ -891,20 +957,21 @@ export class ShopbyproductComponent implements OnInit {
           this.totalprice=(res?.price_string).replace('Rs','');
           this.varprise=res?.price_string;
           this.stk=res?.stock;
+          this.stocckkk=res?.stock;
           if(res?.stock==0){
             this.stocck=0
             this.quantityyy=0;
            
            }
            else {
-            this.stocck=(res?.stock)-1;
-            this.quantityyy=1;
+            this.stocck=(res?.stock);
+            this.quantityyy=0;
            }   
-  
+
           console.log(this.varprise);
           console.log(this.stocck);
           console.log(res?.stock);
-  
+
         }, (error: any) => {
           console.log("error",error);
         

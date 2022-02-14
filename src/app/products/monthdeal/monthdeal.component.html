@@ -426,8 +426,9 @@
 										<div class="product-quantity d-flex align-items-center">
 											<div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
 												<a class="dec qty-btn" style="text-decoration: none;"
-													(click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
-												<input type="text" value="{{quantityyy}}" style="background: transparent;">
+													(click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+													<input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
+											   
 												<a class="inc qty-btn" style="text-decoration: none;"
 													(click)="increaseqty()" *ngIf="stk>1">+</a>
 											</div>
@@ -475,80 +476,4 @@
 			=            quick view         =
 			=============================================-->
 	
-			<div  class="cd-quick-view">
-				<div class="cd-slider-wrapper">
-					<ul class="cd-slider">
-						<li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
-						<li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
-					</ul> <!-- cd-slider -->
-		
-					<ul class="cd-slider-pagination">
-						<li class="active"><a href="#0">1</a></li>
-						<li><a href="#1">2</a></li>
-					</ul> <!-- cd-slider-pagination -->
-		
-					<ul class="cd-slider-navigation">
-						<li><a class="cd-prev" href="#0">Prev</a></li>
-						<li><a class="cd-next" href="#0">Next</a></li>
-					</ul> <!-- cd-slider-navigation -->
-				</div> <!-- cd-slider-wrapper -->
-		
-				<div class="lezada-item-info cd-item-info ps-scroll">
-		
-					<h2 class="item-title">Demo Product One</h2>
-					<p class="price">
-						<span class="main-price discounted">Rs 360.00</span>
-						<span class="discounted-price">Rs 300.00</span>
-					</p>
-		
-					<p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in your daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making variety rices like Biriyani and Puloa.</p>
-		
-					<span class="quickview-title">Quantity:</span>
-					<div class="pro-qty d-inline-block mb-40">
-						<input type="text" value="1">
-					</div>
-		
-					<div class="add-to-cart-btn mb-25">
-		
-						<button class="lezada-button lezada-button--medium">add to cart</button>
-					</div>
-		
-					<div class="quick-view-other-info">
-						<table>
-							<tr class="single-info">
-								<td class="quickview-title">SKU: </td>
-								<td class="quickview-value">12345</td>
-							</tr>
-							<tr class="single-info">
-								<td class="quickview-title">Categories: </td>
-								<td class="quickview-value">
-									<a href="#">Edible Oils</a>,
-									<a href="#">Oils</a>,
-									<a href="#">Cooking Oils</a>
-								</td>
-							</tr>
-							<tr class="single-info">
-								<td class="quickview-title">Tags: </td>
-								<td class="quickview-value">
-									<a href="#">The Spice Club</a>,
-									<a href="#">Satinanace</a>
-								</td>
-							</tr>
-							<tr class="single-info">
-								<td class="quickview-title">Share on: </td>
-								<td class="quickview-value">
-									<ul class="quickview-social-icons">
-										<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-										<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-										<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-										<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-									</ul>
-								</td>
-							</tr>
-						</table>
-					</div>
-		
-		
-				</div> <!-- cd-item-info -->
-				<a href="#0" class="cd-close">Close</a>
-			</div>
+			

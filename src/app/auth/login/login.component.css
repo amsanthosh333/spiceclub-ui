@@ -136,3 +136,10 @@ body { padding: 2em; }
 .loginBtn--google:focus {
   background: #e65b49;
 }
+select {
+ 
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist; 
+  appearance: menulist;     /* Remove default arrow */
+ 
+}

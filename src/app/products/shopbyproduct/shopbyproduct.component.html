@@ -98,9 +98,17 @@
                         <div class="single-sidebar-widget mb-40">
                             <!--=======  search widget  =======-->
 
-                            <div class="search-widget">
+                            <!-- <div class="search-widget">
                                 <input placeholder="Search" type="text" class="browser-default search-field"
                                     (click)='filterDatatable($event)' aria-label="Search box">
+                            </div> -->
+                            <div class="search-widget">
+                           
+                                <form [formGroup]="search" (ngSubmit)="search1(search)" >
+                                    <input type="search" formControlName="key" placeholder="Search products ...">
+                                    <button type="submit"><i class="ion-android-search"></i></button>
+                                </form>
+                               
                             </div>
 
                             <!--=======  End of search widget  =======-->
@@ -589,14 +597,12 @@
                                 <div class="col-3">
                                     <div class="opacity-50 mt-2 " *ngFor="let a of choice">{{a.title}}:</div>
                                 </div>
-                                <div class="col-9">
-                                    <div class="shop-product__block__value" *ngFor="let a of choice">
+                                <div class="shop-product__block__value" *ngFor="let a of choice">
 
-                                        <div class="shop-product-size-list">
-                                            <span class="single-size" *ngFor="let b of a.options"
-                                                (click)="selectvar(b)">{{b}}</span>
+                                    <div class="shop-product-size-list">
+                                        <span class="single-size" *ngFor="let b of a.options"
+                                            (click)="selectvar(b)">{{b}}</span>
 
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -609,8 +615,9 @@
                                     <div class="product-quantity d-flex align-items-center">
                                         <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                             <a class="dec qty-btn" style="text-decoration: none;"
-                                                (click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
-                                            <input type="text" value="{{quantityyy}}" style="background: transparent;">
+                                                (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+                                                <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
+                                           
                                             <a class="inc qty-btn" style="text-decoration: none;"
                                                 (click)="increaseqty()" *ngIf="stk>1">+</a>
                                         </div>

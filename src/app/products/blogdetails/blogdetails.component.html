@@ -33,7 +33,7 @@
 
 						<div class="single-sidebar-widget mb-40 " *ngIf="!sideloader2">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-							<ul style="padding-left: 0px;height: 179px;overflow-y: auto;" class="single-sidebar-widget--list single-sidebar-widget--list--category"
+							<ul style="padding-left: 0px;max-height: 250px;overflow-y: auto;" class="single-sidebar-widget--list single-sidebar-widget--list--category"
 								*ngFor="let cat of Allcat">
 
 								<li><a style="color: gray;" (click)="getblogbycatg(cat.id)" stty>{{cat.name}} </a> <span
@@ -52,7 +52,7 @@
 
 							<!--=======  widget post wrapper  =======-->
 
-							<div class="widget-post-wrapper" *ngIf="!allloader1" style="height: 350px;overflow-y: auto;">
+							<div class="widget-post-wrapper" *ngIf="!allloader1" style="max-height: 450px;overflow-y: auto;">
 								<div class="single-widget-post" *ngFor="let img of Blogs" (click)="getblogdetail2(img.id)">
 									<div class="image">
 										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"

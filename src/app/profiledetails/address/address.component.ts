@@ -57,7 +57,7 @@ export class AddressComponent implements OnInit {
   paymentModeStatus: any;
   indexx: any;
   address_id: any;
-  radioSelected!: string;
+  radioSelected: any =21;
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal,) {
     this.currentUserSubject = new BehaviorSubject<User>(

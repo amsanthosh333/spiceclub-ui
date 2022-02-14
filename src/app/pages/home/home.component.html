@@ -742,7 +742,6 @@
 
     <!-- popup -->
     <ng-template #openRecord let-modal>
-
         <div class="modal-body" style="background-color: rgb(248, 250, 251);">
             <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()"
                 style="padding-right: 15px;">
@@ -860,9 +859,9 @@
                                         <div class="product-quantity d-flex align-items-center">
                                             <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                                 <a class="dec qty-btn" style="text-decoration: none;"
-                                                    (click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
-                                                <input type="text" value="{{quantityyy}}"
-                                                    style="background: transparent;">
+                                                    (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+                                                    <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
+                                               
                                                 <a class="inc qty-btn" style="text-decoration: none;"
                                                     (click)="increaseqty()" *ngIf="stk>1">+</a>
                                             </div>

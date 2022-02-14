@@ -97,6 +97,7 @@ export class CheckoutComponent implements OnInit {
   razpaysuccess: any;
   paymentdetails: any;
   indexx: any;
+  curshipaddress: any;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
@@ -136,6 +137,7 @@ export class CheckoutComponent implements OnInit {
    })
   }
   ngOnInit(): void {
+    window.scroll(0,0)
     this.viewsummery();
     this.viewcart();
     this.paymettype();
@@ -192,7 +194,8 @@ export class CheckoutComponent implements OnInit {
       console.log("Address", this.Address);
       console.log("Address index", this.indexx);
       this.address_id=this.Address[this.indexx].id
-
+      this.curshipaddress=this.Address[this.indexx]
+this.shippingcost(this.curshipaddress)
     });
     // this.paymettype();
   }
@@ -226,14 +229,30 @@ export class CheckoutComponent implements OnInit {
       user_id: this.userid,
       city_name: row.city_name
     }
+    const edata5 = { 
+      user_id: this.userid,
+      id:row.id,   
+    }
     console.log("edatat", edata);
-    console.log("edatat", edata2);
-
+    console.log("edatat2", edata2);
+    console.log("edatat5",edata5);
     this.request.updateshippingaddress(edata2).subscribe((response: any) => {
       console.log("address changed res",response); 
 
     // this. processdata()    
     });
+  
+
+    this.request.makeshipingaddress(edata5).subscribe((res: any) => {
+      console.log("shipping response",res);
+      if (res.result == true) {       
+        // this.toastr.success('Added Successfully','');    
+        console.log("shipping address updated"); 
+      }
+      else  {
+        console.log("something went wrong");
+      }
+    },);
     this.request.fetchcost(edata).subscribe((response: any) => {
       this.Scost=response; 
       this.cost= this.Scost.value_string
@@ -323,7 +342,7 @@ export class CheckoutComponent implements OnInit {
           console.log("Placeorder", response);
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
-            this.toastr.success(response.message);
+            this.toastr.success('Order placed');
             this.sharedService.sendClickEvent();
             this.router.navigate(['/home']);
             
@@ -612,11 +631,13 @@ export class CheckoutComponent implements OnInit {
     this.request.razsuccess(edata4).subscribe((response:any)=>{
       console.log("success response",response);
       if(response.message=="Payment is successful"){ 
+        this.sharedService.sendClickEvent();
         console.log(response.message);
         this.spinner.hide();
-        this.toastr.success('Payment is successful',''); 
-        // alert(response.message)
-        this.sharedService.sendClickEvent();
+        
+         alert(response.message)
+         this.toastr.success('Payment is successful', ''); 
+        
         this.router.navigate(['/home']);
 
       }

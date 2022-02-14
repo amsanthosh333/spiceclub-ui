@@ -133,12 +133,20 @@ li.has-children.active{
     }
     @media screen and (max-width: 995px) {
       .dropdown{
-       display: inline;
+        position: relative;
+       display:  inline-block;
       }
       .shop-page-header {
         padding: 10px 20px;
         border-bottom: none;
     }
+    }
+    @media screen and (min-width: 995px) {
+      .dropdown{
+       
+       display: none;
+      }
+   
     }
     .dl-menuwrapper button:after {
       content: '';
@@ -161,11 +169,11 @@ li.has-children.active{
     width: 20px;
     }
     
-    .dropdown {
+    /* .dropdown {
     position: relative;
-    display: inline-block;
+    display:none;
     }
-    
+     */
     .dropdown-content {
     display: none;
     position: absolute;
@@ -186,3 +194,13 @@ li.has-children.active{
     .dropdown-content a:hover {background-color: #f1f1f1;}
     .dropdown:hover .dropdown-content {display: block;}
     .dropdown:hover #dropbtn {background-color: #3e8e4100;}
+
+       /* to remove arroys form input box */
+   input::-webkit-outer-spin-button,
+   input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+   }
+   input[type=number] {
+     -moz-appearance: textfield;
+   }  

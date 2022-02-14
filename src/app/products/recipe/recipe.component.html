@@ -32,7 +32,7 @@
                         <div class="single-sidebar-widget mb-40">
                             <h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
 
-                            <div class="widget-post-wrapper" *ngIf="!sideloader1" style="height: 450px;overflow-y: auto;">
+                            <div class="widget-post-wrapper" *ngIf="!sideloader1" style="max-height: 450px;overflow-y: auto;">
                                 <!--=======  single widget post  =======-->
                                 <div class="single-widgost" *ngFor="let cat of Allcat">
                                     <div class="imag" (click)="getrecipebycatg2(cat.id)">

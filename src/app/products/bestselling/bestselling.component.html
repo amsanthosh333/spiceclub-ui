@@ -140,7 +140,7 @@
 
                             <!--=======  widget product wrapper  =======-->
 
-                            <div class="widget-product-wrapper" style="height: 450px; overflow-y: auto;" *ngIf="!prodloader">
+                            <div class="widget-product-wrapper" style="max-height: 550px; overflow-y: auto;" *ngIf="!prodloader">
                                 <!--=======  single widget product  =======-->
                                 <div class="single-widget-product-wrapper">
                                     <div class="single-widget-product" *ngFor="let img of Product"
@@ -481,8 +481,9 @@
                                             <div class="product-quantity d-flex align-items-center">
                                                 <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                                     <a class="dec qty-btn" style="text-decoration: none;"
-                                                        (click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
-                                                    <input type="text" value="{{quantityyy}}" style="background: transparent;">
+                                                        (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+                                                        <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
+                                                   
                                                     <a class="inc qty-btn" style="text-decoration: none;"
                                                         (click)="increaseqty()" *ngIf="stk>1">+</a>
                                                 </div>

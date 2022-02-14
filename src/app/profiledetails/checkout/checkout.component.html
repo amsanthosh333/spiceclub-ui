@@ -54,7 +54,7 @@
 						<div class="row row-40">
 							<div class="col-lg-7 mb-20">
 								<!-- Billing Address -->
-								<div id="billing-form" class="mb-40"  >
+								<div id="billing-form" class="mb-40">
 									<h4 class="checkout-title">Shipping Address</h4>
 									<!-- <div class="row">
 											<div class="checktotal" *ngFor="let Connectdtls of Address; let i=index">
@@ -133,14 +133,17 @@
 									<div class="addres1" style="max-height:550px;
 									overflow-y:auto;">
 										<form [formGroup]="address">
-											
+
 											<div class="addresss mb-2" *ngFor="let Connectdtls of Address; let i=index"
 												style=" border:1px solid #e0e0e0; padding: 20px;">
-												<span style="margin-left: auto;"> <input type="radio" class="radio"
-														formControlName="addresss" id="shiping_address{{i}}"
+												<span style="margin-left: auto;">
+													 <input type="radio" class="radio"
+														 
 														value="{{Connectdtls.id}}" data-shipping
-														name="{{Connectdtls.city_name}}"
-														(click)="shippingcost(Connectdtls)" [checked]="true "><label
+														name="radio"
+														[checked]="Connectdtls.set_default== 1"
+														(click)="shippingcost(Connectdtls)" >
+														<label
 														for="shiping_address{{i}}" style="font-size: small;"> &nbsp; Use
 														address{{i+1}} as shipping</label> </span>
 
@@ -154,19 +157,19 @@
 										</form>
 									</div>
 									<div class="checktotal">
-										<ngx-skeleton-loader count="3"  [theme]="{ 
+										<ngx-skeleton-loader count="3" [theme]="{ 
 											'border-radius': '5px',
 											height: '200px',
 											'background-color': '##b9b8b8',
 											border: '1px solid white'
-										  }" animation="pulse" *ngIf="loader" ></ngx-skeleton-loader>
+										  }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
 									</div>
 
 									<div class="col-12 mb-20 mt-20">
 										<div class="check-box">
 											<input type="checkbox" id="create_account" routerLink="/address" />
 											<label for="create_account"> To edit Address <address></address>
-												</label>
+											</label>
 										</div>
 										<div class="check-box">
 											<input type="checkbox" id="shiping_address" data-shipping

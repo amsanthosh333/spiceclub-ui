@@ -52,7 +52,7 @@
 								</td>
 								<td class="product-name" (click)="proddetail(b.product_id)">
 									<a style="text-decoration: none;">{{b.product_name}}</a>
-									<!-- <span class="product-variation">Color: Black</span> -->
+									<span class="product-variation">{{b.variation}}</span>
 								</td>
 
 								<td class="product-price" style="padding-left: 13px;"><span class="price">Rs
@@ -65,9 +65,10 @@
 												style="text-decoration: none;" type="submit"
 												(click)="decreaseqty(b.id,b.quantity-1)"
 												(click)="b.quantity = b.quantity - 1"
-												*ngIf="b.quantity!=b.lower_limit">-</a></span>
-										<input type="text" value="{{b.quantity}}">
-										<span style="position: absolute;"> <a class="inc qty-btn"
+												*ngIf="b.quantity!>b.lower_limit">-</a></span>
+										<!-- <input type="text" value="{{b.quantity}}"> -->
+										  <input type="number" #box value="{{b.quantity}}"  (keyup)="getValue(box.value,b.id,b.upper_limit)" name="qqty" style="background: transparent;">
+										<span style="position: absolute;"> <a class="inc qty-btn" 
 												style="text-decoration: none;" (click)="b.quantity = b.quantity + 1"
 												(click)="increaseqty(b.id,b.quantity)"
 												*ngIf="b.quantity!=b.upper_limit">+</a> </span>
@@ -160,9 +161,26 @@
 
 			<div class="col-xl-4 offset-xl-8 col-lg-5 offset-lg-7" *ngIf="!loader" >
 				<div class="cart-calculation-area" *ngIf="(Cart.length!==0)" >
-					<h2 class="mb-40">Cart totals</h2>
+					<h2 class="mb-0">Cart totals</h2>
 
 					<table class="cart-calculation-table mb-30">
+						<tr *ngIf="couponn==true">
+							<th>Coupon applied</th>
+							<td class="subtotal">yes</td>
+						</tr>
+						<tr>
+							<th>Discount</th>
+							<td class="subtotal">{{Summery?.discount}}</td>
+						</tr>
+						<tr>
+							<th>SHIPPING COST</th>
+							<td class="subtotal">{{Summery?.shipping_cost}}</td>
+						</tr>
+					
+						<tr>
+							<th>Tax</th>
+							<td class="subtotal">{{Summery.tax}}</td>
+						</tr>
 						<tr>
 							<th>SUBTOTAL</th>
 							<td class="subtotal">{{subtot}}</td>

@@ -10,6 +10,7 @@ import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service'
 import { ViewportScroller } from "@angular/common";
+import { windowDock } from 'ngx-bootstrap-icons';
 
 @Component({
   selector: 'app-productdetail',
@@ -45,7 +46,7 @@ export class ProductdetailComponent implements OnInit {
   dec: any;
   totalprice: any;
   varprise: any;
-  quantityyy: any;
+  quantityyy!: number;
   cat_id: any;
   Product: any;
   varient_value: any;
@@ -93,6 +94,11 @@ export class ProductdetailComponent implements OnInit {
   currenturl: any;
   productname: any;
   element!: HTMLElement;
+  myvalue: any;
+  valuee: any;
+  error3: any;
+  stocckkk: any;
+
   constructor(private router: Router, private request: RequestService, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private modalService: NgbModal, config: NgbRatingConfig, private _location: Location,private scroller: ViewportScroller,
     private toastr: ToastrService, private sharedService: SharedService) {
@@ -115,6 +121,7 @@ export class ProductdetailComponent implements OnInit {
     if (this.userid == undefined) {
       this.userid = 0;
     }
+    
   }
 
 
@@ -137,14 +144,73 @@ export class ProductdetailComponent implements OnInit {
 
     this.currenturl = this.router.url
 
+
   }
-  scroll(){
+ 
+
+  numberOnly(event: any): boolean {
+    const charCode = (event.which) ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      
+      return false;
+    }
+    console.log("valueee", event.target.value);
+    return true;
+    
+  }
+  onlyNumberKey(event: { charCode: number; }) {
+    return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
+}
+getValue(val:any){
+if(val<=0){
+  val=1
+}
+else if (val>this.stocckkk){
+ val=this.stocckkk
+}
+  this.quantityyy=val
+  this.stocck=this.stocckkk-val
+  console.log(val);
+  let dataa = {
+    a: this.buyertypeid,
+    b: this.product_id,
+    c: this.varient_value.replace(/\s/g, ""),
+    d: this.quantityyy
+  }
+  console.log("dataaa", dataa);
+  this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+    this.totalprice = res.price;
+    console.log("discount price", this.totalprice);
+    console.log("dis res", res);
+  })
+}
+
+filterDatatable(qty: any) {
+  this.error3=''
+    console.log("search",qty);
+   
+    if(qty>this.stocck ){
+      console.log("out of stock"); 
+      this.error3='out of stock'
+    }
+    else if (qty<=0){
+      console.log("Enter minimun 1 prodect"); 
+      this.error3='Enter minimun 1 prodect'
+    }
+  
+}  
+
+
+  scrolll(){
   console.log("dfgs");
   // this.scroller.scrollToAnchor("targetRed");
     // this.element = document.getElementById('shop-product__rating') as HTMLElement;
     window.scrollTo({ top:900, behavior: 'smooth'});
     // this.router.navigate([], { fragment: "sscroll" });
   }
+  scroll(el: HTMLElement) {
+    el.scrollIntoView();
+}
 
   showLightbox(index: number) {
     this.selectedImageIndex = index;
@@ -233,13 +299,19 @@ export class ProductdetailComponent implements OnInit {
     this.totalprice = 0.00
     this.product_id = id
     this.quantityyy = 0
+    this.photoloader = true;
+    this.contentloader = true;
+    this.discriptloader = true;
     console.log("detail", this.product_id);
+    this.router.navigate(['productdetail', id]);
+    window.scroll(0,0)
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-      // window.scroll(0,0);
+      window.scroll(0,0);
       console.log("proddetaill", response);
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
       this.stocck = (this.Peoduct.current_stock); 1
+      this.stocckkk = (this.Peoduct.current_stock); 1
       this.stk = this.Peoduct.current_stock;
       this.photoos = this.Peoduct.photos;
       //  this.photoos = response.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.data[0].photos.path);
@@ -269,7 +341,7 @@ export class ProductdetailComponent implements OnInit {
       console.log(" this.photoos", this.photoos);
       console.log("res", this.Peoduct);
       console.log("choise option", this.Peoduct.choice_options);
-
+     
       this.getcommentsss()
       //  if(this.Peoduct.current_stock==0){
       //    console.log("stock 0");
@@ -330,6 +402,8 @@ export class ProductdetailComponent implements OnInit {
     return this.quantityy = this.quantityy;
   }
   addtocart(_id: any) {
+   
+    console.log(this.quantityyy);
     if (this.userid == 0) {
       console.log("uuuuuuuuuuuuuuiddddddddd", this.userid);
 
@@ -346,7 +420,8 @@ export class ProductdetailComponent implements OnInit {
           quantity: 1,
           buyertype: this.buyertypeid,
         }
-        this.addtoocartt(edata)
+        this.toastr.info('minimun 1 product should be selected', '');
+        // this.addtoocartt(edata)
         console.log("edata1",edata);
       }
       else {
@@ -429,6 +504,7 @@ export class ProductdetailComponent implements OnInit {
       this.varprise = res?.price_string;
       // this.totalprice=(res?.price_string).replace('Rs','');
       this.stocck = (res?.stock);
+      this.stocckkk = (res?.stock);
       this.quantityyy = 0;
 
       // if (res.message == 'Product added to cart successfully') {       

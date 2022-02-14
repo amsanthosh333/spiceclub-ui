@@ -14,7 +14,7 @@ import { NgImageSliderModule } from 'ng-image-slider';
 import {ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons'
 import { ShareModule } from 'ngx-sharebuttons';
-
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     ProductdetailComponent
@@ -23,7 +23,7 @@ import { ShareModule } from 'ngx-sharebuttons';
     CommonModule,
     ProductdetailRoutingModule,ReactiveFormsModule,NgbModule,
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,NgImageFullscreenViewModule,
-    ToastrModule.forRoot(),NgImageSliderModule,
+    ToastrModule.forRoot(),NgImageSliderModule,FormsModule,
     ShareButtonsModule.withConfig({
          debug:true,
     }),ShareIconsModule,ShareModule

@@ -64,6 +64,7 @@ export class BestsellingComponent implements OnInit {
   Product: any;
   pagenation: any;
   pagess: any;
+  stocckkk: any;
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,private modalService: NgbModal,private  config: NgbRatingConfig,private sharedService: SharedService) {
@@ -213,11 +214,12 @@ export class BestsellingComponent implements OnInit {
       
       });
     }
+   
   atChange(val:any){
       this.prodloader=true;
       this.imgloader = false;
       console.log("value",val);
-      this.request.getsortprod(val.value).subscribe((response: any) => {
+      this.request.getsortprod2(val.value).subscribe((response: any) => {
        
         this.Bestsellpro=response.data;
         // this.page1=false,
@@ -262,55 +264,57 @@ export class BestsellingComponent implements OnInit {
       });
     }
 
-    quickview(id:any,content:any){
+    quickview(id: any, content: any) {
       // this.totalprice=''
-        this.quantityyy=1
-        this.product_id=id
-        this.request.getproddetail(this.product_id).subscribe((response: any) => {
-         
-          console.log("proddetaill",response);
-               this.Peoduct=response.data[0];
-               this.prod_price=this.Peoduct.main_price;
-               this.choice=this.Peoduct.choice_options;
-              //  this.stocck=(this.Peoduct.current_stock)-1;
-               this.stk=this.Peoduct.current_stock;
-               this.photoos=this.Peoduct.photos;
-               this.colors=this.Peoduct.colors;
-               this.tags=this.Peoduct.tags;
-               this.varprise=this.Peoduct.main_price;
-              //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
-               console.log("res",this.Peoduct); 
-               console.log("choise option",this.Peoduct.choice_options); 
-              //  console.log("stocck",this.stocck); 
-               console.log("stk",this.stk); 
-               if(this.Peoduct.current_stock==0){
-                this.stocck=0
-                
-               }
-               else {
-                this.stocck=(this.Peoduct.current_stock)-1;
-               }   
-              //  window.scroll(0,0);             
-              if(this.Peoduct.choice_options.length==0) {
-                console.log("empty"); 
-                this.varient_value=''
-              }
-              else{
-                this.varient_value=this.choice[0]?.options[0];
-              }
-               console.log("optiooooons",this.choice[0]?.options[0] );
-               
-                this.modalService.open(content, {
-                  ariaLabelledBy: 'modal-basic-title',
-                  size: 'lg',
-                });      
-              
-        },
-         (error: any) => {
+      this.quantityyy = 0
+      this.product_id = id
+      this.request.getproddetail(this.product_id).subscribe((response: any) => {
+  
+        console.log("proddetaill", response);
+        this.Peoduct = response.data[0];
+        this.prod_price = this.Peoduct.main_price;
+        this.choice = this.Peoduct.choice_options;
+        //  this.stocck=(this.Peoduct.current_stock)-1;
+        this.stk = this.Peoduct.current_stock;
+        this.stocckkk = this.Peoduct.current_stock;
+        this.photoos = this.Peoduct.photos;
+        this.colors = this.Peoduct.colors;
+        this.tags = this.Peoduct.tags;
+        this.varprise = this.Peoduct.main_price;
+        //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
+        console.log("res", this.Peoduct);
+        console.log("choise option", this.Peoduct.choice_options);
+        //  console.log("stocck",this.stocck); 
+        console.log("stk", this.stk);
+        if (this.Peoduct.current_stock == 0) {
+          this.stocck = 0
+  
+        }
+        else {
+          this.stocck = (this.Peoduct.current_stock) ;
+        }
+        //  window.scroll(0,0);             
+        if (this.Peoduct.choice_options.length == 0) {
+          console.log("empty");
+          this.varient_value = ''
+        }
+        else {
+          this.varient_value = this.choice[0]?.options[0];
+        }
+        console.log("optiooooons", this.choice[0]?.options[0]);
+  
+        this.modalService.open(content, {
+          ariaLabelledBy: 'modal-basic-title',
+          size: 'lg',
+        });
+  
+      },
+        (error: any) => {
           console.log(error);
         });
-        
+  
     }
+ 
     increaseqty(){
       this.quantityyy++;
       this.stocck--;
@@ -328,6 +332,26 @@ export class BestsellingComponent implements OnInit {
           //  console.log("totalprice",this.totalprice);
           
         }
+        getValue(val: any) {
+          if (val<= 0) {
+            val = 1
+            console.log( "valif",val);
+          }
+          else if (val > this.stocckkk) {
+            val = this.stocckkk
+            console.log( "valel",val);
+          }
+          this.quantityyy = val
+          this.stocck = this.stocckkk - val
+      
+          console.log( "val",val);
+          console.log("this.stocckkk-val",this.stocckkk - val);
+          console.log("this.stocckkk",this.stocckkk);
+          console.log(this.stocck);
+          this.stocck
+      
+      
+        }
         selectvar(weight:any){
           this.varient_value=weight.replace(/\s/g, "")
           this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
@@ -336,14 +360,15 @@ export class BestsellingComponent implements OnInit {
             this.totalprice=(res?.price_string).replace('Rs','');
             this.varprise=res?.price_string;
             this.stk=res?.stock;
+            this.stocckkk=res?.stock;
             if(res?.stock==0){
               this.stocck=0
               this.quantityyy=0;
              
              }
              else {
-              this.stocck=(res?.stock)-1;
-              this.quantityyy=1;
+              this.stocck=(res?.stock);
+              this.quantityyy=0;
              }   
 
             console.log(this.varprise);

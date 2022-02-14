@@ -1694,7 +1694,8 @@ compone(){
             console.log("logggouttt") 
             this.authService.logout().subscribe( res=>{
               console.log("res",res);
-              this.router.navigate(['/login'])
+              this.toastr.success('Logout Successfully', '');
+              this.router.navigate(['/home'])
               .then(() => {
                 window.location.reload();
               });

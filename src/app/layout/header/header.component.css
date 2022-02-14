@@ -1,6 +1,8 @@
 /* .menu-item li{
 	color: rgb(106, 107, 107);
 } */
+
+
 #dropbtn[_ngcontent-ajq-c107] {
     background-color: #cecccc00;
     color: white;
@@ -73,23 +75,61 @@
 	.logo-with-offcanvas{
 		margin-right: 60px;
 	}
+}
+	@media (max-width : 995px) {  
+	#logout{
+		display: none;
+	}
+	#logoutside{
+		display:inline;
+	}
+	.reg{
+		display: none;
+	}
+	#regside{
+		display:inline;
+	}
+	.reg1{
+		display:inline;
+	}
+	.loggin{
+		display: none;
+	}
+	.loggin1{
+		display:inline;
+	}
+	#loginside{
+		display:inline;
+	}
+	.header-bottom-navigation{
+		display: none;
+	}
 	}
 	@media (min-width : 995px) {  
 		.header-right-icons .single-icon.drop {
 			display:none;
 		}
+		.header-bottom-navigation{
+			display: inline;
 		}
-.header-right-icons .single-icon.user-login {
-    display:inline;
-}
-.header-right-icons .single-icon.wishlist {
-    display:inline;
-}
+		.loggin1{
+			display:none;
+		}
+		.reg1{
+			display:none;
+		}
+		}
+         .header-right-icons .single-icon.user-login {
+             display:inline;
+         }
+         .header-right-icons .single-icon.wishlist {
+            display:inline;
+        }
 
-.ng-image-slider .ng-image-slider-container .main .next a{
-	text-decoration: none;
-	color:#474747
-}
+         .ng-image-slider .ng-image-slider-container .main .next a{
+        	text-decoration: none;
+        	color:#474747
+         }
  .menu-item a {
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;

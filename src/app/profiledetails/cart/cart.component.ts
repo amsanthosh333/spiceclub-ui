@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {NgForm} from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
-import { RequestService } from 'src/app/services/request.service'; 
+import { RequestService } from 'src/app/services/request.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
@@ -10,7 +10,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
-import{ SharedService} from 'src/app/services/shared.service'
+import { SharedService } from 'src/app/services/shared.service'
 
 
 // import{ SharedService} from 'src/app/services/shared.service'
@@ -26,16 +26,16 @@ export class CartComponent implements OnInit {
 
   @ViewChild('form') form!: ElementRef;
   accessCode: any;
-  encRequestRes : any;
-  order_no : any = 'qaz234567';
-  testAmount : any = '10';
-  selectedAddress : any = {
-    name : 'testing',
-    address : 'test address',
-    city : 'test city',
-    pincode : '23456',
-    state : 'state test',
-    phone : '1234567890'
+  encRequestRes: any;
+  order_no: any = 'qaz234567';
+  testAmount: any = '10';
+  selectedAddress: any = {
+    name: 'testing',
+    address: 'test address',
+    city: 'test city',
+    pincode: '23456',
+    state: 'state test',
+    phone: '1234567890'
   }
   loadingIndicator: boolean | undefined;
   Cart: any;
@@ -44,15 +44,15 @@ export class CartComponent implements OnInit {
   currentdetail: User;
   userid: any;
   accesstoken: any;
-  tokentype: any;Proce: any;
-  _values1 = [" 1 ", "2", " 3 "," 4 "," 5 "," 6 "];
+  tokentype: any; Proce: any;
+  _values1 = [" 1 ", "2", " 3 ", " 4 ", " 5 ", " 6 "];
   quantityy: any;
   Summery: any;
   Address: any;
   Scost: any;
   cost: any;
-  cosst: boolean=false;
-  caart: boolean=true;
+  cosst: boolean = false;
+  caart: boolean = true;
   owneriid: any;
   Grandtot: any;
   Paymenttype: any;
@@ -70,376 +70,367 @@ export class CartComponent implements OnInit {
   state_name: any;
   encRequest: any;
   subtot: any;
-  applycou: boolean=true;
-  removecou: boolean=false;
-  loader: boolean=true;
+  applycou: boolean = true;
+  removecou: boolean = false;
+  loader: boolean = true;
   cartlength: any;
   buyertypeid: any;
   search!: FormGroup;
+  couponn: any;
   // responseText: string;
 
-  constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
-     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
-     private toastr: ToastrService, private toast: ToastrService,private sharedService: SharedService) {
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
+    private authService: AuthService, private fb: FormBuilder, private request: RequestService,
+    private toastr: ToastrService, private toast: ToastrService, private sharedService: SharedService) {
     this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('currentUser')||'{}')
-      
+      JSON.parse(localStorage.getItem('currentUser') || '{}')
+
     );
-    
+
     this.currentUser = this.currentUserSubject.asObservable();
-     this.currentdetail = this.currentUserSubject.value;
-     this.userid=this.currentdetail.user.id;
-     this.buyertypeid=this.currentdetail.user?.buyertypeid;
-     this.accesstoken=this.currentdetail.access_token;
-     this.tokentype=this.currentdetail.token_type;
-     this.username=this.currentdetail.user.name;
-     this.userphone=this.currentdetail.user.phone;
-     this.useremail=this.currentdetail.user.email;
-     console.log("currentuserid=", this.userid);
-     console.log("currentuserdetail=", this.currentdetail);
-   }
+    this.currentdetail = this.currentUserSubject.value;
+    this.userid = this.currentdetail.user.id;
+    this.buyertypeid = this.currentdetail.user?.buyertypeid;
+    this.accesstoken = this.currentdetail.access_token;
+    this.tokentype = this.currentdetail.token_type;
+    this.username = this.currentdetail.user.name;
+    this.userphone = this.currentdetail.user.phone;
+    this.useremail = this.currentdetail.user.email;
+    console.log("currentuserid=", this.userid);
+    console.log("currentuserdetail=", this.currentdetail);
+  }
 
   ngOnInit(): void {
-    window.scroll(0,0)
+    window.scroll(0, 0)
     this.accessCode = 'YOURACCESSCODEGOESHERE';
 
     this.viewcart();
     this.viewcart3();
 
-    this.comment = this.fb.group({ 
-      
-      coupan: ['',[Validators.required]],
-   
+    this.comment = this.fb.group({
+
+      coupan: ['', [Validators.required]],
+
     });
 
-    this.search = this.fb.group({ 
+    this.search = this.fb.group({
       qtyyy: [''],
-      });
+    });
   }
-  viewcart(){
+  viewcart() {
     this.request.fetchusercart(this.userid).subscribe((response: any) => {
-      this.Cart=response;   
-      this.loader=false; 
-      console.log("cart",response);   
-      console.log("owner id",this.Cart[0].owner_id);
-      this.owneriid=this.Cart[0].owner_id;
+      this.Cart = response;
+      this.loader = false;
+      console.log("cart", response);
+      console.log("owner id", this.Cart[0].owner_id);
+      this.owneriid = this.Cart[0].owner_id;
       // setTimeout(() => {
       //   this.loadingIndicator = false;
       // }, 500);
     });
-  
+
   }
 
-  deleteRecord(id:any) {
-    console.log("row",id);
+  deleteRecord(id: any) {
+    console.log("row", id);
     this.request.deleteproud(id).subscribe((response: any) => {
       console.log(response);
-      if(response.message=="Product is successfully removed from your cart"){
-        
+      if (response.message == "Product is successfully removed from your cart") {
+
         console.log("deleted");
         this.viewcart();
         this.viewcart3();
         this.deleteRecordSuccess();
         this.sharedService.sendClickEvent();
       }
-      else{
+      else {
         this.toastr.error(response.message);
         console.log("error ,product is not deleted")
       }
-     }, (error: any) => {
-       console.log(error);
-     });
-  }
-  firstDropDownChanged(data: any,_id:any)  {
-    console.log(data.target.value);
-    this.quantityy=data.target.value;
-    let edata2={
-      id:_id,
-      quantity:  this.quantityy,
-      buyertype:this.buyertypeid
-    }
-    console.log("edata2",edata2);
-    
-     this.request.updatecart(edata2).subscribe((response:any) => {
-       console.log("response",response);
-       this.viewcart();
-       this.viewcart3();
-     });
-  }
-  increaseqty(_id:any,qty:string){
-    let edata2={
-      id:_id,
-      quantity:qty,
-      buyertype:this.buyertypeid
-    }
-    console.log("edata2",edata2);
-    
-     this.request.updatecart(edata2).subscribe((response:any) => {
-       console.log("response",response);
-       this.viewcart();
-       this.viewcart3();
-       this.sharedService.sendClickEvent();
-     });
-
-    }
-    proddetail(id:any){
-      // console.log("detail page",id);
-      window.scroll(0,0);
-      this.router.navigate(['productdetail', id]);
-      console.log("navigate to category");
-    }
-
-      decreaseqty(_id:any,qty:any){
-        let edata2={
-          id:_id,
-          quantity:qty,
-          buyertype:this.buyertypeid
-        }
-        console.log("edata2",edata2);
-       
-         this.request.updatecart(edata2).subscribe((response:any) => {
-           console.log("response",response);
-           this.viewcart();
-           this.viewcart3();
-           this.sharedService.sendClickEvent();
-         });
-       
-     
-        // console.log("-quntity",this.quantityyy);
-        // console.log("price",this.varprise.replace('Rs',''));
-        // console.log("totalprice",this.totalprice); 
-      }
-  viewcart3(){
-    this.request.fetchsummery(this.userid).subscribe((response: any) => {
-      this.Summery=response;   
-      this.Grandtot=this.Summery.grand_total
-      this.subtot=this.Summery.sub_total
-      console.log("summery",response);    
-      console.log("grand total",this.Summery.grand_total); 
-      this.grandtotal=this.Summery.grand_total
+    }, (error: any) => {
+      console.log(error);
     });
-  
   }
-updatecart(){
-  this.viewcart();
-  this.viewcart3();
-}
-  proshipping(){
-    this.caart=false
-    this.cosst=true;
+  firstDropDownChanged(data: any, _id: any) {
+    console.log(data.target.value);
+    this.quantityy = data.target.value;
+    let edata2 = {
+      id: _id,
+      quantity: this.quantityy,
+      buyertype: this.buyertypeid
+    }
+    console.log("edata2", edata2);
+
+    this.request.updatecart(edata2).subscribe((response: any) => {
+      console.log("response", response);
+      this.viewcart();
+      this.viewcart3();
+    });
+  }
+  increaseqty(_id: any, qty: string) {
+    let edata2 = {
+      id: _id,
+      quantity: qty,
+      buyertype: this.buyertypeid
+    }
+    console.log("edata2", edata2);
+
+    this.request.updatecart(edata2).subscribe((response: any) => {
+      console.log("response", response);
+      if(response.result==true){
+        // this.toastr.success('Cart updated', '');
+        this.viewcart();
+        this.viewcart3();
+        this.sharedService.sendClickEvent();
+      }
+      else{
+        this.toastr.success( response.message);
+      }
+    });
+
+  }
+  proddetail(id: any) {
+    // console.log("detail page",id);
+    window.scroll(0, 0);
+    this.router.navigate(['productdetail', id]);
+    console.log("navigate to category");
+  }
+  getValue(val: any, _id: any,stttk:any) {
+    console.log("val", val);
+
+    if (val == 0) {
+      val = 1
+      console.log("val2", val);
+    }
+    else if(val>stttk){
+     val = stttk
+    }
+    console.log("val3", val);
+    let edata2 = {
+      id: _id,
+      quantity: val,
+      buyertype: this.buyertypeid
+    }
+    console.log("edata2", edata2);
+
+    this.request.updatecart(edata2).subscribe((response: any) => {
+      console.log("response", response);
+      if(response.result==true){
+        // this.toastr.success('Cart updated', '');
+        this.viewcart();
+        this.viewcart3();
+        this.sharedService.sendClickEvent();
+      }
+      else{
+        this.toastr.success( response.message);
+      }
+      
+    });
+
+
+  }
+
+  decreaseqty(_id: any, qty: any) {
+    let edata2 = {
+      id: _id,
+      quantity: qty,
+      buyertype: this.buyertypeid
+    }
+    console.log("edata2", edata2);
+
+    this.request.updatecart(edata2).subscribe((response: any) => {
+      console.log("response", response);
+      if(response.result==true){
+        // this.toastr.success('Cart updated', '');
+        this.viewcart();
+        this.viewcart3();
+        this.sharedService.sendClickEvent();
+      }
+      else{
+        this.toastr.success( response.message);
+      }
+    });
+
+
+    // console.log("-quntity",this.quantityyy);
+    // console.log("price",this.varprise.replace('Rs',''));
+    // console.log("totalprice",this.totalprice); 
+  }
+  viewcart3() {
+    this.request.fetchsummery(this.userid).subscribe((response: any) => {
+      this.Summery = response;
+      this.Grandtot = this.Summery.grand_total
+      this.subtot = this.Summery.sub_total
+      this.couponn=this.Summery.coupon_applied
+      console.log("summery", response);
+      console.log("grand total", this.Summery.grand_total);
+      this.grandtotal = this.Summery.grand_total
+    });
+
+  }
+  updatecart() {
+    this.viewcart();
+    this.viewcart3();
+    this.toastr.success('Cart updated', '');
+  }
+  proshipping() {
+    this.caart = false
+    this.cosst = true;
     this.getaddress();
   }
 
-  getaddress(){
+  getaddress() {
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
-      this.Address=response.data;   
-      console.log("Address",this.Address);     
-    // this. processdata()    
+      this.Address = response.data;
+      console.log("Address", this.Address);
+      // this. processdata()    
     });
     this.paymettype();
   }
-  shippingcost(row:any){
-    console.log("row id",row.city_name); 
-    console.log("row id",row.id);
-    this.city=row.city_name;
-    this.pincode=row.postal_code;
-    this.phone=row.phone;
-    this.address=row.address;
-    this.state_name=row.state_name
+  shippingcost(row: any) {
+    console.log("row id", row.city_name);
+    console.log("row id", row.id);
+    this.city = row.city_name;
+    this.pincode = row.postal_code;
+    this.phone = row.phone;
+    this.address = row.address;
+    this.state_name = row.state_name
 
-    let edata2={
-      user_id:this.userid,
-      address_id:row.id
+    let edata2 = {
+      user_id: this.userid,
+      address_id: row.id
     }
-    let edata={
-      owner_id:this.owneriid,
-      user_id:this.userid,
-      city_name:row.city_name
+    let edata = {
+      owner_id: this.owneriid,
+      user_id: this.userid,
+      city_name: row.city_name
     }
-    console.log("edatat",edata); 
-    console.log("edatat",edata2);
-    
+    console.log("edatat", edata);
+    console.log("edatat", edata2);
+
     this.request.updateshippingaddress(edata2).subscribe((response: any) => {
-      console.log("address changed res",response);     
-    // this. processdata()    
+      console.log("address changed res", response);
+      // this. processdata()    
     });
     this.request.fetchcost(edata).subscribe((response: any) => {
-      this.Scost=response; 
-      this.cost= this.Scost.value_string
-      console.log("Scost",this.cost);     
-      console.log("Scostamount", this.Scost); 
-    // this. processdata()    
+      this.Scost = response;
+      this.cost = this.Scost.value_string
+      console.log("Scost", this.cost);
+      console.log("Scostamount", this.Scost);
+      // this. processdata()    
     });
 
   }
-  paymettype(){
+  paymettype() {
     this.request.fetchpaytype().subscribe((response: any) => {
-      this.Paymenttype=response;  
-      console.log("Paymenttype",this.Paymenttype);     
-    // this. processdata()    
+      this.Paymenttype = response;
+      console.log("Paymenttype", this.Paymenttype);
+      // this. processdata()    
     });
   }
-  selectpaytype(row:any){
-    console.log("paytype",row.payment_type)
-    this.payytype=row.payment_type
+  selectpaytype(row: any) {
+    console.log("paytype", row.payment_type)
+    this.payytype = row.payment_type
   }
-  placeorder(){
-    let edata={
-      owner_id:this.owneriid,
-      user_id:this.userid,
-      payment_type:this.payytype
+  placeorder() {
+    let edata = {
+      owner_id: this.owneriid,
+      user_id: this.userid,
+      payment_type: this.payytype
     }
-    console.log("edatat",edata); 
-    if(this.payytype=="billdesk_payment"){
-      console.log("paymentttttype",this.payytype)
+    console.log("edatat", edata);
+    if (this.payytype == "billdesk_payment") {
+      console.log("paymentttttype", this.payytype)
       this.request.placeorder(edata).subscribe((response: any) => {
-        console.log("Placeorder",response); 
-        this.combined_orderid =response.combined_order_id 
-        if(response.result==true){
-         
+        console.log("Placeorder", response);
+        this.combined_orderid = response.combined_order_id
+        if (response.result == true) {
+
           this.billdesk()
         }
-        else{
-          console.log("fail",response.message);
+        else {
+          console.log("fail", response.message);
           this.toastr.error(response.message);
         }
       });
-}
- else if(this.payytype=="razorpay"){
-  console.log("paymenttttype",this.payytype)
-  this.request.placeorder(edata).subscribe((response: any) => {
-    console.log("Placeorder",response); 
-    this.combined_orderid =response.combined_order_id  
-    if(response.result==true){
-       
-      this.razorpay()
     }
-    else{
-      console.log("fail",response.message);
-      this.toastr.error(response.message);
-    }
-  });
-}
-  
-  else{ 
-    this.request.placeorder(edata).subscribe((response: any) => {
-      console.log("Placeorder",response); 
+    else if (this.payytype == "razorpay") {
+      console.log("paymenttttype", this.payytype)
+      this.request.placeorder(edata).subscribe((response: any) => {
+        console.log("Placeorder", response);
+        this.combined_orderid = response.combined_order_id
+        if (response.result == true) {
 
-      this.combined_orderid =response.combined_order_id  ;
-      if(response.result==true){
-        this.toastr.success(response.message);
-      }
-      else{
-        console.log("fail",response.message);
-        this.toastr.error(response.message);
-      }
-    });
-  }
-
-  }
-//    options = {
-//     "key": "YOUR_KEY_ID", // Enter the Key ID generated from the Dashboard
-//     "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
-//     "currency": "INR",
-//     "name": "Acme Corp",
-//     "description": "Test Transaction",
-//     "image": "https://example.com/your_logo",
-//     "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
-//     "handler": function (response:any){
-//         alert(response.razorpay_payment_id);
-//         alert(response.razorpay_order_id);
-//         alert(response.razorpay_signature)
-//     },
-//     "prefill": {
-//         "name": "Gaurav Kumar",
-//         "email": "gaurav.kumar@example.com",
-//         "contact": "9999999999"
-//     },
-//     "notes": {
-//         "address": "Razorpay Corporate Office"
-//     },
-//     "theme": {
-//         "color": "#3399cc"
-//     }
-// };
-// var rzp1 = new Razorpay(options);
-// rzp1.on('payment.failed', function (response){
-//         alert(response.error.code);
-//         alert(response.error.description);
-//         alert(response.error.source);
-//         alert(response.error.step);
-//         alert(response.error.reason);
-//         alert(response.error.metadata.order_id);
-//         alert(response.error.metadata.payment_id);
-// });
-
-  billdesk(){
-    console.log("billdest called"); 
-    this.request.billdeskpay(this.combined_orderid,this.grandtotal.replace('Rs',""),this.userid)
-    .subscribe(
-      (response: any) =>{ response.json()    
-        console.log("billdesktype",response.json());        
-      },
-
-      // (   data: { [x: string]: any; }) => {
-      //   console.log('------', data)
-      //     console.log('-------', data['response'])
-      //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
-      //     console.log('formmmm',payhere_checkout_form)
-      //     console.log('-----------', data)
-      //     this.encRequestRes = data['response']; 
-      //         // setTimeout(()=>{
-      //         //     this.form.nativeElement.submit();
-      //         // },1000)
-      //     },
-           (error: any) => {
-          console.log(error);
-        });   
-    }
-
-    // billdesk2(){
-    //   console.log("billdest called"); 
-    //   this.request.billdeskpayment()
-    //   .subscribe(
-    //     (response: any) =>{ response.json()   
-    //       console.log("billdesktypeEEEE",response); 
-    //       console.log("billdesktype",response.json());        
-    //     },
-    //     (error: any) => {
-    //       console.log(error);
-    //     });   
-    // }
-
-    billdesk2(){
-    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=74&amount=188.00&user_id=8').subscribe(
-      data => {
-        console.log(data);
-        console.log("User Login: " + data.login);
-        console.log("Bio: " + data.bio);
-        console.log("Company: " + data.company);
-      },
-      (err:HttpErrorResponse) => {
-        console.log("err",err);
-        if(err.error instanceof Error){
-          console.log("Client side error");
+          this.razorpay()
         }
-        else{
-          console.log("Sever side error");
+        else {
+          console.log("fail", response.message);
+          this.toastr.error(response.message);
         }
       });
     }
 
-        // (response: any) => { 
-        //   this.encRequest = response.encRequest;
-        //   console.log("desktype",this.encRequest);  
-        //   response.json(results);      
-        //   var object = JSON.parse(response);
-        //   var results = JSON.parse(object); 
-        //   console.log("ressss",results);   
-        //   console.log("ressss",object); 
-        //   console.log("billdesktype",response);        
-        // },
-  
+    else {
+      this.request.placeorder(edata).subscribe((response: any) => {
+        console.log("Placeorder", response);
+
+        this.combined_orderid = response.combined_order_id;
+        if (response.result == true) {
+          this.toastr.success(response.message);
+        }
+        else {
+          console.log("fail", response.message);
+          this.toastr.error(response.message);
+        }
+      });
+    }
+
+  }
+  //    options = {
+  //     "key": "YOUR_KEY_ID", // Enter the Key ID generated from the Dashboard
+  //     "amount": "50000", // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+  //     "currency": "INR",
+  //     "name": "Acme Corp",
+  //     "description": "Test Transaction",
+  //     "image": "https://example.com/your_logo",
+  //     "order_id": "order_9A33XWu170gUtm", //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+  //     "handler": function (response:any){
+  //         alert(response.razorpay_payment_id);
+  //         alert(response.razorpay_order_id);
+  //         alert(response.razorpay_signature)
+  //     },
+  //     "prefill": {
+  //         "name": "Gaurav Kumar",
+  //         "email": "gaurav.kumar@example.com",
+  //         "contact": "9999999999"
+  //     },
+  //     "notes": {
+  //         "address": "Razorpay Corporate Office"
+  //     },
+  //     "theme": {
+  //         "color": "#3399cc"
+  //     }
+  // };
+  // var rzp1 = new Razorpay(options);
+  // rzp1.on('payment.failed', function (response){
+  //         alert(response.error.code);
+  //         alert(response.error.description);
+  //         alert(response.error.source);
+  //         alert(response.error.step);
+  //         alert(response.error.reason);
+  //         alert(response.error.metadata.order_id);
+  //         alert(response.error.metadata.payment_id);
+  // });
+
+  billdesk() {
+    console.log("billdest called");
+    this.request.billdeskpay(this.combined_orderid, this.grandtotal.replace('Rs', ""), this.userid)
+      .subscribe(
+        (response: any) => {
+          response.json()
+          console.log("billdesktype", response.json());
+        },
+
         // (   data: { [x: string]: any; }) => {
         //   console.log('------', data)
         //     console.log('-------', data['response'])
@@ -451,75 +442,134 @@ updatecart(){
         //         //     this.form.nativeElement.submit();
         //         // },1000)
         //     },
-     
-  
- 
-  razorpay(){
-    console.log("razorpay called"); 
+        (error: any) => {
+          console.log(error);
+        });
+  }
+
+  // billdesk2(){
+  //   console.log("billdest called"); 
+  //   this.request.billdeskpayment()
+  //   .subscribe(
+  //     (response: any) =>{ response.json()   
+  //       console.log("billdesktypeEEEE",response); 
+  //       console.log("billdesktype",response.json());        
+  //     },
+  //     (error: any) => {
+  //       console.log(error);
+  //     });   
+  // }
+
+  billdesk2() {
+    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=74&amount=188.00&user_id=8').subscribe(
+      data => {
+        console.log(data);
+        console.log("User Login: " + data.login);
+        console.log("Bio: " + data.bio);
+        console.log("Company: " + data.company);
+      },
+      (err: HttpErrorResponse) => {
+        console.log("err", err);
+        if (err.error instanceof Error) {
+          console.log("Client side error");
+        }
+        else {
+          console.log("Sever side error");
+        }
+      });
+  }
+
+  // (response: any) => { 
+  //   this.encRequest = response.encRequest;
+  //   console.log("desktype",this.encRequest);  
+  //   response.json(results);      
+  //   var object = JSON.parse(response);
+  //   var results = JSON.parse(object); 
+  //   console.log("ressss",results);   
+  //   console.log("ressss",object); 
+  //   console.log("billdesktype",response);        
+  // },
+
+  // (   data: { [x: string]: any; }) => {
+  //   console.log('------', data)
+  //     console.log('-------', data['response'])
+  //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
+  //     console.log('formmmm',payhere_checkout_form)
+  //     console.log('-----------', data)
+  //     this.encRequestRes = data['response']; 
+  //         // setTimeout(()=>{
+  //         //     this.form.nativeElement.submit();
+  //         // },1000)
+  //     },
+
+
+
+  razorpay() {
+    console.log("razorpay called");
     // this.request.razorpayment(this.combined_orderid).subscribe((response: any) => {
     //   console.log("razorpayment",response);   
     // });
   }
-  applycoupan(form: FormGroup){
-    let edata2={
-      user_id:this.userid,
-      owner_id:this.owneriid,
-      coupon_code:form.value.coupan,
+  applycoupan(form: FormGroup) {
+    let edata2 = {
+      user_id: this.userid,
+      owner_id: this.owneriid,
+      coupon_code: form.value.coupan,
     }
-    console.log(edata2);  
+    console.log(edata2);
     this.request.appycoupan(edata2).subscribe((res: any) => {
       console.log(res);
-      if (res.message=='Coupon Applied') {   
-        this.toastr.success('Coupon Applied', '');    
-        this.removecou=true;
-       this.applycou=false;
-       this.updatecart();
+      if (res.message == 'Coupon Applied') {
+        this.toastr.success('Coupon Applied', '');
+        this.removecou = true;
+        this.applycou = false;
+        this.updatecart();
       }
       else if (res.message == 'Invalid coupon code!') {
         this.toastr.error('Invalid coupon code!', '');
         console.log("Invalid coupon code!");
-  
+
       }
-      else{
+      else {
         this.toastr.error(res.message);
-        console.log("error",res);
+        console.log("error", res);
       }
     }, (error: any) => {
       this.toastr.error(error);
-      console.log("error",error);
-    
+      console.log("error", error);
+
     });
-  
+
   }
-  removecoupon(){
-    let edata2={
-      user_id:this.userid,
-      owner_id:this.owneriid,
+  removecoupon() {
+    let edata2 = {
+      user_id: this.userid,
+      owner_id: this.owneriid,
     }
-    console.log(edata2);  
+    console.log(edata2);
     this.request.removecoupan(edata2).subscribe((res: any) => {
       console.log(res);
-      if (res.message =='Coupon Removed') {  
+      if (res.message == 'Coupon Removed') {
         this.toastr.success('Coupon Removed', '');
-        this.removecou=false;
-       this.applycou=true;
-       this.updatecart();
+        this.removecou = false;
+        this.applycou = true;
+        this.updatecart();
       }
       else if (res.message == 'Invalid coupon code!') {
         this.toastr.error('Invalid coupon code!', '');
         console.log("Invalid coupon code!");
-  
+
       }
-      else{
+      else {
         this.toastr.error(res.message);
-        console.log("error",res);
+        console.log("error", res);
       }
     }, (error: any) => {
       this.toastr.error(error);
-      console.log("error",error);
-    
+      console.log("error", error);
+
     });
-  
+
   }
 
 
@@ -544,7 +594,7 @@ updatecart(){
 
 
 
-// method 2
+  // method 2
   // pay() {  
   //   // this.cartValue contains all the order information which is sent to the server
   //   // You can use this package to encrypt - https://www.npmjs.com/package/node-ccavenue/
@@ -558,72 +608,72 @@ updatecart(){
 
 
   // razorpay
-//rpay1
-initPay(){
-  console.log("initPay,")
-  var ref = this;
-  return  {
-    "key":"rzp_test_HTQz79bVMhpN4L", // Enter the Key ID generated from the Dashboard
-    "amount": this.grandtotal.replace('Rs',""), // Amount is in currency subunits. Default currency is INR. Hence, 29935 refers to 29935 paise or INR 299.35.
-    "name": 'Pay',
-    "currency": "INR",
-    "order_id": this.combined_orderid,//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
-    "image": 'https://angular.io/assets/images/logos/angular/angular.png',
-    "handler": function (response: any){
-      ref.handlePayment(response);
-    },
-    "prefill": {
-      "name": this.username,
-      "email": this.useremail,
-      "contact": this.userphone
-    },
-    "theme": {
+  //rpay1
+  initPay() {
+    console.log("initPay,")
+    var ref = this;
+    return {
+      "key": "rzp_test_HTQz79bVMhpN4L", // Enter the Key ID generated from the Dashboard
+      "amount": this.grandtotal.replace('Rs', ""), // Amount is in currency subunits. Default currency is INR. Hence, 29935 refers to 29935 paise or INR 299.35.
+      "name": 'Pay',
+      "currency": "INR",
+      "order_id": this.combined_orderid,//This is a sample Order ID. Create an Order using Orders API. (https://razorpay.com/docs/payment-gateway/orders/integration/#step-1-create-an-order). Refer the Checkout form table given below
+      "image": 'https://angular.io/assets/images/logos/angular/angular.png',
+      "handler": function (response: any) {
+        ref.handlePayment(response);
+      },
+      "prefill": {
+        "name": this.username,
+        "email": this.useremail,
+        "contact": this.userphone
+      },
+      "theme": {
         "color": "#2874f0"
-    }
-   };
- }
+      }
+    };
+  }
 
- handlePayment(response: { razorpay_payment_id: any; }) {
+  handlePayment(response: { razorpay_payment_id: any; }) {
 
-  console.log('payment_id:', response.razorpay_payment_id)
-}
+    console.log('payment_id:', response.razorpay_payment_id)
+  }
 
-//rpay 2
-// initPay() {
-//  let options = {
-//     "key": "rzp_test_HTQz79bVMhpN4L", 
-//     "amount": this.grandtotal.replace('Rs',""),
-//     "currency": "INR",
-//     "name": "Acme Corp",
-//     "description": "Test Transaction",
-//     "image": "https://example.com/your_logo",
-//     "order_id": this.combined_orderid,
-//     "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-//     "prefill": {
-//         "name": this.username,
-//         "email": this.useremail,
-//         "contact": this.userphone
-//     },
-//     "notes": {
-//         "address": "Razorpay Corporate Office"
-//     },
-//     "theme": {
-//         "color": "#3399cc"
-//     }
-// };
-//   console.log("options,",options)
-//   let rzp1 = new this.authService.nativeWindow.Razorpay(options);
-//   rzp1.open();
-//   console.log("works");
-// }
-addRecordSuccess() {
-  this.toastr.success('Added Successfully', '');
-}
-editRecordSuccess() {
-  this.toastr.success('Edit Record Successfully', '');
-}
-deleteRecordSuccess() {
-  this.toastr.error(' Removed Successfully', '');
-}
+  //rpay 2
+  // initPay() {
+  //  let options = {
+  //     "key": "rzp_test_HTQz79bVMhpN4L", 
+  //     "amount": this.grandtotal.replace('Rs',""),
+  //     "currency": "INR",
+  //     "name": "Acme Corp",
+  //     "description": "Test Transaction",
+  //     "image": "https://example.com/your_logo",
+  //     "order_id": this.combined_orderid,
+  //     "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+  //     "prefill": {
+  //         "name": this.username,
+  //         "email": this.useremail,
+  //         "contact": this.userphone
+  //     },
+  //     "notes": {
+  //         "address": "Razorpay Corporate Office"
+  //     },
+  //     "theme": {
+  //         "color": "#3399cc"
+  //     }
+  // };
+  //   console.log("options,",options)
+  //   let rzp1 = new this.authService.nativeWindow.Razorpay(options);
+  //   rzp1.open();
+  //   console.log("works");
+  // }
+  addRecordSuccess() {
+    this.toastr.success('Added Successfully', '');
+  }
+  editRecordSuccess() {
+    this.toastr.success('Edit Record Successfully', '');
+  }
+  deleteRecordSuccess() {
+    this.toastr.error(' Removed Successfully', '');
+  }
 
 }

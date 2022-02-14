@@ -93,25 +93,33 @@ export class HomeComponent implements OnInit {
     { image: 'assets/images/banners/ban3.jpeg' }
   ];
 
-  
- imageObject: any = [
-    { 
-    "thumbImage":"assets/images/banners/ban1.jpeg","title": "title of image"},
-    
-    { 
-    "thumbImage":"assets/images/banners/ban2.jpeg","title": "title xdfgvxvs dfv of image"},
-    { 
-    "thumbImage":"assets/images/banners/ban3.jpeg","title": "title of image"},
-    { 
-    "thumbImage":"assets/images/banners/ban3.jpeg" ,"title": "title of image"},
-    { 
-    "thumbImage":"assets/images/banners/ban1.jpeg","title": "title of image"},
-    { 
-    "thumbImage":"assets/images/banners/ban2.jpeg","title": "title sdefxcvsdv sdgsdvof image"},
-    { 
-    "thumbImage":"assets/images/banners/ban3.jpeg","title": "title of image"},
-    { 
-    "thumbImage":"assets/images/banners/ban3.jpeg" ,"title": "title of image"},
+
+  imageObject: any = [
+    {
+      "thumbImage": "assets/images/banners/ban1.jpeg", "title": "title of image"
+    },
+
+    {
+      "thumbImage": "assets/images/banners/ban2.jpeg", "title": "title xdfgvxvs dfv of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban1.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban2.jpeg", "title": "title sdefxcvsdv sdgsdvof image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
   ]
 
   slideConfig = {
@@ -131,7 +139,8 @@ export class HomeComponent implements OnInit {
   likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   prd_id: any;
   brnd_id: any;
-  imgloader: boolean=true;
+  imgloader: boolean = true;
+  stocckkk!: number;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -259,15 +268,15 @@ export class HomeComponent implements OnInit {
 
     });
   }
-  imageClick(i:any){
+  imageClick(i: any) {
     console.log("Todaysoffer event", i);
-    this.prd_id=this.Todaysoffer[i].product_id,
-    this.proddetail(this.prd_id)
-   
+    this.prd_id = this.Todaysoffer[i].product_id,
+      this.proddetail(this.prd_id)
+
   }
-  blogClick(i:any){
+  blogClick(i: any) {
     console.log("blogClick event", i);
-    this.brnd_id=this.Allbrands[i].id
+    this.brnd_id = this.Allbrands[i].id
     this.brandnavigate(this.brnd_id)
   }
   viewbestsellpro() {
@@ -331,12 +340,15 @@ export class HomeComponent implements OnInit {
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
       this.stocck = this.Peoduct.current_stock;
+      this.stocckkk = this.Peoduct.current_stock;
       this.photoo = this.Peoduct.photos
       this.colors = this.Peoduct.colors
       this.tags = this.Peoduct.tags
       this.varprise = this.Peoduct.main_price
       console.log("res", this.Peoduct);
       console.log("choise option", this.Peoduct.choice_options);
+      console.log('this.stocck', this.stocck);
+      console.log('this.stocckkk', this.stocckkk);
       window.scroll(0, 0);
     },
       (error: any) => {
@@ -536,7 +548,7 @@ export class HomeComponent implements OnInit {
 
   quickview(id: any, content: any) {
     // this.totalprice=''
-    this.quantityyy = 1
+    this.quantityyy = 0
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
 
@@ -546,6 +558,7 @@ export class HomeComponent implements OnInit {
       this.choice = this.Peoduct.choice_options;
       //  this.stocck=(this.Peoduct.current_stock)-1;
       this.stk = this.Peoduct.current_stock;
+      this.stocckkk = this.Peoduct.current_stock;
       this.photoos = this.Peoduct.photos;
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
@@ -560,7 +573,7 @@ export class HomeComponent implements OnInit {
 
       }
       else {
-        this.stocck = (this.Peoduct.current_stock) - 1;
+        this.stocck = (this.Peoduct.current_stock) ;
       }
       //  window.scroll(0,0);             
       if (this.Peoduct.choice_options.length == 0) {
@@ -614,8 +627,9 @@ export class HomeComponent implements OnInit {
 
       }
       else {
-        this.stocck = (res?.stock) - 1;
-        this.quantityyy = 1;
+        this.stocck = (res?.stock) ;
+        this.stocckkk = (res?.stock);
+        this.quantityyy = 0;
       }
 
       console.log(this.varprise);
@@ -627,6 +641,27 @@ export class HomeComponent implements OnInit {
 
     });
   }
+  getValue(val: any) {
+    if (val<= 0) {
+      val = 1
+      console.log( "valif",val);
+    }
+    else if (val > this.stocckkk) {
+      val = this.stocckkk
+      console.log( "valel",val);
+    }
+    this.quantityyy = val
+    this.stocck = this.stocckkk - val
+
+    console.log( "val",val);
+    console.log("this.stocckkk-val",this.stocckkk - val);
+    console.log("this.stocckkk",this.stocckkk);
+    console.log(this.stocck);
+    this.stocck
+
+
+  }
+
   addtocart2() {
     if (this.userid == 0) {
       this.toastr.info('You need to login', '');

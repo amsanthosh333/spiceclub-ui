@@ -58,7 +58,7 @@
 								<input type="password" placeholder="Password" formControlName="password" required>
 							</div>
 
-							<div class="col-lg-12 text-center mb-30">
+							<div class="col-lg-12 text-center mb-10">
 								<h6 class="form-text text-danger" style="height: 12px;">
 									<span *ngIf="error1">{{error1}}</span>
 								</h6>
@@ -69,14 +69,10 @@
 									<input type="checkbox"> <span class="remember-text">Remember me</span>
 									
 								</div> -->
-							<div class="col-lg-12 text-center mb-30">
+							<div class="col-lg-12 text-center mb-10">
 								<a class="reset-pass-link" (click)="forgotpass(Forgotpassword)">Forgot Password?</a>
 							</div>
-							<div class="col-lg-12 text-center mb-30">
-								<p>If you don’t have an account, register now!</p>
-								<button class="lezada-button lezada-button--medium" type="button"><a href="/signup"
-										style="text-decoration: none; color: rgb(252, 248, 248);">signup</a> </button>
-							</div>
+						
 							<div class="col-lg-12 text-center ">
 
 								<a class="reset-pass-link" (click)="loginotp(loginotpRequest)">Login with OTP</a>
@@ -102,6 +98,11 @@
 								</button>
 							</div>
 
+							<div class="col-lg-12 text-center mt-20 mb-30">
+								<p>If you don’t have an account, register now!</p>
+								<button class="lezada-button lezada-button--medium" type="button"><a href="/signup"
+										style="text-decoration: none; color: rgb(252, 248, 248);">signup</a> </button>
+							</div>
 
 							<!-- <button (click)="loginWithGoogle(byertype)" type="button" class="btn btn-warning">
 								Googlelogin</button> 
@@ -243,12 +244,8 @@
 							<p class="form-text" style="color: green; ">*We will send a code to reset your password </p>
 							<form class="validate-form" [formGroup]="forgotForm" (ngSubmit)="onSubmit2(addRecord)">
 								<div class="row">
-									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-										<label>Email or phone<span class="text-danger">*</span></label>
-										<input type="text" class="form-control " formControlName="Mobile" required>
-									</div>
 									<div class="col-lg-12 ">
-										<label for="regPassword">Send code by<span class="required">*</span> </label>
+										<label for="regPassword">Send code by<span class="text-danger">*</span> </label>
 										<div class="form-group position-relative">
 
 											<select class="form-control pl-5" formControlName="Type" required>
@@ -262,6 +259,11 @@
 										*Please select</h6> -->
 										</div>
 									</div>
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>Email or phone<span class="text-danger">*</span></label>
+										<input type="text" class="form-control " formControlName="Mobile" required>
+									</div>
+									
 									<h6 class="form-text text-danger" style="height: 12px;">
 										<span *ngIf="error6">{{error6}}</span>
 									</h6>

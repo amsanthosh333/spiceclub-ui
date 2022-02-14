@@ -55,10 +55,10 @@
                                 <li class="menu-item"><a routerLink="/home">Home</a>                                   
                                 </li>
 
-								<li class="menu-item" ><a routerLink="/shopbyproduct" >ShopByProduct</a>                                
+								<li class="menu-item" ><a routerLink="/shopbyproduct" >Shop By Product</a>                                
                                 </li>
 
-								<li class="menu-item" ><a routerLink="/category/33" >ShopByCategory</a>                                
+								<li class="menu-item" ><a routerLink="/category/33" >Shop By Category</a>                                
                                 </li>
                                
                                 <li class="menu-item"><a routerLink="/blog" >Blog</a>
@@ -104,8 +104,11 @@
                                 <i class="ion-android-favorite-outline"  *ngIf="(userid!==0)"></i>
                                 <span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
                             </a>
-							<a  id="offcanvashlist-icon" routerLink="/login">
-								<i class="ion-android-favorite-outline"  *ngIf="(userid==0)"></i>  
+							<a  id="offcanvashlist-icon" class="loggin1" routerLink="/login" *ngIf="(userid==0)">
+								<i class="ion-android-favorite-outline"  ></i>
+                            </a>
+							<a  id="offcanvashlist-icon" class="loggin" routerLink="/login" *ngIf="(userid==0)">
+								<button type="button" class="btn " style="background-color: #ccccd3;">Login</button>
                             </a>
                         </div>
 
@@ -114,14 +117,23 @@
                                 <i class="ion-ios-cart" *ngIf="(userid!==0)"></i>
                                 <span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
                             </a>
-							<a  id="offcanart-icon" routerLink="/login">
-                                <i class="ion-ios-cart" *ngIf="(userid==0)"></i>  
+							<a id="offcanvt-icon"  class="reg1">
+                                <i class="ion-ios-cart" routerLink="/login" *ngIf="(userid==0)"></i>  
+                            </a>
+							<a  id="offcanart-icon" class="reg" routerLink="/signup" *ngIf="(userid==0)">
+									<button type="button" class="btn" style="background-color: #ccccd3;">Signup</button>						
                             </a>
                         </div>
-						<div class="single-icon drop" >
+						<div class="single-icon cart"  id="logout">
                             
+							<a  id="offcanart-icon" *ngIf="(userid!==0)">
+									<button type="button" (click)="logout1()" class="btn" style="background-color: #ccccd3;">Logout</button>
+								
+                            </a>
+                        </div>
+						
+						<div class="single-icon drop" >  
 							<a  id="offcanart-icon" >
-                               
 									<div class="dropdown" style="float:right;" >
 										 <i class="bi bi-three-dots-vertical" ></i>
 										<div class="dropdown-content">
@@ -131,11 +143,15 @@
 											<a routerLink="/category/33" >ShopByCategory</a>
 											<a routerLink="/blog" >Blog</a>
 											<a  routerLink="/recipe">Recipe</a>
+											<hr>
+											<a id="loginside" routerLink="/login" *ngIf="(userid==0)">Login</a>
+											<hr>
+											<a id="regside" routerLink="/signup" *ngIf="(userid==0)">Signup</a>
+											<a id="logoutside"  (click)="logout1()" *ngIf="(userid!==0)">Logout</a>
+											<hr>
 											
 										</div>
 									  </div>
-								
-							
                             </a>
                         </div>
 

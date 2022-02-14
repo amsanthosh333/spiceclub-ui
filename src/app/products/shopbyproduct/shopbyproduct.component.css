@@ -61,6 +61,17 @@ option{
     text-align: -webkit-center;
   }
     } 
+
+
+       /* to remove arroys form input box */
+   input::-webkit-outer-spin-button,
+   input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+   }
+   input[type=number] {
+     -moz-appearance: textfield;
+   }  
     
 /* .modal-content {
 height: 50px;

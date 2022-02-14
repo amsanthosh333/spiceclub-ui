@@ -39,7 +39,7 @@
       </nav> -->
 
     <div class="shop-page-header">
-        <div class="dropdown" style="float:right;" > 
+        <div class="dropdown" style="float:right;"> 
            <h3><i class="bi bi-card-list"></i></h3> 
            <div class="dropdown-content">
              
@@ -101,7 +101,7 @@
                             <div class="single-filter-widget  mb-40" *ngIf="(Subcat.length!==0)">
                                 <h2 class="single-sidebar-widget--title mb-2">Sub Category</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;height: 275px;overflow-y: auto;">
+                                    style="padding-left: 0px;max-height: 275px;overflow-y: auto;">
                                     <li class="has-children" *ngFor="let cat of Subcat;let i = index" (click)="viewsubcatprod2(cat.id,i)"
                                         [ngClass]="{'active': subItem === i}">
                                         {{cat.name}}
@@ -113,7 +113,7 @@
                             <div class="single-sidebar-widget mb-20" style="height: 200px;">
                                 <h2 class="single-sidebar-widget--title mb-2">All Category</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;height: 350px;overflow-y: auto;">
+                                    style="padding-left: 0px;max-height: 350px;overflow-y: auto;">
                                     <li class="has-children" *ngFor="let img of Allcat;let i=index"
                                         [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod3(img.id,i)">
                                         {{img.name}}
@@ -606,8 +606,9 @@
                                             <div class="product-quantity d-flex align-items-center">
                                                 <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                                     <a class="dec qty-btn" style="text-decoration: none;"
-                                                        (click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
-                                                    <input type="text" value="{{quantityyy}}" style="background: transparent;">
+                                                        (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+                                                        <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
+                                                   
                                                     <a class="inc qty-btn" style="text-decoration: none;"
                                                         (click)="increaseqty()" *ngIf="stk>1">+</a>
                                                 </div>

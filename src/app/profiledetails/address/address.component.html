@@ -32,15 +32,13 @@
                     <span> {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
                         {{Connectdtls.country_name}} - {{Connectdtls.set_default}}{{radioSelected}}</span>
                     <p><strong> {{Connectdtls.postal_code}}</strong></p>
-                    <!-- [checked]="(Connectdtls.set_default === 1)"   [(ngModel)]="radioSelected" id="shiping_address{{i}}"  *ngIf="(Connectdtls.set_default === 1 ? 'checked':'true')" -->
+                    <!-- *ngIf="((Connectdtls.set_default === '1') ? 'checked':'true')"   [checked]="(Connectdtls.set_default === 1)"   [(ngModel)]="radioSelected" id="shiping_address{{i}}"  *ngIf="(Connectdtls.set_default === 1 ? 'checked':'true')" -->
                     
                     <p> 
                         <input type="radio" 
-                       
-                        value="{{Connectdtls.id}}" data-shipping 
-                        name="{{Connectdtls.city_name}}" 
-                        
-                        *ngIf="((Connectdtls.set_default === '1') ? 'checked':'true')"
+                        name="radiio"
+                        value= "{{Connectdtls.id}} "data-shipping 
+                        [checked]="Connectdtls.set_default== 1"
                         (click)="changeshippingaddress(Connectdtls.id)" > <label>&nbsp; Use as shipping address</label>
 
                         

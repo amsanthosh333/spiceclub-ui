@@ -66,13 +66,11 @@
                                 <br> -->
                               
                                 <h2 class="single-sidebar-widget--title" style="padding-bottom: 0px; margin-bottom: 20px;">All Brands</h2>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;height: 400px;overflow-y: auto;" >
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category" style="padding-left: 0px;max-height: 400px;overflow-y: auto;" >
                                     <li class="has-children" *ngFor="let img of Allbrands">
                                         <a style="color: rgb(114, 113, 113);" (click)="viewdata2(img.id,1)">{{img.name}}</a> 
                                     </li>
                                 </ul>
-                               
-                             
                             </div>
 
                             <!--=======  End of single sidebar widget  =======-->
@@ -473,8 +471,9 @@
                                             <div class="product-quantity d-flex align-items-center">
                                                 <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                                     <a class="dec qty-btn" style="text-decoration: none;"
-                                                        (click)="decreaseqty()" *ngIf="quantityyy!==1">-</a>
-                                                    <input type="text" value="{{quantityyy}}" style="background: transparent;">
+                                                        (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+                                                        <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
+                                                   
                                                     <a class="inc qty-btn" style="text-decoration: none;"
                                                         (click)="increaseqty()" *ngIf="stk>1">+</a>
                                                 </div>
