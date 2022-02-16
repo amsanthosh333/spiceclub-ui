@@ -46,6 +46,10 @@ export class RequestService {
       this.userid=0
       this.buyertypeid=0
     }
+    if(this.buyertypeid==undefined){
+      console.log("iffff useris",this.userid);  
+      this.buyertypeid=1
+    }
   }
 
   logout() { 
@@ -410,6 +414,7 @@ razsuccess(body:any) {
   return this.http.post(this.url,body);
 }
 
+
 //category
 public getallcat() {
   this.url = `${this.endPoint1}/categories`;
@@ -457,9 +462,9 @@ public getallproducts(page:any) {
 public getpage(link:any){
   return this.http.get(link);
 }
-public getpage2(link:any,categoryy_id:any,brandd_id:any,name:any,sort: string,min:any,max:any){
-  this.url= link+  `&categories=`+categoryy_id+`&brands=`+brandd_id+`name=`+ name +`&min=` + min+`&max=` + max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
-  console.log("search url",this.url);
+public getpage2(link:any,categoryy_id:any,brandd_id:any,sort: string,min:any,max:any){
+  this.url= link+  `&categories=`+categoryy_id+`&brands=`+brandd_id+`&min=` + min+`&max=` + max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+  console.log("search ,pageurl",this.url);
   
   return this.http.get(this.url);
 }
@@ -763,8 +768,9 @@ public billdeskpay(combined_order_id:any,amount:any,user_id:any) {
    this.url = `${this.endPoint1}/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=` + combined_order_id +`&amount=` +amount+ `&user_id=`+ user_id;
  console.log("urlll=",this.url);
  window.open(this.url);
+ console.log("urlll=",this.url);
  return  this.http.get(this.url)
- .pipe(map((response: any) => response.json()));  
+//  .pipe(map((response: any) => response.json()));  
  
  //  {responseType: 'text' as 'json'}
 
@@ -780,7 +786,7 @@ public billdeskpay(combined_order_id:any,amount:any,user_id:any) {
   
 }
 public billdeskpayment(): Observable<string>  {
-  this.url =`https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=74&amount=188.00&user_id=8`
+  this.url =`https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8`
 console.log("urlll=",this.url);
 // window.open(this.url);
  return this.http.get<any>(this.url)

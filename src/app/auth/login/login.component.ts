@@ -65,6 +65,7 @@ export class LoginComponent implements OnInit {
   error7: any;
 
   ClickEventSubscription !: Subscription;
+  errorb: any;
 
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
     private formBuilder: FormBuilder, private authService: AuthService, private sharedService: SharedService,
@@ -449,7 +450,6 @@ export class LoginComponent implements OnInit {
         const errorMessage = error.message;
         const email = error.email;
         const credential = GoogleAuthProvider.credentialFromError(error);
-
       });
   }
   loginWithFacebook(content: any) {
@@ -492,9 +492,15 @@ export class LoginComponent implements OnInit {
 
   }
   submitbyertype(form: FormGroup) {
-    this.buer_type = form.value.buyer_type
+    this.errorb = ''
+    if (this.byertypeform.invalid) {
+      console.log("loginformmm");
+      
+      this.errorb = '*select buyertype';
 
-    this.validateuser();
+    }
+    this.buer_type = form.value.buyer_type
+     this.validateuser();
   }
 
   validateuser() {

@@ -127,7 +127,7 @@ export class ProductdetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    console.log("brand id", this.id);
+    console.log("product-id", this.id);
     this.viewproductrow(this.id);
     this.iswishlist(this.id)
 
@@ -143,8 +143,6 @@ export class ProductdetailComponent implements OnInit {
     });
 
     this.currenturl = this.router.url
-
-
   }
  
 
@@ -303,7 +301,89 @@ filterDatatable(qty: any) {
     this.contentloader = true;
     this.discriptloader = true;
     console.log("detail", this.product_id);
-    this.router.navigate(['productdetail', id]);
+    // this.router.navigate(['productdetail', id]);
+    window.scroll(0,0)
+    this.request.getproddetail(this.product_id).subscribe((response: any) => {
+      window.scroll(0,0);
+      console.log("proddetaill", response);
+      this.Peoduct = response.data[0];
+      this.choice = this.Peoduct.choice_options;
+      this.stocck = (this.Peoduct.current_stock); 1
+      this.stocckkk = (this.Peoduct.current_stock); 1
+      this.stk = this.Peoduct.current_stock;
+      this.photoos = this.Peoduct.photos;
+      //  this.photoos = response.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.data[0].photos.path);
+      this.colors = this.Peoduct.colors;
+      this.tags = this.Peoduct.tags;
+      this.varprise = this.Peoduct.main_price;
+      this.currentRatess = this.Peoduct.rating;
+
+      this.photoloader = false;
+      this.contentloader = false;
+      this.discriptloader = false;
+      this.productname = this.Peoduct.name;
+
+      // array push photo
+      this.newphotos = this.photoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path)
+
+      this.newphotos.forEach((item: any) => {
+        this.galleryphotos.push({ image: item });
+        // this.allgalleryphotos.push({ thumbImage: item });
+      })
+      this.newphotos.forEach((item: any) => {
+        // this.galleryphotos.push({ image: item });
+        this.allgalleryphotos.push({ thumbImage: item, image: item });
+        console.log("allgalleryphotos", this.allgalleryphotos);
+
+      })
+      console.log(" this.photoos", this.photoos);
+      console.log("res", this.Peoduct);
+      console.log("choise option", this.Peoduct.choice_options);
+     
+      this.getcommentsss()
+      //  if(this.Peoduct.current_stock==0){
+      //    console.log("stock 0");
+      //    this.outofstackbtn=true;
+      //    this.addcartbtn=false
+      //  }
+      //  else{
+      //   this.outofstackbtn=false;
+      //   this.addcartbtn=true
+      //  }
+      if (this.Peoduct.choice_options.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else {
+        this.varient_value = this.choice[0]?.options[0];
+      }
+      console.log("optiooooons", this.varient_value);
+    },
+      (error: any) => {
+        console.log(error);
+      });
+    this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
+      console.log("relatedprod", response);
+      this.Relatedprod = response.data;
+      this.loader6 = false;
+      console.log("res", this.Relatedprod);
+      this.viewbulkdiscount(this.product_id);
+      this.viewdiscount(this.product_id)
+    },
+      (error: any) => {
+        console.log(error);
+      });
+  }
+  viewproductrow2(id: any) {
+    this.allgalleryphotos =[]
+    this.totalprice = 0.00
+    this.product_id = id
+    this.quantityyy = 0
+    this.photoloader = true;
+    this.contentloader = true;
+    this.discriptloader = true;
+    console.log("detail", this.product_id);
+     this.router.navigate(['productdetail', id]);
     window.scroll(0,0)
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       window.scroll(0,0);

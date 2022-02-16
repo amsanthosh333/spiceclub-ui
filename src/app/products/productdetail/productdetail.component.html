@@ -792,7 +792,7 @@
         <div class="carousel-cell" *ngFor="let img of Relatedprod; let i =index">
             <div class="single-product" style="padding-left: 70px;">
                 <!--=======  single product image  =======-->
-                <div class="single-product__image" (click)="viewproductrow(img.id)">
+                <div class="single-product__image" (click)="viewproductrow2(img.id)">
                     <a class="image-wrap">
                         <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}" class="img-fluid"
                             alt="">
@@ -819,10 +819,10 @@
                     </div>
                 </div>
 
-                <div class="single-product__content" (click)="viewproductrow(img)">
+                <div class="single-product__content" (click)="viewproductrow2(img)">
                     <div class="title">
                         <h3> <a>{{img.name}}</a></h3>
-                        <a>Select options</a>
+                        <a style="color: rgb(218, 7, 7);">view details</a>
                     </div>
                     <div class="price">
                         <span class="main-price discounted">{{img.stroked_price}}</span>

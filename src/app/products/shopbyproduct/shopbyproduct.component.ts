@@ -495,7 +495,7 @@ export class ShopbyproductComponent implements OnInit {
   getpage(url:any){
     this.prodloader=true;
     this.imgloader = false;
-    this.request.getpage2(url,this.categoryy_id,this.brandd_id,this.searchh,this.sortval,this.minValue,this.maxValue).subscribe((response:any)=>{
+    this.request.getpage2(url,this.categoryy_id,this.brandd_id,this.sortval,this.minValue,this.maxValue).subscribe((response:any)=>{
       this.Product=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
@@ -762,6 +762,15 @@ export class ShopbyproductComponent implements OnInit {
       form.value.category= ''
       this.categoryy_id=''
     }
+    if(form.value.min==''){
+      form.value.min=0
+      this.minValue=0
+      
+    }
+    if(form.value.max==''){
+      form.value.max=this.maximumprize
+      this.maxValue=this.maximumprize
+    }
     console.log("submitted");
     console.log("submitted", form.value.category,form.value.brand, form.value.min, form.value.max);
 
@@ -833,7 +842,7 @@ export class ShopbyproductComponent implements OnInit {
     return this.sortForm.controls;
   }
   opensort(content: any) {
-    this.sortForm.reset();
+   
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'sm',

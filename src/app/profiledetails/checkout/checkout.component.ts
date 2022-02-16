@@ -195,7 +195,7 @@ export class CheckoutComponent implements OnInit {
       console.log("Address index", this.indexx);
       this.address_id=this.Address[this.indexx].id
       this.curshipaddress=this.Address[this.indexx]
-this.shippingcost(this.curshipaddress)
+      this.shippingcost(this.curshipaddress)
     });
     // this.paymettype();
   }
@@ -207,10 +207,12 @@ this.shippingcost(this.curshipaddress)
     });
   }
   selectpaytype(row: any) {
-    console.log("paytype", row.payment_type)
-    this.payytype = row.payment_type
+    // console.log("paytype", row.payment_type)
+    // this.payytype = row.payment_type
   }
   shippingcost(row: any) {
+    console.log("shippingcosr,address,",row);
+    
     this.address_id = row.id;
     console.log("row id", row.city_name);
     console.log("row id", row.id);
@@ -229,10 +231,11 @@ this.shippingcost(this.curshipaddress)
       user_id: this.userid,
       city_name: row.city_name
     }
-    const edata5 = { 
+    let edata5 = { 
       user_id: this.userid,
       id:row.id,   
     }
+   
     console.log("edatat", edata);
     console.log("edatat2", edata2);
     console.log("edatat5",edata5);
@@ -244,7 +247,7 @@ this.shippingcost(this.curshipaddress)
   
 
     this.request.makeshipingaddress(edata5).subscribe((res: any) => {
-      console.log("shipping response",res);
+      console.log("makeshipping response",res);
       if (res.result == true) {       
         // this.toastr.success('Added Successfully','');    
         console.log("shipping address updated"); 
@@ -265,8 +268,6 @@ this.shippingcost(this.curshipaddress)
     });
 
   }
-
-
   findInvalidControls(f: FormGroup) {
     const invalid = [];
     const controls = f.controls;
@@ -275,14 +276,14 @@ this.shippingcost(this.curshipaddress)
 
   placeorder(form: FormGroup) {
     this.error2 = '';
-
+ console.log("addres_id",this.address_id);
+ 
     if (this.address_id == undefined) {
       console.log("address_id", this.address_id)
       this.error2 = '*please select address';
     }
 
-    else
-     if (this.terms.invalid) {
+    else if (this.terms.invalid) {
       if (!this.terms.get('type')?.valid) {
         this.error2 = '*please select paymenttype';
       }
@@ -299,16 +300,16 @@ this.shippingcost(this.curshipaddress)
         payment_type: this.payytype
       }
       console.log("edatat", edata);
-      if (this.payytype == "billdesk_payment") {
-        console.log("paymentttttype", this.payytype)
+      if (this.payytype == "billdesk") {
+        console.log("paymentttttypebill", this.payytype)
         this.request.placeorder(edata).subscribe((response: any) => {
           console.log("Placeorder", response);
-          console.log("combined_orderid", this.combined_orderid);
+          console.log("combined_orderid", response.combined_order_id);
           this.combined_orderid = response.combined_order_id;
-          if (response.result == true) {
-            console.log("billdesk");
-
-            // this.billdesk()
+          if (response.result = true) {
+            
+            console.log("billdeskkkkkkkkkkkkkkkkkkkkk");
+            this.billdesk()
           }
           else {
             console.log("fail", response.message);
@@ -322,6 +323,7 @@ this.shippingcost(this.curshipaddress)
           console.log("Placeorder response", response);
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
+           
             let edata1 = {
               payment_type: "cart_payment",
               combined_order_id: this.combined_orderid,
@@ -338,6 +340,8 @@ this.shippingcost(this.curshipaddress)
         });
       }
       else {
+        console.log("elssse");
+        
         this.request.placeorder(edata).subscribe((response: any) => {
           console.log("Placeorder", response);
           this.combined_orderid = response.combined_order_id
@@ -673,11 +677,50 @@ this.shippingcost(this.curshipaddress)
   rzp1: any;
   pay() {
     this.rzp1 = new this.authService.nativeWindow.Razorpay(this.options);
-
     this.rzp1.open();
-
-
   }
+  billdesk2(){
+    window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8')
+    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8').subscribe(
+      data => {
+        console.log(data);
+        console.log("User Login: " + data.login);
+        console.log("Bio: " + data.bio);
+        console.log("Company: " + data.company);
+      },
+      (err:HttpErrorResponse) => {
+        console.log("err",err);
+        if(err.error instanceof Error){
+          console.log("Client side error");
+        }
+        else{
+          console.log("Sever side error");
+        }
+      });
+    }
+    billdesk(){
+      console.log("billdest called"); 
+      // this.request.billdeskpay(this.combined_orderid,this.grandtotal.replace('Rs',""),this.userid)
+      this.request.billdeskpay(157,115.00,8)  .subscribe(
+        (response: any) =>{ response.json()    
+          console.log("billdesktype",response.json()); 
+          console.log("billresponse",response);
+         
+        },
+ 
+        // (   data: { [x: string]: any; }) => {
+        //   console.log('------', data)
+        //     console.log('-------', data['response'])
+        //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
+        //     console.log('formmmm',payhere_checkout_form)
+        //     console.log('-----------', data)
+        //     this.encRequestRes = data['response']; 
+        //         // setTimeout(()=>{
+        //         //     this.form.nativeElement.submit();
+        //         // },1000)
+        //     },
+           );   
+      }
 }
 
 
