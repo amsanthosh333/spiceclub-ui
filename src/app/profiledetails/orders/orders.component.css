@@ -54,3 +54,31 @@
 	  padding-right: 0px;
   }
   }
+
+  nav.site-nav > ul > li {
+    line-height: 60px;
+    position: static;
+    display: inline-block;
+    margin: 0 15px;
+    text-align: left;
+    padding-right: 30px;
+}
+nav.site-nav > ul > li > a:after {
+	    content: none;
+}
+@media screen and (max-width: 750px) {
+	/* .filter-title{
+	  font-size: 0.5em;
+	} */
+	nav.site-nav > ul > li {
+		font-size: 0.6em;
+	}
+	nav.site-nav[_ngcontent-jmj-c144] > ul[_ngcontent-jmj-c144] > li[_ngcontent-jmj-c144] {
+		font-size: 0.6em;
+	}
+  }
+ 
+  li a span{
+	font-size:1.2em;
+}
+	

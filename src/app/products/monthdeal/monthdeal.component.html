@@ -159,7 +159,7 @@
 
 							<!--=======  single product  =======-->
 							<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"  *ngFor="let img of Monthdealpro  | paginate: { itemsPerPage: 12, currentPage: p };let i=index">
-								<div class="single-product">
+								<div class="single-product" *ngIf="Monthdealpro?.length!==0">
 									<!--=======  single product image  =======-->
 		
 									<div class="single-product__image">
@@ -222,69 +222,22 @@
 									<!--=======  End of single product content  =======-->
 								</div>
 
-								<div class="single-product--list">
-									<!--=======  single product image  =======-->
-
-									<div class="single-product__image">
-										<a class="image-wrap" href="product_detail.html">
-											<img src="assets/images/products/prod8-f.jpeg" class="img-fluid" alt="">
-                                            <img src="assets/images/products/prod8-b.jpeg" class="img-fluid" alt="">
-										</a>
-
-										<div class="single-product__floating-badges">
-											<span class="onsale">-10%</span>
-											<span class="hot">hot</span>
-										</div>
-
-										<div class="single-product__floating-icons">
-											<span class="wishlist"><a href="#" data-tippy="Add to wishlist" data-tippy-inertia="true"
-													data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
-													data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-														class="ion-android-favorite-outline"></i></a></span>
-
-											<span class="compare"><a href="#" data-tippy="Compare" data-tippy-inertia="true"
-													data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
-													data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-														class="ion-ios-shuffle-strong"></i></a></span>
-
-											<span class="quickview"><a class="cd-trigger" href="#qv-1" data-tippy="Quick View"
-													data-tippy-inertia="true" data-tippy-animation="shift-away" data-tippy-delay="50"
-													data-tippy-arrow="true" data-tippy-theme="sharpborder" data-tippy-placement="bottom"><i
-														class="ion-ios-search-strong"></i></a></span>
-										</div>
-
-										
-
-									</div>
-
-									<!--=======  End of single product image  =======-->
-
-									<!--=======  single product content  =======-->
-
-									<div class="single-product__content">
-
-										<div class="title">
-											<h3> <a href="product_detail.html">High-waist Trousers</a></h3>
-										</div>
-										<div class="price">
-											<span class="main-price discounted">Rs 160.00</span>
-											<span class="discounted-price">Rs 180.00</span>
-										</div>
-										<p class="short-desc"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Laudantium
-											consequuntur voluptatem ad molestiae. Expedita nesciunt quam totam, sapiente eveniet consectetur
-											voluptas quas harum impedit quia quibusdam tempora ab facilis. Non assumenda veritatis,
-										</p>
-
-										<a href="#" class="lezada-button lezada-button--medium">ADD TO CART</a>
-
-									</div>
-
-									<!--=======  End of single product content  =======-->
-								</div>
+								
 							</div>
-                            <div id="pgg" style="text-align: center;">
+                            <div id="pgg" style="text-align: center;" *ngIf="Monthdealpro?.length!==0">
                                 <pagination-controls (pageChange)="p = $event"></pagination-controls>
                             </div>
+							<div id="pggg" *ngIf="Monthdealpro?.length==0" style=" display: flex;
+							justify-content: center;
+							align-items: center;
+							height: 200px;
+							border: 3px solid rgb(139, 139, 139);">
+								<div>
+									<h5>
+										There is no product
+									</h5>
+								</div>
+							</div>
 						</div>
 					</div>
        <!--  productslazyloading -->
@@ -335,54 +288,7 @@
 									</div>
 								</div>
 							</div>
-							<!-- <div class="col-auto w-90px">
-							<div class="aiz-carousel carousel-thumb product-gallery-thumb slick-vertical slick-initialized slick-slider"
-								data-items="5" data-nav-for=".product-gallery" data-vertical="true"
-								data-focus-select="true">
-								<div class="slick-list draggable" style="height: 397.5px;">
-									<div class="slick-track"
-										style="opacity: 1; height: 239px; transform: translate3d(0px, 0px, 0px);">
-										<div class="slick-slide slick-current slick-active"
-											data-slick-index="0" aria-hidden="false"
-											style="width: 70px;">
-											<div>
-												<div class="carousel-box c-pointer border p-1 rounded"
-													style="width: 100%; display: inline-block;">
-													<img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
-														src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-														data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-														onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
-												</div>
-											</div>
-										</div>
-										<div class="slick-slide slick-active" data-slick-index="1"
-											aria-hidden="false" style="width: 70px;">
-											<div>
-												<div class="carousel-box c-pointer border p-1 rounded"
-													style="width: 100%; display: inline-block;">
-													<img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
-														src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-														data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-														onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
-												</div>
-											</div>
-										</div>
-										<div class="slick-slide slick-active" data-slick-index="2"
-											aria-hidden="false" style="width: 70px;">
-											<div>
-												<div class="carousel-box c-pointer border p-1 rounded"
-													style="width: 100%; display: inline-block;">
-													<img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
-														src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-														data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-														onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div> -->
+						
 						</div>
 					</div>
 					<div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
@@ -410,9 +316,8 @@
 										<div class="shop-product__block__value" *ngFor="let a of choice">
 
 											<div class="shop-product-size-list">
-												<span class="single-size" *ngFor="let b of a.options"
-													(click)="selectvar(b)">{{b}}</span>
-
+												<span class="single-size" *ngFor="let b of a.options;let i=index"
+												[ngClass]="{'active': subItemm === i}"    (click)="selectvar(b,i)">{{b}}</span>
 											</div>
 										</div>
 									</div>

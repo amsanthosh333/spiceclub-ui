@@ -3,7 +3,8 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  baseURL1:'https://neophroncrm.com/spiceclubnew/api/v2',
 };
 
 export const firebaseConfig = {

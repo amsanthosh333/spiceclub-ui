@@ -49,6 +49,8 @@ export class HeaderComponent implements OnInit {
   userlogin!:boolean;
 
    ClickEventSubscription!:Subscription;
+  profiledetail: any;
+  loaderimage: boolean=true;
 
   constructor(private router: Router,private fb: FormBuilder,private toastr: ToastrService,private request: RequestService, 
     private modalService: NgbModal,private sharedService: SharedService, private authService: AuthService ) {
@@ -59,6 +61,7 @@ export class HeaderComponent implements OnInit {
           this. viewcartcount();
           this. viewcart();
           this.viewcart3();
+          this.getprofile();
   
         })
       }
@@ -78,7 +81,7 @@ export class HeaderComponent implements OnInit {
        this.userid=this.currentdetail.user?.id;
        this.accesstoken=this.currentdetail.access_token;
        this.tokentype=this.currentdetail.token_type;
-       console.log("currentuserid=", this.userid);
+      //  console.log("currentuserid=", this.userid);
 
        if(this.userid==undefined){
         this.userid=0;
@@ -93,6 +96,7 @@ export class HeaderComponent implements OnInit {
     this. viewcartcount();
     this. viewcart();
     this.viewcart3();
+    this.getprofile();
   }
 
     this.search = this.fb.group({ 
@@ -325,12 +329,7 @@ export class HeaderComponent implements OnInit {
     
       /*----------  multilevel menu  ----------*/
     
-      $("#dl-menu").dlmenu({
-        animationClasses: {
-          classin: "dl-animate-in-2",
-          classout: "dl-animate-out-2"
-        }
-      });
+  
     
       /*----------  overlay menu   ----------*/
     
@@ -1547,33 +1546,38 @@ export class HeaderComponent implements OnInit {
       }
 
 compone(){
-  console.log("heeeeeeeellllllllllloooooooooooo");
+ 
 }
+getprofile(){
+  this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
+    this.profiledetail = response;
+console.log("this.profiledetail",this.profiledetail);
 
+   
+    setTimeout(() => {
+      this.loaderimage=false;
+    }, 2000);
+    
+  });
+}
       viewwishlist(){
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
           this.Wishlist=response.data; 
       this.Wlength= this.Wishlist.length;
       this.loader=false ; 
-          console.log("Wishlist",response.data); 
-          console.log("Wishlistlength", this.Wishlist.length);           
+                   
         });
       }
       viewcart(){
         this.request.fetchusercart(this.userid).subscribe((response: any) => {
           this.Cart=response;   
           // this.cartlength=this.Cart.total;
-          console.log("cart",response);   
-          // console.log("owner id",this.Cart[0]?.owner_id);
           // this.owneriid=this.Cart[0].owner_id;    
         });
       }
       viewcartcount(){
         this.request.cartcount(this.userid).subscribe((response: any) => {
           this.cartlength=response.cartcount; 
-          console.log("cartlength",this.cartlength);
-            
-
         });
       }
       gotocart(){
@@ -1604,30 +1608,22 @@ compone(){
           $("body").removeClass("active-body-search-overlay");
           this.router.navigate(['/checkout']);
       }
-      deleteRecord(id:any) {
-        console.log("row",id);
+      deleteRecord(id:any) {      
         this.request.deletewishproud(id).subscribe((response: any) => {
-          console.log(response);
           if(response.message=="Product is successfully removed from your wishlist"){
-            console.log("deleted");   
             this.viewwishlist();
             this.deleteRecordSuccess();
           }
           else{
-            this.toastr.error( response.message);
-            console.log("error ,product is not deleted")            
+            this.toastr.error( response.message);            
           }
          }, (error: any) => {
            console.log(error);
          });
       }
       deleteRecord2(id:any) {
-        console.log("row",id);
         this.request.deleteproud(id).subscribe((response: any) => {
-          console.log(response);
           if(response.message=="Product is successfully removed from your cart"){
-            
-            console.log("deleted");
             this.viewcart();
             this.viewcart3();
             this.viewcartcount();
@@ -1635,19 +1631,16 @@ compone(){
           }
           else{
             this.toastr.error(response.message);
-            console.log("error ,product is not deleted")
           }
          }, (error: any) => {
-           console.log(error);
+            console.log(error);
          });
       }
       viewcart3(){
         this.request.fetchsummery(this.userid).subscribe((response: any) => {
           this.Summery=response;   
           this.Grandtot=this.Summery.grand_total
-          this.subtot=this.Summery.sub_total
-          console.log("summery",response);    
-          console.log("grand total",this.Summery.grand_total); 
+          this.subtot=this.Summery.sub_total 
           this.grandtotal=this.Summery.grand_total
         });
       
@@ -1663,37 +1656,28 @@ compone(){
       }
 
       filterDatatable(event:any){           
-        console.log(event.target.value)
         if(event.target.value==''){
-         console.log("type something");
         }
         else{
           let key = event.target.value;
           window.scroll(0,0);
           this.router.navigate(['shopbyproduct', key]);
-          console.log("navigate to shop by product");
         }   } 
 
         search1(form:FormGroup){
     
-          let key =form.value.key;
-          console.log("keyyyy1111111",key);
-          
+          let key =form.value.key;       
           if(key==''){
-            console.log("type something");
            }
            else{ 
              window.scroll(0,0);
              this.router.navigate(['shopbyproduct', key]);
-             console.log("navigate to shop by product");
            }
   
            }
 
            logout1(){
-            console.log("logggouttt") 
             this.authService.logout().subscribe( res=>{
-              console.log("res",res);
               this.toastr.success('Logout Successfully', '');
               this.router.navigate(['/home'])
               .then(() => {

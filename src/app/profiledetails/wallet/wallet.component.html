@@ -30,7 +30,7 @@
                             </h2>
                         </strong>
                     </strong>
-                    <p class="eml" style="color: white;">Last Recharge : {{Wallet.last_recharged}}</p>
+                    <p class="eml" style="color: white;">Last Recharge : {{Wallet?.last_recharged}}</p>
                 </div>
                 <br>
                 <button class="btn btn-success" (click)="openrecharge(Recharge)"> Recharge </button>
@@ -56,7 +56,20 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
 
     <div class="cart-table-container" style="margin-left: 5%; margin-right: 5% ;">
         <h4 class="checkout-title mt-40 mb-10">Wallet Recharge History</h4>
-        <div class="checkout-cart-tota" style="padding: 20px;">
+
+        	 <div id="pggg" *ngIf="History?.length==0" style=" display: flex;
+									justify-content: center;
+									align-items: center;
+									height: 200px;
+									border: 3px solid rgb(139, 139, 139);
+									">
+										<div>
+											<h5>
+												There is no recharge history
+											</h5>
+										</div>
+									</div> 
+        <div class="checkout-cart-tota" style="padding: 20px;" *ngIf="History?.length!==0">
             <table class="cart-table" style="background-color: rgb(255, 255, 255);">
                 <thead>
                     <tr>

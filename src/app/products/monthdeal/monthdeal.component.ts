@@ -49,7 +49,7 @@ export class MonthdealComponent implements OnInit {
   stocck: any;
   searchh: any;
   sortprod: any;
-  prodcount=[1,2,3,4,5,6,7,8,9,10];
+  prodcount=[1,2,3,4,5,6,7,8,9,10,11,12];
   prodloader: boolean=true;
   Daydealpro: any;
   Monthdealpro: any;
@@ -66,6 +66,7 @@ export class MonthdealComponent implements OnInit {
   likedd=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
   likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
   stocckkk: any;
+  subItemm: any=0;
  
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,config: NgbRatingConfig,private modalService: NgbModal,
@@ -78,7 +79,7 @@ export class MonthdealComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser')||'{}')   
     );
 
-    console.log("currentuser details=", this.currentUserSubject);
+    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user?.id;
@@ -99,11 +100,9 @@ export class MonthdealComponent implements OnInit {
   toggle(img:any,index:any): void {
     this.likeddd[index] = !this.likeddd[index];   
     if(this.likeddd[index]==true){
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if( this.likeddd[index]==false){
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
   
@@ -111,19 +110,16 @@ export class MonthdealComponent implements OnInit {
   toggledelete(img:any,index:any): void {
     this.likedd[index] = !this.likedd[index];   
     if(this.likedd[index]==true){
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if( this.likedd[index]==false){
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
   }
   viewdaydeal(){
     this.request.getdaydealpro().subscribe((response: any) => {
       this.Daydealpro=response.data.slice(0, 4);
-      this.prodloader=false;
-      console.log("Daydealpro",this.Daydealpro);  
+      this.prodloader=false; 
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -133,7 +129,6 @@ export class MonthdealComponent implements OnInit {
     this.request.getmonthdealpro().subscribe((response: any) => {
       this.Monthdealpro=response.data;
       this.poploader=false;
-      console.log("Monthdealpro",this.Monthdealpro);  
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -141,7 +136,6 @@ export class MonthdealComponent implements OnInit {
   }
   proddetail(id:any){
     this.router.navigate(['productdetail', id]);
-    console.log("navigate to detail");
   }
   addtowishlist(prd_id:any){
     if(this.userid==0){
@@ -152,17 +146,13 @@ export class MonthdealComponent implements OnInit {
       user_id:this.userid,
       product_id:prd_id
     }
-    console.log(edata4);  
     this.request.addtowishlist(edata4).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Product is successfully added to your wishlist') {
-        console.log("success",res.message); 
         this.addRecordSuccess() ;  
         this.sharedService.sendClickEvent();   
       }
       else  {
         this.toastr.error(res.message);
-        console.log("error",res.message);
       }
     }, (error: any) => {
       console.log("error",error);
@@ -170,17 +160,13 @@ export class MonthdealComponent implements OnInit {
   }
   }
   deleteRecord(id:any) {
-    console.log("deleteeerow",id);
     this.request.deletewishproud2(id).subscribe((response: any) => {
-      console.log(response);
       if(response.message=="Product is removed from wishlist"){
-        console.log("deleted",response.message);
         this.deleteRecordSuccess();
         this.sharedService.sendClickEvent();
       }
       else{
         this.toastr.error( response.message);
-        console.log("error ,product is not deleted")
         
       }
   
@@ -198,21 +184,17 @@ export class MonthdealComponent implements OnInit {
       variant:this?.varient_value.replace(/\s/g, ""),
       user_id: this.userid,
       quantity: this.quantityy  
-    }
-    console.log(edata);  
+    } 
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Product added to cart successfully') {  
         this.addRecordSuccess(); 
         this.sharedService.sendClickEvent();    
       }
       else if(res.message== 'Minimum 1 item(s) should be ordered'){
         this.toastr.info(res.message);
-        console.log("minimum 1");
       } 
       else if(res.message== 'Stock out'){
         this.toastr.error(res.message);
-        console.log("Stock out");
       }
       else  {
         console.log("error",res);
@@ -228,8 +210,6 @@ export class MonthdealComponent implements OnInit {
     this.quantityyy = 0
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-
-      console.log("proddetaill", response);
       this.Peoduct = response.data[0];
       this.prod_price = this.Peoduct.main_price;
       this.choice = this.Peoduct.choice_options;
@@ -241,26 +221,19 @@ export class MonthdealComponent implements OnInit {
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
       //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
-      console.log("res", this.Peoduct);
-      console.log("choise option", this.Peoduct.choice_options);
-      //  console.log("stocck",this.stocck); 
-      console.log("stk", this.stk);
       if (this.Peoduct.current_stock == 0) {
         this.stocck = 0
 
       }
       else {
         this.stocck = (this.Peoduct.current_stock) ;
-      }
-      //  window.scroll(0,0);             
+      }           
       if (this.Peoduct.choice_options.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
       }
-      console.log("optiooooons", this.choice[0]?.options[0]);
 
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -277,44 +250,30 @@ export class MonthdealComponent implements OnInit {
   increaseqty(){
     this.quantityyy++;
     this.stocck--;
-    // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-    //  this.totalprice=this.dec.toFixed(2)
-    // console.log("-dec",this.dec);
+
       }
       decreaseqty(){
         this.quantityyy--;
-        this.stocck++;
-        // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-        // this.totalprice=this.dec.toFixed(2)
-        // // console.log("-quntity",this.quantityyy);
-        // // console.log("price",this.varprise.replace('Rs',''));
-        //  console.log("totalprice",this.totalprice);
-        
+        this.stocck++;       
       }
       getValue(val: any) {
         if (val<= 0) {
           val = 1
-          console.log( "valif",val);
         }
         else if (val > this.stocckkk) {
           val = this.stocckkk
-          console.log( "valel",val);
         }
         this.quantityyy = val
         this.stocck = this.stocckkk - val
-    
-        console.log( "val",val);
-        console.log("this.stocckkk-val",this.stocckkk - val);
-        console.log("this.stocckkk",this.stocckkk);
-        console.log(this.stocck);
+
         this.stocck
     
     
       }
-      selectvar(weight:any){
+      selectvar(weight:any,i:any){
         this.varient_value=weight.replace(/\s/g, "")
+        this.subItemm=i
         this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-          console.log(res);
           this.prod_price=res?.price_string;
           this.totalprice=(res?.price_string).replace('Rs','');
           this.varprise=res?.price_string;
@@ -330,9 +289,6 @@ export class MonthdealComponent implements OnInit {
             this.quantityyy=0;
            }   
 
-          console.log(this.varprise);
-          console.log(this.stocck);
-          console.log(res?.stock);
 
         }, (error: any) => {
           console.log("error",error);
@@ -351,12 +307,10 @@ export class MonthdealComponent implements OnInit {
       quantity: this.quantityyy,
       buyertype:this.buyertypeid,  
     }
-    console.log(edata);  
+ 
       
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log("resssssssssssssss",res);
       if (res.message == 'Product added to cart successfully') {    
-        console.log("Product added to cart successfully");
         this.addRecordSuccess();
            this.modalService.dismissAll();
            this.sharedService.sendClickEvent();
@@ -367,11 +321,10 @@ export class MonthdealComponent implements OnInit {
       }
       else if(res.message== 'Stock out'){
         this.toastr.error(res.message);
-        console.log("Stock out");
       }
     },
      (error: any) => {
-      this.toastr.error(error);
+      // this.toastr.error(error);
       console.log("error",error);
     
     });

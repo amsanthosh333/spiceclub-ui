@@ -9,7 +9,7 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from 'src/app/services/payment.service';
-import{ SharedService} from 'src/app/services/shared.service'
+import { SharedService } from 'src/app/services/shared.service'
 import { NgxSpinnerService } from "ngx-spinner";
 @Component({
   selector: 'app-checkout',
@@ -69,7 +69,7 @@ export class CheckoutComponent implements OnInit {
   city: any;
   pincode: any;
   phone: any;
-  address: any;
+  addresssss: FormGroup;
   state_name: any;
   encRequest: any;
   subtot: any;
@@ -98,12 +98,16 @@ export class CheckoutComponent implements OnInit {
   paymentdetails: any;
   indexx: any;
   curshipaddress: any;
+  address: any;
+  shipadds: boolean=true;
+  dis: any;
+  nocart: boolean= false;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
-    private toastr: ToastrService, private toast: ToastrService, 
-    private sharedService: SharedService,private payservice: PaymentService,private spinner: NgxSpinnerService) {
+    private toastr: ToastrService, private toast: ToastrService,
+    private sharedService: SharedService, private payservice: PaymentService, private spinner: NgxSpinnerService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
@@ -115,9 +119,6 @@ export class CheckoutComponent implements OnInit {
     this.username = this.currentdetail.user.name;
     this.userphone = this.currentdetail.user.phone;
     this.useremail = this.currentdetail.user.email;
-    console.log("currentuserid=", this.userid);
-    console.log("currentuserdetail=", this.currentdetail);
-
     this.terms = this.fb.group({
       type: ['', [Validators.required]],
       terms: ['', [Validators.requiredTrue]],
@@ -132,12 +133,12 @@ export class CheckoutComponent implements OnInit {
       postal_code: ['', [Validators.required]],
 
     });
-    this.address = this.fb.group({
-      addresss: [''], 
-   })
+    this.addresssss = this.fb.group({
+      addresss: [''],
+    })
   }
   ngOnInit(): void {
-    window.scroll(0,0)
+    window.scroll(0, 0)
     this.viewsummery();
     this.viewcart();
     this.paymettype();
@@ -155,16 +156,14 @@ export class CheckoutComponent implements OnInit {
   }
 
   onItemChange(item: any) {
-    console.log(item);
     this.payytype = item;
     this.getSelecteditem();
   }
   viewcart() {
     this.request.fetchusercart(this.userid).subscribe((response: any) => {
       this.Cart = response;
-      // this,cart_item=this.Cart.cart_items  
-      console.log("cart", response);
-      console.log("owner id", this.Cart[0]?.owner_id);
+      console.log(this.Cart);
+      
       this.owneriid = this.Cart[0]?.owner_id;
       setTimeout(() => {
         this.loadingIndicator = false;
@@ -174,35 +173,56 @@ export class CheckoutComponent implements OnInit {
   }
   viewsummery() {
     this.request.fetchsummery(this.userid).subscribe((response: any) => {
+      console.log("fetchsummery",response);    
       this.Summery = response;
-      this.Grandtot = this.Summery.grand_total
-      this.subtot = this.Summery.sub_total
-      this.shippingfee = this.Summery.shipping_cost
-      this.tax = this.Summery.tax
-      console.log("summery", response);
-      console.log("grand total", this.Summery.grand_total);
-      this.grandtotal = this.Summery.grand_total
-      this.grandtotal_value = this.Summery.grand_total_value
+      this.Grandtot = this.Summery.grand_total;
+      this.dis=this.Summery.discount;
+      this.subtot = this.Summery.sub_total;
+      this.shippingfee = this.Summery.shipping_cost;
+      this.tax = this.Summery.tax;
+      this.grandtotal = this.Summery.grand_total;
+      this.grandtotal_value = this.Summery.grand_total_value;
     });
   }
   getaddress() {
     this.loader = true
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
       this.Address = response.data;
+      console.log("address", this.Address);
       this.loader = false;
-      this.indexx =this.Address.findIndex((x:any) => x.set_default ==1);
-      console.log("Address", this.Address);
-      console.log("Address index", this.indexx);
-      this.address_id=this.Address[this.indexx].id
-      this.curshipaddress=this.Address[this.indexx]
-      this.shippingcost(this.curshipaddress)
+      if (this.Address.length === 0) {
+        this.shipadds=false
+        console.log("add some address");
+        this.opennewaddress();
+
+      }
+      else {
+        this.shipadds=true
+        this.indexx = this.Address.findIndex((x: any) => x.set_default == 1);
+        this.address_id = this.Address[this.indexx]?.id
+        this.curshipaddress = this.Address[this.indexx]
+        console.log("this.address_id", this.address_id);
+        if (this.address_id === undefined) {
+          console.log("if");
+          this.address_id = this.Address[0]?.id
+          this.curshipaddress = this.Address[0]
+          this.shippingcost(this.curshipaddress)
+          this.getaddress();
+        }
+        else {
+          console.log("else",);
+          console.log("shipping address id", this.address_id);
+          this.shippingcost(this.curshipaddress)
+        }
+      }
+
+
     });
-    // this.paymettype();
+
   }
   paymettype() {
     this.request.fetchpaytype().subscribe((response: any) => {
       this.Paymenttype = response;
-      console.log("Paymenttype", this.Paymenttype);
       // this. processdata()    
     });
   }
@@ -211,16 +231,12 @@ export class CheckoutComponent implements OnInit {
     // this.payytype = row.payment_type
   }
   shippingcost(row: any) {
-    console.log("shippingcosr,address,",row);
-    
-    this.address_id = row.id;
-    console.log("row id", row.city_name);
-    console.log("row id", row.id);
-    this.city = row.city_name;
-    this.pincode = row.postal_code;
-    this.phone = row.phone;
-    this.address = row.address;
-    this.state_name = row.state_name
+    this.address_id = row?.id;
+    this.city = row?.city_name;
+    this.pincode = row?.postal_code;
+    this.phone = row?.phone;
+    this.address = row?.address;
+    this.state_name = row?.state_name
 
     let edata2 = {
       user_id: this.userid,
@@ -231,40 +247,40 @@ export class CheckoutComponent implements OnInit {
       user_id: this.userid,
       city_name: row.city_name
     }
-    let edata5 = { 
+    let edata5 = {
       user_id: this.userid,
-      id:row.id,   
+      id: row.id,
     }
-   
-    console.log("edatat", edata);
-    console.log("edatat2", edata2);
-    console.log("edatat5",edata5);
-    this.request.updateshippingaddress(edata2).subscribe((response: any) => {
-      console.log("address changed res",response); 
 
-    // this. processdata()    
-    });
-  
 
     this.request.makeshipingaddress(edata5).subscribe((res: any) => {
-      console.log("makeshipping response",res);
-      if (res.result == true) {       
-        // this.toastr.success('Added Successfully','');    
-        console.log("shipping address updated"); 
+      console.log("makeshipingaddress ===========",edata5)
+      console.log("makeshipingaddress response", res)
+      if (res.result == true) {
+        // this.getaddress();
+    this.request.updateshippingaddress(edata2).subscribe((response: any) => {
+      console.log("updateshippingaddress=======",edata2)
+      console.log("updateshippingaddress response", response)
+      if(response.result==true){
+
+      }    
+    });
+
       }
-      else  {
-        console.log("something went wrong");
+      else {
+        console.log("error");
+        
       }
-    },);
+    });
+
     this.request.fetchcost(edata).subscribe((response: any) => {
-      this.Scost=response; 
-      this.cost= this.Scost.value_string
-      if(response.result==true)  {
+      console.log("fetchcost ===========",edata)
+      console.log("fetchcost", response)
+      this.Scost = response;
+      this.cost = this.Scost.value_string
+      if (response.result == true) {
         this.viewsummery();
-      } 
-      console.log("Scost",this.cost);     
-      console.log("Scostamount", this.Scost); 
-    // this. processdata()    
+      }
     });
 
   }
@@ -276,11 +292,8 @@ export class CheckoutComponent implements OnInit {
 
   placeorder(form: FormGroup) {
     this.error2 = '';
- console.log("addres_id",this.address_id);
- 
     if (this.address_id == undefined) {
-      console.log("address_id", this.address_id)
-      this.error2 = '*please select address';
+      this.error2 = '*please add address';
     }
 
     else if (this.terms.invalid) {
@@ -290,7 +303,6 @@ export class CheckoutComponent implements OnInit {
       else if (!this.terms.get('terms')?.valid) {
         this.error2 = '*please accept terms & conditions';
       }
-      console.log(this.error2)
       return;
     }
     else {
@@ -299,39 +311,32 @@ export class CheckoutComponent implements OnInit {
         user_id: this.userid,
         payment_type: this.payytype
       }
-      console.log("edatat", edata);
       if (this.payytype == "billdesk") {
-        console.log("paymentttttypebill", this.payytype)
         this.request.placeorder(edata).subscribe((response: any) => {
-          console.log("Placeorder", response);
-          console.log("combined_orderid", response.combined_order_id);
           this.combined_orderid = response.combined_order_id;
           if (response.result = true) {
-            
-            console.log("billdeskkkkkkkkkkkkkkkkkkkkk");
             this.billdesk()
           }
           else {
-            console.log("fail", response.message);
             this.toastr.error(response.message);
           }
         });
       }
       else if (this.payytype == "razorpay") {
-        console.log("paymenttttype", this.payytype)
         this.request.placeorder(edata).subscribe((response: any) => {
-          console.log("Placeorder response", response);
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
-           
+            this.sharedService.sendClickEvent();
+           this.nocart=true;
+
             let edata1 = {
               payment_type: "cart_payment",
               combined_order_id: this.combined_orderid,
               amount: this.grandtotal_value,
-              user_id: this.userid
+              user_id: this.userid,
             }
-            // this.razorpayment1(edata1);
-            this.initPay(edata1);
+            this.initPay(edata1);  
+            //  this.router.navigate(['/orders']);
           }
           else {
             console.log("fail", response.message);
@@ -340,19 +345,14 @@ export class CheckoutComponent implements OnInit {
         });
       }
       else {
-        console.log("elssse");
-        
         this.request.placeorder(edata).subscribe((response: any) => {
-          console.log("Placeorder", response);
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
             this.toastr.success('Order placed');
             this.sharedService.sendClickEvent();
-            this.router.navigate(['/home']);
-            
+            // this.router.navigate(['/orders']);
           }
           else {
-            console.log("fail", response.message);
             this.toastr.error(response.message);
           }
         });
@@ -361,11 +361,7 @@ export class CheckoutComponent implements OnInit {
   }
 
   razorpayment1(edata1: any) {
-    console.log("edata1", edata1);
     this.request.razorpay1(edata1).subscribe((response: any) => {
-      console.log("razorpay1 response", response);
-    }, (error: any) => {
-      console.log("error msg ", error);
     });
   }
 
@@ -398,7 +394,7 @@ export class CheckoutComponent implements OnInit {
     console.log("edata1", edata1);
     this.request.razorpay2(edata1).subscribe((response: any) => {
       console.log("razorpay1 response", response);
-    },);
+    });
 
   }
 
@@ -411,16 +407,12 @@ export class CheckoutComponent implements OnInit {
   viewcountry() {
     this.request.fetchcountry().subscribe((response: any) => {
       this.Country = response.data;
-      console.log("country", this.Country);
-
     });
   }
   selectcountry(event: any) {
     this.country_id = event.target.value;
-    console.log("country id", this.country_id);
     this.request.fetchstatebycountry(this.country_id).subscribe((response: any) => {
       this.State = response.data;
-      console.log("newstates", this.State);
 
     });
 
@@ -428,24 +420,19 @@ export class CheckoutComponent implements OnInit {
   viewstate() {
     this.request.fetchstate().subscribe((response: any) => {
       this.State = response.data;
-      console.log("state", this.State);
 
     });
   }
   selectstate(event: any) {
     this.state_id = event.target.value;
-    console.log("state_id", this.state_id);
     this.request.fetchcitybystate(this.state_id).subscribe((response: any) => {
       this.City = response.data;
-      console.log("newCity", this.City);
-
     });
 
   }
   viewCity() {
     this.request.fetchCity().subscribe((response: any) => {
       this.City = response.data;
-      console.log("City", this.City);
 
     });
   }
@@ -471,7 +458,7 @@ export class CheckoutComponent implements OnInit {
       else if (!this.register.get('postal_code')?.valid) {
         this.error3 = '*enter postalcode';
       }
-      console.log(this.error3)
+
       return;
     }
     else {
@@ -484,10 +471,10 @@ export class CheckoutComponent implements OnInit {
         postal_code: form.value.postal_code,
         phone: form.value.phone,
       }
-      console.log(edata);
+
 
       this.request.addaddress(edata).subscribe((res: any) => {
-        console.log(res);
+
         if (res.message == 'Shipping information has been added successfully') {
           this.toastr.success('Shipping information has been added successfully', '');
           form.reset()
@@ -495,7 +482,7 @@ export class CheckoutComponent implements OnInit {
           window.scroll(0, 0);
         }
         else {
-          console.log("res", res);
+
           this.toastr.error(res.message);
           form.reset();
         }
@@ -523,54 +510,19 @@ export class CheckoutComponent implements OnInit {
     this.toastr.error(' Removed Successfully', '');
   }
 
+spiiner(){
+  this.spinner.show();
+}
 
-  // razorpay site
-  payWithRazor(order_id: any) {
-    const options: any = {
-      key: 'rzp_test_7Hdkaz1xFGPomB',
-      amount: 125500,
-      currency: 'INR',
-      name: 'san',
-      description: 'hiii',
-      image: '.assets/images/LOGOWHITE.jpg',
-      order_id: "",
-      modal: {
-        escape: false,
-      },
-      notes: {
-      },
-      theme: {
-        color: '#0c238a'
-      }
-    };
-    options.handler = ((response: any, error: any) => {
-      options.response = response;
-      console.log(response);
-      console.log(options);
-      // call your backend api to verify payment signature & capture transaction
-    });
-    options.modal.ondismiss = (() => {
-      // handle the case when user closes the form while transaction is in progress
-      console.log('Transaction cancelled.');
-    });
-    const rzp = new this.payservice.nativeWindow.Razorpay(options);
-    rzp.open();
-  }
-
-  // "amount": this.grandtotal.replace('Rs',""),
-
-  // demo spoicce  (working)
-
-
-  initPay(edata:any) {
+  initPay(edata: any) {
     let options = {
       "key": "rzp_test_DYDr3B0KYe4086",
-      "amount": edata.amount*100,
+      "amount": edata.amount * 100,
       "currency": "INR",
       "name": "Spice Club",
       "description": "Test Transaction",
       "image": "assets/images/LOGOWHITE.jpg",
-      "order_id":"",
+      "order_id": "",
       // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
       // "handler": function (response: { razorpay_payment_id: any; razorpay_order_id: any; razorpay_signature: any; }) {
       //   alert(response.razorpay_payment_id);
@@ -578,10 +530,10 @@ export class CheckoutComponent implements OnInit {
       //   alert(response.razorpay_signature)
       //   console.log("razzzerrespnse",response.razorpay_payment_id);
       //   // this.razorpayid = response.razorpay_payment_id
-        
+
       // },
       // "handler": this.paymentResponseHander(response);
-      
+
       "prefill": {
         "name": this.username,
         "email": this.useremail,
@@ -591,64 +543,56 @@ export class CheckoutComponent implements OnInit {
         "address": "Razorpay Corporate Office"
       },
       "theme": {
-        "color": "#3399cc"
+        "color": "#f0240a"
       },
       "handler": (response: any) => {
-       this. razpaysuccess= response
-       console.log(this.razpaysuccess);
-       this.razorpaypayment();
-      }  
+        this.razpaysuccess = response
+        console.log(this.razpaysuccess);
+        this.spinner.show();
+        this.razorpaypayment();
+      }
     };
     console.log("options,", options)
-    
+
     let rzp1 = new this.authService.nativeWindow.Razorpay(options);
-    rzp1.open(); 
+    rzp1.open();
     console.log("works");
   }
 
-  razorpaypayment(){
-    this.spinner.show();
-    console.log("success",this.razpaysuccess.razorpay_payment_id); 
+  razorpaypayment() {
+    //  this.spinner.show();
     this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
       console.log("razorpay1 response", response);
-      if(response.result==true){
-        this.paymentdetails=response.payment_details 
-      //  this.addRecordSuccess()
-      //   this.toastr.success('Added Successfullyyyy', '');
-        console.log(this.paymentdetails);
-        
+      if (response.result == true) {
+        this.paymentdetails = response.payment_details
         this.razorpaysuccess();
       }
 
-    }, );
+    });
   }
-  razorpaysuccess(){
-    let edata4={
-      payment_details:this.paymentdetails,
+  razorpaysuccess() {
+    let edata4 = {
+      payment_details: this.paymentdetails,
       payment_type: "cart_payment",
       combined_order_id: this.combined_orderid,
       amount: this.grandtotal_value,
       user_id: this.userid,
     }
-    console.log("edata4",edata4);
-    
-    this.request.razsuccess(edata4).subscribe((response:any)=>{
-      console.log("success response",response);
-      if(response.message=="Payment is successful"){ 
+
+    this.request.razsuccess(edata4).subscribe((response: any) => {
+      if (response.message == "Payment is successful") {
         this.sharedService.sendClickEvent();
-        console.log(response.message);
         this.spinner.hide();
-        
-         alert(response.message)
-         this.toastr.success('Payment is successful', ''); 
-        
-        this.router.navigate(['/home']);
+
+        alert(response.message)
+        this.toastr.success('Payment is successful', '');
+
+        this.router.navigate(['/orders']);
 
       }
-      else{
-        console.log(response.message);
+      else {
         alert(response.message)
-        this.toastr.error('This payment has already been captured','');
+        this.toastr.error('This payment has already been captured', '');
       }
     })
   }
@@ -679,48 +623,36 @@ export class CheckoutComponent implements OnInit {
     this.rzp1 = new this.authService.nativeWindow.Razorpay(this.options);
     this.rzp1.open();
   }
-  billdesk2(){
+  billdesk2() {
     window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8')
     this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8').subscribe(
       data => {
-        console.log(data);
-        console.log("User Login: " + data.login);
-        console.log("Bio: " + data.bio);
-        console.log("Company: " + data.company);
+
       },
-      (err:HttpErrorResponse) => {
-        console.log("err",err);
-        if(err.error instanceof Error){
+      (err: HttpErrorResponse) => {
+        console.log("err", err);
+        if (err.error instanceof Error) {
           console.log("Client side error");
         }
-        else{
+        else {
           console.log("Sever side error");
         }
       });
-    }
-    billdesk(){
-      console.log("billdest called"); 
-      // this.request.billdeskpay(this.combined_orderid,this.grandtotal.replace('Rs',""),this.userid)
-      this.request.billdeskpay(157,115.00,8)  .subscribe(
-        (response: any) =>{ response.json()    
-          console.log("billdesktype",response.json()); 
-          console.log("billresponse",response);
-         
-        },
- 
-        // (   data: { [x: string]: any; }) => {
-        //   console.log('------', data)
-        //     console.log('-------', data['response'])
-        //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
-        //     console.log('formmmm',payhere_checkout_form)
-        //     console.log('-----------', data)
-        //     this.encRequestRes = data['response']; 
-        //         // setTimeout(()=>{
-        //         //     this.form.nativeElement.submit();
-        //         // },1000)
-        //     },
-           );   
-      }
+  }
+  billdesk() {
+    console.log("billdest called");
+    // this.request.billdeskpay(this.combined_orderid,this.grandtotal.replace('Rs',""),this.userid)
+    this.request.billdeskpay(157, 115.00, 8).subscribe(
+      (response: any) => {
+        response.json()
+        console.log("billdesktype", response.json());
+        console.log("billresponse", response);
+
+      },
+
+
+    );
+  }
 }
 
 

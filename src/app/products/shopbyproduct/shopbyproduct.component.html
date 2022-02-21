@@ -32,12 +32,12 @@
                 <div class="col-12 col-lg-7 col-md-10 d-none d-md-block">
                     <!--=======  fitler titles  =======-->
                     <div class="filter-title filter-title--type-two">
-                        <ul class="product-filter-menu">
-                            <li (click)="viewalldeal()">All</li>
-                            <li (click)="viewtodaysdeal()">Todaysdeal</li>
+                        <ul class="product-filter-menu" >
+                            <li  [ngClass]="{'active': headItem === 1}" (click)="viewalldeal()" (click)="headactive(1)"> All</li>
+                            <li  [ngClass]="{'active': headItem === 2}" (click)="viewtodaysdeal()" (click)="headactive(2)">Todaysdeal</li>
                             <!-- <li (click)="viewflashdeal()">Flashdeal</li> -->
-                            <li (click)="viewdealofday()">Dealofday</li>
-                            <li (click)="viewdealofmonth()">Dealofmonth</li>
+                            <li  [ngClass]="{'active': headItem === 3}" (click)="viewdealofday()" (click)="headactive(3)">Dealofday</li>
+                            <li   [ngClass]="{'active': headItem === 4}" (click)="viewdealofmonth()" (click)="headactive(4)">Dealofmonth</li>
                             <!-- <li data-filter=".sale">sale products</li> -->
                         </ul>
                     </div>
@@ -45,6 +45,7 @@
                 </div>
 
                 <div class="col-12 col-lg-5 col-md-2">
+                 
                     <!--=======  filter icons  =======-->
 
                     <div class="filter-icons">
@@ -136,8 +137,8 @@
                             <h2 class="single-sidebar-widget--title mb-2" >Brands</h2>
                             <ul *ngIf="!sideloader1" class="single-sidebar-widget--list single-sidebar-widget--list--category "
                              style="padding-left: 0px;height: 275px;overflow-y: auto;">
-                                <li class="has-children" *ngFor="let img of Allbrands" >
-                                    <a (click)="getprodofbrand2(img.id,1)">{{img.name}}</a>
+                                <li class="has-children" *ngFor="let img of Allbrands;let i=index"   [ngClass]="{'active': subItem === i}">
+                                    <a  (click)="getprodofbrand2(img.id,i)">{{img.name}}</a>
                                 </li>
                                 <!-- <li  *ngIf="sideloader1">
                                         <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
@@ -359,7 +360,7 @@
                     <div id="pgg" *ngIf="Product?.length!==0">
                         <ul class="pagination" style="justify-content: center;
                             display: flex;">
-                            <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
+                            <li [ngClass]="{disabled:p.url === null}" [ngClass]="{'active': p.active}" class="page-item first-item"
                                 *ngFor="let p of pagess" (click)="getpage(p.url)">
                                 <a class="page-link">{{p.label}}</a>
                             </li>
@@ -460,11 +461,12 @@
 
                 <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Category</label><br>
-                    <select class="formrol pl-5 col-12"  placeholder="All" formControlName="category"
-                        style="background-color: transparent;Border: none;border-bottom:inset">
-                        <option value=null selected> <p> All</p></option>
-                        <option *ngFor="let tab of Allcat" [value]="tab.id" 
-                            style="background-color:rgb(227, 227, 228);Border: none;">
+                    <select  class="formrol pl-5 col-12"  placeholder="All" formControlName="category"
+                        style="background-color: transparent;Border: none;border-bottom:inset" >
+                        <option value='' selected > <p > All</p></option>
+                        <option *ngFor="let tab of Allcat;let i=index" [value]="tab.id" 
+                            style="background-color:rgb(227, 227, 228);Border: none;"
+                           >
                             {{tab.name}}
                         </option>
                     </select>
@@ -472,9 +474,9 @@
                 <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Brand</label><br>
                     <select class="formrol pl-5 col-12" formControlName="brand" 
-                        style="background-color: transparent;Border: none;border-bottom:inset">
-                        <option value=null selected> <p> All</p></option>
-                        <option *ngFor="let tab of Allbrands" [value]="tab.id"
+                        style="background-color: transparent;Border: none;border-bottom:inset" #selectList (change)="searchWithCode($event)">
+                        <option value='' selected> <p> All</p></option>
+                        <option *ngFor="let tab of Allbrands;let i=index" [value]="tab.id"
                             style="background-color:rgb(227, 227, 228);Border: none;">
                             {{tab.name}}
                         </option>
@@ -526,54 +528,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="col-auto w-90px">
-                                <div class="aiz-carousel carousel-thumb product-gallery-thumb slick-vertical slick-initialized slick-slider"
-                                    data-items="5" data-nav-for=".product-gallery" data-vertical="true"
-                                    data-focus-select="true">
-                                    <div class="slick-list draggable" style="height: 397.5px;">
-                                        <div class="slick-track"
-                                            style="opacity: 1; height: 239px; transform: translate3d(0px, 0px, 0px);">
-                                            <div class="slick-slide slick-current slick-active"
-                                                data-slick-index="0" aria-hidden="false"
-                                                style="width: 70px;">
-                                                <div>
-                                                    <div class="carousel-box c-pointer border p-1 rounded"
-                                                        style="width: 100%; display: inline-block;">
-                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
-                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="slick-slide slick-active" data-slick-index="1"
-                                                aria-hidden="false" style="width: 70px;">
-                                                <div>
-                                                    <div class="carousel-box c-pointer border p-1 rounded"
-                                                        style="width: 100%; display: inline-block;">
-                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
-                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="slick-slide slick-active" data-slick-index="2"
-                                                aria-hidden="false" style="width: 70px;">
-                                                <div>
-                                                    <div class="carousel-box c-pointer border p-1 rounded"
-                                                        style="width: 100%; display: inline-block;">
-                                                        <img class="mw-100 size-60px mx-auto ls-is-cached lazyloaded"
-                                                            src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}"
-                                                            onerror="this.onerror=null;this.src='https://neophroncrm.com/spiceclubnew/public/{{detail.thumbnail_image}';">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div> -->
+                           
                         </div>
                     </div>
                     <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
@@ -600,10 +555,9 @@
                                 <div class="shop-product__block__value" *ngFor="let a of choice">
 
                                     <div class="shop-product-size-list">
-                                        <span class="single-size" *ngFor="let b of a.options"
-                                            (click)="selectvar(b)">{{b}}</span>
-
-                                    </div>
+												<span class="single-size" *ngFor="let b of a.options;let i=index"
+												[ngClass]="{'active': subItemm === i}"    (click)="selectvar(b,i)">{{b}}</span>
+											</div>
                                 </div>
                             </div>
 

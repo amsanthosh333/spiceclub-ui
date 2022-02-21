@@ -100,7 +100,7 @@ export class ShopbyproductComponent implements OnInit {
   dec: any;
   outofstackbtn: boolean = false;
   addcartbtn: boolean = true;
-  prodcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  prodcount = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10,11,12];
   keyy: any;
   buyertypeid: any;
   prod_price: any;
@@ -113,6 +113,10 @@ export class ShopbyproductComponent implements OnInit {
   brandd_id: any='';
   categoryy_id: any='';
   search: FormGroup;
+  subItem: any;
+  subbbItem: any;
+  headItem: any=1;
+  subItemm: any=0;
  
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
@@ -128,7 +132,7 @@ export class ShopbyproductComponent implements OnInit {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
-    console.log("currentuser details=", this.currentUserSubject);
+    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -157,7 +161,6 @@ export class ShopbyproductComponent implements OnInit {
   ngOnInit(): void {
     window.scroll(0,0);
     this.keyy = this.route.snapshot.params['key'];
-    console.log("keyyyyyyyyyyyyyy", this.keyy);
     if (this.keyy !==undefined) {
       this.filterDatatable2(this.keyy);
       this.viewbrand();
@@ -166,8 +169,7 @@ export class ShopbyproductComponent implements OnInit {
       this.maximunprice();
       // this.maxxxx();
     }
-    else {
-      console.log("elseeeeeeeee");   
+    else {  
       this.viewdata(1);
       this.viewbrand();
       this.viewcat();
@@ -190,11 +192,9 @@ export class ShopbyproductComponent implements OnInit {
   toggle(img:any,index:any): void {
     this.likeddd[index] = !this.likeddd[index];   
     if(this.likeddd[index]==true){
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if( this.likeddd[index]==false){
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
   
@@ -202,11 +202,9 @@ export class ShopbyproductComponent implements OnInit {
   toggledelete(img:any,index:any): void {
     this.likedd[index] = !this.likedd[index];   
     if(this.likedd[index]==true){
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if( this.likedd[index]==false){
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
   }
@@ -222,7 +220,6 @@ export class ShopbyproductComponent implements OnInit {
   }
   
   open2(){
-    console.log("hii");
     var sidebarCategoryParent = $(
       ".single-filter-widget--list--category li.has-children, .single-sidebar-widget--list--category li.has-children"
     );
@@ -243,25 +240,16 @@ export class ShopbyproductComponent implements OnInit {
     });
   }
   pricerange(){
-    console.log(this.brandd_id,'this.brandd_id');
-    
-    console.log("minValue",this.minValue);
-    console.log("maxValue",this.maxValue);
-    console.log("search",this.searchh);
     this.prodloader = true;
 
     this.request.filterdataa(this.categoryy_id,this.brandd_id,this.searchh,this.sortval,this.minValue,this.maxValue ).subscribe((response: any) => {
-      console.log("response", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.modalService.dismissAll();
       this.prodloader = false;
-      // this.page1=false,
-      // this.page2=false,
-      // this.page3=true,
-     
-      console.log("allprod", this.Product);
+
+
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -278,8 +266,12 @@ export class ShopbyproductComponent implements OnInit {
       this.prodloader = false;
       this.minValue=0
       this.maxValue=10000
-      console.log("response", response);
-      console.log("allproduct", this.Product);
+      this.brand_id=''
+      this.categoryy_id=''
+      this.subItem=''
+      console.log("brnd,category",this.brand_id,this.categoryy_id);
+      
+
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -307,7 +299,7 @@ export class ShopbyproductComponent implements OnInit {
       this.Bestsellpro = response.data.slice(0, 3);
       this.rating = this.Bestsellpro.rating;
       this.poploader = false;
-      console.log("rating", this.rating);
+
       //   for(var i=0;i<=4;i++){  
       //     if(i<=data){  
       //       this.starList[i]=false;  
@@ -316,7 +308,7 @@ export class ShopbyproductComponent implements OnInit {
       //       this.starList[i]=true;  
       //     }  
       //  }  
-      console.log("best sellling", this.Bestsellpro);
+ 
     });
   }
 
@@ -325,9 +317,6 @@ export class ShopbyproductComponent implements OnInit {
       this.Allbrands = response.data;
       this. sideloader=false;
       this.sideloader1=false;
-      
-      console.log("response", response);
-      console.log("Allbrands", this.Allbrands); 
     });
   }
   viewflashdeal(){
@@ -348,10 +337,8 @@ export class ShopbyproductComponent implements OnInit {
     // });
   }
   viewalldeal(){
+   
     this.viewdata(1);
-    // this.viewbrand();
-    // this.viewcat();
-    // this.viewbestpro();
   }
 
   viewtodaysdeal(){
@@ -362,9 +349,9 @@ export class ShopbyproductComponent implements OnInit {
         this.pagenation=response?.meta   ;
         this.pagess=this.pagenation?.links;
         this.prodloader=false;
-        this.minValue=0
-        this.maxValue=this.maximumprize
-        console.log("allcatproduct",this.Product);
+        this.minValue=0;
+        this.maxValue=this.maximumprize;
+        this.subItem=''
         setTimeout(() => {
           this.imgloader = true;
         }, 2000);
@@ -381,9 +368,9 @@ export class ShopbyproductComponent implements OnInit {
         this.pagenation=response?.meta   ;
         this.pagess=this.pagenation?.links;
         this.prodloader=false;
-        this.minValue=0
-        this.maxValue=this.maximumprize
-        console.log("allcatproduct",this.Product);
+        this.minValue=0;
+        this.maxValue=this.maximumprize;
+        this.subItem=''
         setTimeout(() => {
           this.imgloader = true;
         }, 2000);
@@ -400,9 +387,9 @@ export class ShopbyproductComponent implements OnInit {
         this.pagenation=response?.meta   ;
         this.pagess=this.pagenation?.links;
         this.prodloader=false;
-        this.minValue=0
-        this.maxValue=this.maximumprize
-        console.log("allcatproduct",this.Product);
+        this.minValue=0;
+        this.maxValue=this.maximumprize;
+        this.subItem=''
         setTimeout(() => {
           this.imgloader = true;
         }, 2000);
@@ -415,10 +402,6 @@ export class ShopbyproductComponent implements OnInit {
   
     this.request.getmaximumprice().subscribe((response: any) => {
       this.maximumprize=response.price;
-     
-      // this.options.ceil=this.maximumprize;
-      console.log("maximunprize",this.maximumprize);
-      console.log("maximunprize",response);
       let opts: Options = {
         floor: 0,
         ceil: this.maximumprize,
@@ -436,24 +419,17 @@ export class ShopbyproductComponent implements OnInit {
   }
  
   backk() {
-    // this._location.back();
     this.page1 = true;
     this.page2 = false;
   }
   getprodofcategory(id:any,page:any){
     this.prodloader=true;
     this.imgloader = false;
-    // this.selectedItem=this.id;
-    // this.topItem=''
-    // this.subItem=''
-    // console.log("selectedItem",this.selectedItem);
-    console.log("pro link",id);
     this.request.getcatprod(id,page).subscribe((response: any) => {
       this.Product=response.data;
         this.pagenation=response.meta   ;
         this.pagess=this.pagenation.links;
         this.prodloader=false;
-        console.log("allcatproduct",this.Product);
         setTimeout(() => {
           this.imgloader = true;
         }, 2000);
@@ -464,21 +440,17 @@ export class ShopbyproductComponent implements OnInit {
   }
   getprodofbrand(id:any,page:any){
     this.prodloader=true;
-    this.imgloader = false;
-    window.scroll(0,0);
-    // this.selectedItem=this.id;
-    // this.topItem=''
-    // this.subItem=''
-    // console.log("selectedItem",this.selectedItem);
-    console.log("pro link",id);
+    this.imgloader = false;   
+    this.headItem=0
     this.request.getbrandprod(id,page).subscribe((response: any) => {
+      console.log("brand prod",response);
+      
       this.Product=response.data;
         this.pagenation=response.meta   ;
         this.pagess=this.pagenation.links;
         this.prodloader=false;
         this.minValue=0
         this.maxValue=this.maximumprize
-        console.log("allcatproduct",this.Product);
         setTimeout(() => {
           this.imgloader = true;
         }, 2000);
@@ -487,22 +459,37 @@ export class ShopbyproductComponent implements OnInit {
   }
   getprodofbrand2(id:any,i:any){
     window.scroll(0,0);
-   this.brandd_id=id;
-    // this.router.navigate(['shopbyproduct/brand/', id]);
-    console.log("this.brandd_id",this.brandd_id);
+   this.brand_id=id;
+   this.subItem=i
+   console.log("brand id","index",id , i);
     this.getprodofbrand(id,1)
   }
+  headactive(i:any){
+    console.log("iiii",i);
+    
+    this.headItem=i
+
+  }
+  searchWithCode(event:any)  {
+    console.log("index",event)
+    let index =  event.target["selectedIndex"] - 1;
+    console.log("index",index)
+    this.subbbItem=index
+}
+
+findSso(selectedVendor:any,i:any) {
+  console.log("index",i)
+  console.log('Got the selectedVendor as : ', JSON.parse(selectedVendor));
+}
   getpage(url:any){
     this.prodloader=true;
     this.imgloader = false;
-    this.request.getpage2(url,this.categoryy_id,this.brandd_id,this.sortval,this.minValue,this.maxValue).subscribe((response:any)=>{
+    this.request.getpage2(url,this.categoryy_id,this.brand_id,this.sortval,this.minValue,this.maxValue).subscribe((response:any)=>{
       this.Product=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
       window.scroll(0,0);
       this.prodloader=false;
-      console.log("response",response);
-      console.log("allproduct",this.Product);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -512,11 +499,9 @@ export class ShopbyproductComponent implements OnInit {
     this.totalprice = ''
     this.product_id = img.id
     this.quantityyy = 0
-    console.log("detail", this.product_id);
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       this.page1 = false;
       this.page2 = true;
-      console.log("proddetaill", response);
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
       this.stocck = (this.Peoduct.current_stock);
@@ -526,26 +511,20 @@ export class ShopbyproductComponent implements OnInit {
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
       this.totalprice = this.Peoduct.main_price.replace('Rs', '');
-      console.log("res", this.Peoduct);
-      console.log("choise option", this.Peoduct.choice_options);
       window.scroll(0, 0);
 
       if (this.Peoduct.choice_options.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
       }
-      console.log("optiooooons", this.varient_value);
     },
       (error: any) => {
         console.log(error);
       });
     this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
-      console.log("relatedprod", response);
       this.Relatedprod = response.data;
-      console.log("res", this.Relatedprod);
     },
       (error: any) => {
         console.log(error);
@@ -554,14 +533,11 @@ export class ShopbyproductComponent implements OnInit {
 
   }
   proddetail(id:any){
-    // console.log("detail page",id);
     this.router.navigate(['productdetail', id]);
-    console.log("navigate to category");
     window.scroll(0,0)
   }
 
   firstDropDownChanged(data: any) {
-    console.log(data.target.value);
     this.quantityy = data.target.value;
     return this.quantityy = this.quantityy;
   }
@@ -578,20 +554,16 @@ export class ShopbyproductComponent implements OnInit {
       user_id: this.userid,
       quantity: this.quantityy
     }
-    console.log(edata);
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Product added to cart successfully') {
         this.addRecordSuccess();
         this.sharedService.sendClickEvent();
       }
       else if (res.message == 'Minimum 1 item(s) should be ordered') {
         this.toastr.info(res.message);
-        console.log("minimum 1");
       }
       else if (res.message == 'Stock out') {
         this.toastr.error(res.message);
-        console.log("Stock out");
       }
       else {
         console.log("error", res);
@@ -604,17 +576,14 @@ export class ShopbyproductComponent implements OnInit {
   }
   oncatChange(tbl_id: any) {
     this.prodloader = true;
-    console.log("hiii", tbl_id.value);
     this.cat_id = tbl_id.value;
     this.page1 = true;
     this.page2 = false;
     this.request.getcatprodbyid(this.cat_id).subscribe((response: any) => {
-      console.log("catprod", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.prodloader = false;
-      console.log("res", this.Product);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -627,8 +596,6 @@ export class ShopbyproductComponent implements OnInit {
   viewcat() {
     this.request.getallcat().subscribe((response: any) => {
       this.Allcat = response.data;
-      console.log("response", response);
-      console.log("allcategory", this.Allcat);
       this.sideloader1 = false;
       setTimeout(() => {
         this.loadingIndicator = false;
@@ -644,17 +611,13 @@ export class ShopbyproductComponent implements OnInit {
       user_id: this.userid,
       product_id: prd_id
     }
-    console.log(edata4);
     this.request.addtowishlist(edata4).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Product is successfully added to your wishlist') {
-        console.log("success", res.message);
         this.addRecordSuccess();
         this.sharedService.sendClickEvent();
       }
       else {
         this.toastr.error(res.message);
-        console.log("error", res.message);
 
       }
     }, (error: any) => {
@@ -664,17 +627,13 @@ export class ShopbyproductComponent implements OnInit {
   }
   }
   deleteRecord(id:any) {
-    console.log("deleteeerow",id);
     this.request.deletewishproud2(id).subscribe((response: any) => {
-      console.log(response);
       if(response.message=="Product is removed from wishlist"){
-        console.log("deleted",response.message);
         this.deleteRecordSuccess();
         this.sharedService.sendClickEvent();
       }
       else{
         this.toastr.error( response.message);
-        console.log("error ,product is not deleted")
         
       }
   
@@ -698,16 +657,12 @@ export class ShopbyproductComponent implements OnInit {
       rating: "" + this.register.controls['rating'].value,
       comment: "" + this.register.controls['comment'].value,
     }
-    console.log(edata2);
     this.request.addreview(edata2).subscribe((res: any) => {
-      console.log(res);
       if (res.result == true) {
-        console.log("done", res);
         this.toastr.success(res.message);
       }
       else {
         this.toastr.error(res.message);
-        console.log("error", res);
 
       }
     }, (error: any) => {
@@ -730,21 +685,17 @@ export class ShopbyproductComponent implements OnInit {
       title: form.value.title,
       message: form.value.message
     }
-    console.log("edata,", edata);
     this.request.addconv(edata).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Conversation created') {
         this.toastr.success('Conversation created', '');
         this.modalService.dismissAll();
       }
       else {
-        console.log("error", res);
         this.toastr.error(res.message);
 
       }
     }, (error: any) => {
       this.toastr.error(error.message);
-      console.log("error", error);
     });
 
   }
@@ -754,6 +705,8 @@ export class ShopbyproductComponent implements OnInit {
     this.categoryy_id=form.value.category
     this.minValue= form.value.min
     this.maxValue=form.value.max
+    console.log("form.value.category",form.value.category);
+    
     if(form.value.brand==null){
       form.value.brand= ''
       this.brandd_id=''
@@ -771,18 +724,14 @@ export class ShopbyproductComponent implements OnInit {
       form.value.max=this.maximumprize
       this.maxValue=this.maximumprize
     }
-    console.log("submitted");
-    console.log("submitted", form.value.category,form.value.brand, form.value.min, form.value.max);
-
     this.request.filterdataa3(form.value.category,form.value.brand, form.value.min, form.value.max).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.modalService.dismissAll();
+      this.subItem=this.subbbItem
+      this.headItem=1
       this.prodloader = false;
-      
-      console.log("response", response);
-      console.log("allprod", this.Product);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -799,8 +748,6 @@ export class ShopbyproductComponent implements OnInit {
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.prodloader = false;
-      console.log("response", response);
-      console.log("search", this.Product);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -808,15 +755,12 @@ export class ShopbyproductComponent implements OnInit {
      }
   filterDatatable(event: any) {
     this.prodloader = true;
-    console.log(event.target.value)
     this.searchh = event.target.value
     this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.prodloader = false;
-      console.log("response", response);
-      console.log("search", this.Product);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -831,8 +775,6 @@ export class ShopbyproductComponent implements OnInit {
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.prodloader = false;
-      console.log("response", response);
-      console.log("search", this.Product);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -851,18 +793,11 @@ export class ShopbyproductComponent implements OnInit {
   onsortChange(val: any) {
     this.prodloader = true;
     this.sortval=val
-    console.log("value", val);
-    console.log("sort form", this.categoryy_id,this.brandd_id,this.searchh,val,this.minValue,this.maxValue);
      this.request.filterdataa(this.categoryy_id,this.brandd_id,this.searchh,val,this.minValue,this.maxValue).subscribe((response: any) => {
-      console.log("sort response", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      // this.page1=false,
-      // this.page2=false,
-      // this.page3=true,
       this.prodloader = false;
-      console.log("sort", this.Product);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -871,12 +806,9 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   quickview(id: any, content: any) {
-    // this.totalprice=''
     this.quantityyy = 0
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-
-      console.log("proddetaill", response);
       this.Peoduct = response.data[0];
       this.prod_price = this.Peoduct.main_price;
       this.choice = this.Peoduct.choice_options;
@@ -888,10 +820,6 @@ export class ShopbyproductComponent implements OnInit {
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
       //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
-      console.log("res", this.Peoduct);
-      console.log("choise option", this.Peoduct.choice_options);
-      //  console.log("stocck",this.stocck); 
-      console.log("stk", this.stk);
       if (this.Peoduct.current_stock == 0) {
         this.stocck = 0
 
@@ -901,13 +829,11 @@ export class ShopbyproductComponent implements OnInit {
       }
       //  window.scroll(0,0);             
       if (this.Peoduct.choice_options.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
       }
-      console.log("optiooooons", this.choice[0]?.options[0]);
 
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -924,44 +850,29 @@ export class ShopbyproductComponent implements OnInit {
   increaseqty(){
     this.quantityyy++;
     this.stocck--;
-    // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-    //  this.totalprice=this.dec.toFixed(2)
-    // console.log("-dec",this.dec);
       }
       decreaseqty(){
         this.quantityyy--;
         this.stocck++;
-        // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-        // this.totalprice=this.dec.toFixed(2)
-        // // console.log("-quntity",this.quantityyy);
-        // // console.log("price",this.varprise.replace('Rs',''));
-        //  console.log("totalprice",this.totalprice);
         
       }
       getValue(val: any) {
         if (val<= 0) {
           val = 1
-          console.log( "valif",val);
         }
         else if (val > this.stocckkk) {
           val = this.stocckkk
-          console.log( "valel",val);
         }
         this.quantityyy = val
         this.stocck = this.stocckkk - val
-    
-        console.log( "val",val);
-        console.log("this.stocckkk-val",this.stocckkk - val);
-        console.log("this.stocckkk",this.stocckkk);
-        console.log(this.stocck);
         this.stocck
     
     
       }
-      selectvar(weight:any){
+      selectvar(weight:any,i:any){
         this.varient_value=weight.replace(/\s/g, "")
+        this.subItemm=i
         this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-          console.log(res);
           this.prod_price=res?.price_string;
           this.totalprice=(res?.price_string).replace('Rs','');
           this.varprise=res?.price_string;
@@ -976,10 +887,6 @@ export class ShopbyproductComponent implements OnInit {
             this.stocck=(res?.stock);
             this.quantityyy=0;
            }   
-
-          console.log(this.varprise);
-          console.log(this.stocck);
-          console.log(res?.stock);
 
         }, (error: any) => {
           console.log("error",error);
@@ -997,13 +904,10 @@ export class ShopbyproductComponent implements OnInit {
       user_id: this.userid,
       quantity: this.quantityyy,
       buyertype:this.buyertypeid,  
-    }
-    console.log(edata);  
+    };  
       
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log("resssssssssssssss",res);
       if (res.message == 'Product added to cart successfully') {    
-        console.log("Product added to cart successfully");
         this.addRecordSuccess();
            this.modalService.dismissAll();
            this.sharedService.sendClickEvent();
@@ -1014,11 +918,10 @@ export class ShopbyproductComponent implements OnInit {
       }
       else if(res.message== 'Stock out'){
         this.toastr.error(res.message);
-        console.log("Stock out");
       }
     },
      (error: any) => {
-      this.toastr.error(error);
+      // this.toastr.error(error);
       console.log("error",error);
     
     });

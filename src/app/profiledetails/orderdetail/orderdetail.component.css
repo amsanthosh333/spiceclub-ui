@@ -174,4 +174,23 @@ body{
       height:30px;
      }
     }
-  
+    #ppaynoww {
+      font-weight: 500;
+      display: inline-block;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #fff !important;
+      border: 1px solid #333;
+      border-radius: 0;
+      background-color: rgb(250, 140, 15);
+  }
+  #ppaynoww:hover{
+    font-weight: 500;
+    display: inline-block;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #fff !important;
+    border: 1px solid #333;
+    border-radius: 0;
+    background-color: rgba(180, 100, 8, 0);
+}

@@ -9,7 +9,10 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
-
+import {ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons'
+import { ShareModule } from 'ngx-sharebuttons';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     RecipedetailsComponent
@@ -18,7 +21,10 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     RecipedetailsRoutingModule,ReactiveFormsModule,NgbModule,
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot(), FormsModule,
+    ShareButtonsModule.withConfig({
+      debug:true,
+ }),ShareIconsModule,ShareModule
   ]
 })
 export class RecipedetailsModule { }

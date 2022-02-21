@@ -33,6 +33,7 @@ label{
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
+
 input.radio {width: auto;}
 
 .billing-form{
@@ -47,6 +48,7 @@ input.radio {width: auto;}
     display: block;
     -webkit-overflow-scrolling: touch;
     margin-top: 20px;
+    max-height: 160px;
 }
 .ng-dropdown-panel .ng-dropdown-panel-items {
     display: block;
@@ -55,4 +57,11 @@ input.radio {width: auto;}
     max-height: 160px;
     overflow-y: auto;
     margin-top: 20px;
+}
+.ng-select div .ng-dropdown-panel .ng-dropdown-panel-items {
+    display: block;
+    height: auto;
+    box-sizing: border-box;
+    max-height: 140px;
+    overflow-y: auto;
 }

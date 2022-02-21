@@ -64,6 +64,8 @@ export class RecipedetailsComponent implements OnInit {
   discriptloader: boolean = true;
   imgloader: boolean = false;
   id: any;
+  currenturl: any;
+  productname: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private route: ActivatedRoute, private request: RequestService, private modalService: NgbModal, private toastr: ToastrService, config: NgbRatingConfig, private _location: Location) {
 
@@ -74,7 +76,7 @@ export class RecipedetailsComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser') || '{}')
 
     );
-    console.log("currentuser details=", this.currentUserSubject);
+    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -85,10 +87,10 @@ export class RecipedetailsComponent implements OnInit {
       this.userid = 0;
     }
 
+
   }
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    console.log("brand id", this.id);
     this.getrecipedetaill(this.id)
     this.getallrecipe(1);
     this.getallrecipecat();
@@ -98,6 +100,7 @@ export class RecipedetailsComponent implements OnInit {
       comment: ['', [Validators.required]],
 
     });
+    this.currenturl = this.router.url
   }
   getallrecipe(page: any) {
     this.recipeloader = true;
@@ -107,12 +110,9 @@ export class RecipedetailsComponent implements OnInit {
       this.pagenation = res.meta
       this.pagess = this.pagenation.links
       this.recipeloader = false;
-      console.log("allrecipe", this.Blogs);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
-    }, (error: any) => {
-      console.log("error", error);
     });
   }
   getallrecipecat() {
@@ -121,17 +121,12 @@ export class RecipedetailsComponent implements OnInit {
     this.request.getallrecipecat().subscribe((response: any) => {
       this.Allcat = response.data;
       this.sideloader1 = false;
-      console.log("getallrecipecat", this.Allcat);
     },
-      (error: any) => {
-        console.log("error", error);
-      });
+     );
   }
   getrecipebycatg(id: any) {
     window.scroll(0, 0);
     this.router.navigate(['recipe', id]);
-    console.log("rec", id);
-    console.log("navigate to recipe");
   }
   getrecipedetaill(id: any) {
     this.page1 = false;
@@ -148,12 +143,7 @@ export class RecipedetailsComponent implements OnInit {
       this.nutritional = this.Peoduct.nutritional_fact;
       this.Tags = this.Peoduct.tags;
       this.currentRatess = this.Peoduct.rating;
-
-      console.log("photoss", this.photoss);
-      console.log("nutritional", this.nutritional);
-      // this.blogdate=this.Peoduct.created_at.split(/[T ]/i, 1)[0];
-      // this.currentRatess=this.Peoduct.rating;
-      console.log("recipecategorydetail", this.Peoduct);
+      this.productname = this.Peoduct.name;
       this.sideloader2 = false;
 
       this.discrloading = false;
@@ -172,7 +162,6 @@ export class RecipedetailsComponent implements OnInit {
     this.request.getcomments(this.blog_id).subscribe((response: any) => {
       this.Comments = response.data;
       this.commtotal = this.Comments.length
-      console.log("Comments", this.Comments);
     },
       (error: any) => {
         console.log("error", error);
@@ -192,7 +181,6 @@ export class RecipedetailsComponent implements OnInit {
         else if (!this.comment.get('comment')?.valid) {
           this.error1 = '*type some comment';
         }
-        console.log(this.error1)
         return;
       }
       else {
@@ -206,9 +194,7 @@ export class RecipedetailsComponent implements OnInit {
             rating: form.value.rating,
             comment: form.value.comment,
           }
-          console.log(edata2);
           this.request.addrecipecomment(edata2).subscribe((res: any) => {
-            console.log(res);
             if (res.message == 'Comment  Submitted') {
               this.toastr.success('Comment  Submitted', '');
               this.getcommentsss();
@@ -216,7 +202,6 @@ export class RecipedetailsComponent implements OnInit {
             }
             else {
               this.toastr.error(res.message);
-              console.log("error", res);
 
             }
           }, (error: any) => {
@@ -229,7 +214,6 @@ export class RecipedetailsComponent implements OnInit {
   }
   backk() {
     this._location.back();
-    // this._location.back();
 
   }
   addRecordSuccess() {

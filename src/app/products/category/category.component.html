@@ -305,7 +305,7 @@
                         <div id="pgg" *ngIf="Product?.length!=0">
                             <ul class="pagination" style="justify-content: center;
                             display: flex;">
-                                <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
+                                <li [ngClass]="{disabled:p.url === null}" [ngClass]="{'active': p.active}" class="page-item first-item"
                                     *ngFor="let p of pagess" (click)="getpage(p.url)">
                                     <a class="page-link">{{p.label}}</a>
                                 </li>
@@ -590,9 +590,8 @@
                                             <div class="shop-product__block__value" *ngFor="let a of choice">
 
                                                 <div class="shop-product-size-list">
-                                                    <span class="single-size" *ngFor="let b of a.options"
-                                                        (click)="selectvar(b)">{{b}}</span>
-
+                                                    <span class="single-size" *ngFor="let b of a.options;let i=index"
+                                                    [ngClass]="{'active': subItemm === i}"    (click)="selectvar(b,i)">{{b}}</span>
                                                 </div>
                                             </div>
                                         </div>

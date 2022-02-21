@@ -9,7 +9,7 @@ import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { windows } from 'ngx-bootstrap-icons';
 import { ConfirmedValidator } from 'src/app/auth/confirmedValidator';
-
+import { SharedService } from 'src/app/services/shared.service'
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -45,7 +45,9 @@ export class ProfileComponent implements OnInit {
   loader2: boolean=true;
   loader1: boolean=true;
   loader3: boolean=true;
-  constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
+  loaderimage: boolean=true;
+  constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService,
+     private request: RequestService,private sharedService: SharedService,
     private modalService: NgbModal,) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -56,7 +58,6 @@ export class ProfileComponent implements OnInit {
     this.userid = this.currentdetail.user?.id;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-    console.log("currentuserid=", this.userid);
 
     this.editForm = this.fb.group({
       name:['',[Validators.required]],
@@ -80,7 +81,9 @@ export class ProfileComponent implements OnInit {
     this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
       this.profiledetail = response;
       this.loader=false;
-      console.log("profile detsil",this.profiledetail);
+      setTimeout(() => {
+        this.loaderimage=false;
+      }, 2000);
       
     });
   }
@@ -108,10 +111,14 @@ export class ProfileComponent implements OnInit {
          
     });
   }
-
+  
   gotoorder(){
     window.scroll(0,0);
     this.router.navigate(['/orders']);   
+  }
+  gotoorder1(){
+    window.scroll(0,0);
+    this.router.navigate(['/purchased']);   
   }
   gotoaddress(){
     window.scroll(0,0);
@@ -145,7 +152,6 @@ export class ProfileComponent implements OnInit {
       }
       else if(this.editForm.invalid){
         this.error3="* Password and Confirm Password must be match."
-        console.log(" * Password and Confirm Password must be match.", );
       }
  
       // form.reset();
@@ -157,15 +163,14 @@ export class ProfileComponent implements OnInit {
         name: form.value.name,
         password: form.value.password,
       }
-      console.log("edata",edata)
-      this.request.updateProfile(edata).subscribe((response:any) => {
-        console.log("res",response)
-        
+      this.request.updateProfile(edata).subscribe((response:any) => {    
         if (response.result==true) {
           this.modalService.dismissAll();
           this.toastr.success('Profile Updated','')
   
           form.reset();
+          this.getprofile();
+          this.sharedService.sendClickEvent();
           
           
         }
@@ -176,7 +181,6 @@ export class ProfileComponent implements OnInit {
         }
 
       }, (error) => {
-        console.log(error);
         this.modalService.dismissAll();
       });
     }
@@ -190,7 +194,6 @@ export class ProfileComponent implements OnInit {
   fileChangeEvent(fileInput: any) {
     
     this.filename=fileInput.target.files[0].name;
-    console.log("fileInput", this.filename);
     if (fileInput.target.files && fileInput.target.files[0]) {
         // Size Filter Bytes
         const max_size = 20971520;
@@ -239,13 +242,13 @@ changeproimg(){
     filename:this.filename,
     image:this.cardImageBase64
   }
-  console.log("edata",edata)
   this.request.changeimg(edata).subscribe((response: any) => {
-    console.log("prof img response",response);
     this.profilee=response.path;
     if(response.result==true){
       this.modalService.dismissAll();
       this.toastr.success('  Profile Updated','')
+      this.getprofile();
+      this.sharedService.sendClickEvent();
     }
     else{
       this.modalService.dismissAll();

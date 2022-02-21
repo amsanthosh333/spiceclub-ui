@@ -41,13 +41,15 @@ export class MessageComponent implements OnInit {
   lastmessage_id: any;
   currentname: any;
   currentlogo: any;
+  tittlee: any;
+  convdatee: any;
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService,private modalService: NgbModal,) { 
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')||'{}')
       
     );
-    console.log("currentuser details=", this.currentUserSubject);
+    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user.id; 
@@ -67,9 +69,9 @@ export class MessageComponent implements OnInit {
   }
   viewdata(){
     this.request.getallconv(this.userid).subscribe((response: any) => {
-      this.Convertations=response.data;   
-      console.log("response",response);
-      console.log("Convertations",this.Convertations);
+      this.Convertations=response.data;  
+      console.log("this.Convertations",this.Convertations);
+       
       this.viewrow(this.Convertations[0])
     },
     (error: any) => {
@@ -80,11 +82,13 @@ export class MessageComponent implements OnInit {
     this.conv_id=row.id
     this.currentname=row.shop_name;
     this.currentlogo=row.shop_logo;
+    this.tittlee=row.title;
+    this.convdatee=row.date
+    this.convdatee = new Date().toLocaleDateString();
     this.request.getallmessages(row.id).subscribe((response: any) => {
       // this.page2=true;this.page1=false;
       this.Messages=response.data.reverse();   
-      console.log("response",response);
-      console.log("Messages",this.Messages);
+      this.message.reset();
     },
     (error: any) => {
       console.log("error",error); 
@@ -92,7 +96,6 @@ export class MessageComponent implements OnInit {
   }
   sendmsg(form:FormGroup){
     if (this.message.invalid) {
-     console.log("empty");
      
       return;
     } else {
@@ -102,8 +105,6 @@ export class MessageComponent implements OnInit {
     message: form.value.message
     }
     this.request.sendmessages(edata).subscribe((response: any) => {  
-      // this.Messages=response.data;   
-      console.log("response",response);
       if(response.success==true){
         this.Mesg=response.data; 
         this.lastmessage_id= this.Mesg.id
@@ -120,10 +121,9 @@ export class MessageComponent implements OnInit {
   }
   lastmessage(){
     this.request.getnewmessages(this.conv_id,this.lastmessage_id,).subscribe((response: any) => {  
-      // this.Messages=response.data;   
-      console.log("newmsg",response);
       if(response.success==true){
         this.Messages=response.data.reverse(); 
+       this.message.reset();
         // this.lastmessage_id= this.Mesg.id
 
       }

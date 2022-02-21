@@ -63,7 +63,6 @@ export class WalletComponent implements OnInit {
       this.username = this.currentdetail.user.name;
       this.userphone = this.currentdetail.user.phone;
       this.useremail = this.currentdetail.user.email;
-      console.log("currentuserid=", this.userid);
 
       this.rechargeForm = this.fb.group({
         amount:['',[Validators.required]],
@@ -81,18 +80,14 @@ export class WalletComponent implements OnInit {
   getwallet(){
     this.request.fetchwallet(this.userid).subscribe((response: any) => {
       this.Wallet=response; 
-      this.loader=false;  
-      console.log("Wallet",this.Wallet); 
-      console.log("Wallet res",response);        
+      this.loader=false;          
     });
   }
 
   getrechargehistory(){
     this.request.fetchrechisttory(this.userid).subscribe((response: any) => {
       this.History=response.data;
-      this.loader=false   
-      console.log("History",this.History); 
-      // console.log("History res",response);        
+      this.loader=false          
     });
   }
   openrecharge(content: any){
@@ -111,11 +106,8 @@ onproceed(form: FormGroup) {
     }
      else {
       
-       this.rechargeamount= form.value.amount,      
-     
-      console.log("rechargeamount",this.rechargeamount) 
-
-    
+       this.rechargeamount= form.value.amount;     
+  
         let options = {
           "key": "rzp_test_DYDr3B0KYe4086",
           "amount": form.value.amount*100,
@@ -148,29 +140,20 @@ onproceed(form: FormGroup) {
           },
           "handler": (response: any) => {
            this. razpaysuccess= response
-           console.log("razorpay respppp",this.razpaysuccess);
            this.razorpaypayment();
           }  
         };
-        console.log("options,", options)
         
         let rzp1 = new this.authService.nativeWindow.Razorpay(options);
         rzp1.open(); 
-        console.log("works");
     }
   }
 
   razorpaypayment(){
     this.spinner.show();
-    console.log("success",this.razpaysuccess.razorpay_payment_id); 
     this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
-      console.log("razorpay1 response", response);
       if(response.result==true){
-        this.paymentdetails=response.payment_details 
-      //  this.addRecordSuccess()
-      //   this.toastr.success('Added Successfullyyyy', '');
-        console.log(this.paymentdetails);
-        
+        this.paymentdetails=response.payment_details  
         this.razorpaysuccess();
       }
 
@@ -188,23 +171,16 @@ onproceed(form: FormGroup) {
       amount: this.rechargeamount, 
       user_id: this.userid
     }
-    console.log("edata4",edata4);
     
     this.request.razsuccess(edata4).subscribe((response:any)=>{
-
-      
-      console.log("success response",response);
       if(response.message=="Payment is successful"){ 
-        console.log(response.message); 
         this.modalService.dismissAll()
         this.spinner.hide();
         this.toastr.success('Payment is successful',''); 
-        // alert(response.message)
         this.getwallet();
           this.getrechargehistory();
       }
       else{
-        console.log(response.message);
         alert(response.message)
         this.modalService.dismissAll()
         this.toastr.error('',response.message);

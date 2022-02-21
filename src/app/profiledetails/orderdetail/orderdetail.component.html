@@ -102,7 +102,11 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
                 <strong>Total:</strong>
                 <p style="margin-bottom: 10px; color: red;">{{img.grand_total}}</p>
 
-              
+              <!-- <p *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'"> <button (click)="paynow()">Paynow</button></p> -->
+              <span class="add-to-cart" style="margin-left: auto;" *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'">
+                <button id="ppaynoww"  class="lezada-button lezada-button--small lezada-button--icon--left" (click)=paynow1() >
+                    <span style="color: white;"> PAY NOW </span></button>
+            </span>
             </div>
             
         </div>
@@ -160,9 +164,9 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
             </thead>
 
             <tbody *ngFor="let b of Items">
-                <tr  (click)="proddetail(b.product_id)">
+                <tr  >
 
-                    <td class="product-name" id="proname" style="width: 400px;">
+                    <td class="product-name" id="proname" style="width: 400px;" (click)="proddetail(b.product_id)">
                         <a style="text-decoration: none; margin-top: 10px;">{{b.product_name}}</a>
                         <span class="product-variation pb-" *ngIf="b.variation!==null">{{b.quantity}} x {{b.variation}}
                         </span>
@@ -170,13 +174,13 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
                     </td>
 
                     <td class="product-price" style="padding-left: 13px;"><span class="price"
-                            style="color: red;">{{b.price}}</span></td>
+                            style="color: red;" (click)="proddetail(b.product_id)">{{b.price}}</span></td>
 
                     <td class="product-name" style="padding-left: 13px;"><span
-                            class="price">{{b.delivery_status_string}}</span></td>
+                            class="price" (click)="proddetail(b.product_id)">{{b.delivery_status_string}}</span></td>
 
                     <td class="product-name" style="padding-left: 13px;"><span
-                            class="price">{{b.payment_status_string}}</span></td>
+                            class="price" (click)="proddetail(b.product_id)">{{b.payment_status_string}}</span></td>
 
                     <td class="product-name ">
                         <a style="text-decoration: none; margin-top: 10px;">{{b.delivery_status}}</a>
@@ -212,10 +216,10 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
                 <!-- Cart Total -->
                 <div class="col-12 mb-1" style="padding: 0px;">
                     <div class="checkout-cart-total" id="carttotl" *ngFor="let a of Detail" style="padding: 7%;">
-                        <p>Sub Total <span style="font-weight: bold;" >{{a.subtotal}}</span></p>
+                        <p>Discount <a *ngIf="a.coupan_code!=null">(Coupan used: {{a.coupon_code}})</a> <span style="font-weight: bold;">{{a.coupon_discount}}</span></p>                        
                         <p>Shipping Fee <span style="font-weight: bold;">{{a.shipping_cost}}</span></p>
                         <p>Tax <span style="font-weight: bold;">{{a.tax}}</span></p>
-                        <p>Discount <span style="font-weight: bold;">{{a.coupon_discount}}</span></p>
+                        <p>Sub Total <span style="font-weight: bold;" >{{a.subtotal}}</span></p>
                         <h4>Grand Total <span style="font-weight: bold;">{{a.grand_total}}</span></h4>
                     </div>
                 </div>

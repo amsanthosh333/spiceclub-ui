@@ -59,7 +59,29 @@
             </form>
         </div>
     </div>
-
+    <div class="cart-table-container mb-2 " style="margin-left: 5%; margin-right: 5%;" *ngIf="Address?.length==0">
+        <div id="tit" style="width: 100%;">
+            <ngx-skeleton-loader count="1"
+                [theme]="{  'border-radius': '4px',  height: '55px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+                *ngIf="loader"></ngx-skeleton-loader>
+            <ngx-skeleton-loader count="4"
+                [theme]="{  'border-radius': '4px',  height: '150px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white', 'margin-bottom':'0px'  }"
+                *ngIf="loader"></ngx-skeleton-loader>
+        </div>
+        <div id="pggg" *ngIf="Address?.length==0" style=" display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 200px;
+        border: 3px solid rgb(139, 139, 139);
+        margin-left: 4%;
+        margin-right: 4%;">
+            <div>
+                <h5>
+                    Add your address
+                </h5>
+            </div>
+        </div>
+    </div>
     <div class="cart-table-container mb-2  mt-50" style="margin-left: 5%; margin-right: 5%;">
         <div id="tit" style="width: 100%;">
             <ngx-skeleton-loader count="1"
@@ -69,8 +91,10 @@
                 [theme]="{  'border-radius': '4px',  height: '150px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white', 'margin-bottom':'0px'  }"
                 *ngIf="loader"></ngx-skeleton-loader>
         </div>
+        
 
     </div>
+    
 </div>
 
 

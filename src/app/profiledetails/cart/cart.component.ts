@@ -96,8 +96,6 @@ export class CartComponent implements OnInit {
     this.username = this.currentdetail.user.name;
     this.userphone = this.currentdetail.user.phone;
     this.useremail = this.currentdetail.user.email;
-    console.log("currentuserid=", this.userid);
-    console.log("currentuserdetail=", this.currentdetail);
   }
 
   ngOnInit(): void {
@@ -121,8 +119,7 @@ export class CartComponent implements OnInit {
     this.request.fetchusercart(this.userid).subscribe((response: any) => {
       this.Cart = response;
       this.loader = false;
-      console.log("cart", response);
-      console.log("owner id", this.Cart[0].owner_id);
+
       this.owneriid = this.Cart[0].owner_id;
       // setTimeout(() => {
       //   this.loadingIndicator = false;
@@ -132,12 +129,10 @@ export class CartComponent implements OnInit {
   }
 
   deleteRecord(id: any) {
-    console.log("row", id);
-    this.request.deleteproud(id).subscribe((response: any) => {
-      console.log(response);
-      if (response.message == "Product is successfully removed from your cart") {
 
-        console.log("deleted");
+    this.request.deleteproud(id).subscribe((response: any) => {
+
+      if (response.message == "Product is successfully removed from your cart") {
         this.viewcart();
         this.viewcart3();
         this.deleteRecordSuccess();
@@ -145,24 +140,20 @@ export class CartComponent implements OnInit {
       }
       else {
         this.toastr.error(response.message);
-        console.log("error ,product is not deleted")
       }
     }, (error: any) => {
       console.log(error);
     });
   }
   firstDropDownChanged(data: any, _id: any) {
-    console.log(data.target.value);
     this.quantityy = data.target.value;
     let edata2 = {
       id: _id,
       quantity: this.quantityy,
       buyertype: this.buyertypeid
     }
-    console.log("edata2", edata2);
 
     this.request.updatecart(edata2).subscribe((response: any) => {
-      console.log("response", response);
       this.viewcart();
       this.viewcart3();
     });
@@ -173,10 +164,8 @@ export class CartComponent implements OnInit {
       quantity: qty,
       buyertype: this.buyertypeid
     }
-    console.log("edata2", edata2);
 
     this.request.updatecart(edata2).subscribe((response: any) => {
-      console.log("response", response);
       if(response.result==true){
         // this.toastr.success('Cart updated', '');
         this.viewcart();
@@ -190,31 +179,24 @@ export class CartComponent implements OnInit {
 
   }
   proddetail(id: any) {
-    // console.log("detail page",id);
     window.scroll(0, 0);
     this.router.navigate(['productdetail', id]);
-    console.log("navigate to category");
   }
   getValue(val: any, _id: any,stttk:any) {
-    console.log("val", val);
 
     if (val == 0) {
       val = 1
-      console.log("val2", val);
     }
     else if(val>stttk){
      val = stttk
     }
-    console.log("val3", val);
     let edata2 = {
       id: _id,
       quantity: val,
       buyertype: this.buyertypeid
     }
-    console.log("edata2", edata2);
 
     this.request.updatecart(edata2).subscribe((response: any) => {
-      console.log("response", response);
       if(response.result==true){
         // this.toastr.success('Cart updated', '');
         this.viewcart();
@@ -236,12 +218,9 @@ export class CartComponent implements OnInit {
       quantity: qty,
       buyertype: this.buyertypeid
     }
-    console.log("edata2", edata2);
 
     this.request.updatecart(edata2).subscribe((response: any) => {
-      console.log("response", response);
       if(response.result==true){
-        // this.toastr.success('Cart updated', '');
         this.viewcart();
         this.viewcart3();
         this.sharedService.sendClickEvent();
@@ -250,11 +229,6 @@ export class CartComponent implements OnInit {
         this.toastr.success( response.message);
       }
     });
-
-
-    // console.log("-quntity",this.quantityyy);
-    // console.log("price",this.varprise.replace('Rs',''));
-    // console.log("totalprice",this.totalprice); 
   }
   viewcart3() {
     this.request.fetchsummery(this.userid).subscribe((response: any) => {
@@ -262,8 +236,6 @@ export class CartComponent implements OnInit {
       this.Grandtot = this.Summery.grand_total
       this.subtot = this.Summery.sub_total
       this.couponn=this.Summery.coupon_applied
-      console.log("summery", response);
-      console.log("grand total", this.Summery.grand_total);
       this.grandtotal = this.Summery.grand_total
     });
 
@@ -282,14 +254,11 @@ export class CartComponent implements OnInit {
   getaddress() {
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
       this.Address = response.data;
-      console.log("Address", this.Address);
       // this. processdata()    
     });
     this.paymettype();
   }
   shippingcost(row: any) {
-    console.log("row id", row.city_name);
-    console.log("row id", row.id);
     this.city = row.city_name;
     this.pincode = row.postal_code;
     this.phone = row.phone;
@@ -305,8 +274,6 @@ export class CartComponent implements OnInit {
       user_id: this.userid,
       city_name: row.city_name
     }
-    console.log("edatat", edata);
-    console.log("edatat", edata2);
 
     this.request.updateshippingaddress(edata2).subscribe((response: any) => {
       console.log("address changed res", response);
@@ -315,21 +282,16 @@ export class CartComponent implements OnInit {
     this.request.fetchcost(edata).subscribe((response: any) => {
       this.Scost = response;
       this.cost = this.Scost.value_string
-      console.log("Scost", this.cost);
-      console.log("Scostamount", this.Scost);
       // this. processdata()    
     });
 
   }
   paymettype() {
     this.request.fetchpaytype().subscribe((response: any) => {
-      this.Paymenttype = response;
-      console.log("Paymenttype", this.Paymenttype);
-      // this. processdata()    
+      this.Paymenttype = response;   
     });
   }
   selectpaytype(row: any) {
-    console.log("paytype", row.payment_type)
     this.payytype = row.payment_type
   }
   placeorder() {
@@ -338,33 +300,26 @@ export class CartComponent implements OnInit {
       user_id: this.userid,
       payment_type: this.payytype
     }
-    console.log("edatat", edata);
     if (this.payytype == "billdesk_payment") {
-      console.log("paymentttttype", this.payytype)
       this.request.placeorder(edata).subscribe((response: any) => {
-        console.log("Placeorder", response);
         this.combined_orderid = response.combined_order_id
         if (response.result == true) {
 
           this.billdesk()
         }
         else {
-          console.log("fail", response.message);
           this.toastr.error(response.message);
         }
       });
     }
     else if (this.payytype == "razorpay") {
-      console.log("paymenttttype", this.payytype)
       this.request.placeorder(edata).subscribe((response: any) => {
-        console.log("Placeorder", response);
         this.combined_orderid = response.combined_order_id
         if (response.result == true) {
 
           this.razorpay()
         }
         else {
-          console.log("fail", response.message);
           this.toastr.error(response.message);
         }
       });
@@ -372,14 +327,11 @@ export class CartComponent implements OnInit {
 
     else {
       this.request.placeorder(edata).subscribe((response: any) => {
-        console.log("Placeorder", response);
-
         this.combined_orderid = response.combined_order_id;
         if (response.result == true) {
           this.toastr.success(response.message);
         }
         else {
-          console.log("fail", response.message);
           this.toastr.error(response.message);
         }
       });
@@ -423,7 +375,7 @@ export class CartComponent implements OnInit {
   // });
 
   billdesk() {
-    console.log("billdest called");
+  
     this.request.billdeskpay(this.combined_orderid, this.grandtotal.replace('Rs', ""), this.userid)
       .subscribe(
         (response: any) => {
@@ -505,7 +457,7 @@ export class CartComponent implements OnInit {
 
 
   razorpay() {
-    console.log("razorpay called");
+  
     // this.request.razorpayment(this.combined_orderid).subscribe((response: any) => {
     //   console.log("razorpayment",response);   
     // });
@@ -516,7 +468,7 @@ export class CartComponent implements OnInit {
       owner_id: this.owneriid,
       coupon_code: form.value.coupan,
     }
-    console.log(edata2);
+
     this.request.appycoupan(edata2).subscribe((res: any) => {
       console.log(res);
       if (res.message == 'Coupon Applied') {
@@ -527,12 +479,10 @@ export class CartComponent implements OnInit {
       }
       else if (res.message == 'Invalid coupon code!') {
         this.toastr.error('Invalid coupon code!', '');
-        console.log("Invalid coupon code!");
 
       }
       else {
         this.toastr.error(res.message);
-        console.log("error", res);
       }
     }, (error: any) => {
       this.toastr.error(error);
@@ -546,9 +496,7 @@ export class CartComponent implements OnInit {
       user_id: this.userid,
       owner_id: this.owneriid,
     }
-    console.log(edata2);
     this.request.removecoupan(edata2).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Coupon Removed') {
         this.toastr.success('Coupon Removed', '');
         this.removecou = false;
@@ -557,12 +505,10 @@ export class CartComponent implements OnInit {
       }
       else if (res.message == 'Invalid coupon code!') {
         this.toastr.error('Invalid coupon code!', '');
-        console.log("Invalid coupon code!");
 
       }
       else {
         this.toastr.error(res.message);
-        console.log("error", res);
       }
     }, (error: any) => {
       this.toastr.error(error);
@@ -571,44 +517,7 @@ export class CartComponent implements OnInit {
     });
 
   }
-
-
-  // checkout(){
-  //   let redirect_url = 'http%3A%2F%2Flocalhost%3A3008%2Fhandleresponse'; 
-  //   let request = `merchant_id=BDSKUATY&order_id=${this.order_no}&currency=INR&amount=${this.grandtotal}&redirect_url=${redirect_url}&cancel_url=${redirect_url}&language=EN&billing_name=${this.username}&billing_address=${this.address}&billing_city=${this.city}&billing_state=${this.state_name}&billing_zip=${this.pincode}&billing_country=India&billing_tel=${this.phone}
-  //   &delivery_name=${this.username}&delivery_address=${this.address}&delivery_city=${this.city}&delivery_state=${this.state_name}&delivery_zip=${this.pincode}&delivery_country=India&delivery_tel=${this.phone}&billing_email=${this.useremail}`
-  // console.log("request",request)
-  //   this.authService.encryptdata(request).subscribe(
-  //     (      data: { [x: string]: any; }) => {
-  //     console.log('---------------------', data['response'])
-  //     this.encRequestRes = data['response']; 
-  //         setTimeout(()=>{
-  //             this.form.nativeElement.submit();
-  //         },1000)
-  //     }, (error: any) => {
-  //     console.log(error)
-  //     }
-  //     );
-  // }
-
-
-
-
-  // method 2
-  // pay() {  
-  //   // this.cartValue contains all the order information which is sent to the server
-  //   // You can use this package to encrypt - https://www.npmjs.com/package/node-ccavenue/
-  //   this.authService.getEnc(this.orderInformation).subscribe((response: any) => {
-  //     this.encRequest = response.encRequest;
-  //     setTimeout((_: any) => this.form.nativeElement.submit());
-  //   }, (error: any) => {
-  //     console.log(error);
-  //   });
-  // }
-
-
   // razorpay
-  //rpay1
   initPay() {
     console.log("initPay,")
     var ref = this;
@@ -634,38 +543,8 @@ export class CartComponent implements OnInit {
   }
 
   handlePayment(response: { razorpay_payment_id: any; }) {
-
-    console.log('payment_id:', response.razorpay_payment_id)
   }
 
-  //rpay 2
-  // initPay() {
-  //  let options = {
-  //     "key": "rzp_test_HTQz79bVMhpN4L", 
-  //     "amount": this.grandtotal.replace('Rs',""),
-  //     "currency": "INR",
-  //     "name": "Acme Corp",
-  //     "description": "Test Transaction",
-  //     "image": "https://example.com/your_logo",
-  //     "order_id": this.combined_orderid,
-  //     "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-  //     "prefill": {
-  //         "name": this.username,
-  //         "email": this.useremail,
-  //         "contact": this.userphone
-  //     },
-  //     "notes": {
-  //         "address": "Razorpay Corporate Office"
-  //     },
-  //     "theme": {
-  //         "color": "#3399cc"
-  //     }
-  // };
-  //   console.log("options,",options)
-  //   let rzp1 = new this.authService.nativeWindow.Razorpay(options);
-  //   rzp1.open();
-  //   console.log("works");
-  // }
   addRecordSuccess() {
     this.toastr.success('Added Successfully', '');
   }

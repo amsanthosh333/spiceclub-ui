@@ -145,12 +145,12 @@
 
   /*----------  multilevel menu  ----------*/
 
-  $("#dl-menu").dlmenu({
-    animationClasses: {
-      classin: "dl-animate-in-2",
-      classout: "dl-animate-out-2"
-    }
-  });
+  // $("#dl-menu").dlmenu({
+  //   animationClasses: { 
+  //     classin: "dl-animate-in-2",
+  //     classout: "dl-animate-out-2"
+  //   }
+  // });
 
   /*----------  overlay menu   ----------*/
 
@@ -195,13 +195,13 @@
   });
 
   /*----------   Mailchimp  ----------*/
-  $("#mc-form").ajaxChimp({
-    language: "en",
-    callback: mailChimpResponse,
-    // ADD YOUR MAILCHIMP URL BELOW HERE!
-    url:
-      "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
-  });
+  // $("#mc-form").ajaxChimp({
+  //   language: "en",
+  //   callback: mailChimpResponse,
+  //   // ADD YOUR MAILCHIMP URL BELOW HERE!
+  //   url:
+  //     "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
+  // });
 
   function mailChimpResponse(resp) {
     if (resp.result === "success") {
@@ -216,13 +216,13 @@
     }
   }
 
-  $("#mc-form-2").ajaxChimp({
-    language: "en",
-    callback: mailChimpResponse2,
-    // ADD YOUR MAILCHIMP URL BELOW HERE!
-    url:
-      "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
-  });
+  // $("#mc-form-2").ajaxChimp({
+  //   language: "en",
+  //   callback: mailChimpResponse2,
+  //   // ADD YOUR MAILCHIMP URL BELOW HERE!
+  //   url:
+  //     "https://devitems.us11.list-manage.com/subscribe/post?u=6bbb9b6f5827bd842d9640c82&amp;id=05d85f18ef"
+  // });
 
   function mailChimpResponse2(resp) {
     if (resp.result === "success") {
@@ -340,15 +340,15 @@
   var $grid = $(".grid-item");
   $grid.hide();
 
-  $masonry.imagesLoaded(function () {
-    $grid.fadeIn();
-    $masonry.masonry({
-      itemSelector: ".grid-item",
-      columnWidth: ".grid-item--width2",
-      percentPosition: true
-      //gutter: 10
-    });
-  });
+  // $masonry.imagesLoaded(function () {
+  //   $grid.fadeIn();
+  //   $masonry.masonry({
+  //     itemSelector: ".grid-item",
+  //     columnWidth: ".grid-item--width2",
+  //     percentPosition: true
+  //     //gutter: 10
+  //   });
+  // });
 
   /*----------  creative home masonry  ----------*/
 
@@ -356,16 +356,16 @@
   var $gridCreativeHome = $(".grid-item");
   $grid.hide();
 
-  var $masonryCreativeHome = $(".masonry-category-layout--creativehome");
-  $masonryCreativeHome.imagesLoaded(function () {
-    $gridCreativeHome.fadeIn();
-    $masonryCreativeHome.masonry({
-      itemSelector: ".grid-item",
-      columnWidth: ".grid-item--width2",
-      percentPosition: true
-      //gutter: 30
-    });
-  });
+  // var $masonryCreativeHome = $(".masonry-category-layout--creativehome");
+  // $masonryCreativeHome.imagesLoaded(function () {
+  //   $gridCreativeHome.fadeIn();
+  //   $masonryCreativeHome.masonry({
+  //     itemSelector: ".grid-item",
+  //     columnWidth: ".grid-item--width2",
+  //     percentPosition: true
+  //     //gutter: 30
+  //   });
+  // });
 
   /*----------  blog post masonry  ----------*/
 
@@ -373,16 +373,16 @@
   var $gridBlogPost = $(".grid-item");
   $grid.hide();
 
-  var $masonryBlogPost = $(".blog-post-wrapper--masonry");
-  $masonryBlogPost.imagesLoaded(function () {
-    $gridBlogPost.fadeIn();
-    $masonryBlogPost.masonry({
-      itemSelector: ".grid-item",
-      columnWidth: ".grid-item",
-      percentPosition: true
-      //gutter: 30
-    });
-  });
+  // var $masonryBlogPost = $(".blog-post-wrapper--masonry");
+  // $masonryBlogPost.imagesLoaded(function () {
+  //   $gridBlogPost.fadeIn();
+  //   $masonryBlogPost.masonry({
+  //     itemSelector: ".grid-item",
+  //     columnWidth: ".grid-item",
+  //     percentPosition: true
+  //     //gutter: 30
+  //   });
+  // });
 
   /*----------  WOW JS activation  ----------*/
 
@@ -415,171 +415,171 @@
 
   /*----------  instagram image slider  ----------*/
 
-  jQuery(window).on("load", function () {
-    // User Changeable Access
-    var instagramFeedGrid = function () {
-      $.instagramFeed({
-        username: "creative.devitems",
-        container: "#instagramFeed",
-        display_profile: false,
-        display_biography: false,
-        display_gallery: true,
-        callback: null,
-        styling: false,
-        items: 8
-      });
-    };
+  // jQuery(window).on("load", function () {
+  //   // User Changeable Access
+  //   var instagramFeedGrid = function () {
+  //     $.instagramFeed({
+  //       username: "creative.devitems",
+  //       container: "#instagramFeed",
+  //       display_profile: false,
+  //       display_biography: false,
+  //       display_gallery: true,
+  //       callback: null,
+  //       styling: false,
+  //       items: 8
+  //     });
+  //   };
 
-    instagramFeedGrid();
+  //   instagramFeedGrid();
 
-    var instagramFeedSlider = function () {
-      $.instagramFeed({
-        username: "portfolio.devitems",
-        container: "#instagramFeedTwo",
-        display_profile: false,
-        display_biography: false,
-        display_gallery: true,
-        callback: null,
-        styling: false,
-        items: 8
-      });
-    };
+  //   var instagramFeedSlider = function () {
+  //     $.instagramFeed({
+  //       username: "portfolio.devitems",
+  //       container: "#instagramFeedTwo",
+  //       display_profile: false,
+  //       display_biography: false,
+  //       display_gallery: true,
+  //       callback: null,
+  //       styling: false,
+  //       items: 8
+  //     });
+  //   };
 
-    instagramFeedSlider();
+  //   instagramFeedSlider();
 
-    var instagramFeedSliderTwo = function () {
-      $.instagramFeed({
-        username: "creative.devitems",
-        container: "#instagramFeedThree",
-        display_profile: false,
-        display_biography: false,
-        display_gallery: true,
-        callback: null,
-        styling: false,
-        items: 8
-      });
-    };
+  //   var instagramFeedSliderTwo = function () {
+  //     $.instagramFeed({
+  //       username: "creative.devitems",
+  //       container: "#instagramFeedThree",
+  //       display_profile: false,
+  //       display_biography: false,
+  //       display_gallery: true,
+  //       callback: null,
+  //       styling: false,
+  //       items: 8
+  //     });
+  //   };
 
-    instagramFeedSliderTwo();
+  //   instagramFeedSliderTwo();
 
-    $("#instagramFeedThree").on("DOMNodeInserted", function (e) {
-      if (e.target.className === "instagram_gallery") {
-        $(".instagram-carousel .instagram_gallery").slick({
-          slidesToShow: 3,
-          slidesToScroll: 1,
-          autoplay: false,
-          dots: false,
-          arrows: true,
-          prevArrow:
-            '<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
-          nextArrow:
-            '<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
-          responsive: [
-            {
-              breakpoint: 1499,
-              settings: {
-                slidesToShow: 3
-              }
-            },
-            {
-              breakpoint: 1199,
-              settings: {
-                slidesToShow: 3
-              }
-            },
-            {
-              breakpoint: 991,
-              settings: {
-                slidesToShow: 2
-              }
-            },
-            {
-              breakpoint: 767,
-              settings: {
-                slidesToShow: 1
-              }
-            },
-            {
-              breakpoint: 575,
-              settings: {
-                slidesToShow: 1
-              }
-            },
-            {
-              breakpoint: 479,
-              settings: {
-                slidesToShow: 1
-              }
-            }
-          ]
-        });
-      }
-    });
+  //   $("#instagramFeedThree").on("DOMNodeInserted", function (e) {
+  //     if (e.target.className === "instagram_gallery") {
+  //       $(".instagram-carousel .instagram_gallery").slick({
+  //         slidesToShow: 3,
+  //         slidesToScroll: 1,
+  //         autoplay: false,
+  //         dots: false,
+  //         arrows: true,
+  //         prevArrow:
+  //           '<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
+  //         nextArrow:
+  //           '<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
+  //         responsive: [
+  //           {
+  //             breakpoint: 1499,
+  //             settings: {
+  //               slidesToShow: 3
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 1199,
+  //             settings: {
+  //               slidesToShow: 3
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 991,
+  //             settings: {
+  //               slidesToShow: 2
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 767,
+  //             settings: {
+  //               slidesToShow: 1
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 575,
+  //             settings: {
+  //               slidesToShow: 1
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 479,
+  //             settings: {
+  //               slidesToShow: 1
+  //             }
+  //           }
+  //         ]
+  //       });
+  //     }
+  //   });
 
-    $("#instagramFeedTwo").on("DOMNodeInserted", function (e) {
-      if (e.target.className === "instagram_gallery") {
-        $(".instagram-carousel-type2 .instagram_gallery").slick({
-          slidesToShow: 4,
-          slidesToScroll: 1,
-          autoplay: false,
-          dots: false,
-          arrows: true,
-          prevArrow:
-            '<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
-          nextArrow:
-            '<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
-          responsive: [
-            {
-              breakpoint: 1499,
-              settings: {
-                slidesToShow: 4
-              }
-            },
-            {
-              breakpoint: 1199,
-              settings: {
-                slidesToShow: 4
-              }
-            },
-            {
-              breakpoint: 991,
-              settings: {
-                slidesToShow: 2
-              }
-            },
-            {
-              breakpoint: 767,
-              settings: {
-                slidesToShow: 1
-              }
-            },
-            {
-              breakpoint: 575,
-              settings: {
-                slidesToShow: 1
-              }
-            },
-            {
-              breakpoint: 479,
-              settings: {
-                slidesToShow: 1
-              }
-            }
-          ]
-        });
-      }
-    });
+  //   $("#instagramFeedTwo").on("DOMNodeInserted", function (e) {
+  //     if (e.target.className === "instagram_gallery") {
+  //       $(".instagram-carousel-type2 .instagram_gallery").slick({
+  //         slidesToShow: 4,
+  //         slidesToScroll: 1,
+  //         autoplay: false,
+  //         dots: false,
+  //         arrows: true,
+  //         prevArrow:
+  //           '<button type="button" class="slick-prev"><i class="ti-angle-left"></i></button>',
+  //         nextArrow:
+  //           '<button type="button" class="slick-next"><i class="ti-angle-right"></i></button>',
+  //         responsive: [
+  //           {
+  //             breakpoint: 1499,
+  //             settings: {
+  //               slidesToShow: 4
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 1199,
+  //             settings: {
+  //               slidesToShow: 4
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 991,
+  //             settings: {
+  //               slidesToShow: 2
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 767,
+  //             settings: {
+  //               slidesToShow: 1
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 575,
+  //             settings: {
+  //               slidesToShow: 1
+  //             }
+  //           },
+  //           {
+  //             breakpoint: 479,
+  //             settings: {
+  //               slidesToShow: 1
+  //             }
+  //           }
+  //         ]
+  //       });
+  //     }
+  //   });
 
-    /*----------  newsletter popup  ----------*/
+  //   /*----------  newsletter popup  ----------*/
 
-    if (screenSize >= 767) {
-      $("#newsletter-popup-body").addClass("newsletter-overlay-active");
+  //   if (screenSize >= 767) {
+  //     $("#newsletter-popup-body").addClass("newsletter-overlay-active");
 
-      setTimeout(function () {
-        $("#newsletter-content").addClass("show-popup");
-      }, 1000);
-    }
-  });
+  //     setTimeout(function () {
+  //       $("#newsletter-content").addClass("show-popup");
+  //     }, 1000);
+  //   }
+  // });
 
   /*----------  cloth tag positioning  ----------*/
 
@@ -601,13 +601,13 @@
 
   /*----------  magnific popup  ----------*/
 
-  $(".popup-video").magnificPopup({
-    type: "iframe",
-    mainClass: "mfp-fade",
-    removalDelay: 160,
-    preloader: false,
-    fixedContentPos: false
-  });
+  // $(".popup-video").magnificPopup({
+  //   type: "iframe",
+  //   mainClass: "mfp-fade",
+  //   removalDelay: 160,
+  //   preloader: false,
+  //   fixedContentPos: false
+  // });
 
   /*----------  smooth scroll on shoppable home  ----------*/
 
@@ -957,11 +957,11 @@
 
   /*----------  sticky sidebar   ----------*/
 
-  $(".sidebar-sticky").stickySidebar({
-    topSpacing: 90,
-    bottomSpacing: -90,
-    minWidth: 768
-  });
+  // $(".sidebar-sticky").stickySidebar({
+  //   topSpacing: 90,
+  //   bottomSpacing: -90,
+  //   minWidth: 768
+  // });
 
   /*----------  isotope  ----------*/
 
@@ -982,7 +982,7 @@
 
   /*----------   Nice Select  ----------*/
 
-  $(".nice-select").niceSelect();
+  // $(".nice-select").niceSelect();
 
   /*----------  sidebar category dropdown  ----------*/
 
@@ -1014,24 +1014,24 @@
 
   /*----------  price filter  ----------*/
 
-  $("#price-range").slider({
-    range: true,
-    min: 25,
-    max: 350,
-    values: [25, 350],
-    slide: function (event, ui) {
-      $("#price-amount").val(
-        "Price: " + "$" + ui.values[0] + " - $" + ui.values[1]
-      );
-    }
-  });
-  $("#price-amount").val(
-    "Price: " +
-      "$" +
-      $("#price-range").slider("values", 0) +
-      " - $" +
-      $("#price-range").slider("values", 1)
-  );
+  // $("#price-range").slider({
+  //   range: true,
+  //   min: 25,
+  //   max: 350,
+  //   values: [25, 350],
+  //   slide: function (event, ui) {
+  //     $("#price-amount").val(
+  //       "Price: " + "$" + ui.values[0] + " - $" + ui.values[1]
+  //     );
+  //   }
+  // });
+  // $("#price-amount").val(
+  //   "Price: " +
+  //     "$" +
+  //     $("#price-range").slider("values", 0) +
+  //     " - $" +
+  //     $("#price-range").slider("values", 1)
+  // );
 
   /*----------  product view mode  ----------*/
 
@@ -1274,9 +1274,9 @@
 
   /*----------  lightgallery and zoom activation  ----------*/
 
-  //zoom
-  $(".shop-product__big-image-gallery-slider .single-image").zoom();
-  $(".shop-product__big-image-gallery-sticky .single-image").zoom();
+  // zoom
+  // $(".shop-product__big-image-gallery-slider .single-image").zoom();
+  // $(".shop-product__big-image-gallery-sticky .single-image").zoom();
 
   //lightgallery
   var productThumb = $(

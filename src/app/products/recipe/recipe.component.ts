@@ -75,7 +75,7 @@ export class RecipeComponent implements OnInit {
         JSON.parse(localStorage.getItem('currentUser')||'{}')
         
       );
-      console.log("currentuser details=", this.currentUserSubject);
+      // console.log("currentuser details=", this.currentUserSubject);
       this.currentUser = this.currentUserSubject.asObservable();
        this.currentdetail = this.currentUserSubject.value;
        this.userid=this.currentdetail.user?.id; 
@@ -88,15 +88,13 @@ export class RecipeComponent implements OnInit {
   ngOnInit(): void {
     window.scroll(0,0);
     this.keyy = this.route.snapshot.paramMap.get('id');
-    console.log("keyyyyyyyyyyyyyy", this.keyy);
+    
     if (this.keyy !==undefined) {
-      console.log("iffffffffffffff",this.keyy); 
       this.getrecipebycatg(this.keyy);
       
     this.getallrecipecat();
     }
-    else {
-      console.log("elseeeeeeeee");   
+    else { 
       this.getallrecipe(1);
       this.getallrecipecat();
     }
@@ -122,7 +120,6 @@ export class RecipeComponent implements OnInit {
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     this.recipeloader=false;
-    console.log("allrecipe",this.Blogs);
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -136,7 +133,6 @@ getallrecipecat(){
   this.request.getallrecipecat().subscribe((response: any) => {
     this.Allcat=response.data;
     this.sideloader1=false;
-    console.log("getallrecipecat",this.Allcat);
   },
   (error: any) => {
     console.log("error",error);
@@ -150,10 +146,7 @@ getrecipebycatg(id:any,page=1){
     this.Blogs=response.data;
     this.pagenation=response.meta   
     this.pagess=this.pagenation.links;
-    this.recipeloader=false;
-    console.log("response",response);
-    console.log("recipe by category",id,this.Blogs);
-    
+    this.recipeloader=false; 
     this.page1=true;
     this.page2=false;
     setTimeout(() => {
@@ -167,9 +160,7 @@ getrecipebycatg(id:any,page=1){
 getrecipebycatg2(id:any){
   window.scroll(0,0);
   this.router.navigate(['recipe', id]);
-  console.log("rec",id);
   this.getrecipebycatg(id)
-  console.log("navigate to blog");
 }
 getpage(url:any){
   this.recipeloader=true;
@@ -180,8 +171,6 @@ getpage(url:any){
     this.pagenation=response.meta;
     this.pagess=this.pagenation.links;
     this.recipeloader=false;
-    console.log("response",response);
-    console.log("allproduct",this.Blogs);
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -202,12 +191,6 @@ getrecipedetaillold(id:any){
     this.nutritional=this.Peoduct.nutritional_fact;
     this.Tags=this.Peoduct.tags;
     this.currentRatess=this.Peoduct.rating;
-     
-    console.log("photoss",this.photoss);
-    console.log("nutritional",this.nutritional);
-    // this.blogdate=this.Peoduct.created_at.split(/[T ]/i, 1)[0];
-    // this.currentRatess=this.Peoduct.rating;
-    console.log("recipecategorydetail",this.Peoduct);
     this.sideloader2=false;
    
     this.discrloading=false;
@@ -224,13 +207,11 @@ getrecipedetaillold(id:any){
 getrecipedetaill(id:any){
   window.scroll(0,0);
   this.router.navigate(['recipedetails', id]);
-  console.log("navigate to recipedetails");
 }
 getcommentsss(){
   this.request.getcomments(this.blog_id).subscribe((response: any) => {
     this.Comments=response.data;
-    this.commtotal=this.Comments.length
-    console.log("Comments",this.Comments);  
+    this.commtotal=this.Comments.length 
   },
   (error: any) => {
     console.log("error",error);
@@ -245,8 +226,7 @@ addcomment(form: FormGroup){
     }
     else if ( !this.comment.get('comment')?.valid) {
       this.error1 = '*type some comment';
-    }
-    console.log(this.error1)  
+    } 
     return;
   }
   else{
@@ -257,17 +237,15 @@ addcomment(form: FormGroup){
         user_id: this.userid,
         rating:form.value.rating,
         comment:form.value.comment,
-      }
-      console.log(edata2); 
+      } 
   this.request.addrecipecomment(edata2).subscribe((res: any) => {
-    console.log(res);
     if (res.message == 'Comment  Submitted') {  
       this.toastr.success('Comment  Submitted', '');
       this.getcommentsss();
     }
     else  {
       this.toastr.error(res.message);
-      console.log("error",res);
+  
 
     }
   }, (error: any) => {
@@ -281,14 +259,12 @@ search1(form:FormGroup){
 let edata ={
   key :form.value.key
 }
-console.log(edata);
 this.recipeloader=true;
 this.imgloader = false;
 this.request.searchblog(edata).subscribe((res:any)=>{
   this.Blogs=res.data;
   this.pagenation=res.meta   
   this.pagess=this.pagenation.links
-  console.log("allblog",this.Blogs);
   setTimeout(() => {
     this.imgloader = true;
   }, 2000);
@@ -302,15 +278,12 @@ search2(form:FormGroup){
   let edata ={
     key :form.value.key
   }
-
-  console.log(edata);
   this.recipeloader=true;
   this.imgloader = false;
   this.request.searchbyblog(edata).subscribe((res:any)=>{
     this.Blogs=res.data;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
-    console.log("allblog",this.Blogs);
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);

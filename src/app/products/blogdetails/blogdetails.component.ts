@@ -50,6 +50,8 @@ export class BlogdetailsComponent implements OnInit {
   imgloader: boolean = false
   pagenation: any;
   id: any;
+  productname: any;
+  currenturl: any;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private route: ActivatedRoute,
@@ -62,7 +64,7 @@ export class BlogdetailsComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser') || '{}')
 
     );
-    console.log("currentuser details=", this.currentUserSubject);
+    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -77,7 +79,6 @@ export class BlogdetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
-    console.log("brand id", this.id);
     this.getblogdetail(this.id)
     this.viewallblog(1);
     this.viewblogcat();
@@ -87,6 +88,7 @@ export class BlogdetailsComponent implements OnInit {
       comment: ['', [Validators.required]],
 
     });
+    this.currenturl = this.router.url
   }
   viewallblog(page: any) {
     this.loader1 = true;
@@ -95,8 +97,6 @@ export class BlogdetailsComponent implements OnInit {
       this.Blogs = res.data;
       this.loader1 = false;
       this.pagenation = res.meta
-
-      console.log("allblog", this.Blogs);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -109,7 +109,6 @@ export class BlogdetailsComponent implements OnInit {
     this.request.getallblogcat().subscribe((response: any) => {
       this.Allcat = response.data;
       this.loader = false;
-      console.log("getallblogcat", this.Allcat);
     },
       (error: any) => {
         console.log("error", error);
@@ -126,11 +125,12 @@ export class BlogdetailsComponent implements OnInit {
     this.recipeloader = true;
     this.blog_id = id;
     this.request.getblogdetail(id).subscribe((response: any) => {
+      console.log("blog",response);
+      
       this.Peoduct = response.data[0];
       this.blogdate = this.Peoduct.created_at.split(/[T ]/i, 1)[0];
       this.currentRatess = this.Peoduct.rating;
-      console.log("currentRate", this.currentRatess);
-      console.log("recipecategorydetail", this.Peoduct);
+      this.productname = this.Peoduct.name;
       this.sideloader2 = false;
       this.allloader1 = false;
       this.recipeloader = false;
@@ -147,14 +147,12 @@ export class BlogdetailsComponent implements OnInit {
     window.scroll(0, 0);
     this.router.navigate(['blogdetails', id]);
     this.getblogdetail(id)
-    console.log("navigate to blogdetails");
   }
 
   getcommentsss() {
     this.request.getblogcomments(this.blog_id).subscribe((response: any) => {
       this.Comments = response.data;
       this.commtotal = this.Comments.length
-      console.log("Comments", this.Comments);
     },
       (error: any) => {
         console.log("error", error);
@@ -174,13 +172,10 @@ export class BlogdetailsComponent implements OnInit {
         else if (!this.comment.get('comment')?.valid) {
           this.error1 = '*type some comment';
         }
-        console.log(this.error1)
         return;
       }
       else {
         if ((this.comment.get('rating'))?.value == 0) {
-          console.log("valueee", (this.comment.get('rating'))?.value);
-
           form.value.rating = 0
         }
         else {
@@ -190,9 +185,9 @@ export class BlogdetailsComponent implements OnInit {
             rating: form.value.rating,
             comment: form.value.comment,
           }
-          console.log(edata2);
+    console.log(edata2);
+    
           this.request.addblogcomment(edata2).subscribe((res: any) => {
-            console.log(res);
             if (res.message == 'Comment  Submitted') {
               this.toastr.success('Comment  Submitted', '');
               this.getcommentsss();
@@ -200,7 +195,6 @@ export class BlogdetailsComponent implements OnInit {
             }
             else {
               this.toastr.error(res.message);
-              console.log("error", res);
 
             }
           }, (error: any) => {
@@ -214,7 +208,6 @@ export class BlogdetailsComponent implements OnInit {
   getblogbycatg(id: any) {
     window.scroll(0, 0);
     this.router.navigate(['blog', id]);
-    console.log("navigate to blog");
   }
   backk() {
     this._location.back();

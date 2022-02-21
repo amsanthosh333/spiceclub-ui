@@ -1,5 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  baseURL1:'https://neophroncrm.com/spiceclubnew/api/v2',
 };
 export const firebaseConfig = {
   apiKey: "AIzaSyBjCOJgXu_5SUqLPJa7dxseE-qgbLrWjlY",

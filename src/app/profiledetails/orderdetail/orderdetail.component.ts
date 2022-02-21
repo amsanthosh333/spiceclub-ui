@@ -22,8 +22,8 @@ export class OrderdetailComponent implements OnInit {
  
 
   //Demo purpose only, Data might come from Api calls/service
-  public counts = ["Order Placed","Confirmed","Picked Up","On The Way","On Delivery","Delivered "];
-  //  public orderStatus ="Order Placed"
+  public counts = ["Order Placed","Confirmed","Picked Up","On The Way","On Delivery","Delivered"];
+  //  public orderStatus ="Delivered"
   currentRate = 0;
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
@@ -51,6 +51,10 @@ export class OrderdetailComponent implements OnInit {
   orderStatus: any;
   error1: any;
   orderid: any;
+  grandtotal_value: any;
+  razpaysuccess: any;
+  paymentdetails: any;
+  combined_orderid: any;
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService,private route: ActivatedRoute,
@@ -69,13 +73,11 @@ export class OrderdetailComponent implements OnInit {
     this.username=this.currentdetail.user.name;
     this.userphone=this.currentdetail.user.phone;
     this.useremail=this.currentdetail.user.email;
-    console.log("currentuserid=", this.userid);
-    console.log("currentuserdetail=", this.currentdetail);
+
   }
 
   ngOnInit(): void {
     this.ord_id = this.route.snapshot.params['id'];
-    console.log("ord_id",this.ord_id);
     this.viewdetail();
     this.viewitem();
 
@@ -91,12 +93,15 @@ export class OrderdetailComponent implements OnInit {
 
   viewdetail(){
     this.request.vieworderdetail(this.ord_id).subscribe((response: any) => {
+      console.log("response",response);
+      
       this.Detail=response.data;
       this.orderStatus=this.Detail[0].delivery_status_string;
+      this.grandtotal_value=this.Detail[0].grand_total.replace(/[^0-9\.-]+/g,"");
+      this.combined_orderid =this.Detail[0].combined_order_id
+      console.log(" this.grandtotal_value", this.grandtotal_value);
+
       this.orderid=this.Detail[0].id;
-      console.log("dftgdf",this.orderStatus);
-      
-      console.log("order detaillllllll",this.Detail);   
     }
     ); 
   }
@@ -104,9 +109,10 @@ export class OrderdetailComponent implements OnInit {
   viewitem(){
 
     this.request.vieworderitems(this.ord_id).subscribe((response: any) => {
+      console.log("ITEMS",response);
+      
     this.Items=response.data;   
     this.loader=false;  
-      console.log("items",this.Items);
       
     }
     ); 
@@ -121,9 +127,8 @@ export class OrderdetailComponent implements OnInit {
       else if ( !this.register.get('comment')?.valid) {
         this.error1 = '*type some comment';
       }
-      console.log(this.error1)  
       return;
-    }
+    } 
     else{
       if ((this.register.get('rating'))?.value!=Number){
         form.value.rating=0
@@ -133,16 +138,16 @@ export class OrderdetailComponent implements OnInit {
           rating:form.value.rating,
           comment:form.value.comment,
         }
-        console.log(edata2); 
     this.request.addreview(edata2).subscribe((res: any) => {
       console.log(res);
+      
       if (res.message == 'Comment  Submitted') { 
         this.toastr.success('Comment  Submitted', '');      
         // this.getcommentsss();
       }
       else  {
+
         this.toastr.error(res.message);
-        console.log("error",res);
   
       }
     }, (error: any) => {
@@ -160,7 +165,6 @@ export class OrderdetailComponent implements OnInit {
  }
  submitreview(form: FormGroup){
   this.error1 = '';
-  console.log("rating",form.value.rating);
   
   if (this.register.invalid) {
 
@@ -169,8 +173,7 @@ export class OrderdetailComponent implements OnInit {
     }
     else if ( !this.register.get('comment')?.valid) {
       this.error1 = '*type some comment';
-    }
-    console.log(this.error1)  
+    }  
     return;
   }
   else{
@@ -180,16 +183,15 @@ export class OrderdetailComponent implements OnInit {
         rating:form.value.rating,
         comment:form.value.comment,
       }
-      console.log(edata2); 
   this.request.addreview(edata2).subscribe((res: any) => {
     console.log(res);
-    if (res.message == 'Comment  Submitted') { 
-      this.toastr.success('Comment  Submitted', '');    
+    
+    if (res.result == true) { 
+      this.toastr.success('Review  Submitted', '');    
       this.modalService.dismissAll();   
     }
     else  {
       this.toastr.error(res.message);
-      console.log("error",res.message);
       this.modalService.dismissAll(); 
 
     }
@@ -199,15 +201,12 @@ export class OrderdetailComponent implements OnInit {
  }
 }
 proddetail(id:any){
-  // console.log("detail page",id);
   window.scroll(0,0);
   this.router.navigate(['productdetail', id]);
-  console.log("navigate to category");
 }
 quickorder(){
   this.spinner.show();
   this.request.quickorder(this.orderid).subscribe((res:any)=>{
-    console.log("quickorder res",res)
     if(res.result==true){
       this.spinner.hide();
       this.toastr.success('Added to cart', '');
@@ -215,14 +214,121 @@ quickorder(){
       this.router.navigate(['cart']);
     }
     else{
-      console.log("err",res.message);
       this.spinner.hide();
       this.toastr.info('', res.message);
     }
   });
- 
+}
 
+paynow1(){
+  let edata1 = {
+    combined_order_id: this.combined_orderid,
+    payment_type:"cart_payment"
+  }
+  console.log(edata1);
+  
+  this.request.retrypayment(edata1).subscribe((response: any) => {
+    console.log("razorpay1 response", response);
+    if (response.result == true) {
+
+      this.toastr.success('',response.message);
+      this.paynow();
+    }
+    else{
+      this.toastr.success('',response.message);
+    }
+  });
+}
+
+paynow(){
+let edata1 = {
+  payment_type: "cart_payment",
+  combined_order_id: this.combined_orderid,
+  amount: this.grandtotal_value,
+  user_id: this.userid,
+}
+this.initPay(edata1);
 
 }
- 
+initPay(edata: any) {
+  let options = {
+    "key": "rzp_test_DYDr3B0KYe4086",
+    "amount": edata.amount * 100,
+    "currency": "INR",
+    "name": "Spice Club",
+    "description": "Test Transaction",
+    "image": "assets/images/LOGOWHITE.jpg",
+    "order_id": "",
+    // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
+    // "handler": function (response: { razorpay_payment_id: any; razorpay_order_id: any; razorpay_signature: any; }) {
+    //   alert(response.razorpay_payment_id);
+    //   alert(response.razorpay_order_id);
+    //   alert(response.razorpay_signature)
+    //   console.log("razzzerrespnse",response.razorpay_payment_id);
+    //   // this.razorpayid = response.razorpay_payment_id
+
+    // },
+    // "handler": this.paymentResponseHander(response);
+
+    "prefill": {
+      "name": this.username,
+      "email": this.useremail,
+      "contact": this.userphone
+    },
+    "notes": {
+      "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+      "color": "#f0240a"
+    },
+    "handler": (response: any) => {
+      this.razpaysuccess = response
+      console.log(this.razpaysuccess);
+      this.spinner.show();
+      this.razorpaypayment();
+    }
+  };
+  console.log("options,", options)
+
+  let rzp1 = new this.authService.nativeWindow.Razorpay(options);
+  rzp1.open();
+  // console.log("works");
+}
+
+razorpaypayment() {
+  //  this.spinner.show();
+  this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
+    console.log("razorpay1 response", response);
+    if (response.result == true) {
+      this.paymentdetails = response.payment_details
+      this.razorpaysuccess();
+    }
+    else{
+      this.toastr.error('Something went wrong', '');
+    }
+  });
+}
+razorpaysuccess() {
+  let edata4 = {
+    payment_details: this.paymentdetails,
+    payment_type: "cart_payment",
+    combined_order_id: this.combined_orderid,
+    amount: this.grandtotal_value,
+    user_id: this.userid,
+  }
+  console.log("razorpaysuccess method ");
+  this.request.razsuccess(edata4).subscribe((response: any) => {
+    if (response.message == "Payment is successful") {
+      this.sharedService.sendClickEvent();
+      this.spinner.hide();
+      alert(response.message)
+      this.toastr.success('Payment is successful', '');
+      this.router.navigate(['/orders']);
+    }
+    else {
+      alert(response.message)
+      this.toastr.error(response.message);
+    }
+  })
+}
 }

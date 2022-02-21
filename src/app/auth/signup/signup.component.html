@@ -88,26 +88,12 @@
 								  *Enter the same password</h6>
 								</div>
 								
-								<div class="col-lg-12 mb-50">
-									<label for="regPassword">Register By<span class="required">*</span> </label>
-									<div class="form-group position-relative">
-										
-										<select class="form-control pl-5"  formControlName="register_by" required>
-											
-											<option *ngFor="let reg of Regby" [value]="reg.id">
-												{{reg.name}}
-											</option>
-										</select>
-										<h6 class="form-text text-danger"
-									*ngIf="!registerForm.get('register_by')?.valid && registerForm.get('register_by')?.touched">
-									*Please select</h6>
-									</div>
-								</div>
+							
 								<div class="col-lg-12 mb-50">
 									<label for="regPassword">Buyer Type<span class="required">*</span> </label>
 									<div class="form-group position-relative">
 										
-										<select class="form-control pl-5" formControlName="buyer_type" required>
+										<select class="form-control pl-5" style="background: transparent;" formControlName="buyer_type" required>
 											
 											<option *ngFor="let reg of buyer" [value]="reg.id">
 												{{reg.name}}

@@ -25,7 +25,8 @@ import { RouterModule } from '@angular/router';
 import { NgImageSliderModule } from 'ng-image-slider';
 import { SlickCarouselModule } from 'ngx-slick-carousel'; 
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NgxSpinnerModule } from 'ngx-spinner';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -45,11 +46,13 @@ import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
     NgxSkeletonLoaderModule,ToastrModule.forRoot({
       // timeOut: 1000,
       // positionClass: 'toast-bottom-right'
-    }),RouterModule,NgImageSliderModule,SlickCarouselModule,NgxNavbarModule
+    }),RouterModule,NgImageSliderModule,SlickCarouselModule,NgxNavbarModule,NgxSpinnerModule
     
    
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

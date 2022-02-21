@@ -53,3 +53,21 @@ border-radius: 100%;
    input[type=number] {
      -moz-appearance: textfield;
    }  
+   input::-webkit-outer-spin-button,
+   input::-webkit-inner-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+   }
+   input[type=number] {
+     -moz-appearance: textfield;
+   }
+   .shop-product__block__value .shop-product-size-list .single-size.active{
+    font-size: 13px;
+    line-height: 22px;
+    margin-right: 11px;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #2023ce;
+}

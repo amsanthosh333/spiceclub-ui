@@ -318,7 +318,7 @@
                                                                     </div>
                                                                     <div class="single-comment__image" *ngIf="(comm.avatar!=='')">
                                                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
-                                                                            class="img-fluid" style="height: 70px; width:70px;"
+                                                                            class="img-fluid" style="height: 70px; width:70px;object-fit: cover;"
                                                                             alt="">
                                                                     </div>
                                                                     <div class="single-comment__content">
@@ -364,11 +364,11 @@
                                                                                         [(rate)]="currentRate"
                                                                                         [readonly]="false"
                                                                                         formControlName="rating"
-                                                                                        style="size: 10px; color: rgb(248, 141, 19);">
+                                                                                        style="font-size: 2rem; color: rgb(248, 141, 19);">
                                                                                     </ngb-rating>
                                                                                 </span>
                                                                             </div>
-                                                                            <div class="col-lg-12 mb-20">
+                                                                            <div class="col-lg-12 mb-20" style=" border: 2px solid  #ddd5d5;">
                                                                                 <textarea cols="30" rows="10"
                                                                                     formControlName="comment"
                                                                                     placeholder="YOUR MESSAGE"></textarea>
@@ -401,7 +401,7 @@
                                             <!--=======  End of shop product description tab  =======-->
                                         </div>
                                         <div class="row mt-30 align-items-center">
-                                            <div class="col-md-6  text-md-left mb-sm-5">
+                                            <div class="col-md-4  text-md-left mb-sm-5">
                                                 <div class="post-tags">
                                                     <i class="ion-ios-pricetags"></i>
                                                     <ul class="tag-list" *ngFor="let tag of Tags">
@@ -411,14 +411,16 @@
                                                 </div>
                                             </div>
 
-                                            <div class="col-md-6  text-md-right mb-sm-5">
+                                            <div class="col-md-8  text-md-right mb-sm-5">
                                                 <div class="post-share">
                                                     <span style="color: rgb(111, 111, 112);">Share this post:</span>
-                                                    <ul>
-                                                        <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                        <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                                                    <ul style="padding-left: 0px;">
+                                                        <li> <share-buttons theme="circles-dark"
+                                                            [include]="['facebook','whatsapp', 'email','twitter', 'telegram','copy' ]"
+                                                            [showIcon]="true" [showText]="false" url="currenturl"
+                                                            [description]="productname" class="pt-0 mb-2">
+                                                        </share-buttons></li>
+                                                      
                                                     </ul>
                                                 </div>
                                             </div>

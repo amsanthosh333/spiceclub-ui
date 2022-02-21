@@ -71,7 +71,7 @@ export class BlogComponent implements OnInit {
         JSON.parse(localStorage.getItem('currentUser')||'{}')
         
       );
-      console.log("currentuser details=", this.currentUserSubject);
+      // console.log("currentuser details=", this.currentUserSubject);
       this.currentUser = this.currentUserSubject.asObservable();
        this.currentdetail = this.currentUserSubject.value;
        this.userid=this.currentdetail.user?.id; 
@@ -82,14 +82,12 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     window.scroll(0,0);
     this.keyy = this.route.snapshot.params['key'];
-    console.log("keyyyyyyyyyyyyyy", this.keyy);
     if (this.keyy !==undefined) {
       this.getblogbycatg(this.keyy);
       this.viewallblog(1);
       this.viewblogcat();
     }
-    else {
-      console.log("elseeeeeeeee");   
+    else {  
       this.viewallblog(1);
       this.viewblogcat();
     }
@@ -115,7 +113,6 @@ viewallblog(page:any){
     this.loader1=false;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
-    console.log("allblog",this.Blogs);
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -128,7 +125,6 @@ viewblogcat(){
   this.request.getallblogcat().subscribe((response: any) => {
     this.Allcat=response.data;
     this.loader=false;
-    console.log("getallblogcat",this.Allcat);
   },
   (error: any) => {
     console.log("error",error);
@@ -143,8 +139,6 @@ getblogbycatg(id:any,page=1){
     this.loader1=false;
     this.pagenation=response.meta   
     this.pagess=this.pagenation.links
-    console.log("response",response);
-    console.log("recipecategory",this.Blogs);
     this.page1=true;
     this.page2=false;
     setTimeout(() => {
@@ -159,7 +153,6 @@ getblogbycatg2(id:any){
   window.scroll(0,0);
   this.router.navigate(['blog', id]);
   this.getblogbycatg(id)
-  console.log("navigate to blog");
 }
 getpage(url:any){
   this.loader1=true;
@@ -170,8 +163,6 @@ getpage(url:any){
     this.loader1=false;
     this.pagenation=response.meta   
     this.pagess=this.pagenation.links
-    console.log("response",response);
-    console.log("allproduct",this.Blogs);
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -191,8 +182,6 @@ getblogdetailold(id:any){
     this.Peoduct=response.data[0];
     this.blogdate=this.Peoduct.created_at.split(/[T ]/i, 1)[0];
     this.currentRatess=this.Peoduct.rating;
-    console.log("currentRate",this.currentRatess);
-    console.log("recipecategorydetail",this.Peoduct);
     this.sideloader2=false;
     this.allloader1=false;
     this.recipeloader=false;
@@ -209,14 +198,12 @@ getblogdetail(id:any){
   window.scroll(0,0);
   this.router.navigate(['blogdetails', id]);
 
-  console.log("navigate to blogdetails");
 }
 
 getcommentsss(){
   this.request.getblogcomments(this.blog_id).subscribe((response: any) => {
     this.Comments=response.data;
     this.commtotal=this.Comments.length
-    console.log("Comments",this.Comments);  
   },
   (error: any) => {
     console.log("error",error);
@@ -232,7 +219,6 @@ addcomment(form: FormGroup){
     else if ( !this.comment.get('comment')?.valid) {
       this.error1 = '*type some comment';
     }
-    console.log(this.error1)  
     return;
   }
   else{
@@ -244,16 +230,13 @@ addcomment(form: FormGroup){
         rating:form.value.rating,
         comment:form.value.comment,
       }
-      console.log(edata2); 
   this.request.addblogcomment(edata2).subscribe((res: any) => {
-    console.log(res);
     if (res.message == 'Comment  Submitted') {       
       this.toastr.success('Comment  Submitted', '');
       this.getcommentsss();
     }
     else  {
       this.toastr.error(res.message);
-      console.log("error",res);
 
     }
   }, (error: any) => {
@@ -269,13 +252,11 @@ let edata ={
 }
 this.loader1=true;
   this.imgloader = false;
-console.log(edata);
 this.request.searchblog(edata).subscribe((res:any)=>{
   this.Blogs=res.data;
   this.pagenation=res.meta   
   this.pagess=this.pagenation.links
   this.loader1=false;
-  console.log("allblog",this.Blogs);
   setTimeout(() => {
     this.imgloader = true;
   }, 2000);
@@ -290,13 +271,11 @@ search2(form:FormGroup){
   }
   this.loader1=true;
   this.imgloader = false;
-  console.log(edata);
   this.request.searchbyblog(edata).subscribe((res:any)=>{
     this.Blogs=res.data;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     this.loader1=false;
-    console.log("allblog",this.Blogs);
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);

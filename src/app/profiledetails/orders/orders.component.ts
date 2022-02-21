@@ -41,6 +41,24 @@ export class OrdersComponent implements OnInit {
   
   pagenation: any;
   pagess: any;
+  Sort = [
+     { id: '', value: 'All' },
+    { id: 'paid', value: 'Paid' },
+    { id: 'unpaid', value: 'Unpaid' },
+
+  ];
+  Sort2 = [
+     { id: '', value: 'All' },
+    { id: 'confirmed', value: 'Confirmed' },
+    { id: 'on delivery', value: 'On delivery' },
+    { id: 'delivered', value: 'Delivered' },
+  
+  ];
+  sortval: any;
+  deliveryy: any='';
+  paymentt: any='';
+  label1: any="Payment status";
+  label2: any="Delivery status";
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService,) {
@@ -58,8 +76,6 @@ export class OrdersComponent implements OnInit {
     this.username=this.currentdetail.user.name;
     this.userphone=this.currentdetail.user.phone;
     this.useremail=this.currentdetail.user.email;
-    console.log("currentuserid=", this.userid);
-    console.log("currentuserdetail=", this.currentdetail);
   }
 
   ngOnInit(): void {
@@ -81,62 +97,66 @@ export class OrdersComponent implements OnInit {
       this.Orders=response.data;  
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      this.loader=false; 
-      console.log("orders",this.Orders);         
+      this.loader=false;         
     });
   }
 
   getpage(url:any){
     // this.loader=true;
-    
-    this.request.getpage(url).subscribe((response:any)=>{
+    this.request.getpage3(url,this.deliveryy,this.paymentt).subscribe((response:any)=>{
+      console.log(response);
+      
       this.Orders=response.data;  
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
+     
       window.scroll(0,0);
-
-      console.log("response",response);
      
     })
   }
+  onsortChange(val: any,label1:any) {
+    this.loader=true; 
+    this.paymentt=val
+    this.label1=label1
+    console.log(this.paymentt);
+    
+    this.request.fetchOrders2(this.userid,this.deliveryy,this.paymentt).subscribe((response: any) => {
+      this.Orders=response.data;  
+      this.pagenation = response.meta
+      this.pagess = this.pagenation.links
+      this.loader=false;         
+      console.log(response);
+      
+    });
 
+  }
+  onsortChange2(val: any,label2:any) {
+    this.loader=true; 
+    this.deliveryy=val
+    this.label2=label2
+    console.log(this.deliveryy);
+    this.request.fetchOrders2(this.userid,this.deliveryy,this.paymentt).subscribe((response: any) => {
+      this.Orders=response.data;  
+      this.pagenation = response.meta
+      this.pagess = this.pagenation.links
+      this.loader=false;         
+   console.log(response);
+   
+    });
+
+  }
   orderdetail(id:any){
-    // console.log("detail page",id);
     window.scroll(0,0);
     this.router.navigate(['orderdetail', id]);
-    console.log("navigate to orderdetails");
-  }
-  viewrow(Connectdtls:any,content: any){
-    this.modalService.open(content, {
-      ariaLabelledBy: 'modal-basic-title',
-      size: 'lg',
-    });
-this.prdid=Connectdtls.id;
-  this. viewdetail();
-  this.viewitem();
   }
 
 
-  viewdetail(){
-     this.request.vieworderdetail(this.prdid).subscribe((response: any) => {
-   
-       this.Detail=response.data;
-      //  product_id=this.Peoduct.id;
-       console.log("order detail",response);   
-       this.page1=false,
-       this.page2=true,
-       setTimeout(() => {
-         this.loadingIndicator = false;
-       }, 500);    
-     }
-     ); 
-   }
+
 
    viewitem(){
  
      this.request.vieworderitems(this.prdid).subscribe((response: any) => {
      this.Items=response.data;     
-       console.log("items",this.Items);
        
      }
      ); 
@@ -155,21 +175,16 @@ this.prdid=Connectdtls.id;
       user_id: this.userid,
       rating:""+this.register.controls['rating'].value,
       comment: ""+this.register.controls['comment'].value,
-    }
-    console.log(edata2);  
+    } 
     this.request.addreview(edata2).subscribe((res: any) => {
-      console.log(res);
-      // if (res.message == 'Product added to cart successfully') {       
-      // }
-      // else  {
-      //   console.log("error",res);
-  
-      // }
+
     }, (error: any) => {
       console.log("error",error);
     
     });
   
   }
+
+
  
 }

@@ -48,6 +48,8 @@ export class WishlistComponent implements OnInit {
   addcartbtn: boolean=true;
 
   buyertypeid: any;
+  stocckkk: any;
+  subItem: any=0;
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService, 
     private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,
     private sharedService: SharedService) {
@@ -61,7 +63,7 @@ export class WishlistComponent implements OnInit {
      this.accesstoken=this.currentdetail.access_token;
      this.buyertypeid=this.currentdetail.user?.buyertypeid;
      this.tokentype=this.currentdetail.token_type;
-     console.log("currentuserid=", this.userid);
+
    }
 
    ngOnInit(): void {
@@ -73,7 +75,7 @@ export class WishlistComponent implements OnInit {
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
           this.Wishlist=response.data; 
           this.loader=false ;
-          console.log("Wishlist",response.data); 
+ 
           // setTimeout(() => {
           //   this.loader=false ;
           // }, 1000);
@@ -82,18 +84,17 @@ export class WishlistComponent implements OnInit {
       
       }
       deleteRecord(id:any) {
-        console.log("row",id);
+
         this.request.deletewishproud(id).subscribe((response: any) => {
-          console.log(response);
+
           if(response.message=="Product is successfully removed from your wishlist"){
-            console.log("deleted");
+
             this.deleteRecordSuccess();
             this.viewwishlist();
             this.sharedService.sendClickEvent();
           }
           else{
             this.toastr.error( response.message);
-            console.log("error ,product is not deleted")
             
           }
     
@@ -102,10 +103,8 @@ export class WishlistComponent implements OnInit {
          });
       }
       proddetail(id:any){
-        console.log("detail page",id);
         window.scroll(0,0);
         this.router.navigate(['productdetail', id]);
-        console.log("navigate to category");
       }
 
       addtocart1(_id:any,content:any){    
@@ -113,22 +112,17 @@ export class WishlistComponent implements OnInit {
         this.quantityyy=1
         this.product_id=_id
         this.request.getproddetail(this.product_id).subscribe((response: any) => {
-         
-          console.log("proddetaill",response);
                this.Peoduct=response.data[0];
                this.prod_price=this.Peoduct.main_price
                this.choice=this.Peoduct.choice_options;
               //  this.stocck=(this.Peoduct.current_stock)-1;
                this.stk=this.Peoduct.current_stock;
+               this.stocckkk=this.Peoduct.current_stock;
                this.photoos=this.Peoduct.photos;
                this.colors=this.Peoduct.colors;
                this.tags=this.Peoduct.tags;
                this.varprise=this.Peoduct.main_price;
                this.totalprice=this.Peoduct.main_price.replace('Rs','');
-               console.log("res",this.Peoduct); 
-               console.log("choise option",this.Peoduct.choice_options); 
-              //  console.log("stocck",this.stocck); 
-               console.log("stk",this.stk); 
                if(this.Peoduct.current_stock==0){
                 this.stocck=0
                 
@@ -137,14 +131,12 @@ export class WishlistComponent implements OnInit {
                 this.stocck=(this.Peoduct.current_stock)-1;
                }   
               //  window.scroll(0,0);             
-              if(this.Peoduct.choice_options.length==0) {
-                console.log("empty"); 
+              if(this.Peoduct.choice_options.length==0) { 
                 this.varient_value=''
               }
               else{
                 this.varient_value=this.choice[0]?.options[0];
               }
-               console.log("optiooooons",this.choice[0]?.options[0] );
                
                 this.modalService.open(content, {
                   ariaLabelledBy: 'modal-basic-title',
@@ -158,45 +150,111 @@ export class WishlistComponent implements OnInit {
         
        
       }
+
+      // increaseqty(){
+      //   this.quantityyy++;
+      //   this.stocck--;
+      //   this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
+      //    this.totalprice=this.dec.toFixed(2)
+      //     }
+      //     decreaseqty(){
+      //       this.quantityyy--;
+      //       this.stocck++;
+      //       this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
+      //       this.totalprice=this.dec.toFixed(2)
+
+            
+      //     }
+      //     selectvar(weight:any){
+      //       this.varient_value=weight.replace(/\s/g, "")
+      //       this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
+      
+      //         this.prod_price=res?.price_string;
+      //         this.totalprice=(res?.price_string).replace('Rs','');
+      //         this.varprise=res?.price_string;
+      //         this.stk=res?.stock;
+      //         if(res?.stock==0){
+      //           this.stocck=0
+      //           this.quantityyy=0;
+               
+      //          }
+      //          else {
+      //           this.stocck=(res?.stock)-1;
+      //           this.quantityyy=1;
+      //          }   
+
+
+      //       }, (error: any) => {
+      //         console.log("error",error);
+            
+      //       });
+      //     }
+
+      getValue(val: any) {
+        
+        if (val<= 0) {
+          val = 1
+         
+        }
+        else if (val > this.stocckkk) {
+          val = this.stocckkk
+          
+        }
+        this.quantityyy = val
+        this.stocck = this.stocckkk - val
+      
+        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+          console.log(res);
+          
+          this.totalprice = res.price;
+          
+        // this.totalprice = this.dec.toFixed(2) 
+       
+        })
+    
+      }
       increaseqty(){
         this.quantityyy++;
         this.stocck--;
-        this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-         this.totalprice=this.dec.toFixed(2)
-        console.log("-dec",this.dec);
+        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+          console.log(res);
+          
+          this.totalprice = res.price;
+          
+        // this.totalprice = this.dec.toFixed(2) 
+       
+        })
           }
           decreaseqty(){
+
             this.quantityyy--;
-            this.stocck++;
-            this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-            this.totalprice=this.dec.toFixed(2)
-            // console.log("-quntity",this.quantityyy);
-            // console.log("price",this.varprise.replace('Rs',''));
-             console.log("totalprice",this.totalprice);
-            
-          }
-          selectvar(weight:any){
-            this.varient_value=weight.replace(/\s/g, "")
-            this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
+            this.stocck++;    
+            this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
               console.log(res);
+              
+              this.totalprice = res.price;
+              
+            // this.totalprice = this.dec.toFixed(2) 
+           
+            })   
+          }
+          selectvar(weight:any,i:any){
+            this.varient_value=weight.replace(/\s/g, "")
+            this.subItem=i
+            this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
               this.prod_price=res?.price_string;
               this.totalprice=(res?.price_string).replace('Rs','');
               this.varprise=res?.price_string;
               this.stk=res?.stock;
+              this.stocckkk=res?.stock;
               if(res?.stock==0){
                 this.stocck=0
                 this.quantityyy=0;
-               
                }
                else {
-                this.stocck=(res?.stock)-1;
-                this.quantityyy=1;
-               }   
-
-              console.log(this.varprise);
-              console.log(this.stocck);
-              console.log(res?.stock);
-
+                this.stocck=(res?.stock);
+                this.quantityyy=0;
+               }  
             }, (error: any) => {
               console.log("error",error);
             
@@ -210,12 +268,11 @@ export class WishlistComponent implements OnInit {
           quantity: this.quantityyy,
           buyertype:this.buyertypeid,  
         }
-        console.log(edata);  
+ 
           
         this.request.addtocart(edata).subscribe((res: any) => {
-          console.log(res);
+      
           if (res.message == 'Product added to cart successfully') {    
-            console.log("Product added to cart successfully");
             this.addRecordSuccess();
                this.modalService.dismissAll();
                this.sharedService.sendClickEvent();
@@ -230,8 +287,8 @@ export class WishlistComponent implements OnInit {
         
         });
       }
+
       firstDropDownChanged(data: any,_id:any)  {
-        console.log(data.target.value);
         this.quantityy=data.target.value;
       }
            

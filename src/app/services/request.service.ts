@@ -8,17 +8,18 @@ import { catchError} from 'rxjs/operators';
 import {  throwError } from 'rxjs';
 import {  retry } from 'rxjs/operators';
 import { error } from '@angular/compiler/src/util';
-
+import{environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RequestService {
+   endPoint1 = environment.baseURL1;
   url: string | undefined;
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
-  // private endPoint1 = "https://admin.jcombiz.com/jcomweb/login.php"
-  private endPoint1 = "https://neophroncrm.com/spiceclubnew/api/v2"
+  
+  // private endPoint1 = "https://neophroncrm.com/spiceclubnew/api/v2"
   currentdetail: User;
   userid: any;
   accesstoken: any;
@@ -31,23 +32,19 @@ export class RequestService {
       JSON.parse(localStorage.getItem('currentUser') || '{}')
 
     );
-    console.log("currentuser details=", this.currentUserSubject);
+    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
      this.userid = this.currentdetail?.user?.id;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-    this.buyertypeid = this.currentdetail.user?.buyertypeid;
-    console.log("currentuser=", this.currentUser);
-    console.log("currentusezr=", this.currentdetail.access_token);
+    this.buyertypeid = this.currentdetail.user?.buyertypeid;;
     if(this.userid==undefined){
-      console.log("iffff useris",this.userid);
       
       this.userid=0
       this.buyertypeid=0
     }
-    if(this.buyertypeid==undefined){
-      console.log("iffff useris",this.userid);  
+    if(this.buyertypeid==undefined){  
       this.buyertypeid=1
     }
   }
@@ -119,7 +116,6 @@ export class RequestService {
       .set('Authorization', 'Bearer'+' '+ this.accesstoken)
       // .set('Access-Control-Allow-Origin', '*')
       this.url = `${this.endPoint1}/carts/add`;
-      console.log("sts",this.url)
       return this.http.post(this.url,body,{headers:headers});
    
   }
@@ -129,7 +125,6 @@ export class RequestService {
     .set('content-type', 'application/json')
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
     this.url = `${this.endPoint1}/cart-count/` + id;
-    console.log("sts",headers)
     return this.http.get(this.url,{headers:headers});      
   }
   public fetchusercart(id:any,) {  
@@ -137,7 +132,6 @@ export class RequestService {
     .set('content-type', 'application/json')
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
     this.url = `${this.endPoint1}/carts/` + id;
-    // console.log("sts",headers)
     return this.http.post(this.url,null,{headers:headers});      
   }
   public fetchcartprocess(body:any) {
@@ -178,7 +172,6 @@ public checkwishlist(prodid:any,userid:any){
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)
   
   this.url = `${this.endPoint1}/wishlists-check-product?product_id=`+prodid+`&user_id=`+ userid;
-console.log("urllll",this.url)
   return this.http.get(this.url, {headers:headers});
 
 }
@@ -189,7 +182,6 @@ public addtowishlist(body: any) {
       .set('Authorization', 'Bearer'+' '+ this.accesstoken)
       
       this.url = `${this.endPoint1}/wishlists`;
-    // console.log("sts",newconnect)
       return this.http.post(this.url, body, {headers:headers});
    
   }
@@ -211,7 +203,6 @@ public addtowishlist(body: any) {
     const headers = new HttpHeaders() 
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
     this.url = `${this.endPoint1}/wishlists/` + id;
-    console.log("sts",this.url)
     return this.http.get(this.url,{headers:headers});      
   }
   deletewishproud(id:any) {  
@@ -237,7 +228,6 @@ public getmaximumprice(){
 public fetchuserprofile(id:any){
   
   this.url = `${this.endPoint1}/profile/getprofile/` + id;
-  console.log("stssss",this.url)
   return this.http.get(this.url);  
 }
 // address
@@ -272,7 +262,6 @@ public fetchaddress(id:any) {
   const headers = new HttpHeaders()
   .set('content-type', 'application/json')
   .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
-  console.log("headers",headers)
   this.url = `${this.endPoint1}/user/shipping/address/` + id;
   return this.http.get(this.url,{headers:headers});
 }
@@ -294,9 +283,7 @@ public updateshippingaddress(body:any) {
 deleteaddress(id:any) {  
   const headers = new HttpHeaders()
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)
-  this.url = `${this.endPoint1}/user/shipping/delete/` + id;
-  console.log(this.url);
-  
+  this.url = `${this.endPoint1}/user/shipping/delete/` + id; 
   return this.http.get(this.url,{headers:headers});
 }
 public fetchcost(body:any) {
@@ -311,9 +298,7 @@ public makeshipingaddress(body: any) {
   const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer'+' '+ this.accesstoken)
-      // .set('Access-Control-Allow-Origin', '*')
       this.url = `${this.endPoint1}/user/shipping/make_default`;
-      console.log("sts",this.url)
       return this.http.post(this.url,body,{headers:headers});
    
   }
@@ -332,6 +317,22 @@ public fetchOrders(id:any) {
   const headers = new HttpHeaders()
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)    
    this.url = `${this.endPoint1}/purchase-history/`  + id;
+   return this.http.get(this.url,{headers:headers});
+}
+public fetchOrders1(id:any,delivery:any) {
+  const headers = new HttpHeaders()
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken)    
+   this.url = `${this.endPoint1}/purchase-history/`  + id +`?delivery_status=`+ delivery;
+   console.log(this.url);
+   
+   return this.http.get(this.url,{headers:headers});
+}
+public fetchOrders2(id:any,delivery:any,payment:any) {
+  const headers = new HttpHeaders()
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken)    
+   this.url = `${this.endPoint1}/purchase-history/`  + id +`?delivery_status=`+ delivery+`&payment_status=`+ payment;
+   console.log(this.url);
+   
    return this.http.get(this.url,{headers:headers});
 }
 public vieworderdetail(id:any) {
@@ -374,7 +375,6 @@ public razorpay1(body:any) {
 
 public razorpay3() {
   this.url = `${this.endPoint1}/razorpay/pay-with-razorpay?payment_type=cart_payment&combined_order_id=111&amount=82&user_id=8`;
-  console.log("urlll",this.url);
   window.open(this.url);
   return this.http.get<any>(`https://neophroncrm.com/spiceclubnew/api/v2/razorpay/payment`)
 }
@@ -383,9 +383,6 @@ public razorpay3() {
 // razorpay test
 public razorpay2(body:any): Observable<any> {
   this.url = `${this.endPoint1}/razorpay/pay-with-razorpay`;
- 
-  console.log("usrlll",this.url);
-  
   return this.http.post(this.url,body) .pipe(map((response: any) => response.json())
     // .catchError(this.handleErrorr)
   );;
@@ -405,15 +402,16 @@ private handleErrorr(error: HttpErrorResponse) {
 // paymentstatus api 
  razorpayment(id:any) {
   this.url = `${this.endPoint1}/razorpay/payment?razorpay_payment_id=`+ id;
-  console.log("url",this.url);
   return this.http.get(this.url);
 }
 razsuccess(body:any) {
   this.url = `${this.endPoint1}/razorpay/success`;
-  console.log("url",this.url);
   return this.http.post(this.url,body);
 }
-
+retrypayment(body:any){
+  this.url = `${this.endPoint1}/order/repayment`;
+  return this.http.post(this.url,body);
+}
 
 //category
 public getallcat() {
@@ -430,7 +428,6 @@ public gettopcat() {
 }
 public getcatprod(id:any,page:any) {
   this.url = `${this.endPoint1}/products/category/` + id +'?page='+ page +'&name=&user_id='+ this.userid;
-  console.log("category url",this.url);
   
   return this.http.get(this.url);
 }
@@ -462,9 +459,14 @@ public getallproducts(page:any) {
 public getpage(link:any){
   return this.http.get(link);
 }
+public getpage3(link:any,deliveryy:any,paymentt:any){
+  this.url = link+`&delivery_status=`+ deliveryy+`&payment_status=`+ paymentt;
+  console.log( this.url);
+  
+  return this.http.get(this.url);
+}
 public getpage2(link:any,categoryy_id:any,brandd_id:any,sort: string,min:any,max:any){
   this.url= link+  `&categories=`+categoryy_id+`&brands=`+brandd_id+`&min=` + min+`&max=` + max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
-  console.log("search ,pageurl",this.url);
   
   return this.http.get(this.url);
 }
@@ -472,12 +474,10 @@ public getpage2(link:any,categoryy_id:any,brandd_id:any,sort: string,min:any,max
 
 public getbrandprod(id:string,page:any,) {
   this.url = `${this.endPoint1}/products/brand/` + id +'?page='+ page+`&user_id=`+this.userid+`&buyertype=` +this.buyertypeid;
-  console.log("brandurl",this.url)
   return this.http.get(this.url);
 }
 public getbrandsearchprod(id:string,page:any,key:any) {
   this.url = `${this.endPoint1}/products/brand/` + id +'?page='+ page +'&name='+ key+`&user_id=`+this.userid+`&buyertype=` +this.buyertypeid;
-  console.log("url",this.url)
   return this.http.get(this.url);
 }
 
@@ -500,11 +500,7 @@ public getdisc(b_id: string,P_id:any) {
   return this.http.get(this.url);
 }
 public getdiscountprice(b_id: any, P_id:any, var_value:any, qty:any) {
-  console.log("varr",var_value);
-  
   this.url = `${this.endPoint1}/products/discountprice?id=`+ P_id + `&variant=`+ var_value +`&quantity=`+ qty +`&buyertype=` + b_id ;
-  console.log("url",this.url);
- 
   return this.http.get(this.url);
 }
 //related product
@@ -518,14 +514,10 @@ public addvarient(id: string,varient:any) {
 }
 public getsortprod(sort: string,min:any,max:any) {
   this.url = `${this.endPoint1}/products/search?min=` + min+`&max=` + max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
-  console.log(this.url);
-  
   return this.http.get(this.url);
 }
 public getsortprod2(sort: string) {
   this.url = `${this.endPoint1}/products/search?sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
-  console.log(this.url);
-  
   return this.http.get(this.url);
 }
 public filterdataa(category:any,brand:any,name:any,sort:any,min:any,max:any) {
@@ -539,6 +531,8 @@ public filterdataa2(min:any,max:any) {
 }
 public filterdataa3(category:any,brand:any,min:any,max:any) {
   this.url = `${this.endPoint1}/products/search?categories=` + category +`&brands=` + brand +`&name=` +`&min=` + min +`&max=` +max+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
+  console.log(this.url);
+  
   return this.http.get(this.url);
 }
 public filtersearchdataa(name:any) {
@@ -654,7 +648,6 @@ public getblogcomments(id: string) {
 }
 public addblogcomment(body:any) {
   this.url = `${this.endPoint1}/blogcomment/submit`;
-  console.log(this.url);
   return this.http.post(this.url,body);
 }
 public searchblog(key:any) {
@@ -696,7 +689,6 @@ public getcountes(id: string) {
   const headers = new HttpHeaders()
   .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
   this.url = `${this.endPoint1}/profile/counters/` + id ;
-  console.log("url",this.url)
   return this.http.get(this.url,{headers:headers});
 
 }
@@ -748,7 +740,6 @@ public getnewmessages(convid: any,lastid:any) {
   .set('content-type', 'application/json')
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)
   this.url = `${this.endPoint1}/chat/get-new-messages/` + convid +`/` + lastid +`?Content-Type=` + "application/json" +`&Authorization=Bearer`+ this.accesstoken;
-  console.log("url",this.url)
   return this.http.get(this.url,{headers:headers});
 }
 public quickorder(id: any,) {
@@ -756,7 +747,6 @@ public quickorder(id: any,) {
   .set('content-type', 'application/json')
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)
   this.url = `${this.endPoint1}/quickorder/` + id ;
-  console.log("url",this.url)
   return this.http.get(this.url,{headers:headers});
 }
 
@@ -766,9 +756,7 @@ public quickorder(id: any,) {
 
 public billdeskpay(combined_order_id:any,amount:any,user_id:any) {
    this.url = `${this.endPoint1}/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=` + combined_order_id +`&amount=` +amount+ `&user_id=`+ user_id;
- console.log("urlll=",this.url);
  window.open(this.url);
- console.log("urlll=",this.url);
  return  this.http.get(this.url)
 //  .pipe(map((response: any) => response.json()));  
  
@@ -787,7 +775,6 @@ public billdeskpay(combined_order_id:any,amount:any,user_id:any) {
 }
 public billdeskpayment(): Observable<string>  {
   this.url =`https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8`
-console.log("urlll=",this.url);
 // window.open(this.url);
  return this.http.get<any>(this.url)
 //  .pipe( map((res) => {

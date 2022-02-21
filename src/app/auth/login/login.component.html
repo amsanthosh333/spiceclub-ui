@@ -19,7 +19,9 @@
 		</div>
 	</div>
 </div>
-
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#e00707" type="ball-scale-multiple">
+	<p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 <!--=======  End of breadcrumb area =======-->
 
 <!--=============================================
@@ -79,7 +81,7 @@
 								<H6>OR</H6>
 								<!-- <i class="fa fa-facebook" style="color: rgb(8, 96, 228);"></i> <i class="fa fa-google" style="color: rgb(194, 207, 7);"></i>  -->
 							</div>
-
+						
 							<!-- <div class="google-btn" >
 								<div class="google-icon-wrapper" (click)="loginWithGoogle(byertype)" >
 									<img class="google-icon"
@@ -111,6 +113,10 @@
 						</div>
 					</form>
 
+					<!-- <button (click)="spiiner()">spiiner </button> -->
+				
+				
+
 					<ng-template #otpRecord let-modal>
 						<div class="modal-header editRowModal">
 							<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
@@ -134,7 +140,7 @@
 										<input type="text" class="form-control" placeholder="otp" formControlName="otp"
 											required>
 										<!-- <small class="form-text text-danger"
-										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
+										  *ngIf="!otpform.get('otp').valid && otpform.get('otp').touched"> code is
 										  required</small>  -->
 									</div>
 								</div>
@@ -314,7 +320,7 @@
 								<div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error7}}</div>
 								<div class="modal-footer" style="border: none;text-align: center;">
 									<button type="submit" class="btn btn-danger">Verify &nbsp;</button>
-									<button class="btn btn-success" (click)="resend2()">Resend</button>
+									<button class="btn btn-success" type="button" (click)="resend2()">Resend</button>
 
 									<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
 								</div>

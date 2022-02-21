@@ -6,7 +6,7 @@
         <!--=======  breadcrumb list  =======-->
         <ul class="breadcrumb-list" style="padding-left: 0px;">
           <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-          <li class="breadcrumb-list__item breadcrumb-list__item--active">Convertations</li>
+          <li class="breadcrumb-list__item breadcrumb-list__item--active">Conversation</li>
         </ul>
         <!--=======  End of breadcrumb list  =======-->
       </div>
@@ -20,7 +20,7 @@
       <div class="inbox_people">
         <div class="headind_srch">
           <div class="recent_heading">
-            <h4 style="padding-bottom: 0px;">All Covertation</h4>
+            <h6 style="padding-bottom: 0px; color: #05728f;">All Conversation</h6>
           </div>
           <!-- <div class="srch_bar">
                 <div class="stylish-input-group">
@@ -32,7 +32,7 @@
         </div>
         <div class="inbox_chat">
 
-          <div id="pggg" *ngIf="(Convertations.length==0)" style=" display: flex;
+          <div id="pggg" *ngIf="(Convertations?.length==0)" style=" display: flex;
 justify-content: center;
 align-items: center;
 height: 200px;
@@ -41,7 +41,7 @@ margin-right: 100px;
 margin-left: 100px;">
             <div>
               <h5>
-                No convertation yet
+                No conversation yet
               </h5>
             </div>
           </div>
@@ -54,7 +54,8 @@ margin-left: 100px;">
                   style="height: 50px; width: 50px;border-radius: 50px;"
                   src="https://neophroncrm.com/spiceclubnew/public/{{Connectdtls.shop_logo}}" alt=""> </div>
               <div class="chat_ib">
-                <h5>{{Connectdtls.shop_name}} <span class="chat_date">{{Connectdtls.date}}</span></h5>
+                <h5>{{Connectdtls.shop_name}} </h5>
+                <!-- <h5>{{Connectdtls.shop_name}} <span class="chat_date">{{Connectdtls.date}}</span></h5> -->
                 <p>{{Connectdtls.title}}</p>
 
               </div>
@@ -70,17 +71,17 @@ margin-left: 100px;">
 
             <div class="chat_img" *ngIf="(currentlogo=='')"> <img style="height: 50px; width: 50px;border-radius: 50px;"
                 src="assets/images/user-profile.png" alt=""> </div>
-            <div class="chat_img" *ngIf="(currentlogo!=='' && Convertations.length !==0 )"> <img
+            <div class="chat_img" *ngIf="(currentlogo!=='' && Convertations?.length !==0 )"> <img
                 style="height: 50px; width: 50px;border-radius: 50px;"
                 src="https://neophroncrm.com/spiceclubnew/public/{{currentlogo}}" alt=""> </div>
-            <h5 style="padding-top: 12px;">{{currentname}}</h5>
+            <h5 style="padding-top: 12px;">{{currentname}} <span style="font-size: x-small;    float: right;
+              margin-top: 10px;">{{convdatee}}</span></h5>
           </div>
         </div>
         <div class="mesgs pt-1" style="padding-right: 20px;">
           <div class="msg_history">
 
             <div *ngFor="let m of Messages">
-
               <div class="incoming_msg" *ngIf="(m.user_id!==userid)">
                 <div class="incoming_msg_img"> <img src="assets/images/user-profile.png" alt="sunil"> </div>
                 <div class="received_msg">
@@ -133,7 +134,7 @@ margin-left: 100px;">
     </div>
     <div class="inbox_chat">
 
-      <div id="pggg" *ngIf="(Convertations.length==0)" style=" display: flex;
+      <div id="pggg" *ngIf="(Convertations?.length==0)" style=" display: flex;
 justify-content: center;
 align-items: center;
 height: 200px;

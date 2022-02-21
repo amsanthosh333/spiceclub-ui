@@ -133,17 +133,9 @@
 									<!--=======  post category  =======-->
 
 									<div class="post-category mb-10">
-										<a href="#">{{Peoduct.slug}}</a>
+										<a >{{Peoduct.slug}}</a>
 									</div>
-
-									<h2 class="post-title"><a>{{Peoduct.name}}</a></h2>
-
-									<p class="mb-30" [innerHTML]="Peoduct.description">{{Peoduct.description}}</p>
-									<!--=======  End of post category  =======-->
-
-									<!--=======  post info  =======-->
-
-									<div class="post-info d-flex flex-wrap align-items-center mb-50">
+									<div class="post-info d-flex flex-wrap align-items-center mb-10">
 										<div class="post-user">
 											<i class="ion-android-person"></i> By
 											<a class="textopacity"> SpiceClub</a>
@@ -164,47 +156,28 @@
 
 									</div>
 
-									<!--=======  End of post info  =======-->
+									<h2 class="post-title"><a>{{Peoduct.name}}</a></h2>
 
+									<p class="mb-30" [innerHTML]="Peoduct.description">{{Peoduct.description}}</p>
+									<!--=======  End of post category  =======-->
 
-									<!--=======  single blog post section  =======-->
-
+									<div class="row mt-30 align-items-center">
 									
-
-									<!--=======  End of single blog post section  =======-->
-
-
-									<!-- <div class="row mt-30 align-items-center">
-										<div class="col-md-6 text-center text-md-left mb-sm-15">
-											<div class="post-tags">
-												<i class="ion-ios-pricetags"></i>
-												<ul class="tag-list">
-													<li><a href="#">Health</a>,</li>
-													<li><a href="#">tips</a>,</li>
-													<li><a href="#">spiceclub</a>,</li>
-													<li><a href="#">sanitance</a>,</li>
-													<li><a href="#">weightloss</a>,</li>
-													<li><a href="#">drink</a>,</li>
-													<li><a href="#">spiceclub</a>,</li>
-													<li><a href="#">Health</a>,</li>
-													<li><a href="#">tips</a>,</li>
-													<li><a href="#">spiceclub</a></li>
-												</ul>
-											</div>
-										</div>
-
-										<div class="col-md-6 text-center text-md-right">
+										<!-- <div class="col-md-10 text-center text-md-right"> -->
+										<div class="col-md-10 ">
 											<div class="post-share">
 												<span>Share this post:</span>
-												<ul>
-													<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-													<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-													<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-													<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+												<ul style="padding-left: 0px;">
+													<li> <share-buttons theme="circles-dark"
+														[include]="['facebook','whatsapp', 'email','twitter', 'telegram','copy' ]"
+														[showIcon]="true" [showText]="false" url="currenturl"
+														[description]="productname" class="pt-0 mb-2">
+													</share-buttons></li>
+												  
 												</ul>
 											</div>
 										</div>
-									</div> -->
+									</div> 
 								</div>
 
 								<!--=======  End of content  =======-->
@@ -239,7 +212,7 @@
 								</div>
 								<div class="single-comment__image" *ngIf="(comm.avatar!=='')">
 									<img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
-										class="img-fluid" style="height: 70px; width: 70px;" alt="">
+										class="img-fluid" style="height: 70px; width: 70px; object-fit: cover;" alt="">
 								</div>
 								<div class="single-comment__content">
 
@@ -287,10 +260,10 @@
 											<span class="product-rating">
 												<ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false"
 													formControlName="rating"
-													style="size: 10px; color: rgb(248, 141, 19);"></ngb-rating>
+													style="font-size: 2rem; color: rgb(248, 141, 19);"></ngb-rating>
 											</span>
 										</div>
-										<div class="col-lg-12 mb-20">
+										<div class="col-lg-12 mb-20" style=" border: 2px solid  #ddd5d5;">
 											<textarea cols="30" rows="10" formControlName="comment"
 												placeholder="YOUR MESSAGE"></textarea>
 										</div>

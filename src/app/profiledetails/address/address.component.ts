@@ -70,7 +70,7 @@ export class AddressComponent implements OnInit {
     this.username = this.currentdetail.user?.name;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-    console.log("currentuserid=", this.userid);
+    // console.log("currentuserid=", this.userid);
 
     this.editForm = this.fb.group({
       name:['',[Validators.required]],
@@ -132,8 +132,6 @@ export class AddressComponent implements OnInit {
       lng: event.longitude
     };
 
-    console.log('selected marker',this.selectedMarker);
-    
   }
 
   getaddress(){
@@ -141,12 +139,8 @@ export class AddressComponent implements OnInit {
       this.Address=response.data;   
       this.loader=false
       this.indexx =this.Address.findIndex((x:any) => x.set_default ==1);
-      console.log("Address", this.Address);
-      console.log("Address index", this.indexx);
       this.address_id=this.Address[this.indexx].id
-      this.radioSelected = this.Address[this.indexx].id;
-     
-      console.log("Address",this.Address);  
+      this.radioSelected = this.Address[this.indexx].id;  
       window.scroll(0,0)   
     // this. processdata()    
     });
@@ -167,50 +161,40 @@ export class AddressComponent implements OnInit {
 
   viewcountry(){
     this.request.fetchcountry().subscribe((response: any) => {
-      this.Country=response.data;   
-      console.log("country",this.Country);     
+      this.Country=response.data;        
     // this. processdata()    
     });
   }
   selectcountry(event: any) {
     this.country_id = event.target.value;
-    console.log("country id", this.country_id);
     this.request.fetchstatebycountry(this.country_id).subscribe((response: any) => {
       this.State = response.data;
-      console.log("newstates", this.State);
 
     });
 
   }
   viewstate(){
     this.request.fetchstate().subscribe((response: any) => {
-      this.State=response.data;   
-      console.log("state",this.State);     
-    // this. processdata()    
+      this.State=response.data;        
     });
   }
   selectstate(event: any) {
     this.state_id = event.target.value;
-    console.log("state_id", this.state_id);
     this.request.fetchcitybystate(this.state_id).subscribe((response: any) => {
       this.City = response.data;
-      console.log("newCity", this.City);
 
     });
 
   }
   viewCity(){
     this.request.fetchCity().subscribe((response: any) => {
-      this.City=response.data;   
-      console.log("City",this.City);     
-    // this. processdata()    
+      this.City=response.data;     
     });
   }
   onAddRowSave(form: FormGroup) {  
  
     this.error2 = '';
     if (this.register.invalid) {
-      console.log("form invalid")
       this.error2 = '* Enter all details';
       return;
     } else {
@@ -223,19 +207,15 @@ export class AddressComponent implements OnInit {
       postal_code:form.value.postal_code,
       phone:form.value.phone,  
     }
-    console.log(edata);
   
     this.request.addaddress(edata).subscribe((res: any) => {
-      console.log("address response",res);
       if (res.result == true) {       
         form.reset()
         this.getaddress()
         this.toastr.success('Added Successfully','');
-      this.modalService.dismissAll();
-    // this.viewdata();    
+      this.modalService.dismissAll();  
       }
       else  {
-        console.log("res",res);
         form.reset();
     this.modalService.dismissAll();
       }
@@ -252,10 +232,7 @@ export class AddressComponent implements OnInit {
       ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
     });
-
-    console.log("adderess",row);
     this.rowiid=row.id;
-
 
     this.editForm.setValue({
       address: row.address,
@@ -270,9 +247,7 @@ export class AddressComponent implements OnInit {
 
   }
   deleteRow(row:any) {
-    console.log("row",row.id);
     this.request.deleteaddress(row.id).subscribe((response: any) => {
-      console.log(response); 
       if (response.result == true) {
         this.modalService.dismissAll();
         this.toastr.error('Removed Successfully','');
@@ -281,7 +256,6 @@ export class AddressComponent implements OnInit {
       }
       else  {
         this.modalService.dismissAll();
-        console.log("responnn",response);
       }   
      }, );
   }
@@ -291,12 +265,10 @@ changeshippingaddress(a_id:any){
     user_id: this.userid,
     id:a_id,   
   }
-  console.log(edata);
   this.request.makeshipingaddress(edata).subscribe((res: any) => {
-    console.log("shipping response",res);
     if (res.result == true) {       
-      // this.toastr.success('Added Successfully','');    
-      console.log("shipping address updated"); 
+      // this.toastr.success('shipping address updated','');    
+      // console.log("shipping address updated"); 
     }
     else  {
       console.log("something went wrong");
@@ -305,10 +277,6 @@ changeshippingaddress(a_id:any){
 }
 
   onEditSave(form: FormGroup) {
-
-    // var x = this.editRow(row, content);
-  console.log("row id",this.rowiid)
-
     const edata2 = {
        id:this.rowiid,
       user_id: this.userid,
@@ -319,9 +287,7 @@ changeshippingaddress(a_id:any){
       postal_code:form.value.postal_code,
       phone:form.value.phone,  
   }
-  console.log("responnn",edata2);
   this.request.updateaddress(edata2).subscribe((res: any) => {
-    console.log("responnn",res);
     if (res.message == 'Shipping information has been updated successfully') {
       this.modalService.dismissAll();
       this.toastr.success('Updated Successfully','');
@@ -331,7 +297,6 @@ changeshippingaddress(a_id:any){
     else  {
       this.modalService.dismissAll();
       this.toastr.error('Something went wrong','');
-      console.log("responnn",res);
     }
 
   }, (error: any) => {

@@ -108,3 +108,27 @@ p{
     input[type=number] {
       -moz-appearance: textfield;
     }
+    .blink_me {
+      animation: blinker 2s linear infinite;
+    }
+    
+    @keyframes blinker {
+      50% {
+        opacity: 0;
+      }
+    }
+
+    /* span.single-size.active{
+      color: rgb(249, 249, 253);
+      background-color: blue; 
+  } */
+  .shop-product__block__value .shop-product-size-list .single-size.active{
+    font-size: 13px;
+    line-height: 22px;
+    margin-right: 11px;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 4px;
+    border-radius: 4px;
+    background-color: #2023ce;
+}

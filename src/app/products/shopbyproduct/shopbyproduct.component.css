@@ -1,4 +1,8 @@
 
+li.has-children.active a{
+text-decoration: underline;
+color: rgb(228, 13, 13);
+}
 .single-product__floating-badges {
   position: absolute;
   z-index: 9;
@@ -137,3 +141,43 @@ width: 40px;
       -webkit-appearance: none;
       margin: 0;
   } */
+
+  .toplist ul{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 200px;
+    background-color: #f1f1ff;
+    }
+    
+    .toplist ul li a{
+    display: block;
+    padding: 8px 16px;
+    color: #000;
+    text-decoration: none;
+    }
+    
+    .toplist ul li a .active{
+    background-color: #4CAF50;
+    color: white;
+    }
+    
+    .toplist ul li a:hover:not(.active) {
+    background-color: #555;
+    color: white;
+    }
+    
+    .toplist ul li a:hover {
+    background-color: #555;
+    color: white;
+    }
+    .shop-product__block__value .shop-product-size-list .single-size.active{
+      font-size: 13px;
+      line-height: 22px;
+      margin-right: 11px;
+      cursor: pointer;
+      color: #ffffff;
+      padding: 4px;
+      border-radius: 4px;
+      background-color: #2023ce;
+  }

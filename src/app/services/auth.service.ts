@@ -59,7 +59,7 @@ export class AuthService {
         map((user) => { 
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-          console.log("currentuser:",user);
+          // console.log("currentuser:",user);
           return user;
         })
       );
@@ -71,7 +71,7 @@ export class AuthService {
         map((user) => {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-          console.log("currentuser:",user);
+          // console.log("currentuser:",user);
           return user;
         })
       );
@@ -99,7 +99,7 @@ export class AuthService {
     return this.http.get(this.url,{headers:headers})
   }
    adduser(body: any) {
-    console.log('credentials2',body);
+    // console.log('credentials2',body);
     this.url = `${this.endPoint1}/auth/signup`;
     return this.http.post(this.url, body);
   }
@@ -139,16 +139,29 @@ export class AuthService {
     return this.http.post<any>(this.url, body)
       
   }
-  sociallogin(body: any) { 
+  sociallogin3(body: any) { 
     this.url = `${this.endPoint1}/auth/social-login`;
     return this.http.post<any>(this.url, body).pipe(     
       map((user) => {
         localStorage.setItem('currentUser', JSON.stringify(user));
         this.currentUserSubject.next(user);
-        console.log("currentuser:",user);
+        // console.log("currentuser:",user);
         return user;
       })
     );
+      
+  }
+  sociallogin(body: any) { 
+    this.url = `${this.endPoint1}/auth/social-login-count`;
+    return this.http.post<any>(this.url, body)
+    // return this.http.post<any>(this.url, body).pipe(     
+    //   map((user) => {
+    //     localStorage.setItem('currentUser', JSON.stringify(user));
+    //     this.currentUserSubject.next(user);
+    //     // console.log("currentuser:",user);
+    //     return user;
+    //   })
+    // );
       
   }
 

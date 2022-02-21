@@ -141,6 +141,7 @@ export class HomeComponent implements OnInit {
   brnd_id: any;
   imgloader: boolean = true;
   stocckkk!: number;
+  subItem: any=0;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -154,7 +155,7 @@ export class HomeComponent implements OnInit {
       JSON.parse(localStorage.getItem('currentUser') || '{}')
 
     );
-    console.log("currentuser details=", this.currentUserSubject);
+    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -171,8 +172,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
-    // myCompOneObj.viewwishlist();
     setTimeout(() => {
       this.loadingg = false;
     }, 2000);
@@ -184,9 +183,6 @@ export class HomeComponent implements OnInit {
     this.viewfuturedpro();
     this.viewdata3();
     this.viewbrands();
-    // this.viewdata2();
-    // this.viewdata3();
-    // this.viewdata4();
     this.register = this.fb.group({
       rating: [''],
       comment: [''],
@@ -197,11 +193,9 @@ export class HomeComponent implements OnInit {
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if (this.likeddd[index] == false) {
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
 
@@ -209,24 +203,18 @@ export class HomeComponent implements OnInit {
   toggledelete(img: any, index: any): void {
     this.likedd[index] = !this.likedd[index];
     if (this.likedd[index] == true) {
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if (this.likedd[index] == false) {
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
   }
   toggle1(img: any, index: any): void {
     this.likesss[index] = !this.likesss[index];
-    console.log("tooogglle1", this.likesss[index]);
-
     if (this.likesss[index] == true) {
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if (this.likesss[index] == false) {
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
 
@@ -235,11 +223,9 @@ export class HomeComponent implements OnInit {
     this.likess[index] = !this.likess[index];
 
     if (this.likess[index] == true) {
-      console.log("true , add recrd");
       this.addtowishlist(img.id);
     }
     else if (this.likedd[index] == false) {
-      console.log("false , delectrecord");
       this.deleteRecord(img.id);
     }
   }
@@ -249,9 +235,7 @@ export class HomeComponent implements OnInit {
   viewdata() {
     this.request.getslider().subscribe((response: any) => {
       this.Slider = response.data;
-      console.log("slider.data", response.data);
       this.photoo = this.Slider.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.photo);
-      console.log("photosss", this.photoo)
       this.loader1 = false;
       this.mainloader = false;
       setTimeout(() => {
@@ -263,26 +247,22 @@ export class HomeComponent implements OnInit {
   viewtodayoffer() {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data;
-      console.log("Todaysoffer", this.Todaysoffer);
       this.loader4 = false;
 
     });
   }
   imageClick(i: any) {
-    console.log("Todaysoffer event", i);
     this.prd_id = this.Todaysoffer[i].product_id,
       this.proddetail(this.prd_id)
 
   }
   blogClick(i: any) {
-    console.log("blogClick event", i);
     this.brnd_id = this.Allbrands[i].id
     this.brandnavigate(this.brnd_id)
   }
   viewbestsellpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
       this.Bestsellpro = response.data.slice(0, 8);
-      console.log("best sellling", this.Bestsellpro);
       this.loader3 = false;
       setTimeout(() => {
         this.imgloader = false;
@@ -293,8 +273,6 @@ export class HomeComponent implements OnInit {
     this.request.getfuturedpro().subscribe((response: any) => {
       this.Futuredpro = response.data;
       this.loader6 = false;
-      console.log("response.data", response);
-      console.log("Futuredpro", this.Futuredpro);
 
     });
   }
@@ -302,8 +280,6 @@ export class HomeComponent implements OnInit {
     this.request.gethomecat().subscribe((response: any) => {
       this.Homecat = response.data;
       this.loader2 = false;
-      console.log("response", response);
-      console.log("allcategory", this.Allcat);
     });
   }
   openquick(content: any) {
@@ -316,27 +292,21 @@ export class HomeComponent implements OnInit {
     this.request.getbanner().subscribe((response: any) => {
       this.Banners = response.data;
       this.loader4 = false;
-      console.log("slider.data", response.data);
-      console.log("slider", this.Slider);
       setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
     });
   }
   proddetail(id: any) {
-    // console.log("detail page",id);
     window.scroll(0, 0);
     this.router.navigate(['productdetail', id]);
-    console.log("navigate to category");
   }
   viewproductrow(img: any) {
 
     this.product_id = img.id
-    console.log("detail", this.product_id);
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       this.page1 = false;
       this.page2 = true;
-      console.log("proddetaill", response);
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
       this.stocck = this.Peoduct.current_stock;
@@ -345,19 +315,13 @@ export class HomeComponent implements OnInit {
       this.colors = this.Peoduct.colors
       this.tags = this.Peoduct.tags
       this.varprise = this.Peoduct.main_price
-      console.log("res", this.Peoduct);
-      console.log("choise option", this.Peoduct.choice_options);
-      console.log('this.stocck', this.stocck);
-      console.log('this.stocckkk', this.stocckkk);
       window.scroll(0, 0);
     },
       (error: any) => {
         console.log(error);
       });
     this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
-      console.log("relatedprod", response);
       this.Relatedprod = response.data;
-      console.log("res", this.Relatedprod);
     },
       (error: any) => {
         console.log(error);
@@ -390,7 +354,6 @@ export class HomeComponent implements OnInit {
   gotodeals() {
     this.router.navigate(['/daydeal']);
     window.scroll(0, 0)
-    console.log("navigate to deal");
   }
   addtocart(_id: any) {
     let edata = {
@@ -399,9 +362,8 @@ export class HomeComponent implements OnInit {
       user_id: this.userid,
       quantity: this.quantityy
     }
-    console.log(edata);
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log(res);
+
       if (res.message == 'Product added to cart successfully') {
       }
       else if (res.message == 'Minimum 1 item(s) should be ordered') {
@@ -426,10 +388,8 @@ export class HomeComponent implements OnInit {
       let edata4 = {
         user_id: this.userid,
         product_id: prd_id
-      }
-      console.log(edata4);
+      }  
       this.request.addtowishlist(edata4).subscribe((res: any) => {
-        console.log(res);
         if (res.message == 'Product is successfully added to your wishlist') {
 
           this.addRecordSuccess();
@@ -438,7 +398,6 @@ export class HomeComponent implements OnInit {
         }
         else {
           this.toastr.success('', res.message);
-          console.log("error", res);
 
         }
       }, (error: any) => {
@@ -448,17 +407,13 @@ export class HomeComponent implements OnInit {
     }
   }
   deleteRecord(id: any) {
-    console.log("deleteeerow", id);
     this.request.deletewishproud2(id).subscribe((response: any) => {
-      console.log(response);
       if (response.message == "Product is removed from wishlist") {
-        console.log("deleted", response.message);
         this.deleteRecordSuccess();
         this.sharedService.sendClickEvent();
       }
       else {
         this.toastr.error(response.message);
-        console.log("error ,product is not deleted")
 
       }
 
@@ -466,37 +421,13 @@ export class HomeComponent implements OnInit {
       console.log(error);
     });
   }
-  submitreview(form: FormGroup) {
-    let edata2 = {
-      product_id: this.product_id,
-      user_id: this.userid,
-      rating: "" + this.register.controls['rating'].value,
-      comment: "" + this.register.controls['comment'].value,
-    }
-    console.log(edata2);
-    this.request.addreview(edata2).subscribe((res: any) => {
-      console.log(res);
-      if (res.message == 'Product added to cart successfully') {
-        console.log("done", res);
-      }
-      else {
-        console.log("error", res);
 
-      }
-    }, (error: any) => {
-      console.log("error", error);
-
-    });
-
-  }
 
   viewbrands() {
     this.request.getallbrands().subscribe((response: any) => {
       this.Allbrands = response.data;
       this.page1 = true,
         this.page2 = false,
-        console.log("response.data", response.data);
-      console.log("allbrands", this.Allbrands);
       this.loader5 = false
       setTimeout(() => {
         this.loadingIndicator = false;
@@ -506,7 +437,6 @@ export class HomeComponent implements OnInit {
   brandnavigate(id: any) {
     window.scroll(0, 0);
     this.router.navigate(['brands', id]);
-    console.log("navigate to brand");
 
   }
 
@@ -533,8 +463,7 @@ export class HomeComponent implements OnInit {
       // console.log(Arr2);
       // this.page1=true,
       // this.page2=false,
-      console.log("response", response);
-      console.log("allcategory", this.Allcat);
+
       setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
@@ -543,7 +472,7 @@ export class HomeComponent implements OnInit {
   catnavigate(id: any) {
     window.scroll(0, 0);
     this.router.navigate(['category', id]);
-    console.log("navigate to category");
+
   }
 
   quickview(id: any, content: any) {
@@ -599,24 +528,15 @@ export class HomeComponent implements OnInit {
   increaseqty() {
     this.quantityyy++;
     this.stocck--;
-    // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-    //  this.totalprice=this.dec.toFixed(2)
-    // console.log("-dec",this.dec);
   }
   decreaseqty() {
     this.quantityyy--;
     this.stocck++;
-    // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-    // this.totalprice=this.dec.toFixed(2)
-    // // console.log("-quntity",this.quantityyy);
-    // // console.log("price",this.varprise.replace('Rs',''));
-    //  console.log("totalprice",this.totalprice);
-
   }
-  selectvar(weight: any) {
+  selectvar(weight: any,i:any) {
     this.varient_value = weight.replace(/\s/g, "")
+    this.subItem=i
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
-      console.log(res);
       this.prod_price = res?.price_string;
       this.totalprice = (res?.price_string).replace('Rs', '');
       this.varprise = res?.price_string;
@@ -632,10 +552,6 @@ export class HomeComponent implements OnInit {
         this.quantityyy = 0;
       }
 
-      console.log(this.varprise);
-      console.log(this.stocck);
-      console.log(res?.stock);
-
     }, (error: any) => {
       console.log("error", error);
 
@@ -644,19 +560,14 @@ export class HomeComponent implements OnInit {
   getValue(val: any) {
     if (val<= 0) {
       val = 1
-      console.log( "valif",val);
+ 
     }
     else if (val > this.stocckkk) {
       val = this.stocckkk
-      console.log( "valel",val);
+   
     }
     this.quantityyy = val
     this.stocck = this.stocckkk - val
-
-    console.log( "val",val);
-    console.log("this.stocckkk-val",this.stocckkk - val);
-    console.log("this.stocckkk",this.stocckkk);
-    console.log(this.stocck);
     this.stocck
 
 

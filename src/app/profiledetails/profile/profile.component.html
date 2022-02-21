@@ -27,12 +27,22 @@
                                 <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
                                     class="bi bi-pen-fill"></i></span>
                         </div>
-                        <div class="single-comment__image" *ngIf="(profiledetail?.profileimg!=='')">
+                        <div class="single-comment__image" *ngIf="(profiledetail?.profileimg!=='')" >
+                                <ngx-skeleton-loader *ngIf="loaderimage" count="1" [theme]="{ 
+                                    'border-radius': '75px',
+                                    height: '100px',
+                                    width: '100PX',
+                                    'background-color': '#ffffff',
+                                    border: '1px solid white'
+                                  }" animation="pulse" ></ngx-skeleton-loader>
+                                        
+                           
                             <img src="https://neophroncrm.com/spiceclubnew/public/{{profiledetail?.profileimg}}"
-                                class="img-fluid" style="height: 100px;" alt="">
+                                class="img-fluid" style="height: 100px;width: 100px; object-fit: cover;" alt="" *ngIf="!loaderimage">
                             <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
                                     class="bi bi-pen-fill"></i></span>
                             <!-- (click)="editprofileimg(profileimageRecord)" -->
+                        
                         </div>
                         <div class="single-comment__content pl-2 mt-2 mb-4">
                             <strong class="username">{{profiledetail?.name}}</strong>
@@ -159,7 +169,7 @@
         </div>
 
         <div class="row mt-3" style="text-align: center;">
-            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder()">
+            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder1()">
                 <div class="single-comment__content pl-2 mt-2">
                     <strong class="username">
                         <h2 style="padding: 0px; margin: 0px;">

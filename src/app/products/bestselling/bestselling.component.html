@@ -465,9 +465,9 @@
                                             <div class="shop-product__block__value" *ngFor="let a of choice">
 
                                                 <div class="shop-product-size-list">
-                                                    <span class="single-size" *ngFor="let b of a.options"
-                                                        (click)="selectvar(b)">{{b}}</span>
-
+                                                    <span class="single-size" *ngFor="let b of a.options;let i=index"
+                                                    [ngClass]="{'active': subItem === i}"    (click)="selectvar(b,i)">{{b}}</span>
+    
                                                 </div>
                                             </div>
                                         </div>

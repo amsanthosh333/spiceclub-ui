@@ -67,7 +67,7 @@
                     <div class="row">
 
                         <div class="col-md-4 mb-60" *ngFor="let img of Blogs">
-                            <div class="single-slider-post">
+                            <div class="single-slider-post"  *ngIf="Blogs?.length!==0">
                                 <!--=======  image  style="height: 200px; width: 200px;"=======-->
 
                                 <div class="single-slider-post__image mb-30" style="height: 200px;  display: block;
@@ -104,15 +104,25 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <!--=======  pagination  =======-->
-
-                            <div id="pgg">
+                            <div id="pgg" *ngIf="Blogs?.length!==0">
                                 <ul class="pagination" style="justify-content: center;
                                     display: flex;">
-                                    <li [ngClass]="{disabled:p.url === null}" class="page-item first-item"
+                                    <li [ngClass]="{disabled:p.url === null}"  [ngClass]="{'active': p.active}" class="page-item first-item"
                                         *ngFor="let p of pagess" (click)="getpage(p.url)">
                                         <a class="page-link">{{p.label}}</a>
                                     </li>
                                 </ul>
+                            </div>
+                            <div id="pggg" *ngIf="Blogs?.length==0" style=" display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            height: 200px;
+                            border: 3px solid rgb(139, 139, 139);">
+                                <div>
+                                    <h5>
+                                        There is no recipe
+                                    </h5>
+                                </div>
                             </div>
 
                             <!--=======  End of pagination  =======-->

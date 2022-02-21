@@ -15,12 +15,12 @@ export class SharedService {
 }
 
 sendlogout(){
-  console.log("sendlogout");
+ 
   
   this.logoutsubject.next(value)
 }
 getlogout():Observable<any>{
-  console.log("getlogout");
+ 
   return this.logoutsubject.asObservable()
 }
  

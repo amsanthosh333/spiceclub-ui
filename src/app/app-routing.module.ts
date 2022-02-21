@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'address', loadChildren: () => import('./profiledetails/address/address.module').then(m => m.AddressModule) },
   { path: 'message', loadChildren: () => import('./profiledetails/message/message.module').then(m => m.MessageModule) },
   { path: 'faq', loadChildren: () => import('./pages/faq/faq.module').then(m => m.FaqModule) },
+  { path: 'purchased', loadChildren: () => import('./profiledetails/purchased/purchased.module').then(m => m.PurchasedModule) },
   
 ];
 
