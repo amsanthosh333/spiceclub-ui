@@ -9,6 +9,7 @@ import { CarouselModule } from 'ngx-owl-carousel-o';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
+import { RouterModule } from '@angular/router';
 @NgModule({
   declarations: [
     BrandsComponent
@@ -17,7 +18,6 @@ import { ToastrModule } from 'ngx-toastr';
     CommonModule,
     BrandsRoutingModule,ReactiveFormsModule,NgbModule,
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
-    ToastrModule.forRoot(),
-  ]
+    ToastrModule.forRoot(), ]
 })
 export class BrandsModule { }

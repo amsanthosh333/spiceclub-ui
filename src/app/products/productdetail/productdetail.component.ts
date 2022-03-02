@@ -99,8 +99,11 @@ export class ProductdetailComponent implements OnInit {
   error3: any;
   stocckkk: any;
   subItem: any=0;
+  varprise0: any;
+  varienttt: any;
 
-  constructor(private router: Router, private request: RequestService, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
+  constructor(private router: Router, private request: RequestService,
+     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private modalService: NgbModal, config: NgbRatingConfig, private _location: Location,private scroller: ViewportScroller,
     private toastr: ToastrService, private sharedService: SharedService) {
 
@@ -282,7 +285,7 @@ filterDatatable(qty: any) {
     // this.router.navigate(['productdetail', id]);
     window.scroll(0,0)
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-      console.log("viewproductrow",response);
+      // console.log("viewproductrow",response);
       
       window.scroll(0,0);
       this.Peoduct = response.data[0];
@@ -294,7 +297,10 @@ filterDatatable(qty: any) {
       //  this.photoos = response.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.data[0].photos.path);
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
-      this.varprise = this.Peoduct.main_price;
+      // this.varprise = this.Peoduct.main_price;
+      this.varprise0 =  this.choice 
+      this.varienttt= this.varprise0[0]?.options[0]
+      
       this.currentRatess = this.Peoduct.rating;
 
       this.photoloader = false;
@@ -312,15 +318,16 @@ filterDatatable(qty: any) {
       this.newphotos.forEach((item: any) => {
         // this.galleryphotos.push({ image: item });
         this.allgalleryphotos.push({ thumbImage: item, image: item });
-
-      })
-     
+      }) 
       this.getcommentsss()
       if (this.Peoduct.choice_options.length == 0) {
+       
         this.varient_value = ''
       }
       else {
+        // console.log("elllllllse");
         this.varient_value = this.choice[0]?.options[0];
+        this.checkvarientprice();
       }
 
     },
@@ -360,7 +367,6 @@ filterDatatable(qty: any) {
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
       this.currentRatess = this.Peoduct.rating;
-
       this.photoloader = false;
       this.contentloader = false;
       this.discriptloader = false;
@@ -378,13 +384,15 @@ filterDatatable(qty: any) {
         this.allgalleryphotos.push({ thumbImage: item, image: item });
 
       })
-     
       this.getcommentsss()
       if (this.Peoduct.choice_options.length == 0) {
+        console.log("iffffffffffff");
         this.varient_value = ''
       }
       else {
+        console.log("elseeeeee");
         this.varient_value = this.choice[0]?.options[0];
+        this.checkvarientprice();
       }
     },
       (error: any) => {
@@ -505,19 +513,32 @@ filterDatatable(qty: any) {
   selectvar(weight: any,i:any) {
     this.varient_value = weight.replace(/\s/g, "")
     this.subItem=i
-
+  
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
+console.log(res);
 
       this.varprise = res?.price_string;
       // this.totalprice=(res?.price_string).replace('Rs','');
       this.stocck = (res?.stock);
       this.stocckkk = (res?.stock);
       this.quantityyy = 0;
-
+      this.totalprice = 0.00
     }, (error: any) => {
       console.log("error", error);
 
     });
+  }
+  checkvarientprice(){
+    this.request.addvarient(this.product_id, this.varienttt).subscribe((res: any) => {
+
+
+      this.varprise = res?.price_string;
+     
+    }, (error: any) => {
+      console.log("error", error);
+
+    });
+
   }
   addreview(content: any, _id: any) {
     this.product_iddd = _id;

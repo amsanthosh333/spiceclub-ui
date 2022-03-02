@@ -60,6 +60,7 @@ export class BlogComponent implements OnInit {
   recipeloader: boolean=true;
   imgloader: boolean=false;
   keyy: any;
+  topItem: any;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
     private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
@@ -124,6 +125,8 @@ viewblogcat(){
   this.loader=true;
   this.request.getallblogcat().subscribe((response: any) => {
     this.Allcat=response.data;
+    // console.log("this.Allcat",this.Allcat);
+    
     this.loader=false;
   },
   (error: any) => {
@@ -149,10 +152,12 @@ getblogbycatg(id:any,page=1){
     console.log("error",error);
   });
 }
-getblogbycatg2(id:any){
+getblogbycatg2(id:any,i:any){
   window.scroll(0,0);
   this.router.navigate(['blog', id]);
+  this.topItem=i
   this.getblogbycatg(id)
+  
 }
 getpage(url:any){
   this.loader1=true;

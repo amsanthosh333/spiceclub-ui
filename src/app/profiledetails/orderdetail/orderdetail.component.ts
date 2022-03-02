@@ -22,7 +22,7 @@ export class OrderdetailComponent implements OnInit {
  
 
   //Demo purpose only, Data might come from Api calls/service
-  public counts = ["Order Placed","Confirmed","Picked Up","On The Way","On Delivery","Delivered"];
+  public counts = ["Order Placed","Confirmed","Picked Up","On The Way","Delivered"];
   //  public orderStatus ="Delivered"
   currentRate = 0;
   currentUserSubject: BehaviorSubject<User>;
@@ -184,14 +184,14 @@ export class OrderdetailComponent implements OnInit {
         comment:form.value.comment,
       }
   this.request.addreview(edata2).subscribe((res: any) => {
-    console.log(res);
+    console.log("addreview",res);
     
     if (res.result == true) { 
       this.toastr.success('Review  Submitted', '');    
       this.modalService.dismissAll();   
     }
     else  {
-      this.toastr.error(res.message);
+      this.toastr.info(res.message);
       this.modalService.dismissAll(); 
 
     }
@@ -323,7 +323,10 @@ razorpaysuccess() {
       this.spinner.hide();
       alert(response.message)
       this.toastr.success('Payment is successful', '');
-      this.router.navigate(['/orders']);
+      const currentUrl = this.router.url;
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+        this.router.navigate([currentUrl]);
+    });
     }
     else {
       alert(response.message)

@@ -1,0 +1,45 @@
+
+p{
+    color: #474747 ;
+    font-family: 'Poppins', sans-serif;
+  }
+  input{
+    color: #474747 ;
+    font-family: 'Poppins', sans-serif;
+  }
+  h2{
+    color:#474747; ;
+    font-family: 'Poppins', sans-serif;
+  }
+  h5.widget-title{
+    color:#474747; ;
+    font-family: 'Poppins', sans-serif;
+  }
+  li a{
+   
+    font-family: 'Poppins', sans-serif;
+  }
+  nav ul {
+    padding-left: 0rem;
+}
+
+@media (max-width : 700px) {  
+	.pt-100 {
+        padding-top: 10px !important;
+    }
+
+    .footer-single-widget .logo {
+        margin-bottom: 0px;
+    }
+
+    .footer-container.footer-one .col {
+        
+        margin-bottom: 30px;
+    }
+    .footer-single-widget h5.widget-title {
+        font-size: 14px;
+        /* font-weight: 600; */
+        margin-bottom: 10px;
+        color: #333;
+    }
+}

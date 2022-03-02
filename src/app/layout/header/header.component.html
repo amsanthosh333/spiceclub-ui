@@ -1,8 +1,8 @@
 
 
-<header class="header header-wide-topbar header-sticky border-bottom-0"  >
+<header class="header header-wide-topbar header-sticky border-bottom-0" >
     <!--=======  header bottom  =======-->
-    <div class="header-bottom pt-md-40 pb-md-40 pt-sm-40 pb-sm-40">
+    <div class="header-bottom pt-md-40 pb-md-40 ">
         <div class="container wide">
             <!--=======  header bottom container  =======-->
             <div class="header-bottom-container" style="height: 90px;">
@@ -58,7 +58,7 @@
 								<li class="menu-item" ><a routerLink="/shopbyproduct" >Shop By Product</a>                                
                                 </li>
 
-								<li class="menu-item" ><a routerLink="/category/33" >Shop By Category</a>                                
+								<li class="menu-item" ><a routerLink="/category" >Shop By Category</a>                                
                                 </li>
                                
                                 <li class="menu-item"><a routerLink="/blog" >Blog</a>
@@ -140,7 +140,7 @@
 										  
 											<a routerLink="/home">Home</a>
 											<a routerLink="/shopbyproduct" >ShopByProduct</a>
-											<a routerLink="/category/33" >ShopByCategory</a>
+											<a routerLink="/category" >ShopByCategory</a>
 											<a routerLink="/blog" >Blog</a>
 											<a  routerLink="/recipe">Recipe</a>
 											<hr>
@@ -535,7 +535,7 @@
 								<h5><a>{{b.product_name}}</a></h5>
 								<p><span class="main-price discounted">Rs{{b.price}}</span> 
 									<span class="discounted-price" style="color: red;" >Rs{{b.price}}</span></p>
-									<span><p>quantity: {{b.quantity}}</p></span>
+									<span><p style="font-size:small;">quantity: {{b.quantity}}</p></span>
 							</div>
 						</div>
 					</div>

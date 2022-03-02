@@ -64,6 +64,7 @@ export class RecipeComponent implements OnInit {
   discriptloader: boolean=true;
   imgloader: boolean=false;
   keyy: any;
+  topItem: any;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
     private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
@@ -157,9 +158,10 @@ getrecipebycatg(id:any,page=1){
     console.log("error",error);
   });
 }
-getrecipebycatg2(id:any){
+getrecipebycatg2(id:any,i:any){
   window.scroll(0,0);
   this.router.navigate(['recipe', id]);
+  this.topItem=i
   this.getrecipebycatg(id)
 }
 getpage(url:any){

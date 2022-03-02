@@ -1,3 +1,10 @@
+li a.active{
+  color: red;
+}
+li a{
+  color: gray;
+}
+
 .breadcrumb-list__item{
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
@@ -52,3 +59,23 @@
 .rating__item::after {
   content: "";
 }
+
+@media (max-width : 768px) {  
+ 
+  
+
+.mb-100 {
+  margin-bottom: 0px !important;
+}
+.mb-60 {
+  margin-bottom:30px !important;
+}
+.single-product__image{
+  text-align: -webkit-center;
+
+}
+.shop-product-wrap [class*="col"], .shop-product-wrap [class*="col-"] {
+  text-align: -webkit-center;
+}
+
+    } 

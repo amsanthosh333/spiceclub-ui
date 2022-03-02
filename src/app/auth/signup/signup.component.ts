@@ -32,11 +32,13 @@ export class SignupComponent implements OnInit {
   buyer: any;
   error2: any;
   error3: any;
+  verloading!: boolean;
+  resendloading!: boolean;
   constructor( private router: Router,private fb: FormBuilder,private request: RequestService, 
      private authService: AuthService,private toastr: ToastrService,private formBuilder: FormBuilder,private modalService: NgbModal,) {
     this.registerForm = this.formBuilder.group({
       fname: ['', Validators.required], 
-      Mobile: ['', [Validators.required]],
+      Mobile: ['', [Validators.required ,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(5)], ],
       password: ['', Validators.required], 
       confirmpassword: ['', Validators.required],
@@ -117,19 +119,25 @@ export class SignupComponent implements OnInit {
       user_id: this.userid,
       verification_code:""+this.otpform.controls['otp'].value,
     }
+    this.verloading=true;
     this.authService.registerotpverification(edata1) .subscribe(
       (res) => {
-        if (res.message == "Code does not match, you can request for resending the code") { 
-            this.error3 = '*Code does not match,you can request for resending the code';
-         
-         
+        console.log( res);
+        this.verloading=false;
+        if (res.result == true) { 
+          console.log("iffff");
+          this.toastr.success('Your account is verified', '');
+          this.modalService.dismissAll();
+          this.router.navigate(['/login']);
         } else {
-           this.router.navigate(['/home']);
+          console.log("elseee");
+          this.error3 = '*Code does not match,you can request for resending the code';
+       
           // this.error1 = 'Invalid Login';
         }
       },
       (error1) => {
-        
+        this.verloading=false;
         console.log("fail1",error1);
         this.submitted = false;
       }
@@ -137,6 +145,7 @@ export class SignupComponent implements OnInit {
   }
   }
   resend(){
+    this.resendloading=true
     let edata2={
       user_id: this.userid,
       register_by:""+this.registerForm.controls['register_by'].value,
@@ -146,6 +155,7 @@ export class SignupComponent implements OnInit {
 
     this.authService.resendotp(edata2).subscribe(
       (res) => {
+        this.resendloading=false
          // if (res.message == "Code does not match, you can request for resending the code") { 
         //     console.log("Code does not match");
         //     // this.error1 = 'Incorrect OTP!!Please Try Again!!!!';  
@@ -157,6 +167,7 @@ export class SignupComponent implements OnInit {
         // }
       },
       (error1) => {
+        this.resendloading=false
         console.log("fail"); 
         this.submitted = false;
       }

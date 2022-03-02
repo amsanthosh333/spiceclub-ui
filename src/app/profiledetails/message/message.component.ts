@@ -43,6 +43,7 @@ export class MessageComponent implements OnInit {
   currentlogo: any;
   tittlee: any;
   convdatee: any;
+  subItemm: any;
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService,private modalService: NgbModal,) { 
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -72,18 +73,19 @@ export class MessageComponent implements OnInit {
       this.Convertations=response.data;  
       console.log("this.Convertations",this.Convertations);
        
-      this.viewrow(this.Convertations[0])
+      this.viewrow(this.Convertations[0],0)
     },
     (error: any) => {
       console.log("error",error); 
     });
   }
-  viewrow(row:any){
+  viewrow(row:any,i:any){
     this.conv_id=row.id
     this.currentname=row.shop_name;
     this.currentlogo=row.shop_logo;
     this.tittlee=row.title;
     this.convdatee=row.date
+    this.subItemm=i
     this.convdatee = new Date().toLocaleDateString();
     this.request.getallmessages(row.id).subscribe((response: any) => {
       // this.page2=true;this.page1=false;

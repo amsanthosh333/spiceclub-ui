@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { RequestService } from 'src/app/services/request.service';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
 @Component({
   selector: 'app-recipedetails',
   templateUrl: './recipedetails.component.html',
@@ -66,8 +67,13 @@ export class RecipedetailsComponent implements OnInit {
   id: any;
   currenturl: any;
   productname: any;
+  relatedrec: any;
+  videoo: any;
+  videourl!: SafeResourceUrl;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
-    private route: ActivatedRoute, private request: RequestService, private modalService: NgbModal, private toastr: ToastrService, config: NgbRatingConfig, private _location: Location) {
+    private route: ActivatedRoute, private request: RequestService,
+     private modalService: NgbModal, private toastr: ToastrService, config: NgbRatingConfig,
+      private _location: Location,public sanitizer:DomSanitizer) {
 
     config.max = 5;
     config.readonly = true;
@@ -144,6 +150,10 @@ export class RecipedetailsComponent implements OnInit {
       this.Tags = this.Peoduct.tags;
       this.currentRatess = this.Peoduct.rating;
       this.productname = this.Peoduct.name;
+      this.relatedrec =this.Peoduct.products;
+      this.videoo =this.Peoduct.video_link;
+      this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);
+      
       this.sideloader2 = false;
 
       this.discrloading = false;
@@ -184,10 +194,10 @@ export class RecipedetailsComponent implements OnInit {
         return;
       }
       else {
-        if ((this.comment.get('rating'))?.value == 0) {
+        if (isNaN(form.value.rating)) {
           form.value.rating = 0
         }
-        else {
+ 
           let edata2 = {
             recipe_id: this.blog_id,
             user_id: this.userid,
@@ -208,7 +218,7 @@ export class RecipedetailsComponent implements OnInit {
             console.log("error", error);
 
           });
-        }
+        
       }
     }
   }

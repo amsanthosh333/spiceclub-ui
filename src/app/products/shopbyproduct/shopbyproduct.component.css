@@ -37,6 +37,8 @@ border-radius: 100%;
 .imglazy{
   height: 240px;
   width: 200px;
+  position: relative;
+  overflow: hidden;
 }
 .has-children a {
 	color: #474747 ;
@@ -54,7 +56,14 @@ option{
   color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
-
+input{
+  color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+select{
+  color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
 
 @media (max-width : 800px) {  
   .single-product__image{
@@ -63,6 +72,15 @@ option{
   }
   .shop-product-wrap [class*="col"], .shop-product-wrap [class*="col-"] {
     text-align: -webkit-center;
+  }
+  #vieww{
+    margin-left: 100px;
+  }
+  #ulsort{
+padding-left: 0px;
+  }
+  #fill{
+    margin-right: 20px;
   }
     } 
 
@@ -181,3 +199,53 @@ width: 40px;
       border-radius: 4px;
       background-color: #2023ce;
   }
+  
+  #product {
+    position: relative;
+   
+  }
+  
+  .electric {
+    background: turquoise;
+    color: white;
+    padding: 5px;
+    text-transform: uppercase;
+    position: absolute;
+    top: 27px;
+    left: -2px;
+    z-index: 2;
+    transform: rotate(-45deg);
+    
+  }
+
+  
+   #offtag {
+    display: block;
+    width: 120px;
+    height: 24px;
+    background-color: #ff8100;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    text-align: center;
+    line-height: 24px;
+    right: -25px;
+    top: 20px;
+    font-family: arial;
+    font-size: 10px;
+  }
+  @media (max-width : 800px) {  
+      
+    .py-4{
+        margin-left: 0px;
+        margin-right: 0px;
+    }
+      } 
+  @media (min-width : 800px) {  
+      
+        .py-4{
+            margin-left: 20px;
+            margin-right: 20px;
+        }
+          } 

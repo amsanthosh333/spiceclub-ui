@@ -1,3 +1,14 @@
+.imag.active{
+  border-style: solid;
+  border-color: rgb(128, 125, 125);
+}
+.widget-positle a.active{
+  color: red;
+}
+.widget-positle a{
+  color: #474747 ;
+  text-decoration: none;
+}
 .textopacity{
     opacity:1;
 }
@@ -22,9 +33,8 @@
     color: #474747 ;
     font-family: 'Poppins', sans-serif;
   }
- 
 
-@media (max-width : 800px) {  
+@media (max-width : 992px) {  
   .single-product__image{
     text-align: -webkit-center;
 
@@ -38,6 +48,37 @@
   #imggg{
     height: 300px;
   }
-    } 
+  .single-slider-post__content {
+    padding-top: 10px;
+}
+.page-sidebar{
+  text-align: -webkit-center;
+}
+.mb-100 {
+  margin-bottom: 0px !important;
+}
+.imag{
+  height: 105px; 
+  width: 150px;
+}
+.widget-post-wrapper{
+  max-height: 750px;overflow-y: auto;
+}
 
+    } 
+    /* .imag{
+      height: 75px; width: 100px;
+    } */
+    
+    @media (min-width : 992px) {  
+  
+    .imag{
+      height: 75px; width: 100px;
+      display: block;
+      margin: auto;
+    }
+    .widget-post-wrapper{
+      max-height: 450px;overflow-y: auto;
+    }
+        }
    

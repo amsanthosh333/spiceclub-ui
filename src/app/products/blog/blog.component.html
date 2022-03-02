@@ -32,9 +32,8 @@
 						<div class="single-sidebar-widget mb-40" *ngIf="!loader">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
 							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category" 
-							style="padding-left: 0px;max-height: 250px;overflow-y: auto;" *ngFor="let cat of Allcat">
-								<li><a style="color: gray;" (click)="getblogbycatg2(cat.id)" stty>{{cat.name}} </a> <span
-										class="quantity">12</span></li>
+							style="padding-left: 0px;max-height: 250px;overflow-y: auto;" *ngFor="let cat of Allcat;let i=index">
+								<li><a  (click)="getblogbycatg2(cat.id,i)" [ngClass]="{'active': topItem === i}" >{{cat.name}} </a></li>
 							</ul>
 
 						</div>
@@ -61,7 +60,7 @@
 											class="img-fluid" alt="">
 									</div>
 									<div class="content" >
-										<h3 class="widget-post-title"><a href="#">{{img.name}}</a></h3>
+										<h3 class="widget-post-title"><a >{{img.name}}</a></h3>
 										<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
 										<p class="widget-post-date"></p>
 									</div>
@@ -92,7 +91,7 @@
 							<div class="single-slider-post" *ngIf="Blogs?.length!==0">
 								<!--=======  image  style="height: 200px; width: 200px;"=======-->
 
-								<div class="single-slider-post__image mb-30" style="height: 200px; width: 200px;  display: block;
+								<div class="single-slider-post__image mb-10" style="height: 200px;   display: block;
 								margin-left: auto;
 								margin-right: auto;">
 									<ngx-skeleton-loader count="1" *ngIf="!imgloader"
@@ -100,7 +99,7 @@
 									</ngx-skeleton-loader>
 									<a *ngIf="imgloader" (click)="getblogdetail(img.id)">
 										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
-											class="img-fluid" alt="">
+											class="img-fluid" alt="" style="height: 200px;">
 									</a>
 								</div>
 
@@ -136,7 +135,7 @@
 							<div id="pgg"  *ngIf="Blogs?.length!==0">
 								<ul class="pagination" style="justify-content: center;
                                 display: flex;">
-									<li [ngClass]="{disabled:p.url === null}" [ngClass]="{'active': p.active}" class="page-item first-item"
+									<li  [ngClass]="{disabled:p.url === null,'active': p.active}" class="page-item first-item"
 										*ngFor="let p of pagess" (click)="getpage(p.url)">
 										<a class="page-link">{{p.label}}</a>
 									</li>

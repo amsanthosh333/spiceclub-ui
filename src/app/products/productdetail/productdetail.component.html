@@ -495,8 +495,8 @@
                                             <!--=======  shop product long description  =======-->
 
                                             <div class="shop-product__long-desc mb-20"
-                                                [innerHTML]="Peoduct?.description" *ngIf="!discriptloader">
-                                                <p>
+                                                [innerHTML]="Peoduct?.description" *ngIf="!discriptloader" style="font-family: 'Poppins', sans-serif">
+                                                <p >
                                                     {{Peoduct?.description}}
 
                                                 </p>
@@ -567,10 +567,21 @@
                                                     <!--=======  single comment  =======-->
 
                                                     <div class="single-comment" *ngFor="let comm of Comments">
-                                                        <div class="single-comment__image">
-                                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
+
+                                                        <div class="single-comment__image" *ngIf="(comm.avatar=='')">
+                                                            <img src="assets/images/user-profile.png"
                                                                 class="img-fluid" style="height: 70px;" alt="">
                                                         </div>
+                                                        <div class="single-comment__image" *ngIf="(comm.avatar!=='')">
+                                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
+                                                                class="img-fluid" style="height: 70px; width:70px;object-fit: cover;"
+                                                                alt="">
+                                                        </div>
+
+                                                        <!-- <div class="single-comment__image">
+                                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
+                                                                class="img-fluid" style="height: 70px;" alt="">
+                                                        </div> -->
                                                         <div class="single-comment__content">
 
                                                             <!--=======  username and date  =======-->

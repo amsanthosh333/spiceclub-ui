@@ -51,7 +51,7 @@
                     <div class="filter-icons">
                         <!--=======  filter dropdown  =======-->
                         <nav class="site-nav center-menu" style="height: 80px;">
-                            <ul>
+                            <ul id="ulsort">
                                 <li class="menu-item-has-children"><a href="javascript:void(0)"><span
                                             style="color: rgb(139, 139, 139);">Sorting</span></a>
                                     <ul class="sub-menu single-column-menu">
@@ -63,7 +63,7 @@
                         </nav>
                         <!--=======  advance filter icon  =====    (click)="opensort(sortRecord)"  ==-->
 
-                        <div class="single-icon advance-filter-icon" (click)="opensort(sortRecord)">
+                        <div  id="fill" class="single-icon advance-filter-icon" (click)="opensort(sortRecord)">
                             <a href="javascript:void(0)" id="advance-filter-active-btn"><i
                                     class="ion-android-funnel"></i>
                                 Filters</a>
@@ -285,12 +285,14 @@
                     <div class="row product-isotope shop-product-wrap four-column">
 
                         <!--=======  single product   =======-->
-                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let img of Product;let i=index">
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"  *ngFor="let img of Product;let i=index">
+                            <!-- <span class="electric">Electric</span> -->
+                           
                             <div class="single-product">
                                 <!--=======  single product image  =======-->
-
-                                <div class="single-product__image">
-                                    <div class="imglazy">
+                                
+                                <div class="single-product__image"  style="overflow: hidden;" >
+                                    <div class="imglazy"  >
                                         <ngx-skeleton-loader count="1" *ngIf="!imgloader"
                                             [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -300,16 +302,22 @@
                                                 class="img-fluid" alt=""> -->
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                                 class="img-fluid" alt="">
-                                        </a>
-                                    </div>
+                                        </a> 
+                                        <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
+                                    <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
+                                    <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span>
 
+                                    </div>
+                                    
                                     <div class="single-product__floating-badges">
                                         <!-- <span class="onsale">-10%</span> -->
                                         <span class="hot" *ngIf="img.has_discount==true">hot</span>
                                         <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
                                     </div>
-
+                                    
+                                  
                                     <div class="single-product__floating-icons">
+                                        
                               
 											<span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
 												data-tippy-inertia="true" data-tippy-animation="shift-away"
@@ -334,6 +342,7 @@
                                                 data-tippy-placement="left"><i
                                                     class="ion-ios-search-strong"></i></a></span>
                                     </div>
+
                                 </div>
                                 <!--=======  End of single product image  =======-->
 
@@ -341,7 +350,7 @@
                                 <div class="single-product__content" (click)="proddetail(img.id)">
                                     <div class="title">
                                         <h3> <a href="">{{img.name}}</a></h3>
-                                        <a style="color: red;">View details</a>
+                                        <a id="vieww" style="color: red;">View details</a>
                                     </div>
                                     <div class="price">
                                         <span class="main-price discounted">{{img.stroked_price}}</span>
@@ -360,7 +369,7 @@
                     <div id="pgg" *ngIf="Product?.length!==0">
                         <ul class="pagination" style="justify-content: center;
                             display: flex;">
-                            <li [ngClass]="{disabled:p.url === null}" [ngClass]="{'active': p.active}" class="page-item first-item"
+                            <li [ngClass]="{disabled:p.url === null,'active': p.active}" class="page-item first-item"
                                 *ngFor="let p of pagess" (click)="getpage(p.url)">
                                 <a class="page-link">{{p.label}}</a>
                             </li>
@@ -398,48 +407,6 @@
 
     <!--=====  End of shop page content  ======-->
 </div>
-<!-- dummy -->
-<ng-template #sortRecordd let-modal>
-    <div class="modal-content">
-
-
-        <div class="modal-body">
-            <form class="register-form" [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
-                <div class="row">
-                    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-                        <label>min<span class="text-danger">*</span></label>
-
-                        <div class="search-widget">
-                            <input type="text" class="form-control" placeholder="" formControlName="min" >
-                        </div>
-                        <label>max<span class="text-danger">*</span></label>
-                        <div class="search-widget">
-                            <input type="text" class="form-control" placeholder="" formControlName="max">
-                        </div>
-                    </div>
-
-
-                    <div class="col-12 md-12">
-                        <label>category</label>
-                        <select class="formrol pl-5" formControlName="category">
-                            <option >All</option>
-                            <option *ngFor="let tab of Allcat" [value]="tab.id">
-                                {{tab.name}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Apply</button>
-
-
-                </div>
-            </form>
-
-        </div>
-    </div>
-</ng-template>
 
 <!-- sort poup -->
 <ng-template #sortRecord let-modal>
@@ -507,12 +474,12 @@
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
             <span aria-hidden="true"><i class="ion-android-close"></i></span>
         </button>
-        <div class="py-4" style="margin-left: 20px; margin-right: 20px;">
-            <div class="modal-body p-4 c-scrollbar-light">
+        <div class="py-4" >
+            <div class="modal-body  c-scrollbar-light">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="row gutters-10 flex-row-reverse"
-                            style="margin-right: 20px;border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
+                            style="border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
                             <div class="col" style="margin-top: 35px;margin-bottom: 35px;">
                                 <div class="aiz-carousel product-gallery slick-initialized slick-slider"
                                     data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
@@ -595,15 +562,12 @@
                                 </div> -->
                         </form>
                         <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
-                            <button *ngIf="stk!==0" type="button" class="btn btn-primary buy-now fw-600 add-to-cart"
-                                (click)="addtocart2()">
-                                <i class="la la-shopping-cart"></i>
-                                <span class="d-none d-md-inline-block"> Add to cart</span>
-                            </button>
-                            <button type="button" class="btn btn-danger buy-now fw-600 add-to-cart" *ngIf="stk==0">
-                                <i class="la la-shopping-cart"></i>
-                                <span class="d-none d-md-inline-block"> Out of Stock</span>
-                            </button>
+                            <button   *ngIf="stk!==0" class="lezada-button lezada-button--small lezada-button--icon--left" (click)="addtocart2()">
+                                <i class="ion-ios-cart-outline"></i>add to cart</button>
+
+                            <button   *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
+                             style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
+                                    <i class="ion-ios-cart-outline"></i>Out of Stock</button>
 
                         </div>
 

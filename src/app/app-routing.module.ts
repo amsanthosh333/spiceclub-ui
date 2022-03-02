@@ -29,13 +29,17 @@ const routes: Routes = [
   { path: 'recipe', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },
   { path: 'recipe/:id', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },
   { path: 'brands/:id', loadChildren: () => import('./products/brands/brands.module').then(m => m.BrandsModule) },
+   { path: 'brands/:id/:page', loadChildren: () => import('./products/brands/brands.module').then(m => m.BrandsModule) },
   { path: 'flash', loadChildren: () => import('./products/flash/flash.module').then(m => m.FlashModule) },
   { path: 'category/:id', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
-  { path: 'category/subcategory/:id', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
+  { path: 'category', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
+  
  
   { path: 'daydeal', loadChildren: () => import('./products/daydeal/daydeal.module').then(m => m.DaydealModule) },
   { path: 'monthdeal', loadChildren: () => import('./products/monthdeal/monthdeal.module').then(m => m.MonthdealModule) },
   { path: 'orders', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
+  { path: 'orders/:page', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
+  { path: 'orders/:page/:delivery/:payment', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
   { path: 'orderdetail/:id', loadChildren: () => import('./profiledetails/orderdetail/orderdetail.module').then(m => m.OrderdetailModule) },
   { path: 'profile', loadChildren: () => import('./profiledetails/profile/profile.module').then(m => m.ProfileModule) },
   { path: 'wallet', loadChildren: () => import('./profiledetails/wallet/wallet.module').then(m => m.WalletModule) },

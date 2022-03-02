@@ -127,9 +127,8 @@
         </div>
     </div>
 </div>
-<!-- poup -->
+<!-- poup dummy-->
 <ng-template #openRecordd let-modal>
-
     <div class="modal-body">
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
             <span aria-hidden="true"><i class="ion-android-close"></i></span>
@@ -309,12 +308,12 @@
                 style="padding-right: 15px;">
                 <span aria-hidden="true"><i class="ion-android-close"></i></span>
             </button>
-            <div class="py-4" style="margin-left: 20px; margin-right: 20px;">
-                <div class="modal-body p-4 c-scrollbar-light">
+            <div class="py-4" >
+                <div class="modal-body  c-scrollbar-light">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="row gutters-10 flex-row-reverse"
-                                style="margin-right: 20px;border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
+                                style="border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
                                 <div class="col" style="margin-top: 35px;margin-bottom: 35px;">
                                     <div class="aiz-carousel product-gallery slick-initialized slick-slider"
                                         data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
@@ -412,16 +411,13 @@
                                 </div> -->
                                 </form>
                                 <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
-                                    <button *ngIf="stk!==0" type="button"
-                                        class="btn btn-primary buy-now fw-600 add-to-cart" (click)="addtocart2()">
-                                        <i class="la la-shopping-cart"></i>
-                                        <span class="d-none d-md-inline-block"> Add to cart</span>
-                                    </button>
-                                    <button type="button" class="btn btn-danger buy-now fw-600 add-to-cart"
-                                        *ngIf="stk==0">
-                                        <i class="la la-shopping-cart"></i>
-                                        <span class="d-none d-md-inline-block"> Out of Stock</span>
-                                    </button>
+                                  
+                                    <button   *ngIf="stk!==0" class="lezada-button lezada-button--small lezada-button--icon--left" (click)="addtocart2()">
+                                        <i class="ion-ios-cart-outline"></i>add to cart</button>
+        
+                                    <button   *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
+                                     style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
+                                            <i class="ion-ios-cart-outline"></i>Out of Stock</button>
 
                                 </div>
 

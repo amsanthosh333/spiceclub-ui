@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, NavigationStart, Params, Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RequestService } from 'src/app/services/request.service';
-import {Location} from '@angular/common';
+import {Location,PopStateEvent} from '@angular/common';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
  import{ SharedService} from 'src/app/services/shared.service'
+ import { PlatformLocation } from '@angular/common';
+ 
 
 @Component({
   selector: 'app-brands',
@@ -65,16 +67,22 @@ export class BrandsComponent implements OnInit {
   likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
   stocckkk: any;
   subItem: any;
+  subItemm: any;
+  currentpage: any;
+  pagee: any=1;
+  
  
 
   constructor(private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,
-    config: NgbRatingConfig,private _location: Location, private sharedService: SharedService) {
+    config: NgbRatingConfig,private _location: Location, private activatedRoute: ActivatedRoute, private sharedService: SharedService,
+    private location: Location) {
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser')||'{}')
         
       );
-      // console.log("currentuser details=", this.currentUserSubject);
+    
+     
       this.currentUser = this.currentUserSubject.asObservable();
        this.currentdetail = this.currentUserSubject.value;
        this.userid=this.currentdetail.user?.id; 
@@ -95,17 +103,66 @@ export class BrandsComponent implements OnInit {
       this.search = this.fb.group({ 
         key: [''],
       });
-   
+    //   this.id = this.route.snapshot.params['id'];
+    //   this.pagee = this.route.snapshot.params['page'];
+    //   location.onPopState(() => {
+    //     console.log('pressed back!');
+    //     // this.id = this.route.snapshot.params['id'];
+    //     // this.pagee = this.route.snapshot.params['page'];
+    //     this.viewdata(this.id,this.pagee)
+    // });
+
      }
 
   ngOnInit(): void {
+
+  this.detectPopState();
+  
+    // this.router.events.subscribe( e => {
+    //   if(e instanceof NavigationStart) {
+    //     console.log('Navigation type: ', e);
+    //     // this.id = this.route.snapshot.params['id'];
+    //     // this.pagee = this.route.snapshot.params['page'];
+    //      this.viewdata(this.id,this.pagee);
+    //   }
+    // })
+  
+   // this.id = this.route.snapshot.params['id'];
+    // this.route.queryParams.subscribe((data2: Params) => {     
+    //   this.pagee = data2['page']
+    //   console.log("queryParams data", this.pagee);
+      // this.viewdata(this.id,this.pagee);
+   // })
     this.prodloader=true;
     this.id = this.route.snapshot.params['id'];
-    this.viewbrands();
-    this.viewdata(this.id,1);
+    this.pagee = this.activatedRoute.snapshot.params['page'];
+    console.log("this.id ngOnInit",this.id);
+    
+    this.viewbrands(this.id);
+    this.viewdata(this.id,this.pagee);
     this.viewtopbrands();
     
   }
+  detectPopState() {
+    this.location.subscribe((popStateEvent: PopStateEvent) => {
+     // Detect popstate
+     if (popStateEvent.type === 'popstate') {
+       const eventSubscription = this.router.events.subscribe((event: any) => {
+         if (event instanceof NavigationEnd) {
+          console.log("detectPopState if");
+         
+           this.id = this.activatedRoute.snapshot.params['id'];
+           this.pagee = this.activatedRoute.snapshot.params['page'];
+           console.log("queryParams this.id", this.id);
+           console.log("queryParams data", this.pagee);
+           this.viewdata(this.id,this.pagee);
+           eventSubscription.unsubscribe();
+         }
+       });
+     }
+   });
+ }
+
   toggle(img:any,index:any): void {
     this.likeddd[index] = !this.likeddd[index];   
     if(this.likeddd[index]==true){
@@ -125,14 +182,19 @@ export class BrandsComponent implements OnInit {
       this.deleteRecord(img.id);
     }
   }
-  viewdata(id:any,page:any,){
+  viewdata(id:any,page:any){  
     this.prodloader=true;
   this.imgloader = false;
+  
     this.request.getbrandprod(id,page).subscribe((response: any) => {
+      console.log("response",response);
       this.Product=response.data;
       this.pagenation=response.meta   
       this.pagess=this.pagenation.links;
+      // this.currentpage=response.meta.current_page     
       this.prodloader=false;
+      let index = this.Allbrands?.findIndex((x:any ) => x.id == id );
+     this.subItemm=index
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -140,14 +202,22 @@ export class BrandsComponent implements OnInit {
   }
   viewdata2(id:any,i:any){
     window.scroll(0,0);
-    this.router.navigate(['brands', id]);
+    this.subItemm=i
+    this.id=id
+    // this.router.navigate(['brands', id],{ queryParams: { page: 1  }});
+    this.router.navigate(['brands',id,1]),
     this.viewdata(id,1)
    
   }
-  viewbrands(){
+  viewbrands(id:any){
     this.request.getallbrands().subscribe((response: any) => { 
       this.Allbrands=response.data;
+      // console.log(this.Allbrands);
+      
       this.sideloader=false;
+
+      let index = this.Allbrands.findIndex((x:any ) => x.id == id );
+     this.subItemm=index
     
     });
   }
@@ -155,10 +225,17 @@ export class BrandsComponent implements OnInit {
     this.prodloader=true;
     window.scroll(0,0);
   this.imgloader = false;
+  console.log("this.id",this.id);
     this.request.getpage(url).subscribe((response:any)=>{
       this.Product=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
+      this.currentpage=response.meta.current_page
+      // console.log("this.currentpage",this.currentpage);
+      this.router.navigate(['brands',this.id,this.currentpage],
+     // this.router.navigate(['brands',this.id],{  queryParams: { page: this.currentpage }},
+  
+      );
       
       this.prodloader=false;
 

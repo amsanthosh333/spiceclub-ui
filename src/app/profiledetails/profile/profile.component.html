@@ -16,7 +16,7 @@
 
 <div class="col-lg-12 mb-15 mt-2" >
 
-    <div class="checkout-cart-total  mt-1" style="margin-left: 8%; margin-right: 8%;">
+    <div class="checkout-cart-total  mt-1">
         <div class="row" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
             <div class="col-12 mb-" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
                 <div class="single-widget mt-4" style="border: none;" *ngIf="!loader">
@@ -45,7 +45,7 @@
                         
                         </div>
                         <div class="single-comment__content pl-2 mt-2 mb-4">
-                            <strong class="username">{{profiledetail?.name}}</strong>
+                            <strong  class="usernamee">{{profiledetail?.name}}</strong>
                             <p class="email" style="color: blue;">{{profiledetail?.email}}</p>
                         </div>
                     </div>
@@ -102,8 +102,9 @@
                         border: '1px solid white',
                         ' margin-bottom':'0px' 
                       }" animation="pulse"></ngx-skeleton-loader>
-                    <strong class="username">{{cartlength}}</strong>
-                    <p class="eml">In your cart</p>
+                   <h6><strong class="username">{{cartlength}}</strong></h6> 
+                    <!-- <h6 class="eml">In your cart</h6> -->
+                    <strong class="username">In your cart</strong>
                 </div>
             </div>
             <div class="col-4">
@@ -115,8 +116,8 @@
                     'background-color': '#ffffff',
                     border: '1px solid white',
                     ' margin-bottom':'0px' }" animation="pulse"></ngx-skeleton-loader>
-                    <strong class="username">{{Wlength}}</strong>
-                    <p class="eml">In your wishlist</p>
+                  <h6>  <strong class="username">{{Wlength}}</strong></h6>
+                    <strong class="username">In your wishlist</strong>
                 </div>
             </div>
             <div class="col-4">
@@ -129,8 +130,8 @@
                         border: '1px solid white',
                         ' margin-bottom':'0px' 
                       }" animation="pulse"></ngx-skeleton-loader>
-                    <strong class="username">{{orderlength}}</strong>
-                    <p class="eml">In your ordered</p>
+                  <h6>  <strong class="username">{{orderlength}}</strong></h6>
+                    <strong class="username">your total orders</strong>
                 </div>
             </div>
         </div>
@@ -139,31 +140,34 @@
             <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder()">
                 <div class="single-comment__content pl-2 mt-2">
                     <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;">
+                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
                             <i class="bi bi-file-earmark-medical-fill" style="color: green;"></i>
                         </h2>
                     </strong>
-                    <p class="eml">Orders</p>
+                    <strong class="username">Orders</strong>
+                    <!-- <p class="eml">Orders</p> -->
                 </div>
             </div>
             <div class="col-4" style="border: 1px solid #eceaea;" (click)="editprofile(changeRecord)">
                 <div class="single-comment__content pl-2 mt-2">
                     <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;">
+                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
                             <i class="bi bi-person-circle" style="color: rgb(17, 50, 243);"></i>
                         </h2>
                     </strong>
-                    <p class="eml">Profile</p>
+                    <!-- <p class="eml">Profile</p> -->
+                    <strong class="username">Profile</strong>
                 </div>
             </div>
             <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoaddress()">
                 <div class="single-comment__content pl-2 mt-2">
                     <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;">
+                        <h2 style="padding: 0px; margin: 0px; margin-bottom: 10px;">
                             <i class="bi bi-geo-alt-fill"style="color: rgb(240, 20, 31);" ></i>
                         </h2>
                     </strong>
-                    <p class="eml">Address</p>
+                    <!-- <p class="eml">Address</p> -->
+                    <strong class="username mt-1">Address</strong>
                 </div>
             </div>
         </div>
@@ -172,31 +176,34 @@
             <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder1()">
                 <div class="single-comment__content pl-2 mt-2">
                     <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;">
+                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
                             <i class="bi bi-handbag-fill" style="color: rgb(250, 116, 39);" ></i>
                         </h2>
                     </strong>
-                    <p class="eml">Purchase History</p>
+                    <strong class="username">Purchase History</strong>
+                    <!-- <p class="eml">Purchase History</p> -->
                 </div>
             </div>
             <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotowallet()">
                 <div class="single-comment__content pl-2 mt-2">
                     <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;">
+                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
                             <i class="bi bi-wallet-fill" style="color: rgb(114, 45, 5);"></i>
                         </h2>
                     </strong>
-                    <p class="eml">Wallet</p>
+                    <strong class="username">Wallet</strong>
+                    <!-- <p class="eml">Wallet</p> -->
                 </div>
             </div>
             <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotochats()">
                 <div class="single-comment__content pl-2 mt-2">
                     <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;">
+                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
                             <i class="bi bi-chat-text-fill" style="color: rgb(15, 183, 224);"></i>
                         </h2>
                     </strong>
-                    <p class="eml">Chats</p>
+                    <strong class="username">Chats</strong>
+                    <!-- <p class="eml">Chats</p> -->
                 </div>
             </div>
            
@@ -237,7 +244,7 @@
 
     <div class="modal-body">
 
-        <div class="card-body" style="margin-left: 50px;margin-right: 50px;">
+        <div class="card-body" >
             <p class="text-muted">Basic Information</p>
             <form class="edit-form" [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)">
 
@@ -306,7 +313,7 @@
                                 </ng-template>
                                 <br>
                                 <button class="btn btn-danger btn-md btn-block" (click)="changeproimg()">
-                                    save
+                                    Save
                                 </button>
 
                             </div>

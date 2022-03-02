@@ -1,3 +1,19 @@
+td{
+    color:#474747; ;
+    font-family: 'Poppins', sans-serif;
+  }
+  p{
+    color:#474747; ;
+    font-family: 'Poppins', sans-serif;
+  }
+  th h6{
+      padding-bottom: 0px;
+  }
+  h2{
+    color:#474747; ;
+    font-family: 'Poppins', sans-serif;
+  }
+
 .checkout-cart-total {
     padding: 45px;
     background-color:rgb(230, 5, 5);
@@ -68,3 +84,28 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+
+    @media (max-width: 768px) {
+        .checkout-cart-total{
+           
+            margin-left: 0%;
+            margin-right: 0%;
+            padding: 10px;
+           
+        }
+        .checkout-cart-tota{
+            padding: 1px;
+        }
+        
+        }
+        @media (min-width: 768px) {
+            .checkout-cart-total{            
+                margin-left: 5%;
+                margin-right: 5%;
+                padding: 30px;
+            }   
+            .checkout-cart-tota{
+                padding: 20px;
+            }   
+            }
+        

@@ -171,3 +171,84 @@ a.next.icons.next-icon {
     border-radius: 4px;
     background-color: #2023ce;
 }
+
+#offtag {
+  display: block;
+  width: 120px;
+  height: 24px;
+  background-color: #ff8100;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  text-align: center;
+  line-height: 24px;
+  right: -30px;
+  top: 20px;
+  font-family: arial;
+  font-size: 10px;
+  
+}
+#offtag1 {
+  display: block;
+  width: 120px;
+  height: 24px;
+  background-color: #ff8100;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  text-align: center;
+  line-height: 24px;
+  right: -160px;
+  top: 20px;
+  font-family: arial;
+  font-size: 10px;
+}
+/* <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
+   <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
+  <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span> */
+  .imglazy{
+    height: 240px;
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  @media (max-width : 575px) {
+    .single-product__image {
+      text-align: -webkit-center;
+    }
+    .single-product__content{
+      text-align: -webkit-center;
+    }
+   #vieww{
+    margin-left: 100px;
+  }
+    }
+    @media (max-width : 575px) {
+      #sklbest {
+        text-align: -webkit-center;
+      }
+      
+    
+      }
+    @media only screen and (min-width: 768px) {
+      /* For desktop: */
+      .col-1 {width: 8.33%;}
+      .col-2 {width: 16.66%;}
+      .col-3 {width: 25%;}
+    }
+    @media (max-width : 800px) {  
+      
+      .py-4{
+          margin-left: 0px;
+          margin-right: 0px;
+      }
+        } 
+    @media (min-width : 800px) {  
+        
+          .py-4{
+              margin-left: 20px;
+              margin-right: 20px;
+          }
+            } 

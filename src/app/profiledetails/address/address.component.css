@@ -2,11 +2,24 @@
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
+input{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+select{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+
 label{
     color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
 option{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+h5{
     color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
@@ -73,4 +86,37 @@ agm-map { height: 600px;
     margin-right: 0px;
 }
 }
+
+@media (max-width: 768px) {
+.checkout-cart-total{
+   
+    margin-left: 0%;
+    margin-right: 0%;
+    padding: 10px;
+   
+}
+span {     
+    font-size: 0.8em;
+}
+label{
+    font-size: 0.7em;
+}
+strong{
+    font-size: 0.9em;
+}
+#fform{
+    margin-left: 0px;margin-right: 0px
+}
+}
+@media (min-width: 768px) {
+    .checkout-cart-total{
+       
+        margin-left: 5%;
+        margin-right: 5%;
+        padding: 30px;
+    }
+    #fform{
+        margin-left: 30px;margin-right: 40px
+    }
+    }
 

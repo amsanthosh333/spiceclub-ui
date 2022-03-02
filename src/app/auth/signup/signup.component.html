@@ -152,8 +152,10 @@
                             <div class="modal-footer" style="justify-content: center;">
 								<h6 class="form-text text-danger"style="height: 12px;">
 									<span *ngIf="error3">{{error3}}</span></h6>
-                              <button type="submit" class="btn btn-danger">&nbsp;Verify&nbsp;</button>
-							  <button  class="btn btn-success"  (click)="resend()">Resend</button>
+                              <button type="submit" class="btn btn-danger"  *ngIf="!verloading">&nbsp;Verify&nbsp;</button>
+							  <button type="submit" class="btn btn-danger" *ngIf="verloading"><i class="fa fa-spinner fa-spin" ></i>&nbsp;</button>
+							  <button  class="btn btn-success" *ngIf="!resendloading" (click)="resend()">Resend</button>
+							  <button type="button" class="btn btn-success" *ngIf="resendloading"><i class="fa fa-spinner fa-spin" ></i>&nbsp;</button>
                               <!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
                             </div>
                           </form>

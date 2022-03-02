@@ -159,14 +159,17 @@ export class BlogdetailsComponent implements OnInit {
       });
   }
   addcomment(form: FormGroup) {
+    console.log(form.value.rating)
+    console.log("edata2");
     if (this.userid == 0) {
       this.toastr.info('You need to login', '');
     }
     else {
       this.error1 = '';
       if (this.comment.invalid) {
-
+        console.log("invalid")
         if (!this.comment.get('rating')?.valid) {
+          console.log("give")
           this.error1 = '*give star';
         }
         else if (!this.comment.get('comment')?.valid) {
@@ -175,10 +178,15 @@ export class BlogdetailsComponent implements OnInit {
         return;
       }
       else {
-        if ((this.comment.get('rating'))?.value == 0) {
+        console.log("give else")
+        console.log(form.value.rating)
+        if (isNaN(form.value.rating)) {
+          console.log("give iff")
           form.value.rating = 0
+          console.log(form.value.rating)
+          
         }
-        else {
+     
           let edata2 = {
             blog_id: this.blog_id,
             user_id: this.userid,
@@ -188,6 +196,7 @@ export class BlogdetailsComponent implements OnInit {
     console.log(edata2);
     
           this.request.addblogcomment(edata2).subscribe((res: any) => {
+
             if (res.message == 'Comment  Submitted') {
               this.toastr.success('Comment  Submitted', '');
               this.getcommentsss();
@@ -201,7 +210,7 @@ export class BlogdetailsComponent implements OnInit {
             console.log("error", error);
 
           });
-        }
+        
       }
     }
   }

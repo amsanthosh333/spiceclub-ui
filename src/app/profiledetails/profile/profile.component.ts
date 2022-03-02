@@ -104,7 +104,7 @@ export class ProfileComponent implements OnInit {
     });
   }
   getorders(){
-    this.request.fetchOrders(this.userid).subscribe((response: any) => {
+    this.request.fetchOrders(this.userid,1).subscribe((response: any) => {
       this.Orders=response.meta;  
       this.orderlength = this.Orders.total;
       this.loader3=false

@@ -11,6 +11,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
+import { NgImageSliderModule } from 'ng-image-slider';
 @NgModule({
   declarations: [
     CategoryComponent
@@ -19,7 +20,7 @@ import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
     CommonModule,
     CategoryRoutingModule,ReactiveFormsModule,NgbModule,
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
-    ToastrModule.forRoot(),CollapseModule,NgxNavbarModule
+    ToastrModule.forRoot(),CollapseModule,NgxNavbarModule,NgImageSliderModule
   ]
 })
 export class CategoryModule { }

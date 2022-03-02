@@ -81,6 +81,40 @@ export class CategoryComponent implements OnInit {
   element!: HTMLElement;
   stocckkk: any;
   subItemm: any=0;
+  page2!: boolean;
+  imageObject: any = [
+    {
+      "thumbImage": "assets/images/banners/ban1.jpeg", "title": "title of image"
+    },
+
+    {
+      "thumbImage": "assets/images/banners/ban2.jpeg", "title": "title xdfgvxvs dfv of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban1.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban2.jpeg", "title": "title sdefxcvsdv sdgsdvof image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
+    {
+      "thumbImage": "assets/images/banners/ban3.jpeg", "title": "title of image"
+    },
+  ]
+  catName: any;
+  SubofSubcat: any=[];
+  SubofSubcat1: any=[];
+  topItem1: any;
+
+
   constructor(private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,
     config: NgbRatingConfig,private _location: Location,private sharedService: SharedService) {
@@ -103,12 +137,24 @@ export class CategoryComponent implements OnInit {
  
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    console.log("this.id",this.id);
+    if(this.id===undefined){
+      this.viewallcategory();
+      this.viewtopcategory();
+      this.viewfeatured();
+      this.page2=false
+    }
+    else{
     this.viewallcategory();
+    this.categorydetail(this.id);
     this.getprodofcategory(this.id,1);
     this.getsubcategory(this.id);
     this.viewtopcategory();
     this.viewfeatured();
+    this.page2=true
     this.selectedItem=this.id;
+  }
+
     this.search = this.fb.group({ 
     key: [''],
     });
@@ -163,13 +209,23 @@ getsubcategory(id:any){
     console.log("error",error);
   });
 }
+getsubsubcategory(id:any){
+  this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+    this.SubofSubcat=res.data;
+    this.sideloader=false;
+  }, (error: any) => {
+    console.log("error",error);
+  });
+}
 getprodofcategory(id:any,page:any){
   this.prodloader=true;
   this.imgloader = false;
   this.selectedItem=this.id;
-  this.topItem=''
+  // this.topItem=''
   this.subItem=''
   this.request.getcatprod(id,page).subscribe((response: any) => {
+    console.log(response);
+    
     this.Product=response.data;
       this.pagenation=response.meta   ;
       this.pagess=this.pagenation.links;
@@ -181,6 +237,12 @@ getprodofcategory(id:any,page:any){
   (error: any) => {
     console.log("error",error);
   });
+}
+categorydetail(id:any){
+  this.request.getcatdetail(id).subscribe((response: any) => {
+    console.log("categorydetail",response);
+    this.catName=response.data[0].name
+})
 }
 getpage(url:any){
   this.prodloader=true;
@@ -290,6 +352,63 @@ viewctopcatprod3(id:any,i:any){
   this.viewctopcatprod(id,1,i)
  
 }
+viewctopcatprodsub(id:any,page:any,i:any){
+  this.prodloader=true;
+  this.imgloader = false; 
+  this. selectedItem='';
+ this. topItem=i;
+ this. topItem1='';
+
+  this.request.getcatprod(id,page).subscribe((response:any) => {
+    this.Product=response.data;
+    this.pagenation=response.meta   
+    this.pagess=this.pagenation.links;
+    this.prodloader=false;
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
+    this.search.reset();
+    this.searchh1=true;
+    this.search2=false;
+  
+  });
+  
+}
+viewctopcatprodsub1(id:any,page:any,i:any){
+  this.prodloader=true;
+  this.imgloader = false; 
+  this. selectedItem='';
+ this. topItem1=i;
+
+  this.request.getcatprod(id,page).subscribe((response:any) => {
+    this.Product=response.data;
+    this.pagenation=response.meta   
+    this.pagess=this.pagenation.links;
+    this.prodloader=false;
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
+    this.search.reset();
+    this.searchh1=true;
+    this.search2=false;
+  
+  });
+  
+}
+viewctopcatprod3sub(id:any,i:any){
+  window.scroll(0,0);
+  this.router.navigate(['category', id]);
+  this.viewctopcatprodsub(id,1,i)
+  this.subofsubcatprod1(id)
+ 
+}
+viewctopcatprod3sub1(id:any,i:any){
+  window.scroll(0,0);
+  this.router.navigate(['category', id]);
+  this.viewctopcatprodsub1(id,1,i)
+  
+ 
+}
 
 viewctopcatprod2(id:any,page:any,i:any){
   this.prodloader=true;
@@ -297,6 +416,8 @@ viewctopcatprod2(id:any,page:any,i:any){
   this. selectedItem='';
   this.subItem='';
  this. topItem=''; 
+ this.SubofSubcat1=[]
+ this.SubofSubcat=[]
  window.scroll(0,0);
   this.getsubcategory(id)
   this.request.getcatprod(id,page).subscribe((response:any) => {
@@ -315,8 +436,11 @@ viewctopcatprod2(id:any,page:any,i:any){
   
 }
 viewctopcatprod4(id:any,i:any){
+
   window.scroll(0,0);
+  this.page2=true
   this.router.navigate(['category', id]);
+  this.categorydetail(id)
   this.viewctopcatprod2(id,1,i)
 }
 viewsubcatprod(id:any,page:any,i:any){
@@ -326,9 +450,9 @@ viewsubcatprod(id:any,page:any,i:any){
   this.searchh1=false;
   this.search2=true;
   this.subItem=i;
+  this. topItem=''; 
   this.request.getsubcatprod(id,page).subscribe((response: any) => {
-    console.log("subcat",response ,this.subItem);
-    
+    console.log("subcatprod",response ,this.subItem);  
     this.Product=response.data;
     this.pagenation=response.meta   
     this.pagess=this.pagenation.links
@@ -339,10 +463,31 @@ viewsubcatprod(id:any,page:any,i:any){
    
   });
 }
+subofsubcatprod(id:any){
+  this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+    this.SubofSubcat=res.data;
+    console.log("SubofSubcat",this.SubofSubcat);
+    
+    this.sideloader=false;
+  }, (error: any) => {
+    console.log("error",error);
+  });
+}
+subofsubcatprod1(id:any){
+  this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+    this.SubofSubcat1=res.data;
+    console.log("SubofSubcat",this.SubofSubcat);
+    
+    this.sideloader=false;
+  }, (error: any) => {
+    console.log("error",error);
+  });
+}
 viewsubcatprod2(id:any,i:any){
   window.scroll(0,0);
   // this.router.navigate(['category/subcategory', id]);
   this.viewsubcatprod(id,1,i)
+ this.subofsubcatprod(id)
  
 }
 

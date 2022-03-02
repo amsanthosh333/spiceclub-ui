@@ -203,14 +203,14 @@
 										<div class="row">
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Phone no*</label>
+												<label class="shipplable">Phone no<span class="text-danger">*</span></label>
 												<input type="text" placeholder="Phone number" formControlName="phone"
 													required>
 											</div>
 
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Country*</label>
+												<label class="shipplable">Country<span class="text-danger">*</span></label>
 												<select class="nice-select" (change)="selectcountry($event)"
 													formControlName="country">
 													<option value="" selected disabled>select</option>
@@ -219,7 +219,7 @@
 												</select>
 											</div>
 											<div class="col-12 mb-20">
-												<label class="shipplable">Address*</label>
+												<label class="shipplable">Address<span class="text-danger">*</span></label>
 												<input type="text" placeholder="Address line 1"
 													formControlName="address">
 												<input type="text" placeholder="Address line 2"
@@ -227,7 +227,7 @@
 											</div>
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">State*</label>
+												<label class="shipplable">State<span class="text-danger">*</span></label>
 												<select class="nice-select" (change)="selectstate($event)"
 													formControlName="state">
 													<option value="" selected disabled>select</option>
@@ -249,15 +249,20 @@
 												</select>
 											</div> -->
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Town/City*</label>
-												<ng-select class="nice-select" formControlName="city" [items]="City"
+												<label class="shipplable">Town/City<span class="text-danger">*</span></label>
+												<!-- <ng-select class="nice-select" formControlName="city" [items]="City"
 													bindLabel="name" bindValue="id" required placeholder="">
-												</ng-select>
+												</ng-select> -->
+												<select class="nice-select" formControlName="city" required>
+													<option *ngFor="let mem of City" [value]="mem.id">
+														{{mem.name}}
+													</option>
+												</select>
 											</div>
 
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Zip Code*</label>
+												<label class="shipplable">Zip Code<span class="text-danger">*</span></label>
 												<input type="text" placeholder="Zip Code" formControlName="postal_code">
 											</div>
 
@@ -287,7 +292,7 @@
 												<div *ngFor="let a of Cart">
 													<li *ngFor="let b of a.cart_items">
 														<div class="row">
-															<div class="col-10">{{b.product_name}} <span style="float: none; color: blue;">(x {{b.quantity}})</span> </div>
+															<div class="col-10">{{b.product_name}} <span style="float: none; color: blue;">({{b.quantity}})</span> </div>
 															<div class="col-2"><span >Rs.{{b.total}}</span> </div>
 														</div>
 														

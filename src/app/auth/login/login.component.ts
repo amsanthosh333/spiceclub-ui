@@ -67,6 +67,11 @@ export class LoginComponent implements OnInit {
 
   ClickEventSubscription !: Subscription;
   errorb: any;
+  btnloading!: boolean;
+  loginloading!: boolean;
+  fpassloading!: boolean;
+  fpassotploading!: boolean;
+  resendloading!: boolean;
 
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
     private formBuilder: FormBuilder, private authService: AuthService, private sharedService: SharedService,
@@ -110,7 +115,7 @@ export class LoginComponent implements OnInit {
       buyer_type: ['', [Validators.required]],
     });
     this.forgotForm = this.formBuilder.group({
-      Mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      Mobile: ['', [Validators.required]],
       Type: ['', [Validators.required]],
       // meeting_type:['', Validators.required]
     });
@@ -272,13 +277,13 @@ export class LoginComponent implements OnInit {
   loginotp(content: any) {
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'sm',
+      size: 'md',
     });
   }
   loginotpverify(content: any) {
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'lg',
+      size: 'md',
     });
   }
 
@@ -288,6 +293,7 @@ export class LoginComponent implements OnInit {
       this.error3 = '* Enter correct mobile number';
       return;
     } else {
+      this.btnloading=true;
       let edata1 = {
         phone: form.value.phone,
       }
@@ -295,6 +301,7 @@ export class LoginComponent implements OnInit {
         this.otpuserid = res.user_id
         if (res) {
           if (res.message == "OTP code is sent to Mobile ") {
+            this.btnloading=false;
             this.modalService.open(content, {
               ariaLabelledBy: 'modal-basic-title',
               size: 'md',
@@ -302,9 +309,11 @@ export class LoginComponent implements OnInit {
             return;
           }
           else if (res.result == false) {
+            this.btnloading=false;
             this.error3 = '* Not a registered mobile number';
           }
         } else {
+          this.btnloading=false;
           this.error3 = '*Enter correct details';
         }
       },
@@ -318,15 +327,18 @@ export class LoginComponent implements OnInit {
   verifyloginotp(form: FormGroup) {
     this.error5 = ''
     if (this.loginverifyform.invalid) {
-      this.error3 = '* Enter correct mobile number';
+      this.error3 = '* Enter Otp';
       return;
     } else {
       let edata1 = {
         user_id: this.otpuserid,
         otp_code: form.value.otp_code,
       }
+      this.loginloading=true
       this.authService.otplogin(edata1).subscribe((res) => {
+        this.loginloading=false
         if (res) {
+          
           if (res.message == "User not found") {
             this.error5 = 'User not found';
             return;
@@ -611,23 +623,25 @@ export class LoginComponent implements OnInit {
     if (this.forgotForm.invalid) {
       // console.log("form invalid",);
       if (!this.forgotForm.get('Mobile')?.valid) {
-        this.error6 = '* Enter Correct mobile number';
+        this.error6 = '* Enter correct email or mobile number';
       }
       else if (!this.forgotForm.get('Type')?.valid) {
         this.error6 = '* Select Type';
       }
       return;
     } else {
-
+      console.log("reskkkk");
       let edata1 = {
         email_or_phone: "" + this.forgotForm.controls['Mobile'].value,
         send_code_by: "" + this.forgotForm.controls['Type'].value,
       }
-
+      console.log(edata1);
+     this.fpassloading=true
 
       this.authService.conformforgot(edata1).subscribe(
         (res) => {
-
+          console.log("res",res);
+          this.fpassloading=false
           if (res) {
             if (res.message == "A code is sent") {
               this.modalService.dismissAll()
@@ -637,16 +651,21 @@ export class LoginComponent implements OnInit {
               });
 
             }
-          } else if (res.result = false) {
+          } else if (res.result == false) {
             this.error6 = '* Enter registered mailid';
 
           }
         },
-        (error: string) => {
-          console.log("test", "" + error);
-        }
+        (error: any) => {
+          this.fpassloading=false
+          console.log("test", "", error.error);
+          if (error.error.result == false) {
+            this.error6 = error.error.message;
+
+
+          }}
       );
-    }
+        }    
   }
 
   // password change
@@ -660,11 +679,13 @@ export class LoginComponent implements OnInit {
         this.error7 = '* Enter OTP';
       }
       else if (!this.passwordForm.get('newpassword')?.valid) {
+        console.log("passs");
+        
         this.error7 = '* Enter password';
       }
       return;
     } else {
-
+this.fpassotploading=true
       let edata3 = {
         verification_code: "" + this.passwordForm.controls['otp'].value,
         password: "" + this.passwordForm.controls['newpassword'].value,
@@ -673,7 +694,7 @@ export class LoginComponent implements OnInit {
       // current user by login is stored in local storage -see authservice
       this.authService.resetpassword(edata3).subscribe(
         (res) => {
-
+          this.fpassotploading=false
           if (res) {
             if (res.message == "Your password is reset.Please login") {
               this.toastr.success('Reset Successfully', '');
@@ -682,7 +703,7 @@ export class LoginComponent implements OnInit {
               window.scroll(0, 0)
 
             }
-            else if (res.message == "No user is found") {
+            else if (res.message == "No user found") {
               this.error7 = '* Invalid code';
 
             }
@@ -704,6 +725,7 @@ export class LoginComponent implements OnInit {
 
   }
   resend2() {
+    this.resendloading=true
     let edata2 = {
       email_or_phone: "" + this.forgotForm.controls['Mobile'].value,
       verify_by: "" + this.forgotForm.controls['Type'].value,
@@ -711,11 +733,10 @@ export class LoginComponent implements OnInit {
 
     this.authService.resendforgot(edata2).subscribe(
       (res) => {
+        this.resendloading=false
 
-        if (res.message == "A code is sent again") {
+        if (res.result == true) {
           this.error7 = '* A code is sent again';
-
-
 
         } else {
 

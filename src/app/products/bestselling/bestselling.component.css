@@ -1,6 +1,8 @@
 .imglazy{
     height: 240px;
     width: 200px;
+    position: relative;
+    overflow: hidden;
   }
   .breadcrumb-list__item{
     color: #474747 ;
@@ -42,7 +44,21 @@ border-radius: 100%;
   .shop-product-wrap [class*="col"], .shop-product-wrap [class*="col-"] {
     text-align: -webkit-center;
   }
+  #vieww{
+    margin-left: 100px;
+  }
+  .py-4{
+      margin-left: 0px;
+      margin-right: 0px;
+  }
     } 
+    @media (min-width : 800px) {  
+    
+      .py-4{
+          margin-left: 20px;
+          margin-right: 20px;
+      }
+        } 
 
    /* to remove arroys form input box */
    input::-webkit-outer-spin-button,
@@ -71,3 +87,23 @@ border-radius: 100%;
     border-radius: 4px;
     background-color: #2023ce;
 }
+#offtag {
+  display: block;
+  width: 120px;
+  height: 24px;
+  background-color: #ff8100;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+  position: absolute;
+  text-align: center;
+  line-height: 24px;
+  right: -25px;
+  top: 20px;
+  font-family: arial;
+  font-size: 10px;
+}
+/* <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
+   <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
+  <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span> 
+  style="overflow: hidden;"   */
