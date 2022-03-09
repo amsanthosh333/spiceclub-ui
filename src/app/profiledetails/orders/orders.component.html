@@ -21,13 +21,16 @@
             <div class="col-12 col-lg-12 col-md-2">
                 <div class="filter-icons">
                     <nav class="site-nav center-menu" style="height: 60px;">
-                        <ul>
+                        <ul class="fil" style="  list-style-type: none;
+                        margin: 0;
+                        padding: 0;
+                        overflow: hidden;">
                             <li class="menu-item-has-children">
                                 <i class="bi bi-credit-card" style="color: rgb(139, 139, 139); "></i>&nbsp; <a
                                     href="javascript:void(0)"><span
                                         style="color: rgb(139, 139, 139); ">{{label1}}</span></a>
                                 <ul class="sub-menu single-column-menu">
-                                    <li *ngFor="let tab of Sort"><a (click)="onsortChange(tab.id,tab.value)">
+                                    <li  *ngFor="let tab of Sort"><a (click)="onsortChange(tab.id,tab.value)">
                                             {{tab.value}}</a></li>
                                 </ul>
                             </li>
@@ -52,10 +55,10 @@
 </div>
 
 <div *ngIf="!loader">
-    <div class="orderss mb-2  mt-40" *ngFor="let img of Orders"
+    <div class="orderss mb-2  mt-10" *ngFor="let img of Orders"
         style="border:1px solid rgb(212, 210, 210); background-color: white; margin-left: 9%; margin-right: 9%;">
         <div class="row " style=" margin-left: 5px; margin-right: 5px;" *ngIf="(Orders.length!==0)">
-            <div class="col-12 mb-3 " style="height: 50px;border-bottom:1px solid rgb(212, 210, 210) ; ">
+            <div class="col-12 mb-3 " style="height: 50px;border-bottom:1px solid rgb(212, 210, 210) ; background-color: whitesmoke;">
                 <div class="row mt-2 " id="firstrow">
                     <div class="col-10 " style="padding-right: 0px;">
                         <!-- <button type="button" class="btn btn-primary btn-lg btn-block" >

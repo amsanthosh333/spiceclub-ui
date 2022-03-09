@@ -245,6 +245,7 @@ categorydetail(id:any){
 })
 }
 getpage(url:any){
+  if(url!==null){
   this.prodloader=true;
   this.imgloader = false;
   window.scroll(0,0);
@@ -257,6 +258,7 @@ getpage(url:any){
       this.imgloader = true;
     }, 2000);
   })
+}
 }
 proddetail(id:any){
   this.router.navigate(['productdetail', id]);

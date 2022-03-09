@@ -32,12 +32,16 @@
                 <div class="col-12 col-lg-7 col-md-10 d-none d-md-block">
                     <!--=======  fitler titles  =======-->
                     <div class="filter-title filter-title--type-two">
-                        <ul class="product-filter-menu" >
-                            <li  [ngClass]="{'active': headItem === 1}" (click)="viewalldeal()" (click)="headactive(1)"> All</li>
-                            <li  [ngClass]="{'active': headItem === 2}" (click)="viewtodaysdeal()" (click)="headactive(2)">Todaysdeal</li>
+                        <ul class="product-filter-menu">
+                            <li [ngClass]="{'active': headItem === 1}" (click)="viewalldeal()" (click)="headactive(1)">
+                                All</li>
+                            <li [ngClass]="{'active': headItem === 2}" (click)="viewtodaysdeal()"
+                                (click)="headactive(2)">Todaysdeal</li>
                             <!-- <li (click)="viewflashdeal()">Flashdeal</li> -->
-                            <li  [ngClass]="{'active': headItem === 3}" (click)="viewdealofday()" (click)="headactive(3)">Dealofday</li>
-                            <li   [ngClass]="{'active': headItem === 4}" (click)="viewdealofmonth()" (click)="headactive(4)">Dealofmonth</li>
+                            <li [ngClass]="{'active': headItem === 3}" (click)="viewdealofday()"
+                                (click)="headactive(3)">Dealofday</li>
+                            <li [ngClass]="{'active': headItem === 4}" (click)="viewdealofmonth()"
+                                (click)="headactive(4)">Dealofmonth</li>
                             <!-- <li data-filter=".sale">sale products</li> -->
                         </ul>
                     </div>
@@ -45,7 +49,7 @@
                 </div>
 
                 <div class="col-12 col-lg-5 col-md-2">
-                 
+
                     <!--=======  filter icons  =======-->
 
                     <div class="filter-icons">
@@ -63,7 +67,7 @@
                         </nav>
                         <!--=======  advance filter icon  =====    (click)="opensort(sortRecord)"  ==-->
 
-                        <div  id="fill" class="single-icon advance-filter-icon" (click)="opensort(sortRecord)">
+                        <div id="fill" class="single-icon advance-filter-icon" (click)="opensort(sortRecord)">
                             <a href="javascript:void(0)" id="advance-filter-active-btn"><i
                                     class="ion-android-funnel"></i>
                                 Filters</a>
@@ -90,7 +94,7 @@
     <div class="shop-page-content mt-15 mb-15">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 order-2 order-lg-1" >
+                <div class="col-lg-3 order-2 order-lg-1">
                     <!--=======  page sidebar  =======-->
 
                     <div class="page-sidebar">
@@ -104,12 +108,12 @@
                                     (click)='filterDatatable($event)' aria-label="Search box">
                             </div> -->
                             <div class="search-widget">
-                           
-                                <form [formGroup]="search" (ngSubmit)="search1(search)" >
+
+                                <form [formGroup]="search" (ngSubmit)="search1(search)">
                                     <input type="search" formControlName="key" placeholder="Search products ...">
                                     <button type="submit"><i class="ion-android-search"></i></button>
                                 </form>
-                               
+
                             </div>
 
                             <!--=======  End of search widget  =======-->
@@ -134,11 +138,13 @@
                             </div> -->
 
                         <div class="single-sidebar-widget mb-40">
-                            <h2 class="single-sidebar-widget--title mb-2" >Brands</h2>
-                            <ul *ngIf="!sideloader1" class="single-sidebar-widget--list single-sidebar-widget--list--category "
-                             style="padding-left: 0px;height: 275px;overflow-y: auto;">
-                                <li class="has-children" *ngFor="let img of Allbrands;let i=index"   [ngClass]="{'active': subItem === i}">
-                                    <a  (click)="getprodofbrand2(img.id,i)">{{img.name}}</a>
+                            <h2 class="single-sidebar-widget--title mb-2">Brands</h2>
+                            <ul *ngIf="!sideloader1"
+                                class="single-sidebar-widget--list single-sidebar-widget--list--category "
+                                style="padding-left: 0px;height: 275px;overflow-y: auto;">
+                                <li class="has-children" *ngFor="let img of Allbrands;let i=index"
+                                    [ngClass]="{'active': subItem === i}">
+                                    <a (click)="getprodofbrand2(img.id,i)">{{img.name}}</a>
                                 </li>
                                 <!-- <li  *ngIf="sideloader1">
                                         <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
@@ -277,7 +283,7 @@
                         <!--=======  End of single sidebar widget  =======-->
                     </div>
                 </div>
-               
+
                 <!-- sidebarlazyloading  end-->
                 <!-- *ngIf="prodloader" -->
                 <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="!prodloader">
@@ -285,14 +291,15 @@
                     <div class="row product-isotope shop-product-wrap four-column">
 
                         <!--=======  single product   =======-->
-                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"  *ngFor="let img of Product;let i=index">
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"
+                            *ngFor="let img of Product;let i=index">
                             <!-- <span class="electric">Electric</span> -->
-                           
+
                             <div class="single-product">
                                 <!--=======  single product image  =======-->
-                                
-                                <div class="single-product__image"  style="overflow: hidden;" >
-                                    <div class="imglazy"  >
+
+                                <div class="single-product__image" style="overflow: hidden;">
+                                    <div class="imglazy">
                                         <ngx-skeleton-loader count="1" *ngIf="!imgloader"
                                             [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -302,38 +309,38 @@
                                                 class="img-fluid" alt=""> -->
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                                 class="img-fluid" alt="">
-                                        </a> 
+                                        </a>
                                         <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
-                                    <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
-                                    <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span>
+                                        <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
+                                        <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span>
 
                                     </div>
-                                    
+
                                     <div class="single-product__floating-badges">
                                         <!-- <span class="onsale">-10%</span> -->
                                         <span class="hot" *ngIf="img.has_discount==true">hot</span>
                                         <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
                                     </div>
-                                    
-                                  
-                                    <div class="single-product__floating-icons">
-                                        
-                              
-											<span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
-												data-tippy-inertia="true" data-tippy-animation="shift-away"
-												data-tippy-delay="50" data-tippy-arrow="true"
-												data-tippy-theme="sharpborder" data-tippy-placement="left">
-												<i [ngClass]="{'ion-android-favorite':likeddd[i]===true, 'ion-android-favorite-outline':likeddd[i]===false}"
-													(click)='toggle(img,i)'
-													style="color: rgb(214, 5, 5);"></i></a></span>
 
-									    	<span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
-									  			data-tippy-inertia="true" data-tippy-animation="shift-away"
-												data-tippy-delay="50" data-tippy-arrow="true"
-												data-tippy-theme="sharpborder" data-tippy-placement="left">
-												<i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
-													(click)='toggledelete(img,i)'
-													style="color: rgb(214, 5, 5);"></i></a></span>
+
+                                    <div class="single-product__floating-icons">
+
+
+                                        <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
+                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                data-tippy-delay="50" data-tippy-arrow="true"
+                                                data-tippy-theme="sharpborder" data-tippy-placement="left">
+                                                <i [ngClass]="{'ion-android-favorite':likeddd[i]===true, 'ion-android-favorite-outline':likeddd[i]===false}"
+                                                    (click)='toggle(img,i)'
+                                                    style="color: rgb(214, 5, 5);"></i></a></span>
+
+                                        <span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
+                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                data-tippy-delay="50" data-tippy-arrow="true"
+                                                data-tippy-theme="sharpborder" data-tippy-placement="left">
+                                                <i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
+                                                    (click)='toggledelete(img,i)'
+                                                    style="color: rgb(214, 5, 5);"></i></a></span>
 
                                         <span class="quickview" (click)="quickview(img.id,openRecord)"><a
                                                 class="cd-trigger" data-tippy="Quick View" data-tippy-inertia="true"
@@ -361,7 +368,7 @@
                                 <!--=======  End of single product content  =======-->
                             </div>
 
-                            
+
                         </div>
 
                     </div>
@@ -420,7 +427,7 @@
                     <div class="search-widget mb-2">
                         <input type="text" class="form-control" placeholder="" formControlName="min">
                     </div>
-                    <label class="sorttext" >Maximum</label>
+                    <label class="sorttext">Maximum</label>
                     <div class="search-widget  mb-2">
                         <input type="text" class="form-control" placeholder="" formControlName="max">
                     </div>
@@ -428,21 +435,25 @@
 
                 <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Category</label><br>
-                    <select  class="formrol pl-5 col-12"  placeholder="All" formControlName="category"
-                        style="background-color: transparent;Border: none;border-bottom:inset" >
-                        <option value='' selected > <p > All</p></option>
-                        <option *ngFor="let tab of Allcat;let i=index" [value]="tab.id" 
-                            style="background-color:rgb(227, 227, 228);Border: none;"
-                           >
+                    <select class="formrol pl-5 col-12" placeholder="All" formControlName="category"
+                        style="background-color: transparent;Border: none;border-bottom:inset">
+                        <option value='' selected>
+                            <p> All</p>
+                        </option>
+                        <option *ngFor="let tab of Allcat;let i=index" [value]="tab.id"
+                            style="background-color:rgb(227, 227, 228);Border: none;">
                             {{tab.name}}
                         </option>
                     </select>
                 </div>
                 <div class="col-12 md-12 mt-3">
                     <label class="sorttext">Brand</label><br>
-                    <select class="formrol pl-5 col-12" formControlName="brand" 
-                        style="background-color: transparent;Border: none;border-bottom:inset" #selectList (change)="searchWithCode($event)">
-                        <option value='' selected> <p> All</p></option>
+                    <select class="formrol pl-5 col-12" formControlName="brand"
+                        style="background-color: transparent;Border: none;border-bottom:inset" #selectList
+                        (change)="searchWithCode($event)">
+                        <option value='' selected>
+                            <p> All</p>
+                        </option>
                         <option *ngFor="let tab of Allbrands;let i=index" [value]="tab.id"
                             style="background-color:rgb(227, 227, 228);Border: none;">
                             {{tab.name}}
@@ -474,7 +485,7 @@
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
             <span aria-hidden="true"><i class="ion-android-close"></i></span>
         </button>
-        <div class="py-4" >
+        <div class="py-4">
             <div class="modal-body  c-scrollbar-light">
                 <div class="row">
                     <div class="col-lg-6">
@@ -495,11 +506,11 @@
                                     </div>
                                 </div>
                             </div>
-                           
+
                         </div>
                     </div>
                     <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
-                        <h2 class="item-title mb-4">{{Peoduct.name}}</h2>
+                        <h3 class="item-title mb-4">{{Peoduct.name}}</h3>
                         <p class="price">
                             <span class="main-price discounted" style="text-decoration: line-through"
                                 *ngIf="Peoduct?.stroked_price!==prod_price">{{Peoduct?.stroked_price}}</span>
@@ -519,12 +530,14 @@
                                 <div class="col-3">
                                     <div class="opacity-50 mt-2 " *ngFor="let a of choice">{{a.title}}:</div>
                                 </div>
+                                <div class="col-9">
                                 <div class="shop-product__block__value" *ngFor="let a of choice">
 
                                     <div class="shop-product-size-list">
-												<span class="single-size" *ngFor="let b of a.options;let i=index"
-												[ngClass]="{'active': subItemm === i}"    (click)="selectvar(b,i)">{{b}}</span>
-											</div>
+                                        <span class="single-size" *ngFor="let b of a.options;let i=index"
+                                            [ngClass]="{'active': subItemm === i}" (click)="selectvar(b,i)">{{b}}</span>
+                                    </div>
+                                </div>
                                 </div>
                             </div>
 
@@ -537,8 +550,10 @@
                                         <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                             <a class="dec qty-btn" style="text-decoration: none;"
                                                 (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
-                                                <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
-                                           
+                                            <input type="number" #box value="{{quantityyy}}"
+                                                (keyup)="getValue(box.value)" name="qqty"
+                                                style="background: transparent;">
+
                                             <a class="inc qty-btn" style="text-decoration: none;"
                                                 (click)="increaseqty()" *ngIf="stk>1">+</a>
                                         </div>
@@ -562,12 +577,13 @@
                                 </div> -->
                         </form>
                         <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
-                            <button   *ngIf="stk!==0" class="lezada-button lezada-button--small lezada-button--icon--left" (click)="addtocart2()">
+                            <button *ngIf="stk!==0" class="lezada-button lezada-button--small lezada-button--icon--left"
+                                (click)="addtocart2()">
                                 <i class="ion-ios-cart-outline"></i>add to cart</button>
 
-                            <button   *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
-                             style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
-                                    <i class="ion-ios-cart-outline"></i>Out of Stock</button>
+                            <button *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
+                                style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
+                                <i class="ion-ios-cart-outline"></i>Out of Stock</button>
 
                         </div>
 

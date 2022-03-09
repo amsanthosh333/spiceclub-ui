@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router,ParamMap } from '@angular/router';
+import { ActivatedRoute, Router,ParamMap, Params, NavigationEnd } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user'; 
 import { BehaviorSubject, Observable } from 'rxjs';
 import { RequestService } from 'src/app/services/request.service';
-import {Location} from '@angular/common';
+import {Location,PopStateEvent} from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { isNull } from '@angular/compiler/src/output/output_ast';
+
 @Component({
   selector: 'app-recipe',
   templateUrl: './recipe.component.html',
@@ -65,9 +67,14 @@ export class RecipeComponent implements OnInit {
   imgloader: boolean=false;
   keyy: any;
   topItem: any;
+ 
+  currentpage: any;
+  pagee: any=1;
+  categoryy_id: any;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
-    private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
+    private toastr: ToastrService,config: NgbRatingConfig, private activatedRoute: ActivatedRoute,
+    private _location: Location,private location: Location) {
      
       config.max = 5;
       config.readonly = true;
@@ -88,19 +95,26 @@ export class RecipeComponent implements OnInit {
 
   ngOnInit(): void {
     window.scroll(0,0);
-    this.keyy = this.route.snapshot.paramMap.get('id');
-    
-    if (this.keyy !==undefined) {
-      this.getrecipebycatg(this.keyy);
-      
+    // this.rec_id = this.route.snapshot.paramMap.get('id');
     this.getallrecipecat();
-    }
-    else { 
-      this.getallrecipe(1);
-      this.getallrecipecat();
-    }
-  
-    
+    this.activatedRoute.queryParams.subscribe((data2: Params) => {
+     
+      this.rec_id = data2['category']
+      this.pagee = data2['page']
+      console.log("queryParams data", this.rec_id);
+      if (this.rec_id ==undefined || this.rec_id ==null ) {
+        console.log("rec!undefined",this.rec_id);  
+      // this.rec_id='';
+      this.getallrecipe(this.pagee);
+      // this.getallrecipecat();
+      }
+      else { 
+        console.log("rec!else");  
+        this.getrecipebycatg(this.rec_id,this.pagee); 
+      // this.getallrecipecat();
+      }
+    })
+
     this.comment = this.fb.group({ 
       rating:['',[ Validators.required]],
       comment: ['',[ Validators.required]],
@@ -113,14 +127,17 @@ export class RecipeComponent implements OnInit {
       key: [''],
     });
   }
+
   getallrecipe(page:any){
     this.recipeloader=true;
     this.imgloader = false;
-  this.request.getallrecipe(page).subscribe((res:any)=>{
+    this.request.getallrecipe(page).subscribe((res:any)=>{
     this.Blogs=res.data;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     this.recipeloader=false;
+    this.topItem=-1
+    // this.router.navigate(['recipe'] ,{ queryParams: { page: page} });
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -130,7 +147,6 @@ export class RecipeComponent implements OnInit {
 }
 getallrecipecat(){
   this.sideloader1=true;
-  
   this.request.getallrecipecat().subscribe((response: any) => {
     this.Allcat=response.data;
     this.sideloader1=false;
@@ -140,9 +156,10 @@ getallrecipecat(){
   });
 }
 
-getrecipebycatg(id:any,page=1){
+getrecipebycatg(id:any,page:any){
   this.recipeloader=true;
   this.imgloader = false;
+ 
   this.request.getrecipebycat(id,page).subscribe((response: any) => {
     this.Blogs=response.data;
     this.pagenation=response.meta   
@@ -150,6 +167,13 @@ getrecipebycatg(id:any,page=1){
     this.recipeloader=false; 
     this.page1=true;
     this.page2=false;
+    // console.log("this.Allcat",this.Allcat);
+     let index = this.Allcat?.findIndex((x:any ) => x.id == id );
+    this.topItem=index
+    // console.log("this.topItemr",this.topItem);
+   
+    
+    this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: page} });
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -160,11 +184,13 @@ getrecipebycatg(id:any,page=1){
 }
 getrecipebycatg2(id:any,i:any){
   window.scroll(0,0);
-  this.router.navigate(['recipe', id]);
+  this.rec_id=id 
   this.topItem=i
-  this.getrecipebycatg(id)
+  this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: 1} });
+  // this.getrecipebycatg(id,1)
 }
-getpage(url:any){
+getpage(url:any,label:any){
+  if(url!==null){
   this.recipeloader=true;
   this.imgloader = false;
   window.scroll(0,0);
@@ -172,11 +198,18 @@ getpage(url:any){
     this.Blogs=response.data;
     this.pagenation=response.meta;
     this.pagess=this.pagenation.links;
+    this.currentpage=response.meta.current_page;
+    // console.log("this.currentpage",this.currentpage);
+    // this.router.navigate(['recipe',this.rec_id,this.currentpage]);
+        // this.router.navigate(['recipe'] ,{ queryParams: { page: page} });
+    this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page:this.currentpage} });
     this.recipeloader=false;
+ 
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
   })
+}
 }
 getrecipedetaillold(id:any){
    this.page1=false;

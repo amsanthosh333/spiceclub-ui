@@ -15,14 +15,13 @@
     </div>
 </div>
 
-<ngx-spinner   bdColor="rgba(51,51,51,0.8)"
-size="large"
-color="#e00707"
-type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</p></ngx-spinner>
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#e00707" type="ball-scale-multiple">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>
 
 
 
-<div class="col-lg-12 mb-45 " >
+<div class="col-lg-12 mb-45 ">
     <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Order Details</h4>
     <div class="checkout-cart-total mt-1" style="margin-left: 8%; margin-right: 8%;" *ngFor="let img of Detail">
         <div class="row">
@@ -70,48 +69,50 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
                         style="color: rgb(21, 231, 21);"></i>
                     <i *ngIf="img.delivery_status_string=='Confirmed'" class="bi bi-hand-thumbs-up-fill"
                         style="color: rgb(45, 89, 223);"></i>
-                        <i *ngIf="img.delivery_status=='Pending'" class="bi bi-exclamation-circle-fill"
-                        style="color: rgb(45, 89, 223);"></i> 
+                    <i *ngIf="img.delivery_status=='Pending'" class="bi bi-exclamation-circle-fill"
+                        style="color: rgb(45, 89, 223);"></i>
                     <i *ngIf="img.delivery_status_string=='On The Way'" class="bi bi-truck"
                         style="color: rgb(252, 166, 8);;"></i>
                     <i *ngIf="img.delivery_status_string=='Delivered'" class="bi bi-check-circle-fill"
                         style="color: rgb(11, 192, 11);;"></i>
-                        <i *ngIf="img.delivery_status_string=='Picked Up'" class="bi bi-bag-check-fill"
+                    <i *ngIf="img.delivery_status_string=='Picked Up'" class="bi bi-bag-check-fill"
                         style="color: rgb(209, 98, 7);;"></i>
                 </p>
 
                 <strong>Delivery Status:</strong>
                 <p style="margin-bottom: 10px;">{{img.delivery_status}}
                     <i *ngIf="img.delivery_status=='cancelled'" class="bi bi-x-circle-fill"
-                    style="color: rgb(231, 21, 32);"></i>
-                <i *ngIf="img.delivery_status=='order_placed'" class="bi bi-hand-thumbs-up-fill"
-                    style="color: rgb(21, 231, 21);"></i>
-                <i *ngIf="img.delivery_status=='confirmed'" class="bi bi-hand-thumbs-up-fill"
-                    style="color: rgb(45, 89, 223);"></i>
+                        style="color: rgb(231, 21, 32);"></i>
+                    <i *ngIf="img.delivery_status=='order_placed'" class="bi bi-hand-thumbs-up-fill"
+                        style="color: rgb(21, 231, 21);"></i>
+                    <i *ngIf="img.delivery_status=='confirmed'" class="bi bi-hand-thumbs-up-fill"
+                        style="color: rgb(45, 89, 223);"></i>
                     <i *ngIf="img.delivery_status=='pending'" class="bi bi-exclamation-circle-fill"
-                    style="color: rgb(45, 89, 223);"></i>  
-                <i *ngIf="img.delivery_status=='on_the_way'" class="bi bi-truck"
-                    style="color: rgb(252, 166, 8);;"></i>
-                <i *ngIf="img.delivery_status=='delivered'" class="bi bi-check-circle-fill"
-                    style="color: rgb(11, 192, 11);;"></i>
+                        style="color: rgb(45, 89, 223);"></i>
+                    <i *ngIf="img.delivery_status=='on_the_way'" class="bi bi-truck"
+                        style="color: rgb(252, 166, 8);;"></i>
+                    <i *ngIf="img.delivery_status=='delivered'" class="bi bi-check-circle-fill"
+                        style="color: rgb(11, 192, 11);;"></i>
                     <i *ngIf="img.delivery_status=='picked_up'" class="bi bi-bag-check-fill"
-                    style="color: rgb(209, 98, 7);;"></i>
+                        style="color: rgb(209, 98, 7);;"></i>
                 </p>
 
 
                 <strong>Total:</strong>
                 <p style="margin-bottom: 10px; color: red;">{{img.grand_total}}</p>
 
-              <!-- <p *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'"> <button (click)="paynow()">Paynow</button></p> -->
-              <span class="add-to-cart" style="margin-left: auto;" *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'">
-                <button id="ppaynoww"  class="lezada-button lezada-button--small lezada-button--icon--left" (click)=paynow1() >
-                    <span style="color: white;"> PAY NOW </span></button>
-            </span>
+                <!-- <p *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'"> <button (click)="paynow()">Paynow</button></p> -->
+                <span class="add-to-cart" style="margin-left: auto;"
+                    *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'">
+                    <button id="ppaynoww" class="lezada-button lezada-button--small lezada-button--icon--left"
+                        (click)=paynow1()>
+                        <span style="color: white;"> PAY NOW </span></button>
+                </span>
             </div>
-            
+
         </div>
     </div>
-    <div class="art-total   mt-1 "  style="margin-left: 8%; margin-right: 8%;">
+    <div class="art-total   mt-1 " style="margin-left: 8%; margin-right: 8%;">
         <ngx-skeleton-loader count="1" [theme]="{ 
             'border-radius': '5px',
             height: '350px',
@@ -135,76 +136,80 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
 </div>
 
 <!-- order items -->
-<div class="col-lg-12 mb-5">
-   
+<div class="col-lg-12 mb-2">
     <div class="cart-table-container" style="margin-left: 8%; margin-right: 8%;">
-        <h4 class="checkout-title mt-40 mb-10" >Order Items</h4>
-        <div class="checkout-cart-total"  style="padding: 20px;">
-        <table class="cart-table" style="background-color: rgb(255, 255, 255);">
-            <thead>
-                <tr>
-                    <th class="product-name">
-                        <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Product</strong></h6>
-                    </th>
-                    <th class="product-price">
-                        <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Price</strong></h6>
-                    </th>
-                    <th class="product-price">
-                        <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Order status</strong></h6>
-                    </th>
-                    <th class="product-price">
-                        <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Payment status</strong></h6>
-                    </th>
-                    <th class="product-price">
-                        <h6 style="padding: 0px; margin-bottom: 0px;"> <strong>Delivery status</strong></h6>
-                    </th>
-                    <th class="product-price">&nbsp;</th>
+        <h4 class="checkout-title mt-10 mb-10">Order Items</h4>
+        <div class="checkout-cart-total" style="padding: 20px;">
+            <table class="cart-table" style="background-color: rgb(255, 255, 255);">
+                <thead>
+                    <tr>
+                        <th class="product-name">
+                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Product</strong></h6>
+                        </th>
+                        <th class="product-price">
+                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Price</strong></h6>
+                        </th>
+                        <th class="product-price">
+                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Order status</strong></h6>
+                        </th>
+                        <th class="product-price">
+                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Payment status</strong></h6>
+                        </th>
+                        <th class="product-price">
+                            <h6 style="padding: 0px; margin-bottom: 0px;"> <strong>Delivery status</strong></h6>
+                        </th>
+                        <th class="product-price">&nbsp;</th>
 
-                </tr>
-            </thead>
+                    </tr>
+                </thead>
 
-            <tbody *ngFor="let b of Items">
-                <tr  >
+                <tbody *ngFor="let b of Items">
+                    <tr>
 
-                    <td class="product-name" id="proname" style="width: 400px;" (click)="proddetail(b.product_id)">
-                        <a style="text-decoration: none; margin-top: 10px;">{{b.product_name}}</a>
-                        <span class="product-variation pb-" *ngIf="b.variation!==null">{{b.quantity}} x {{b.variation}}
-                        </span>
-                        <span class="product-variation pb-" *ngIf="b.variation==null">Quantity: {{b.quantity}}</span>
-                    </td>
+                        <td class="product-name" id="proname" style="width: 400px;" (click)="proddetail(b.product_id)">
+                            <a
+                                style="text-decoration: none; margin-top: 5px; margin-bottom: 5px;">{{b.product_name}}</a>
+                            <span class="product-variation pb-" *ngIf="b.variation!==null">{{b.quantity}} x
+                                {{b.variation}}
+                            </span>
+                            <span class="product-variation pb-" *ngIf="b.variation==null">Quantity:
+                                {{b.quantity}}</span>
+                        </td>
 
-                    <td class="product-price" style="padding-left: 13px;"><span class="price"
-                            style="color: red;" (click)="proddetail(b.product_id)">{{b.price}}</span></td>
+                        <td class="product-price" style="padding-left: 13px;"><span class="price" style="color: red;"
+                                (click)="proddetail(b.product_id)">{{b.price}}</span></td>
 
-                    <td class="product-name" style="padding-left: 13px;"><span
-                            class="price" (click)="proddetail(b.product_id)">{{b.delivery_status_string}}</span></td>
+                        <td class="product-name" style="padding-left: 13px;"><span class="price"
+                                (click)="proddetail(b.product_id)">{{b.delivery_status_string}}</span></td>
 
-                    <td class="product-name" style="padding-left: 13px;"><span
-                            class="price" (click)="proddetail(b.product_id)">{{b.payment_status_string}}</span></td>
+                        <td class="product-name" style="padding-left: 13px;"><span class="price"
+                                (click)="proddetail(b.product_id)">{{b.payment_status_string}}</span></td>
 
-                    <td class="product-name ">
-                        <a style="text-decoration: none; margin-top: 10px;">{{b.delivery_status}}</a>
-                        <span class="product-variation pb-3" *ngIf="b.delivery_status=='delivered'"
-                            (click)="addreview(addRecord,b.product_id)" style="color: rgb(45, 89, 223); display:block ;">
-                            <a> <i class="ion-android-star"></i> Review
-                                this product </a></span>
-                    </td>
+                        <td class="product-name ">
+                            <a
+                                style="text-decoration: none; margin-top: 5px; margin-bottom: 5px;">{{b.delivery_status}}</a>
+                            <span class="product-variation pb-3" *ngIf="b.delivery_status=='delivered'"
+                                (click)="addreview(addRecord,b.product_id)"
+                                style="color: rgb(45, 89, 223); display:block ;">
+                                <a> <i class="ion-android-star"></i> Review
+                                    this product </a></span>
+                        </td>
 
-                </tr>
+                    </tr>
 
-            </tbody>
-        </table>
-       
-        <ngx-skeleton-loader count="4"
-        [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
-        *ngIf="loader"></ngx-skeleton-loader>
-        <div class="col-12" style="text-align: end;padding-right: 0px;">
-            <span class="add-to-cart" style="margin-left: auto;">
-                <button   class="lezada-button lezada-button--small lezada-button--icon--left" (click)=quickorder()>
-                    <span style="color: white;"> Quick order</span></button>
-            </span>
+                </tbody>
+            </table>
+
+            <ngx-skeleton-loader count="4"
+                [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
+                *ngIf="loader"></ngx-skeleton-loader>
+            <div class="col-12" style="text-align: end;padding-right: 0px;">
+                <span class="add-to-cart" style="margin-left: auto;">
+                    <button class="lezada-button lezada-button--small lezada-button--icon--left" (click)=quickorder()>
+                        <span style="color: white;"> Quick order</span></button>
+                </span>
+            </div>
         </div>
-    </div>
     </div>
     <!--=======  End of cart table  =======-->
 </div>
@@ -212,31 +217,40 @@ type="ball-scale-multiple"><p style="font-size: 20px; color: white">Loading...</
 <!-- price details -->
 <div class="col-lg-12 ">
     <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Price Details</h4>
-            <div class="row mt-10 mb-0" *ngFor="let img of Detail" style="margin-left: 8%; margin-right: 8%;" >
-                <!-- Cart Total -->
-                <div class="col-12 mb-1" style="padding: 0px;">
-                    <div class="checkout-cart-total" id="carttotl" *ngFor="let a of Detail" style="padding: 7%;">
-                        <p>Discount <a *ngIf="a.coupan_code!=null">(Coupan used: {{a.coupon_code}})</a> <span style="font-weight: bold;">{{a.coupon_discount}}</span></p>                        
-                        <p>Shipping Fee <span style="font-weight: bold;">{{a.shipping_cost}}</span></p>
-                        <p>Tax <span style="font-weight: bold;">{{a.tax}}</span></p>
-                        <p>Sub Total <span style="font-weight: bold;" >{{a.subtotal}}</span></p>
-                        <h4>Grand Total <span style="font-weight: bold;">{{a.grand_total}}</span></h4>
-                    </div>
-                </div>
-        
-         
+    <div class="row mt-10 mb-0" *ngFor="let img of Detail" style="margin-left: 8%; margin-right: 8%;">
+        <!-- Cart Total -->
+        <div class="col-8 mb-1" style="padding: 0px;" id="col88">
+            <div class="checkout-cart-total" id="carttotl" *ngFor="let a of Detail" style="padding: 3%;">
+                <p>Discount <a *ngIf="a.coupan_code!=null">(Coupan used: {{a.coupon_code}})</a> <span
+                        style="font-weight: bold;">{{a.coupon_discount}}</span></p>
+                <p>Shipping Fee <span style="font-weight: bold;">{{a.shipping_cost}}</span></p>
+                <p>Tax <span style="font-weight: bold;">{{a.tax}}</span></p>
+                <p>Sub Total <span style="font-weight: bold;">{{a.subtotal}}</span></p>
+                <h4>Grand Total <span style="font-weight: bold;">{{a.grand_total}}</span></h4>
             </div>
-   
+        </div>
+
+        <div class="col-4 mb-1" style="text-align: -webkit-center;">
+            <div id="sts"  >
+                <!-- <img src="assets/images/icons/cod.png" alt="" *ngIf="img.payment_type=='Cash On Delivery'"> -->
+                <img src="assets/images/icons/paid.png" alt="" *ngIf="img.payment_status_string!=='Unpaid'" >
+                <img src="assets/images/icons/unpaid.png" alt="" *ngIf="img.payment_status_string=='Unpaid'">
+            </div>
+        </div>
+
+
     </div>
 
-    <div class="art-total  mr-110 ml-110 mt-1">
-        <ngx-skeleton-loader count="1" [theme]="{ 
+</div>
+
+<div class="art-total  mr-110 ml-110 mt-1">
+    <ngx-skeleton-loader count="1" [theme]="{ 
             'border-radius': '5px',
             height: '200px',
             'background-color': '##b9b8b8',
             border: '1px solid white'
           }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
-    </div>
+</div>
 <!-- sort poup -->
 <ng-template #addRecord let-modal>
     <div class="modal-about mt-4 ml-4">

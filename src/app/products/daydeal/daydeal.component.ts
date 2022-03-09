@@ -70,6 +70,7 @@ export class DaydealComponent implements OnInit {
   likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
   stocckkk: any;
   subItemm: any=0;
+  Productt: any;
  
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,config: NgbRatingConfig,private modalService: NgbModal,
@@ -98,6 +99,7 @@ export class DaydealComponent implements OnInit {
   ngOnInit(): void {
     this. viewdaydeal();
     this.viewmonthdeal();
+    this. viewtodaysdeal()
   }
   toggle(img:any,index:any): void {
     this.likeddd[index] = !this.likeddd[index];   
@@ -133,7 +135,7 @@ export class DaydealComponent implements OnInit {
     // this.prodloader=true;
     // this.imgloader = false;
     this.request.getmonthdealpro().subscribe((response: any) => {
-      this.Monthdealpro=response.data.slice(0, 4);
+      this.Monthdealpro=response.data.slice(0, 3);
       this.poploader=false;
       setTimeout(() => {
         this.imgloader = true;
@@ -141,6 +143,27 @@ export class DaydealComponent implements OnInit {
       
     });
   }
+  viewtodaysdeal() {
+    // this.prodloader = true;
+    // this.imgloader = false;
+    this.request.gettodaysdeal().subscribe((response: any) => {
+      this.Productt = response.data
+      this.Product = response.data.slice(0, 5);
+      this.pagenation = response?.meta;
+      this.pagess = this.pagenation?.links;
+      this.prodloader = false;  
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+  }
+  viewtodays(){
+  this.Daydealpro=this.Productt
+  }
+
 
   proddetail(id:any){
     this.router.navigate(['productdetail', id]);

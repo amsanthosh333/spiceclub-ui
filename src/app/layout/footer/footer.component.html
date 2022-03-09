@@ -37,10 +37,10 @@
 					<div class="footer-nav-container">
 						<nav>
 							<ul>
-								<li><a href="#">About us</a></li>
-								<li><a href="#">Store location</a></li>
-								<li><a href="#">Contact</a></li>
-								<li><a href="#">Orders tracking</a></li>
+								<li><a routerLink="/aboutus">About us</a></li>
+								<li><a routerLink="/storelocation">Store location</a></li>
+								<li><a routerLink="/contact">Contact</a></li>
+								<li><a routerLink="/orderstrack">Orders tracking</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -58,9 +58,9 @@
 					<div class="footer-nav-container">
 						<nav>
 							<ul>
-								<li><a href="#">Returns</a></li>
-								<li><a href="#">Support Policy</a></li>
-								<li><a href="#">Size guide</a></li>
+								<li><a routerLink="/return" >Returns</a></li>
+								<li><a routerLink="/privacypolicy">Support Policy</a></li>
+								<li><a routerLink="/home">Size guide</a></li>
 								<li><a routerLink="/faq">FAQs</a></li>
 							</ul>
 						</nav>
@@ -79,11 +79,11 @@
 
 					<div class="footer-nav-container footer-social-links">
 						<nav>
-							<ul>
-								<li><a href="http://twitter.com/"><i class="fa fa-twitter"></i> Twitter</a></li>
-								<li><a href="http://facebook.com/"> <i class="fa fa-facebook"></i> Facebook</a></li>
-								<li><a href="http://instagram.com/"><i class="fa fa-instagram"></i> Instagram</a></li>
-								<li><a href="http://youtube.com/"> <i class="fa fa-youtube"></i> Youtube</a></li>
+							<ul>		
+								<li><a href="{{facebookurl}}"> <i class="fa fa-facebook"></i> Facebook</a></li>
+								<li><a href="{{instagramurl}}"><i class="fa fa-instagram"></i> Instagram</a></li>
+								<li><a href="{{youtubeurl}}"> <i class="fa fa-youtube"></i> Youtube</a></li>
+								<li><a href="{{twitterurl}}"><i class="fa fa-twitter"></i> Twitter</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -102,10 +102,11 @@
 						<!--=======  subscription form  =======-->
 
 						<div class="subscription-form">
-							<form id="mc-form" class="mc-form">
-								<input type="email" placeholder="Your email address" required>
+							<form  [formGroup]="subscribe" (ngSubmit)="mailsubscribe(subscribe)" class="mc-form">
+								<input type="email" placeholder="Your email address" formControlName="mail" required>
 								<button type="submit"><i class="ion-ios-arrow-thin-right"></i></button>
 							</form>
+							<h6 style="color: red;">{{error}}</h6>
 						</div>
 
 						<!--=======  End of subscription form  =======-->

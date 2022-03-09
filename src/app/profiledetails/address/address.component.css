@@ -29,7 +29,7 @@ h5{
 .addresss{
     background-color: white;
     /* border: 1px solid rgb(161, 156, 156); */
-    padding: 20px;
+    padding: 10px;
     padding-left: 30px;
     border-bottom:1px solid #e0e0e0;
 }
@@ -111,8 +111,8 @@ strong{
 @media (min-width: 768px) {
     .checkout-cart-total{
        
-        margin-left: 5%;
-        margin-right: 5%;
+        margin-left: 7%;
+        margin-right: 7%;
         padding: 30px;
     }
     #fform{
@@ -120,3 +120,6 @@ strong{
     }
     }
 
+    .checkout-cart-total p {
+        padding: 0px;
+    }

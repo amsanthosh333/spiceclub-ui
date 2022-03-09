@@ -67,6 +67,7 @@ export class MonthdealComponent implements OnInit {
   likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
   stocckkk: any;
   subItemm: any=0;
+  Product: any;
  
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,config: NgbRatingConfig,private modalService: NgbModal,
@@ -95,6 +96,7 @@ export class MonthdealComponent implements OnInit {
   ngOnInit(): void {
     this. viewdaydeal();
     this.viewmonthdeal();
+    this.viewtodaysdeal();
   }
 
   toggle(img:any,index:any): void {
@@ -133,6 +135,22 @@ export class MonthdealComponent implements OnInit {
         this.imgloader = true;
       }, 2000);
     });
+  }
+  viewtodaysdeal() {
+    // this.prodloader = true;
+    // this.imgloader = false;
+    this.request.gettodaysdeal().subscribe((response: any) => {
+
+      this.Product = response.data.slice(0,4);
+     
+      this.prodloader = false;  
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
   }
   proddetail(id:any){
     this.router.navigate(['productdetail', id]);

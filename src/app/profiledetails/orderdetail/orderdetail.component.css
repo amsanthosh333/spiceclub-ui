@@ -9,6 +9,7 @@ strong{
 h6 strong{
   color:  #474747 ;
 	font-family: 'Poppins', sans-serif;
+  font-size: 0.8em;
 }
 span{
   color: #474747 ;
@@ -101,12 +102,23 @@ body{
      body {
        font-size:40%
     }
+  #col88{
+    width: 100%;
+  }
+  #sts{
+    height: 200px;width: 200px;
+    margin-left: 100px;
+  }
   } 
   
   /* Small devices (portrait tablets and large phones, 600px and up) */
   @media only screen and (min-width: 600px) {
      body {
        font-size:60%
+    }
+    #sts{
+      height: 200px;width: 200px;
+      margin-left: 0px;
     }
   } 
   
@@ -193,4 +205,10 @@ body{
     border: 1px solid #333;
     border-radius: 0;
     background-color: rgba(180, 100, 8, 0);
+}
+.cart-table th {
+  padding: 10px 10px;
+}
+.product-variation {
+  font-size: smaller;
 }

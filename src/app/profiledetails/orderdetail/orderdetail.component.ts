@@ -130,8 +130,10 @@ export class OrderdetailComponent implements OnInit {
       return;
     } 
     else{
-      if ((this.register.get('rating'))?.value!=Number){
-        form.value.rating=0
+      if (isNaN(form.value.rating)) {
+        console.log("ratinggsss", form.value.rating);
+        form.value.rating = 0
+      }
         let edata2={
           product_id:id,
           user_id: this.userid,
@@ -141,18 +143,19 @@ export class OrderdetailComponent implements OnInit {
     this.request.addreview(edata2).subscribe((res: any) => {
       console.log(res);
       
-      if (res.message == 'Comment  Submitted') { 
+      if (res.result == true) { 
         this.toastr.success('Comment  Submitted', '');      
         // this.getcommentsss();
+        this.modalService.dismissAll()
       }
       else  {
 
-        this.toastr.error(res.message);
+        this.toastr.info(res.message);
   
       }
     }, (error: any) => {
       console.log("error",error);  
-    }); }
+    }); 
   }
   }
 

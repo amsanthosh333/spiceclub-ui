@@ -897,7 +897,7 @@ a.scroll-top:hover {
 .about-overlay .overlay-content .contact-widget .email a:hover {
   color: #333333;
 }
-
+font { 	font-family: 'Poppins', sans-serif;}
 .about-overlay .overlay-content .contact-widget .phone {
   font-size: 24px;
   font-weight: 600;

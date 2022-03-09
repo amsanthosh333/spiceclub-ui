@@ -139,6 +139,111 @@
 
 					</div>
 
+					<!-- todays_deal -->
+					<div class="page-sidebar">
+						<!--=======  End of single sidebar widget  =======-->
+
+						<!--=======  single sidebar widget  =======-->
+
+						<div class="single-sidebar-widget mb-40 mt-30">
+							<h2 class="single-sidebar-widget--title">Today's deal</h2>
+							<!--=======  widget product wrapper  =======-->
+							<div class="widget-product-wrapper">
+								<!--=======  single widget product  =======-->
+								<div class="single-widget-product-wrapper">
+									<div class="single-widget-product" *ngFor="let img of Product"
+										style="padding-bottom: 17px; "  >
+										<!--=======  image  =======-->
+
+										<div class="single-widget-product__image" (click)="proddetail(img.id)" style="overflow: hidden;">
+											<a >
+												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+													class="img-fluid" alt="">
+												
+											</a>
+											
+										</div>
+										
+										<!--=======  End of image *ngIf="img.deal_of_day!=0"  =======-->
+										<!--=======  content  =======-->
+
+										<div class="single-widget-product__content" (click)="proddetail(img.id)">
+
+											<div class="single-widget-product__content__top">
+												<h3 class="product-title"><a>{{img.name}}</a>
+												</h3>
+												<br>
+												<div class="price">
+													<span class="main-price discounted"
+														*ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
+													<span class="discounted-price">{{img.main_price}}</span>
+												</div>
+												<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+												</ngb-rating>
+											</div>
+										</div>
+										<!--=======  End of content  =======-->
+									</div>
+								</div>
+
+								<!--=======  End of single widget product  =======-->
+							</div>
+							<!-- lazyloading -->
+							<div class="widget-product-wrapper" *ngIf="poploader">
+								<!--=======  single widget product  =======-->
+								<div class="single-widget-product-wrapper">
+									<div class="single-widget-product" style="padding-bottom: 17px;">
+										<div class="single-widget-product__image" style="height: 120px; width:80px">
+											<ngx-skeleton-loader count="1"
+												[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+											</ngx-skeleton-loader>
+										</div>
+										<div class="single-widget-product__content">
+											<div class="single-widget-product__content__top">
+												<ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+											</div>
+										</div>
+									</div>
+									<div class="single-widget-product" style="padding-bottom: 17px;">
+										<div class="single-widget-product__image" style="height: 120px; width:80px">
+											<ngx-skeleton-loader count="1"
+												[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+											</ngx-skeleton-loader>
+										</div>
+										<div class="single-widget-product__content">
+											<div class="single-widget-product__content__top">
+												<ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+											</div>
+										</div>
+									</div>
+									<div class="single-widget-product" style="padding-bottom: 17px;">
+										<div class="single-widget-product__image" style="height: 120px; width:80px">
+											<ngx-skeleton-loader count="1"
+												[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+											</ngx-skeleton-loader>
+										</div>
+										<div class="single-widget-product__content">
+											<div class="single-widget-product__content__top">
+												<ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!--=======  End of single widget product  =======-->
+							</div>
+							<div class="row">
+								<div class="col-lg-12 text-center mt-30">
+									<a class="lezada-button lezada-button--medium lezada-button--icon--left"
+										routerLink="/todaysdeal"><i class="ion-android-add"></i> MORE</a>
+								</div>
+							</div>
+							<!--=======  End of widget product wrapper  =======-->
+						</div>
+
+						<!--=======  End of single sidebar widget  =======-->
+
+					</div>
 					<!--=======  End of page sidebar  =======-->
 				</div>
 
@@ -394,7 +499,7 @@
 						</div>
 					</div>
 					<div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
-						<h2 class="item-title mb-4">{{Peoduct.name}}</h2>
+						<h3 class="item-title mb-4">{{Peoduct.name}}</h3>
 						<p class="price">
 							<span class="main-price discounted" style="text-decoration: line-through"
 								*ngIf="Peoduct?.stroked_price!==prod_price">{{Peoduct?.stroked_price}}</span>

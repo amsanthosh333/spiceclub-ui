@@ -151,6 +151,8 @@ export class RecipedetailsComponent implements OnInit {
       this.currentRatess = this.Peoduct.rating;
       this.productname = this.Peoduct.name;
       this.relatedrec =this.Peoduct.products;
+      console.log("this.relatedrec",response);
+      
       this.videoo =this.Peoduct.video_link;
       this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);
       
@@ -205,10 +207,13 @@ export class RecipedetailsComponent implements OnInit {
             comment: form.value.comment,
           }
           this.request.addrecipecomment(edata2).subscribe((res: any) => {
-            if (res.message == 'Comment  Submitted') {
+            if (res.result == true) {
               this.toastr.success('Comment  Submitted', '');
-              this.getcommentsss();
-              this.comment.reset();
+              const currentRoute = this.router.url;
+
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([currentRoute]); // navigate to same route
+              });
             }
             else {
               this.toastr.error(res.message);
@@ -226,6 +231,13 @@ export class RecipedetailsComponent implements OnInit {
     this._location.back();
 
   }
+
+  viewproductrow2(id: any) {
+    // window.scroll(0, 0);
+    // console.log("viewprod2", id);
+  this.router.navigate(['/productdetail', id])
+  }
+
   addRecordSuccess() {
     this.toastr.success('Added Successfully', '');
   }

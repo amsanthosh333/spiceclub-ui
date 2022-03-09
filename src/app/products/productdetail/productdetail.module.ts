@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { ProductdetailRoutingModule } from './productdetail-routing.module';
@@ -19,6 +19,7 @@ import { FormsModule } from '@angular/forms';
   declarations: [
     ProductdetailComponent
   ],
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
     ProductdetailRoutingModule,ReactiveFormsModule,NgbModule,
@@ -29,6 +30,7 @@ import { FormsModule } from '@angular/forms';
     }),ShareIconsModule,ShareModule
 
     
-  ]
+  ],
+ 
 })
 export class ProductdetailModule { }

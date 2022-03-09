@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { User } from 'src/app/models/user'; 
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -61,16 +61,19 @@ export class BlogComponent implements OnInit {
   imgloader: boolean=false;
   keyy: any;
   topItem: any;
+  currentpage: any;
+  blogid: any;
+  pagee: any=1;
+  BBlogs: any;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
-    private toastr: ToastrService,config: NgbRatingConfig,private _location: Location) {
+    private toastr: ToastrService,config: NgbRatingConfig,private _location: Location,private activatedRoute: ActivatedRoute) {
      
       config.max = 5;
       config.readonly = true;
       
       this.currentUserSubject = new BehaviorSubject<User>(
-        JSON.parse(localStorage.getItem('currentUser')||'{}')
-        
+        JSON.parse(localStorage.getItem('currentUser')||'{}')  
       );
       // console.log("currentuser details=", this.currentUserSubject);
       this.currentUser = this.currentUserSubject.asObservable();
@@ -82,17 +85,22 @@ export class BlogComponent implements OnInit {
 
   ngOnInit(): void {
     window.scroll(0,0);
-    this.keyy = this.route.snapshot.params['key'];
-    if (this.keyy !==undefined) {
-      this.getblogbycatg(this.keyy);
-      this.viewallblog(1);
-      this.viewblogcat();
+    this.viewblogcat();
+    this.viewallblog2(1);
+    this.activatedRoute.queryParams.subscribe((data2: Params) => {
+      this.blogid = data2['category']
+      this.pagee = data2['page']
+    if (this.blogid ==undefined || this.blogid ==null ) {
+      this.viewallblog( this.pagee);
+      // this.viewblogcat();
+ 
     }
     else {  
-      this.viewallblog(1);
-      this.viewblogcat();
+      this.getblogbycatg(this.blogid,this.pagee);
+      // this.viewallblog(1);
+    
     }
-
+  });
    
     this.comment = this.fb.group({ 
       rating:['',[ Validators.required]],
@@ -110,10 +118,14 @@ viewallblog(page:any){
   this.loader1=true;
   this.imgloader = false;
   this.request.getallblog(page).subscribe((res:any)=>{
+    console.log("eerrrrrreeeere");
+    
     this.Blogs=res.data;
     this.loader1=false;
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
+this.topItem=-1
+    this.router.navigate(['/blog'],{ queryParams:{ category:this.blogid, page: page} });
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -121,6 +133,20 @@ viewallblog(page:any){
     console.log("error",error);
   });
 }
+viewallblog2(page:any){
+  this.loader1=true;
+  this.imgloader = false;
+  this.request.getallblog(page).subscribe((res:any)=>{
+    this.BBlogs=res.data;
+    this.loader1=false;
+    setTimeout(() => {
+      this.imgloader = true;
+    }, 2000);
+  }, (error: any) => {
+    console.log("error",error);
+  });
+}
+
 viewblogcat(){
   this.loader=true;
   this.request.getallblogcat().subscribe((response: any) => {
@@ -134,16 +160,20 @@ viewblogcat(){
   });
 }
 
-getblogbycatg(id:any,page=1){
+getblogbycatg(id:any,page:any){
   this.loader1=true;
   this.imgloader = false;
   this.request.getblogbycat(id,page).subscribe((response: any) => {
+    console.log("dddddddddddddddddg");
     this.Blogs=response.data;
     this.loader1=false;
     this.pagenation=response.meta   
     this.pagess=this.pagenation.links
     this.page1=true;
     this.page2=false;
+    let index = this.Allcat?.findIndex((x:any ) => x.id == id );
+    this.topItem=index
+    // this.router.navigate(['/blog'],{ queryParams:{ category:this.blogid, page: page} });
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -154,24 +184,31 @@ getblogbycatg(id:any,page=1){
 }
 getblogbycatg2(id:any,i:any){
   window.scroll(0,0);
-  this.router.navigate(['blog', id]);
+  // this.router.navigate(['blog', id]);
+  this.router.navigate(['/blog'],{ queryParams:{ category:id, page: 1} });
   this.topItem=i
-  this.getblogbycatg(id)
+  // this.getblogbycatg(id)
   
 }
 getpage(url:any){
-  this.loader1=true;
-  this.imgloader = false;
-  window.scroll(0,0);
-  this.request.getpage(url).subscribe((response:any)=>{
-    this.Blogs=response.data;
-    this.loader1=false;
-    this.pagenation=response.meta   
-    this.pagess=this.pagenation.links
-    setTimeout(() => {
-      this.imgloader = true;
-    }, 2000);
-  })
+  if(url!==null){
+    this.loader1=true;
+    this.imgloader = false;
+    window.scroll(0,0);
+   
+    this.request.getpage(url).subscribe((response:any)=>{
+      this.Blogs=response.data;
+      this.loader1=false;
+      this.pagenation=response.meta   
+      this.pagess=this.pagenation.links
+      this.currentpage=response.meta.current_page;
+      this.router.navigate(['/blog'],{ queryParams:{ category:this.blogid, page:this.currentpage} });
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    })
+  }
+ 
 }
 getblogdetailold(id:any){
   this.page1=false;

@@ -23,7 +23,7 @@
         =            checkout page content         =
         =============================================-->
 
-        <div class="blog-page-wrapper mb-100">
+        <div class="blog-page-wrapper mb-10">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2 order-2 order-lg-1">
@@ -236,7 +236,7 @@
                                                                             <tr>
                                                                                 <th><img class="imgicon"
                                                                                         src="assets/images/icons/prepare.png">
-                                                                                    preparation_time:</th>
+                                                                                    Preparation time</th>
                                                                                 <td>
                                                                                     <p>{{Peoduct.preparation_time}}</p>
                                                                                 </td>
@@ -244,7 +244,7 @@
                                                                             <tr>
                                                                                 <th> <img class="imgicon"
                                                                                         src="assets/images/icons/rice-cooker.png">
-                                                                                    cooking_time:</th>
+                                                                                    Cooking time</th>
                                                                                 <td>
                                                                                     <p>{{Peoduct.cooking_time}}</p>
                                                                                 </td>
@@ -252,7 +252,7 @@
                                                                             <tr>
                                                                                 <th><img class="imgicon"
                                                                                         src="assets/images/icons/meal.png">
-                                                                                    total_time:</th>
+                                                                                    Total time</th>
                                                                                 <!-- <th><i class="bi bi-clock" style="font-size:24px"></i>  total_time:</th> -->
                                                                                 <td>
                                                                                     <p>{{Peoduct.total_time}}</p>
@@ -262,7 +262,7 @@
                                                                                 <!-- <th><i class='fas fa-concierge-bell' style='font-size:24px;'></i>  serving:</th> -->
                                                                                 <th><img class="imgicon"
                                                                                         src="assets/images/icons/food-delivery.png">
-                                                                                    serving:</th>
+                                                                                    Serving</th>
                                                                                 <td>
                                                                                     <p>{{Peoduct.serving}}</p>
                                                                                 </td>
@@ -307,31 +307,35 @@
                                                                     <tbody>
                                                                         <tr *ngFor="let a of nutritional"
                                                                             style="font-size: large;">
-                                                                            <th style="font-size: large;"
-                                                                                *ngIf="a.title=='Total Fat'"><img
+                                                                            <!-- <th style="font-size: large;"
+                                                                                *ngIf="a.name=='3'"><img
                                                                                     class="imgicon"
                                                                                     src="assets/images/icons/belly.png">
-                                                                                {{a.title}}:</th>
+                                                                                {{a.title}}</th>
                                                                             <th style="font-size: large;"
-                                                                                *ngIf="a.title=='Sugar'"><img
+                                                                                *ngIf="a.name=='4'"><img
                                                                                     class="imgicon"
                                                                                     src="assets/images/icons/sugar-cube.png">
-                                                                                {{a.title}}:</th>
+                                                                                {{a.title}}</th>
                                                                             <th style="font-size: large;"
-                                                                                *ngIf="a.title=='Protein'"><img
+                                                                                *ngIf="a.name=='5'"><img
                                                                                     class="imgicon"
                                                                                     src="assets/images/icons/muscles.png">
-                                                                                {{a.title}}:</th>
+                                                                                {{a.title}}</th>
                                                                             <th style="font-size: large;"
-                                                                                *ngIf="a.title=='Calories'"><img
+                                                                                *ngIf="a.name=='1'"><img
                                                                                     class="imgicon"
                                                                                     src="assets/images/icons/calories-calculator.png">
-                                                                                {{a.title}}:</th>
+                                                                                {{a.title}}</th>
                                                                             <th style="font-size: large;"
-                                                                                *ngIf="a.title=='Carbohydrates'"><img
+                                                                                *ngIf="a.name=='2'"><img
                                                                                     class="imgicon"
                                                                                     src="assets/images/icons/rice.png">
-                                                                                {{a.title}}:</th>
+                                                                                {{a.title}}</th> -->
+                                                                                <th style="font-size: large;" ><img
+                                                                                    class="imgicon"
+                                                                                    src="https://neophroncrm.com/spiceclubnew/public/{{a.image}}">
+                                                                                {{a.title}}</th>
                                                                             <td style="font-size: large;">
                                                                                 <p *ngFor="let b of a.options">{{b}}</p>
                                                                             </td>
@@ -503,16 +507,17 @@
 
                                         <div class="col-lg-12">
                                             <div class="section-title section-title--one text-center">
-                                                <h1>Related Recipies</h1>
+                                                <h1>Products Used</h1>
                                             </div>
                                         </div>
-                                        <carousel style="height: 300px; z-index: unset;">
+                                        <carousel style="height: 200px; z-index: unset;">
                                             <div class="carousel-cell" *ngFor="let img of relatedrec; let i =index">
                                                 <div class="single-product" style="padding-left: 70px;">
                                                     <!--=======  single product image *ngIf="!loader6" =======-->
-                                                    <div class="single-product__image">
+                                                    <div class="single-product__image" (click)="viewproductrow2(img.product_id)">
                                                         <a class="image-wrap">
-
+                                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_img}}" class="img-fluid"
+                                                            alt="">
                                                         </a>
 
                                                         <div class="single-product__floating-badges">
@@ -522,7 +527,7 @@
 
                                                     </div>
 
-                                                    <div class="single-product__content">
+                                                    <div class="single-product__content" (click)="viewproductrow2(img.product_id)">
                                                         <div class="title">
                                                             <h3> <a>{{img.title}}</a></h3>
                                                             <a style="color: rgb(218, 7, 7);">view details</a>

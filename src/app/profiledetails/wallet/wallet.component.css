@@ -10,10 +10,21 @@ td{
       padding-bottom: 0px;
   }
   h2{
-    color:#474747; ;
+  
+    font-family: 'Poppins', sans-serif;
+  }
+  button{
     font-family: 'Poppins', sans-serif;
   }
 
+  label{
+    color:#474747; ;
+    font-family: 'Poppins', sans-serif;
+  }
+  h6 span{
+    font-family: 'Poppins', sans-serif;
+  }
+ 
 .checkout-cart-total {
     padding: 45px;
     background-color:rgb(230, 5, 5);

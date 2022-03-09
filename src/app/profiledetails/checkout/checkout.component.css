@@ -20,6 +20,10 @@
     background:  #f2f2f2;;
   
 }
+#checkkk{
+    color: #242323 ;
+	font-family: 'Poppins', sans-serif;
+}
 /* #f2f2f2; */
 .breadcrumb-list__item{
 	color: #474747 ;
@@ -27,6 +31,10 @@
 }
 span{
 	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+p{
+    color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
 label{
@@ -85,4 +93,30 @@ input.radio {width: auto;}
 }
 .ng-dropdown-panel .scroll-host {
     background-color: #f1f1f1;
+}
+.checkout-payment-method{
+    padding: 25px;
+}
+input[type='radio']:checked:after {
+    width: 15px;
+    height: 15px;
+    border-radius: 15px;
+    top: -2px;
+    left: -1px;
+    position: relative;
+    background-color: #ff0800;
+    content: '';
+    display: inline-block;
+    visibility: visible;
+    border: 2px solid #ffa500;
+}
+p strong{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+    font-size: small;
+}
+#sssp{
+    color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+    font-size: small;
 }

@@ -28,6 +28,7 @@ const routes: Routes = [
   { path: 'blog/:id', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
   { path: 'recipe', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },
   { path: 'recipe/:id', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },
+  { path: 'recipe/:id/:page/:categories', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },
   { path: 'brands/:id', loadChildren: () => import('./products/brands/brands.module').then(m => m.BrandsModule) },
    { path: 'brands/:id/:page', loadChildren: () => import('./products/brands/brands.module').then(m => m.BrandsModule) },
   { path: 'flash', loadChildren: () => import('./products/flash/flash.module').then(m => m.FlashModule) },
@@ -49,6 +50,13 @@ const routes: Routes = [
   { path: 'message', loadChildren: () => import('./profiledetails/message/message.module').then(m => m.MessageModule) },
   { path: 'faq', loadChildren: () => import('./pages/faq/faq.module').then(m => m.FaqModule) },
   { path: 'purchased', loadChildren: () => import('./profiledetails/purchased/purchased.module').then(m => m.PurchasedModule) },
+  { path: 'todaysdeal', loadChildren: () => import('./products/todaysdeal/todaysdeal.module').then(m => m.TodaysdealModule) },
+  { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
+  { path: 'orderstrack', loadChildren: () => import('./pages/orderstrack/orderstrack.module').then(m => m.OrderstrackModule) },
+  { path: 'storelocation', loadChildren: () => import('./pages/storelocation/storelocation.module').then(m => m.StorelocationModule) },
+  { path: 'aboutus', loadChildren: () => import('./pages/aboutus/aboutus.module').then(m => m.AboutusModule) },
+  { path: 'privacypolicy', loadChildren: () => import('./pages/privacypolicy/privacypolicy.module').then(m => m.PrivacypolicyModule) },
+  { path: 'return', loadChildren: () => import('./pages/return/return.module').then(m => m.ReturnModule) },
   
 ];
 

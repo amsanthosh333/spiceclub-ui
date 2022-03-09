@@ -14,6 +14,10 @@ tr {
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
+input{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
 
 @media (max-width : 990px) {
 	.lezada-button{
@@ -30,3 +34,40 @@ tr {
    input[type=number] {
      -moz-appearance: textfield;
    }
+   .cart-calculation-table th {
+	padding: 10px 18px;
+	line-height: 14px;
+	font-size: 13px;
+   }
+   .cart-calculation-area{
+	   padding: 20px;
+   }
+
+   .lezada-button--medium {
+	font-size: 14px;
+	padding: 5px 45px;
+	margin-top: 10px;
+}
+.cart-table td.product-name a {
+	font-size: 13px;
+}
+.cart-table th {
+	font-size: 13px;
+}
+.lezada-button{
+font-size: 0.8em;
+}
+.cart-table td.product-remove a i {
+    font-size: 20px;
+    line-height: 23px;
+}
+.product-remove{
+	padding-left: 15px;
+}
+.product-remove a{
+
+	margin-right: 15px;
+}
+.product-quantity{
+	padding-left: 20px;
+}

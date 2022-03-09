@@ -1,8 +1,22 @@
+li{
+	color: #474747 ;
+	font-family: 'Poppins', sans-serif;
+}
+
 .breadcrumb-list__item{
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
 @media (max-width :900px) {
+	h6{
+		font-size:0.8rem;
+	}
+	.orderss{
+		margin-left: 5%; margin-right: 5%;
+	}
+
+  }
+  @media (min-width :900px) {
 	h6{
 		font-size:0.8rem;
 	}
@@ -66,7 +80,7 @@
 nav.site-nav > ul > li > a:after {
 	    content: none;
 }
-@media screen and (max-width: 750px) {
+@media screen and (max-width: 767px) {
 	/* .filter-title{
 	  font-size: 0.5em;
 	} */
@@ -76,9 +90,19 @@ nav.site-nav > ul > li > a:after {
 	nav.site-nav[_ngcontent-jmj-c144] > ul[_ngcontent-jmj-c144] > li[_ngcontent-jmj-c144] {
 		font-size: 0.6em;
 	}
+	li a span{
+		font-size:1.5em;
+	}
   }
  
+  @media screen and (max-width: 500px) {
   li a span{
-	font-size:1.2em;
+	font-size:1.0em;
+}
+  }
+
+.fil .menu-item-has-children{
+	display: inline;
+	
 }
 	

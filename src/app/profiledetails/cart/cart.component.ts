@@ -77,6 +77,7 @@ export class CartComponent implements OnInit {
   buyertypeid: any;
   search!: FormGroup;
   couponn: any;
+  Summeryload: boolean=true;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
@@ -165,7 +166,10 @@ export class CartComponent implements OnInit {
       buyertype: this.buyertypeid
     }
 
+ console.log("edata2",edata2);
     this.request.updatecart(edata2).subscribe((response: any) => {
+      console.log("response",response);
+      
       if(response.result==true){
         // this.toastr.success('Cart updated', '');
         this.viewcart();
@@ -173,7 +177,7 @@ export class CartComponent implements OnInit {
         this.sharedService.sendClickEvent();
       }
       else{
-        this.toastr.success( response.message);
+        this.toastr.info( response.message);
       }
     });
 
@@ -237,6 +241,7 @@ export class CartComponent implements OnInit {
       this.subtot = this.Summery.sub_total
       this.couponn=this.Summery.coupon_applied
       this.grandtotal = this.Summery.grand_total
+      this.Summeryload=false
     });
 
   }

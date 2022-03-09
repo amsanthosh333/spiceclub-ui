@@ -228,6 +228,8 @@ public getmaximumprice(){
 public fetchuserprofile(id:any){
   
   this.url = `${this.endPoint1}/profile/getprofile/` + id;
+  // console.log(this.url);
+  
   return this.http.get(this.url);  
 }
 // address
@@ -817,7 +819,56 @@ public billdeskpayment(): Observable<string>  {
     
 // }
 
- 
+ public emailsubscribe(body:any){
+  this.url=`${this.endPoint1}/subscriber/add`;
+  return this.http.post(this.url,body)
 
+}
 
+public fetchfacebookurl() {
+  this.url = `${this.endPoint1}/social/getlink/facebook` ;
+  return this.http.get(this.url);
+}
+public fetchyoutubeurl() {
+  this.url = `${this.endPoint1}/social/getlink/youtube` ;
+  return this.http.get(this.url);
+}
+public fetchinstagramurl() {
+  this.url = `${this.endPoint1}/social/getlink/instagram` ;
+  return this.http.get(this.url);
+}
+public fetchtwitterurl() {
+  this.url = `${this.endPoint1}/social/getlink/twitter` ;
+  return this.http.get(this.url);
+}
+
+public getaboutus() {
+  this.url = `${this.endPoint1}/policies/custompage/about` ;
+  return this.http.get(this.url);
+}
+
+public getfaq() {
+  this.url = `${this.endPoint1}/policies/custompage/faq` ;
+  return this.http.get(this.url);
+}
+
+public getreturn() {
+  this.url = `${this.endPoint1}/policies/return` ;
+  return this.http.get(this.url);
+}
+
+public getcontact() {
+  this.url = `${this.endPoint1}/policies/custompage/contactus`;
+  return this.http.get(this.url);
+}
+
+public getstorelocation() {
+  this.url = `${this.endPoint1}/policies/custompage/storelocation`;
+  return this.http.get(this.url);
+}
+
+public getsupportpolicy() {
+  this.url = `${this.endPoint1}/policies/support`;
+  return this.http.get(this.url);
+}
 }

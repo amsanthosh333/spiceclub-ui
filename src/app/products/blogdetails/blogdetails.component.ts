@@ -197,10 +197,13 @@ export class BlogdetailsComponent implements OnInit {
     
           this.request.addblogcomment(edata2).subscribe((res: any) => {
 
-            if (res.message == 'Comment  Submitted') {
+            if (res.result == true) {
               this.toastr.success('Comment  Submitted', '');
-              this.getcommentsss();
-              this.comment.reset();
+              const currentRoute = this.router.url;
+
+              this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                this.router.navigate([currentRoute]); // navigate to same route
+              });
             }
             else {
               this.toastr.error(res.message);

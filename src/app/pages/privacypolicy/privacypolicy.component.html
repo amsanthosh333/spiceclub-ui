@@ -1,0 +1,130 @@
+<div class="breadcrumb-area breadcrumb-bg-1 pt-10  ">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="breadcrumb-title">Support policy</h1>
+
+                <ul class="breadcrumb-list">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Support policy</li>
+                </ul>
+
+                <!--=======  End of breadcrumb list  =======-->
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="faq-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="faq-wrapper">
+
+
+                    <!--=======  single faq  =======-->
+
+                    <div class="single-faq mb-80 mt-40">
+                        
+                        <div class="accordion" id="shippingInfo">
+                            <div class="card">
+                                
+                                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#shippingInfo">
+                                    <div class="card-body" >
+                                        <div class="shop-product__long-desc mb-10"
+                                        [innerHTML]="description" 
+                                        style="font-family: 'Poppins', sans-serif" *ngIf="!desload" >
+                                        <p>
+                                            {{description}}
+
+                                        </p>
+                                    </div>
+                                    <div class="shop-prodiption" *ngIf="desload">
+                                        <div class="_price mb-10">
+                                            <ngx-skeleton-loader count="1"[theme]="{ 
+                                                'border-radius': '5px',
+                                                 height: '25px',
+                                                 width: '80%',
+                                                'background-color': '##b9b8b8',
+                                                border: '1px solid white'
+                                              }"  animation="pulse"></ngx-skeleton-loader>
+                                        </div>
+    
+                                        <div class="shop-prdesc mb-30">
+                                            <ngx-skeleton-loader count="5"[theme]="{ 
+                                                'border-radius': '5px',
+                                                 height: '25px',
+                                                 width: '100%',
+                                                'background-color': '##b9b8b8',
+                                                border: '1px solid white'
+                                              }"  animation="pulse"></ngx-skeleton-loader>
+                                            <ngx-skeleton-loader count="1" [theme]="{ 
+                                                'border-radius': '5px',
+                                                 height: '25px',
+                                                 width: '60%',
+                                                'background-color': '##b9b8b8',
+                                                border: '1px solid white',
+                                                'margin-left':'50px'
+                                              }" animation="pulse"></ngx-skeleton-loader>
+                                        </div>
+
+                                        <div class="_price mb-10">
+                                            <ngx-skeleton-loader count="1"[theme]="{ 
+                                                'border-radius': '5px',
+                                                 height: '25px',
+                                                 width: '80%',
+                                                'background-color': '##b9b8b8',
+                                                border: '1px solid white'
+                                              }"  animation="pulse"></ngx-skeleton-loader>
+                                        </div>
+    
+                                        <div class="shop-prdesc mb-30">
+                                            <ngx-skeleton-loader count="5"[theme]="{ 
+                                                'border-radius': '5px',
+                                                 height: '25px',
+                                                 width: '100%',
+                                                'background-color': '##b9b8b8',
+                                                border: '1px solid white'
+                                              }"  animation="pulse"></ngx-skeleton-loader>
+                                            <ngx-skeleton-loader count="1" [theme]="{ 
+                                                'border-radius': '5px',
+                                                 height: '25px',
+                                                 width: '60%',
+                                                'background-color': '##b9b8b8',
+                                                border: '1px solid white',
+                                                'margin-left':'50px'
+                                              }" animation="pulse"></ngx-skeleton-loader>
+                                        </div>
+                                        <!--=======  End of shop product description  =======-->
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="cta-area pt-50 pb-50">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="cta-content">
+                    <div class="cta-title">
+                        <h2>Any unanswered questions?</h2>
+                    </div>
+
+                    <div class="cta-button">
+                        <button routerLink="/contact" class="lezada-button lezada-button--medium lezada-cta-button">contact us</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

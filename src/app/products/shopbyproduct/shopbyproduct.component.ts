@@ -302,7 +302,7 @@ export class ShopbyproductComponent implements OnInit {
       this.brand_id = ''
       this.categoryy_id = ''
       this.subItem = ''
-      console.log("brnd,category", this.brand_id, this.categoryy_id);
+      // console.log("brnd,category", this.brand_id, this.categoryy_id);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -501,6 +501,7 @@ export class ShopbyproductComponent implements OnInit {
     console.log('Got the selectedVendor as : ', JSON.parse(selectedVendor));
   }
   getpage(url: any) {
+    if(url!==null){
     this.prodloader = true;
     this.imgloader = false;
     this.request.getpage2(url, this.categoryy_id, this.brand_id, this.sortval, this.minValue, this.maxValue,).subscribe((response: any) => {
@@ -515,7 +516,7 @@ export class ShopbyproductComponent implements OnInit {
         this.imgloader = true;
       }, 2000);
     })
-
+  }
   }
   viewproductrow(img: any) {
     this.totalprice = ''
@@ -818,12 +819,12 @@ export class ShopbyproductComponent implements OnInit {
     if (this.brandd_id === undefined) {
       this.brandd_id = ''
     }
-    console.log("this.categoryy_id", this.categoryy_id);
-    console.log("this.brandd_id", this.brandd_id);
+    // console.log("this.categoryy_id", this.categoryy_id);
+    // console.log("this.brandd_id", this.brandd_id);
 
     this.request.filterdataa3(this.pagee, this.categoryy_id, this.brandd_id, this.minValue, this.maxValue, this.sortvalue).subscribe((response: any) => {
       // this.request.filtersearchdataa(key).subscribe((response: any) => {
-      console.log("filterdataa3", response);
+      // console.log("filterdataa3", response);
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;

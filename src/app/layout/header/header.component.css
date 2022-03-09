@@ -1,7 +1,18 @@
 /* .menu-item li{
 	color: rgb(106, 107, 107);
 } */
+.ion-close{
+	font-size: 11px;
+}
 h5 a{
+	color: #474747 ;
+    font-family: 'Poppins', sans-serif;
+}
+h6 a{
+	color: #474747 ;
+    font-family: 'Poppins', sans-serif;
+}
+button{
 	color: #474747 ;
     font-family: 'Poppins', sans-serif;
 }
@@ -20,7 +31,10 @@ span p{
     color: #474747;
     font-family: 'Poppins', sans-serif;
 }
-
+#ccc{
+	
+    font-family: 'Poppins', sans-serif;
+}
 
 #dropbtn[_ngcontent-ajq-c107] {
     background-color: #cecccc00;

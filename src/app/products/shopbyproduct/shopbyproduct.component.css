@@ -1,3 +1,26 @@
+p span{
+  font-family: 'Poppins', sans-serif;
+}
+p{
+  font-family: 'Poppins', sans-serif;
+}
+input{
+  color: #474747 ;
+  font-family: 'Poppins', sans-serif;
+}
+.avialable-amount{
+  color: #474747 ;
+  font-family: 'Poppins', sans-serif;
+}
+.h5 {
+  color: red;
+}
+.single-size{
+  font-family: 'Poppins', sans-serif;
+}
+.opacity-50{
+  font-family: 'Poppins', sans-serif;
+}
 
 li.has-children.active a{
 text-decoration: underline;

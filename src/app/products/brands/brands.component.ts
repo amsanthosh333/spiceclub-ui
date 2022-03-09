@@ -66,7 +66,7 @@ export class BrandsComponent implements OnInit {
   likedd=[false,false,false,false,false,false,false,false,false,false,false,false,false,false,false];
   likeddd=[true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true,true];
   stocckkk: any;
-  subItem: any;
+  subItem: any=0;
   subItemm: any;
   currentpage: any;
   pagee: any=1;
@@ -222,6 +222,7 @@ export class BrandsComponent implements OnInit {
     });
   }
   getpage(url:any){
+    if(url!==null){
     this.prodloader=true;
     window.scroll(0,0);
   this.imgloader = false;
@@ -243,6 +244,7 @@ export class BrandsComponent implements OnInit {
         this.imgloader = true;
       }, 2000);
     })
+  }
   }
   addtowishlist(prd_id:any){
     if(this.userid==0){

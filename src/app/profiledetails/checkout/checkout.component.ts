@@ -347,10 +347,11 @@ export class CheckoutComponent implements OnInit {
       else {
         this.request.placeorder(edata).subscribe((response: any) => {
           this.combined_orderid = response.combined_order_id
+          console.log("", response.message);
           if (response.result == true) {
             this.toastr.success('Order placed');
             this.sharedService.sendClickEvent();
-            // this.router.navigate(['/orders']);
+             this.router.navigate(['/orders']);
           }
           else {
             this.toastr.error(response.message);

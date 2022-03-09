@@ -357,7 +357,7 @@
 							</div>
 							<div class="single-comment__image" *ngIf="(profiledetail?.profileimg!=='')">
 								<img src="https://neophroncrm.com/spiceclubnew/public/{{profiledetail?.profileimg}}"
-									class="img-fluid" style="height: 70px;object-fit: cover;" alt="">
+									class="img-fluid" style="height: 60px;object-fit: cover;width: 60px;" alt="">
 							</div>
 							<div class="single-comment__content  mt-2 pl-2">
 								<!--=======  username and date  =======-->
@@ -453,7 +453,7 @@
 
 						<div class="single-cart-product" *ngFor="let img of Wishlist">
 							<span class="cart-close-icon">
-								<a (click)="deleteRecord(img.id)"><i class="ion-android-close"></i></a>
+								<a (click)="deleteRecord(img.id)"><i class="ion-close" style="font-size: 11px;"></i></a>
 							</span>
 							<div class="image">
 								<a >
@@ -462,7 +462,7 @@
 							</div>
 							<div class="content">
 								<p style="height: 15px;"></p>
-								<h5><a>{{img.product.name}}</a></h5>
+								<h5 style="width: 200px;"><a>{{img.product.name}}</a></h5>
 								<p><span class="main-price discounted">{{img.product.base_price}}</span> 
 									<span class="discounted-price" style="color: red;" >{{img.product.base_price}}</span></p>
 							</div>
@@ -521,9 +521,8 @@
 						<!--=======  single cart product  =======-->
 						<div class="sdd" *ngFor="let img of Cart">
 						<div class="single-cart-product" *ngFor="let b of img.cart_items" >
-							
 							<span class="cart-close-icon">
-								<a (click)="deleteRecord2(b.id)"><i class="ion-android-close"></i></a>
+								<a (click)="deleteRecord2(b.id)"><i class="ion-close" style="font-size: 11px;"></i></a>
 							</span>
 							<div class="image">
 								<a >
@@ -532,14 +531,13 @@
 							</div>
 							<div class="content">
 								<p style="height: 15px;"></p>
-								<h5><a>{{b.product_name}}</a></h5>
+								<h5 style="width: 200px;"><a>{{b.product_name}}</a></h5>
 								<p><span class="main-price discounted">Rs{{b.price}}</span> 
 									<span class="discounted-price" style="color: red;" >Rs{{b.price}}</span></p>
 									<span><p style="font-size:small;">quantity: {{b.quantity}}</p></span>
 							</div>
 						</div>
 					</div>
-	
 					</div>
 
 					
@@ -603,7 +601,7 @@
 			</div>
 			</div>
 			<div class="search-hint">
-				<span># Hit enter to search or ESC to close</span>
+				<span id="ccc"># Hit enter to search or ESC to close</span>
 			</div>
 		</div>
 

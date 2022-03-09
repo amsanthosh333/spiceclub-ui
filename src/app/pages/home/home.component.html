@@ -571,7 +571,7 @@
         </div>
         <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px;"
             (imageClick)="blogClick($event)" [images]="Allbrands" [imagePopup]="false"
-            [imageSize]="{width: 150, height: 150, space: 13}" #nav></ng-image-slider>
+            [imageSize]="{width: 150, height: 150, space: 13}" [font] #nav></ng-image-slider>
     </div>
 
 
@@ -769,11 +769,11 @@
                             </div>
                         </div>
                         <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
-                            <h2 class="item-title mb-4">{{Peoduct.name}}</h2>
+                            <h3 class="item-title mb-4">{{Peoduct.name}}</h3>
                             <p class="price">
                                 <span class="main-price discounted" style="text-decoration: line-through"
                                     *ngIf="Peoduct?.stroked_price!==prod_price">{{Peoduct?.stroked_price}}</span>
-                                <span class="h5 discounted-price">{{prod_price}}</span>
+                                <span class="h5 discounted-price" style="color: red;">{{prod_price}}</span>
                                 <span class="opacity-70">/{{Peoduct.unit}}</span>
                             </p>
                             <p class="description" [innerHTML]="Peoduct?.description">
@@ -803,7 +803,7 @@
 
                                 <div class="row no-gutters ml-1">
                                     <div class="col-3">
-                                        <div class="opacity-50 mt-2">Quantity:</div>
+                                        <div class="opacity-50 mt-2" style="font-family: 'Poppins', sans-serif;">Quantity:</div>
                                     </div>
                                     <div class="col-9">
                                         <div class="product-quantity d-flex align-items-center">

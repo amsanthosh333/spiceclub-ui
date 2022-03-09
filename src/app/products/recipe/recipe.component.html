@@ -108,7 +108,7 @@
                                 <ul class="pagination" style="justify-content: center;
                                     display: flex;">
                                     <li [ngClass]="{disabled:p.url === null,'active': p.active}" class="page-item first-item"
-                                        *ngFor="let p of pagess" (click)="getpage(p.url)">
+                                        *ngFor="let p of pagess" (click)="getpage(p.url,p.label)">
                                         <a class="page-link">{{p.label}}</a>
                                     </li>
                                 </ul>
