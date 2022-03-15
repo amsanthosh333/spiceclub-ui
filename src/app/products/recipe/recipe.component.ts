@@ -98,9 +98,8 @@ export class RecipeComponent implements OnInit {
     // this.rec_id = this.route.snapshot.paramMap.get('id');
     this.getallrecipecat();
     this.activatedRoute.queryParams.subscribe((data2: Params) => {
-     
-      this.rec_id = data2['category']
-      this.pagee = data2['page']
+    this.rec_id = data2['category']
+    this.pagee = data2['page']
       console.log("queryParams data", this.rec_id);
       if (this.rec_id ==undefined || this.rec_id ==null ) {
         console.log("rec!undefined",this.rec_id);  

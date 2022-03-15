@@ -101,13 +101,15 @@
                 <strong>Total:</strong>
                 <p style="margin-bottom: 10px; color: red;">{{img.grand_total}}</p>
 
-                <!-- <p *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'"> <button (click)="paynow()">Paynow</button></p> -->
-                <span class="add-to-cart" style="margin-left: auto;"
+              
+         
+              
+                <!-- <span class="add-to-cart" style="margin-left: auto;"
                     *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'">
                     <button id="ppaynoww" class="lezada-button lezada-button--small lezada-button--icon--left"
                         (click)=paynow1()>
                         <span style="color: white;"> PAY NOW </span></button>
-                </span>
+                </span> -->
             </div>
 
         </div>
@@ -205,8 +207,11 @@
                 *ngIf="loader"></ngx-skeleton-loader>
             <div class="col-12" style="text-align: end;padding-right: 0px;">
                 <span class="add-to-cart" style="margin-left: auto;">
-                    <button class="lezada-button lezada-button--small lezada-button--icon--left" (click)=quickorder()>
+                    <button class="lezada-button lezada-button--small lezada-button--icon--left"  *ngIf="!loadingg" style="margin-top: 5px;" (click)=quickorder()>
                         <span style="color: white;"> Quick order</span></button>
+                        <button class="lezada-button lezada-button--small lezada-button--icon--left" *ngIf="loadingg" style="margin-top: 5px;" >
+                            <span style="color: white;" >&nbsp;&nbsp;<i class="fa fa-spinner fa-spin" style="font-size: 1.1em;"></i>&nbsp;&nbsp;</span></button>
+
                 </span>
             </div>
         </div>

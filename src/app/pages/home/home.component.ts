@@ -142,6 +142,7 @@ export class HomeComponent implements OnInit {
   imgloader: boolean = true;
   stocckkk!: number;
   subItem: any=0;
+  storked_pricee: any;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -483,7 +484,10 @@ export class HomeComponent implements OnInit {
 
       console.log("proddetaill", response);
       this.Peoduct = response.data[0];
+
       this.prod_price = this.Peoduct.main_price;
+      this.storked_pricee=this.Peoduct.stroked_price;
+
       this.choice = this.Peoduct.choice_options;
       //  this.stocck=(this.Peoduct.current_stock)-1;
       this.stk = this.Peoduct.current_stock;
@@ -537,7 +541,10 @@ export class HomeComponent implements OnInit {
     this.varient_value = weight.replace(/\s/g, "")
     this.subItem=i
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
+ 
       this.prod_price = res?.price_string;
+      this.storked_pricee=res?.stroked_price;
+
       this.totalprice = (res?.price_string).replace('Rs', '');
       this.varprise = res?.price_string;
       this.stk = res?.stock;

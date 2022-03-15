@@ -70,6 +70,7 @@ export class BrandsComponent implements OnInit {
   subItemm: any;
   currentpage: any;
   pagee: any=1;
+  storked_pricee: any;
   
  
 
@@ -317,7 +318,10 @@ export class BrandsComponent implements OnInit {
       this.product_id = id
       this.request.getproddetail(this.product_id).subscribe((response: any) => {
         this.Peoduct = response.data[0];
-        this.prod_price = this.Peoduct.main_price;
+
+      this.prod_price = this.Peoduct.main_price;
+      this.storked_pricee=this.Peoduct.stroked_price;
+
         this.choice = this.Peoduct.choice_options;
         //  this.stocck=(this.Peoduct.current_stock)-1;
         this.stk = this.Peoduct.current_stock;
@@ -382,7 +386,11 @@ export class BrandsComponent implements OnInit {
           this.varient_value=weight.replace(/\s/g, "")
           this.subItem=i
           this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-            this.prod_price=res?.price_string;
+          
+
+            this.prod_price = res?.price_string;
+      this.storked_pricee=res?.stroked_price;
+
             this.totalprice=(res?.price_string).replace('Rs','');
             this.varprise=res?.price_string;
             this.stk=res?.stock;

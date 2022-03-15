@@ -24,7 +24,7 @@
 <!-- <button (click)="payWithRazor(21)">razorpay</button>
 	<button (click)="initPay()">razorpay</button>
 	<button (click)="pay()">Pay</button> -->
-	<!-- <button (click)="billdesk2()"> BILLDESK payy</button>
+<!-- <button (click)="billdesk2()"> BILLDESK payy</button>
 	<button (click)="billdesk()"> BILLDESK payy server</button> -->
 
 <!-- <button (click)="initPay()">razorpay initpay</button> ------->
@@ -42,7 +42,7 @@
 	=            checkout page content         =
 	=============================================-->
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#e00707" type="ball-scale-multiple">
-	<p style="font-size: 20px; color: white">Loading...</p>
+	<p style="font-size: 20px; color: white">Please wait...</p>
 </ngx-spinner>
 
 <div class="checkout-page-area mb-130">
@@ -138,17 +138,15 @@
 											<div class="addresss mb-2" *ngFor="let Connectdtls of Address; let i=index"
 												style=" border:1px solid #e0e0e0; padding: 15px; padding-left: 20px; ">
 												<span style="margin-left: auto;">
-													 <input type="radio" class="radio"
-														 
-														value="{{Connectdtls.id}}" data-shipping
-														name="radio"
+													<input type="radio" class="radio" value="{{Connectdtls.id}}"
+														data-shipping name="radio"
 														[checked]="Connectdtls.set_default== 1"
-														(click)="shippingcost(Connectdtls)" >
-														<label
-														for="shiping_address{{i}}" style="font-size: small;"> &nbsp; Use
+														(click)="shippingcost(Connectdtls)">
+													<label for="shiping_address{{i}}" style="font-size: small;"> &nbsp;
+														Use
 														address{{i+1}} as shipping</label> </span>
 
-												<p style="margin-bottom: 0px; margin-top: 10px;" > <strong >{{username}}
+												<p style="margin-bottom: 0px; margin-top: 10px;"> <strong>{{username}}
 													</strong> <strong> {{Connectdtls.phone}}</strong> </p>
 												<span id="sssp"> {{Connectdtls.address}} , {{Connectdtls.city_name}} ,
 													{{Connectdtls.state_name}} ,
@@ -186,7 +184,7 @@
 											<label for="create_account"> To edit Address <address></address>
 											</label>
 										</div>
-										<div class="check-box" >
+										<div class="check-box">
 											<input type="checkbox" id="shiping_address" data-shipping
 												(click)="opennewaddress()">
 											<label for="shiping_address">Use new Address</label>
@@ -203,14 +201,16 @@
 										<div class="row">
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Phone no<span class="text-danger">*</span></label>
+												<label class="shipplable">Phone no<span
+														class="text-danger">*</span></label>
 												<input type="text" placeholder="Phone number" formControlName="phone"
 													required>
 											</div>
 
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Country<span class="text-danger">*</span></label>
+												<label class="shipplable">Country<span
+														class="text-danger">*</span></label>
 												<select class="nice-select" (change)="selectcountry($event)"
 													formControlName="country">
 													<option value="" selected disabled>select</option>
@@ -219,7 +219,8 @@
 												</select>
 											</div>
 											<div class="col-12 mb-20">
-												<label class="shipplable">Address<span class="text-danger">*</span></label>
+												<label class="shipplable">Address<span
+														class="text-danger">*</span></label>
 												<input type="text" placeholder="Address line 1"
 													formControlName="address">
 												<input type="text" placeholder="Address line 2"
@@ -227,7 +228,8 @@
 											</div>
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">State<span class="text-danger">*</span></label>
+												<label class="shipplable">State<span
+														class="text-danger">*</span></label>
 												<select class="nice-select" (change)="selectstate($event)"
 													formControlName="state">
 													<option value="" selected disabled>select</option>
@@ -249,7 +251,8 @@
 												</select>
 											</div> -->
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Town/City<span class="text-danger">*</span></label>
+												<label class="shipplable">Town/City<span
+														class="text-danger">*</span></label>
 												<!-- <ng-select class="nice-select" formControlName="city" [items]="City"
 													bindLabel="name" bindValue="id" required placeholder="">
 												</ng-select> -->
@@ -262,7 +265,8 @@
 
 
 											<div class="col-md-6 col-12 mb-20">
-												<label class="shipplable">Zip Code<span class="text-danger">*</span></label>
+												<label class="shipplable">Zip Code<span
+														class="text-danger">*</span></label>
 												<input type="text" placeholder="Zip Code" formControlName="postal_code">
 											</div>
 
@@ -292,11 +296,13 @@
 												<div *ngFor="let a of Cart">
 													<li *ngFor="let b of a.cart_items">
 														<div class="row">
-															<div id="checkkk" class="col-10">{{b.product_name}} <span style="float: none; color: blue;">({{b.quantity}})</span> </div>
-															<div  class="col-2"><span >Rs.{{b.total}}</span> </div>
+															<div id="checkkk" class="col-10">{{b.product_name}} <span
+																	style="float: none; color: blue;">({{b.quantity}})</span>
+															</div>
+															<div class="col-2"><span>Rs.{{b.total}}</span> </div>
 														</div>
-														
-														 </li>
+
+													</li>
 												</div>
 											</ul>
 											<p>Discount <span>{{dis}}</span></p>
@@ -336,8 +342,9 @@
 
 											<button class="lezada-button lezada-button--medium mt-10" type="submit"
 												style=" display: block;
-												margin: 0 auto;">Place order</button>
-
+												margin: 0 auto;" *ngIf="!loadingg">Place order</button> 
+											<button class="lezada-button lezada-button--medium mt-10" type="button"
+												style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 										</form>
 
 
@@ -352,14 +359,15 @@
                     align-items: center;
                     height: 200px;
                     border: 3px solid rgb(139, 139, 139);">
-                        <div>
-                            <h5>
-                                There is no product in checkout
-                            </h5>
+						<div>
+							<h5>
+								There is no product in checkout
+							</h5>
 							<p style="color: #474747 ;
-							font-family: 'Poppins', sans-serif;" > If you want to continue payment go to <a routerLink="/orders"> Orders  </a></p>
-                        </div>
-                    </div>
+							font-family: 'Poppins', sans-serif;"> If you want to continue payment go to <a routerLink="/orders"> Orders </a>
+							</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

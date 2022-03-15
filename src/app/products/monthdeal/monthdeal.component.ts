@@ -68,6 +68,7 @@ export class MonthdealComponent implements OnInit {
   stocckkk: any;
   subItemm: any=0;
   Product: any;
+  storked_pricee: any;
  
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,config: NgbRatingConfig,private modalService: NgbModal,
@@ -229,7 +230,10 @@ export class MonthdealComponent implements OnInit {
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       this.Peoduct = response.data[0];
+    
       this.prod_price = this.Peoduct.main_price;
+      this.storked_pricee=this.Peoduct.stroked_price;
+      
       this.choice = this.Peoduct.choice_options;
       //  this.stocck=(this.Peoduct.current_stock)-1;
       this.stk = this.Peoduct.current_stock;
@@ -292,7 +296,11 @@ export class MonthdealComponent implements OnInit {
         this.varient_value=weight.replace(/\s/g, "")
         this.subItemm=i
         this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-          this.prod_price=res?.price_string;
+
+          this.prod_price = res?.price_string;
+      this.storked_pricee=res?.stroked_price;
+
+
           this.totalprice=(res?.price_string).replace('Rs','');
           this.varprise=res?.price_string;
           this.stk=res?.stock;

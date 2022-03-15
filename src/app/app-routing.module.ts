@@ -33,6 +33,7 @@ const routes: Routes = [
    { path: 'brands/:id/:page', loadChildren: () => import('./products/brands/brands.module').then(m => m.BrandsModule) },
   { path: 'flash', loadChildren: () => import('./products/flash/flash.module').then(m => m.FlashModule) },
   { path: 'category/:id', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
+  { path: 'subcategory/:id', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
   { path: 'category', loadChildren: () => import('./products/category/category.module').then(m => m.CategoryModule) },
   
  

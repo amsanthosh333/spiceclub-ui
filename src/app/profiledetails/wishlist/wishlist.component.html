@@ -268,7 +268,7 @@
                                     <div class="col-9">
                                         <div class="product-price">
                                             <strong id="chosen_price"
-                                                class="h5 fw-600 text-danger">Rs{{totalprice}}</strong>
+                                                class="h5 fw-600 text-danger">Rs {{totalprice}}</strong>
                                         </div>
                                     </div>
                                 </div>
@@ -336,9 +336,9 @@
                             <h2 class="item-title mb-4">{{Peoduct.name}}</h2>
                             <p class="price">
                                 <span class="main-price discounted" style="text-decoration: line-through"
-                                *ngIf="Peoduct?.stroked_price!==prod_price">{{Peoduct?.stroked_price}}</span>   
-                                <span class="h5 discounted-price">{{prod_price}}</span>
-                                <span class="opacity-70">/{{Peoduct.unit}}</span>
+                                *ngIf="storked_pricee!==prod_price">{{storked_pricee}}</span>
+                            <span class="h5 discounted-price">{{prod_price}}</span>
+                            <span class="opacity-70">/{{Peoduct.unit}}</span>
                             </p>
                             <p class="description" [innerHTML]="Peoduct?.description">
                                                 {{Peoduct.description}}

@@ -258,7 +258,13 @@ li.has-children.active{
     color: #ffffff;
     padding: 4px;
     border-radius: 4px;
-    background-color: #2023ce;
+    background-color: #f14014;
+}
+
+.shop-product__block__value .shop-product-size-list .single-size {
+  background-color: #cc3c2200;
+  color:#f14014;
+  border: 1px solid red;
 }
 
 #offtag {
@@ -272,7 +278,7 @@ li.has-children.active{
   position: absolute;
   text-align: center;
   line-height: 24px;
-  right: -25px;
+  right: -20px;
   top: 20px;
   font-family: arial;
   font-size: 10px;
@@ -281,3 +287,38 @@ li.has-children.active{
    <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
   <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span> 
   style="overflow: hidden;"   */
+
+  /* new design css */
+  #coll{
+    padding: 20px;
+  }
+  .text-reset{
+text-decoration: none;
+  }
+  .text-reset:hover{
+  text-decoration: underline;
+      }
+
+  .subcatt{
+    /* color: #474747 ; */
+  font-family: 'Poppins', sans-serif;
+  font-size: small;
+  }
+  #subcattt:hover{
+    text-decoration: underline;
+    text-decoration-color: red;
+    color: red!important;
+  }
+  #catname:hover{
+    font-weight: 600;
+    /* color: rgb(34, 32, 32)!important; */
+    text-decoration: underline;
+    text-decoration-color: rgb(7, 7, 7);
+  
+  }
+  #catnamee:hover{
+    
+    /* color: rgb(34, 32, 32)!important; */
+    text-decoration: underline;
+    text-decoration-color: rgb(36, 36, 36);
+  }

@@ -14,45 +14,13 @@
                     </div>
                 </div>
 
-				<!-- <nav ngxNavbarDynamicExpand class="navbar-light bg-light" > 
-					<button
-					  class="navbar-toggler"
-					  type="button"
-					  (click)="collapse.toggle()"
-					  aria-controls="main-nav"
-					  aria-expanded="false"
-					  aria-label="Navigáció kapcsoló" >
-					  <span
-						class="navbar-toggler-icon d-flex align-items-center justify-content-center"
-					  >
-					  </span>
-					</button> 
-					<ngx-navbar-collapse id="main-nav" #collapse="ngxNavbarCollapse" style="margin-left: 8%; margin-right: 8%;">
-					  <ul class="navbar-nav mr-auto">  
-						<li class="nav-item" >
-							<a routerLink="/home">Home</a>
-						</li>
-						<li class="nav-item" >
-							<a routerLink="/shopbyproduct" >ShopByProduct</a>
-						</li>
-						<li class="nav-item" >
-							<a routerLink="/category/33" >ShopByCategory</a>
-						</li>
-						<li class="nav-item" >
-							<a routerLink="/blog" >Blog</a>
-						</li>
-						<li class="nav-item" >
-							<a  routerLink="/recipe">Recipe</a>
-						</li>
-						
-					  </ul>
-					</ngx-navbar-collapse>
-				  </nav> -->
-                <div class="header-bottom-navigation">
+
+                <!-- <div class="header-bottom-navigation">
                     <div class="site-main-nav d-none d-lg-block">
                         <nav class="site-nav center-menu">
                             <ul>
-                                <li class="menu-item"><a routerLink="/home">Home</a>                                   
+                                <li class="menu-item"><a routerLink="/home">Home</a>  
+
                                 </li>
 
 								<li class="menu-item" ><a routerLink="/shopbyproduct" >Shop By Product</a>                                
@@ -69,9 +37,63 @@
                                 </li>
                             </ul>
                         </nav>
+
+				
 					
                     </div>
-                </div>
+                </div> -->
+
+
+								<!--=======  header bottom navigation  =======-->
+
+								<div class="header-bottom-navigation">
+									<div class="site-main-nav d-none d-lg-block">
+										<nav class="site-nav center-menu">
+											<ul>
+												<li class="menu-item"><a routerLink="/home">Home</a></li>
+
+										     	<li class="menu-item" ><a routerLink="/shopbyproduct" >Shop By Product</a>  </li>
+											
+												<li class="menu-item-has-children"><a >Shop By Category</a>
+
+													<ul class="sub-menu mega-menu mega-menu-column-4">
+
+														<li  style="max-height: 350px;overflow-y: auto;">
+															<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
+																<li style="margin-top: 10px;"  ><a (click)="gotocategory(img.id)" (mouseover)="viewsubcat(img.id,i)" [ngClass]="{'active': subItem === i}">{{img.name}}</a></li>
+																
+															</ul>
+														</li>
+
+														<li  style="max-height: 350px;overflow-y: auto;">
+															<ul class="mega-sub-menu" *ngFor="let img of Subcat;let i=index" >
+																<li style="margin-top: 10px;" ><a (click)="gotocategory2(img.id)" (mouseover)="viewsubcat2(img.id,i)" [ngClass]="{'active': subItem1 === i}" >{{img.name}}</a></li>		
+															</ul>
+														</li>
+
+														<li  *ngIf="Subcat2?.length!=0"  style="max-height: 350px;overflow-y: auto;">
+															<ul class="mega-sub-menu" *ngFor="let img of Subcat2;let i=index">
+																<li style="margin-top: 10px;"><a (click)="gotocategory3(img.id)" (mouseover)="viewsubcat3(img.id,i)" [ngClass]="{'active': subItem2 === i}"  >{{img.name}}</a></li>		
+															</ul>
+														</li>	
+														<li *ngIf="Subcat3?.length!=0"   style="max-height: 350px;overflow-y: auto;">
+															<ul class="mega-sub-menu" *ngFor="let img of Subcat3;let i=index">
+																<li style="margin-top: 10px;"><a (click)="gotocategory4(img.id)" (mouseover)="viewsubcat4(img.id,i)" [ngClass]="{'active': subItem3 === i}" >{{img.name}}</a></li>		
+															</ul>
+														</li>
+
+													</ul>
+												</li>
+
+												<li class="menu-item"><a routerLink="/blog" >Blog</a> </li>
+
+											    <li class="menu-item"><a  routerLink="/recipe">Recipe</a></li>
+											</ul>
+										</nav>
+									</div>
+								</div>
+			
+								<!--=======  End of header bottom navigation  =======-->
 
                 <!--=======  End of header bottom navigation  =======-->
 
@@ -463,7 +485,8 @@
 							<div class="content">
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{img.product.name}}</a></h5>
-								<p><span class="main-price discounted">{{img.product.base_price}}</span> 
+								<p>
+									<!-- <span class="main-price discounted">{{img.product.base_price}}</span>  -->
 									<span class="discounted-price" style="color: red;" >{{img.product.base_price}}</span></p>
 							</div>
 						</div>
@@ -532,8 +555,9 @@
 							<div class="content">
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{b.product_name}}</a></h5>
-								<p><span class="main-price discounted">Rs{{b.price}}</span> 
-									<span class="discounted-price" style="color: red;" >Rs{{b.price}}</span></p>
+								<p>
+									<!-- <span class="main-price discounted">Rs {{b.price}}</span>  -->
+									<span class="discounted-price" style="color: red;" >Rs {{b.price}}</span></p>
 									<span><p style="font-size:small;">quantity: {{b.quantity}}</p></span>
 							</div>
 						</div>

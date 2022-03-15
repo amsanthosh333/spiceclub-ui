@@ -51,6 +51,18 @@ export class HeaderComponent implements OnInit {
    ClickEventSubscription!:Subscription;
   profiledetail: any;
   loaderimage: boolean=true;
+  Allcat: any;
+  Subcat: any;
+  Subcat2: any=[];
+  Subcat3: any=[];
+  subItem: any=-1;
+  subItem1: any;
+  subItem2: any;
+  subItem3: any;
+  cat_id: any;
+  subcat_id: any;
+  subcategory1: any;
+  catid1_id: any;
 
   constructor(private router: Router,private fb: FormBuilder,private toastr: ToastrService,private request: RequestService, 
     private modalService: NgbModal,private sharedService: SharedService, private authService: AuthService ) {
@@ -62,6 +74,7 @@ export class HeaderComponent implements OnInit {
           this. viewcart();
           this.viewcart3();
           this.getprofile();
+         
   
         })
       }
@@ -97,6 +110,7 @@ export class HeaderComponent implements OnInit {
     this. viewcart();
     this.viewcart3();
     this.getprofile();
+    this.viewallcategory();
   }
 
     this.search = this.fb.group({ 
@@ -1563,6 +1577,7 @@ console.log("this.profiledetail",this.profiledetail);
       viewwishlist(){
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
           this.Wishlist=response.data; 
+          console.log("this.Wishlist",this.Wishlist);
       this.Wlength= this.Wishlist.length;
       this.loader=false ; 
                    
@@ -1570,7 +1585,9 @@ console.log("this.profiledetail",this.profiledetail);
       }
       viewcart(){
         this.request.fetchusercart(this.userid).subscribe((response: any) => {
-          this.Cart=response;   
+          this.Cart=response;  
+          console.log("this.Cart",this.Cart);
+           
           // this.cartlength=this.Cart.total;
           // this.owneriid=this.Cart[0].owner_id;    
         });
@@ -1691,6 +1708,78 @@ console.log("this.profiledetail",this.profiledetail);
           logout() {
             this.sharedService.sendlogout()
           }
+
+          viewallcategory(){
+            this.request.getallcat().subscribe((response: any) => {         
+              this.Allcat=response.data;
+              console.log("alllcat",this.Allcat);
+               window.scroll(0,0);
+            },
+            (error: any) => {
+              console.log("error",error);
+            });
+          }
+          viewsubcat(id:any,i:any){
+   
+            this.cat_id=id
+            this.subItem=i
+            this.subItem1=-1;
+            this.subItem2=-1;
+            this.subItem3=-1;
+              this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+               
+                
+                this.Subcat=res.data;
+              }, (error: any) => {
+                console.log("error",error);
+              });
+            
+          }
+          viewsubcat2(id:any,i:any){
+          
+            this.subcat_id=id
+            this.subItem1=i;
+            this.subItem2=-1;
+            this.subItem3=-1;
+              this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+                
+                
+                this.Subcat2=res.data;
+              }, (error: any) => {
+                console.log("error",error);
+              });
+          }
+          viewsubcat3(id:any,i:any){
+           this.catid1_id=id
+            this.subItem2=i;
+            this.subItem3=-1;
+              this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+         
+                this.Subcat3=res.data;
+              }, (error: any) => {
+                console.log("error",error);
+              });
+          }
+          viewsubcat4(id:any,i:any){
+            this.subItem3=i;
+            this.subcategory1=id
+          }
+
+          gotocategory(id:any){
+            this.router.navigate(['category', id]);
+          }
+          gotocategory2(id:any){
+            this.router.navigate(['category', this.cat_id],{ queryParams: {subcategory: id }});
+          }
+          gotocategory3(id:any){
+            this.router.navigate(['category', this.cat_id],{ queryParams: {subcategory: this.subcat_id,category1: id,}});
+          }
+          gotocategory4(id:any){
+            console.log("id",id);
+            
+            this.router.navigate(['category', this.cat_id],{ queryParams: {subcategory: this.subcat_id,category1: this.catid1_id,subcategory1:id}});
+          }
+
            
 }
 

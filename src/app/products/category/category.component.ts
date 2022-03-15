@@ -8,6 +8,8 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import{ SharedService} from 'src/app/services/shared.service'
+import { Params } from '@fortawesome/fontawesome-svg-core';
+
 
 
 @Component({
@@ -113,11 +115,23 @@ export class CategoryComponent implements OnInit {
   SubofSubcat: any=[];
   SubofSubcat1: any=[];
   topItem1: any;
+  viewSubcat: any;
+  loader2: boolean=true;
+  loader3:  boolean=true;
+  categorynameid: any;
+  locationSegments: any;
+  subcatedoryid: any;
+  catedory1id: any;
+  subcategory1id: any;
+  subcategory_id: any;
+  category1_id: any;
+  storked_pricee: any;
 
 
   constructor(private router: Router,private route: ActivatedRoute,private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private toastr: ToastrService,
-    config: NgbRatingConfig,private _location: Location,private sharedService: SharedService) {
+    config: NgbRatingConfig,private _location: Location,
+    private activatedRoute: ActivatedRoute,private sharedService: SharedService,private location: Location) {
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser')||'{}')
         
@@ -136,33 +150,99 @@ export class CategoryComponent implements OnInit {
      }
  
   ngOnInit(): void {
+  
+    this.activatedRoute.queryParams.subscribe((data2: Params) => {
+    console.log("activatedRoute");
     this.id = this.route.snapshot.params['id'];
-    console.log("this.id",this.id);
+    // console.log("this.id",this.id);
+    // console.log("this.id",this.route.snapshot);
+    // console.log("this.id",this.route.snapshot.queryParams['subcategory']);
+    this.subcatedoryid=this.route.snapshot.queryParams['subcategory']
+    this.catedory1id=this.route.snapshot.queryParams['category1'] 
+    this.subcategory1id=this.route.snapshot.queryParams['subcategory1']
+    console.log("category1id",this.catedory1id);
+    let locationPath = this.location.path();
+    if(locationPath.length) {
+      this.locationSegments = locationPath.split('/');
+    }
+    console.log(this.locationSegments[1])
+
     if(this.id===undefined){
       this.viewallcategory();
       this.viewtopcategory();
       this.viewfeatured();
       this.page2=false
     }
-    else{
+    else {
+      if(this.subcategory1id!== undefined){
+        console.log("11111111111111sssssssubbbbbbcccccccccccccccccccccccategory");
+        this.page2=true
+        // this.viewsubcatprod(this.subcatedoryid,1,0)
+        this.viewctopcatprodsub1(this.subcategory1id,1,0)
+        this.getsubcategory(this.id);
+        this.subofsubcatprod(this.subcatedoryid)
+        this.subofsubcatprod1(this.catedory1id)
+        this.viewallcategory();
+        this.categorydetail(this.id);
+        this.viewtopcategory();
+        this.viewfeatured();
+      }
+
+     else if(this.catedory1id!== undefined){
+        console.log("11111111111111cccccccccccccccccccccccategory");
+        this.page2=true
+        // this.viewsubcatprod(this.subcatedoryid,1,0)
+        this.viewctopcatprodsub(this.catedory1id,1,0)
+        this.subofsubcatprod1(this.catedory1id)
+        this.getsubcategory(this.id);
+        this.subofsubcatprod(this.subcatedoryid)
+        this.SubofSubcat1=[]
+        // this.selectedItem=this.id;
+        this.viewallcategory();
+        this.categorydetail(this.id);
+        this.viewtopcategory();
+        this.viewfeatured();
+      }
+    else if(this.subcatedoryid!== undefined){
+      // console.log("sssssssssssubccccccccccccccccccccccccategory");
+      this.page2=true
+      this.viewsubcatprod(this.subcatedoryid,1,0)
+      this.getsubcategory(this.id);
+      this.subofsubcatprod(this.subcatedoryid)
+      this.SubofSubcat=[]
+      this.SubofSubcat1=[]
+      // this.selectedItem=this.id;
+      this.viewallcategory();
+      this.categorydetail(this.id);
+      this.viewtopcategory();
+      this.viewfeatured();
+    }
+  
+    else {
+        // console.log("ccccccccccccccccccccccccategory");   
     this.viewallcategory();
     this.categorydetail(this.id);
     this.getprodofcategory(this.id,1);
     this.getsubcategory(this.id);
+    this.SubofSubcat=[]
+      this.SubofSubcat1=[]
     this.viewtopcategory();
     this.viewfeatured();
     this.page2=true
     this.selectedItem=this.id;
+    }
   }
-
-    this.search = this.fb.group({ 
+    }),
+    
+  this.search = this.fb.group({ 
     key: [''],
     });
  
     this.subsearch = this.fb.group({ 
       key: [''],
     });
-  }
+}
+
   toggle(img:any,index:any): void {
     this.likeddd[index] = !this.likeddd[index];   
     if(this.likeddd[index]==true){
@@ -186,6 +266,7 @@ export class CategoryComponent implements OnInit {
 viewallcategory(){
   this.request.getallcat().subscribe((response: any) => {
     this.Allcat=response.data;
+    this.loader2=false
      window.scroll(0,0);
   },
   (error: any) => {
@@ -196,15 +277,20 @@ viewtopcategory(){
   this.request.gettopcat().subscribe((response: any) => {
     this.Topcat=response.data;
     this.navloader=false
+    this.loader3=false
   },
   (error: any) => {
     console.log("error",error);
   });
 }
 getsubcategory(id:any){
+  console.log("getsubcategory");
   this.request.getsubcategoryofcat(id).subscribe((res: any) => {
     this.Subcat=res.data;
     this.sideloader=false;
+    let index = this.Subcat?.findIndex((x:any ) => x.id == this.subcatedoryid );
+    this.subItem=index
+    
   }, (error: any) => {
     console.log("error",error);
   });
@@ -239,6 +325,7 @@ getprodofcategory(id:any,page:any){
   });
 }
 categorydetail(id:any){
+  this.categorynameid=id
   this.request.getcatdetail(id).subscribe((response: any) => {
     console.log("categorydetail",response);
     this.catName=response.data[0].name
@@ -398,16 +485,19 @@ viewctopcatprodsub1(id:any,page:any,i:any){
   
 }
 viewctopcatprod3sub(id:any,i:any){
-  window.scroll(0,0);
-  this.router.navigate(['category', id]);
-  this.viewctopcatprodsub(id,1,i)
-  this.subofsubcatprod1(id)
- 
+  // window.scroll(0,0);
+
+  this.category1_id=id
+  this.router.navigate(['category', this.categorynameid],{ queryParams: {subcategory: this.subcategory_id,category1: id,}});
+  // this.viewctopcatprodsub(id,1,i)
+  // this.subofsubcatprod1(id)
 }
 viewctopcatprod3sub1(id:any,i:any){
-  window.scroll(0,0);
-  this.router.navigate(['category', id]);
-  this.viewctopcatprodsub1(id,1,i)
+  console.log("viewctopcatprod3sub1");
+  
+  // window.scroll(0,0);
+  this.router.navigate(['category', this.categorynameid],{ queryParams: {subcategory: this.subcategory_id,category1: this.category1_id,subcategory1:id}});
+  // this.viewctopcatprodsub1(id,1,i)
   
  
 }
@@ -446,7 +536,8 @@ viewctopcatprod4(id:any,i:any){
   this.viewctopcatprod2(id,1,i)
 }
 viewsubcatprod(id:any,page:any,i:any){
-  this.subsearch.reset();
+  
+  // this.subsearch.reset();
   this.prodloader=true;
   this.imgloader = false;
   this.searchh1=false;
@@ -469,8 +560,11 @@ subofsubcatprod(id:any){
   this.request.getsubcategoryofcat(id).subscribe((res: any) => {
     this.SubofSubcat=res.data;
     console.log("SubofSubcat",this.SubofSubcat);
-    
     this.sideloader=false;
+    let index = this.SubofSubcat?.findIndex((x:any ) => x.id == this.catedory1id );
+    console.log("index",index);
+    console.log("catedory1id",this.catedory1id);
+    this.topItem=index
   }, (error: any) => {
     console.log("error",error);
   });
@@ -478,18 +572,34 @@ subofsubcatprod(id:any){
 subofsubcatprod1(id:any){
   this.request.getsubcategoryofcat(id).subscribe((res: any) => {
     this.SubofSubcat1=res.data;
-    console.log("SubofSubcat",this.SubofSubcat);
-    
+    console.log("SubofSubcat1",this.SubofSubcat1);
+    let index = this.SubofSubcat1?.findIndex((x:any ) => x.id == this.subcategory1id );
+    this.topItem1=index
+    console.log("this.topItem1",this.subcategory1id,this.topItem1);
     this.sideloader=false;
   }, (error: any) => {
     console.log("error",error);
   });
 }
 viewsubcatprod2(id:any,i:any){
+  this.subcategory_id=id
+  // window.scroll(0,0);
+  this.router.navigate(['category',this.categorynameid],{ queryParams: {subcategory: id }});
+//   this.viewsubcatprod(id,1,i)
+//  this.subofsubcatprod(id)
+ 
+}
+viewsubcatprodformpage(catid:any,id:any,i:any){
+  console.log("subcatprooduct");
+  this.router.navigate(['category', catid],{ queryParams: {subcategory: id } });
+
   window.scroll(0,0);
-  // this.router.navigate(['category/subcategory', id]);
+  this.page2=true
+  this.getsubcategory(catid);
   this.viewsubcatprod(id,1,i)
+  
  this.subofsubcatprod(id)
+ this.categorydetail(catid)
  
 }
 
@@ -543,7 +653,10 @@ search1(form:FormGroup,page=1){
   
         console.log("proddetaill", response);
         this.Peoduct = response.data[0];
+        
         this.prod_price = this.Peoduct.main_price;
+        this.storked_pricee=this.Peoduct.stroked_price;
+
         this.choice = this.Peoduct.choice_options;
         //  this.stocck=(this.Peoduct.current_stock)-1;
         this.stk = this.Peoduct.current_stock;
@@ -606,7 +719,11 @@ search1(form:FormGroup,page=1){
           this.varient_value=weight.replace(/\s/g, "")
           this.subItemm=i;
           this.request.addvarient(this.product_id,weight).subscribe((res: any) => {;
-            this.prod_price=res?.price_string;
+           
+
+            this.prod_price = res?.price_string;
+            this.storked_pricee=res?.stroked_price;
+
             this.totalprice=(res?.price_string).replace('Rs','');
             this.varprise=res?.price_string;
             this.stk=res?.stock;
@@ -681,4 +798,37 @@ search1(form:FormGroup,page=1){
         this.element.className = "topnav";
       }
     }
+
+    yourMethod(id:any){
+      console.log("catid",id);
+        this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+          console.log("res",res);
+          this.viewSubcat=res.data; 
+        });
+      
+    }
+
+  //   public subcat(id:any): Array<any> {
+  //     console.log("subcat",id);
+  //     let stars: any[] = [];
+  //     //---> some logic
+  //     // this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+  //     //   console.log("res",res);
+  //     //   this.viewSubcat=res.data; 
+  //     // });
+  //      return stars;
+  // }
+  myFunction1(testf: any){
+
+    console.log(testf);
+
+    return testf;
+
+  } 
+
+  viewproducts(){
+    console.log("huh");
+    
+this.viewctopcatprod4(this.categorynameid,0)
+  }
 }

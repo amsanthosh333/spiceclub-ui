@@ -236,6 +236,7 @@ export class CartComponent implements OnInit {
   }
   viewcart3() {
     this.request.fetchsummery(this.userid).subscribe((response: any) => {
+      console.log("summery",response); 
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
       this.subtot = this.Summery.sub_total

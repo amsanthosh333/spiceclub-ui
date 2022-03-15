@@ -24,15 +24,21 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }  
-.shop-product-size-list .single-size.active{
-    font-size: 13px;
-    line-height: 22px;
-    margin-right: 11px;
-    cursor: pointer;
-    color: #ffffff;
-    padding: 4px;
-    border-radius: 4px;
-    background-color: #2023ce;
+.shop-product__block__value .shop-product-size-list .single-size.active{
+  font-size: 13px;
+  line-height: 22px;
+  margin-right: 11px;
+  cursor: pointer;
+  color: #ffffff;
+  padding: 4px;
+  border-radius: 4px;
+  background-color: #f14014;
+}
+
+.shop-product__block__value .shop-product-size-list .single-size {
+background-color: #cc3c2200;
+color:#f14014;
+border: 1px solid red;
 }
 @media (max-width : 800px) {  
       

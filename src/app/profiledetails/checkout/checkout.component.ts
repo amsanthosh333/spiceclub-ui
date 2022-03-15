@@ -102,6 +102,7 @@ export class CheckoutComponent implements OnInit {
   shipadds: boolean=true;
   dis: any;
   nocart: boolean= false;
+  loadingg: boolean =false;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
@@ -306,6 +307,7 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     else {
+      this.loadingg=true
       let edata = {
         owner_id: this.owneriid,
         user_id: this.userid,
@@ -324,10 +326,12 @@ export class CheckoutComponent implements OnInit {
       }
       else if (this.payytype == "razorpay") {
         this.request.placeorder(edata).subscribe((response: any) => {
+
+          console.log("placeorder response",response);    
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
             this.sharedService.sendClickEvent();
-           this.nocart=true;
+          //  this.nocart=true;
 
             let edata1 = {
               payment_type: "cart_payment",
@@ -336,7 +340,7 @@ export class CheckoutComponent implements OnInit {
               user_id: this.userid,
             }
             this.initPay(edata1);  
-            //  this.router.navigate(['/orders']);
+            
           }
           else {
             console.log("fail", response.message);
@@ -346,11 +350,14 @@ export class CheckoutComponent implements OnInit {
       }
       else {
         this.request.placeorder(edata).subscribe((response: any) => {
+          console.log("cod response",response);
+          
           this.combined_orderid = response.combined_order_id
-          console.log("", response.message);
           if (response.result == true) {
+            console.log("if  response");
             this.toastr.success('Order placed');
             this.sharedService.sendClickEvent();
+            this.loadingg=false
              this.router.navigate(['/orders']);
           }
           else {
@@ -516,6 +523,9 @@ spiiner(){
 }
 
   initPay(edata: any) {
+
+    console.log(edata);
+    
     let options = {
       "key": "rzp_test_DYDr3B0KYe4086",
       "amount": edata.amount * 100,
@@ -549,7 +559,8 @@ spiiner(){
       "handler": (response: any) => {
         this.razpaysuccess = response
         console.log(this.razpaysuccess);
-        this.spinner.show();
+        // this.loadingg=true
+       ////////****//  // this.spinner.show();
         this.razorpaypayment();
       }
     };
@@ -561,9 +572,13 @@ spiiner(){
   }
 
   razorpaypayment() {
-    //  this.spinner.show();
+this.loadingg=true
+    ////////****//  this.spinner.show();
+    console.log("razorpay1 response process");
+    // window.alert("Payment in process please wait...")
     this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
       console.log("razorpay1 response", response);
+     
       if (response.result == true) {
         this.paymentdetails = response.payment_details
         this.razorpaysuccess();
@@ -572,6 +587,7 @@ spiiner(){
     });
   }
   razorpaysuccess() {
+   
     let edata4 = {
       payment_details: this.paymentdetails,
       payment_type: "cart_payment",
@@ -579,21 +595,24 @@ spiiner(){
       amount: this.grandtotal_value,
       user_id: this.userid,
     }
+console.log("edata4",edata4);
 
     this.request.razsuccess(edata4).subscribe((response: any) => {
-      if (response.message == "Payment is successful") {
+      console.log("razsuccess response",response);
+      
+      if (response.result == true) {
         this.sharedService.sendClickEvent();
-        this.spinner.hide();
+        this.loadingg=false
+        //////////////****/ this.spinner.hide();
 
         alert(response.message)
         this.toastr.success('Payment is successful', '');
 
         this.router.navigate(['/orders']);
-
       }
       else {
         alert(response.message)
-        this.toastr.error('This payment has already been captured', '');
+        this.toastr.error(response.message);
       }
     })
   }

@@ -1,6 +1,10 @@
 /* .menu-item li{
 	color: rgb(106, 107, 107);
 } */
+li a.active{
+    color: red;
+	font-weight: 700;
+}
 .ion-close{
 	font-size: 11px;
 }
@@ -21,6 +25,10 @@ span p{
     font-family: 'Poppins', sans-serif;
 }
  a{
+	color: #474747 ;
+    font-family: 'Poppins', sans-serif;
+}
+.menu-item-has-children{
 	color: #474747 ;
     font-family: 'Poppins', sans-serif;
 }

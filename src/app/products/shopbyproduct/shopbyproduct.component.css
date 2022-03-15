@@ -220,7 +220,13 @@ width: 40px;
       color: #ffffff;
       padding: 4px;
       border-radius: 4px;
-      background-color: #2023ce;
+      background-color: #f14014;
+  }
+  
+  .shop-product__block__value .shop-product-size-list .single-size {
+    background-color: #cc3c2200;
+    color:#f14014;
+    border: 1px solid red;
   }
   
   #product {
@@ -253,7 +259,7 @@ width: 40px;
     position: absolute;
     text-align: center;
     line-height: 24px;
-    right: -25px;
+    right: -20px;
     top: 20px;
     font-family: arial;
     font-size: 10px;

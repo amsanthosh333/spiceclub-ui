@@ -55,6 +55,7 @@ export class OrderdetailComponent implements OnInit {
   razpaysuccess: any;
   paymentdetails: any;
   combined_orderid: any;
+  loadingg: boolean=false;
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService,private route: ActivatedRoute,
@@ -208,12 +209,15 @@ proddetail(id:any){
   this.router.navigate(['productdetail', id]);
 }
 quickorder(){
-  this.spinner.show();
+  // this.spinner.show();
+  this.loadingg=true
   this.request.quickorder(this.orderid).subscribe((res:any)=>{
     if(res.result==true){
-      this.spinner.hide();
+      // this.spinner.hide();
+      
       this.toastr.success('Added to cart', '');
       this.sharedService.sendClickEvent();
+      this.loadingg=false
       this.router.navigate(['cart']);
     }
     else{

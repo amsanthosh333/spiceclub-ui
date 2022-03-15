@@ -307,7 +307,7 @@
 												data-tippy-animation="shift-away" data-tippy-delay="50"
 												data-tippy-arrow="true" data-tippy-theme="sharpborder"
 												data-tippy-placement="left"><i
-													class="ion-ios-search-strong"></i></a></span>
+												class="bi bi-cart3"></i></a></span>
 									</div>
 								</div>
 								<!--=======  End of single product image  =======-->
@@ -315,11 +315,12 @@
 								<!--=======  single product content  =======-->
 								<div class="single-product__content" (click)="proddetail(img.id)">
 									<div class="title">
-										<h3> <a href="">{{img.name}}</a></h3>
-										<a id="vieww" style="color: red;" (click)="proddetail(img.id)">view details</a>
+										<h3> <a href="">{{img.name}}</a><a style="color: red;font-size: small;">
+                                            <i class="bi bi-eye-fill"></i> View</a></h3>
+											<a id="vieww" style="font-size: small;">{{img.name}}</a>
 									</div>
 									<div class="price">
-										<span class="main-price discounted">{{img.stroked_price}}</span>
+										<span  *ngIf="img?.stroked_price!==img?.main_price" class="main-price discounted">{{img.stroked_price}}</span>
 										<span class="discounted-price">{{img.main_price}}</span>
 									</div>
 								</div>
@@ -506,9 +507,9 @@
 						<h3 class="item-title mb-4">{{Peoduct.name}}</h3>
 						<p class="price">
 							<span class="main-price discounted" style="text-decoration: line-through"
-								*ngIf="Peoduct?.stroked_price!==prod_price">{{Peoduct?.stroked_price}}</span>
-							<span class="h5 discounted-price">{{prod_price}}</span>
-							<span class="opacity-70">/{{Peoduct.unit}}</span>
+							*ngIf="storked_pricee!==prod_price">{{storked_pricee}}</span>
+						<span class="h5 discounted-price">{{prod_price}}</span>
+						<span class="opacity-70">/{{Peoduct.unit}}</span>
 						</p>
 						<p class="description" [innerHTML]="Peoduct?.description">
 							{{Peoduct.description}}

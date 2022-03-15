@@ -412,10 +412,13 @@ private handleErrorr(error: HttpErrorResponse) {
 // paymentstatus api 
  razorpayment(id:any) {
   this.url = `${this.endPoint1}/razorpay/payment?razorpay_payment_id=`+ id;
+  console.log(this.url);
+  
   return this.http.get(this.url);
 }
 razsuccess(body:any) {
   this.url = `${this.endPoint1}/razorpay/success`;
+  console.log(this.url);
   return this.http.post(this.url,body);
 }
 retrypayment(body:any){

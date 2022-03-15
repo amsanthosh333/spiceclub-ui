@@ -214,7 +214,13 @@ font { font-family: 'Poppins', sans-serif; }
     color: #ffffff;
     padding: 4px;
     border-radius: 4px;
-    background-color: #2023ce;
+    background-color: #f14014;
+}
+
+.shop-product__block__value .shop-product-size-list .single-size {
+  background-color: #cc3c2200;
+  color:#f14014;
+  border: 1px solid red;
 }
 @media (max-width : 768px) {  
  
@@ -352,3 +358,23 @@ td span{
       border-radius: 0;
       margin-bottom: -18px;
   }
+  img:hover {
+    cursor: pointer;
+}
+.gallery:hover{
+  cursor: pointer;
+}
+.shop-product__big-image-gallery-slider:hover{
+  cursor: pointer;
+}
+
+#brndprd{
+  cursor: pointer;
+}
+#chatt{
+  cursor: pointer;
+}
+/* .ng-image-fullscreen-view 
+.lightbox-wrapper .lightbox-div .lightbox-image-main .lightbox-image {
+  cursor: pointer;
+} */
