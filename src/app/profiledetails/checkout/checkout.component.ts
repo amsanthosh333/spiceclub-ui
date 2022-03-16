@@ -103,6 +103,7 @@ export class CheckoutComponent implements OnInit {
   dis: any;
   nocart: boolean= false;
   loadingg: boolean =false;
+  winRef: any;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
@@ -522,7 +523,7 @@ spiiner(){
   this.spinner.show();
 }
 
-  initPay(edata: any) {
+  initPayold(edata: any) {
 
     console.log(edata);
     
@@ -558,12 +559,19 @@ spiiner(){
       },
       "handler": (response: any) => {
         this.razpaysuccess = response
+        console.log("razpay responseeee",response);
         console.log(this.razpaysuccess);
         // this.loadingg=true
        ////////****//  // this.spinner.show();
         this.razorpaypayment();
-      }
+      },
+      modal: {
+        // We should prevent closing of the form when esc key is pressed.
+        escape: false,
+      },
+     
     };
+  
     console.log("options,", options)
 
     let rzp1 = new this.authService.nativeWindow.Razorpay(options);
@@ -571,11 +579,55 @@ spiiner(){
     console.log("works");
   }
 
+  initPay(edata: any) {
+    const options: any = {
+      key: 'rzp_test_DYDr3B0KYe4086',
+      amount: edata.amount * 100, // amount should be in paise format to display Rs 1255 without decimal point
+      currency: 'INR',
+      name: "Spice Club", // company name or product name
+      description: "Test Transaction",  // product description
+      image: "assets/images/LOGOWHITE.jpg", // company logo or product image
+      order_id: "", // order_id created by you in backend
+      prefill: {
+        "name": this.username,
+        "email": this.useremail,
+        "contact": this.userphone
+      },
+      modal: {
+        // We should prevent closing of the form when esc key is pressed.
+        escape: false,
+      },
+      notes: {
+        // include notes if any
+      },
+      theme: {
+        color: '#f0240a'
+      }
+    };
+    options.handler = ((response: any, error: any) => {
+      options.response = response;
+      this.razpaysuccess = response
+      console.log(response);
+      console.log(options);
+      this.razorpaypayment();
+      // call your backend api to verify payment signature & capture transaction
+    });
+    options.modal.ondismiss = (() => {
+      // handle the case when user closes the form while transaction is in progress
+      console.log('Transaction cancelled.');
+      this.paymentfailed();
+      this.loadingg=false;
+      
+    });
+    const rzp = new this.authService.nativeWindow.Razorpay(options);
+    rzp.open();
+  }
+
+
   razorpaypayment() {
 this.loadingg=true
     ////////****//  this.spinner.show();
     console.log("razorpay1 response process");
-    // window.alert("Payment in process please wait...")
     this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
       console.log("razorpay1 response", response);
      
@@ -587,7 +639,6 @@ this.loadingg=true
     });
   }
   razorpaysuccess() {
-   
     let edata4 = {
       payment_details: this.paymentdetails,
       payment_type: "cart_payment",
@@ -596,7 +647,6 @@ this.loadingg=true
       user_id: this.userid,
     }
 console.log("edata4",edata4);
-
     this.request.razsuccess(edata4).subscribe((response: any) => {
       console.log("razsuccess response",response);
       
@@ -607,13 +657,21 @@ console.log("edata4",edata4);
 
         alert(response.message)
         this.toastr.success('Payment is successful', '');
-
         this.router.navigate(['/orders']);
       }
       else {
         alert(response.message)
         this.toastr.error(response.message);
       }
+    })
+  }
+  paymentfailed(){
+    let edata5= {
+      combined_order_id: this.combined_orderid,   
+    }
+    this.request.razfailure(edata5).subscribe((response: any) => {
+      console.log("razfailure response",response);
+
     })
   }
   //youtube

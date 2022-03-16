@@ -247,4 +247,9 @@ export class RecipedetailsComponent implements OnInit {
   deleteRecordSuccess() {
     this.toastr.error(' Removed Successfully', '');
   }
+  shareinstaUrl(foodid:any) {
+    window.open('https://instagram.com/accounts/login/?text=%20Check%20up%20this%20awesome%20content' + encodeURIComponent(document.title) + ':%20 ' +
+     encodeURIComponent('https://spiceclub-a8420.web.app/' + foodid));
+    return false;
+  }
 }

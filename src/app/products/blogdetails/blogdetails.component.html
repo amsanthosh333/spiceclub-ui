@@ -176,12 +176,19 @@
 												<div class="post-share">
 													<span>Share this post:</span>
 													<ul style="padding-left: 0px;">
-														<li>
+														<li style="display:inline-block;">
 															<share-buttons theme="circles-dark"
 																[include]="['facebook','whatsapp', 'email','twitter', 'telegram','copy' ]"
 																[showIcon]="true" [showText]="false" url="currenturl"
 																[description]="productname" class="pt-0 mb-2">
 															</share-buttons>
+
+															
+															<span >
+																<a  (click)="shareinstaUrl(currenturl)">
+																<img src="assets/images/icons/INSTA.png"
+																style="height:47px; width:47px; margin-bottom: 5px;margin-left:5px; "></a>
+															</span>
 														</li>
 
 													</ul>

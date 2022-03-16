@@ -421,6 +421,16 @@ razsuccess(body:any) {
   console.log(this.url);
   return this.http.post(this.url,body);
 }
+razfailure(body:any){
+  const headers = new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
+  this.url = `${this.endPoint1}/order/paymentfailed`;
+  console.log(this.url);
+  return this.http.post(this.url,body,{headers:headers});
+
+
+}
 retrypayment(body:any){
   this.url = `${this.endPoint1}/order/repayment`;
   return this.http.post(this.url,body);

@@ -486,7 +486,7 @@
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{img.product.name}}</a></h5>
 								<p>
-									<!-- <span class="main-price discounted">{{img.product.base_price}}</span>  -->
+									<span *ngIf="img.product.stroked_price!=img.product.base_price" class="main-price discounted">{{img.product?.stroked_price}}</span> 
 									<span class="discounted-price" style="color: red;" >{{img.product.base_price}}</span></p>
 							</div>
 						</div>
@@ -556,7 +556,7 @@
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{b.product_name}}</a></h5>
 								<p>
-									<!-- <span class="main-price discounted">Rs {{b.price}}</span>  -->
+									<span *ngIf="b?.stroked_price!==b.price" class="main-price discounted">{{b?.stroked_price}}</span>
 									<span class="discounted-price" style="color: red;" >Rs {{b.price}}</span></p>
 									<span><p style="font-size:small;">quantity: {{b.quantity}}</p></span>
 							</div>
