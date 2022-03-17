@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './auth/login/login.component';
+import { AuthGuard } from './guard/auth.guard';
 import { HeaderComponent } from './layout/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
@@ -21,9 +22,9 @@ const routes: Routes = [
  
   { path: 'shopbyproduct/:key', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
   { path: 'productdetail/:id', loadChildren: () => import('./products/productdetail/productdetail.module').then(m => m.ProductdetailModule) },
-  { path: 'wishlist', loadChildren: () => import('./profiledetails/wishlist/wishlist.module').then(m => m.WishlistModule) },
-  { path: 'cart', loadChildren: () => import('./profiledetails/cart/cart.module').then(m => m.CartModule) },
-  { path: 'checkout', loadChildren: () => import('./profiledetails/checkout/checkout.module').then(m => m.CheckoutModule) },
+  { path: 'wishlist', loadChildren: () => import('./profiledetails/wishlist/wishlist.module').then(m => m.WishlistModule),canActivate: [AuthGuard], },
+  { path: 'cart', loadChildren: () => import('./profiledetails/cart/cart.module').then(m => m.CartModule) ,canActivate: [AuthGuard],},
+  { path: 'checkout', loadChildren: () => import('./profiledetails/checkout/checkout.module').then(m => m.CheckoutModule),canActivate: [AuthGuard], },
   { path: 'blog', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
   { path: 'blog/:id', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
   { path: 'recipe', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },
@@ -39,18 +40,18 @@ const routes: Routes = [
  
   { path: 'daydeal', loadChildren: () => import('./products/daydeal/daydeal.module').then(m => m.DaydealModule) },
   { path: 'monthdeal', loadChildren: () => import('./products/monthdeal/monthdeal.module').then(m => m.MonthdealModule) },
-  { path: 'orders', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
-  { path: 'orders/:page', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
-  { path: 'orders/:page/:delivery/:payment', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule) },
-  { path: 'orderdetail/:id', loadChildren: () => import('./profiledetails/orderdetail/orderdetail.module').then(m => m.OrderdetailModule) },
-  { path: 'profile', loadChildren: () => import('./profiledetails/profile/profile.module').then(m => m.ProfileModule) },
-  { path: 'wallet', loadChildren: () => import('./profiledetails/wallet/wallet.module').then(m => m.WalletModule) },
+  { path: 'orders', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule),canActivate: [AuthGuard] },
+  { path: 'orders/:page', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule),canActivate: [AuthGuard] },
+  { path: 'orders/:page/:delivery/:payment', loadChildren: () => import('./profiledetails/orders/orders.module').then(m => m.OrdersModule),canActivate: [AuthGuard] },
+  { path: 'orderdetail/:id', loadChildren: () => import('./profiledetails/orderdetail/orderdetail.module').then(m => m.OrderdetailModule),canActivate: [AuthGuard] },
+  { path: 'profile', loadChildren: () => import('./profiledetails/profile/profile.module').then(m => m.ProfileModule),canActivate: [AuthGuard] },
+  { path: 'wallet', loadChildren: () => import('./profiledetails/wallet/wallet.module').then(m => m.WalletModule),canActivate: [AuthGuard] },
   { path: 'blogdetails/:id', loadChildren: () => import('./products/blogdetails/blogdetails.module').then(m => m.BlogdetailsModule) },
   { path: 'recipedetails/:id', loadChildren: () => import('./products/recipedetails/recipedetails.module').then(m => m.RecipedetailsModule) },
-  { path: 'address', loadChildren: () => import('./profiledetails/address/address.module').then(m => m.AddressModule) },
-  { path: 'message', loadChildren: () => import('./profiledetails/message/message.module').then(m => m.MessageModule) },
+  { path: 'address', loadChildren: () => import('./profiledetails/address/address.module').then(m => m.AddressModule),canActivate: [AuthGuard] },
+  { path: 'message', loadChildren: () => import('./profiledetails/message/message.module').then(m => m.MessageModule),canActivate: [AuthGuard] },
   { path: 'faq', loadChildren: () => import('./pages/faq/faq.module').then(m => m.FaqModule) },
-  { path: 'purchased', loadChildren: () => import('./profiledetails/purchased/purchased.module').then(m => m.PurchasedModule) },
+  { path: 'purchased', loadChildren: () => import('./profiledetails/purchased/purchased.module').then(m => m.PurchasedModule),canActivate: [AuthGuard] },
   { path: 'todaysdeal', loadChildren: () => import('./products/todaysdeal/todaysdeal.module').then(m => m.TodaysdealModule) },
   { path: 'contact', loadChildren: () => import('./pages/contact/contact.module').then(m => m.ContactModule) },
   { path: 'orderstrack', loadChildren: () => import('./pages/orderstrack/orderstrack.module').then(m => m.OrderstrackModule) },

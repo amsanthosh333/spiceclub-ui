@@ -1,10 +1,29 @@
 /* .menu-item li{
 	color: rgb(106, 107, 107);
 } */
-li a.active{
-    color: red;
-	font-weight: 700;
+.lispan{
+	/* display:block;padding-left: 8px; */
+	display:inline-block;width:225px; text-overflow: ellipsis;
 }
+.lii{
+	max-height: 350px;overflow-y:auto; padding-left: 5px;
+}
+/* li a.active{  
+   color: red;
+	font-weight: bolder;	
+} */
+li a.active span{   
+	color: rgb(10, 9, 9);
+	font-weight: 700;
+	font-weight: bolder;
+ }
+
+ .bi-caret-right-fill{
+	color: #999999 ;
+ }
+ i.active{
+	color: rgb(10, 9, 9) ;
+ }
 .ion-close{
 	font-size: 11px;
 }
@@ -529,3 +548,9 @@ a.view-more-detail {
   text-align: center;
   color: #FFF;
 }
+li::-webkit-scrollbar {
+    display: none;
+}
+/* .bi-caret-right-fill{
+color: red;
+} */

@@ -1726,24 +1726,28 @@ console.log("this.profiledetail",this.profiledetail);
             this.subItem1=-1;
             this.subItem2=-1;
             this.subItem3=-1;
-              this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-               
-                
+
+            this.Subcat= this.Allcat[i].children;
+            
+            this.Subcat2=[]
+            this.Subcat3=[]
+              this.request.getsubcategoryofcat(id).subscribe((res: any) => {              
                 this.Subcat=res.data;
+                console.log("this.Subcat",this.Subcat);
+                
               }, (error: any) => {
                 console.log("error",error);
               });
             
           }
-          viewsubcat2(id:any,i:any){
-          
+          viewsubcat2(id:any,i:any){  
             this.subcat_id=id
             this.subItem1=i;
             this.subItem2=-1;
             this.subItem3=-1;
+            this.Subcat2= this.Subcat[i].children
+            this.Subcat3=[]
               this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-                
-                
                 this.Subcat2=res.data;
               }, (error: any) => {
                 console.log("error",error);
@@ -1753,8 +1757,8 @@ console.log("this.profiledetail",this.profiledetail);
            this.catid1_id=id
             this.subItem2=i;
             this.subItem3=-1;
+            this.Subcat3= this.Subcat2[i].children
               this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-         
                 this.Subcat3=res.data;
               }, (error: any) => {
                 console.log("error",error);
@@ -1766,9 +1770,10 @@ console.log("this.profiledetail",this.profiledetail);
           }
 
           gotocategory(id:any){
+            console.log("goto");
             this.router.navigate(['category', id]);
           }
-          gotocategory2(id:any){
+          gotocategory2(id:any){  
             this.router.navigate(['category', this.cat_id],{ queryParams: {subcategory: id }});
           }
           gotocategory3(id:any){
@@ -1776,7 +1781,6 @@ console.log("this.profiledetail",this.profiledetail);
           }
           gotocategory4(id:any){
             console.log("id",id);
-            
             this.router.navigate(['category', this.cat_id],{ queryParams: {subcategory: this.subcat_id,category1: this.catid1_id,subcategory1:id}});
           }
 

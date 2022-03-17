@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
+import { DatePipe } from '@angular/common'
 
 function _window() : any {
   return window;
@@ -11,6 +12,7 @@ function _window() : any {
 
 @Injectable({
   providedIn: 'root'
+  
 })
 export class AuthService {
   currentdetail: User;
@@ -18,6 +20,9 @@ export class AuthService {
   accesstoken: any;
 
   tokentype: any;
+  expires_at: any;
+  date: Date | undefined;
+  latest_date!:any;
   
   encryptdata(request: string) {
     throw new Error('Method not implemented.');
@@ -34,7 +39,7 @@ export class AuthService {
   private endPoint1 = "https://neophroncrm.com/spiceclubnew/api/v2"
  
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private datepipe: DatePipe) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')||'{}')
     );
@@ -43,9 +48,13 @@ export class AuthService {
     this.userid = this.currentdetail?.user?.id;
    this.accesstoken = this.currentdetail.access_token;
    this.tokentype = this.currentdetail.token_type;
+   console.log("current user",this.currentUser);
+   
    }
+
   public get currentUserValue(): User {
-    return this.currentUserSubject.value;
+    console.log("currentUserValue");
+    return this.currentdetail
   }
 
 
@@ -63,6 +72,23 @@ export class AuthService {
           return user;
         })
       );
+  }
+  isLoggedIn() {
+    JSON.parse(localStorage.getItem('currentUser')||'{}')
+    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentdetail = this.currentUserSubject.value;
+    this.userid = this.currentdetail?.user?.id;
+   this.accesstoken = this.currentdetail.access_token;
+   this.expires_at=this.currentdetail.expires_at;
+
+     this.date=new Date();
+     this.latest_date =this.datepipe.transform(this.date, 'yyyy-MM-dd h:MM:ss');
+     console.log("this.expires_at", this.expires_at );
+     console.log("isloogedin", this.latest_date );
+
+     
+     return this.expires_at > this.latest_date // check if token is expired
+
   }
 
   otplogin(body:any) { 

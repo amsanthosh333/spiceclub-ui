@@ -8,7 +8,7 @@ import { HeaderComponent } from './layout/header/header.component';
 import { FooterComponent } from './layout/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { DatePipe } from '@angular/common';
 import { FormsModule, } from '@angular/forms';
 
 import { AuthModule } from './auth/auth.module';
@@ -51,7 +51,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
    
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [ DatePipe],
   bootstrap: [AppComponent],
 
 })
