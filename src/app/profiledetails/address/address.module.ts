@@ -34,7 +34,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,ToastrModule.forRoot(),
     NgxBootstrapIconsModule,BootstrapIconsModule.pick(allIcons),NgbModule,NgSelectModule,  PerfectScrollbarModule,
     AgmCoreModule.forRoot({
-      apiKey: 'YOUR_GOOGLE_MAPS_API_KEY_GOES_HERE'
+      apiKey: 'AIzaSyBdk4cZNrQ8FmIGE9FvQ9jZyLxVTHSbvZ0'
     })
   ]
 })

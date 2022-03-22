@@ -109,6 +109,7 @@ export class ProductdetailComponent implements OnInit {
   varphotoos: Array<object> = [];
   newvarphotos: any;
   vargalleryphotos: any = [];
+  varstrokedprice: any;
 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -351,6 +352,7 @@ export class ProductdetailComponent implements OnInit {
       if (this.Peoduct.choice_options.length == 0) {
         this.varient_value = ''
         this.varprise = this.Peoduct.main_price;
+        this.varstrokedprice= this.Peoduct.stroked_price;
 
       }
       else {
@@ -553,6 +555,7 @@ export class ProductdetailComponent implements OnInit {
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
       console.log("selectvar",res);
       this.varprise = res?.price_string;
+      this.varstrokedprice=res?.stroked_price
       // this.totalprice=(res?.price_string).replace('Rs','');
       this.stocck = (res?.stock);
       this.stocckkk = (res?.stock);
@@ -591,6 +594,7 @@ export class ProductdetailComponent implements OnInit {
 
       console.log(res);
       this.varprise = res?.price_string;
+      this.varstrokedprice= res?.stroked_price;
       console.log("error", this.varprise);
     }, (error: any) => {
       console.log("error", error);

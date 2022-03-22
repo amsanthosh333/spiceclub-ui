@@ -115,6 +115,8 @@ export class AddressComponent implements OnInit {
   
   }
   addMarker(lat: number, lng: number) {
+    console.log("addmarker",lat , lng );
+    
     this.markers.push({ lat, lng, alpha: 0.4 });
   }
 
@@ -131,6 +133,7 @@ export class AddressComponent implements OnInit {
       lat: event.latitude,
       lng: event.longitude
     };
+    console.log("selectedMarker",this.selectedMarker );
 
   }
 
@@ -146,7 +149,6 @@ export class AddressComponent implements OnInit {
     });
   }
   addaddresss(content:any,content2:any){
-
     this.register.reset();
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
