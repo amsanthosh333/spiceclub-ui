@@ -74,23 +74,19 @@ export class RecipeComponent implements OnInit {
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
     private toastr: ToastrService,config: NgbRatingConfig, private activatedRoute: ActivatedRoute,
-    private _location: Location,private location: Location) {
-     
+    private _location: Location,private location: Location) { 
       config.max = 5;
-      config.readonly = true;
-      
+      config.readonly = true;     
       this.currentUserSubject = new BehaviorSubject<User>(
         JSON.parse(localStorage.getItem('currentUser')||'{}')
-        
+     
       );
       // console.log("currentuser details=", this.currentUserSubject);
       this.currentUser = this.currentUserSubject.asObservable();
        this.currentdetail = this.currentUserSubject.value;
        this.userid=this.currentdetail.user?.id; 
        this.accesstoken=this.currentdetail.access_token;
-       this.tokentype=this.currentdetail.token_type;
-
-     
+       this.tokentype=this.currentdetail.token_type;     
      }
 
   ngOnInit(): void {
@@ -103,21 +99,16 @@ export class RecipeComponent implements OnInit {
       console.log("queryParams data", this.rec_id);
       if (this.rec_id ==undefined || this.rec_id ==null ) {
         console.log("rec!undefined",this.rec_id);  
-      // this.rec_id='';
       this.getallrecipe(this.pagee);
-      // this.getallrecipecat();
       }
       else { 
         console.log("rec!else");  
         this.getrecipebycatg(this.rec_id,this.pagee); 
-      // this.getallrecipecat();
       }
     })
-
     this.comment = this.fb.group({ 
       rating:['',[ Validators.required]],
       comment: ['',[ Validators.required]],
-   
     });
     this.searchall = this.fb.group({ 
       key: [''],
@@ -126,7 +117,6 @@ export class RecipeComponent implements OnInit {
       key: [''],
     });
   }
-
   getallrecipe(page:any){
     this.recipeloader=true;
     this.imgloader = false;
@@ -136,7 +126,6 @@ export class RecipeComponent implements OnInit {
     this.pagess=this.pagenation.links
     this.recipeloader=false;
     this.topItem=-1
-    // this.router.navigate(['recipe'] ,{ queryParams: { page: page} });
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -154,11 +143,9 @@ getallrecipecat(){
     console.log("error",error);
   });
 }
-
 getrecipebycatg(id:any,page:any){
   this.recipeloader=true;
-  this.imgloader = false;
- 
+  this.imgloader = false; 
   this.request.getrecipebycat(id,page).subscribe((response: any) => {
     this.Blogs=response.data;
     this.pagenation=response.meta   
@@ -166,12 +153,8 @@ getrecipebycatg(id:any,page:any){
     this.recipeloader=false; 
     this.page1=true;
     this.page2=false;
-    // console.log("this.Allcat",this.Allcat);
      let index = this.Allcat?.findIndex((x:any ) => x.id == id );
-    this.topItem=index
-    // console.log("this.topItemr",this.topItem);
-   
-    
+    this.topItem=index 
     this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: page} });
     setTimeout(() => {
       this.imgloader = true;
@@ -186,7 +169,6 @@ getrecipebycatg2(id:any,i:any){
   this.rec_id=id 
   this.topItem=i
   this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: 1} });
-  // this.getrecipebycatg(id,1)
 }
 getpage(url:any,label:any){
   if(url!==null){

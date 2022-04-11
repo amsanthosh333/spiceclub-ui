@@ -108,7 +108,8 @@
 									<h6 class="form-text text-danger "
 									*ngIf="error2">
 									{{error2}}</h6>
-									<button class="lezada-button lezada-button--medium" >signup</button>
+									<button class="lezada-button lezada-button--medium" *ngIf="!btnloading">signup</button>
+									<button class="lezada-button lezada-button--medium" style="padding-top: 8px;" *ngIf="btnloading"><i class="fa fa-spinner fa-spin" ></i>&nbsp;</button>
 								</div>
                                 <br>
                                 <div class="col-lg-12 text-center mb-30">

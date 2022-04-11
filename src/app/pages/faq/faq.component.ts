@@ -15,12 +15,10 @@ export class FaqComponent implements OnInit {
     window.scroll(0,0)
     this.getaboutus();
   }
-
   getaboutus(){
     this.request.getfaq().subscribe((res:any)=>{
       console.log("res",res);
   this.description=res.data[0].content
-  
   this.desload=false
      });
   }

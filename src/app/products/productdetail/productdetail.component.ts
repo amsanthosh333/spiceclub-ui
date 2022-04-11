@@ -115,22 +115,18 @@ export class ProductdetailComponent implements OnInit {
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private modalService: NgbModal, config: NgbRatingConfig, private _location: PlatformLocation, private scroller: ViewportScroller,
     private toastr: ToastrService, private sharedService: SharedService, private activatedRoute: ActivatedRoute,) {
-
     config.max = 5;
     config.readonly = true;
-
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
 
     );
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
     this.buyertypeid = this.currentdetail.user?.buyertypeid;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-    //  this.buyertypeid=this.currentdetail.user?.buyertypeid;
     if (this.userid == undefined) {
       this.userid = 0;
     }
@@ -145,37 +141,29 @@ export class ProductdetailComponent implements OnInit {
       this.viewproductrow(this.id);
       this.iswishlist(this.id)
     });
-    // this.id = this.activatedRoute.snapshot.params['id'];
-    // this.viewproductrow(this.id);
-    // this.iswishlist(this.id)
-
     this.comment = this.fb.group({
       rating: ['', [Validators.required]],
       comment: ['', [Validators.required]],
     });
-
     this.message = this.fb.group({
       title: ['', [Validators.required]],
       message: ['', [Validators.required]],
-
     });
-
     this.currenturl = this.router.url
   }
-
 
   numberOnly(event: any): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-
       return false;
     }
     return true;
-
   }
+
   onlyNumberKey(event: { charCode: number; }) {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
   }
+
   getValue(val: any) {
     if (val <= 0) {
       val = 1
@@ -198,22 +186,17 @@ export class ProductdetailComponent implements OnInit {
 
   filterDatatable(qty: any) {
     this.error3 = ''
-
-
     if (qty > this.stocck) {
       this.error3 = 'out of stock'
     }
     else if (qty <= 0) {
       this.error3 = 'Enter minimun 1 prodect'
     }
-
   }
-
 
   scrolll() {
     console.log("dfgs");
     window.scrollTo({ top: 900, behavior: 'smooth' });
-
   }
   scroll(el: HTMLElement) {
     el.scrollIntoView();
@@ -269,11 +252,9 @@ export class ProductdetailComponent implements OnInit {
           this.iswishlist(prd_id)
           this.addRecordSuccess();
           this.sharedService.sendClickEvent();
-
         }
         else {
           this.toastr.error(res.message);
-
         }
       }, (error: any) => {
         console.log("error", error);
@@ -290,9 +271,7 @@ export class ProductdetailComponent implements OnInit {
       }
       else {
         this.toastr.error(response.message);
-
       }
-
     }, (error: any) => {
       console.log(error);
     });
@@ -309,9 +288,7 @@ export class ProductdetailComponent implements OnInit {
     // this.router.navigate(['productdetail', id]);
 
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-      // console.log("viewproductrow",response);
       console.log("proddetail", response);
-
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
       this.stocck = (this.Peoduct.current_stock); 1
@@ -321,12 +298,9 @@ export class ProductdetailComponent implements OnInit {
       //  this.photoos = response.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.data[0].photos.path);
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
-      // this.varprise = this.Peoduct.main_price;
       this.varprise0 = this.choice
       this.varienttt = this.varprise0[0]?.options[0]
-
       this.currentRatess = this.Peoduct.rating;
-
       this.photoloader = false;
       this.contentloader = false;
       this.discriptloader = false;
@@ -334,7 +308,6 @@ export class ProductdetailComponent implements OnInit {
 
       // array push photo
       this.newphotos = this.photoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path)
-
       this.newphotos.forEach((item: any) => {
         this.galleryphotos.push({ image: item });
         // this.allgalleryphotos.push({ thumbImage: item });
@@ -353,21 +326,18 @@ export class ProductdetailComponent implements OnInit {
         this.varient_value = ''
         this.varprise = this.Peoduct.main_price;
         this.varstrokedprice= this.Peoduct.stroked_price;
-
       }
       else {
         console.log("elllllllse");
         this.varient_value = this.choice[0]?.options[0];
         this.checkvarientprice();
       }
-
     },
       (error: any) => {
-
+        console.log("error",error.message);
       });
     this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
       console.log("getrelatedprod", response);
-
       this.Relatedprod = response.data;
       this.loader6 = false;
       this.viewbulkdiscount(this.product_id);
@@ -551,7 +521,6 @@ export class ProductdetailComponent implements OnInit {
   selectvar(weight: any, i: any) {
     this.varient_value = weight.replace(/\s/g, "")
     this.subItem = i
-
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
       console.log("selectvar",res);
       this.varprise = res?.price_string;
@@ -561,28 +530,21 @@ export class ProductdetailComponent implements OnInit {
       this.stocckkk = (res?.stock);
       this.quantityyy = 0;
       this.totalprice = 0.00;
-      this.varphotoos=res.image
-      
+      this.varphotoos=res.image    
             // array push photo
             this.newvarphotos=[];
             this.newvarphotos = this.varphotoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item)
             console.log("this.newvarphotos", this.newvarphotos);
-
             this.vargalleryphotos=[]
             this.newvarphotos.forEach((item: any) => {
               this.vargalleryphotos.push({ thumbImage: item, image: item });
             })
-
             // pushing main images in varient images
             this.galleryphotos.forEach((item: any) => {
               this.vargalleryphotos.push({ thumbImage: item.image, image: item.image });
             })
-
-            // console.log("this.allgalleryphotos", this.allgalleryphotos);
-            // console.log("this.vargalleryphotos", this.vargalleryphotos);
             this.allgalleryphotos=this.vargalleryphotos;
             this.selectedimage = this.vargalleryphotos[0].image;
-            // console.log("this.selectedimage", this.selectedimage);
     }, (error: any) => {
       console.log("error", error);
 
@@ -591,17 +553,15 @@ export class ProductdetailComponent implements OnInit {
   checkvarientprice() {
     console.log("varienttt", this.varienttt);
     this.request.addvarient(this.product_id, this.varienttt).subscribe((res: any) => {
-
       console.log(res);
       this.varprise = res?.price_string;
       this.varstrokedprice= res?.stroked_price;
       console.log("error", this.varprise);
     }, (error: any) => {
       console.log("error", error);
-
     });
-
   }
+
   addreview(content: any, _id: any) {
     this.product_iddd = _id;
     this.modalService.open(content, {
@@ -623,13 +583,10 @@ export class ProductdetailComponent implements OnInit {
       }
       else if (res.message == 'You cannot review this product') {
         this.toastr.error(res.message);
-
       }
     }, (error: any) => {
       console.log("error", error);
-
     });
-
   }
 
   backk() {
@@ -680,10 +637,7 @@ export class ProductdetailComponent implements OnInit {
 
           if (res.result == true) {
             this.toastr.success('Comment  Submitted', '');
-            // this.getcommentsss();
-            // this.comment.reset();
             const currentRoute = this.router.url;
-
             this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
               this.router.navigate([currentRoute]); // navigate to same route
             });
@@ -700,35 +654,29 @@ export class ProductdetailComponent implements OnInit {
     }
   }
   quickview(id: any, content: any) {
-    // this.totalprice=''
     this.quantityyy2 = 1
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       this.Peoduct = response.data[0];
       this.prod_price = this.Peoduct.main_price;
       this.choice = this.Peoduct.choice_options;
-      //  this.stocck=(this.Peoduct.current_stock)-1;
       this.stk = this.Peoduct.current_stock;
       this.photoos = this.Peoduct.photos;
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
-      //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
       if (this.Peoduct.current_stock == 0) {
         this.stocck = 0
-
       }
       else {
         this.stocck = (this.Peoduct.current_stock) - 1;
-      }
-      //  window.scroll(0,0);             
+      }             
       if (this.Peoduct.choice_options.length == 0) {
         this.varient_value = ''
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
       }
-
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
         size: 'lg',
@@ -782,7 +730,6 @@ export class ProductdetailComponent implements OnInit {
         quantity: this.quantityyy2,
         buyertype: this.buyertypeid,
       };
-
       this.request.addtocart(edata).subscribe((res: any) => {
         if (res.message == 'Product added to cart successfully') {
           this.addRecordSuccess();
@@ -817,7 +764,6 @@ export class ProductdetailComponent implements OnInit {
       this.error2 = '* Enter requireds';
       return;
     } else {
-
       let edata = {
         product_id: this.product_id,
         user_id: this.userid,
@@ -860,8 +806,6 @@ export class ProductdetailComponent implements OnInit {
   viewbrand(id:any){
     this.router.navigate(['brands', id]);
   }
-
-
   collapsebtn(){
     console.log("collapsebtn");
     this.btnItemm=!this.btnItemm
@@ -874,7 +818,6 @@ export class ProductdetailComponent implements OnInit {
     this.desbtnItemm=!this.desbtnItemm
     this.btnItemm=false
     console.log("collapsebtn1",this.desbtnItemm);
-    
   }
   shareinstaUrl(foodid:any) {
     window.open('https://instagram.com/accounts/login/?text=%20Check%20up%20this%20awesome%20content' + encodeURIComponent(document.title) + ':%20 ' +

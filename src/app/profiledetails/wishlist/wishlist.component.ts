@@ -210,7 +210,7 @@ export class WishlistComponent implements OnInit {
         this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
           console.log(res);
           
-          this.totalprice = res.price;
+          this.totalprice = res.price.toFixed(2);
           
         // this.totalprice = this.dec.toFixed(2) 
        
@@ -223,7 +223,7 @@ export class WishlistComponent implements OnInit {
         this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
           console.log(res);
           
-          this.totalprice = res.price;
+          this.totalprice = res.price.toFixed(2);
           
         // this.totalprice = this.dec.toFixed(2) 
        
@@ -236,7 +236,7 @@ export class WishlistComponent implements OnInit {
             this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
               console.log(res);
               
-              this.totalprice = res.price;
+              this.totalprice = res.price.toFixed(2);
               
             // this.totalprice = this.dec.toFixed(2) 
            
@@ -267,6 +267,7 @@ export class WishlistComponent implements OnInit {
             
             });
           }
+          
       addtocart2(){
         let edata={
           id : this.product_id,

@@ -16,13 +16,11 @@ export class FooterComponent implements OnInit {
   instagramurl: any;
   twitterurl: any;
 
-  constructor( private fb:FormBuilder,private request:RequestService, private toastr: ToastrService) { }
+  constructor(private fb: FormBuilder, private request: RequestService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.subscribe = this.fb.group({
-
-      mail: ['', [Validators.required,Validators.email]],
-
+      mail: ['', [Validators.required, Validators.email]],
     });
     this.getfacebookurl();
     this.getinstagramurl();
@@ -30,64 +28,53 @@ export class FooterComponent implements OnInit {
     this.getyoutubeurl();
 
   }
-  mailsubscribe(form:FormGroup){
-    this.error='';
+  mailsubscribe(form: FormGroup) {
+    this.error = '';
     if (this.subscribe.invalid) {
       this.error = '* Enter valid email';
-
       return;
     } else {
-let edata={
-  email:form.value.mail
-} 
-// this.toastr.success(form.value.mail);
-this.request.emailsubscribe(edata).subscribe((res:any)=>{
-  
- console.log(res);
-if(res.result==true){
-  this.toastr.success(res.message);
-  this.subscribe.reset();
-}
-else{
-  this.toastr.info(res.message);
-  this.subscribe.reset();
-}
- 
-});
+      let edata = {
+        email: form.value.mail
+      };
+      this.request.emailsubscribe(edata).subscribe((res: any) => {
+        console.log(res);
+        if (res.result == true) {
+          this.toastr.success(res.message);
+          this.subscribe.reset();
+        }
+        else {
+          this.toastr.info(res.message);
+          this.subscribe.reset();
+        }
+      });
     }
   }
 
-  getfacebookurl(){
-    this.request.fetchfacebookurl().subscribe((res:any)=>{
-       
-      this.facebookurl=res.link;   
-      console.log("this.facebookurl",this.facebookurl);
-      
-     });
+  getfacebookurl() {
+    this.request.fetchfacebookurl().subscribe((res: any) => {
+      this.facebookurl = res.link;
+      console.log("this.facebookurl", this.facebookurl);
+    });
   }
-  getyoutubeurl(){
-    this.request.fetchyoutubeurl().subscribe((res:any)=>{
-    
-      this.youtubeurl=res.link;
-      console.log("this.youtubeurl",this.youtubeurl);
-      
-     });
+  getyoutubeurl() {
+    this.request.fetchyoutubeurl().subscribe((res: any) => {
+      this.youtubeurl = res.link;
+      console.log("this.youtubeurl", this.youtubeurl);
+    });
   }
-  getinstagramurl(){
-    this.request.fetchinstagramurl().subscribe((res:any)=>{
+  getinstagramurl() {
+    this.request.fetchinstagramurl().subscribe((res: any) => {
+      this.instagramurl = res.link;
+      console.log("this.instagramurl", this.instagramurl);
+    });
+  }
 
-      this.instagramurl=res.link;
-      console.log("this.instagramurl",this.instagramurl);
-      
-     });
-  }
-  gettwitterurl(){
-    this.request.fetchtwitterurl().subscribe((res:any)=>{
-
-      this.twitterurl=res.link;
-      console.log("this.twitterurl",this.twitterurl);
-      
-     });
+  gettwitterurl() {
+    this.request.fetchtwitterurl().subscribe((res: any) => {
+      this.twitterurl = res.link;
+      console.log("this.twitterurl", this.twitterurl);
+    });
   }
 }
 

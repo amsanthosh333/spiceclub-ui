@@ -9,12 +9,9 @@ export class OrderstrackComponent implements OnInit {
 
   description: any;
   desload: boolean=false;
-
   constructor(private request:RequestService) { }
-
   ngOnInit(): void {
     window.scroll(0,0)
-    // this.getaboutus();
   }
 
   // getaboutus(){

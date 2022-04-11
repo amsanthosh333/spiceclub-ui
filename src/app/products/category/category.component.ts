@@ -650,30 +650,25 @@ search1(form:FormGroup,page=1){
       this.quantityyy = 0
       this.product_id = id
       this.request.getproddetail(this.product_id).subscribe((response: any) => {
-  
         console.log("proddetaill", response);
-        this.Peoduct = response.data[0];
-        
+        this.Peoduct = response.data[0];     
         this.prod_price = this.Peoduct.main_price;
         this.storked_pricee=this.Peoduct.stroked_price;
-
         this.choice = this.Peoduct.choice_options;
-        //  this.stocck=(this.Peoduct.current_stock)-1;
         this.stk = this.Peoduct.current_stock;
         this.stocckkk = this.Peoduct.current_stock;
         this.photoos = this.Peoduct.photos;
         this.colors = this.Peoduct.colors;
         this.tags = this.Peoduct.tags;
         this.varprise = this.Peoduct.main_price;
-        //  this.totalprice=this.Peoduct.main_price.replace('Rs','');
+        this.totalprice=this.Peoduct.main_price.replace('Rs','');
+        this.subItem=0
         if (this.Peoduct.current_stock == 0) {
           this.stocck = 0
-  
         }
         else {
           this.stocck = (this.Peoduct.current_stock) ;
-        }
-        //  window.scroll(0,0);             
+        }             
         if (this.Peoduct.choice_options.length == 0) {
           this.varient_value = ''
         }
@@ -693,37 +688,47 @@ search1(form:FormGroup,page=1){
   
     }
  
+    getValue(val: any) {      
+      if (val<= 0) {
+        val = 1     
+      }
+      else if (val > this.stocckkk) {
+        val = this.stocckkk       
+      }
+      this.quantityyy = val
+      this.stocck = this.stocckkk - val 
+      this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+        console.log(res);     
+        this.totalprice = res.price.toFixed(2);       
+      // this.totalprice = this.dec.toFixed(2)  
+      })
+  
+    }
     increaseqty(){
       this.quantityyy++;
       this.stocck--;
+      this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+        console.log(res);
+        this.totalprice = res.price.toFixed(2);
+      // this.totalprice = this.dec.toFixed(2) 
+
+      })
         }
         decreaseqty(){
           this.quantityyy--;
-          this.stocck++;
-          
-        }
-        getValue(val: any) {
-          if (val<= 0) {
-            val = 1
-          }
-          else if (val > this.stocckkk) {
-            val = this.stocckkk
-          }
-          this.quantityyy = val
-          this.stocck = this.stocckkk - val
-          this.stocck
-      
-      
+          this.stocck++;    
+          this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+            console.log(res);       
+            this.totalprice = res.price.toFixed(2);         
+          // this.totalprice = this.dec.toFixed(2)      
+          })   
         }
         selectvar(weight:any,i:any){
           this.varient_value=weight.replace(/\s/g, "")
-          this.subItemm=i;
-          this.request.addvarient(this.product_id,weight).subscribe((res: any) => {;
-           
-
+          this.subItem=i
+          this.request.addvarient(this.product_id,weight).subscribe((res: any) => {    
             this.prod_price = res?.price_string;
-            this.storked_pricee=res?.stroked_price;
-
+            this.storked_pricee=res?.stroked_price;        
             this.totalprice=(res?.price_string).replace('Rs','');
             this.varprise=res?.price_string;
             this.stk=res?.stock;
@@ -731,13 +736,11 @@ search1(form:FormGroup,page=1){
             if(res?.stock==0){
               this.stocck=0
               this.quantityyy=0;
-             
              }
              else {
               this.stocck=(res?.stock);
               this.quantityyy=0;
-             }   
-
+             }  
           }, (error: any) => {
             console.log("error",error);
           
@@ -754,8 +757,7 @@ search1(form:FormGroup,page=1){
         user_id: this.userid,
         quantity: this.quantityyy,
         buyertype:this.buyertypeid,  
-      }
-        
+      }      
       this.request.addtocart(edata).subscribe((res: any) => {
         if (res.message == 'Product added to cart successfully') {    
           this.addRecordSuccess();
@@ -789,8 +791,6 @@ search1(form:FormGroup,page=1){
     }
 
      myFunction() {
-      // let x = document.getElementById("myTopnav");
-     
       this.element = document.getElementById('myTopnav') as HTMLElement;
       if (this.element.className === "topnav") {
         this.element.className += " responsive";

@@ -257,6 +257,8 @@ export class DaydealComponent implements OnInit {
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
+      this.totalprice=this.Peoduct.main_price.replace('Rs','');
+      this.subItemm=0
       if (this.Peoduct.current_stock == 0) {
         this.stocck = 0
 
@@ -283,34 +285,48 @@ export class DaydealComponent implements OnInit {
       });
 
   }
+  getValue(val: any) {      
+    if (val<= 0) {
+      val = 1     
+    }
+    else if (val > this.stocckkk) {
+      val = this.stocckkk       
+    }
+    this.quantityyy = val
+    this.stocck = this.stocckkk - val 
+    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+      console.log(res);     
+      this.totalprice = res.price.toFixed(2);       
+    // this.totalprice = this.dec.toFixed(2)  
+    })
 
+  }
   increaseqty(){
     this.quantityyy++;
     this.stocck--;
+    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+      console.log(res);
+      this.totalprice = res.price.toFixed(2);
+    // this.totalprice = this.dec.toFixed(2) 
+
+    })
       }
       decreaseqty(){
         this.quantityyy--;
-        this.stocck++;     
+        this.stocck++;    
+        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+          console.log(res);       
+          this.totalprice = res.price.toFixed(2);         
+        // this.totalprice = this.dec.toFixed(2)      
+        })   
       }
-      getValue(val: any) {
-        if (val<= 0) {
-          val = 1
-        }
-        else if (val > this.stocckkk) {
-          val = this.stocckkk
-        }
-        this.quantityyy = val
-        this.stocck = this.stocckkk - val
-        this.stocck
-    
-    
-      }
+
+
       selectvar(weight:any,i:any){
         this.varient_value=weight.replace(/\s/g, "")
         this.subItemm=i
         this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-      
-
+    
           this.prod_price = res?.price_string;
           this.storked_pricee=res?.stroked_price;
 

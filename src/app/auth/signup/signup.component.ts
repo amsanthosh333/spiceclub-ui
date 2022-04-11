@@ -16,11 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
   providers: [ToastrService],
 })
 export class SignupComponent implements OnInit {
-//  buyer= [  
-//     { id: '1', name: 'customer' },
-//     { id: '2', name: 'seller' },
-//     { id: '3', name: 'b2b' },  
-//   ];
+
   Regby = [  
     { id: 'email', name: 'email' },
     { id: 'phone', name: 'phone' },  
@@ -34,6 +30,7 @@ export class SignupComponent implements OnInit {
   error3: any;
   verloading!: boolean;
   resendloading!: boolean;
+  btnloading: boolean=false;
   constructor( private router: Router,private fb: FormBuilder,private request: RequestService, 
      private authService: AuthService,private toastr: ToastrService,private formBuilder: FormBuilder,private modalService: NgbModal,) {
     this.registerForm = this.formBuilder.group({
@@ -51,7 +48,6 @@ export class SignupComponent implements OnInit {
     );
     
    }
-
    ngOnInit(): void {
     this.getbyertype();
     this.otpform = this.fb.group({ 
@@ -72,6 +68,7 @@ export class SignupComponent implements OnInit {
   }
   onSubmit(content: any) { 
     this.submitted = true;
+    this.btnloading=true;
     this.error2 = '';
     if (this.registerForm.invalid) {
       this.error2 = '* Enter all details';
@@ -95,12 +92,14 @@ export class SignupComponent implements OnInit {
               ariaLabelledBy: 'modal-basic-title',
               size: 'md',
             });
+            this.btnloading=false;
           }else if(res.message == "User already exists.") {      
             this.error2 = res.message
-            
+            this.btnloading=false;
           }
            else  {
-            this.error2= res.message
+            this.error2= res.message;
+            this.btnloading=false;
           }
         },
         
@@ -148,23 +147,21 @@ export class SignupComponent implements OnInit {
     this.resendloading=true
     let edata2={
       user_id: this.userid,
-      register_by:""+this.registerForm.controls['register_by'].value,
-      // mobile_no :""+this.registerForm.controls['Mobile'].value,
+      email_or_phone: this.registerForm.controls['email'].value,
      
     }
-
+    console.log("edata2",edata2);
     this.authService.resendotp(edata2).subscribe(
       (res) => {
-        this.resendloading=false
-         // if (res.message == "Code does not match, you can request for resending the code") { 
-        //     console.log("Code does not match");
-        //     // this.error1 = 'Incorrect OTP!!Please Try Again!!!!';  
-         
-        // } else {
-        //    console.log("Code  matched");
-        //    this.router.navigate(['/main']);
-        //   // this.error1 = 'Invalid Login';
-        // }
+        console.log("resend response",res);
+        this.resendloading=false;
+        if(res.result==true){
+          this.toastr.success(res.message);
+        }
+        else{
+          this.toastr.info(res.message);
+        }
+
       },
       (error1) => {
         this.resendloading=false

@@ -72,15 +72,14 @@ export class LoginComponent implements OnInit {
   fpassloading!: boolean;
   fpassotploading!: boolean;
   resendloading!: boolean;
+  logbtnloading: boolean = false;
 
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
     private formBuilder: FormBuilder, private authService: AuthService, private sharedService: SharedService,
-    private toastr: ToastrService, private modalService: NgbModal,private spinner: NgxSpinnerService) {
+    private toastr: ToastrService, private modalService: NgbModal, private spinner: NgxSpinnerService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
-
     );
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -98,7 +97,6 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
-      // meeting_type:['', Validators.required]
     });
 
     this.otpform = this.fb.group({
@@ -117,12 +115,10 @@ export class LoginComponent implements OnInit {
     this.forgotForm = this.formBuilder.group({
       Mobile: ['', [Validators.required]],
       Type: ['', [Validators.required]],
-      // meeting_type:['', Validators.required]
     });
     this.passwordForm = this.formBuilder.group({
       otp: ['', [Validators.required]],
       newpassword: ['', [Validators.required, Validators.minLength(4)]],
-      // meeting_type:['', Validators.required]
     });
   }
   get f() {
@@ -144,7 +140,6 @@ export class LoginComponent implements OnInit {
       (error: any) => {
         console.log(error);
       })
-
   }
   onSubmit(content: any) {
     this.error1 = ''
@@ -157,9 +152,11 @@ export class LoginComponent implements OnInit {
       }
       return;
     } else {
+      this.logbtnloading = true;
       this.authService
         .login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value,).subscribe((res) => {
           if (res) {
+            this.logbtnloading = false;
             if (res.message == "User not found") {
               this.error1 = '* User not found';
               return;
@@ -179,9 +176,11 @@ export class LoginComponent implements OnInit {
             }
           } else {
             this.error1 = '* Invalid Login';
+            this.logbtnloading = false;
           }
         },
           (error: any) => {
+            this.logbtnloading = false;
             if (error.error.message == "User not found") {
               this.error1 = '* User not found';
             } else if (error.error.message == "Unauthorized") {
@@ -223,35 +222,35 @@ export class LoginComponent implements OnInit {
 
     this.authService.resendotp(edata2).subscribe(
       (res) => {
-
+        console.log("resend response", res);
+        if (res.result == true) {
+          this.toastr.success('Verification code is sent', '');
+        }
+        else {
+          this.toastr.info(res.message);
+        }
         this.useer_id = res.user_id
-
       },
       (error1) => {
         console.log("fail", error1);
-        // this.error1 = error1;
-        // this.submitted = false;
       }
     );
   }
   onAddRowSave(form: FormGroup) {
     this.error2 = ''
     if (this.otpform.invalid) {
-
       this.error2 = '* Enter code';
       return;
     } else {
-
       let edata1 = {
         user_id: this.useer_id,
         verification_code: "" + this.otpform.controls['otp'].value,
-
       }
-
+      console.log("edata1", edata1);
       this.authService.registerotpverification(edata1).subscribe(
         (res) => {
-
-          if (res.message == "Code does not match, you can request for resending the code") {
+          console.log("verification res", res);
+          if (res.result == false) {
             this.error2 = 'Code does not match';
           }
           else if (res.result == true) {
@@ -268,8 +267,6 @@ export class LoginComponent implements OnInit {
         },
         (error1) => {
           this.error2 = 'something went wrong';
-
-
         }
       );
     }
@@ -293,7 +290,7 @@ export class LoginComponent implements OnInit {
       this.error3 = '* Enter correct mobile number';
       return;
     } else {
-      this.btnloading=true;
+      this.btnloading = true;
       let edata1 = {
         phone: form.value.phone,
       }
@@ -301,7 +298,7 @@ export class LoginComponent implements OnInit {
         this.otpuserid = res.user_id
         if (res) {
           if (res.message == "OTP code is sent to Mobile ") {
-            this.btnloading=false;
+            this.btnloading = false;
             this.modalService.open(content, {
               ariaLabelledBy: 'modal-basic-title',
               size: 'md',
@@ -309,11 +306,11 @@ export class LoginComponent implements OnInit {
             return;
           }
           else if (res.result == false) {
-            this.btnloading=false;
+            this.btnloading = false;
             this.error3 = '* Not a registered mobile number';
           }
         } else {
-          this.btnloading=false;
+          this.btnloading = false;
           this.error3 = '*Enter correct details';
         }
       },
@@ -334,11 +331,10 @@ export class LoginComponent implements OnInit {
         user_id: this.otpuserid,
         otp_code: form.value.otp_code,
       }
-      this.loginloading=true
+      this.loginloading = true
       this.authService.otplogin(edata1).subscribe((res) => {
-        this.loginloading=false
+        this.loginloading = false
         if (res) {
-          
           if (res.message == "User not found") {
             this.error5 = 'User not found';
             return;
@@ -356,7 +352,6 @@ export class LoginComponent implements OnInit {
               });
           }
         } else {
-
           this.error5 = 'Invalid Login';
         }
       },
@@ -364,20 +359,14 @@ export class LoginComponent implements OnInit {
           console.log("test", "", error.error);
           if (error.error.message == "User not found") {
             this.error5 = 'User not found';
-
-
           } else if (error.error.message == "Unauthorized") {
             this.error5 = '* Invalid credentials';
-
           }
           else if (error.error.message == "Please verify your account") {
             this.error5 = 'Please verify your account';
-
             this.resend();
-
           }
           else {
-
             this.toastr.error('Something went wrong', '');
             this.error5 = 'Something went wrong';
             this.modalService.dismissAll();
@@ -390,27 +379,20 @@ export class LoginComponent implements OnInit {
   loginWithGoogle(content: any) {
     const provider = new GoogleAuthProvider();
     this.provider = provider
-
     this.s_logintype = "google"
-
     const auth = getAuth();
     signInWithPopup(auth, this.provider)
       .then((result) => {
-
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential?.accessToken;
-
         const user = result.user;
-
         this.s_username = user.displayName;
         this.s_useremail = user.email;
         this.s_usermobile = user.phoneNumber;
         this.s_useraccessToken = token;
-
         if (user) {
           this.validateuser(content);
         }
-
       }).catch((error) => {
         console.log("error", error);
         const errorCode = error.code;
@@ -421,7 +403,6 @@ export class LoginComponent implements OnInit {
   }
   loginWithFacebook(content: any) {
     this.s_logintype = "facebook"
-
     const provider = new FacebookAuthProvider();
     this.provider = provider;
     const auth = getAuth();
@@ -434,37 +415,24 @@ export class LoginComponent implements OnInit {
         this.s_useremail = user.providerData[0].email;
         this.s_usermobile = user.providerData[0].phoneNumber;
         this.s_useraccessToken = token;
-
-
         if (user) {
           this.validateuser(content);
         }
-
-
-        //  let a:any;
-        //  a = credential
-        //  const token = a.accessToken;    
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         const email = error.email;
         const credential = FacebookAuthProvider.credentialFromError(error);
-
-        // ...
       });
 
   }
   submitbyertype(form: FormGroup) {
     this.errorb = ''
     if (this.byertypeform.invalid) {
-
-
       this.errorb = '*select buyertype';
-
     }
     this.buer_type = form.value.buyer_type
-    //  this.validateuser();
     let edata1 = {
       name: this.s_username,
       email: this.s_useremail,
@@ -473,47 +441,38 @@ export class LoginComponent implements OnInit {
       loginby: this.s_logintype,
       buyertype: this.buer_type
     }
-
     this.authService.sociallogin3(edata1).subscribe(
       (res) => {
         console.log("social response", res);
         if (res.result = true) {
           console.log("social response if ");
-         this.modalService.dismissAll();
+          this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
           this.toastr.success('logged in Successfully', '');
-            this.router.navigate(['/home'])
-              .then(() => {
-                window.location.reload();
-              });
-          
+          this.router.navigate(['/home'])
+            .then(() => {
+              window.location.reload();
+            });
         } else {
           console.log("social response else");
           this.toastr.error('', res.message);
-          //  this.router.navigate(['/main']);
-          // this.error1 = 'Invalid Login';
         }
       },
       (error) => {
-        // this.error1 = error1;
         console.log("fail1", error);
-
       }
     );
-
   }
-  spiiner(){
+  spiiner() {
     this.spinner.show();
   }
   validateuser(content: any) {
-   
     let edata1 = {
       name: this.s_username,
       email: this.s_useremail,
       phoneNumber: this.s_usermobile,
       provider: this.s_useraccessToken,
       loginby: this.s_logintype,
-      // buyertype: this.buer_type
     }
     this.spinner.show();
     this.authService.sociallogin(edata1).subscribe(
@@ -521,10 +480,7 @@ export class LoginComponent implements OnInit {
         console.log("social response", res);
         if (res.result = true) {
           console.log("social response if ");
-          // this.modalService.dismissAll();
-         
-
-          if (res.count==0) {
+          if (res.count == 0) {
             this.spinner.hide();
             this.modalService.open(content, {
               ariaLabelledBy: 'modal-basic-title',
@@ -538,57 +494,38 @@ export class LoginComponent implements OnInit {
               phoneNumber: this.s_usermobile,
               provider: this.s_useraccessToken,
               loginby: this.s_logintype,
-              // buyertype: this.buer_type
             }
-        
             this.authService.sociallogin3(edata1).subscribe(
               (res) => {
                 this.spinner.hide();
                 console.log("social response", res);
                 if (res.result = true) {
-
-                 
                   this.sharedService.sendClickEvent();
-
                   this.toastr.success('logged in Successfully', '');
-                  
-                    this.router.navigate(['/home'])
-                      .then(() => {
-                        window.location.reload();
-                      });
-                  
+                  this.router.navigate(['/home'])
+                    .then(() => {
+                      window.location.reload();
+                    });
                 } else {
                   console.log("social response else");
                   this.toastr.error('', res.message);
-                  //  this.router.navigate(['/main']);
-                  // this.error1 = 'Invalid Login';
                 }
               },
               (error) => {
-                // this.error1 = error1;
                 console.log("fail1", error);
-        
               }
             );
           }
-
         } else {
           console.log("social response else");
           this.toastr.error('', res.message);
-          //  this.router.navigate(['/main']);
-          // this.error1 = 'Invalid Login';
         }
       },
       (error) => {
-        // this.error1 = error1;
         console.log("fail1", error);
-
       }
     );
-
   }
-
-
   logout() {
     const auth = getAuth();
     signOut(auth).then(() => {
@@ -598,7 +535,6 @@ export class LoginComponent implements OnInit {
   }
   addRecordSuccess() {
     this.toastr.success('logged in Successfully', '');
-
   }
   editRecordSuccess() {
     this.toastr.success('Edit Record Successfully', '');
@@ -606,7 +542,6 @@ export class LoginComponent implements OnInit {
   deleteRecordSuccess() {
     this.toastr.error(' Removed Successfully', '');
   }
-
 
   // forgot password
 
@@ -617,11 +552,8 @@ export class LoginComponent implements OnInit {
     });
   }
   onSubmit2(content: any) {
-
     this.error6 = ''
-
     if (this.forgotForm.invalid) {
-      // console.log("form invalid",);
       if (!this.forgotForm.get('Mobile')?.valid) {
         this.error6 = '* Enter correct email or mobile number';
       }
@@ -636,12 +568,11 @@ export class LoginComponent implements OnInit {
         send_code_by: "" + this.forgotForm.controls['Type'].value,
       }
       console.log(edata1);
-     this.fpassloading=true
-
+      this.fpassloading = true
       this.authService.conformforgot(edata1).subscribe(
         (res) => {
-          console.log("res",res);
-          this.fpassloading=false
+          console.log("res", res);
+          this.fpassloading = false
           if (res) {
             if (res.message == "A code is sent") {
               this.modalService.dismissAll()
@@ -649,107 +580,84 @@ export class LoginComponent implements OnInit {
                 ariaLabelledBy: 'modal-basic-title',
                 size: 'md',
               });
-
             }
           } else if (res.result == false) {
             this.error6 = '* Enter registered mailid';
-
           }
         },
         (error: any) => {
-          this.fpassloading=false
+          this.fpassloading = false
           console.log("test", "", error.error);
           if (error.error.result == false) {
             this.error6 = error.error.message;
-
-
-          }}
+          }
+        }
       );
-        }    
+    }
   }
 
   // password change
   onAddRowSave2() {
     this.error7 = ''
-
     if (this.passwordForm.invalid) {
-
-
       if (!this.passwordForm.get('otp')?.valid) {
         this.error7 = '* Enter OTP';
       }
       else if (!this.passwordForm.get('newpassword')?.valid) {
         console.log("passs");
-        
+
         this.error7 = '* Enter password';
       }
       return;
     } else {
-this.fpassotploading=true
+      this.fpassotploading = true
       let edata3 = {
         verification_code: "" + this.passwordForm.controls['otp'].value,
         password: "" + this.passwordForm.controls['newpassword'].value,
       }
-
       // current user by login is stored in local storage -see authservice
       this.authService.resetpassword(edata3).subscribe(
         (res) => {
-          this.fpassotploading=false
+          this.fpassotploading = false
           if (res) {
             if (res.message == "Your password is reset.Please login") {
               this.toastr.success('Reset Successfully', '');
               this.modalService.dismissAll();
               this.router.navigate(['/login']);
-              window.scroll(0, 0)
-
+              window.scroll(0,0)
             }
             else if (res.message == "No user found") {
               this.error7 = '* Invalid code';
-
             }
-
           }
           else {
-
             this.error7 = '* Invalid code or mobile';
-
           }
         },
         (error: string) => {
-
           console.log("test", "" + error);
-
         }
       );
     }
-
   }
   resend2() {
-    this.resendloading=true
+    this.resendloading = true
     let edata2 = {
       email_or_phone: "" + this.forgotForm.controls['Mobile'].value,
       verify_by: "" + this.forgotForm.controls['Type'].value,
     }
-
     this.authService.resendforgot(edata2).subscribe(
       (res) => {
-        this.resendloading=false
-
+        this.resendloading = false
         if (res.result == true) {
           this.error7 = '* A code is sent again';
-
         } else {
-
           this.error7 = '* Need credentials';
-          //  this.router.navigate(['/main']);
-
         }
       },
       (error) => {
         console.log("fail");
-        // this.error1 = error1;
         this.error7 = '* Something went wrong';
-        // this.submitted = false;
       }
     );
   }

@@ -64,7 +64,8 @@
 								<h6 class="form-text text-danger" style="height: 12px;">
 									<span *ngIf="error1">{{error1}}</span>
 								</h6>
-								<button class="lezada-button lezada-button--medium">login</button>
+								<button class="lezada-button lezada-button--medium" *ngIf="!logbtnloading">login</button>
+								<button class="lezada-button lezada-button--medium" style="padding-top: 7px;" *ngIf="logbtnloading" ><i class="fa fa-spinner fa-spin" ></i>&nbsp;</button>
 							</div>
 
 							<!-- <div class="col-lg-12 ">
@@ -133,9 +134,6 @@
 										<label>Verification Code<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" placeholder="otp" formControlName="otp"
 											required>
-										<!-- <small class="form-text text-danger"
-										  *ngIf="!otpform.get('otp').valid && otpform.get('otp').touched"> code is
-										  required</small>  -->
 									</div>
 								</div>
 
