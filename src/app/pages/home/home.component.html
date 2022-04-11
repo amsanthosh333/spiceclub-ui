@@ -66,13 +66,18 @@
     <div class="product-category-container mb-40 mb-md-80 mb-sm-70 ">
         <div class="container wide">
             <div class="row">
-                <div class="col-lg-12">
+                <!-- <div class="col-lg-12">
                     <div class="section-title section-title--one text-center">
                         <h1>Top Categories</h1>
                     </div>
-                </div>
+                </div> -->
 
-                <div class="col-lg-12">
+                <div class="col-lg-2" >
+                    <div class="section-title section-title--one text-center" id="topheader">
+                        <h1>Top Categories</h1>
+                    </div>
+                </div>
+                <div class="col-lg-10">
                     <div class="product-category-container--collectionhome-wrapper">
                         <div class="row justify-content-center">
                             <div class="col-lg-2 col-md-6 col-12 mb-30" *ngFor="let img of Homecat; let i = index">
@@ -82,7 +87,7 @@
                                     <!--=======  single category image  =======-->
 
                                     <div class="single-category__image single-category__image--one"
-                                        style="height: 210px;" (click)="catnavigate(img.id)">
+                                        style="height: 210px;" (click)="catnavigate(img.id)" >
                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
                                             class="img-fluid" alt="" style="width:100%; height:100%;object-fit:cover">
                                     </div>
@@ -91,10 +96,10 @@
                                         (click)="catnavigate(img.id)">
                                         <div class="title">
                                             <p>{{img.name}}</p>
-                                            <a style="color: red;">+open {{img.name}}</a>
+                                            <a style="color: red;">{{img.name}}</a>
                                         </div>
 
-                                        <p class="product-count">{{img.number_of_children}}</p>
+                                        <!-- <p class="product-count">{{img.number_of_children}}</p> -->
                                     </div>
 
                                     <!-- <a href="products.html" class="banner-link"></a> -->
@@ -228,27 +233,37 @@
         <div class="container wide">
 
             <div class="row">
-                <div class="col-lg-2">
-                </div>
-                <div class="col-lg-8">
-                    <div class="section-title section-title--one text-center">
+                <!-- <div class="col-lg-2">
+                </div> -->
+                <!-- <div class="col-lg-8">
+                    <div class="section-title section-title--one ">
                         <h1>Best Selling Products</h1>
                     </div>
-                </div>
-                <!-- class="col-lg-2 d-flex mb-3 align-items-baseline " -->
+                </div> -->
+<!--             
                 <div class="col-lg-2 " id="bestbtn" style="text-align: center;">
+
                     <a routerLink="/bestselling" class="ml-auto mr-0 btn btn-danger btn-sm shadow-md ">View All</a>
-                </div>
+                </div> -->
 
                 <div class="col-lg-3 mb-md-80 mb-sm-60">
                     <!--=============================================
                             =          product side  banner         =
                             =============================================-->
                     <div class="product-side-banner">
+                        <div class="section-title section-title--one text-center ">
+                            <h1>Best Selling Products</h1>
+                        </div>
                         <a routerLink="/bestselling">
                             <img src="assets/images/food-one/banner-1.png" class="img-fluid" alt="">
 
                         </a>
+                       
+        
+                    </div>
+                    <div class="colll" id="bestbtn" style="text-align: center;">
+
+                        <a routerLink="/bestselling" class="ml-auto mr-0 btn btn-danger btn-sm shadow-md ">View All</a>
                     </div>
                     <!--=====  End of product side banner  ======-->
                 </div>
@@ -322,10 +337,8 @@
 
                                 <div class="single-product__content" (click)=" proddetail(img.id)">      
                                     <div class="title">
-                                        <h3> <a>{{img.name}}</a> <a style="color: red;font-size: small;">
-                                            <i class="bi bi-eye-fill"></i> View</a></h3>
-                                        
-                                            <a id="vieww" style="font-size: small;">{{img.name}}</a>
+                                        <h3> <a>{{img.name}}</a> </h3>
+                                            <a id="vieww" style="font-size: small;color: red;font-size: small;">{{img.name}}</a>
                                     </div>
                                     <div class="price">
                                         <span  *ngIf="img?.stroked_price!==img?.main_price" class="main-price discounted">{{img.stroked_price}}</span>
@@ -441,7 +454,7 @@
                    
                     <div class="single-product__image" >
                         <div class="imglaz" style="position: relative;overflow: hidden;">
-                        <a class="image-wrap" (click)=" proddetail(img.id)">
+                        <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg">
                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                 class="img-fluid" alt="">
                         </a>
@@ -480,9 +493,9 @@
                     <div class="single-product__content" (click)=" proddetail(img.id)">
                     
                         <div class="title">
-                            <h3> <a href="products.html">{{img.name}}</a> <a style="color: red;font-size: small;">
-                                <i class="bi bi-eye-fill"></i> View</a></h3>
-                            <a (click)=" proddetail(img.id)" style="font-size: small;">{{img.name}}</a>
+                            <h3> <a href="products.html">{{img.name}}</a>
+                               </h3>
+                            <a (click)=" proddetail(img.id)" style="font-size: small;color: red;font-size: small;">{{img.name}}</a>
                         </div>
                         <div class="price">
                             <span  *ngIf="img?.stroked_price!==img?.main_price" class="main-price discounted">{{img.stroked_price}}</span>
