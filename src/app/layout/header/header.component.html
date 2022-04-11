@@ -1,14 +1,25 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<!--=======  header bottom  =======-->
+
+	<div class="scroller" style="background:#dc3545" >
+<h3 style="color: white;">Spice Club</h3>
+	</div>
 	<div class="header-bottom pt-md-40 pb-md-40 ">
+
+
+
+
 		<div class="container wide">
+
+		
 			<!--=======  header bottom container  =======-->
 			<div class="header-bottom-container" style="height: 90px;">
 				<!--=======  logo with off canvas  =======-->
 				<div class="logo-with-offcanvas d-flex ">
 					<!--=======  logo   =======-->
 					<div class="logo ml-3" id="loogo">
-						<img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="">
+						<a routerLink="/home"><img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt=""></a>
+						
 					</div>
 				</div>
 
@@ -43,122 +54,20 @@
 
 
 				<!--=======  header bottom navigation  =======-->
-
-				<div class="header-bottom-navigation">
-					<div class="site-main-nav d-none d-lg-block">
-						<nav class="site-nav center-menu">
-							<ul>
-								<li class="menu-item"><a routerLink="/home">Home</a></li>
-
-								<li class="menu-item"><a routerLink="/shopbyproduct">Shop By Product</a> </li>
-
-								<li class="menu-item-has-children"><a>Shop By Category</a>
-
-									<ul class="sub-menu mega-menu mega-menu-column-4">
-										<li class="lii" style="padding-left: 15px;">
-											<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
-												<li style="margin-top: 10px;padding-left: 4px;">
-													<!-- <a (click)="gotocategory(img.id)"
-														[ngClass]="{'active': subItem === i}">{{img.name}}</a>
-													<i (click)="viewsubcat(img.id,i)" style="float: right;"
-														class="bi bi-chevron-right"></i> -->
-													<span class="lispan">
-														<a style="display:inline;"  [ngClass]="{'active': subItem === i}"> <span 
-																(click)="gotocategory(img.id)">{{img.name}}</span>
-															<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
-															(click)="viewsubcat(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
-
-															<i *ngIf="img.number_of_children!=0" style="float: right;"
-																(click)="viewsubcat(img.id,i)"
-																class="bi bi-caret-right-fill"  [ngClass]="{'active': subItem === i}"></i>
-														</a>
-													</span>
-												</li>
-
-											</ul>
-										</li>
-
-
-
-										<li class="lii" style="padding-left: 15px;">
-											<ul class="mega-sub-menu" *ngFor="let img of Subcat;let i=index">
-												<li style="margin-top: 10px;padding-left: 4px;" >
-													<span class="lispan">
-														<a style="width:190px;" [ngClass]="{'active': subItem1 === i}">
-															<span (click)="gotocategory2(img.id)">{{img.name}}</span>
-															<!-- <i *ngIf="img.number_of_children!=0" style="float: right;"
-																(click)="viewsubcat2(img.id,i)"
-																class="bi bi-caret-right-fill"></i> -->
-
-															<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
-															(click)="viewsubcat2(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
-
-														</a>
-
-														<i *ngIf="img.number_of_children!=0" style="float: right;"
-															(click)="viewsubcat2(img.id,i)"
-															class="bi bi-caret-right-fill"  [ngClass]="{'active': subItem1 === i}"></i>
-													</span>
-												</li>
-											</ul>
-										</li>
-
-
-
-										<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 15px;">
-											<ul class="mega-sub-menu" *ngFor="let img of Subcat2;let i=index">
-												<li style="margin-top: 10px;padding-left: 4px;" >
-													<span class="lispan" >
-														<a style="width:190px;" [ngClass]="{'active': subItem2 === i}">
-															<span (click)="gotocategory3(img.id)">{{img.name}}</span>
-															<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
-															(click)="viewsubcat2(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
-
-														</a>
-
-														<i *ngIf="img.number_of_children!=0" style="float: right;" (click)="viewsubcat3(img.id,i)"
-															class="bi bi-caret-right-fill" [ngClass]="{'active': subItem2 === i}"></i>
-													</span>
-												</li>
-											</ul>
-										</li>
-
-
-
-										<li class="lii" *ngIf="Subcat3?.length!=0" style="padding-left: 15px;">
-											<ul class="mega-sub-menu" *ngFor="let img of Subcat3;let i=index">
-												<li style="margin-top: 10px;">
-
-													<span class="lispan">
-														<a style="display:inline;"
-															[ngClass]="{'active': subItem3 === i}"> <span
-																(click)="gotocategory4(img.id)">{{img.name}}</span>
-															<!-- <i style="float: right;" (click)="viewsubcat4(img.id,i)"
-																class="bi bi-chevron-right"></i> -->
-														</a>
-													</span>
-
-													<!-- <a (click)="gotocategory4(img.id)"
-														(mouseover)="viewsubcat4(img.id,i)"
-														[ngClass]="{'active': subItem3 === i}">{{img.name}}</a> -->
-												</li>
-
-
-											</ul>
-										</li>
-
-
-
-									</ul>
-								</li>
-
-								<li class="menu-item"><a routerLink="/blog">Blog</a> </li>
-
-								<li class="menu-item"><a routerLink="/recipe">Recipe</a></li>
-							</ul>
-						</nav>
+				<div class="main" >			
+					<!-- Another variation with a button -->
+					<div class="input-group">
+					  <input type="text" class="form-control" placeholder="Search for products">
+					  <div class="input-group-append">
+						<button class="btn btn-danger" type="button">
+						  <i class="ion-ios-search-strong"></i>
+						</button>
+					  </div>
 					</div>
-				</div>
+				
+				  </div>
+
+				
 
 				<!--=======  End of header bottom navigation  =======-->
 
@@ -288,133 +197,133 @@
 
 			<!-- Mobile Navigation Start Here -->
 
-			<!-- <div class="site-mobile-navigation d-block d-lg-none">
-                <div id="dl-menu" class="dl-menuwrapper site-mobile-nav">
-                  
-                    <button class="dl-trigger hamburger hamburger--spin">
-                        <span class="hamburger-box">
-                            <span class="hamburger-inner"></span>
-                        </span>
-                    </button>
-               
-                    <ul class="dl-menu dl-menu-toggle">
-                            <ul class="dl-submenu">
-
-                                <li><a >Home</a>
-                                    
-                                </li>
-                                 <li><a>WellBeing Products</a>
-                                    <ul class="dl-sub-menu">
-                                        <li><a href="">Aromotherapy</a></li>
-                                        <li><a href="">Essential Oils</a></li>
-                                        <li><a href="">Skin & Face Care</a></li>
-                                        <li><a href="">Natural Hair Care</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="javascript:void(0)">Beverages</a>
-                                    <ul class="dl-sub-menu">
-                                        <li><a href="">Tea</a></li>
-                                        <li><a href="">Green Tea</a></li>
-                                        <li><a href="">Blended Coffee</a></li>
-                                        <li><a href="">Green Coffee</a></li>
-                                        <li><a href="">Milk Mixes</a></li>
-                                    </ul>
-                                </li>
-                                <li ><a href="products.html">Gourmet & Groceries</a>
-                                    
-                                     
-                                            <ul class="dl-sub-menu">
-                                                <li><a href="product.html">Millets & Traditional Rice</a></li>
-                                                <li><a href="product.html">Nutritious Chutney Powders</a></li>
-                                                <li><a href="product.html">Virgin Edible Oils</a></li>
-                                                <li><a href="product.html">Food Supplements</a></li>
-                                                <li><a href="product.html">Salt,Sugar & Honey</a></li>
-                                                <li><a href="product.html">Instant Mixes</a></li>
-                                                <li><a href="product.html">Snacks & Savouries</a></li>
-                                                <li><a href="product.html">Herbs & Seasonings</a></li>
-                                            </ul>
-                                        
-                                    
-                                </li>
-
-                        
-                    </ul>
-                </ul>
-                </div>
-            </div> -->
-
-			<!-- Mobile Navigation End Here -->
-			<!-- <div class="site-mobile-navigation d-block d-lg-none">
-                <div id="dl-menu" class="dl-menuwrapper site-mobile-nav">
-                  
-					<div class="dropdown" style="float:right;" >
-						<button class="dropbtn">Left</button>
-						<div class="dropdown-content">
-						  
-							<a routerLink="/home">Home</a>
-							<a routerLink="/shopbyproduct" >ShopByProduct</a>
-							<a routerLink="/category/33" >ShopByCategory</a>
-							<a routerLink="/blog" >Blog</a>
-							<a  routerLink="/recipe">Recipe</a>
-							
-						</div>
-					  </div>
-
-                </div>
-            </div> -->
+		
 
 		</div>
 	</div>
 
+	<div class="header-bottom-navigation">
+		<div class="site-main-nav d-none d-lg-block">
+			<nav class="site-nav center-menu">			
+				<ul>
+					<li class="menu-item"><a routerLink="/home">Subscription</a></li>
+
+					<li class="menu-item"><a routerLink="/shopbyproduct">Shop By Product</a> </li>
+
+					<li class="menu-item-has-children"><a>Shop By Category</a>
+
+						<ul class="sub-menu mega-menu mega-menu-column-4">
+							<li class="lii" style="padding-left: 15px;">
+								<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
+									<li style="margin-top: 10px;padding-left: 4px;">
+										<!-- <a (click)="gotocategory(img.id)"
+											[ngClass]="{'active': subItem === i}">{{img.name}}</a>
+										<i (click)="viewsubcat(img.id,i)" style="float: right;"
+											class="bi bi-chevron-right"></i> -->
+										<span class="lispan">
+											<a style="display:inline;"  [ngClass]="{'active': subItem === i}"> <span 
+													(click)="gotocategory(img.id)">{{img.name}}</span>
+												<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
+												(click)="viewsubcat(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
+
+												<i *ngIf="img.number_of_children!=0" style="float: right;"
+													(click)="viewsubcat(img.id,i)"
+													class="bi bi-caret-right-fill"  [ngClass]="{'active': subItem === i}"></i>
+											</a>
+										</span>
+									</li>
+
+								</ul>
+							</li>
+
+
+
+							<li class="lii" style="padding-left: 15px;">
+								<ul class="mega-sub-menu" *ngFor="let img of Subcat;let i=index">
+									<li style="margin-top: 10px;padding-left: 4px;" >
+										<span class="lispan">
+											<a style="width:190px;" [ngClass]="{'active': subItem1 === i}">
+												<span (click)="gotocategory2(img.id)">{{img.name}}</span>
+												<!-- <i *ngIf="img.number_of_children!=0" style="float: right;"
+													(click)="viewsubcat2(img.id,i)"
+													class="bi bi-caret-right-fill"></i> -->
+
+												<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
+												(click)="viewsubcat2(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
+
+											</a>
+
+											<i *ngIf="img.number_of_children!=0" style="float: right;"
+												(click)="viewsubcat2(img.id,i)"
+												class="bi bi-caret-right-fill"  [ngClass]="{'active': subItem1 === i}"></i>
+										</span>
+									</li>
+								</ul>
+							</li>
+
+
+
+							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 15px;">
+								<ul class="mega-sub-menu" *ngFor="let img of Subcat2;let i=index">
+									<li style="margin-top: 10px;padding-left: 4px;" >
+										<span class="lispan" >
+											<a style="width:190px;" [ngClass]="{'active': subItem2 === i}">
+												<span (click)="gotocategory3(img.id)">{{img.name}}</span>
+												<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
+												(click)="viewsubcat2(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
+
+											</a>
+
+											<i *ngIf="img.number_of_children!=0" style="float: right;" (click)="viewsubcat3(img.id,i)"
+												class="bi bi-caret-right-fill" [ngClass]="{'active': subItem2 === i}"></i>
+										</span>
+									</li>
+								</ul>
+							</li>
+
+
+
+							<li class="lii" *ngIf="Subcat3?.length!=0" style="padding-left: 15px;">
+								<ul class="mega-sub-menu" *ngFor="let img of Subcat3;let i=index">
+									<li style="margin-top: 10px;">
+
+										<span class="lispan">
+											<a style="display:inline;"
+												[ngClass]="{'active': subItem3 === i}"> <span
+													(click)="gotocategory4(img.id)">{{img.name}}</span>
+												<!-- <i style="float: right;" (click)="viewsubcat4(img.id,i)"
+													class="bi bi-chevron-right"></i> -->
+											</a>
+										</span>
+
+										<!-- <a (click)="gotocategory4(img.id)"
+											(mouseover)="viewsubcat4(img.id,i)"
+											[ngClass]="{'active': subItem3 === i}">{{img.name}}</a> -->
+									</li>
+
+
+								</ul>
+							</li>
+
+
+
+						</ul>
+					</li>
+
+					<li class="menu-item"><a routerLink="/blog">Blog</a> </li>
+
+					<li class="menu-item"><a routerLink="/recipe">Recipe</a></li>
+				</ul>
+				
+			</nav>
+		</div>
+	</div>
 
 
 	<!--=======  End of header bottom  =======-->
 </header>
 
 
-
-
-
-
-
-
-<!-- <div class="newsletter-overlay-area">
-    <div class="newsletter-content newsletter-content-bg-1" id="newsletter-content">
-
-        <span class="close-icon" id="newsletter-popup-close-icon">
-            <a href="javascript:void(0)">
-                <i class="ion-android-close"></i>
-            </a>
-        </span>
-
-        <h2 class="mb-12"><span>Get</span> to know about 1st.
-        </h2>
-
-        <div class="mc-newsletter-form mc-newsletter-form--popup mb-40">
-            <form id="mc-form" class="mc-form">
-                <input type="email" placeholder="Your email address" required>
-                <button type="submit">SUBSCRIBE</button>
-            </form>
-        </div>
-
-       
-
-        <div class="mailchimp-alerts">
-            <div class="mailchimp-submitting"></div>
-            <div class="mailchimp-success"></div>
-            <div class="mailchimp-error"></div>
-        </div>
-
-        <p>* Be the first to learn about our products and get exclusive offers.</p>
-    </div>
-</div> -->
-
-
-
-
-<!--=============================================
-	=            overlay items         =
-	=============================================-->
 
 <!--=======  about overlay  =======-->
 
