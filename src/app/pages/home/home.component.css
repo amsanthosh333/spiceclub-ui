@@ -14,7 +14,7 @@
   }
 .colll{
   position: absolute;
-  bottom: 20px;
+  bottom: 30px;
   left: 130px;
 }
   .single-product__floating-badges {
@@ -45,35 +45,40 @@
   border-radius: 100%;
 }
   .title p{
-    color: #474747 ;
-    font-family: 'Lato'; 
+    color: #140f0f ;
+    font-family: 'Lato', sans-serif;
   }
   .title a{
-    color: #474747 ;
-    font-family: 'Lato'; 
+    color: #140f0f ;
+    font-family: 'Lato', sans-serif; 
+  }
+  .title h3 a{
+    color: #140f0f ;
+    font-family: 'Lato', sans-serif;
+    text-decoration: none; 
   }
   a{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   p span{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   p{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   input{
     color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   .avialable-amount{
-    color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+    color: #140f0f ;
+    font-family: 'Lato', sans-serif;
   }
   .single-size{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }s
   .ng-image-slider .ng-image-slider-container .main .main-inner .img-div .caption {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
 element.style {
   height: 300px;
@@ -96,14 +101,15 @@ element.style {
 
 
 .section-title h1 {
-    font-size: 30px;
+    font-size: 25px;
     line-height: 35px;
     margin-top: -10px;
     margin-bottom: 10px; 
-    font-family: 'Lato'; 
+    font-family: 'Lato', sans-serif;
     text-transform: capitalize;
     
 }
+
 
 element.style {
   object-fit: cover;

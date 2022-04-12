@@ -1,22 +1,53 @@
-
+.footer-single-widget h5.widget-title {
+  margin-bottom: 0px;
+}
+.footer-subscription-widget .footer-subscription-title {
+  
+   margin-bottom: 0px;
+ 
+}
+.footer-nav-container nav ul li {
+  padding: 6px 0;
+}
+.footer-nav-container nav ul li a {
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  color: #464545;
+}
+.footer-subscription-widget .subscription-subtitle {
+  margin-bottom: 0px;
+}
+.footer-subscription-widget .subscription-subtitle {
+  margin-bottom: 0px;
+  font-size: 0.8rem;
+}
+.footer-container.footer-one .col {
+  -ms-flex-preferred-size: 17.5%;
+  flex-basis: 17.5%;
+ margin-bottom: 10px;
+}
+.footer-single-widget .logo {
+  margin-bottom: 5px;
+}
 p{
     color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   input{
     color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   h2{
     color:#474747; ;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   h5.widget-title{
     color:#474747; ;
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
   }
   li a{
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Lato', sans-serif;
     text-decoration: none;
   }
   nav ul {

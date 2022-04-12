@@ -330,9 +330,8 @@
                                 <!--=======  single product content  =======-->
                                 <div class="single-product__content" (click)=" proddetail(img.id)">
                                     <div class="title">
-                                        <h3> <a>{{img.name}}</a> <a style="color: red;font-size: small;">
-                                            <i class="bi bi-eye-fill"></i> View</a></h3>
-                                        <a id="vieww" style="font-size: small;">{{img.name}}</a>
+                                        <h3> <a href="">{{img.name}}</a></h3>
+                                            <a id="vieww" style="font-size: small;color: red">{{img.name}}</a>
                                     </div>
                                     <div class="price">
                                         <span  *ngIf="img?.stroked_price!==img?.main_price" class="main-price discounted">{{img.stroked_price}}</span>

@@ -15,7 +15,6 @@ declare var jQuery: any;
 
 import { SharedService } from 'src/app/services/shared.service'
 
-
 @Component({
   selector: 'app-shopbyproduct',
   templateUrl: './shopbyproduct.component.html',
@@ -183,7 +182,11 @@ export class ShopbyproductComponent implements OnInit {
 
       if (this.keyy !== undefined) {
         console.log("filterDatatable1");
+        this.minValue = 0
+        this.maxValue = 10000
+        
         this.filterDatatable1(this.keyy);
+        
       }
       else {
         console.log("filterDatatable2");
