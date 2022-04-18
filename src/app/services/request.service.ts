@@ -837,7 +837,10 @@ public billdeskpayment(): Observable<string>  {
   return this.http.post(this.url,body)
 
 }
-
+public fetchpayment() {
+  this.url = `${this.endPoint1}/footer/paymentgateway` ;
+  return this.http.get(this.url);
+}
 public fetchfacebookurl() {
   this.url = `${this.endPoint1}/social/getlink/facebook` ;
   return this.http.get(this.url);

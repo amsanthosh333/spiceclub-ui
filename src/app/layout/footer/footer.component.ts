@@ -15,6 +15,7 @@ export class FooterComponent implements OnInit {
   youtubeurl: any;
   instagramurl: any;
   twitterurl: any;
+  Paymentmethod: any;
 
   constructor(private fb: FormBuilder, private request: RequestService, private toastr: ToastrService) { }
 
@@ -26,6 +27,7 @@ export class FooterComponent implements OnInit {
     this.getinstagramurl();
     this.gettwitterurl();
     this.getyoutubeurl();
+    this.getpayment();
 
   }
   mailsubscribe(form: FormGroup) {
@@ -49,6 +51,13 @@ export class FooterComponent implements OnInit {
         }
       });
     }
+  }
+
+  getpayment() {
+    this.request.fetchpayment().subscribe((res: any) => {
+      this.Paymentmethod = res;
+      console.log("this.Paymentmethod", this.Paymentmethod);
+    });
   }
 
   getfacebookurl() {
