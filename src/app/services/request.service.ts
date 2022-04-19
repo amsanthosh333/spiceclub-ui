@@ -857,6 +857,10 @@ public fetchtwitterurl() {
   this.url = `${this.endPoint1}/social/getlink/twitter` ;
   return this.http.get(this.url);
 }
+public fetchlinkedurl() {
+  this.url = `${this.endPoint1}/social/getlink/twitter` ;
+  return this.http.get(this.url);
+}
 
 public getaboutus() {
   this.url = `${this.endPoint1}/policies/custompage/about` ;

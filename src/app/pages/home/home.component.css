@@ -45,40 +45,51 @@
   border-radius: 100%;
 }
   .title p{
-    color: #140f0f ;
-    font-family: 'Lato', sans-serif;
+    color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }
   .title a{
-    color: #140f0f ;
-    font-family: 'Lato', sans-serif; 
+    color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }
   .title h3 a{
     color: #140f0f ;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
     text-decoration: none; 
   }
   a{
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }
   p span{
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }
   p{
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }
   input{
-    color: #474747 ;
-    font-family: 'Lato', sans-serif;
+    color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }
   .avialable-amount{
     color: #140f0f ;
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }
   .single-size{
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
   }s
   .ng-image-slider .ng-image-slider-container .main .main-inner .img-div .caption {
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
+    
   }
 element.style {
   height: 300px;
@@ -105,8 +116,9 @@ element.style {
     line-height: 35px;
     margin-top: -10px;
     margin-bottom: 10px; 
-    font-family: 'Lato', sans-serif;
+    font-family: 'Roboto',Arial,sans-serif;
     text-transform: capitalize;
+     color: #000000;;
     
 }
 
@@ -227,14 +239,15 @@ a.next.icons.next-icon {
   background-color: #ff8100;
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
+  transform: rotate(310deg);
   position: absolute;
   text-align: center;
   line-height: 24px;
   right: -30px;
-  top: 20px;
+  top: 190px;
   font-family: arial;
   font-size: 10px;
+  
   
 }
 #offtag1 {
@@ -244,12 +257,12 @@ a.next.icons.next-icon {
   background-color: #ff8100;
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
+  transform: rotate(310deg);
   position: absolute;
   text-align: center;
   line-height: 24px;
-  right: -160px;
-  top: 20px;
+  right: -30px;
+  top: 190px;
   font-family: arial;
   font-size: 10px;
 }

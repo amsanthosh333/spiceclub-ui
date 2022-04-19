@@ -124,12 +124,12 @@ li.has-children.active a{
   background-color: #ff8100;
   -ms-transform: rotate(45deg);
   -webkit-transform: rotate(45deg);
-  transform: rotate(45deg);
+  transform: rotate(310deg);
   position: absolute;
   text-align: center;
   line-height: 24px;
-  right: -20px;
-  top: 20px;
+  right: -30px;
+  top: 190px;
   font-family: arial;
   font-size: 10px;
 }
