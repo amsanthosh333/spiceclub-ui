@@ -1,16 +1,32 @@
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 p{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 label{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 option{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
+}
+.login-form--register label {
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 14px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #333;
+}
+.lezada-button--medium {
+    font-size: 14px;
+    padding: 5px 45px;
 }

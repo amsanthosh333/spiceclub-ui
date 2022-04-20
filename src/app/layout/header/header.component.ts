@@ -16,6 +16,7 @@ declare var jQuery: any;
 import * as $ from 'jquery';
 import { SharedService } from 'src/app/services/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { LoginComponent } from '../../auth/login/login.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -1762,6 +1763,13 @@ export class HeaderComponent implements OnInit {
   gotocategory4(id: any) {
     console.log("id", id);
     this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id, category1: this.catid1_id, subcategory1: id } });
+  }
+
+  openlogin(){
+    this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
 }
 

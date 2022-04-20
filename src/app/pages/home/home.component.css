@@ -250,6 +250,25 @@ a.next.icons.next-icon {
   
   
 }
+#offtag2 {
+  display: block;
+  width: 120px;
+  height: 24px;
+  background-color: #ff8100;
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(359deg);
+  position: absolute;
+  /* text-align: center; */
+  padding-left: 10px;
+  line-height: 24px;
+  right: -30px;
+  top: 110px;
+  font-family: arial;
+  font-size: 10px;
+  
+  
+}
 #offtag1 {
   display: block;
   width: 120px;

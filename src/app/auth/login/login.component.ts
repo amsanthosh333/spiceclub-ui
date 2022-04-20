@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { NgbModalRef, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormGroup } from '@angular/forms';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,6 +16,9 @@ import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service';
 import { Subscriber } from 'rxjs';
 import { NgxSpinnerService } from "ngx-spinner";
+import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { ViewChild } from '@angular/core';
+import { SignupComponent } from '../signup/signup.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -74,6 +77,9 @@ export class LoginComponent implements OnInit {
   resendloading!: boolean;
   logbtnloading: boolean = false;
 
+  // @ViewChild('myModal') myModal : any;
+ 
+
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
     private formBuilder: FormBuilder, private authService: AuthService, private sharedService: SharedService,
     private toastr: ToastrService, private modalService: NgbModal, private spinner: NgxSpinnerService) {
@@ -85,12 +91,12 @@ export class LoginComponent implements OnInit {
     this.userid = this.currentdetail.user?.id;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-
     this.ClickEventSubscription = this.sharedService.getlogout().subscribe(() => {
       this.logout();
     })
-
   }
+
+
   ngOnInit(): void {
     window.scroll(0, 0);
     this.getbyertype()
@@ -119,6 +125,15 @@ export class LoginComponent implements OnInit {
     this.passwordForm = this.formBuilder.group({
       otp: ['', [Validators.required]],
       newpassword: ['', [Validators.required, Validators.minLength(4)]],
+    });
+  }
+
+  openloginn(content:any) {
+    console.log("open");
+    
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'sm',
     });
   }
   get f() {
@@ -661,10 +676,15 @@ export class LoginComponent implements OnInit {
       }
     );
   }
+
+  openregister(){
+    this.modalService.open(SignupComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg',
+    });
+  }
+  
 }
-
-
-
 
 
 

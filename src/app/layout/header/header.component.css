@@ -73,8 +73,8 @@ nav.site-nav > ul > li {
 } */
 li a.active span {
 	color: rgb(10, 9, 9);
-	font-weight: 700;
-	font-weight: bolder;
+	font-weight: 600;
+	/* font-weight: bolder; */
 }
 
 .bi-caret-right-fill {
@@ -137,7 +137,7 @@ a {
 
 .menu-item-has-children {
 	color: #474747;
-	margin-top: 1rem;
+	/* margin-top: 1rem; */
 	font-size: 0.8rem;
 	font-weight: 600;
 	font-family: 'Lato', sans-serif;
@@ -148,7 +148,7 @@ a {
 .menu-item-has-children a{
 	color: #474747;
 	/* font-family: 'Poppins', sans-serif; */
-	margin-top: 1rem;
+	/* margin-top: 1rem; */
 	/* color: rgb(152, 152, 152); */
 	font-size: 0.8rem;
 	font-weight: 600;

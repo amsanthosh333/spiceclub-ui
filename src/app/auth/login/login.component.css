@@ -1,40 +1,57 @@
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 h2{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #141414;
+  font-family: 'Roboto',Arial,sans-serif;
+  letter-spacing: 0;
 }
 select{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 input{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 option{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	color: #141414;
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 p{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #141414;
+  font-family: 'Roboto',Arial,sans-serif;
+  letter-spacing: 0;
 }
 .reset-pass-link{
     color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	  font-family: 'Roboto',Arial,sans-serif;
+  letter-spacing: 0;
+  margin-top: 8px;
+  text-decoration: none;
+  font-size: smaller;
 }
 label{
 	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 button{
-	font-family: 'Poppins', sans-serif;
+
+    font-family: 'Roboto',Arial,sans-serif;
+    letter-spacing: 0;
 }
 
-
+.lezada-button--medium {
+  font-size: 14px;
+  padding: 5px 85px;
+}
 /* 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 .google-btn {
@@ -92,7 +109,7 @@ body { padding: 2em; }
   padding: 0 15px 0 46px;
   border: none;
   text-align: left;
-  line-height: 34px;
+  line-height: 30px;
   white-space: nowrap;
   border-radius: 0.2em;
   font-size: 16px;
@@ -105,7 +122,7 @@ body { padding: 2em; }
   position: absolute;
   top: 0;
   left: 0;
-  width: 34px;
+  width: 30px;
   height: 100%;
 }
 .loginBtn:focus {

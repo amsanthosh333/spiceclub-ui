@@ -72,6 +72,7 @@ export class SignupComponent implements OnInit {
     this.error2 = '';
     if (this.registerForm.invalid) {
       this.error2 = '* Enter all details';
+      this.btnloading=false;
       return;
     } else {
        let edata={
@@ -169,5 +170,10 @@ export class SignupComponent implements OnInit {
         this.submitted = false;
       }
     );
+  }
+  closemodel(){
+    console.log("close");
+    
+    this.modalService.dismissAll()
   }
 }

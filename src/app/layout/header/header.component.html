@@ -10,7 +10,6 @@
 		<div class="container wide">
 				<!--=======  header bottom container  =======-->
 			<div class="header-bottom-container" style="height: 80px;">
-				<!--=======  logo with off canvas  =======-->
 				<div class="logo-with-offcanvas d-flex ">
 					<!--=======  logo   =======-->
 					<div class="logo ml-3" id="loogo">
@@ -20,7 +19,6 @@
 
 				<!--=======  header bottom navigation  =======-->
 				<div class="main" >			
-					<!-- Another variation with a button -->
 					<div class="inputroup">
 						<form class="input-group" [formGroup]="search" (ngSubmit)="search1(search)" style="width:100%;">
 					  <input type="text" class="form-control" placeholder="Search for products" formControlName="key">
@@ -58,7 +56,7 @@
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
 								<i class="ion-android-person" *ngIf="(userid!==0)"></i>
 							</a>
-							<a id="offcanvaout-icon" routerLink="/login">
+							<a id="offcanvaout-icon"   (click)="openlogin()">
 								<i class="ion-android-person" *ngIf="(userid==0)"></i>
 							</a>
 						</div>
@@ -71,8 +69,8 @@
 							<a id="offcanvashlist-icon" class="loggin1" routerLink="/login" *ngIf="(userid==0)">
 								<i class="ion-android-favorite-outline"></i>
 							</a>
-							<a id="offcanvashlist-icon" class="loggin" routerLink="/login" *ngIf="(userid==0)">
-								<button type="button" class="btn " style="background-color: #ccccd3;">Login</button>
+							<a id="offcanvashlist-icon" class="loggin"  *ngIf="(userid==0)">
+								<button type="button" class="btn " style="background-color: #ccccd3;" (click)="openlogin()">Login</button>
 							</a>
 						</div>
 
@@ -84,9 +82,9 @@
 							<a id="offcanvt-icon" class="reg1">
 								<i class="ion-ios-cart" routerLink="/login" *ngIf="(userid==0)"></i>
 							</a>
-							<a id="offcanart-icon" class="reg" routerLink="/signup" *ngIf="(userid==0)">
+							<!-- <a id="offcanart-icon" class="reg" routerLink="/signup" *ngIf="(userid==0)">
 								<button type="button" class="btn" style="background-color: #ccccd3;">Signup</button>
-							</a>
+							</a> -->
 						</div>
 						<div class="single-icon cart" id="logout">
 
@@ -102,8 +100,7 @@
 								<div class="dropdown" style="float:right;">
 									<i class="bi bi-three-dots-vertical"></i>
 									<div class="dropdown-content">
-
-										<a routerLink="/home">Home</a>
+										<a routerLink="/home">Subscription</a>
 										<a routerLink="/shopbyproduct">ShopByProduct</a>
 										<a routerLink="/category">ShopByCategory</a>
 										<a routerLink="/blog">Blog</a>
@@ -172,7 +169,7 @@
 		<div class="site-main-nav d-none d-lg-block">
 			<nav class="site-nav center-menu">			
 				<ul>
-					<li class="menu-item"><a routerLink="/home">SUBSCRIPTION</a></li>
+					<li class="menu-item"><a routerLink="/category/96">SUBSCRIPTION</a></li>
 
 					<li class="menu-item"><a routerLink="/shopbyproduct">SHOP BY PRODUCTS</a> </li>
 
@@ -219,7 +216,7 @@
 
 											</a>
 
-											<i *ngIf="img.number_of_children!=0" style="float: right;"
+											<i *ngIf="img.number_of_children!=0" style="float: right;margin-top: 8px; "
 												(click)="viewsubcat2(img.id,i)"
 												class="bi bi-caret-right-fill"  [ngClass]="{'active': subItem1 === i}"></i>
 										</span>
@@ -240,7 +237,7 @@
 
 											</a>
 
-											<i *ngIf="img.number_of_children!=0" style="float: right;" (click)="viewsubcat3(img.id,i)"
+											<i *ngIf="img.number_of_children!=0" style="float: right;margin-top: 8px;" (click)="viewsubcat3(img.id,i)"
 												class="bi bi-caret-right-fill" [ngClass]="{'active': subItem2 === i}"></i>
 										</span>
 									</li>
