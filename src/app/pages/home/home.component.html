@@ -1,5 +1,39 @@
-<div>
+<div style="background-color: #93939338; padding-bottom: 1px;">
    
+    <!-- <div class="col-md-10">
+        <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
+       <div class="carousel-inner">
+         <div class="carousel-item active">
+           <div class="container">
+             <div class="row">
+               <div class="col-md-4"><a href="#"><img src="http://www.pentagonpress.in/upload/books/20157161142Happiness%20Unlimited.jpg" id="a1" width="250px" height="350px"></a></div>
+               <div class="col-md-4"><a href="#"><img src="https://www.booktopia.com.au/http_coversbooktopiacomau/big/9780007848423/the-monk-who-sold-his-ferrari.jpg" id="a1" width="250px" height="350px"></a></div>
+               <div class="col-md-4"><a href="#"><img src="https://images-na.ssl-images-amazon.com/images/I/71DnP7GbRIL.jpg" id="a1" width="350px" height="350px"></a></div>
+             </div>
+           </div>
+         </div>
+         <div class="carousel-item">
+            <div class="container">
+             <div class="row">
+               <div class="col-md-4"><a href="#"><img src="https://www.wbkidsgo.com/Portals/4/Images/Content/Characters/Temp_Thumbs/ScoobyDoo_ShaggyRogers.png" width="300px" height="300px" id="a1"></a></div>
+               <div class="col-md-4"><a href="#"><img src="http://images6.fanpop.com/image/photos/35100000/Scooby-Doo-scoobert-doo-35193928-500-500.jpg" id="a1" width="300px" height="300px"></a></div>
+               <div class="col-md-4"><a href="#"><img src="https://www.wbkidsgo.com/Portals/4/Images/Content/Characters/Temp_Thumbs/ScoobyDoo_Scooby-Doo.png" id="a1" width="300px" height="300px"></a></div>
+             </div>
+         </div>
+       </div>
+       <a id="b11" class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+       <h1><i class="fa fa-angle-left" aria-hidden="true"></i></h1> 
+         <span class="sr-only">Previous</span>
+       </a>
+       <a id="b12" class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <h1><i class="fa fa-angle-right" aria-hidden="true"></i></h1>
+         <span class="sr-only">Next</span>
+       </a>
+     </div></div></div> -->
+
+    
     <!-- carousel-fade by api-->
 
     <!-- lazyloading  banner -->
@@ -28,6 +62,7 @@
     </div>
 
     <!-- todays offer slider -->
+    <div class="carousall6">
     <div class="sli mb-3" *ngIf="!loader4">
         <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px;" [images]="Todaysoffer"
             [imageSize]="{width: 400, height: 200, space: 13}" [infinite]="true" [imagePopup]="false"
@@ -61,23 +96,17 @@
             </div>
         </div>
     </div>
+</div>
+
     <!-- todays offer slider end-->
     <!-- category start -->
+    <div class="carousall3" >
     <div class="product-category-container mb-40 mb-md-80 mb-sm-70 ">
         <div class="container wide">
             <div class="row">
-                <!-- <div class="col-lg-12">
-                    <div class="section-title section-title--one text-center">
-                        <h1>Top Categories</h1>
-                    </div>
-                </div> -->
+              <h6 class="HH6">Top Categories</h6>          
+                <div class="col-lg-12">
 
-                <div class="col-lg-2" >
-                    <div class="section-title section-title--one text-center" id="topheader">
-                        <h1 style="font-family: Roboto,Arial,sans-serif;color: #141414;">Top Categories</h1>
-                    </div>
-                </div>
-                <div class="col-lg-10">
                     <div class="product-category-container--collectionhome-wrapper">
                         <div class="row justify-content-center">
                             <div class="col-lg-2 col-md-6 col-12 mb-30" *ngFor="let img of Homecat; let i = index">
@@ -95,7 +124,7 @@
                                     <div class="single-category__content single-category__content--one mt-10 mb-10"
                                         (click)="catnavigate(img.id)">
                                         <div class="titlee">
-                                            <p>{{img.name}}</p>
+                                            <p style="font-size: smaller; font-weight: 500;">{{img.name}}</p>
                                             <!-- <a style="color: red;">{{img.name}}</a> -->
                                         </div>
 
@@ -186,76 +215,25 @@
             </div>
         </div>
     </div>
-    <!-- category end -->
-
-    <!-- category start -->
-    <!-- <div class="product-category-container mb-70 mb-md-80 mb-sm-70">
-            <div class="container wide">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="section-title section-title--one text-center">
-                            <h1>Categories</h1>
-                        </div>
-                    </div>
-                  
-                    <div class="col-lg-12">
-                        <div class="product-category-container--collectionhome-wrapper">
-                            <div class="row justify-content-center">
-                            
-                                <div class="col-lg-2 col-md-6 col-12 mb-60" *ngFor="let img of Homecat; let i = index">
-                                    <div class="single-category single-category--one wow zoomIn">
-                                        <div class="single-category__image single-category__image--one"
-                                            style=" width:100%; height:200px;" (click)="catnavigate(img.id)">
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
-                                                class="img-fluid" alt="" style="width:100%; height:100%;object-fit:cover">
-                                        </div>
-                                      
-                                        <div class="single-category__content single-category__content--one mt-10 mb-10">
-                                            <div class="title">
-                                                <p>{{img.name}}</p>
-                                                <a (click)="catnavigate(img.id)" style="color: red;">+open {{img.name}}</a>
-                                            </div>
-                                            <p class="product-count">{{img.number_of_children}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                  
-                </div>
-            </div>
-        </div>  -->
+    </div>
     <!-- category end -->
 
     <!--bestsellers start-->
-    <div class="banner-with-product-area mb-20 mb-md-80 mb-sm-60 " style="padding-top: 30px;">
-        <div class="container wide">
+    
+    <div class="banner-with-product-area mb-20 mb-md-80 mb-sm-60 " style="padding-top: 0px;">
+        <div class="container wide" style="background-color: white; padding: 20px;max-width: 98%; padding-bottom: 10px;">
 
             <div class="row">
-                <!-- <div class="col-lg-2">
-                </div> -->
-                <!-- <div class="col-lg-8">
-                    <div class="section-title section-title--one ">
-                        <h1>Best Selling Products</h1>
-                    </div>
-                </div> -->
-<!--             
-                <div class="col-lg-2 " id="bestbtn" style="text-align: center;">
-
-                    <a routerLink="/bestselling" class="ml-auto mr-0 btn btn-danger btn-sm shadow-md ">View All</a>
-                </div> -->
-
-                <div class="col-lg-3 mb-md-80 mb-sm-60">
+                <div class="col-lg-3 mb-md-80 mb-sm-60 pl-30">
                     <!--=============================================
                             =          product side  banner         =
                             =============================================-->
                     <div class="product-side-banner">
                         <div class="section-title section-title--one text-center ">
-                            <h1>Best Selling Products</h1>
+                            <h6 style="font-weight: 600; color: black;">Best Selling Products</h6>
                         </div>
                         <a routerLink="/bestselling">
-                            <img src="assets/images/food-one/banner-1.png" class="img-fluid" alt="">
+                            <img src="assets/images/food-one/banner-1.png" class="img-fluid" alt="" style="height: 500px;">
 
                         </a>
                        
@@ -278,7 +256,7 @@
 
                                 <div class="single-product__image" style="overflow: hidden;">
 
-                                    <div class="imglazy">                               
+                                    <div class="imglazy" style="height: 200px;">                               
                                     <ngx-skeleton-loader count="1" *ngIf="imgloader"
                                         [theme]="{  'border-radius': '4px',  height: '220px',  width:'200px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -438,14 +416,16 @@
 
     <!-- featured product  start-->
     <div class="col-lg-12 mb-10">
-        <div class="section-title section-title--one text-center mb-0">
-            <h1>Featured Products</h1>
-        </div>
+       
+        <div class="carousall" >
+            <div class="col-lg-12">
+                <div class="section-title section-title--one  mb-0">
+                    <h6 style="font-weight: 600; color: black;margin-left: 30px;">Featured Products</h6>
+                </div>
+            </div>
         <carousel style="height: 300px; z-index: unset;" *ngIf="!loader6">
             <div class="carousel-cell" *ngFor="let img of Futuredpro ;let i = index">
-                <span id="offtag2" *ngIf="img.deal_of_day!=0">Deal of the day</span>
-                <span id="offtag2" *ngIf="img.deal_of_month!=0">Deal of the month</span>
-                <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>
+                
                
                 <div class="single-product" style="padding-left: 70px; overflow: hidden;">
                     <!--=======  single product image *ngIf="img.deal_of_day!=0" =======-->
@@ -507,6 +487,7 @@
                 </div>
             </div>
         </carousel>
+        
         <div class="col-lg-12" *ngIf="loader6">
             <div class="product-category-container--collectionhome-wrapper">
                 <div class="row justify-content-center">
@@ -575,18 +556,21 @@
             </div>
         </div>
     </div>
+
+    </div>
     <!-- featured product end -->
 
     <!-- brands start -->
-    <div class="sli mb-3 mt-1" *ngIf="!loader5">
+    <div class="carousall1">
+    <div class="sli mb-1" *ngIf="!loader5">
         <div class="col-lg-12">
-            <div class="section-title section-title--one text-center">
-                <h1 style="margin-top: -60px;">Brands</h1>
+            <div class="section-title section-title--one ">
+                <h6 style="font-weight: 600; color: black;">Brands</h6>
             </div>
         </div>
-        <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px;"
+        <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px; border-radius: 20px;"
             (imageClick)="blogClick($event)" [images]="Allbrands" [imagePopup]="false"
-            [imageSize]="{width: 150, height: 150, space: 13}" [font] #nav></ng-image-slider>
+            [imageSize]="{width: 150, height: 150, space: 13 }" [font] #nav></ng-image-slider>
     </div>
 
 
@@ -595,8 +579,8 @@
         <div class="container wide">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="section-title section-title--one text-center">
-                        <h1>Brands</h1>
+                    <div class="section-title section-title--one  mb-0">
+                        <h6 style="font-weight: 600; color: black;">Brands</h6>
                     </div>
                 </div>
                 <!-- <div class="col-lg-12" style="padding-left: 50px; padding-right: 50px;">
@@ -704,6 +688,7 @@
         </div>
     </div>
     <!--lazyloading brands end -->
+</div>
 
     <!-- popup -->
     <ng-template #openRecord let-modal>
@@ -871,25 +856,6 @@
         </div>
     </ng-template>
 
-
-    <!-- <div class="instagram-image-slider-area mb-50 mb-md-70">
-    
-            <div class="container wide">
-                <div class="row">
-                    <div class="col-lg-12">
-                
-    
-                        <div class="instagram-image-slider-container">
-                            <div class="instagram-feed-thumb">
-                                <div id="instagramFeedTwo" class="instagram-carousel-type2">
-                                </div>
-                            </div>
-                        </div>
-    
-                    </div>
-                </div>
-            </div>
-        </div> -->
 </div>
 
 

@@ -188,9 +188,12 @@ export class HomeComponent implements OnInit {
       rating: [''],
       comment: [''],
 
-    });
+    });  
+          
   }
 
+
+  
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
