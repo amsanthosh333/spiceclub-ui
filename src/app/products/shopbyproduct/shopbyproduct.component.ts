@@ -122,6 +122,7 @@ export class ShopbyproductComponent implements OnInit {
   maxx: any;
   storked_pricee: any;
   prod_pricee: any;
+  directpage: boolean =true;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
@@ -179,7 +180,7 @@ export class ShopbyproductComponent implements OnInit {
 
     if (this.keyy !== undefined || this.categoryy_id !== undefined || this.brandd_id !== undefined || this.minValue !== undefined || this.maxValue !== undefined) {
       console.log("if ", this.keyy);
-
+      this.directpage=false
       if (this.keyy !== undefined) {
         console.log("filterDatatable1");
         this.minValue = 0
@@ -204,6 +205,7 @@ export class ShopbyproductComponent implements OnInit {
         this.maxValue = 10000
       }
       this.viewdata(this.pagee);
+      this.directpage=true
     }
 
     this.viewbrand();
@@ -297,10 +299,14 @@ export class ShopbyproductComponent implements OnInit {
   }
   viewdata(page: any) {
     this.prodloader = true;
+    console.log("viewdataaaaaaaaaaaaa");
+    
     this.request.getallproducts(page).subscribe((response: any) => {
       this.Product = response.data;
+    
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      console.log("viewdataaaaaaaaaaaaa response",this.pagess);
       this.prodloader = false;
       this.minValue = 0
       this.maxValue = 10000
@@ -506,6 +512,8 @@ export class ShopbyproductComponent implements OnInit {
     console.log('Got the selectedVendor as : ', JSON.parse(selectedVendor));
   }
   getpage(url: any) {
+    console.log("urll page",url);
+    
     if(url!==null){
     this.prodloader = true;
     this.imgloader = false;
@@ -515,6 +523,26 @@ export class ShopbyproductComponent implements OnInit {
       this.pagess = this.pagenation.links;
       this.pagee = this.pagenation.current_page
       this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee, categories: this.categoryy_id, brands: this.brandd_id, min: this.minValue, max: this.maxValue, sort_key: this.sortval } });
+      window.scroll(0, 0);
+      this.prodloader = false;
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    })
+  }
+  }
+  getpage1(url: any) {
+    console.log("urll page",url);
+    
+    if(url!==null){
+    this.prodloader = true;
+    this.imgloader = false;
+    this.request.getpage(url).subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response.meta;
+      this.pagess = this.pagenation.links;
+      this.pagee = this.pagenation.current_page
+      this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
       window.scroll(0, 0);
       this.prodloader = false;
       setTimeout(() => {

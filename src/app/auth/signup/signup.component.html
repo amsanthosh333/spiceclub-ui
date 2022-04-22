@@ -72,7 +72,7 @@
 									<label for="regPassword">Buyer Type<span class="required">*</span> </label>
 									<div class="form-group position-relative">
 										
-										<select class="form-control pl-5"  style="background: transparent;" formControlName="buyer_type" required>
+										<select class="form-control pl-5"  style="background: transparent;border: 0px; border-bottom: 2px solid #cccccc; background: transparent;" formControlName="buyer_type" required>
 											
 											<option *ngFor="let reg of buyer" [value]="reg.id">
 												{{reg.name}}

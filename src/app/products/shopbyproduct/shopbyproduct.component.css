@@ -1,6 +1,22 @@
 .title h3 a{
-  text-decoration: none;
+  font-size: 13px;
+  color: #140f0f ;
+  font-family: 'Roboto',Arial,sans-serif;
+  letter-spacing: 0;
+  text-decoration: none; 
 }
+@media (min-width: 992px){
+  .col-lg-9 {
+      flex: 0 0 auto;
+      width: 77%;
+  }
+  }
+  @media (min-width: 992px){
+    .col-lg-3 {
+        flex: 0 0 auto;
+        width: 23%;
+    }
+    }
 
 p span{
   font-family: 'Poppins', sans-serif;
@@ -91,7 +107,18 @@ select{
   color: #474747 ;
 	font-family: 'Poppins', sans-serif;
 }
-
+@media (min-width: 992px){
+.col-lg-9 {
+    flex: 0 0 auto;
+    width: 70%;
+}
+}
+@media (min-width: 992px){
+  .col-lg-3 {
+      flex: 0 0 auto;
+      width: 23%;
+  }
+  }
 @media (max-width : 800px) {  
   .single-product__image{
     text-align: -webkit-center;

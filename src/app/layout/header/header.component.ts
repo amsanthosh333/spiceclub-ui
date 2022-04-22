@@ -1673,6 +1673,7 @@ export class HeaderComponent implements OnInit {
     }
     else {
       window.scroll(0, 0);
+      this.search.reset();
       this.router.navigate(['shopbyproduct', key]);
     }
   }

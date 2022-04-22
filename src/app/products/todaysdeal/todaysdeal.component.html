@@ -127,12 +127,23 @@
 
                                 <!--=======  End of single widget product  =======-->
                             </div>
-                            <div class="row">
+                            <div class="row" *ngIf="Daydealpro?.length!==0">
                                 <div class="col-lg-12 text-center mt-30">
                                     <a class="lezada-button lezada-button--medium lezada-button--icon--left"
                                     routerLink="/daydeal" ><i class="ion-android-add"></i> MORE</a>
                                 </div>
                             </div>
+							<div id="daysdeal" *ngIf="Daydealpro?.length==0" style=" display: flex;
+							justify-content: center;
+							align-items: center;
+							height: 200px;
+							border: 3px solid rgb(139, 139, 139);">
+								<div>
+									<h5>
+										There is no product
+									</h5>
+								</div>
+							</div>
                             <!--=======  End of widget product wrapper  =======-->
                         </div>
 
@@ -234,12 +245,23 @@
 
 								<!--=======  End of single widget product  =======-->
 							</div>
-							<div class="row">
+							<div class="row" *ngIf="Monthdealpro?.length!==0">
 								<div class="col-lg-12 text-center mt-30">
 									<a class="lezada-button lezada-button--medium lezada-button--icon--left"
 										routerLink="/monthdeal"><i class="ion-android-add"></i> MORE</a>
 								</div>
 							</div>
+							<div id="dealmonth" *ngIf="Monthdealpro?.length==0" style=" display: flex;
+						justify-content: center;
+						align-items: center;
+						height: 200px;
+						border: 3px solid rgb(139, 139, 139);">
+							<div>
+								<h5>
+									There is no product
+								</h5>
+							</div>
+						</div>
 							<!--=======  End of widget product wrapper  =======-->
 						</div>
 
@@ -256,8 +278,9 @@
 					<div class="row product-isotope shop-product-wrap four-column">
 
 						<!--=======  single product  =======-->
-						<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale"
-							*ngFor="let img of Product | paginate: { itemsPerPage: 12, currentPage: p };let i = index">
+						<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
+							*ngFor="let img of Product | paginate: { itemsPerPage: 12, currentPage: p };let i = index"
+							style="border: 0.8px solid #e9e7e7; margin-right: 10px;" >
 							<div class="single-product"  *ngIf="Product?.length!==0">
 								<!--=======  single product image  =======-->
 
@@ -388,11 +411,11 @@
 								<!--=======  End of single product content  =======-->
 							</div>
 						</div>
-						<div id="pgg" style="text-align: center;" *ngIf="Daydealpro?.length!==0">
+						<div id="pgg" style="text-align: center;" *ngIf="Product?.length!==0">
 							<pagination-controls (pageChange)="p = $event"></pagination-controls>
 
 						</div>
-						<div id="pggg" *ngIf="Daydealpro?.length==0" style=" display: flex;
+						<div id="pggg" *ngIf="Product?.length==0" style=" display: flex;
 						justify-content: center;
 						align-items: center;
 						height: 200px;

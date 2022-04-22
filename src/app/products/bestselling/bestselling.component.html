@@ -27,99 +27,7 @@
         =            shop advance filter area         =
         =============================================-->
 
-    <div class="shop-advance-filter-area" id="shop-advance-filter-area">
-        <div class="shop-advance-filter-wrapper pt-50">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                        <!--=======  single advance filte  =======-->
-
-                        <div class="single-filter-widget">
-                            <h2 class="single-filter-widget--title">Sort by</h2>
-                            <ul class="single-filter-widget--list">
-                                <li><a href="#">Default</a></li>
-                                <li><a href="#">Popularity</a></li>
-                                <li><a href="#">Average rating</a></li>
-                                <li><a href="#">Newness</a></li>
-                                <li><a href="#">Price: low to high</a></li>
-                                <li><a href="#">Price: high to low</a></li>
-                            </ul>
-                        </div>
-
-                        <!--=======  End of single advance filte  =======-->
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                        <!--=======  single advance filte  =======-->
-
-                        <div class="single-filter-widget">
-                            <h2 class="single-filter-widget--title">Categories</h2>
-                            <ul class="single-filter-widget--list single-filter-widget--list--category">
-                                <li class="has-children">
-                                    <a href="products.html">Beverages</a> <span class="quantity">5</span>
-                                    <ul>
-                                        <li><a href="products.html">Tea</a></li>
-                                        <li><a href="products.html">Coffee</a></li>
-                                        <li><a href="products.html">Milk Shake</a></li>
-                                        <li><a href="products.html">Beverages</a></li>
-                                    </ul>
-                                </li>
-                                <li class="has-children">
-                                    <a href="products.html">Gourmet & Groceries</a> <span class="quantity">23</span>
-                                    <ul>
-                                        <li><a href="products.html">Instant Mixes</a></li>
-                                        <li><a href="products.html">Edible Oils</a></li>
-                                        <li><a href="products.html">Herbs & Seasonings</a></li>
-                                        <li><a href="products.html">Food Supplements</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="products.html">Masalas</a> <span class="quantity">12</span></li>
-                            </ul>
-                        </div>
-
-                        <!--=======  End of single advance filte  =======-->
-                    </div>
-
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                        <!--=======  single advance filte  =======-->
-
-                        <div class="single-filter-widget">
-                            <h2 class="single-filter-widget--title">Price filter</h2>
-                            <ul class="single-filter-widget--list">
-                                <li><a href="#">All</a></li>
-                                <li><a href="#">Rs 0.00 - Rs 70.00</a></li>
-                                <li><a href="#">Rs 70.00 - Rs 140.00</a></li>
-                                <li><a href="#">Rs 140.00 - Rs 210.00</a></li>
-                                <li><a href="#">Rs 210.00 - Rs 280.00</a></li>
-                                <li><a href="#">Rs 280.00 - Rs 350.00</a></li>
-                            </ul>
-                        </div>
-
-                        <!--=======  End of single advance filte  =======-->
-                    </div>
-
-
-                    <div class="col-lg-3 col-md-4 col-sm-6 mb-50">
-                        <!--=======  single advance filte  =======-->
-
-                        <div class="single-filter-widget">
-                            <h2 class="single-filter-widget--title">Brands</h2>
-                            <ul class="single-filter-widget--list single-filter-widget--list--brand">
-                                <li><a href="#">The Spice Club</a> <span class="quantity">(12)</span></li>
-                                <li><a href="#">Satinanace</a> <span class="quantity">(15)</span></li>
-                                <li><a href="#">Vilva</a> <span class="quantity">(13)</span></li>
-                                <li><a href="#">The Spice Club</a> <span class="quantity">(12)</span></li>
-                                <li><a href="#">Satinanace</a> <span class="quantity">(15)</span></li>
-                                <li><a href="#">Vilva</a> <span class="quantity">(13)</span></li>
-                            </ul>
-                        </div>
-
-                        <!--=======  End of single advance filte  =======-->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    
 
     <!--=====  End of shop advance filter area  ======-->
 
@@ -266,20 +174,21 @@
                     <!--=======  End of page sidebar  =======-->
                 </div>
 
-                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-30" *ngIf="!prodloader">
+                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" *ngIf="!prodloader">
 
                     <div class="row product-isotope shop-product-wrap four-column">
 
                         <!--=======  single product  =======-->
-                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" style="overflow: hidden;"
-                            *ngFor="let img of Bestsellpro | paginate: { itemsPerPage: 12, currentPage: p };let i = index">
-                            <div class="single-product">
+                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale" style="overflow: hidden;"
+                            *ngFor="let img of Bestsellpro | paginate: { itemsPerPage: 12, currentPage: p };let i = index"
+                            style="border: 0.8px solid #e9e7e7; margin-right: 10px;" >
+                            <div class="single-product" >
                                 <!--=======  single product image  =======-->
 
                                 <div class="single-product__image" style="overflow: hidden;">
                                     <div class="imglazy" (click)=" proddetail(img.id)">
                                         <ngx-skeleton-loader count="1" *ngIf="!imgloader"
-                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            [theme]="{ 'margin-left':'10px', 'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
                                         <a class="image-wrap" *ngIf="imgloader">
 

@@ -498,6 +498,7 @@ public getpage3(link:any,deliveryy:any,paymentt:any){
 }
 public getpage2(link:any,categoryy_id:any,brandd_id:any,sort: string,min:any,max:any){
   this.url= link+  `&categories=`+categoryy_id+`&brands=`+brandd_id+`&min=` + min+`&max=` + max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+  console.log("page url",this.url);
   
   return this.http.get(this.url);
 }

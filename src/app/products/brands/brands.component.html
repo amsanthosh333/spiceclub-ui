@@ -184,20 +184,20 @@
                     </div>
                     <!-- sidebarlazyloading  end-->
 
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="!prodloader">
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" *ngIf="!prodloader">
 
                         <div class="row product-isotope shop-product-wrap four-column">
 
                             <!--=======  single product  =======-->
-                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" style="overflow: hidden;"
-                                *ngFor="let img of Product;let i = index">
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale" style="overflow: hidden;"
+                                *ngFor="let img of Product;let i = index" style="border: 0.8px solid #e9e7e7; margin-right: 10px;">
                                 <div class="single-product">
                                     <!--=======  single product image  =======-->
 
                                     <div class="single-product__image" style="overflow: hidden;" >
                                         <div class="imglazy">
                                             <ngx-skeleton-loader count="1" *ngIf="!imgloader"
-                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                                [theme]="{  'margin-left':'10px','border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                             </ngx-skeleton-loader>
                                             <a class="image-wrap" *ngIf="imgloader" (click)="proddetail(img.id)">
 
