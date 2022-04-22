@@ -361,29 +361,43 @@ export class HomeComponent implements OnInit {
     window.scroll(0, 0)
   }
   addtocart(_id: any) {
-    let edata = {
-      id: _id,
-      variant: this?.varient_value.replace(/\s/g, ""),
-      user_id: this.userid,
-      quantity: this.quantityy
-    }
-    this.request.addtocart(edata).subscribe((res: any) => {
 
-      if (res.message == 'Product added to cart successfully') {
-      }
-      else if (res.message == 'Minimum 1 item(s) should be ordered') {
-        console.log("minimum 1");
-      }
-      else if (res.message == 'Stock out') {
-        console.log("Stock out");
+      if (this.userid == 0) {
+        this.toastr.info('You need to login', '');
       }
       else {
-        console.log("error", res);
+        let edata = {
+          id: _id,
+          variant: this.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.quantityyy,
+          buyertype: this.buyertypeid,
+        }
+        console.log(edata);
+  
+        this.request.addtocart(edata).subscribe((res: any) => {
+          console.log("resssssssssssssss", res);
+          if (res.message == 'Product added to cart successfully') {
+            console.log("Product added to cart successfully");
+            this.addRecordSuccess();
+            this.modalService.dismissAll();
+            this.sharedService.sendClickEvent();
+          }
+          else if (res.message == 'Minimum 1 item(s) should be ordered') {
+            this.toastr.success(res.message);
+  
+          }
+          else if (res.message == 'Stock out') {
+            this.toastr.error(res.message);
+            console.log("Stock out");
+          }
+        },
+          (error: any) => {
+            this.toastr.error(error);
+            console.log("error", error);
+  
+          });
       }
-    }, (error: any) => {
-      console.log("error", error);
-
-    });
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
