@@ -267,7 +267,7 @@ export class HomeComponent implements OnInit {
   viewbestsellpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
       console.log("best selling pro", response)
-      this.Bestsellpro = response.data.slice(0, 8);
+      this.Bestsellpro = response.data.slice(0, 12);
       this.loader3 = false;
       setTimeout(() => {
         this.imgloader = false;

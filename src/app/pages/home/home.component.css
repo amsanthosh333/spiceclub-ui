@@ -7,6 +7,10 @@
     transition: opacity 1s 2.6s;
     
   } */
+  .col-lg-2 {
+    flex: 0 0 auto;
+    width: 15.666667%;
+}
   .btn-primary:hover {
     color: #fff;
     background-color: #4acaf7;
@@ -78,7 +82,7 @@ body {
   background-color: rgb(255, 255, 255);
   padding: 10px;
   /* border: 1px solid rgb(206, 202, 202);  */
-  height: 310px;
+  height: auto;
 }
 
 .carousall1 {
