@@ -132,7 +132,6 @@ export class BrandsComponent implements OnInit {
         const eventSubscription = this.router.events.subscribe((event: any) => {
           if (event instanceof NavigationEnd) {
             console.log("detectPopState if");
-
             this.id = this.activatedRoute.snapshot.params['id'];
             this.pagee = this.activatedRoute.snapshot.params['page'];
             console.log("queryParams this.id", this.id);

@@ -128,10 +128,10 @@
                                     <a><i class="ion-ios-arrow-thin-left" (click)="backk()"></i></a>
                                     <!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> -->
                                 </div>
-                                <div class="shop-product__title ">
-                                    <h4 style="margin-bottom: 0px;"><strong> {{Peoduct?.name}}</strong></h4>
+                                <div class="shop-product__title " sty>
+                                    <h4 style="margin-bottom: 0px;padding-bottom: 0px;"><strong> {{Peoduct?.name}}</strong></h4>
                                 </div>
-                                <div class="shop-product__rating mb-15">
+                                <div class="shop-product__rating mb-10">
                                     <div>
                                         <span class="review-link" (click)="scroll(target)">
                                             <a style="margin-right: 10px;">{{Peoduct?.rating}}</a>
@@ -176,7 +176,7 @@
                                             *ngFor="let a of Bulckdis">Order minimum {{a.min_qty}}
                                             to {{a.max_qty}} quantity to get {{a.discount_percentage}}% Discount </h6>
                                     </div>
-                                    <div class="quick-view-other-info pb-0" #target>
+                                    <div class="quick-view-other-info pb-0 pt-0" #target>
                                         <table>
                                             <tr class="single-info"
                                                 *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
@@ -188,21 +188,22 @@
 
                                                 </td>
                                             </tr>
-                                            <tr class="single-info mt-1">
+                                            <tr class="single-info ">
                                                 <td class="quickview-title" style="color: red; ">Price: </td>
                                                 <td class="quickview-value">
                                                     <a style="font-size: 1.3rem;">{{Peoduct?.main_price}}</a>
+                                                    <span style="font-size: 0.8rem;font-weight: 500;"> (Including all taxes)</span>
 
                                                 </td>
                                             </tr>
-                                            <tr class="single-inf mt-1" *ngIf="Peoduct?.discount_percentage!==0">
+                                            <tr class="single-inf " *ngIf="Peoduct?.discount_percentage!==0">
                                                 <td class="quickview-title" style="color: red;"> </td>
                                                 <td class="quickview-value">
                                                     <a>( You save {{Peoduct?.discount_percentage}} % ) </a>
                                                 </td>
                                             </tr>
-                                            <tr class="single-info mt-1">
-                                                <td class="quickview-title" style="color: red;">Exclude GST: </td>
+                                            <tr class="single-info ">
+                                                <td class="quickview-title" style="color: red;">Excluding GST: </td>
                                                 <td class="quickview-value">
                                                     <a>Rs {{Peoduct?.excl_gst}} </a>
                                                 </td>
@@ -290,7 +291,7 @@
                                         <a class="lezada-button lezada-button--medium" *ngIf="stk==0">out of stock</a>
                                    
                                     </div> -->
-                                    <div class="shop-product__block shop-product__block--size mb-10 mt-20"
+                                    <div class="shop-product__block shop-product__block--size mb-10 mt-10"
                                         *ngIf="(choice.length!==0)">
 
                                         <div class="shop-product__block__title " *ngFor="let a of choice" style="font-weight: 600;color: red;">{{a.title}}:
@@ -307,11 +308,11 @@
                                         </div>
                                     </div>
 
-                                    <div class="shop-product__block__title mt-10"
-                                        style="font-weight: 600;color: green; text-align: center;">
+                                    <div class="shop-product__block__title"
+                                        style="font-weight: 600;color: green; text-align: start;">
                                         {{Peoduct?.usp_text}}
                                     </div>
-                                    <div  style="text-align: center;"> <span >
+                                    <div  style="text-align: start;"> <span >
                                             <a *ngFor="let b of Peoduct?.usp_icon">
                                                 <img src="https://neophroncrm.com/spiceclubnew/public/{{b?.icon}}"
                                                     style="height:47px; width:47px; margin-bottom: 3px;margin-left:15px;margin: right 15px; ; "></a>
@@ -327,12 +328,12 @@
                                                     <a *ngFor="let a of tags">{{a}} ,   </a>
                                                 </td>
                                             </tr>
-                                            <tr class="single-info">
+                                            <!-- <tr class="single-info">
                                                 <td class="quickview-title" style="color: red;">Ingredients: </td>
                                                 <td class="quickview-value" style="font-weight: 400;"  [innerHTML]="Peoduct?.ingredients">
                                                     <a>{{Peoduct?.ingredients}}</a>
                                                 </td>
-                                            </tr>
+                                            </tr> -->
                                             <tr class="single-info">
                                                 <td class="quickview-title" style="color: red;">Unit: </td>
                                                 <td class="quickview-value" style="font-weight: 400;">
@@ -513,8 +514,8 @@
                                         style="color: #cd2126;"> {{Peoduct?.main_price}}</strong></span> -->
                                 <!-- <span class="main-price discounted"
                                     *ngIf="varstrokedprice!==varprise">{{varstrokedprice}}</span> -->
-                                <span class="discounted-price" style="color: #cd2126;"> <strong style="color: #cd2126;">
-                                        {{varprise}}</strong></span>
+                                <span class="discounted-price" style="font-size: 0.8rem; color: #56b11b;font-weight: 600;"> 
+                                        {{varprise}}</span> <span style="font-size: 0.8rem;"> (Including all taxes)</span> 
                             </div>
                         </div>
                     </div>
@@ -542,40 +543,41 @@
                         </form>
 
                     </div>
-                    <div class="shop-productt">
+                    <!-- <div class="shop-productt">
                         <div class="k pt-1 pl-15">
 
                             <span style="opacity: 0.3;"> (available={{stocck}}) </span>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="shop-product__block shop-product__block--size mb-10 mt-20">
                         <div class="shop-product__block__title">Total: </div>
                         <div class="shop-product__block__value ">
-                            <span style="color: red;"> Rs {{totalprice}}</span>
+                            <strong><span style="color: red;"> Rs {{totalprice}}</span></strong>
+                            
                         </div>
 
                     </div>
                     <button *ngIf="stk!==0" type="button" class="btn btn-primary"
-                        style=" width: -webkit-fill-available;" (click)="addtocart(Peoduct.id)"> <i
+                        style=" width: -webkit-fill-available; margin-bottom: 3px;" (click)="addtocart(Peoduct.id)"> <i
                             style="background-color: transparent;color: rgb(250, 248, 248) !important;"
                             class="icon-left ion-ios-cart"></i> Add to cart</button>
                     <button *ngIf="stk==0" type="button" class="btn btn-danger" style=" width: -webkit-fill-available;"
                         (click)="addtocart(Peoduct.id)">Out of stock</button>
-                    <br>
-                    <br>
+                   
+                    
                     <button *ngIf="(iswishlistt?.is_in_wishlist==false)" type="button" class="btn btn-primary"
-                        style=" width: -webkit-fill-available;" (click)="addtowishlist(Peoduct?.id)"><i
+                        style=" width: -webkit-fill-available; margin-bottom: 3px;" (click)="addtowishlist(Peoduct?.id)"><i
                             class="ion-android-favorite-outline"></i> Add to Wishlist</button>
                     <button *ngIf="(iswishlistt?.is_in_wishlist==true)" type="button" class="btn btn-primary"
-                        style=" width: -webkit-fill-available;" (click)="deleteRecord(Peoduct?.id)"> <i
+                        style=" width: -webkit-fill-available;margin-bottom: 3px;" (click)="deleteRecord(Peoduct?.id)"> <i
                             class="ion-android-favorite" style="color: rgb(255, 255, 255);"></i> Remove from Wishlist</button>
                         <button *ngIf="userid==0" type="button" class="btn btn-primary"
                         style=" width: -webkit-fill-available;" (click)="addtowishlist(Peoduct?.id)"><i
                             class="ion-android-favorite-outline"></i> Add to Wishlist</button>
-                        <br><br>
+                   
                         <button  type="button" class="btn btn-primary"
                         style=" width: -webkit-fill-available;" > <i
-                            class="ion-android-thumbs-up" style="color: rgb(255, 255, 255);"></i> Subcribe & Save</button>
+                            class="ion-android-thumbs-up" style="color: rgb(255, 255, 255);"></i> Subscribe & Save</button>
                     <!-- <div class="shop-product__buttons " style="display: flex;
                     align-items: center;
                     justify-content: center;">
@@ -743,11 +745,43 @@
                                 <div class="accordion" id="shippingInfo">
                                     <div class="card">
                                         <div class="card-header" id="headingOne">
-                                            <h5 class="mb-0" (click)="collapsebtn()">
+                                            <h5 class="mb-0" (click)="collapsebtn2()">
                                                 <button class="btn btn-link"
                                                     style="background-color:#d31a1a;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
                                                     data-toggle="collapse" data-target="#collapseOne"
                                                     aria-expanded="true" aria-controls="collapseOne">
+                                                    <i class="bi bi-list-stars"></i> Ingredients <i
+                                                        style="float: right;" class="bi bi-arrow-left-circle-fill"
+                                                        [ngClass]="{'active': ingItemm }"></i>
+                                                </button>
+                                            </h5>
+                                        </div>
+
+                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                            data-parent="#shippingInfo">
+                                            <div class="card-body" style=" margin-top: -17px;">
+                                                <div class="crdbdy">
+                                                    <div class="shop-product__long-desc mb-10"
+                                                        [innerHTML]="Peoduct?.ingredients" *ngIf="!discriptloader"
+                                                        style="font-family: 'Poppins', sans-serif">
+                                                        <p>
+                                                            {{Peoduct?.ingredients}}
+
+                                                        </p>
+                                                    </div>
+                     
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-header" id="headingTwo">
+                                            <h5 class="mb-0" (click)="collapsebtn()">
+                                                <button class="btn btn-link"
+                                                    style="background-color:#d31a1a;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
+                                                    data-toggle="collapse" data-target="#collapseTwo"
+                                                    aria-expanded="true" aria-controls="collapseTwo">
                                                     <i class="bi bi-list-stars"></i> Description <i
                                                         style="float: right;" class="bi bi-arrow-left-circle-fill"
                                                         [ngClass]="{'active': btnItemm }"></i>
@@ -755,7 +789,7 @@
                                             </h5>
                                         </div>
 
-                                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
                                             data-parent="#shippingInfo">
                                             <div class="card-body" style=" margin-top: -17px;">
                                                 <div class="crdbdy">
@@ -792,8 +826,8 @@
                                             <h5 class="mb-0" (click)="collapsebtn1()">
                                                 <button class="btn btn-link collapsed"
                                                     style="background-color:#d31a1a;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
-                                                    data-toggle="collapse" data-target="#collapseTwo"
-                                                    aria-expanded="false" aria-controls="collapseTwo">
+                                                    data-toggle="collapse" data-target="#collapseThree"
+                                                    aria-expanded="false" aria-controls="collapseThree">
                                                     <i class="bi bi-list-nested"></i> Rating & Reviews <i
                                                         style="float: right;" id="icondes"
                                                         class="bi bi-arrow-left-circle-fill"
@@ -802,7 +836,7 @@
 
                                             </h5>
                                         </div>
-                                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+                                        <div id="collapseThree" class="collapse" aria-labelledby="headingTwo"
                                             data-parent="#shippingInfo">
                                             <div class="card-body" style="padding-top: 0px;">
                                                 <div data-v-7f034c00="" class="v-expansion-panel-content">

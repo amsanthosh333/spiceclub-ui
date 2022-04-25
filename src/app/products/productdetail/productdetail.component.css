@@ -36,19 +36,22 @@
 }
 
 .quick-view-other-info table tr td {
-    padding-top: 10px;
+    padding-top: 7px;
    
 }
-  .btn-primary {
-    color: #fff;
-    background-color: #4acaf7;
-    border-color:  #4acaf7;
+.btn-primary:hover {
+  /* color: #fff; */
+  /* color: #ce2127;
+  background-color: #ffffff;
+  border-color: #ce2127; */
 }
-  .btn-primary:hover{
-    color: #4acaf7;
-    background-color: #ffffff;
-    border-color: #4acaf7;
-    font-weight: 600;
+.btn-primary{
+  /* color: #ce2127; */
+  color: #fff;
+  /* background-color: #ffffff; */
+  background-color: #ce2127;
+  border-color: #ce2127;
+  font-weight: 600;
 }
 
 .sidecard{

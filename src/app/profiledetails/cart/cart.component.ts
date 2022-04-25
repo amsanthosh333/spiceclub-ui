@@ -118,7 +118,9 @@ export class CartComponent implements OnInit {
   }
   viewcart() {
     this.request.fetchusercart(this.userid).subscribe((response: any) => {
+
       this.Cart = response;
+      console.log("this.Cart",this.Cart)
       this.loader = false;
 
       this.owneriid = this.Cart[0].owner_id;

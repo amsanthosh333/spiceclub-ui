@@ -110,6 +110,7 @@ export class ProductdetailComponent implements OnInit {
   newvarphotos: any;
   vargalleryphotos: any = [];
   varstrokedprice: any;
+  ingItemm: boolean=true;
 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -810,6 +811,7 @@ export class ProductdetailComponent implements OnInit {
     console.log("collapsebtn");
     this.btnItemm=!this.btnItemm
     this.desbtnItemm=false
+    this.ingItemm=false
     console.log("collapsebtn",this.btnItemm);
     
   }
@@ -817,6 +819,13 @@ export class ProductdetailComponent implements OnInit {
     console.log("collapsebtn1");
     this.desbtnItemm=!this.desbtnItemm
     this.btnItemm=false
+    this.ingItemm=false
+    console.log("collapsebtn1",this.desbtnItemm);
+  }
+  collapsebtn2(){
+    this.ingItemm=!this.ingItemm
+    this.btnItemm=false
+    this.desbtnItemm=false
     console.log("collapsebtn1",this.desbtnItemm);
   }
   shareinstaUrl(foodid:any) {
