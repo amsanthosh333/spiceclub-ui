@@ -123,7 +123,7 @@ export class CheckoutComponent implements OnInit {
     this.useremail = this.currentdetail.user.email;
     this.terms = this.fb.group({
       type: ['', [Validators.required]],
-      terms: ['', [Validators.requiredTrue]],
+    
 
     });
     this.register = this.fb.group({
@@ -302,9 +302,9 @@ export class CheckoutComponent implements OnInit {
       if (!this.terms.get('type')?.valid) {
         this.error2 = '*please select paymenttype';
       }
-      else if (!this.terms.get('terms')?.valid) {
-        this.error2 = '*please accept terms & conditions';
-      }
+      // else if (!this.terms.get('terms')?.valid) {
+      //   this.error2 = '*please accept terms & conditions';
+      // }
       return;
     }
     else {

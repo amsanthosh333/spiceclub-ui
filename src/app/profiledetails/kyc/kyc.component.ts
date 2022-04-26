@@ -70,7 +70,7 @@ if (this.registerForm.invalid) {
   return;
 } else {
   const edata = { 
-    id: this.userid,
+    user_id: this.userid,
     gst_number:form.value.gst,
     gst_image:this.gstImageBase64,
     pan_number:form.value.pan,
