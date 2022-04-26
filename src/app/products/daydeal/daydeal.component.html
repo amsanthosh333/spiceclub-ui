@@ -298,7 +298,7 @@
 
 									<div class="single-product__floating-badges">
 										<!-- <span class="onsale">-10%</span> -->
-										<span class="hot" *ngIf="img.has_discount==true">hot</span>
+										<span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
 										<!-- <span class="hot" *ngIf="(img.wishlist==1)"><i
 												class="bi bi-heart-fill"></i></span> -->
 									</div>
@@ -332,20 +332,44 @@
 								<!--=======  End of single product image  =======-->
 
 								<!--=======  single product content  =======-->
-								<div class="single-product__content" (click)="proddetail(img.id)">
-									<div class="title">
-                                        <h3> <a href="">{{img.name}}</a></h3>
-                                            <a id="vieww" style="font-size: small;color: red">{{img.name}}</a>
-                                    </div>
+								<div class="single-product__content" (click)=" proddetail(img.id)">      
+									<div class="title" >
+										<h3> <a style="line-height: 1.6rem;
+											overflow: hidden;
+											display: -webkit-box; 
+											-webkit-line-clamp: 2;
+											-webkit-box-orient: vertical;
+											max-height: 3.2rem;" >{{img.name}}</a> </h3>
+											<a id="vieww" style="font-size: small;color: red;font-size: small; margin-left: 10px;">View Details</a>
+									</div>
 									
-									<div class="price">
+									<div class="price" >
 										<span  *ngIf="img?.stroked_price!==img?.main_price" class="main-price discounted">{{img.stroked_price}}</span>
-										<span class="discounted-price">{{img.main_price}}</span>
+										<span class="discounted-price">{{img.main_price}} </span>
+									</div>    
+							
+									<div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+									overflow: hidden;
+									display: -webkit-box; 
+									-webkit-line-clamp: 1;
+									-webkit-box-orient: vertical;
+									max-height: 1.7rem; font-size: 0.7rem;"> 
+										<span class="discounted-price" *ngFor="let imgggg of imggg.options;"  > {{imgggg}}| </span>
+									</div>
+									<div class="pri" style="text-align: center;"> 
+										<span class="discounted-price" style="line-height: 1.6rem;
+										overflow: hidden;
+										display: -webkit-box; 
+										-webkit-line-clamp: 1;
+										-webkit-box-orient: vertical;
+										max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
 									</div>
 								</div>
-
+								
 								<!--=======  End of single product content  =======-->
 							</div>
+							<button type="button" class="btn btn-primary" style=" width: -webkit-fill-available;" (click)="quickview(img.id,openRecord)">Add to cart</button>
+							
 
 							<div class="single-product--list">
 								<!--=======  single product image  =======-->

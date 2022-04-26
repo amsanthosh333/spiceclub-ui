@@ -36,7 +36,7 @@
                                 <div class="single-product__floating-badges single-product__floating-badges--shop-product"
                                     *ngFor="let d of discount">
                                     <span class="hot"
-                                        *ngIf="Peoduct?.has_discount==true">{{d.discount_percentage}}%</span>
+                                        *ngIf="Peoduct?.has_discount==true">{{Peoduct.discount_percentage}}%</span>
                                 </div>
 
 
@@ -1025,7 +1025,7 @@
         </div>
         <carousel style="height: 300px; z-index: unset;" *ngIf="!loader6">
             <div class="carousel-cell" *ngFor="let img of Relatedprod; let i =index">
-                <div class="single-product" style="padding-left: 70px;">
+                <div class="single-product"  style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
                     <div class="single-product__image" (click)="viewproductrow2(img.id)">
                         <a class="image-wrap">
                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
@@ -1033,7 +1033,7 @@
                         </a>
 
                         <div class="single-product__floating-badges">
-                            <span class="hot" *ngIf="img.has_discount==true">hot</span>
+                            <span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
                         </div>
 
 
@@ -1052,18 +1052,45 @@
                         </div>
                     </div>
 
-                    <div class="single-product__content" (click)="viewproductrow2(img)">
-                        <div class="title">
-                            <h3> <a>{{img.name}}</a></h3>
-                            <a style="color: rgb(218, 7, 7);">view details</a>
+                   
+
+                    <div class="single-product__content" (click)="viewproductrow2(img)">      
+                        <div class="title" >
+                            <h3> <a style="line-height: 1.6rem;
+                                overflow: hidden;
+                                display: -webkit-box; 
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                max-height: 3.2rem;" >{{img.name}}</a> </h3>
+                                <a id="vieww" style="font-size: small;color: red;font-size: small; margin-left: 10px;">View Details</a>
                         </div>
-                        <div class="price">
-                            <span class="main-price discounted">{{img.stroked_price}}</span>
-                            <span class="discounted-price">{{img.main_price}}</span>
+                        
+                        <div class="price" >
+                            <span  *ngIf="img?.stroked_price!==img?.main_price" class="main-price discounted">{{img.stroked_price}}</span>
+                            <span class="discounted-price">{{img.main_price}} </span>
+                        </div>    
+
+                        <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                        overflow: hidden;
+                        display: -webkit-box; 
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        max-height: 1.7rem; font-size: 0.7rem;"> 
+                            <span class="discounted-price" *ngFor="let imgggg of imggg.options;" > {{imgggg}}|  </span>
+                        </div>
+                        <div class="pri" style="text-align: center;"> 
+                            <span class="discounted-price" style="line-height: 1.6rem;
+                            overflow: hidden;
+                            display: -webkit-box; 
+                            -webkit-line-clamp: 12;
+                            -webkit-box-orient: vertical;
+                            max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
                         </div>
                     </div>
-
+                    
+                    <!--=======  End of single product content  =======-->
                 </div>
+                <!-- <button type="button" class="btn btn-primary" style=" width: -webkit-fill-available;" (click)="quickview(img.id,openRecord)">Add to cart</button> -->
             </div>
         </carousel>
 

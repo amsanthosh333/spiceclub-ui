@@ -232,6 +232,14 @@ public fetchuserprofile(id:any){
   
   return this.http.get(this.url);  
 }
+// kyc
+public addkyc(body:any) {
+  const headers = new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken)    
+   this.url = `${this.endPoint1}/kyc/submit`;
+   return this.http.post(this.url,body,{headers:headers});
+}
 // address
 public addaddress(body:any) {
   const headers = new HttpHeaders()

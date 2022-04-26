@@ -104,7 +104,7 @@ export class ProductdetailComponent implements OnInit {
   selectedimg: any = 0;
   selectedimage: any;
   prdcomment: boolean=true;
-  btnItemm: boolean=true;
+  btnItemm: boolean=false;
   desbtnItemm: boolean=false;
   varphotoos: Array<object> = [];
   newvarphotos: any;

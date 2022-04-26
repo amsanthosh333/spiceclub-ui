@@ -43,7 +43,7 @@ export class SignupComponent implements OnInit {
       buyer_type: ['', Validators.required],
     },
     {
-      validator: ConfirmedValidator('password', 'confirmpassword')
+      validator: ConfirmedValidator('password','confirmpassword')
     }
     );
     

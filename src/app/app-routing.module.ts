@@ -59,6 +59,7 @@ const routes: Routes = [
   { path: 'aboutus', loadChildren: () => import('./pages/aboutus/aboutus.module').then(m => m.AboutusModule) },
   { path: 'privacypolicy', loadChildren: () => import('./pages/privacypolicy/privacypolicy.module').then(m => m.PrivacypolicyModule) },
   { path: 'return', loadChildren: () => import('./pages/return/return.module').then(m => m.ReturnModule) },
+  { path: 'kyc', loadChildren: () => import('./profiledetails/kyc/kyc.module').then(m => m.KycModule) },
   
 ];
 

@@ -1,4 +1,32 @@
-
+.col-lg-2 {
+  flex: 0 0 auto;
+  width: 15.666667%;
+}
+.btn-primary:hover {
+  color: #fff;
+  background-color: #ce2127;
+  border-color:  #ce2127;
+}
+.btn-primary{
+  color: #ce2127;
+  background-color: #ffffff;
+  border-color: #ce2127;
+  font-weight: 600;
+}
+.discounted-price{
+  color: green;
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.single-product__content .price .discounted-price {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  color: #333333;
+}
+.single-product__content{
+text-align: center;
+}
 .title h3 a{
   font-size: 13px;
   color: #140f0f ;

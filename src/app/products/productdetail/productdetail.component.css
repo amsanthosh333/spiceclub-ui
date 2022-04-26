@@ -19,7 +19,13 @@
 
 
 
-
+.title h3 a{
+  font-size: 13px;
+  color: #140f0f ;
+  font-family: 'Roboto',Arial,sans-serif;
+  letter-spacing: 0;
+  text-decoration: none; 
+}
 .sb-facebook{
   --sb-icon-size: 1.rem;
 }

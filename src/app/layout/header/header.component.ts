@@ -17,6 +17,7 @@ import * as $ from 'jquery';
 import { SharedService } from 'src/app/services/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from '../../auth/login/login.component';
+import { KycComponent } from 'src/app/profiledetails/kyc/kyc.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -1770,6 +1771,13 @@ export class HeaderComponent implements OnInit {
 
   openlogin(){
     this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
+  }
+  
+  openkyc(){
+    this.modalService.open(KycComponent, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
     });

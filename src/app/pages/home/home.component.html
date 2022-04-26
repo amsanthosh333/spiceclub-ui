@@ -231,7 +231,7 @@
                             *ngFor="let img of Bestsellpro; let i = index " style="border: 0.8px solid #e9e7e7; margin-right: 10px;">
 
 
-                            <div class="single-product"  >
+                            <div class="single-product">
                                 <!--=======  single product image  =======-->
                                 <div class="single-product__image" style="overflow: hidden;">
 
@@ -308,16 +308,21 @@
                                         <span class="discounted-price">{{img.main_price}} </span>
                                     </div>    
  
-                                    <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;"> 
+                                    <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                                    overflow: hidden;
+                                    display: -webkit-box; 
+                                    -webkit-line-clamp: 1;
+                                    -webkit-box-orient: vertical;
+                                    max-height: 1.7rem; font-size: 0.7rem;"> 
                                         <span class="discounted-price" *ngFor="let imgggg of imggg.options;" > {{imgggg}}|  </span>
                                     </div>
                                     <div class="pri" style="text-align: center;"> 
                                         <span class="discounted-price" style="line-height: 1.6rem;
                                         overflow: hidden;
                                         display: -webkit-box; 
-                                        -webkit-line-clamp: 2;
+                                        -webkit-line-clamp: 1;
                                         -webkit-box-orient: vertical;
-                                        max-height: 3.2rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
+                                        max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
                                     </div>
                                 </div>
                                 
@@ -454,7 +459,7 @@
             <div class="carousel-cell" *ngFor="let img of Futuredpro ;let i = index">
                 
                
-                <div class="single-product" style="    padding-left: 25px; overflow: hidden; padding-right: 25px;">
+                <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
                     <!--=======  single product image *ngIf="img.deal_of_day!=0" =======-->
                    
  
@@ -513,22 +518,28 @@
                             <span class="discounted-price">{{img.main_price}} </span>
                         </div>    
 
-                        <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;"> 
+                        <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                        overflow: hidden;
+                        display: -webkit-box; 
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        max-height: 1.7rem; font-size: 0.7rem;"> 
                             <span class="discounted-price" *ngFor="let imgggg of imggg.options;" > {{imgggg}}|  </span>
                         </div>
                         <div class="pri" style="text-align: center;"> 
                             <span class="discounted-price" style="line-height: 1.6rem;
                             overflow: hidden;
                             display: -webkit-box; 
-                            -webkit-line-clamp: 2;
+                            -webkit-line-clamp: 12;
                             -webkit-box-orient: vertical;
-                            max-height: 3.2rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
                         </div>
                     </div>
                     
                     <!--=======  End of single product content  =======-->
                 </div>
                 <button type="button" class="btn btn-primary" style=" width: -webkit-fill-available;" (click)="quickview(img.id,openRecord)">Add to cart</button>
+          
             </div>
         </carousel>
         
