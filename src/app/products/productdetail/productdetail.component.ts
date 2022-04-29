@@ -589,7 +589,27 @@ export class ProductdetailComponent implements OnInit {
       console.log("error", error);
     });
   }
+  addtosubscribe(id:any){
+    console.log("addtosubscribe");
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else { 
+      this.request.addtosubscribe(this.userid,id).subscribe((res: any) => {
+        console.log("res",res);
+        if (res.message == 'Product added to subscribe') {         
+          this.toastr.success('Subscribed Successfully', '');
+          // this.sharedService.sendClickEvent();
+        }
+        else {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log("error", error);
 
+      });
+    }
+  }
   backk() {
     this._location.back();
   }

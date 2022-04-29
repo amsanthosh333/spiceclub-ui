@@ -24,7 +24,7 @@
 					  <input type="text" class="form-control" placeholder="Search for products" formControlName="key">
 					  <div class="input-group-append">
 						<button class="btn btn-dark" type="submit" id="searchbar" style="display:inline;">
-						  <i class="ion-ios-search-strong"></i><span > Search</span> 
+						  <i class="ion-ios-search-strong"></i><span> Search</span> 
 						</button>
 					  </div>
 					</form>
@@ -35,6 +35,9 @@
 				<div class="header-right-container">
 
 					<!--=======  header right icons  =======-->
+					<button *ngIf="buyertypereal==1  ">
+						verify kyc
+					</button>
 
 					<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
 						<!-- <div class="single-icon search">

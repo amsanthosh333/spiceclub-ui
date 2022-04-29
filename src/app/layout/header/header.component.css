@@ -53,13 +53,14 @@ nav.site-nav > ul > li {
 	display: inline-block;
 	width: 225px;
 	text-overflow: ellipsis;
-	font-family: 'Lato', sans-serif;
+	color: #140f0f ;
+	font-family: Arial, Helvetica, sans-serif;
 
 }
 
 .lispan a span {
 	margin-top: 1rem;
-	color: rgb(152, 152, 152);
+	color: #140f0f ;
 	font-size: 0.8rem;
 	font-weight: 500;
 	text-transform: capitalize;

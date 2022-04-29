@@ -1,11 +1,11 @@
 <div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
-    <!-- <div class="container">
+    <div class="container">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="breadcrumb-title">Shop</h1>
 
                 <ul class="breadcrumb-list" style="padding-left: 0px;">
-                    <li class="breadcrumb-list__item"><a href="index.html">HOME</a></li>
+                    <li class="breadcrumb-list__item"><a >HOME</a></li>
                    
                     <li class="breadcrumb-list__item breadcrumb-list__item--active">PRODUCT DETAILS</li>
                 </ul>
@@ -13,7 +13,7 @@
 
             </div>
         </div>
-    </div> -->
+    </div>
 </div>
 
 
@@ -129,7 +129,7 @@
                                     <!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> -->
                                 </div>
                                 <div class="shop-product__title " sty>
-                                    <h4 style="margin-bottom: 0px;padding-bottom: 0px;"><strong> {{Peoduct?.name}}</strong></h4>
+                                    <h4 style="margin-bottom: 0px;padding-bottom: 0px;"><strong style=" font-family: Arial, Helvetica, sans-serif;"> {{Peoduct?.name}}</strong></h4>
                                 </div>
                                 <div class="shop-product__rating mb-10">
                                     <div>
@@ -198,8 +198,8 @@
                                             </tr>
                                             <tr class="single-inf " *ngIf="Peoduct?.discount_percentage!==0">
                                                 <td class="quickview-title" style="color: red;"> </td>
-                                                <td class="quickview-value">
-                                                    <a>( You save {{Peoduct?.discount_percentage}} % ) </a>
+                                                <td class="quickview-value pt-0" >
+                                                    <a style="font-weight: 300;">( You save {{Peoduct?.discount_percentage}} % ) </a>
                                                 </td>
                                             </tr>
                                             <tr class="single-info ">
@@ -576,8 +576,8 @@
                             class="ion-android-favorite-outline"></i> Add to Wishlist</button>
                    
                         <button  type="button" class="btn btn-primary"
-                        style=" width: -webkit-fill-available;" > <i
-                            class="ion-android-thumbs-up" style="color: rgb(255, 255, 255);"></i> Subscribe & Save</button>
+                        style=" width: -webkit-fill-available;margin-top: 3px;" (click)="addtosubscribe(Peoduct?.id)"> <i
+                            class="ion-android-thumbs-up" style="color: rgb(255, 255, 255);" ></i> Subscribe & Save</button>
                     <!-- <div class="shop-product__buttons " style="display: flex;
                     align-items: center;
                     justify-content: center;">
@@ -762,17 +762,14 @@
                                             <div class="card-body" style=" margin-top: -17px;">
                                                 <div class="crdbdy">
                                                     <div class="shop-product__long-desc mb-10"
-                                                        [innerHTML]="Peoduct?.ingredients" *ngIf="!discriptloader"
-                                                        style="font-family: 'Poppins', sans-serif">
-                                                        <p>
+                                                        [innerHTML]="Peoduct?.ingredients" *ngIf="!discriptloader" >
+                                                        <p style="color: red !important;">
                                                             {{Peoduct?.ingredients}}
-
                                                         </p>
                                                     </div>
                      
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div class="card">
@@ -794,11 +791,9 @@
                                             <div class="card-body" style=" margin-top: -17px;">
                                                 <div class="crdbdy">
                                                     <div class="shop-product__long-desc mb-10"
-                                                        [innerHTML]="Peoduct?.description" *ngIf="!discriptloader"
-                                                        style="font-family: 'Poppins', sans-serif">
+                                                        [innerHTML]="Peoduct?.description" *ngIf="!discriptloader" >
                                                         <p>
                                                             {{Peoduct?.description}}
-
                                                         </p>
                                                     </div>
                                                     <div class="shop-product__additional-info"

@@ -1,3 +1,8 @@
+
+.single-slider-post{
+  border:0.8px solid #e9e7e7;
+  padding: 10px;
+}
 .imag.active{
   border-style: solid;
   border-color: rgb(128, 125, 125);

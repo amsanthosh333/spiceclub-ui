@@ -140,6 +140,7 @@ export class HomeComponent implements OnInit {
   prd_id: any;
   brnd_id: any;
   imgloader: boolean = true;
+  imgloader2: boolean = true;
   stocckkk!: number;
   subItem: any=0;
   storked_pricee: any;
@@ -278,7 +279,9 @@ export class HomeComponent implements OnInit {
     this.request.getfuturedpro().subscribe((response: any) => {
       this.Futuredpro = response.data;
       this.loader6 = false;
-
+      setTimeout(() => {
+        this.imgloader2 = false;
+      }, 3000);
     });
   }
   gethomeecat() {

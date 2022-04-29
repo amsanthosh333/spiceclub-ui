@@ -1,44 +1,71 @@
+.title p {
+  color: #141414;
+  font-family: 'Roboto', Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+.title a {
+  color: #141414;
+  font-family: 'Roboto', Arial, sans-serif;
+  letter-spacing: 0;
+}
+
+.title h3 a {
+  font-size: 13px;
+  color: #140f0f;
+  font-family: 'Roboto', Arial, sans-serif;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .comment-title{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .review-title{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .username{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .message{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 p{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #423d3d ;
+  font-family: Arial, Helvetica, sans-serif;
 }
  tr th{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: large;
 }
 tr{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: large;
 }
 td p{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: large;
 }
-
-
+.shop-product__lonc{
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: large;
+}
+.comment-title {
+  font-size: 20px; 
+  color: #333;
+}
 .star {
     position: relative;
     display: inline-block;

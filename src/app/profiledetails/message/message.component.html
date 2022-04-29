@@ -45,9 +45,10 @@ margin-left: 100px;">
               </h5>
             </div>
           </div>
-          <div class="chat_list active_chat" *ngFor="let Connectdtls of Convertations;let i=index" [ngClass]="{'active': subItemm === i}">
-           
-            <div class="chat_people" (click)="viewrow(Connectdtls,i)" >
+          <div class="chat_list active_chat" *ngFor="let Connectdtls of Convertations;let i=index"
+            [ngClass]="{'active': subItemm === i}">
+
+            <div class="chat_people" (click)="viewrow(Connectdtls,i)">
               <div class="chat_img" *ngIf="(Connectdtls.shop_logo=='')"> <img
                   style="height: 48px; width: 50px;border-radius: 50px;" src="assets/images/user-profile.png" alt="">
               </div>
@@ -58,7 +59,6 @@ margin-left: 100px;">
                 <h5>{{Connectdtls.shop_name}} </h5>
                 <!-- <h5>{{Connectdtls.shop_name}} <span class="chat_date">{{Connectdtls.date}}</span></h5> -->
                 <p>{{Connectdtls.title}}</p>
-
               </div>
             </div>
           </div>
@@ -150,7 +150,7 @@ margin-left: 100px;">
       </div>
 
       <div class="chat_list active_chat" *ngFor="let Connectdtls of Convertations;let i=index" (click)="openchat()">
-   
+
         <div class="chat_people" (click)="viewrow(Connectdtls,i)">
           <div class="chat_img" *ngIf="(Connectdtls.shop_logo=='')"> <img
               style="height: 40px; width: 50px;border-radius: 50px;" src="assets/images/user-profile.png" alt="">
@@ -164,7 +164,7 @@ margin-left: 100px;">
 
           </div>
         </div>
-       
+
       </div>
 
     </div>
@@ -183,8 +183,8 @@ margin-left: 100px;">
       <div class="chat_img" *ngIf="(currentlogo!=='' && Convertations.length !==0 )"> <img
           style="height: 40px; width: 50px;border-radius: 50px; margin-top: 5px;"
           src="https://neophroncrm.com/spiceclubnew/public/{{currentlogo}}" alt=""> </div>
-       <h5 style="padding-top: 12px;">&nbsp;{{currentname}}</h5>
-       <p style="margin-left: 40px;">{{tittlee}}</p>
+      <h5 style="padding-top: 12px;">&nbsp;{{currentname}}</h5>
+      <p style="margin-left: 40px;">{{tittlee}}</p>
     </div>
   </div>
 

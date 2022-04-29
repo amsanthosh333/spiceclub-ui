@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams,HttpErrorResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable, ObservableInput, of } from 'rxjs';
+import { BehaviorSubject, Observable, ObservableInput, of, Subscriber } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
 import { User } from '../models/user';
@@ -185,6 +185,17 @@ public addtowishlist(body: any) {
       return this.http.post(this.url, body, {headers:headers});
    
   }
+  // Subscribe product
+  public addtosubscribe(userid: any,prdid:any) {
+    const headers = new HttpHeaders()
+        .set('content-type', 'application/json')
+        .set('X-Requested-With', 'XMLHttpRequest')
+        .set('Authorization', 'Bearer'+' '+ this.accesstoken)
+       
+        this.url = `${this.endPoint1}/subscribes-add-product?product_id=`+ prdid+`&user_id=` +userid;
+        return this.http.get(this.url, {headers:headers});
+     
+    }
   // deals
   public gettodaysdeal() {
     this.url = `${this.endPoint1}/products/todays-deal?user_id=`+ this.userid+`&buyertype=` +this.buyertypeid;

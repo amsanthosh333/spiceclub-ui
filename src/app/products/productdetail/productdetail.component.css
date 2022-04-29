@@ -1,5 +1,7 @@
 
-
+body {
+  font-family: Arial, Helvetica, sans-serif !important;
+  }
 
 .sb-circles-dark .sb-wrapper, .sb-circles-light .sb-wrapper {
   --sb-color: #fff;
@@ -22,7 +24,7 @@
 .title h3 a{
   font-size: 13px;
   color: #140f0f ;
-  font-family: 'Roboto',Arial,sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0;
   text-decoration: none; 
 }
@@ -42,15 +44,9 @@
 }
 
 .quick-view-other-info table tr td {
-    padding-top: 7px;
-   
+    padding-top: 7px;  
 }
-.btn-primary:hover {
-  /* color: #fff; */
-  /* color: #ce2127;
-  background-color: #ffffff;
-  border-color: #ce2127; */
-}
+
 .btn-primary{
   /* color: #ce2127; */
   color: #fff;
@@ -67,104 +63,114 @@
   padding:10px;
 border: 1px solid gray;
 }
-
+.breadcrumb-title{
+ 
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 textarea{
-  color: #474747 ;
-font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #desc{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .shop-product__price{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .shop-product__title{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .shop-product__block__title{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .shop-product__short-desc p{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 strong {
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 tr {
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 td a{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 a{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 p{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .shop-product__long-desc p{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #141414 ;
+  font-family: Arial, Helvetica, sans-serif;
 }
+/* .single-faq #collapseOne .card-body .crdbdy .shop-product__long-desc p {
+  font-size: 15px;
+  line-height: 24px;
+  color: rgb(14, 14, 14);
+} */
 .review-title{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .comment-title{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .review-link a{
   color:#a19a9a;
-	font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: medium;
 }
 #braand{
   color:#a19a9a;
-	font-family: 'Poppins', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
   font-size: small;
 }
 #braandN{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 #brndprd{
   color:#a19a9a;
-	font-family: 'Poppins', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
   font-size: x-small;
   
 }
+
+
 #brndprd:hover{
   color: #2023ce;
 }
 span{
-	font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 span #varr{
   color:#a19a9a;
-	font-family: 'Poppins', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 input{
   color:#a19a9a;
-	font-family: 'Poppins', sans-serif;
+	font-family: Arial, Helvetica, sans-serif;
 }
 button{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 #disprice{
   font-size:large;
@@ -179,13 +185,13 @@ button{
 
 }
 .wishlist-icon strong{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: small;
   float: right;
   color: #ff902b;
 }
 .wishlist-icon{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: small;
   margin-top: 5px;
   float: right;
@@ -231,7 +237,7 @@ font { font-family: 'Poppins', sans-serif; }
   }
   label{
     color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   @media (max-width : 1200px) {  
@@ -349,31 +355,35 @@ td span{
 
         .display-2{
           color: #787575 ;
-          font-family: 'Poppins', sans-serif;
+          font-family: Arial, Helvetica, sans-serif;
           font-size: 3em;
         }
         #outt{
           color: #474747 ;
-          font-family: 'Poppins', sans-serif;
+          font-family: Arial, Helvetica, sans-serif;
           font-size: smaller;
         }
         .fs-12{
           color: #474747 ;
-          font-family: 'Poppins', sans-serif;
+          font-family: Arial, Helvetica, sans-serif;
         }
         #prdreview{
           color: #474747 ;
-          font-family: 'Poppins', sans-serif;
+          font-family: Arial, Helvetica, sans-serif;
         }
         .fs-11{
           font-size:0.7em;
         }
-        .single-faq .card-body p {
+        .single-faq .card-body .crdbdy .shop-product__long-desc p {
           font-size: 13px;
           line-height: 24px;
-          color: #777;
+          color: #040404;
       }
-
+      .single-faq .card-body p {
+        font-size: 15px;
+        line-height: 24px;
+        color: #080808;
+    }
       .shop-product__block__title {
         font-size: 14px;
       }

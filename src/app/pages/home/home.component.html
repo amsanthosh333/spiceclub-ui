@@ -464,12 +464,16 @@
                    
  
                    
-                    <div class="single-product__image" >
+                    <div class="single-product__image"  >
                         <div class="imglaz" style="position: relative;overflow: hidden;">
-                        <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg">
-                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                            <ngx-skeleton-loader count="1" *ngIf="imgloader2"
+                                        [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                        <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader2">
+                            <img  src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}" 
                                 class="img-fluid" alt="">
                         </a>
+                      
                         <span id="offtag2" *ngIf="img.deal_of_day!=0">Deal of the day</span>
                         <span id="offtag2" *ngIf="img.deal_of_month!=0">Deal of the month</span>
                         <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>

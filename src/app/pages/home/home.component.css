@@ -483,6 +483,12 @@ input[type=number] {
   position: relative;
   overflow: hidden;
 }
+.imglaz {
+  height: 152px;
+  width: 95%;
+  position: relative;
+  overflow: hidden;
+}
 
 @media (max-width : 575px) {
   .single-product__image {

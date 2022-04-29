@@ -1,3 +1,24 @@
+.product-title {
+  padding: 0px;
+}
+
+.has-children {
+  padding-bottom: 12px;
+
+}
+
+#catnamee strong {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+a:not([href]):not([class]),
+a:not([href]):not([class]):hover {
+  color: #140f0f;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
+
 .col-lg-2 {
   flex: 0 0 auto;
   width: 15.666667%;
@@ -30,7 +51,7 @@ text-align: center;
 .title h3 a{
   font-size: 13px;
   color: #140f0f ;
-  font-family: 'Roboto',Arial,sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0;
   text-decoration: none; 
 }
@@ -51,8 +72,8 @@ text-align: center;
     width: 200px;
   }
   .breadcrumb-list__item{
-    color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+    color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
   }
   .single-product__floating-badges {
     position: absolute;
@@ -154,22 +175,22 @@ text-align: center;
         }
           } 
           p span{
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
           }
           p{
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
           }
           input{
-            color: #474747 ;
-            font-family: 'Poppins', sans-serif;
+            color: #140f0f ;
+            font-family: Arial, Helvetica, sans-serif;
           }
           .avialable-amount{
-            color: #474747 ;
-            font-family: 'Poppins', sans-serif;
+            color: #140f0f ;
+            font-family: Arial, Helvetica, sans-serif;
           }
           .h5 {
             color: red;
           }
           .single-size{
-            font-family: 'Poppins', sans-serif;
+            font-family: Arial, Helvetica, sans-serif;
           }

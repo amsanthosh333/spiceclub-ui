@@ -71,10 +71,10 @@
                         <!--=======  End of page sidebar  =======-->
                     </div>
 
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-70">
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-20">
                         <div class="row">
-                            <div class="col-lg-12" id="bacck">
-                                <div class="shop-product__navigation " style="margin-bottom: 10px;">
+                            <div class="col-lg-12" id="bacck" style="height: 40px;">
+                                <div class="shop-product__navigation " style="margin-bottom: 0px;">
                                     <a><i class="ion-ios-arrow-thin-left" (click)="backk()" style="size: 0px;"></i></a>
                                     <!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> (click)="backk()" -->
                                 </div>
@@ -144,7 +144,7 @@
 
                                         <!--=======  post info  =======-->
 
-                                        <div class="post-info d-flex flex-wrap align-items-center mb-50">
+                                        <div class="post-info d-flex flex-wrap align-items-center mb-10">
                                             <div class="post-user">
                                                 <i class="ion-android-person"></i> By
                                                 <a class="textopacity"> {{Peoduct?.added_by}}</a>
@@ -203,7 +203,7 @@
 
                                                             <div class="shop-product__lonc"
                                                                 [innerHTML]="Peoduct.directions"
-                                                                style="text-align: start;font-family: 'Poppins', sans-serif; font-size: large;"
+                                                                style="text-align: start;"
                                                                 *ngIf="!discriptloader">
                                                                 <p> {{Peoduct.directions}} </p>
                                                             </div>
@@ -281,7 +281,7 @@
                                                                       }" animation="pulse"></ngx-skeleton-loader>
                                                                     </div>
                                                                 </div>
-                                                                <div class="videoo mt-40" style="text-align: center;">
+                                                                <div class="videoo mt-10" style="text-align: center;">
                                                                     <iframe width="427" height="309" [src]="videourl"
                                                                         title="YouTube video player" frameborder="0"
                                                                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -360,24 +360,24 @@
                                                                             class="fa fa-star-o text-warning cursor"></em>
                                                                     </span>
                                                                 </ng-template>
-                                                                <h2 class="comment-title mb-30">Ratings <span>
+                                                                <h2 class="comment-title mb-0">Ratings <span>
                                                                         <ngb-rating [(rate)]="currentRatess"
                                                                             [starTemplate]="t" [readonly]="true"
                                                                             style="color: rgb(245, 153, 14);">
                                                                         </ngb-rating>
                                                                     </span></h2>
-                                                                <h2 class="review-title mb-30">{{commtotal}} comments
+                                                                <h2 class="review-title mb-0">{{commtotal}} comments
                                                                     for
                                                                     this
                                                                     Product</h2>
-                                                                <div class="col-lg-12 mb-40">
+                                                                <div class="col-lg-12 mb-0">
 
                                                                     <!--=======  commenter info  =======-->
 
                                                                     <!--=======  single comment  =======-->
 
                                                                     <div class="single-comment"
-                                                                        *ngFor="let comm of Comments">
+                                                                        *ngFor="let comm of Comments" style="margin-bottom:0px ;padding-bottom: 0px;" >
                                                                         <div class="single-comment__image"
                                                                             *ngIf="(comm.avatar=='')">
                                                                             <img src="assets/images/user-profile.png"
@@ -391,7 +391,7 @@
                                                                                 style="height: 70px; width:70px;object-fit: cover;"
                                                                                 alt="">
                                                                         </div>
-                                                                        <div class="single-comment__content">
+                                                                        <div class="single-comment__content" style="padding-top:5px ;">
 
                                                                             <!--=======  username and date  =======-->
 
@@ -473,8 +473,8 @@
 
                                                 <!--=======  End of shop product description tab  =======-->
                                             </div>
-                                            <div class="row mt-30 align-items-center">
-                                                <div class="col-md-4  text-md-left mb-sm-5">
+                                            <div class="row mt-10 align-items-center">
+                                                <div class="col-md-4  text-md-left mb-sm-1">
                                                     <div class="post-tags">
                                                         <i class="ion-ios-pricetags"></i>
                                                         <ul class="tag-list" *ngFor="let tag of Tags">
@@ -485,7 +485,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-8  text-md-right mb-sm-5">
+                                                <div class="col-md-8  text-md-right mb-sm-1">
                                                     <div class="post-share">
                                                         <span style="color: rgb(111, 111, 112);">Share this post:</span>
                                                         <ul style="padding-left: 0px;">
@@ -516,10 +516,10 @@
                                                 <h1>Products Used</h1>
                                             </div>
                                         </div>
-                                        <carousel style="height: 200px; z-index: unset;">
+                                        <carousel style="height: 220px; z-index: unset;">
                                             <div class="carousel-cell" *ngFor="let img of relatedrec; let i =index">
-                                                <div class="single-product" style="padding-left: 70px;">
-                                                    <!--=======  single product image *ngIf="!loader6" =======-->
+                                                <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
+                                                  
                                                     <div class="single-product__image" (click)="viewproductrow2(img.product_id)">
                                                         <a class="image-wrap">
                                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_img}}" class="img-fluid"
@@ -527,25 +527,27 @@
                                                         </a>
 
                                                         <div class="single-product__floating-badges">
-                                                            <!-- <span class="onsale">-10%</span> -->
+                                                          
                                                             <span class="hot" *ngIf="img.has_discount==true">hot</span>
                                                         </div>
 
                                                     </div>
-
-                                                    <div class="single-product__content" (click)="viewproductrow2(img.product_id)">
-                                                        <div class="title">
-                                                            <h3> <a>{{img.title}}</a></h3>
-                                                            <a style="color: rgb(218, 7, 7);">view details</a>
-                                                        </div>
-
+                                                    <div class="title" >
+                                                        <h6> <a style="line-height: 1.6rem;
+                                                            overflow: hidden;
+                                                            display: -webkit-box; 
+                                                            -webkit-line-clamp: 2;
+                                                            -webkit-box-orient: vertical;
+                                                            max-height: 3.2rem;" >{{img.title}}</a> </h6>
+                                                            <a id="vieww" style="font-size: small;color: red;font-size: small; margin-left: 10px;">View Details</a>
                                                     </div>
+                             
 
                                                 </div>
                                             </div>
                                         </carousel>
 
-
+                                      
                                     </div>
 
 

@@ -1,6 +1,25 @@
+.subcatt{
+  /* font-family: 'Poppins', sans-serif; */
+  font-size: small;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
+.product-title{
+  padding: 0px;
+}
+.has-children{
+  padding-bottom: 12px;
 
-
+}
+#catnamee strong{
+  font-family: Arial, Helvetica, sans-serif;
+}
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+  color: #140f0f;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
 .col-lg-2 {
   flex: 0 0 auto;
   width: 15.666667%;
@@ -46,7 +65,7 @@ max-height: 3.2rem;
 .title h3 a{
   font-size: 13px;
   color: #140f0f ;
-  font-family: 'Roboto',Arial,sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0;
   text-decoration: none; 
 }
@@ -63,24 +82,24 @@ max-height: 3.2rem;
     }
     }
 p span{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 p{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 input{
-  color: #474747 ;
-  font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .avialable-amount{
-  color: #474747 ;
-  font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .h5 {
   color: red;
 }
 .single-size{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 li.has-children.active {color: red}
@@ -94,23 +113,23 @@ li.has-children.active{
     overflow: hidden;
   }
   .nav-item{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+    color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
   padding-right: 20px;
   font-size: 0.9em;
   }
 
    li.has-children {
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .title{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .single-product__floating-badges {
@@ -365,7 +384,7 @@ text-decoration: none;
 
   .subcatt{
     /* color: #474747 ; */
-  font-family: 'Poppins', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   font-size: small;
   }
   #subcattt:hover{

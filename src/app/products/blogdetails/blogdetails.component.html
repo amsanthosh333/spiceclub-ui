@@ -102,7 +102,7 @@
 								<br><br>
 							</div>
 							<div class="col-md-12 mb-40">
-								<div class="single-slider-post single-slider-post--sticky pb-60">
+								<div class="single-slider-post single-slider-post--sticky pb-20">
 									<!--=======  image  =======-->
 
 
@@ -202,7 +202,7 @@
 							</div>
 
 
-							<div class="col-lg-12 mb-40">
+							<div class="col-lg-12 mb-20">
 
 								<!--=======  commenter info  =======-->
 								<ng-template #t let-fill="fill">
@@ -212,11 +212,11 @@
 											class="fa fa-star-o text-warning cursor"></em>
 									</span>
 								</ng-template>
-								<h2 class="comment-title mb-30">Ratings <span>
+								<h2 class="comment-title mb-10">Ratings <span>
 										<ngb-rating [(rate)]="currentRatess" [starTemplate]="t" [readonly]="true"
 											style="color: rgb(245, 153, 14);"></ngb-rating>
 									</span></h2>
-								<h2 class="comment-title mb-30">Comments <span>{{commtotal}} </span></h2>
+								<h2 class="comment-title mb-10">Comments <span>{{commtotal}} </span></h2>
 
 
 
@@ -251,13 +251,7 @@
 										<ngb-rating [rate]="comm.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
 										<p class="message">{{comm.comment}} </p>
 
-										<!--=======  End of message  =======-->
 
-										<!--=======  reply link  =======-->
-
-										<!-- <a href="#" class="reply-link"><i class="ion-reply"></i> reply</a> -->
-
-										<!--=======  End of reply link  =======-->
 									</div>
 								</div>
 
@@ -267,14 +261,14 @@
 
 							<div class="col-lg-12">
 
-								<h2 class="comment-title mb-30">Leave your thought here</h2>
+								<h5 class="comment-title mb-10">Leave your thought here</h5>
 								<!--=======  comment form  =======-->
 
 								<div class="lezada-form comment-gorm">
 									<form [formGroup]="comment" (ngSubmit)="addcomment(comment)">
 										<div class="row">
 
-											<div class="col-lg-12 mb-20">
+											<div class="col-lg-12 mb-10">
 												<span class="rating-title mr-30" style="opacity: 0.72;">YOUR
 													RATING</span>
 												<span class="product-rating">
@@ -283,7 +277,7 @@
 														style="font-size: 2rem; color: rgb(248, 141, 19);"></ngb-rating>
 												</span>
 											</div>
-											<div class="col-lg-12 mb-20" style=" border: 2px solid  #ddd5d5;">
+											<div class="col-lg-12 mb-10" style=" border: 2px solid  #ddd5d5;">
 												<textarea cols="30" rows="10" formControlName="comment"
 													placeholder="YOUR MESSAGE"></textarea>
 											</div>

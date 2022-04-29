@@ -29,7 +29,7 @@
 					<!--=======  page sidebar  =======-->
 
 					<div class="page-sidebar">
-						<div class="single-sidebar-widget mb-40" *ngIf="!loader">
+						<div class="single-sidebar-widget mb-20" *ngIf="!loader">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
 							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category" 
 							style="padding-left: 0px;max-height: 250px;overflow-y: auto;" *ngFor="let cat of Allcat;let i=index">
@@ -37,7 +37,7 @@
 							</ul>
 
 						</div>
-						<div class="single-sidebar-widget mb-40" *ngIf="loader">
+						<div class="single-sidebar-widget mb-20" *ngIf="loader">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
 							<ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
 
@@ -49,7 +49,7 @@
 
 						<!--=======  single sidebar widget  =======-->
 
-						<div class="single-sidebar-widget mb-40">
+						<div class="single-sidebar-widget mb-20">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">All Blogs</h2>
 							<!--=======  widget post wrapper  =======-->
 							<div class="widget-post-wrapper" *ngIf="!loader1" style="max-height: 350px;overflow-y: auto;">
@@ -110,14 +110,14 @@
 								<div class="single-slider-post__content" (click)="getblogdetail(img.id)">
 									<div class="post-date">
 										<i class="ion-android-calendar"></i>
-										<a> june 5, 2021</a>
+										<!-- <a> june 5, 2021</a> -->
 										&nbsp;<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
 										</ngb-rating>
 									</div>
-									<h2 class="post-title" style=" height:80px; width: 100%;
-                                    overflow: hidden;"><a>{{img.name}} </a></h2>
+									<h4 class="post-title" style=" height:80px; width: 100%;
+                                    overflow: hidden;"><a>{{img.name}} </a></h4>
 									<p class="post-excerpt" style=" height: 50px; width: 100%;
-                                    overflow: hidden;">{{img.short_description}}
+                                    overflow: hidden;margin-bottom: 0px">{{img.short_description}}
 										</p>
 									<a class="blog-readmore-btn" (click)="getblogdetail(img.id)">read more</a>
 								</div>

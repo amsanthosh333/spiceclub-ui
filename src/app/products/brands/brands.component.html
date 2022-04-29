@@ -66,7 +66,7 @@
                                 <br> -->
 
                                 <h2 class="single-sidebar-widget--title"
-                                    style="padding-bottom: 0px; margin-bottom: 20px;">All Brands</h2>
+                                    style="padding-bottom: 0px; margin-bottom: 10px;">All Brands</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
                                     style="padding-left: 0px;max-height: 400px;overflow-y: auto;">
                                     <li class="has-children" *ngFor="let img of Allbrands;let i=index"  [ngClass]="{'active': subItemm === i}">
@@ -157,7 +157,7 @@
                     <!-- sidebarlazyloading -->
                     <div class="col-lg-3 order-2 order-lg-1" *ngIf="sideloader">
                         <div class="page-sidebar">
-                            <div class="single-sidebar-widget mb-40">
+                            <div class="single-sidebar-widget mb-20">
                                 <div class="search-widget">
                                     <form [formGroup]="search" (ngSubmit)="search1(search)">
                                         <input type="search" formControlName="key" placeholder="Search products ...">
