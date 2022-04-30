@@ -1,43 +1,54 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<!--=======  header bottom  =======-->
 
-	<div class="scroller" style="background:#ce2127; text-align: end;" >
+	<div class="scroller" style="background:#ce2127; text-align: end;">
 		<!-- <marquee behavior="scrol" direction="left"><h3 style="color: white;">Spice Club</h3></marquee> -->
 		<h3 style="color: white;">Spice Club</h3>
 
 	</div>
 	<div class="header-bottom pt-md-40 pb-md-40 ">
 		<div class="container wide">
-				<!--=======  header bottom container  =======-->
+			<!--=======  header bottom container  =======-->
 			<div class="header-bottom-container" style="height: 80px;">
 				<div class="logo-with-offcanvas d-flex ">
 					<!--=======  logo   =======-->
 					<div class="logo ml-3" id="loogo">
-						<a routerLink="/home"><img src="assets/images/spicelogo.jpeg" class="img-fluid sitelogo" alt=""></a>						
+						<a routerLink="/home"><img src="assets/images/spicelogo.jpeg" class="img-fluid sitelogo"
+								alt=""></a>
 					</div>
 				</div>
 
 				<!--=======  header bottom navigation  =======-->
-				<div class="main" >			
+				<div class="main">
 					<div class="inputroup">
 						<form class="input-group" [formGroup]="search" (ngSubmit)="search1(search)" style="width:100%;">
-					  <input type="text" class="form-control" placeholder="Search for products" formControlName="key">
-					  <div class="input-group-append">
-						<button class="btn btn-dark" type="submit" id="searchbar" style="display:inline;">
-						  <i class="ion-ios-search-strong"></i><span> Search</span> 
-						</button>
-					  </div>
-					</form>
-					</div>			
-				  </div>
+							<input type="text" class="form-control" placeholder="Search for products"
+								formControlName="key">
+							<div class="input-group-append">
+								<button class="btn btn-dark" type="submit" id="searchbar" style="display:inline;">
+									<i class="ion-ios-search-strong"></i><span> Search</span>
+								</button>
+							</div>
+						</form>
 
+
+
+
+					</div>
+
+
+
+				</div>
+				<div>
+					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0" (click)="openkyc()">
+						<a class="btn btn-info" id="buttonkyc">Verify Kyc</a>
+					</div>
+				</div>
 
 				<div class="header-right-container">
 
 					<!--=======  header right icons  =======-->
-					<button *ngIf="buyertypereal==1  ">
-						verify kyc
-					</button>
+
 
 					<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
 						<!-- <div class="single-icon search">
@@ -50,7 +61,7 @@
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
 								<i class="ion-android-person" *ngIf="(userid!==0)"></i>
 							</a>
-							<a id="offcanvaout-icon"   (click)="openlogin()">
+							<a id="offcanvaout-icon" (click)="openlogin()">
 								<i class="ion-android-person" *ngIf="(userid==0)"></i>
 							</a>
 						</div>
@@ -63,8 +74,9 @@
 							<a id="offcanvashlist-icon" class="loggin1" routerLink="/login" *ngIf="(userid==0)">
 								<i class="ion-android-favorite-outline"></i>
 							</a>
-							<a id="offcanvashlist-icon" class="loggin"  *ngIf="(userid==0)">
-								<button type="button" class="btn " style="background-color: #ccccd3;" (click)="openlogin()">Login</button>
+							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
+								<button type="button" class="btn " style="background-color: #ccccd3;"
+									(click)="openlogin()">Login</button>
 							</a>
 						</div>
 
@@ -88,6 +100,7 @@
 
 							</a>
 						</div>
+
 
 						<div class="single-icon drop">
 							<a id="offcanart-icon">
@@ -154,14 +167,14 @@
 
 			<!-- Mobile Navigation Start Here -->
 
-		
+
 
 		</div>
 	</div>
 
 	<div class="header-bottom-navigation">
 		<div class="site-main-nav d-none d-lg-block">
-			<nav class="site-nav center-menu">			
+			<nav class="site-nav center-menu">
 				<ul>
 					<li class="menu-item"><a routerLink="/category/96">SUBSCRIPTION</a></li>
 
@@ -178,14 +191,14 @@
 										<i (click)="viewsubcat(img.id,i)" style="float: right;"
 											class="bi bi-chevron-right"></i> -->
 										<span class="lispan">
-											<a style="display:inline;"  [ngClass]="{'active': subItem === i}"> <span 
+											<a style="display:inline;" [ngClass]="{'active': subItem === i}"> <span
 													(click)="gotocategory(img.id)">{{img.name}}</span>
 												<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
 												(click)="viewsubcat(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
 
 												<i *ngIf="img.number_of_children!=0" style="float: right;"
-													(click)="viewsubcat(img.id,i)"
-													class="bi bi-caret-right-fill"  [ngClass]="{'active': subItem === i}"></i>
+													(click)="viewsubcat(img.id,i)" class="bi bi-caret-right-fill"
+													[ngClass]="{'active': subItem === i}"></i>
 											</a>
 										</span>
 									</li>
@@ -197,7 +210,7 @@
 
 							<li class="lii" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Subcat;let i=index">
-									<li style="margin-top: 10px;padding-left: 4px;" >
+									<li style="margin-top: 10px;padding-left: 4px;">
 										<span class="lispan">
 											<a style="width:190px;" [ngClass]="{'active': subItem1 === i}">
 												<span (click)="gotocategory2(img.id)">{{img.name}}</span>
@@ -211,8 +224,8 @@
 											</a>
 
 											<i *ngIf="img.number_of_children!=0" style="float: right;margin-top: 8px; "
-												(click)="viewsubcat2(img.id,i)"
-												class="bi bi-caret-right-fill"  [ngClass]="{'active': subItem1 === i}"></i>
+												(click)="viewsubcat2(img.id,i)" class="bi bi-caret-right-fill"
+												[ngClass]="{'active': subItem1 === i}"></i>
 										</span>
 									</li>
 								</ul>
@@ -222,8 +235,8 @@
 
 							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Subcat2;let i=index">
-									<li style="margin-top: 10px;padding-left: 4px;" >
-										<span class="lispan" >
+									<li style="margin-top: 10px;padding-left: 4px;">
+										<span class="lispan">
 											<a style="width:190px;" [ngClass]="{'active': subItem2 === i}">
 												<span (click)="gotocategory3(img.id)">{{img.name}}</span>
 												<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
@@ -231,8 +244,9 @@
 
 											</a>
 
-											<i *ngIf="img.number_of_children!=0" style="float: right;margin-top: 8px;" (click)="viewsubcat3(img.id,i)"
-												class="bi bi-caret-right-fill" [ngClass]="{'active': subItem2 === i}"></i>
+											<i *ngIf="img.number_of_children!=0" style="float: right;margin-top: 8px;"
+												(click)="viewsubcat3(img.id,i)" class="bi bi-caret-right-fill"
+												[ngClass]="{'active': subItem2 === i}"></i>
 										</span>
 									</li>
 								</ul>
@@ -245,8 +259,7 @@
 									<li style="margin-top: 10px;">
 
 										<span class="lispan">
-											<a style="display:inline;"
-												[ngClass]="{'active': subItem3 === i}"> <span
+											<a style="display:inline;" [ngClass]="{'active': subItem3 === i}"> <span
 													(click)="gotocategory4(img.id)">{{img.name}}</span>
 												<!-- <i style="float: right;" (click)="viewsubcat4(img.id,i)"
 													class="bi bi-chevron-right"></i> -->
@@ -271,7 +284,7 @@
 
 					<li class="menu-item"><a routerLink="/recipe">RECIPE</a></li>
 				</ul>
-				
+
 			</nav>
 		</div>
 	</div>
@@ -357,7 +370,7 @@
 					<h6 class="col-2"><i class="ion-android-chat"></i> </h6>
 					<h6 class="col-8"><a>My Chats</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" (click)="openkyc()">
+				<div class="row mb-3 ml-4" id="closeabout" (click)="openkyc()" *ngIf="buyertypereal===2 && kyc_verify_status==0">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
 					<h6 class="col-8"><a>Kyc</a></h6>
 				</div>

@@ -78,11 +78,13 @@ max-height: 3.2rem;
 .single-product__content {
 height: 130px;
 }
+
 @media (min-width: 992px) {
 .img-fluid {
   max-width: 100%;
   height: auto;
 }
+
 }
 @media (max-width: 992px) {
   .img-fluid {
@@ -102,6 +104,9 @@ height: 130px;
   .col-lg-9 {
       flex: 0 0 auto;
       width: 77%;
+  }
+  .product-isotope{
+    margin-right: -100px;
   }
   }
   @media (min-width: 992px){

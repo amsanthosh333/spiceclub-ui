@@ -65,6 +65,9 @@ export class HeaderComponent implements OnInit {
   subcat_id: any;
   subcategory1: any;
   catid1_id: any;
+  buyertypereal: any;
+  kyc_verify_status: any;
+  buyertypeid: any;
 
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
@@ -91,11 +94,15 @@ export class HeaderComponent implements OnInit {
     this.userid = this.currentdetail.user?.id;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
+    this.buyertypereal = this.currentdetail.user?.buyertypereal;
+    this.kyc_verify_status=this.currentdetail.user?.kyc_verify_status;
+    this.buyertypeid = this.currentdetail.user?.buyertypeid;
+    // this.buyertypereal = this.currentdetail.buyertypereal;
+     console.log("buyertypereal",this.buyertypereal)
     if (this.userid == undefined) {
       this.userid = 0;
-    }
+    } 
   }
-
   ngOnInit(): void {
     if (this.userid !== 0) {
       this.viewwishlist();

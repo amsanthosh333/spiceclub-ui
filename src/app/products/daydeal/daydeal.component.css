@@ -80,6 +80,9 @@ a:not([href]):not([class]):hover {
     flex: 0 0 auto;
     width: 77%;
   }
+  .product-isotope{
+    margin-right: -100px;
+  }
 }
 
 @media (min-width: 992px) {

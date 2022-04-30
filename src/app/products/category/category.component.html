@@ -219,7 +219,7 @@
 
                     <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10"  *ngIf="!prodloader">
 
-                        <div class="row product-isotope shop-product-wrap four-column">
+                        <div class="row product-isotope shop-product-wrap four-column" >
 
                             <!--=======  single product  =======-->
                             <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
@@ -344,7 +344,7 @@
                     </div>
                     <!--  productslazyloading -->
                     <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
-                        <div class="row product-isotope shop-product-wrap four-column">
+                        <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;">
                             <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
                                 <div class="single-product" style="height: 250px; width: 200px;">
                                     <ngx-skeleton-loader count="1"
@@ -887,24 +887,66 @@
                         </div>
                         <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
                             <h5 class="item-title mb-4">{{Peoduct.name}}</h5>
-                            <p class="price">
+                            <!-- <p class="price">
                                 <span class="main-price discounted" style="text-decoration: line-through"
                                 *ngIf="storked_pricee!==prod_price">{{storked_pricee}}</span>
                             <span style="color: red;" class="h5 discounted-price">{{prod_price}}</span>
                             <span class="opacity-70">/{{Peoduct.unit}}</span>
-                            </p>
+                            </p> -->
                             
-                            <hr>
+                            
+                           
+                            <div class="quick-view-other-info pb-0 pt-0" #target>
+                                <table>
+                                    <tr class="single-info"
+                                        *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
+                                        <td class="quickview-title" style="color: red;">MRP: </td>
+                                        <td class="quickview-value">
+    
+                                            <span
+                                                class="main-price discounted">{{Peoduct?.stroked_price}}</span>
+    
+                                        </td>
+                                    </tr>
+                                    <tr class="single-info ">
+                                        <td class="quickview-title" style="color: red; ">Price: </td>
+                                        <td class="quickview-value">
+                                            <a style="font-size: 1.3rem;">{{Peoduct?.main_price}}</a>
+                                            <span style="font-size: 0.8rem;font-weight: 500;"> (Including all taxes)</span>
+    
+                                        </td>
+                                    </tr>
+                                    <tr class="single-inf " *ngIf="Peoduct?.discount_percentage!==0">
+                                        <td class="quickview-title" style="color: red;"> </td>
+                                        <td class="quickview-value pt-0" >
+                                            <a style="font-weight: 300;">( You save {{Peoduct?.discount_percentage}} % ) </a>
+                                        </td>
+                                    </tr>
+                                    <tr class="single-info">
+                                        <td class="quickview-title" style="color: red;">Excluding GST: </td>
+                                        <td class="quickview-value">
+                                            <a style="font-size: 1rem;font-weight: 500;">Rs {{Peoduct?.excl_gst}} </a>
+                                        </td>
+                                    </tr>
+                                    <tr class="single-info">
+                                        <td class="quickview-title" style="color: red;">Variable Price: </td>
+                                        <td class="quickview-value">
+                                            <a style="font-size: 1rem;font-weight: 500;">{{prod_price}} </a>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            
     
                             <form id="option-choice-form">
                                 <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
                                 <input type="hidden" name="id" value="21">
     
-                                <div class="row no-gutters ml-1">
-                                    <div class="col-3">
-                                        <div class="opacity-50 mt-2 " *ngFor="let a of choice">{{a.title}}:</div>
+                                <div class="row no-gutters ml-1 mt-2">
+                                    <div class="col-3 ">
+                                        <div class="quickview-title mt-2 "  *ngFor="let a of choice" style="color: red;">{{a.title}}:</div>
                                     </div>
-                                    <div class="col-9">
+                                    <div class="col-9 ">
                                         <div class="shop-product__block__value" *ngFor="let a of choice">
     
                                             <div class="shop-product-size-list">
@@ -915,10 +957,11 @@
                                         </div>
                                     </div>
                                 </div>
+      
     
                                 <div class="row no-gutters ml-1">
                                     <div class="col-3">
-                                        <div class="opacity-50 mt-2" style="font-family: 'Poppins', sans-serif;">Quantity:</div>
+                                        <div class="quickview-title mt-2" style="color: red;">Quantity:</div>
                                     </div>
                                     <div class="col-9">
                                         <div class="product-quantity d-flex align-items-center">
@@ -930,16 +973,16 @@
                                                 <a class="inc qty-btn" style="text-decoration: none;"
                                                     (click)="increaseqty()" *ngIf="stk>1">+</a>
                                             </div>
-                                            <div class="avialable-amount opacity-60">
+                                            <!-- <div class="avialable-amount opacity-60">
                                                 &nbsp; (<span id="available-quantity">{{stocck}}</span> available)
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row no-gutters pb-3 ml-1" id="chosen_price_div" *ngIf="quantityyy!==0">
                                         <div class="col-3">
-                                            <div class="opacity-50">Total Price:</div>
+                                            <div class="quickview-title">Total Price:</div>
                                         </div>
                                         <div class="col-9">
                                             <div class="product-price">
@@ -959,6 +1002,17 @@
                                         <i class="ion-ios-cart-outline"></i>Out of Stock</button>
     
                             </div>
+                            
+                            <div class="shop-product__block__title"
+                            style="font-weight: 600;color: green; text-align: start;">
+                            {{Peoduct?.usp_text}}
+                        </div>
+                        <div  style="text-align: start;"> <span >
+                                <a *ngFor="let b of Peoduct?.usp_icon">
+                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{b?.icon}}"
+                                        style="height:47px; width:47px; margin-bottom: 3px;margin-left:15px;margin: right 15px; ; "></a>
+                           &nbsp; </span>
+                        </div>
                             <hr>
                             <h6> <strong>Description</strong> </h6>
                             <p class="description" [innerHTML]="Peoduct?.description" style="font-size: small;">

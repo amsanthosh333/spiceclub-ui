@@ -109,7 +109,11 @@ export class RequestService {
     this.url = `${this.endPoint1}/banners`;
     return this.http.get(this.url);
   }
-
+//testimonial
+public gettestimonial() {
+  this.url = `${this.endPoint1}/testimonial`;
+  return this.http.get(this.url);
+}
   public addtocart(body: any) {
   const headers = new HttpHeaders()
       .set('content-type', 'application/json')

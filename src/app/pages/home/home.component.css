@@ -7,6 +7,13 @@
     transition: opacity 1s 2.6s;
     
   } */
+
+
+  /* // */
+  .multi-testimonial-single-item__text::-webkit-scrollbar {
+    display: none;
+}
+
   .col-lg-2 {
     flex: 0 0 auto;
     width: 15.666667%;
@@ -296,14 +303,25 @@ element.style {
   height: 250px;
   width: 430px;
 }
-
-
+#carr .carousel-cell {
+  /* height: 250px; */
+  width: auto;
+  
+}
+.carousel-cells{
+  padding-left: 100px;
+}
+[_nghost-pul-c115] .carousel-container[_ngcontent-pul-c115] {
+  width: 900px;
+}
 .carousel-cell element.style {
   height: 350px;
   width: 400px;
   transform: translateX(0px);
 }
-
+#carr{
+  width: 210px !important;
+}
 /* @media(max-width:768px){
   .carousel .carousel-cell{
  

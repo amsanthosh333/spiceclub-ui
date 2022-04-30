@@ -68,6 +68,9 @@ max-height: 3.2rem;
       flex: 0 0 auto;
       width: 77%;
   }
+  .product-isotope{
+    margin-right: -100px;
+  }
   }
   @media (min-width: 992px){
     .col-lg-3 {

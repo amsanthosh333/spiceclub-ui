@@ -10363,10 +10363,19 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 =============================================*/
 /*----------  multi testimonial single item  ----------*/
 .multi-testimonial-single-item__text {
-  font-size: 18px;
-  line-height: 36px;
+ 
+    font-size: 16px;
+    line-height: 31px;
     text-align: center;
-  padding-bottom: 40px;
+    padding-bottom: 20px;
+    line-height: 1.6rem;
+    overflow-y: scroll;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    max-height: 8.2rem;
+    height: 8.2rem;
+    margin-bottom: 10px;
 }
 
 .multi-testimonial-single-item__author-info {
@@ -10384,6 +10393,9 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 
   width: 80px;
   height: 80px;
+  display: block;
+    margin-left: auto;
+    margin-right: auto 
 }
 
 .multi-testimonial-single-item__author-info .image img {
@@ -10397,7 +10409,7 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
   flex-basis: calc(100% - 80px);
 
   margin-top: 10px;
-  padding-left: 25px;
+  /* padding-left: 25px; */
 }
 
 .multi-testimonial-single-item__author-info .content .name {

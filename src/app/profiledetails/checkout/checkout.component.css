@@ -44,6 +44,8 @@ label{
 .checkout-title{
 	color: #474747 ;
 	font-family: 'Poppins', sans-serif;
+    padding-bottom: 0px;
+    margin-bottom: 10px;
 }
 input{
     color: #474747 ;

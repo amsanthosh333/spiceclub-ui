@@ -1,3 +1,4 @@
+
 .filter-title .product-filter-menu li.active {
   color: rgb(219, 4, 4);
 }
@@ -64,10 +65,18 @@ max-height: 3.2rem;
   letter-spacing: 0;
   text-decoration: none; 
 }
+.col-lg-9 {
+  flex: 0 0 auto;
+  width: 77%;
+}
+
 @media (min-width: 992px){
   .col-lg-9 {
       flex: 0 0 auto;
       width: 77%;
+  }
+  .product-isotope{
+    margin-right: -100px;
   }
   }
   @media (min-width: 992px){

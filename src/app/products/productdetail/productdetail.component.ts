@@ -828,25 +828,25 @@ export class ProductdetailComponent implements OnInit {
     this.router.navigate(['brands', id]);
   }
   collapsebtn(){
-    console.log("collapsebtn");
+    // console.log("collapsebtn");
     this.btnItemm=!this.btnItemm
     this.desbtnItemm=false
     this.ingItemm=false
-    console.log("collapsebtn",this.btnItemm);
+    // console.log("collapsebtn",this.btnItemm);
     
   }
   collapsebtn1(){
-    console.log("collapsebtn1");
+    // console.log("collapsebtn1");
     this.desbtnItemm=!this.desbtnItemm
     this.btnItemm=false
     this.ingItemm=false
-    console.log("collapsebtn1",this.desbtnItemm);
+    // console.log("collapsebtn1",this.desbtnItemm);
   }
   collapsebtn2(){
     this.ingItemm=!this.ingItemm
     this.btnItemm=false
     this.desbtnItemm=false
-    console.log("collapsebtn1",this.desbtnItemm);
+    // console.log("collapsebtn1",this.desbtnItemm);
   }
   shareinstaUrl(foodid:any) {
     window.open('https://instagram.com/accounts/login/?text=%20Check%20up%20this%20awesome%20content' + encodeURIComponent(document.title) + ':%20 ' +

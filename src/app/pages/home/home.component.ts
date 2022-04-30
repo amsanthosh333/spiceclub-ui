@@ -144,6 +144,7 @@ export class HomeComponent implements OnInit {
   stocckkk!: number;
   subItem: any=0;
   storked_pricee: any;
+  Testimonial: any;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -185,6 +186,7 @@ export class HomeComponent implements OnInit {
     this.viewfuturedpro();
     this.viewdata3();
     this.viewbrands();
+    this.viewdata4();
     this.register = this.fb.group({
       rating: [''],
       comment: [''],
@@ -303,6 +305,16 @@ export class HomeComponent implements OnInit {
       setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
+    });
+  }
+  viewdata4() {
+    this.request.gettestimonial().subscribe((response: any) => {
+      this.Testimonial = response.data;
+      console.log(this.Testimonial);
+      // this.loader4 = false;
+      // setTimeout(() => {
+      //   this.loadingIndicator = false;
+      // }, 500);
     });
   }
   proddetail(id: any) {
