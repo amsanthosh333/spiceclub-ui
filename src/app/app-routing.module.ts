@@ -60,6 +60,8 @@ const routes: Routes = [
   { path: 'privacypolicy', loadChildren: () => import('./pages/privacypolicy/privacypolicy.module').then(m => m.PrivacypolicyModule) },
   { path: 'return', loadChildren: () => import('./pages/return/return.module').then(m => m.ReturnModule) },
   { path: 'kyc', loadChildren: () => import('./profiledetails/kyc/kyc.module').then(m => m.KycModule) },
+  { path: 'subscribedprod', loadChildren: () => import('./products/subscribedprod/subscribedprod.module').then(m => m.SubscribedprodModule) },
+ 
   
 ];
 

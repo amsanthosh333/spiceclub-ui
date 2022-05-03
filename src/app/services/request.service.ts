@@ -337,6 +337,13 @@ public getbestsellpro() {
   this.url = `${this.endPoint1}/products/best-seller?user_id=`+this.userid+`&buyertype=` +this.buyertypeid;
   return this.http.get(this.url);
 }
+//subscribed products
+public getsubscribedpro() {
+  const headers = new HttpHeaders()
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
+  this.url = `${this.endPoint1}/subscribes/`+this.userid;
+  return this.http.get(this.url,{headers:headers});
+}
 // orders
 public fetchOrders(id:any,page:any) {
   const headers = new HttpHeaders()
