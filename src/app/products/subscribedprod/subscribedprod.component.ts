@@ -93,6 +93,8 @@ export class SubscribedprodComponent implements OnInit {
    }
 
    ngOnInit(): void {
+     console.log("ngonint");
+     
     window.scroll(0,0);
     this.viewfuturedpro();
     
@@ -121,9 +123,8 @@ export class SubscribedprodComponent implements OnInit {
     viewfuturedpro(){
       this.imgloader = false;
       this.request.getsubscribedpro().subscribe((response: any) => {
-        this.Bestsellpro=response.data;
-        console.log("this.subscribedpro",this.Bestsellpro);
-        
+        console.log("this.subscribedpro response",response);
+        this.Bestsellpro=response.data;  
         this.prodloader=false;  
         setTimeout(() => {
           this.imgloader = true;

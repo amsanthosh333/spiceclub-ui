@@ -29,6 +29,25 @@
 	animation: glowing 1300ms infinite;
 	width: 120px;
   }
+  #buttonkyc1 {
+	border: 1px transparent;
+	/* -webkit-border-radius: 40px; */
+	/* border-radius: 40px; */
+	color: #eeeeee;
+	cursor: pointer;
+	display: inline-block;
+	font-family: Arial;
+	font-size: 10px;
+    padding: 5px 20px;
+	text-align: center;
+	text-decoration: none;
+	margin-left: 0px;
+	-webkit-animation: glowing 1300ms infinite;
+	-moz-animation: glowing 1300ms infinite;
+	-o-animation: glowing 1300ms infinite;
+	animation: glowing 1300ms infinite;
+	width: 120px;
+  }
   @-webkit-keyframes glowing {
 	0% {
 	  background-color: #0091b2;

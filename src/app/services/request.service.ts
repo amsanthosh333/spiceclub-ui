@@ -342,6 +342,7 @@ public getsubscribedpro() {
   const headers = new HttpHeaders()
   .set('Authorization', 'Bearer'+' '+ this.accesstoken) 
   this.url = `${this.endPoint1}/subscribes/`+this.userid;
+  console.log(this.url);
   return this.http.get(this.url,{headers:headers});
 }
 // orders

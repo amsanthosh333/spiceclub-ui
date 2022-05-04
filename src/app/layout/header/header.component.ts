@@ -68,6 +68,7 @@ export class HeaderComponent implements OnInit {
   buyertypereal: any;
   kyc_verify_status: any;
   buyertypeid: any;
+  iskycupload: any;
 
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
@@ -96,6 +97,7 @@ export class HeaderComponent implements OnInit {
     this.tokentype = this.currentdetail.token_type;
     this.buyertypereal = this.currentdetail.user?.buyertypereal;
     this.kyc_verify_status=this.currentdetail.user?.kyc_verify_status;
+    this.iskycupload=this.currentdetail.user?.iskycupload;
     this.buyertypeid = this.currentdetail.user?.buyertypeid;
     // this.buyertypereal = this.currentdetail.buyertypereal;
      console.log("buyertypereal",this.buyertypereal)

@@ -40,8 +40,11 @@
 
 				</div>
 				<div>
-					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0" (click)="openkyc()">
+					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"  (click)="openkyc()">
 						<a class="btn btn-info" id="buttonkyc">Verify Kyc</a>
+					</div>
+					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1">
+						<a class="btn btn-info" id="buttonkyc1">Kyc verification inprogress</a>
 					</div>
 				</div>
 
@@ -176,7 +179,8 @@
 		<div class="site-main-nav d-none d-lg-block">
 			<nav class="site-nav center-menu">
 				<ul>
-					<li class="menu-item"><a routerLink="/subscribedprod">SUBSCRIPTION</a></li>
+					<li class="menu-item"><a *ngIf="(userid!==0)" routerLink="/subscribedprod">SUBSCRIPTION</a>
+						<a id="offcanvaout-icon" *ngIf="(userid==0)" (click)="openlogin()">SUBSCRIPTION	</a></li>
 
 					<li class="menu-item"><a routerLink="/shopbyproduct">SHOP BY PRODUCTS</a> </li>
 
