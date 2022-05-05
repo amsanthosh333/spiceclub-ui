@@ -111,6 +111,8 @@ export class ProductdetailComponent implements OnInit {
   vargalleryphotos: any = [];
   varstrokedprice: any;
   ingItemm: boolean=true;
+  issubscribed: any;
+  product_idd: any;
 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -140,7 +142,8 @@ export class ProductdetailComponent implements OnInit {
       console.log('pressed params!', val);
       this.id = val['id']
       this.viewproductrow(this.id);
-      this.iswishlist(this.id)
+      this.iswishlist(this.id);
+      this.issubscriber(this.id)
     });
     this.comment = this.fb.group({
       rating: ['', [Validators.required]],
@@ -353,12 +356,12 @@ export class ProductdetailComponent implements OnInit {
     console.log("viewprod2", id);
     this.allgalleryphotos = []
     this.totalprice = 0.00
-    this.product_id = id
+    this.product_idd = id
     this.quantityyy = 0
     this.photoloader = true;
     this.contentloader = true;
     this.discriptloader = true;
-    console.log("viewprod2", this.product_id);
+    console.log("viewprod2", this.product_idd);
     // this.request.getproddetail(this.product_id).subscribe((response: any) => {
 
     //   console.log("proddetail", response);
@@ -413,7 +416,7 @@ export class ProductdetailComponent implements OnInit {
     //   (error: any) => {
     //     console.log(error);
     //   });
-    this.router.navigate(['productdetail', this.product_id]);
+    this.router.navigate(['/productdetail', this.product_idd]);
   }
   viewbulkdiscount(id: any) {
     this.request.getbulckdisc(this.buyertypeid, id).subscribe((response: any) => {
@@ -600,6 +603,7 @@ export class ProductdetailComponent implements OnInit {
         if (res.message == 'Product added to subscribe') {         
           this.toastr.success('Subscribed Successfully', '');
           // this.sharedService.sendClickEvent();
+          this.issubscribed=res.is_in_subscribe
         }
         else {
           this.toastr.error(res.message);
@@ -607,6 +611,27 @@ export class ProductdetailComponent implements OnInit {
       }, (error: any) => {
         console.log("error", error);
 
+      });
+    }
+  }
+  removefromsubscribe(id:any){
+    console.log("addtosubscribe",id);
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else { 
+      this.request.removefromsubscribe(this.userid,id).subscribe((res: any) => {
+        console.log("res",res);
+        if (res.message == 'Product is removed from subscribe') {         
+          this.toastr.error('Removed Successfully','');
+          this.issubscribed=res.is_in_subscribe
+          // this.sharedService.sendClickEvent();
+        }
+        else {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log("error", error);
       });
     }
   }
@@ -818,6 +843,14 @@ export class ProductdetailComponent implements OnInit {
   iswishlist(prodid: any) {
     this.request.checkwishlist(prodid, this.userid).subscribe((response: any) => {
       this.iswishlistt = response;
+    },
+      (error: any) => {
+        console.log(error);
+      });
+  }
+  issubscriber(prodid: any) {
+    this.request.checksubscribe(prodid, this.userid).subscribe((response: any) => {
+      this.issubscribed = response?.is_in_subscribe;   
     },
       (error: any) => {
         console.log(error);

@@ -27,10 +27,8 @@ import { SignupComponent } from '../signup/signup.component';
 })
 export class LoginComponent implements OnInit {
   meetings = [
-
     { id: 'phone', value: 'phone' },
     { id: 'email', value: 'email' },
-
   ];
   forgotForm!: FormGroup;
   passwordForm!: FormGroup;
@@ -67,7 +65,6 @@ export class LoginComponent implements OnInit {
   error5: any;
   error6: any;
   error7: any;
-
   ClickEventSubscription !: Subscription;
   errorb: any;
   btnloading!: boolean;
@@ -76,9 +73,7 @@ export class LoginComponent implements OnInit {
   fpassotploading!: boolean;
   resendloading!: boolean;
   logbtnloading: boolean = false;
-
   // @ViewChild('myModal') myModal : any;
- 
 
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
     private formBuilder: FormBuilder, private authService: AuthService, private sharedService: SharedService,
@@ -130,7 +125,6 @@ export class LoginComponent implements OnInit {
 
   openloginn(content:any) {
     console.log("open");
-    
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'sm',
@@ -181,11 +175,8 @@ export class LoginComponent implements OnInit {
             }
             if (res.message == "Successfully logged in") {
               this.toastr.success('logged in Successfully', '');
-
               this.sharedService.sendClickEvent();
-
-              this.router.navigate(['/home'])
-                .then(() => {
+              this.router.navigate(['/home']).then(() => {
                   window.location.reload();
                 });
             }
@@ -234,7 +225,6 @@ export class LoginComponent implements OnInit {
       user_id: this.userid ?? null,
       register_by: "email",
     }
-
     this.authService.resendotp(edata2).subscribe(
       (res) => {
         console.log("resend response", res);

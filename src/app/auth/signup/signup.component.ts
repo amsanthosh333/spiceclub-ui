@@ -80,8 +80,7 @@ export class SignupComponent implements OnInit {
              email:""+this.registerForm.controls['email'].value,
              phone:""+this.registerForm.controls['Mobile'].value,
              password:""+this.registerForm.controls['password'].value,
-             passowrd_confirmation:""+this.registerForm.controls['confirmpassword'].value,
-             
+             passowrd_confirmation:""+this.registerForm.controls['confirmpassword'].value,    
              buyer_type:""+this.registerForm.controls['buyer_type'].value,
            }
       this.authService.adduser(edata).subscribe(

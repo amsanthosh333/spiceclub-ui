@@ -174,8 +174,7 @@ export class AuthService {
         // console.log("currentuser:",user);
         return user;
       })
-    );
-      
+    );  
   }
   sociallogin(body: any) { 
     this.url = `${this.endPoint1}/auth/social-login-count`;

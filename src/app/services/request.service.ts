@@ -179,6 +179,16 @@ public checkwishlist(prodid:any,userid:any){
   return this.http.get(this.url, {headers:headers});
 
 }
+public checksubscribe(prodid:any,userid:any){
+  const headers = new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('X-Requested-With', 'XMLHttpRequest') 
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken)
+  
+  this.url = `${this.endPoint1}/subscribes-check-product?product_id=`+prodid+`&user_id=`+ userid;
+  return this.http.get(this.url, {headers:headers});
+
+}
 public addtowishlist(body: any) {
   const headers = new HttpHeaders()
       .set('content-type', 'application/json')
@@ -200,6 +210,15 @@ public addtowishlist(body: any) {
         return this.http.get(this.url, {headers:headers});
      
     }
+    public removefromsubscribe(userid: any,prdid:any) {
+      const headers = new HttpHeaders()
+          .set('content-type', 'application/json')
+          .set('X-Requested-With', 'XMLHttpRequest')
+          .set('Authorization', 'Bearer'+' '+ this.accesstoken)      
+          this.url = `${this.endPoint1}/subscribes-remove-product?product_id=`+ prdid+`&user_id=` +userid;
+          console.log("this.url",this.url);      
+          return this.http.get(this.url, {headers:headers});     
+      }
   // deals
   public gettodaysdeal() {
     this.url = `${this.endPoint1}/products/todays-deal?user_id=`+ this.userid+`&buyertype=` +this.buyertypeid;

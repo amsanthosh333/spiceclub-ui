@@ -63,7 +63,6 @@ export class AddressComponent implements OnInit {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
-
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -91,18 +90,14 @@ export class AddressComponent implements OnInit {
     this.viewcountry();
     this. viewstate();
     this.viewCity();
-
-    this.register = this.fb.group({
-     
+    this.register = this.fb.group({    
      address: ['', [Validators.required]],
       country: ['', [Validators.required]],
       state: ['',[Validators.required]],
       city: ['', [Validators.required]],
       postal_code: ['', [Validators.required]],
       phone: [ '',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$") ]],
-
     });
-
 
     this.editForm = this.fb.group({ 
       address: ['', [Validators.required]],

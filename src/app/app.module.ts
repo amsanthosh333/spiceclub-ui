@@ -10,9 +10,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { FormsModule, } from '@angular/forms';
-
 import { AuthModule } from './auth/auth.module';
-
 import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
 import { FeaturedComponent } from './products/featured/featured.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';

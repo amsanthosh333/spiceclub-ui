@@ -1,10 +1,8 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<!--=======  header bottom  =======-->
-
 	<div class="scroller" style="background:#ce2127; text-align: end;">
 		<!-- <marquee behavior="scrol" direction="left"><h3 style="color: white;">Spice Club</h3></marquee> -->
 		<h3 style="color: white;">Spice Club</h3>
-
 	</div>
 	<div class="header-bottom pt-md-40 pb-md-40 ">
 		<div class="container wide">
@@ -17,7 +15,6 @@
 								alt=""></a>
 					</div>
 				</div>
-
 				<!--=======  header bottom navigation  =======-->
 				<div class="main">
 					<div class="inputroup">
@@ -30,14 +27,7 @@
 								</button>
 							</div>
 						</form>
-
-
-
-
 					</div>
-
-
-
 				</div>
 				<div>
 					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"  (click)="openkyc()">
@@ -47,7 +37,6 @@
 						<a class="btn btn-info" id="buttonkyc1">Kyc verification inprogress</a>
 					</div>
 				</div>
-
 				<div class="header-right-container">
 
 					<!--=======  header right icons  =======-->
@@ -59,7 +48,6 @@
 								<i class="ion-ios-search-strong"></i>
 							</a>
 						</div> -->
-
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
 								<i class="ion-android-person" *ngIf="(userid!==0)"></i>
@@ -68,7 +56,6 @@
 								<i class="ion-android-person" *ngIf="(userid==0)"></i>
 							</a>
 						</div>
-
 						<div class="single-icon wishlist">
 							<a href="javascript:void(0)" id="offcanvas-wishlist-icon">
 								<i class="ion-android-favorite-outline" *ngIf="(userid!==0)"></i>
@@ -82,7 +69,6 @@
 									(click)="openlogin()">Login</button>
 							</a>
 						</div>
-
 						<div class="single-icon cart">
 							<a href="javascript:void(0)" id="offcanvas-cart-icon">
 								<i class="ion-ios-cart" *ngIf="(userid!==0)"></i>
@@ -100,11 +86,8 @@
 							<a id="offcanart-icon" *ngIf="(userid!==0)">
 								<button type="button" (click)="logout1()" class="btn"
 									style="background-color: #ccccd3;">Logout</button>
-
 							</a>
 						</div>
-
-
 						<div class="single-icon drop">
 							<a id="offcanart-icon">
 								<div class="dropdown" style="float:right;">
@@ -141,7 +124,6 @@
 								<i class="ion-ios-search-strong"></i>
 							</a>
 						</div>
-
 						<!--=======  End of single-icon  =======-->
 						<!--=======  single-icon  =======-->
 

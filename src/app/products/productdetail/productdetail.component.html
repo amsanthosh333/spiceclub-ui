@@ -491,10 +491,7 @@
                                     <!--=======  End of shop product description  =======-->
                                 </div>
                             </div>
-
-
                         </div>
-
                     </div>
                 </div>
 
@@ -502,7 +499,6 @@
 
             <div class="col-lg-3 order-2 order-lg-1">
                 <!-- related -->
-
                 <div class="sidecard mt-80">
                     <div class="shop-product__block shop-product__block--size mb-10">
                         <div class="shop-product__block__title">Price: </div>
@@ -519,7 +515,6 @@
                             </div>
                         </div>
                     </div>
-
 
                     <div class="shop-product__block shop-product__block--quantity mb-10 ">
                         <div class="shop-product__block__title">Quantity: </div>
@@ -541,7 +536,6 @@
                                 </div>
                             </div>
                         </form>
-
                     </div>
                     <!-- <div class="shop-productt">
                         <div class="k pt-1 pl-15">
@@ -555,7 +549,6 @@
                             <strong><span style="color: red;"> Rs {{totalprice}}</span></strong>
                             
                         </div>
-
                     </div>
                     <button *ngIf="stk!==0" type="button" class="btn btn-primary"
                         style=" width: -webkit-fill-available; margin-bottom: 3px;" (click)="addtocart(Peoduct.id)"> <i
@@ -563,30 +556,30 @@
                             class="icon-left ion-ios-cart"></i> Add to cart</button>
                     <button *ngIf="stk==0" type="button" class="btn btn-danger" style=" width: -webkit-fill-available;"
                         (click)="addtocart(Peoduct.id)">Out of stock</button>
-                   
-                    
+                                
                     <button *ngIf="(iswishlistt?.is_in_wishlist==false)" type="button" class="btn btn-primary"
                         style=" width: -webkit-fill-available; margin-bottom: 3px;" (click)="addtowishlist(Peoduct?.id)"><i
                             class="ion-android-favorite-outline"></i> Add to Wishlist</button>
-                    <button *ngIf="(iswishlistt?.is_in_wishlist==true)" type="button" class="btn btn-primary"
+                    <button   type="button" class="btn btn-primary" *ngIf="(iswishlistt?.is_in_wishlist==true)"
                         style=" width: -webkit-fill-available;margin-bottom: 3px;" (click)="deleteRecord(Peoduct?.id)"> <i
                             class="ion-android-favorite" style="color: rgb(255, 255, 255);"></i> Remove from Wishlist</button>
                         <button *ngIf="userid==0" type="button" class="btn btn-primary"
                         style=" width: -webkit-fill-available;" (click)="addtowishlist(Peoduct?.id)"><i
                             class="ion-android-favorite-outline"></i> Add to Wishlist</button>
                    
-                        <button  type="button" class="btn btn-primary"
+                        <button  type="button" class="btn btn-primary"  *ngIf="(issubscribed== false)"
                         style=" width: -webkit-fill-available;margin-top: 3px;" (click)="addtosubscribe(Peoduct?.id)"> <i
-                            class="ion-android-thumbs-up" style="color: rgb(255, 255, 255);" ></i> Subscribe & Save</button>
-                    <!-- <div class="shop-product__buttons " style="display: flex;
+                        class="bi bi-hand-thumbs-up-fill" style="color: rgb(255, 255, 255);" ></i> Subscribe & Save</button>
+                            <button  type="button" class="btn btn-primary"   *ngIf="(issubscribed== true)"
+                            style=" width: -webkit-fill-available;margin-top: 3px;" (click)="removefromsubscribe(Peoduct?.id)"> <i
+                            class="bi bi-hand-thumbs-down-fill" style="color: rgb(255, 255, 255);"></i> Remove from Subscribe</button>
+                    <!-- <div class="shop-product__buttons " style="display: flex;    is_in_subscribe
                     align-items: center;
                     justify-content: center;">
                         <a class="lezada-button lezada-button--medium" *ngIf="stk!==0"
                             (click)="addtocart(Peoduct.id)">add to cart</a>
                         <a class="lezada-button lezada-button--medium" *ngIf="stk==0">out of stock</a>
-
                     </div> -->
-
                 </div>
                 <br>
                 <share-buttons theme="modern-dark"
@@ -594,9 +587,7 @@
                     [size]="1"   [showText]="false" url="currenturl" [description]="productname" class="pt-0 mb-2">
                 </share-buttons>
             </div>
-
         </div>
-
         <!-- description  & additional information  & Rating -->
         <!-- <div class="row">
             <div class="col-lg-12">
