@@ -274,6 +274,16 @@ public addkyc(body:any) {
    this.url = `${this.endPoint1}/kyc/submit`;
    return this.http.post(this.url,body,{headers:headers});
 }
+//B2b enquiry 
+
+public sendenquiry(body:any) {
+  const headers = new HttpHeaders()
+  .set('content-type', 'application/json')
+  .set('Authorization', 'Bearer'+' '+ this.accesstoken)    
+   this.url = `${this.endPoint1}/b2benquery/submit`;
+   console.log(this.url);
+   return this.http.post(this.url,body,{headers:headers});
+}
 // address
 public addaddress(body:any) {
   const headers = new HttpHeaders()

@@ -59,6 +59,7 @@ const routes: Routes = [
   { path: 'return', loadChildren: () => import('./pages/return/return.module').then(m => m.ReturnModule) },
   { path: 'kyc', loadChildren: () => import('./profiledetails/kyc/kyc.module').then(m => m.KycModule) },
   { path: 'subscribedprod', loadChildren: () => import('./products/subscribedprod/subscribedprod.module').then(m => m.SubscribedprodModule) },
+  { path: 'enquiry', loadChildren: () => import('./profiledetails/enquiry/enquiry.module').then(m => m.EnquiryModule) },
  
   
 ];

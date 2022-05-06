@@ -1,28 +1,30 @@
 td{
-    color:#474747; ;
-    font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
   }
   p{
-    color:#474747; ;
-    font-family: 'Poppins', sans-serif;
+    color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
   }
   th h6{
       padding-bottom: 0px;
   }
   h2{
   
-    font-family: 'Poppins', sans-serif;
+  
+    font-family: Arial, Helvetica, sans-serif;
   }
   button{
-    font-family: 'Poppins', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
   }
 
   label{
-    color:#474747; ;
-    font-family: 'Poppins', sans-serif;
+    color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
   }
   h6 span{
-    font-family: 'Poppins', sans-serif;
+    
+    font-family: Arial, Helvetica, sans-serif;
   }
  
 .checkout-cart-total {
@@ -59,20 +61,20 @@ td{
 }
 
 .product-price a {
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .product-name a {
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .labell{
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #loading{

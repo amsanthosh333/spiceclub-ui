@@ -337,9 +337,9 @@ li.has-children.active{
      -moz-appearance: textfield;
    }  
    .shop-product__block__value .shop-product-size-list .single-size.active{
-    font-size: 13px;
-    line-height: 22px;
-    margin-right: 11px;
+    font-size: 11px;
+  line-height: 22px;
+  margin-right: 5px;
     cursor: pointer;
     color: #ffffff;
     padding: 4px;
@@ -348,6 +348,9 @@ li.has-children.active{
 }
 
 .shop-product__block__value .shop-product-size-list .single-size {
+  font-size: 11px;
+  line-height: 22px;
+  margin-right: 5px;
   background-color: #cc3c2200;
   color:#f14014;
   border: 1px solid red;

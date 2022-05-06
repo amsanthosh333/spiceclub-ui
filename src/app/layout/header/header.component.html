@@ -98,6 +98,7 @@
 										<a routerLink="/category">ShopByCategory</a>
 										<a routerLink="/blog">Blog</a>
 										<a routerLink="/recipe">Recipe</a>
+										<a *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"  (click)="openkyc()" >Kyc</a>
 										<hr>
 										<a id="loginside" routerLink="/login" *ngIf="(userid==0)">Login</a>
 										<hr>
@@ -359,6 +360,10 @@
 				<div class="row mb-3 ml-4" id="closeabout" (click)="openkyc()" *ngIf="buyertypereal===2 && kyc_verify_status==0">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
 					<h6 class="col-8"><a>Kyc</a></h6>
+				</div>
+				<div  class="row mb-3 ml-4" id="closeabout"  (click)="openenquery()" *ngIf="buyertypeid==2">
+					<h6 class="col-2" ><i class="ionicons ion-ios-information"></i> </h6>
+					<h6 class="col-8" ><a>Enquiry</a></h6>
 				</div>
 				<hr>
 				<div class="row mb-2 ml-4" id="closeabout">

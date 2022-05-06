@@ -28,8 +28,6 @@ import { FormsModule } from '@angular/forms';
     ShareButtonsModule.withConfig({
          debug:true,
     }),ShareIconsModule,ShareModule
-
-    
   ],
  
 })

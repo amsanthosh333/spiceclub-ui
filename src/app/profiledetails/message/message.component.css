@@ -4,8 +4,8 @@
   color: rgb(228, 13, 13);
   }
 input{
-  color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 @media (max-width: 750px) {
  #windowconv{
@@ -38,15 +38,15 @@ display: inline;
      }
 
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+	color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 p{
   
-	font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 span{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container{max-width:1170px; margin:auto;}

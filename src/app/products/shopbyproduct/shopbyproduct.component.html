@@ -607,7 +607,7 @@
                                 <div class="col-9 ">
                                     <div class="shop-product__block__value" *ngFor="let a of choice">
 
-                                        <div class="shop-product-size-list">
+                                        <div class="shop-product-size-list ">
                                             <span class="single-size" *ngFor="let b of a.options;let i=index"
                                             [ngClass]="{'active': subItemm === i}"    (click)="selectvar(b,i)">{{b}}</span>
 

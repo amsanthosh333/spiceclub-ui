@@ -18,6 +18,7 @@ import { SharedService } from 'src/app/services/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from '../../auth/login/login.component';
 import { KycComponent } from 'src/app/profiledetails/kyc/kyc.component';
+import { EnquiryComponent } from 'src/app/profiledetails/enquiry/enquiry.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -264,13 +265,13 @@ export class HeaderComponent implements OnInit {
         $(".overlay-close").addClass("active").removeClass("inactive");
         $("body").addClass("active-body-search-overlay");
       });
-
+ 
       $("#about-close-icon, .overlay-close, #closeabout").on("click", function () {
         $("#about-overlay").toggleClass("active-about-overlay");
         $(".overlay-close").addClass("inactive").removeClass("active");
         $("body").removeClass("active-body-search-overlay");
       });
-
+      
       /* active and deactive wishlist overlay */
 
       $("#offcanvas-wishlist-icon, #offcanvas-wishlist-icon-2").on(
@@ -1786,10 +1787,23 @@ export class HeaderComponent implements OnInit {
   }
   
   openkyc(){
+    $("#about-overlay").toggleClass("active-about-overlay");
+        $(".overlay-close").addClass("inactive").removeClass("active");
+        $("body").removeClass("active-body-search-overlay");
     this.modalService.open(KycComponent, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
     });
+  }
+  openenquery(){
+    $("#about-overlay").toggleClass("active-about-overlay");
+    $(".overlay-close").addClass("inactive").removeClass("active");
+    $("body").removeClass("active-body-search-overlay");
+    this.modalService.open(EnquiryComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
+
   }
 }
 

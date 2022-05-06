@@ -59,7 +59,7 @@ max-height: 3.2rem;
 .title h3 a{
   font-size: 13px;
   color: #140f0f ;
-  font-family: 'Roboto',Arial,sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0;
   text-decoration: none; 
 }
@@ -79,24 +79,24 @@ max-height: 3.2rem;
     }
     }
 p span{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 p{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 input{
-  color: #474747 ;
-  font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .avialable-amount{
-  color: #474747 ;
-  font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 .h5 {
   color: red;
 }
 .single-size{
-  font-family: 'Poppins', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 li.has-children.active a{
@@ -110,8 +110,8 @@ li.has-children.active a{
     overflow: hidden;
   }
   .breadcrumb-list__item{
-    color: #474747 ;
-    font-family: 'Poppins', sans-serif;
+    color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
   }
   .single-product__floating-badges {
     position: absolute;
@@ -177,9 +177,9 @@ li.has-children.active a{
      -moz-appearance: textfield;
    }  
    .shop-product__block__value .shop-product-size-list .single-size.active{
-    font-size: 13px;
-    line-height: 22px;
-    margin-right: 11px;
+    font-size: 11px;
+  line-height: 22px;
+  margin-right: 5px;
     cursor: pointer;
     color: #ffffff;
     padding: 4px;
@@ -188,6 +188,9 @@ li.has-children.active a{
 }
 
 .shop-product__block__value .shop-product-size-list .single-size {
+  font-size: 11px;
+  line-height: 22px;
+  margin-right: 5px;
   background-color: #cc3c2200;
   color:#f14014;
   border: 1px solid red;

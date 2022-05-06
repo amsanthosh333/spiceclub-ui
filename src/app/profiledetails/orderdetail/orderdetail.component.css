@@ -1,33 +1,33 @@
 .breadcrumb-list__item{
-	color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 strong{
-  color: #070707 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 h6 strong{
-  color:  #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
   font-size: 0.8em;
 }
 span{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
 }
 th{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
 }
 tr{
-  color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+  color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
 }
 p{
     border-bottom: none;
     padding: 0px;
-    color: #474747 ;
-	font-family: 'Poppins', sans-serif;
+    color: #140f0f ;
+    font-family: Arial, Helvetica, sans-serif;
 }
 .someclass{
         height: 15px;
