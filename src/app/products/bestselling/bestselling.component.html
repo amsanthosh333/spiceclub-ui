@@ -26,7 +26,7 @@
     <div class="shop-page-content mt-15 mb-15">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 order-2 order-lg-1 mt-30">
+                <div class="col-lg-3 order-2 order-lg-1" id="sidee">
                     <!--=======  page sidebar  =======-->
 
                     <div class="single-sidebar-widget mb-40">
@@ -45,7 +45,7 @@
                                     <div class="single-widget-product__image">
                                         <a>
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="">
+                                                class="img-fluid" id="todays" alt="">
                                         </a>
                                     </div>
                                     <div class="single-widget-product__content">
@@ -162,7 +162,7 @@
                     <!--=======  End of page sidebar  =======-->
                 </div>
 
-                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" *ngIf="!prodloader">
+                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-30 mt-10" *ngIf="!prodloader">
 
                     <div class="row product-isotope shop-product-wrap four-column">
 
@@ -174,7 +174,7 @@
                             <div class="single-product" >
                                 <!--=======  single product image  =======-->
 
-                                <div class="single-product__image" style="overflow: hidden;">
+                                <div class="single-product__image"  style="overflow: hidden;">
                                     <div class="imglazy" (click)=" proddetail(img.id)">
                                         <ngx-skeleton-loader count="1" *ngIf="!imgloader"
                                             [theme]="{ 'margin-left':'10px', 'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
@@ -273,9 +273,9 @@
                 </div>
                 <!--  productslazyloading -->
                 <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
-                    <div id="" class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;"> 
+                    <div id="prodload" class="row product-isotope shop-product-wrap four-column"> 
                         <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-                            <div class="single-product" style="height: 250px; width: 200px;">
+                            <div class="single-product" id style="height: 250px; width: 200px;">
                                 <ngx-skeleton-loader count="1"
                                     [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                 </ngx-skeleton-loader>

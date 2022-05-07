@@ -29,6 +29,7 @@
 						</form>
 					</div>
 				</div>
+				
 				<div>
 					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"  (click)="openkyc()">
 						<a class="btn btn-info" id="buttonkyc">Verify Kyc</a>
@@ -43,11 +44,11 @@
 
 
 					<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
-						<!-- <div class="single-icon search">
+						<div class="single-icon search">
 							<a href="javascript:void(0)" id="search-icon">
 								<i class="ion-ios-search-strong"></i>
 							</a>
-						</div> -->
+						</div>
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
 								<i class="ion-android-person" *ngIf="(userid!==0)"></i>
