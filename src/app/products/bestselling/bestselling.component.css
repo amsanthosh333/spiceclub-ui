@@ -107,6 +107,9 @@ height: 130px;
     position: relative;
     overflow: hidden;
 }
+#quickimg{
+  margin-left: 35px;
+}
 #offtag {
   display: block;
   width: 120px;
@@ -144,6 +147,7 @@ height: 130px;
   #prodload{
     margin-right: -100px;
   }
+
   #offtag {
     display: block;
     width: 120px;

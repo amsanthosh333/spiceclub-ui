@@ -73,7 +73,7 @@
     max-width: 100%;
     height: auto;
   }
-
+ 
   .col-lg-2 {
     flex: 0 0 auto;
     width: 15.666667%;
@@ -102,7 +102,9 @@
     max-width: 100%;
     height: 200px;
   }
-
+  #quickimg{
+    margin-left: 35px;
+  }
   .col-lg-2 {
     flex: 0 0 auto;
     width: 87.666667%;
@@ -126,6 +128,12 @@
     margin-left: 0px;
     display: inline;
 }
+.imglazy {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  overflow: hidden;
+}
 }
 
 body {
@@ -138,12 +146,7 @@ body {
   border: 0px solid #ffffff;
 }
 
-.imglazy {
-  height: 200px;
-  width: 200px;
-  position: relative;
-  overflow: hidden;
-}
+
 
 .carousall {
   background-color: rgb(255, 255, 255);
@@ -436,6 +439,12 @@ a.next.icons.next-icon {
     max-width: 100%;
     height: auto;
   }
+  .imglazy {
+    height: 240px;
+    width: 95%;
+    position: relative;
+    overflow: hidden;
+  }
 }
 
 @media (max-width: 992px) {
@@ -531,8 +540,6 @@ input[type=number] {
   top: 150px;
   font-family: arial;
   font-size: 10px;
-
-
 }
 
 #offtag2 {
@@ -569,15 +576,8 @@ input[type=number] {
   font-size: 10px;
 }
 
-/* <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
-   <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
-  <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span> */
-.imglazy {
-  height: 240px;
-  width: 95%;
-  position: relative;
-  overflow: hidden;
-}
+
+
 
 .imglaz {
   height: 152px;

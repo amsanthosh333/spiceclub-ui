@@ -37,7 +37,7 @@
 
 						<!--=======  single sidebar widget  =======-->
 
-						<div class="single-sidebar-widget mb-40 mt-30">
+						<div class="single-sidebar-widget mb-20 ">
 							<h2 class="single-sidebar-widget--title">Deal of the month</h2>
 
 							<!--=======  widget product wrapper  =======-->
@@ -51,7 +51,7 @@
 
 										<div class="single-widget-product__image" (click)="proddetail(img.id)" style="overflow: hidden;">
 											<a >
-												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+												<img id="todaysimg" src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
 													class="img-fluid" alt="">
 												
 											</a>
@@ -156,7 +156,7 @@
 
 						<!--=======  single sidebar widget  =======-->
 
-						<div class="single-sidebar-widget mb-40 mt-30">
+						<div class="single-sidebar-widget mb-20 ">
 							<h2 class="single-sidebar-widget--title">Today's deal</h2>
 							<!--=======  widget product wrapper  =======-->
 							<div class="widget-product-wrapper">
@@ -168,7 +168,7 @@
 
 										<div class="single-widget-product__image" (click)="proddetail(img.id)" style="overflow: hidden;">
 											<a >
-												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+												<img id="todaysimg" src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
 													class="img-fluid" alt="">
 												
 											</a>
@@ -269,7 +269,7 @@
 					<!--=======  End of page sidebar  =======-->
 				</div>
 
-				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" *ngIf="!prodloader">
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-10 mt-10" *ngIf="!prodloader">
 
 					<div class="row product-isotope shop-product-wrap four-column">
 
@@ -451,7 +451,7 @@
 				</div>
 				<!--  productslazyloading -->
 				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
-					<div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;">
+					<div id="prodload" class="row product-isotope shop-product-wrap four-column" >
 						<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
 							<div class="single-product" style="height: 250px; width: 200px;">
 								<ngx-skeleton-loader count="1"
@@ -486,7 +486,7 @@
 									data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
 									<div class="carousel-box img-zoom rounded"
 										style="width: 100%; display: inline-block; position: relative; overflow: hidden;">
-										<img class="img-fluid ls-is-cached lazyloaded"
+										<img id="quickimg" class="img-fluid ls-is-cached lazyloaded"
 											src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
 											data-src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}">
 										<img role="presentation" alt=""
