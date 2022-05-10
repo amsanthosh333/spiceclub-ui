@@ -22,7 +22,7 @@ export class OrderdetailComponent implements OnInit {
  
 
   //Demo purpose only, Data might come from Api calls/service
-  public counts = ["Order Placed","Confirmed","Picked Up","On The Way","Delivered"];
+  public counts = ["Open","In Progress","Packing","Shipped","Delivered","Cancelled"];
   //  public orderStatus ="Delivered"
   currentRate = 0;
   currentUserSubject: BehaviorSubject<User>;
@@ -108,20 +108,16 @@ export class OrderdetailComponent implements OnInit {
   }
 
   viewitem(){
-
     this.request.vieworderitems(this.ord_id).subscribe((response: any) => {
-      console.log("ITEMS",response);
-      
+      console.log("ITEMS",response);   
     this.Items=response.data;   
-    this.loader=false;  
-      
+    this.loader=false;       
     }
     ); 
   }
   addcomment(form: FormGroup,id:any){
     this.error1 = '';
     if (this.register.invalid) {
-  
       if(!this.register.get('rating')?.valid){
         this.error1 = '*give star';
       }

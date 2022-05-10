@@ -99,8 +99,66 @@ a:not([href]):not([class]):hover {
     flex: 0 0 auto;
     width: 23%;
   }
-}
+  .imglazy{
+    height: 240px;
+    width: 200px;
+    position: relative;
+    overflow: hidden;
+  }
+  #prodload{
+    margin-right: -100px;
+  }
 
+  #offtag {
+    display: block;
+    width: 120px;
+    height: 24px;
+    background-color: #ff8100;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(310deg);
+    position: absolute;
+    text-align: center;
+    line-height: 24px;
+    right: -30px;
+    top: 190px;
+    font-family: arial;
+    font-size: 10px;
+  }
+}
+@media (max-width: 992px) {
+  .ng5-slider {
+    display: inline-block;
+    position: relative;
+    height: 4px;
+    width: 78%;
+}
+.imglazy{
+  height: 200px;
+  width: 200px;
+  position: relative;
+  overflow: hidden;
+}
+#quickimg{
+margin-left: 35px;
+}
+#offtag {
+display: block;
+width: 120px;
+height: 24px;
+background-color: #ff8100;
+-ms-transform: rotate(45deg);
+-webkit-transform: rotate(45deg);
+transform: rotate(310deg);
+position: absolute;
+text-align: center;
+line-height: 24px;
+right: -30px;
+top: 150px;
+font-family: arial;
+font-size: 10px;
+}
+}
 p span {
   font-family: 'Poppins', sans-serif;
 }
@@ -169,12 +227,6 @@ li.has-children.active a {
   pointer-events: none;
 }
 
-.imglazy {
-  height: 240px;
-  width: 200px;
-  position: relative;
-  overflow: hidden;
-}
 
 .has-children a {
   color: #140f0f;
@@ -218,6 +270,7 @@ select {
     flex: 0 0 auto;
     width: 23%;
   }
+  
 }
 
 @media (max-width : 800px) {
@@ -390,22 +443,7 @@ width: 40px;
 }
 
 
-#offtag {
-  display: block;
-  width: 120px;
-  height: 24px;
-  background-color: #ff8100;
-  -ms-transform: rotate(45deg);
-  -webkit-transform: rotate(45deg);
-  transform: rotate(310deg);
-  position: absolute;
-  text-align: center;
-  line-height: 24px;
-  right: -30px;
-  top: 190px;
-  font-family: arial;
-  font-size: 10px;
-}
+
 
 @media (max-width : 800px) {
 

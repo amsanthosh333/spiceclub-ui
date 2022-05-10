@@ -91,6 +91,31 @@
       max-width: 100%;
       height: 200px;
     }
+    .imglazy{
+      height: 200px;
+      width: 200px;
+      position: relative;
+      overflow: hidden;
+  }
+  #quickimg{
+    margin-left: 35px;
+  }
+  #offtag {
+    display: block;
+    width: 120px;
+    height: 24px;
+    background-color: #ff8100;
+    -ms-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    transform: rotate(310deg);
+    position: absolute;
+    text-align: center;
+    line-height: 24px;
+    right: -30px;
+    top: 150px;
+    font-family: arial;
+    font-size: 10px;
+  }
     }
   
   .title h3 a{
@@ -118,14 +143,35 @@
           flex: 0 0 auto;
           width: 23%;
       }
+      .imglazy{
+        height: 240px;
+        width: 200px;
+        position: relative;
+        overflow: hidden;
+      }
+      #prodload{
+        margin-right: -100px;
+      }
+    
+      #offtag {
+        display: block;
+        width: 120px;
+        height: 24px;
+        background-color: #ff8100;
+        -ms-transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        transform: rotate(310deg);
+        position: absolute;
+        text-align: center;
+        line-height: 24px;
+        right: -30px;
+        top: 190px;
+        font-family: arial;
+        font-size: 10px;
+      }
       }
   
-  .imglazy{
-      height: 240px;
-      width: 200px;
-      position: relative;
-      overflow: hidden;
-    }
+ 
     .breadcrumb-list__item{
       color: #474747 ;
       font-family: 'Poppins', sans-serif;
@@ -235,22 +281,7 @@
     color:#f14014;
     border: 1px solid red;
   }
-  #offtag {
-    display: block;
-    width: 120px;
-    height: 24px;
-    background-color: #ff8100;
-    -ms-transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    transform: rotate(310deg);
-    position: absolute;
-    text-align: center;
-    line-height: 24px;
-    right: -30px;
-    top: 190px;
-    font-family: arial;
-    font-size: 10px;
-  }
+
   /* <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
      <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
     <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span> 

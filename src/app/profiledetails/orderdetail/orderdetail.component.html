@@ -130,8 +130,10 @@
 <div class="col-lg-12 mb-25" id="statusss" style="height: 80px; margin-right: 8%;">
     <div class="containerr" id="status">
         <span *ngFor="let item of counts;let i = index">
-            <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
-            <span class="circles" [class.active]="orderStatus == item"></span>
+            <span *ngIf="orderStatus!== 'Cancelled'" class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
+            <span *ngIf="orderStatus== 'Cancelled'"class="circle-desc1" [class.circle-desc1-active]="orderStatus == item">{{ item }}</span>
+            <span class="circles" *ngIf="orderStatus!== 'Cancelled'" [class.active]="orderStatus == item "></span>
+            <span class="circles1" *ngIf="orderStatus== 'Cancelled'" [class.active]="orderStatus == item "></span>
             <span class="bar" *ngIf="(i != counts.length-1)"></span>
         </span>
     </div>
