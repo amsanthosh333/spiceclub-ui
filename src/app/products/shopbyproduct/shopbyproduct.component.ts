@@ -124,6 +124,8 @@ export class ShopbyproductComponent implements OnInit {
   prod_pricee: any;
   directpage: boolean =true;
 
+  deals=[ "Todaysdeal", "DealofDay" , "DealofMonth"]
+
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
     private toastr: ToastrService, private sharedService: SharedService, private toast: ToastrService, private _location: Location,

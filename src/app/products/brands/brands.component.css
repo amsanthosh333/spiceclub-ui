@@ -107,7 +107,7 @@ max-height: 3.2rem;
     }
     @media (max-width : 992px) {  
       #quickimg{
-        margin-left: 35px;
+        /* margin-left: 35px; */
       }
       .imglazy{
         height: 200px;

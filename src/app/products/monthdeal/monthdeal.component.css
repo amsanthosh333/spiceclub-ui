@@ -80,7 +80,7 @@ a:not([href]):not([class]):hover {
   }
 
   #quickimg {
-    margin-left: 35px;
+    /* margin-left: 35px; */
   }
 
   .imglazy {

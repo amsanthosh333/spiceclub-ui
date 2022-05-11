@@ -24,14 +24,14 @@ export class EnquiryComponent implements OnInit {
   currentUser: Observable<User>;
   userid: any;
   accesstoken: any;
-  tokentype: any;Proce: any;
+  tokentype: any; Proce: any;
   currentdetail: User;
   register!: FormGroup;
   username: any;
   error2: any;
   filename1: any;
   filename2: any;
-  constructor(private modalService: NgbModal,private fb: FormBuilder,private formBuilder: FormBuilder,private request: RequestService,private toastr: ToastrService) {
+  constructor(private modalService: NgbModal, private fb: FormBuilder, private formBuilder: FormBuilder, private request: RequestService, private toastr: ToastrService) {
 
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -44,8 +44,8 @@ export class EnquiryComponent implements OnInit {
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
     this.registerForm = this.formBuilder.group({
-      product: ['',  [Validators.required]], 
-      product_description: ['',Validators.required],
+      product: ['', [Validators.required]],
+      product_description: ['', Validators.required],
       image: [''],
       // imagename: [''], 
       image2: [''],
@@ -54,82 +54,78 @@ export class EnquiryComponent implements OnInit {
       // imagename3: [''], 
     },
     );
-   }
+  }
 
   ngOnInit(): void {
   }
-  onSubmit(form: FormGroup){
+  onSubmit(form: FormGroup) {
     this.error2 = '';
-if (this.registerForm.invalid) {
-  if (!this.registerForm.get('product')?.valid) {
-    this.error2 = '* Enter product name';
-  }
-  else if (!this.registerForm.get('gstimg')?.valid) {
-    this.error2 = '* *Enter some words in description';
-  }
-  return;
-} else {
-  const edata = { 
-    user_id: this.userid,
-    product:form.value.product,
-    product_description:form.value.product_description,
-    image:this.gstImageBase64,
-    imagename:this.filename1,
-    image2:this.panImageBase64,
-    imagename2: this.filename2,
-    image3:"",
-    imagename3: ""
-  }
-  console.log("form valuessss",edata);
-  this.request.sendenquiry(edata).subscribe((res: any) => {
-    console.log("sendenquirysendenquirysendenquiry");
-    
-    console.log("sendenquiry response", res);
-    
-    if (res.result == true) {       
-      form.reset() 
-      this.toastr.success('Submited Successfully','');
-    this.modalService.dismissAll();  
+    if (this.registerForm.invalid) {
+      if (!this.registerForm.get('product')?.valid) {
+        this.error2 = '* Enter product name';
+      }
+      else if (!this.registerForm.get('gstimg')?.valid) {
+        this.error2 = '* *Enter some words in description';
+      }
+      return;
+    } else {
+      const edata = {
+        user_id: this.userid,
+        product: form.value.product,
+        product_description: form.value.product_description,
+        image: this.gstImageBase64,
+        imagename: this.filename1,
+        image2: this.panImageBase64,
+        imagename2: this.filename2,
+        image3: "",
+        imagename3: ""
+      }
+      console.log("form valuessss", edata);
+      this.request.sendenquiry(edata).subscribe((res: any) => {
+        console.log("sendenquirysendenquirysendenquiry");
+        console.log("sendenquiry response", res);
+        if (res.result == true) {
+          form.reset()
+          this.toastr.success('Submited Successfully', '');
+          this.modalService.dismissAll();
+        }
+        else {
+          this.toastr.info('Something went wrong', '');
+        }
+      }, (error: any) => {
+        console.log("error", error);
+        this.toastr.info('Something went wrong', '');
+      });
     }
-    else  {
-  this.toastr.info('Something went wrong','');
-    }
-  }, (error: any) => {
-    console.log("error",error);
-    this.toastr.info('Something went wrong','');
- 
-  });
-   }
-
 
   }
   fileChangeEvent(fileInput: any) {
-    this.filename1=fileInput.target.files[0].name;
+    this.filename1 = fileInput.target.files[0].name;
     if (fileInput.target.files && fileInput.target.files[0]) {
-        // Size Filter Bytes
-        const max_size = 20971520;
-        const allowed_types = ['image/png', 'image/jpeg'];
-        const max_height = 15200;
-        const max_width = 25600;
-        const reader = new FileReader();
-        reader.onload = (e: any) => {
-            const image = new Image();
-            image.src = e.target.result;
-            image.onload = rs => {             
-                // console.log(img_height, img_width);
-                    const imgBase64Path = e.target.result.split(',')[1];  
-                    this.gstImageBase64 = imgBase64Path;
-                    this.isImageSaved = true;
-                    // this.previewImagePath = imgBase64Path;
-                    console.log("imgBase64Path", imgBase64Path);               
-            };
+      // Size Filter Bytes
+      const max_size = 20971520;
+      const allowed_types = ['image/png', 'image/jpeg'];
+      const max_height = 15200;
+      const max_width = 25600;
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        const image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          // console.log(img_height, img_width);
+          const imgBase64Path = e.target.result.split(',')[1];
+          this.gstImageBase64 = imgBase64Path;
+          this.isImageSaved = true;
+          // this.previewImagePath = imgBase64Path;
+          console.log("imgBase64Path", imgBase64Path);
         };
-        reader.readAsDataURL(fileInput.target.files[0]);
+      };
+      reader.readAsDataURL(fileInput.target.files[0]);
     }
-}
-fileChangeEvent2(fileInput: any) {
-  this.filename2=fileInput.target.files[0].name;
-  if (fileInput.target.files && fileInput.target.files[0]) {
+  }
+  fileChangeEvent2(fileInput: any) {
+    this.filename2 = fileInput.target.files[0].name;
+    if (fileInput.target.files && fileInput.target.files[0]) {
       // Size Filter Bytes
       const max_size = 20971520;
       const allowed_types = ['image/png', 'image/jpeg'];
@@ -149,17 +145,17 @@ fileChangeEvent2(fileInput: any) {
       // }
       const reader = new FileReader();
       reader.onload = (e: any) => {
-          const image = new Image();
-          image.src = e.target.result;
-          image.onload = rs => {             
-                  const imgBase64Path = e.target.result.split(',')[1];  
-                  this.panImageBase64 = imgBase64Path;
-                  this.isImageSaved = true;
-                  // this.previewImagePath = imgBase64Path;
-                  console.log("imgBase64Path pan", imgBase64Path);               
-          };
+        const image = new Image();
+        image.src = e.target.result;
+        image.onload = rs => {
+          const imgBase64Path = e.target.result.split(',')[1];
+          this.panImageBase64 = imgBase64Path;
+          this.isImageSaved = true;
+          // this.previewImagePath = imgBase64Path;
+          console.log("imgBase64Path pan", imgBase64Path);
+        };
       };
       reader.readAsDataURL(fileInput.target.files[0]);
+    }
   }
-}
 }

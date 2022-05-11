@@ -92,6 +92,9 @@ a:not([href]):not([class]):hover {
   .product-isotope {
     margin-right: -100px;
   }
+  #deals{
+    display: none;
+  }
 }
 
 @media (min-width: 992px) {
@@ -140,7 +143,7 @@ a:not([href]):not([class]):hover {
   overflow: hidden;
 }
 #quickimg{
-margin-left: 35px;
+/* margin-left: 35px; */
 }
 #offtag {
 display: block;

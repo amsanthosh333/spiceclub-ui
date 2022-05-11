@@ -94,7 +94,8 @@
 								<div class="dropdown" style="float:right;">
 									<i class="bi bi-three-dots-vertical"></i>
 									<div class="dropdown-content">
-										<a routerLink="/subscribedprod">Subscription</a>
+										<a routerLink="/subscribedprod" *ngIf="(userid!==0)">Subscription</a>
+										<a *ngIf="(userid==0)" (click)="openlogin()">Subscription</a>
 										<a routerLink="/shopbyproduct">ShopByProduct</a>
 										<a routerLink="/category">ShopByCategory</a>
 										<a routerLink="/blog">Blog</a>

@@ -75,10 +75,10 @@ a:not([href]):not([class]):hover {
   text-decoration: none;
 }
 @media (max-width: 992px) {
-  .img-fluid {
+  /* .img-fluid {
     max-width: 100%;
-    height: 200px;
-  }
+    height: auto;
+  } */
   #todaysimg{
     max-width: 100%;
     height: 100px;
@@ -93,7 +93,7 @@ a:not([href]):not([class]):hover {
     overflow: hidden;
 }
 #quickimg{
-  margin-left: 35px;
+  /* margin-left: 35px; */
 }
 #offtag {
   display: block;

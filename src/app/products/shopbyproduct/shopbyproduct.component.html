@@ -65,6 +65,25 @@
                                 </li>
                             </ul>
                         </nav>
+
+                        <nav id="deals" class="site-nav center-menu" style="height: 80px;">
+                            <ul id="ulsort">
+                                <li class="menu-item-has-children"><a href="javascript:void(0)"><span
+                                            style="color: rgb(139, 139, 139);">Deals</span></a>
+                                    <ul class="sub-menu single-column-menu">
+                                        <li style="margin-bottom:25px ;" [ngClass]="{'active': headItem === 1}" (click)="viewalldeal()" (click)="headactive(1)">
+                                            All</li>
+                                        <li style="margin-bottom:25px ;" [ngClass]="{'active': headItem === 2}" (click)="viewtodaysdeal()"
+                                            (click)="headactive(2)">Todaysdeal</li>
+                                        <!-- <li (click)="viewflashdeal()">Flashdeal</li> -->
+                                        <li style="margin-bottom:25px ;" [ngClass]="{'active': headItem === 3}" (click)="viewdealofday()"
+                                            (click)="headactive(3)">Dealofday</li>
+                                        <li style="margin-bottom:25px ;" [ngClass]="{'active': headItem === 4}" (click)="viewdealofmonth()"
+                                            (click)="headactive(4)">Dealofmonth</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </nav>
                         <!--=======  advance filter icon  =====    (click)="opensort(sortRecord)"  ==-->
 
                         <div id="fill" class="single-icon advance-filter-icon" (click)="opensort(sortRecord)">
@@ -529,7 +548,7 @@
                                     data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
                                     <div class="carousel-box img-zoom rounded"
                                         style="width: 100%; display: inline-block; position: relative; overflow: hidden;">
-                                        <img  class="img-fluid ls-is-cached lazyloaded"
+                                        <img id="quickimg" class="img-fluid ls-is-cached lazyloaded"
                                             src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
                                             data-src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}">
                                         <img role="presentation" alt=""
