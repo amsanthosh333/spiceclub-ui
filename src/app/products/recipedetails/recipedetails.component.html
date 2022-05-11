@@ -497,11 +497,6 @@
                                                                     class="pt-0 mb-2">
                                                                 </share-buttons>
 
-                                                                <span >
-                                                                    <a  (click)="shareinstaUrl(currenturl)">
-                                                                    <img src="assets/images/icons/INSTA.png"
-                                                                    style="height:47px; width:47px; margin-bottom: 3px;margin-left:5px; "></a>
-                                                                </span>
                                                             </li>
 
                                                         </ul>
@@ -532,7 +527,7 @@
                                                         </div>
 
                                                     </div>
-                                                    <div class="title" >
+                                                    <div class="title" (click)="viewproductrow2(img.product_id)" >
                                                         <h6> <a style="line-height: 1.6rem;
                                                             overflow: hidden;
                                                             display: -webkit-box; 
