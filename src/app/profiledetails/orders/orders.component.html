@@ -145,17 +145,18 @@
     </div>
     <div class="pgn mt-4" style="justify-content: center;" *ngIf="(Orders.length!==0)">
         <div class="col-12">
-            <div id="pgg">
+            <div id="pgg">        
                 <ul class="pagination" style="justify-content: center;
                 display: flex;">
                     <li [ngClass]="{disabled:p.url === null,'active': p.active}" class="page-item first-item"
                         *ngFor="let p of pagess" (click)="getpage(p.url)">
                         <a class="page-link">{{p.label}}</a>
                     </li>
-                </ul>
+                </ul>    
             </div>
         </div>
     </div>
+    
     <div id="pggg" *ngIf="(Orders.length==0)" style=" display: flex;
 justify-content: center;
 align-items: center;

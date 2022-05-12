@@ -96,6 +96,11 @@ top: 150px;
 font-family: arial;
 font-size: 10px;
 }
+  .page-link {
+    padding: 0.375rem 0.4rem !important;
+    /* size: 4.5em; */
+    font-size: x-small !important;
+  }
 }
 @media (min-width: 992px){
   .col-lg-9 {

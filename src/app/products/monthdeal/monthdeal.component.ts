@@ -123,6 +123,7 @@ export class MonthdealComponent implements OnInit {
     this.request.getdaydealpro().subscribe((response: any) => {
       this.Daydealpro=response.data.slice(0, 4);
       this.prodloader=false; 
+      window.scroll(0,0);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);

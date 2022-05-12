@@ -126,7 +126,11 @@ height: 130px;
   font-family: arial;
   font-size: 10px;
 }
-
+#pgg{
+  margin-left: 0;
+  margin-bottom: 1rem;
+  font-size: x-small !important;
+}
   }
 
 .title h3 a{

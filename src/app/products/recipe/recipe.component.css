@@ -70,6 +70,13 @@
   max-height: 750px;overflow-y: auto;
 }
 
+  .page-link {
+    padding: 0.375rem 0.4rem !important;
+    /* size: 4.5em; */
+    font-size: x-small !important;
+  }
+  
+
     } 
     /* .imag{
       height: 75px; width: 100px;

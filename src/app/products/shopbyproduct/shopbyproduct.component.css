@@ -161,6 +161,11 @@ top: 150px;
 font-family: arial;
 font-size: 10px;
 }
+.page-link {
+  padding: 0.375rem 0.4rem !important;
+  /* size: 4.5em; */
+  font-size: x-small !important;
+}
 }
 p span {
   font-family: 'Poppins', sans-serif;

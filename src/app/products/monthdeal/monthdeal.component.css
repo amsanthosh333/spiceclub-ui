@@ -142,7 +142,11 @@ a:not([href]):not([class]):hover {
   .single-sidebar-widget--title{
     margin-bottom: 10px;
   }
-
+  #pgg{
+    margin-left: 0;
+    margin-bottom: 1rem;
+    font-size: x-small !important;
+}
 }
 
 .breadcrumb-list__item {
