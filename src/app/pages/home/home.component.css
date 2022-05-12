@@ -445,6 +445,9 @@ a.next.icons.next-icon {
     position: relative;
     overflow: hidden;
   }
+  #sliderimg{
+    width: 100%;  height: 355px;object-fit:cover
+  }
 }
 
 @media (max-width: 992px) {
@@ -452,6 +455,18 @@ a.next.icons.next-icon {
     max-width: 100%;
     height: 200px;
   }
+  #sliderimg{
+    width: 100%;  height: 145px;object-fit:cover
+  }
+  .carousel-item{
+    height: 145px
+  }
+  /* .ng-image-slider .ng-image-slider-container .main .main-inner .img-div img {
+    overflow: hidden;
+    position: absolute;
+    height: 174px !important;
+    width: 100%;
+} */
 }
 
 @media (min-width: 992px) {
@@ -485,13 +500,14 @@ a.next.icons.next-icon {
 }
 
 @media (max-width : 700px) {
-  .carousel-item {
+  /* .carousel-item {
     height: 200px;
-  }
+  } */
 
   #lazyy {
     height: 200px;
   }
+
 }
 
 /* to remove arroys form input box */
