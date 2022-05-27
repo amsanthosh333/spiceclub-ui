@@ -1,163 +1,148 @@
-	<!--=============================================
-	=            footer area         =
-	=============================================-->
-
-	
-
-
-	<div class="footer-container footer-one pt-40 pb-30">
-		<div class="container wide">
-			<div class="row">
-				<div class="col footer-single-widget">
-					<!--=======  copyright text  =======-->
-					<!--=======  logo  =======-->
-
-					<div class="logo">
-						<img src="assets/images/spicelogo.jpeg" class="img-fluid" alt="">
-					</div>
-					
-					<div>
-						<nav style="text-align: center;" >
-							<ul class=" list-unstyled d-flex justify-start justify-md-end mt-2 ps-0 " style="justify-content: center;">
-								<li class="social-icon" ><a href="{{facebookurl}}" >
-									<img src="assets/images/icons/facebookk.png" class="imggg"
-										></a></li>
-										<li class="social-icon" ><a href="{{instagramurl}}" >
-											<img src="assets/images/icons/INSTA.png" class="imggg"
-											></a></li>
-												<li class="social-icon" ><a href="{{youtubeurl}}" >
-													<img src="assets/images/icons/youtube.png" class="imggg"
-													></a></li>
-														<li class="social-icon" ><a href="{{linkedinurl}}" >
-															<img src="assets/images/icons/linkedin.png" class="imggg"
-															></a></li>
-																<li class="social-icon" ><a href="{{twitterurl}}" >
-																	<img src="assets/images/icons/twitter.png" class="imggg"
-																	></a></li>
-							</ul>
-						</nav>
-					</div>
-
-					
-					<!--=======  End of logo  =======-->
-
-					<!--=======  copyright text  =======-->
-
-					<div class="copyright-text">
-						<p style=""> &copy; 2021 The Spice Club.<span >All Rights Reserved</span></p>
-					</div>
-
-					<!--=======  End of copyright text  =======-->
-
-					<!--=======  End of copyright text  =======-->
+<div class="footer-container footer-one pt-40 pb-30">
+	<div class="container wide">
+		<div class="row">
+			<div id="logocol" class="col-3 footer-single-widget">
+				<div class="logo">
+					<img src="assets/images/spicelogo.jpeg" class="img-fluid" alt="">
 				</div>
-				<div class="col footer-single-widget">
-					<!--=======  single widget  =======-->
-					<h5 class="widget-title">ABOUT</h5>
-					<!--=======  footer navigation container  =======-->
-					<div class="footer-nav-container">
-						<nav>
-							<ul>
-								<li><a routerLink="/aboutus">About us</a></li>
-								<li><a routerLink="/storelocation">Store location</a></li>
-								<li><a routerLink="/contact">Contact</a></li>
-								<li><a routerLink="/orderstrack">Orders tracking</a></li>
-							</ul>
-						</nav>
-					</div>
-					<!--=======  End of footer navigation container  =======-->
-					<!--=======  single widget  =======-->
+			</div>
+			<div id="about" class="col-2 footer-single-widget">
+				<h5 class="widget-title">About</h5>
+				<div class="footer-nav-container">
+					<nav>
+						<ul>
+							<li><a routerLink="/aboutus">About us</a></li>
+							<li><a routerLink="/storelocation">Store location</a></li>
+							<li><a routerLink="/contact">Contact</a></li>
+							<li><a routerLink="/orderstrack">Orders tracking</a></li>
+						</ul>
+					</nav>
 				</div>
-				<div class="col footer-single-widget">
-					<!--=======  single widget  =======-->
-					<h5 class="widget-title">USEFUL LINKS</h5>
-
-					<!--=======  footer navigation container  =======-->
-
-					<div class="footer-nav-container">
-						<nav>
-							<ul>
-								<li><a routerLink="/return" >Returns</a></li>
-								<li><a routerLink="/privacypolicy">Support Policy</a></li>
-								<li><a routerLink="/home">Size guide</a></li>
-								<li><a routerLink="/faq">FAQs</a></li>
-							</ul>
-						</nav>
-					</div>
-
-					<!--=======  End of footer navigation container  =======-->
-
-					<!--=======  single widget  =======-->
+			</div>
+			<div class="col-2 footer-single-widget">
+				<h5 class="widget-title">For Customer</h5>
+				<div class="footer-nav-container">
+					<nav>
+						<ul>
+							<li><a routerLink="/return">Returns</a></li>
+							<li><a routerLink="/privacypolicy">Support Policy</a></li>
+							<li><a routerLink="/home">Size guide</a></li>
+							<li><a routerLink="/faq">FAQs</a></li>
+						</ul>
+					</nav>
 				</div>
+			</div>
 
-
-				<div class="col footer-single-widget">
-					<!--=======  single widget  =======-->
-					<div class="footer-subscription-widget">
-						<h2 class="footer-subscription-title">Subscribe</h2>
-						<p class="subscription-subtitle">Subscribe to our newsletter to receive news on update.</p>
-
-						<!--=======  subscription form  =======-->
-
-						<div class="subscription-form">
-							<form  [formGroup]="subscribe" (ngSubmit)="mailsubscribe(subscribe)" class="mc-form">
-								<input type="email" placeholder="Your email address" formControlName="mail" required>
-								<button type="submit"><i class="ion-ios-arrow-thin-right"></i></button>
-							</form>
-							<h6 style="color: red;">{{error}}</h6>
-						</div>
-
-						<!--=======  End of subscription form  =======-->
-
-						<!-- mailchimp-alerts Start -->
-						<div>
-							<nav style="text-align: center;" >
-								<ul class=" list-unstyled d-flex justify-start justify-md-end mt-2 ps-0 " style="justify-content: center;">
-									<li class="social-icon" style="padding-right: 15px ;margin-top: 10px;">
-										<a>
-										<img src="https://neophroncrm.com/spiceclubnew/public/{{Paymentmethod?.rozarpay}}"
-											style="height:30px; width:40px; margin-bottom: 3px;margin-left:5px;"></a></li>	
-											<li class="social-icon" style="padding-right: 15px">
-												<a>
-												<img src="assets/images/icons/mastercard.png"
-													style="height:50px; width:55px; margin-bottom: 3px;margin-left:5px;"></a></li>
-													<li class="social-icon" style="padding-right: 15px">
-														<a>
-														<img src="assets/images/icons/visa.png"
-															style="height:50px; width:55px; margin-bottom: 3px;margin-left:5px;"></a></li>
-															<li class="social-icon" style="padding-right: 15px">
-																<a>
-																<img src="assets/images/icons/upi.png"
-																	style="height: 15px;width: 59px;margin-bottom: -24px;margin-left: 2px;"></a></li>
-																	
-
-								</ul>
-							</nav>
-						</div>
-
-						<div class="mailchimp-alerts">
-							<div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-							<div class="mailchimp-success"></div><!-- mailchimp-success end -->
-							<div class="mailchimp-error"></div><!-- mailchimp-error end -->
-						</div><!-- mailchimp-alerts end -->
-
+			<div class="col-3 footer-single-widget pt-10">
+				<div class="footer-subscription-widget">
+					<h2 class="footer-subscription-title">Subscribe</h2>
+					<p class="subscription-subtitle">Subscribe to our newsletter to receive news on update.</p>
+					<div class="subscription-form mt-20">
+						<form [formGroup]="subscribe" (ngSubmit)="mailsubscribe(subscribe)" class="mc-form">
+							<input type="email" placeholder="Your email address" formControlName="mail" required>
+							<button type="submit"><i class="ion-ios-arrow-thin-right"></i></button>
+						</form>
+						<h6 style="color: red;">{{error}}</h6>
 					</div>
-
-					<!--=======  End of single widget  =======-->
-				</div>
-
-				<div class="col footer-single-widget">
-					<!--=======  single widget  =======-->
-					<h5 class="widget-title" id="downloadd">Download our app on</h5>
-           <span>
-	        <a href="" >
-		    <img src="assets/images/icons/google-play.png"
-			style="height: 100px;width: 100px; margin-bottom: 3px;margin-left:5px;margin-top: -20px; "></a> </span>
-					<!--=======  footer navigation container  =======-->
 
 				</div>
 			</div>
+
+			<div id="socialmedia" class="col-2  footer-single-widget">
+				<!-- <h5 class="widget-title" id="downloadd">Download our app on</h5> -->
+				<div class="app" style="display:flex;">
+					<span>
+						<a href="">
+							<img src="assets/images/icons/google-play.png"
+								style="height: 100px;width: 100px; margin-bottom: 3px;margin-left:5px;margin-top: -20px; "></a>
+					</span>
+					<span style="margin-right:5px;">
+						<a href="">
+							<img src="assets/images/icons/applestore.png"
+								style="height: 33px;width: 110px; margin-bottom: 3px;margin-left:5px;margin-top: 13px; "></a>
+					</span>
+				</div>
+
+				<!--=======  footer navigation container  =======-->
+
+				<div>
+					<h5 class="widget-title" id="downloadd">Follow us on</h5>
+					<nav style="text-align: center;">
+						<ul  id="socialbtn" class=" list-unstyled d-flex justify-start justify-md-end mt-2 ps-0 "
+							>
+							<li class="social-icon"><a href="{{facebookurl}}">
+									<img src="assets/images/icons/facebookk.png" class="imggg"></a></li>
+							<li class="social-icon"><a href="{{instagramurl}}">
+									<img src="assets/images/icons/INSTA.png" class="imggg"></a></li>
+							<li class="social-icon"><a href="{{youtubeurl}}">
+									<img src="assets/images/icons/youtube.png" class="imggg"></a></li>
+							<li class="social-icon"><a href="{{linkedinurl}}">
+									<img src="assets/images/icons/linkedin.png" class="imggg"></a></li>
+							<li class="social-icon"><a href="{{twitterurl}}">
+									<img src="assets/images/icons/twitter.png" class="imggg"></a></li>
+						</ul>
+					</nav>
+				</div>
+
+			</div>
+			<div class="col-3">
+				<div class="copyright-text">
+					<p> &copy; 2021 The Spice Club.<span>All Rights Reserved</span></p>
+				</div>
+			</div>
+			<div class="col-9 pr-65">
+				<div>
+					<nav style="text-align: center;">
+						<ul class=" list-unstyled d-flex justify-start justify-md-end mt-2 ps-0 "
+							style="justify-content: end;">
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/razorpay2.jpg"
+										style="height:41px; width:60px; margin-bottom: -8px;margin-left:5px;"></a>
+							</li>
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/MasterCard1.jpg"
+										style="height:37px; width:55px; margin-bottom: -15px;margin-left:5px;"></a>
+							</li>
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/visa.png"
+										style="height:50px; width:55px; margin-bottom: 3px;margin-left:5px;"></a>
+							</li>
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/upi.jpg"
+										style="height: 35px;width: 59px;margin-bottom: -24px;margin-left: 2px;"></a>
+							</li>
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/mastersecure.png"
+										style="height: 23px;width: 59px;margin-bottom: -24px;margin-left: 2px;"></a>
+							</li>
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/Rupay.jpg"
+										style="height: 34px;width: 59px;margin-bottom: -24px;margin-left: 2px;"></a>
+							</li>
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/safekey.png"
+										style="height: 29px;width: 59px;margin-bottom: -24px;margin-left: 2px;"></a>
+							</li>
+							<li class="social-icon" style="padding-right: 15px">
+								<a>
+									<img src="assets/images/icons/verified-visa.png"
+										style="height: 26px;width: 59px;margin-bottom: -24px;margin-left: 2px;"></a>
+							</li>
+						</ul>
+					</nav>
+				</div>
+
+			</div>
+		
 		</div>
 	</div>
+</div>
 
-	<!--=====  End of footer area  ======-->
+<!--=====  End of footer area  ======-->
