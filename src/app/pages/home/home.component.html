@@ -1,4 +1,4 @@
-<div style="background-color: #93939338; padding-bottom: 1px;">
+<div class="row" style="background-color: #93939338; padding-bottom: 1px;">
 
     <!-- <div class="col-md-10">
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="false">
@@ -43,20 +43,82 @@
         </ngx-skeleton-loader>
     </div>
 
-    <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel"
-        data-interval="3000" style="margin-right:2.4%; margin-left:2.8%;">
-        <div class="carousel-inner " style=" width:100%;object-fit:cover ">
-            <div class="carousel-item" *ngFor="let img of photoo; let i = index" [ngClass]="{'active': i == 0 }"
-                style=" width:100%; ">
-                <img src="{{img}}" class="d-block " style=" width: 100%;  height: 355px;object-fit:cover">
-                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
+    <div class="row" id="sliderrow1">
+        <div class="col-lg-9" id="slidermain">
+            <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel"
+                data-interval="3000">
+                <div class="carousel-inner " style=" width:100%;object-fit:cover ">
+                    <div class="carousel-item" *ngFor="let img of photoo; let i = index" [ngClass]="{'active': i == 0 }"
+                        style=" width:100%; ">
+                        <img src="{{img}}" class="d-block " style=" width: 100%;  height: 355px;object-fit:cover">
+                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
+                            data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleControls" role="button"
+                            data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-2" style="background-color:white; width: 24.6%;">
+            <div class="row" id="sliderrow2" *ngIf="quickreg">
+                <div class="lez">
+                    <p>Quick Registeration</p>
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Name:</label>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" id="fname" formControlName="fname">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Email:</label>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" id="email" formControlName="email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Mobile:</label>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" id="Mobile" formControlName="Mobile">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+                                <label>Business Name:</label>
+                            </div>
+                            <div class="col-7">
+                                <input type="text" id="lname" formControlName="businessname">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-center mb-10">
+                            <button class="btn btn-danger btn-sm" *ngIf="!btnloading">Submit</button>
+                            <button class="btn btn-danger btn-sm" *ngIf="btnloading">
+                                <i class="fa fa-spinner fa-spin"
+                                    style="font-size:15px; width: 30px;"></i>&nbsp;</button>
+                        </div>
+                        <!-- <div style="text-align:center;padding-bottom: 10px;">
+                            <button class="btn btn-danger btn-sm">Submit</button>
+                        </div> -->
+                    </form>
+                </div>
+            </div>
+            <div class="row" id="sliderrow3">
+                <div class="subbanner">
+                    <img src="https://neophroncrm.com/spiceclubnew/public/{{subscribebanner.photo}}"
+                        style="height: 100%;width: 100%; object-fit: cover;" class="img-fluid" alt="">
+                </div>
             </div>
         </div>
     </div>
@@ -203,44 +265,260 @@
     </div> -->
     <!-- category end -->
 
-    <!--bestsellers start-->
-    <div class="banner-with-product-area mb-20 mb-md-80 mb-sm-60 " style="padding-top: 0px;">
-        <div class="container wide"
-            style="background-color: white; padding: 20px;max-width: 98%; padding-bottom: 10px;">
+    <!-- bestsellers -->
+    <div class="col-lg-12 mb-10 pb-0" class="listcard">
+        <div class="col-lg-12" style="  border-bottom: 2px solid #d3d3d3;">
+            <div class="section-title section-title--one  mb-0">
+                <h6 style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">Best
+                    Selling Products</h6>
+                <button class="btn btn-primary" id="viewall" [routerLink]="'/bestselling'">View all</button>
+            </div>
+        </div>
+        <div class="carousall">
+            <carousel style="height: 320px; z-index: unset;" *ngIf="!loader6">
+                <div class="carousel-cell" *ngFor="let img of Bestsellpro ;let i = index">
+                    <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
+                        <div class="single-product__image">
+                            <div class="imglaz" style="position: relative;overflow: hidden;">
+                                <ngx-skeleton-loader count="1" *ngIf="imgloader2"
+                                    [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                </ngx-skeleton-loader>
+                                <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader2">
+                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                        class="img-fluid" alt="">
+                                </a>
+                                <span id="offtag2" *ngIf="img.deal_of_day!=0">Deal of the day</span>
+                                <span id="offtag2" *ngIf="img.deal_of_month!=0">Deal of the month</span>
+                                <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>
+                            </div>
+                            <div class="single-product__floating-badges" style="margin-left: 0px;">
+                                <span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
+                            </div>
+                            <div class="single-product__floating-icons">
+                                <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
+                                        data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                        data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                        data-tippy-placement="left">
+                                        <i [ngClass]="{'ion-android-favorite':likesss[i]===true, 'ion-android-favorite-outline':likesss[i]===false}"
+                                            (click)='toggle1(img,i)' style="color: rgb(214, 5, 5);"></i></a></span>
 
-            <div class="row">
-                <!-- <div class="col-lg-3 mb-md-80 mb-sm-60 pl-30">
-                    <div class="product-side-banner" style=" ">
-                        <div class="section-title section-title--one  ">
-                            <h6 style="font-weight: 600; color: black;padding-left:40px">Best Selling Products</h6>
+                                <span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
+                                        data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                        data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                        data-tippy-placement="left">
+                                        <i [ngClass]="{'ion-android-favorite':likess[i]===true, 'ion-android-favorite-outline':likess[i]===false}"
+                                            (click)='toggledelete1(img,i)'
+                                            style="color: rgb(214, 5, 5);"></i></a></span>
+
+                                <span class="quickview" (click)="quickview(img.id,openRecord)"><a class="cd-trigger"
+                                        data-tippy="Quick View" data-tippy-inertia="true"
+                                        data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
+                                        data-tippy-theme="sharpborder" data-tippy-placement="left"><i
+                                            class="bi bi-cart3"></i></a></span>
+                            </div>
                         </div>
-                        <a routerLink="/bestselling">
-                            <img src="assets/images/food-one/banner-1.png" class="img-fluid" alt="" style="height: 700px; object-fit: cover;">
-                        </a>                  
-                    </div>
-                    <div class="colll" id="bestbtn" style="text-align: center;">
-                        <a routerLink="/bestselling" class="ml-auto mr-0 btn btn-danger btn-sm shadow-md ">View All</a>
-                    </div>                   
-                </div> -->
 
-                <div class="col-lg-12" style="display: inline-block;margin-left: 15px;">
-                    <div class="section-title section-title--one  mb-0" style="display: inline;">
-                        <h6 id="besthead" style="">Best Selling
-                            Products</h6><span> &nbsp;<a routerLink="/bestselling" style="text-decoration: none;">see
-                                all products</a></span>
+                        <div class="single-product__content" (click)=" proddetail(img.id)">
+                            <div class="title">
+                                <h3> <a style="line-height: 1.6rem;
+                                overflow: hidden;
+                                display: -webkit-box; 
+                                -webkit-line-clamp: 2;
+                                -webkit-box-orient: vertical;
+                                max-height: 3.2rem;">{{img.name}}</a> </h3>
+                                <a id="vieww"
+                                    style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
+                                    Details</a>
+                            </div>
+
+                            <div class="price">
+                                <span *ngIf="img?.stroked_price!==img?.main_price"
+                                    class="main-price discounted">{{img.stroked_price}}</span>
+                                <span class="discounted-price">{{img.main_price}} </span>
+                            </div>
+
+                            <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                        overflow: hidden;
+                        display: -webkit-box; 
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        max-height: 1.7rem; font-size: 0.7rem;">
+                                <span class="discounted-price" *ngFor="let imgggg of imggg.options;"> {{imgggg}}|
+                                </span>
+                            </div>
+                            <div class="pri" style="text-align: center;">
+                                <span class="discounted-price" style="line-height: 1.6rem;
+                            overflow: hidden;
+                            display: -webkit-box; 
+                            -webkit-line-clamp: 12;
+                            -webkit-box-orient: vertical;
+                            max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            </div>
+                        </div>
+
+                        <!--=======  End of single product content  =======-->
                     </div>
-                    <div class="row" *ngIf="!loader3">
-                        <!--=======  single product  =======-->
+                    <button type="button" class="btn btn-primary" style=" width: -webkit-fill-available;"
+                        (click)="quickview(img.id,openRecord)">Add to cart</button>
+                </div>
+            </carousel>
+            <div class="col-lg-12" *ngIf="loader6">
+                <div class="product-category-container--collectionhome-wrapper">
+                    <div class="row justify-content-center">
+                        <!-- Allcat   Homecat -->
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:200px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--bestsellers end-->
+
+    <!-- Explore category -->
+    <div class="row mt-10 mb-10" id="sliderrow4">
+        <div class="col-lg-8" style="background-color:white;">
+            <div class="section-title section-title--one  mb-0" style="border-bottom: 2px solid #d3d3d3;">
+                <h6 style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
+                    Explore Categories</h6>
+            </div>
+            <div class="explore row">
+                <div class="col-2 pt-15 pb-15" *ngFor="let img of Topcat" style="text-align:center;">
+                    <div style="height:100px; width:100px;  display:block; margin:auto;">
+                        <img src="assets/images/icons/gift.png" style="height: 100%;width: 100%; object-fit: cover; display: block;
+                    margin-left: auto;
+                    margin-right: auto;" class="img-fluid" alt="">
+
+                        <!-- <img src="https://neophroncrm.com/spiceclubnew/public/{{img.icon}}"
+                    style="height: 100%;width: 100%; object-fit: cover; display: block;
+                    margin-left: auto;
+                    margin-right: auto;" class="img-fluid"  alt=""> -->
+                    </div>
+                    <p>{{img.name}}</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-lg-4 " style="background-color:white; padding: 0px;">
+            <div class="section-title section-title--one  mb-0" style="border-bottom: 2px solid #d3d3d3;">
+                <p style="font-weight: 600;  color: rgb(11, 131, 201);padding:6px;border: 2px solid #d3d3d3;border-bottom: none;
+                font-size: 0.7rem;">
+                    Tell us what you need</p>
+            </div>
+            <div class="enqueryform">
+                <form [formGroup]="enquiryForm" (ngSubmit)="enqueryonSubmit()" style="border: 2px solid #d3d3d3;border-top:0px">
+                    <div class="row" id="enqueryformrow" style="padding:20px" >     
+                        <div class="col-12" >
+                            <input type="radio" id="wholesale" name="enqfor" value="Whole Sale"  formControlName="enqfor">
+                            <label for="">For Whole Sale</label> &nbsp;
+                            <input type="radio" id="personal" name="enqfor" value="Personal" formControlName="enqfor">
+                            <label for="">For Personal Family</label>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" placeholder="Tell us what you need" formControlName="title">
+                        </div>               
+                        <div class="col-4">
+                            <input type="text" placeholder="Name" formControlName="name">
+                        </div>            
+                        <div class="col-3">
+                            <input type="text" placeholder="Mobile" formControlName="mobile"  >
+                        </div>
+                        <div class="col-5">
+                            <input type="text" placeholder="Email" formControlName="email">
+                        </div>          
+                        <div class="col-8">
+                            <textarea name="" cols="30" rows="3" placeholder="Comments" formControlName="comments"></textarea>
+                        </div>
+                        <div class="col-lg-4 text-center mb-10 mt-20 pl-0" >
+                            <button class="btn btn-warning" *ngIf="!btnloading1">Requirement</button>
+                            <button class="btn btn-warning" *ngIf="btnloading1">
+                                <i class="fa fa-spinner fa-spin"
+                                style="font-size: 14px; width: 77px;"></i>&nbsp;</button>
+                        </div>
+                    </div>
+                   
+                    <!-- <div style="text-align:center;padding-bottom: 10px;">
+                        <button class="btn btn-danger btn-sm">Submit</button>
+                    </div> -->
+                </form>
+            </div>
+            <div class="unhappy mt-20"  style="background-color: rgb(79, 196, 216);"><h6>Unhappy with your earning, Partner with india's leading B2B platform</h6></div>
+        </div>
+    </div>
+    <!-- Explore category end -->
+
+    <!-- Deal of the day   routerLink="/daydeal"-->
+    <div class="countdown-timer-area mb-20 countdown-background countdown-bg-2 pt-20 pb-20">
+        <div class="container wide" style="margin-left:7px;">
+            <div class="row">
+                <div class="col-9" style="background-color:white ;">
+                    <div class="row" *ngIf="!loader3" style="padding: 0px;margin-left: 2px; margin-right: -125px;">
                         <div class="col-12 col-lg-2 col-md-6 col-sm-12 mb-10 pt-10 pb-10 "
-                            *ngFor="let img of Bestsellpro; let i = index "
-                            style="border: 0.8px solid #e9e7e7; margin-right: 10px;">
-
-
+                            *ngFor="let img of Daydealpro; let i = index " style="border: 0.8px solid #e9e7e7; margin-right: 10px;margin-left: 10px;
+                            margin-top: 10px;">
                             <div class="single-product">
-                                <!--=======  single product image  =======-->
                                 <div class="single-product__image" style="overflow: hidden;">
 
-                                    <div class="imglazy" style="height: 200px;">
+                                    <div class="imglazy" style="height: 125px;">
                                         <ngx-skeleton-loader count="1" *ngIf="imgloader"
                                             [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '220px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -251,19 +529,12 @@
                                             <!-- <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                             class="img-fluid" alt=""> -->
                                         </a>
-                                        <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
-                                        <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
-                                        <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span>
                                     </div>
-
-
                                     <div class="single-product__floating-badges">
-                                        <!-- <span class="onsale">-10%</span> -->
                                         <span class="hot"
                                             *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
                                         <!-- <span class="hot"  *ngIf="likeddd[i]" ><i class="bi bi-heart-fill"></i></span>  -->
                                     </div>
-
                                     <div class="single-product__floating-icons">
                                         <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
                                                 data-tippy-inertia="true" data-tippy-animation="shift-away"
@@ -289,15 +560,14 @@
                                                 data-tippy-arrow="true" data-tippy-theme="sharpborder"
                                                 data-tippy-placement="left"><i class="bi bi-cart3"></i></a></span>
                                     </div>
-
-
                                 </div>
 
                                 <!--=======  End of single product image  =======-->
 
                                 <!--=======  single product content $$$ (click)="viewproductrow(img)" =======-->
 
-                                <div class="single-product__content" (click)=" proddetail(img.id)">
+                                <div class="single-product__content" (click)=" proddetail(img.id)"
+                                    style="height:90px ;">
                                     <div class="title">
                                         <h3> <a style="line-height: 1.6rem;
                                             overflow: hidden;
@@ -315,150 +585,30 @@
                                             class="main-price discounted">{{img.stroked_price}}</span>
                                         <span class="discounted-price">{{img.main_price}} </span>
                                     </div>
-
-                                    <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
-                                    overflow: hidden;
-                                    display: -webkit-box; 
-                                    -webkit-line-clamp: 1;
-                                    -webkit-box-orient: vertical;
-                                    max-height: 1.7rem; font-size: 0.7rem;">
-                                        <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
-                                            {{imgggg}}| </span>
-                                    </div>
-                                    <div class="pri" style="text-align: center;">
-                                        <span class="discounted-price" style="line-height: 1.6rem;
-                                        overflow: hidden;
-                                        display: -webkit-box; 
-                                        -webkit-line-clamp: 1;
-                                        -webkit-box-orient: vertical;
-                                        max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
-                                    </div>
                                 </div>
 
                                 <!--=======  End of single product content  =======-->
                             </div>
-                            <button type="button" class="btn btn-primary" style=" width: -webkit-fill-available;"
-                                (click)="quickview(img.id,openRecord)">Add to cart</button>
-                        </div>
-                    </div>
-                    <!-- lazyloading *ngIf="loader3" -->
-                    <div class="row" *ngIf="loader3">
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                        <div id="sklbest" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-30">
-                            <div class="single-product" style="height: 280px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--bestsellers end-->
 
-    <!-- Deal of the day   routerLink="/daydeal"-->
-    <div class="countdown-timer-area mb-20 countdown-background countdown-bg-2 pt-100 pb-100">
-        <div class="container wide">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="row">
-                        <div class=" col-12 col-xl-5 offset-xl-7 col-lg-9 offset-lg-3">
-                            <div class="countdown-wrapper text-center">
-                                <h3>Deal of the day</h3>
-                                <div class="deal-countdown" data-countdown="2021/12/31"></div>
-                                <a (click)="gotodeals()"
-                                    class="lezada-button lezada-button--medium lezada-button--icon--left"> <i
-                                        style="background-color: transparent;color: rgb(250, 248, 248) !important;"
-                                        class="icon-left ion-ios-cart"></i>shop now</a>
-                            </div>
                         </div>
                     </div>
                 </div>
+                <div class=" col-3">
+                    <div class="countdown-wrapper text-center">
+                        <h3>Deal of the day</h3>
+                        <div class="deal-countdown" data-countdown="2021/12/31"></div>
+                        <a (click)="gotodeals()" class="lezada-button lezada-button--medium lezada-button--icon--left">
+                            <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
+                                class="icon-left ion-ios-cart"></i>shop now</a>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
 
     <!-- featured product  start-->
     <div class="col-lg-12 mb-10">
-
         <div class="carousall">
             <div class="col-lg-12">
                 <div class="section-title section-title--one  mb-0">
@@ -765,7 +915,7 @@
             </div>
         </div>
         <!--lazyloading brands end -->
-       
+
     </div>
 
     <!-- static testimonial -->
@@ -832,42 +982,43 @@
 
 
     <!-- slide testimonial -->
-    <div  class="lezada-testimonial single-item-testimonial-area testimonial-bg testimonial-bg-1  pt-20 mb-1">
+    <div class="lezada-testimonial single-item-testimonial-area testimonial-bg testimonial-bg-1  pt-20 mb-1">
         <div class="col-lg-12">
             <div class="section-title section-title--one text-center">
                 <h1>Testimonials</h1>
             </div>
         </div>
         <carousel class="caroussellll" style="height: 300px;" *ngIf="!loader6">
-            <div id="carr" class="carousel-cell" *ngFor="let a of Testimonial" style="margin-left: 30px; margin-right: 30px; width: 300px !important;">
-                <div class="col-12"  style="display: inline-grid;">
+            <div id="carr" class="carousel-cell" *ngFor="let a of Testimonial"
+                style="margin-left: 30px; margin-right: 30px; width: 300px !important;">
+                <div class="col-12" style="display: inline-grid;">
                     <div class="testimonial-item multi-testimonial-single-item">
                         <div class="multi-testimonial-single-item__text">
                             {{a.content}}
                         </div>
                         <div class="multi-testimonial-single-item__author-info">
                             <div style="text-align: center;">
-                            <div class="image">
-                                <img src="https://neophroncrm.com/spiceclubnew/public/{{a.photo}}"
-                                    class="img-fluid" alt="" style="display: block;
+                                <div class="image">
+                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{a.photo}}" class="img-fluid"
+                                        alt="" style="display: block;
                                     margin-left: auto;
-                                    margin-right: auto;height: 70px; width:70px;object-fit: cover; " >
-                            </div>
-    
-                            <div class="content">
-                                <p class="name">{{a.name}}</p>
-                                <!-- <ngb-rating style="font-size: 1.5rem; color:rgb(245, 153, 14);"
+                                    margin-right: auto;height: 70px; width:70px;object-fit: cover; ">
+                                </div>
+
+                                <div class="content">
+                                    <p class="name">{{a.name}}</p>
+                                    <!-- <ngb-rating style="font-size: 1.5rem; color:rgb(245, 153, 14);"
                                 [rate]="Peoduct?.rating"></ngb-rating> -->
+                                </div>
+
                             </div>
-    
-                        </div>
                         </div>
                     </div>
                 </div>
             </div>
         </carousel>
     </div>
- 
+
 
     <!-- popup -->
     <ng-template #openRecord let-modal>
@@ -908,33 +1059,33 @@
                             <span style="color: red;" class="h5 discounted-price">{{prod_price}}</span>
                             <span class="opacity-70">/{{Peoduct.unit}}</span>
                             </p> -->
-                            
-                            
-                           
+
+
+
                             <div class="quick-view-other-info pb-0 pt-0" #target>
                                 <table>
-                                    <tr class="single-info"
-                                        *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
+                                    <tr class="single-info" *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
                                         <td class="quickview-title" style="color: red;">MRP: </td>
                                         <td class="quickview-value">
-    
-                                            <span
-                                                class="main-price discounted">{{Peoduct?.stroked_price}}</span>
-    
+
+                                            <span class="main-price discounted">{{Peoduct?.stroked_price}}</span>
+
                                         </td>
                                     </tr>
                                     <tr class="single-info ">
                                         <td class="quickview-title" style="color: red; ">Price: </td>
                                         <td class="quickview-value">
                                             <a style="font-size: 1.3rem;">{{Peoduct?.main_price}}</a>
-                                            <span style="font-size: 0.8rem;font-weight: 500;"> (Including all taxes)</span>
-    
+                                            <span style="font-size: 0.8rem;font-weight: 500;"> (Including all
+                                                taxes)</span>
+
                                         </td>
                                     </tr>
                                     <tr class="single-inf " *ngIf="Peoduct?.discount_percentage!==0">
                                         <td class="quickview-title" style="color: red;"> </td>
-                                        <td class="quickview-value pt-0" >
-                                            <a style="font-weight: 300;">( You save {{Peoduct?.discount_percentage}} % ) </a>
+                                        <td class="quickview-value pt-0">
+                                            <a style="font-weight: 300;">( You save {{Peoduct?.discount_percentage}} % )
+                                            </a>
                                         </td>
                                     </tr>
                                     <tr class="single-info">
@@ -951,29 +1102,31 @@
                                     </tr>
                                 </table>
                             </div>
-                            
-    
+
+
                             <form id="option-choice-form">
                                 <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
                                 <input type="hidden" name="id" value="21">
-    
+
                                 <div class="row no-gutters ml-1 mt-2">
                                     <div class="col-3 ">
-                                        <div class="quickview-title mt-2 "  *ngFor="let a of choice" style="color: red;">{{a.title}}:</div>
+                                        <div class="quickview-title mt-2 " *ngFor="let a of choice" style="color: red;">
+                                            {{a.title}}:</div>
                                     </div>
                                     <div class="col-9 ">
                                         <div class="shop-product__block__value" *ngFor="let a of choice">
-    
+
                                             <div class="shop-product-size-list">
                                                 <span class="single-size" *ngFor="let b of a.options;let i=index"
-                                                [ngClass]="{'active': subItem === i}"    (click)="selectvar(b,i)">{{b}}</span>
-    
+                                                    [ngClass]="{'active': subItem === i}"
+                                                    (click)="selectvar(b,i)">{{b}}</span>
+
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-      
-    
+
+
                                 <div class="row no-gutters ml-1">
                                     <div class="col-3">
                                         <div class="quickview-title mt-2" style="color: red;">Quantity:</div>
@@ -983,8 +1136,10 @@
                                             <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                                 <a class="dec qty-btn" style="text-decoration: none;"
                                                     (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
-                                                    <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
-                                               
+                                                <input type="number" #box value="{{quantityyy}}"
+                                                    (keyup)="getValue(box.value)" name="qqty"
+                                                    style="background: transparent;">
+
                                                 <a class="inc qty-btn" style="text-decoration: none;"
                                                     (click)="increaseqty()" *ngIf="stk>1">+</a>
                                             </div>
@@ -996,45 +1151,48 @@
                                 </div>
                                 <hr>
                                 <div class="row no-gutters pb-3 ml-1" id="chosen_price_div" *ngIf="quantityyy!==0">
-                                        <div class="col-3">
-                                            <div class="quickview-title">Total Price:</div>
-                                        </div>
-                                        <div class="col-9">
-                                            <div class="product-price">
-                                                <strong id="chosen_price"
-                                                    class="h5 fw-600 text-danger">Rs {{totalprice}}</strong>
-                                            </div>
+                                    <div class="col-3">
+                                        <div class="quickview-title">Total Price:</div>
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="product-price">
+                                            <strong id="chosen_price" class="h5 fw-600 text-danger">Rs
+                                                {{totalprice}}</strong>
                                         </div>
                                     </div>
+                                </div>
                             </form>
-    
+
                             <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
-                                <button   *ngIf="stk!==0" class="lezada-button lezada-button--small lezada-button--icon--left" (click)="addtocart2()">
+                                <button *ngIf="stk!==0"
+                                    class="lezada-button lezada-button--small lezada-button--icon--left"
+                                    (click)="addtocart2()">
                                     <i class="ion-ios-cart-outline"></i>add to cart</button>
-    
-                                <button   *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
-                                 style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
-                                        <i class="ion-ios-cart-outline"></i>Out of Stock</button>
-    
+
+                                <button *ngIf="stk==0"
+                                    class="lezada-button lezada-button--small lezada-button--icon--left"
+                                    style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
+                                    <i class="ion-ios-cart-outline"></i>Out of Stock</button>
+
                             </div>
-                            
+
                             <div class="shop-product__block__title"
-                            style="font-weight: 600;color: green; text-align: start;">
-                            {{Peoduct?.usp_text}}
-                        </div>
-                        <div  style="text-align: start;"> <span >
-                                <a *ngFor="let b of Peoduct?.usp_icon">
-                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{b?.icon}}"
-                                        style="height:47px; width:47px; margin-bottom: 3px;margin-left:15px;margin: right 15px; ; "></a>
-                           &nbsp; </span>
-                        </div>
+                                style="font-weight: 600;color: green; text-align: start;">
+                                {{Peoduct?.usp_text}}
+                            </div>
+                            <div style="text-align: start;"> <span>
+                                    <a *ngFor="let b of Peoduct?.usp_icon">
+                                        <img src="https://neophroncrm.com/spiceclubnew/public/{{b?.icon}}"
+                                            style="height:47px; width:47px; margin-bottom: 3px;margin-left:15px;margin: right 15px; ; "></a>
+                                    &nbsp; </span>
+                            </div>
                             <hr>
                             <h6> <strong>Description</strong> </h6>
                             <p class="description" [innerHTML]="Peoduct?.description" style="font-size: small;">
                                 {{Peoduct.description}}
                             </p>
-    
-    
+
+
                         </div>
                     </div>
                 </div>
@@ -1080,5 +1238,3 @@
     src="assets/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
 <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
 <script type="text/javascript" src="assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
-
-

@@ -20,14 +20,9 @@
 						<form  [formGroup]="registerForm" (ngSubmit)="onSubmit(addRecord)">
 							<div class="row">
 								<div class="col-lg-12">
-									<!--=======  login title  =======-->
-
 									<div class="section-title section-title--login text-center mb-10">
-										<h5 class="mb">Looks like you're new here!</h5>
-										
+										<h5 class="mb">Looks like you're new here!</h5>									
 									</div>
-
-									<!--=======  End of login title  =======-->
 								</div>
 								<div class="col-lg-12 ">
 									<label >Name <span class="required">*</span> </label>
@@ -49,31 +44,25 @@
 									<h6 class="form-text text-danger"
 									*ngIf="!registerForm.get('Mobile')?.valid && registerForm.get('Mobile')?.touched">
 								  *Enter the mobile</h6>
-								</div>
-								
+								</div>								
 								<div class="col-lg-12 ">
 									<label for="regPassword">Password <span class="required">*</span> </label>
 									<input type="password" formControlName="password"  required>
 									<h6 class="form-text text-danger"
 									*ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
 								  *Enter the password</h6>
-								</div>
-							
+								</div>							
 								<div class="col-lg-12 ">
 									<label for="regPassword">Confirm-Password<span class="required">*</span> </label>
 									<input type="password"   formControlName="confirmpassword"  required>
 									<h6 class="form-text text-danger"
 									*ngIf="!registerForm.get('confirmpassword')?.valid && registerForm.get('confirmpassword')?.touched">
 								  *Enter the same password</h6>
-								</div>
-								
-							
+								</div>															
 								<div class="col-lg-12 ">
 									<label for="regPassword">Buyer Type<span class="required">*</span> </label>
-									<div class="form-group position-relative">
-										
-										<select class="form-control pl-5"  style="background: transparent;border: 0px; border-bottom: 2px solid #cccccc; background: transparent;" formControlName="buyer_type" required>
-											
+									<div class="form-group position-relative">										
+										<select class="form-control pl-5"  style="background: transparent;border: 0px; border-bottom: 2px solid #cccccc; background: transparent;" formControlName="buyer_type" required>											
 											<option *ngFor="let reg of buyer" [value]="reg.id">
 												{{reg.name}}
 											</option>

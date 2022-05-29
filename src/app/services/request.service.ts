@@ -646,6 +646,11 @@ public gettodaysoffer() {
   this.url = `${this.endPoint1}/todayoffer?user_id=`+this.userid +`&buyertype=` +this.buyertypeid;
   return this.http.get(this.url);
 }
+
+public getsubscribebanner() {
+  this.url = `${this.endPoint1}/subscriptionbanners`;
+  return this.http.get(this.url);
+}
 //review
 public addreview(body:any) {
   const headers = new HttpHeaders()

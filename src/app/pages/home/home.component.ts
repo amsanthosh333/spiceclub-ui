@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RequestService } from 'src/app/services/request.service';
@@ -12,6 +12,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { SharedService } from 'src/app/services/shared.service'
+import { AuthService } from 'src/app/services/auth.service';
 
 declare var jQuery: any;
 @Component({
@@ -21,6 +22,7 @@ declare var jQuery: any;
   providers: [ToastrService],
 })
 export class HomeComponent implements OnInit {
+  registerForm!: FormGroup;
   mainloader: boolean = true;
   Slider: any;
   loadingIndicator: boolean | undefined;
@@ -142,14 +144,23 @@ export class HomeComponent implements OnInit {
   imgloader: boolean = true;
   imgloader2: boolean = true;
   stocckkk!: number;
-  subItem: any=0;
+  subItem: any = 0;
   storked_pricee: any;
   Testimonial: any;
+  subscribebanner: any;
+  Bestsellpro1: any;
+  Daydealpro: any;
+  error2: any;
+  btnloading: boolean = false;
+  quickreg: boolean = false;
+  Topcat: any;
+  enquiryForm: FormGroup;
+  btnloading1: boolean = false;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private toastr: ToastrService, private modalService: NgbModal,
-    config: NgbRatingConfig, private _location: Location, private sharedService: SharedService) {
+    config: NgbRatingConfig, private _location: Location, private sharedService: SharedService, private authService: AuthService) {
 
     this.loader1 = true;
     this.loader2 = true;
@@ -166,37 +177,146 @@ export class HomeComponent implements OnInit {
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
 
-
-
     if (this.userid == undefined) {
       this.userid = 0;
+      this.quickreg = true;
     }
 
+    this.registerForm = this.formBuilder.group({
+      fname: ['', Validators.required],
+      Mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(5)],],
+      businessname: ['', Validators.required],
+      // buyer_type: ['', Validators.required],
+    });
+    this.enquiryForm = this.formBuilder.group({
+      enqfor: ['', [Validators.required]],
+      title: ['', [Validators.required]],
+      name: ['', Validators.required],
+      mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
+      email: ['', [Validators.required, Validators.email, Validators.minLength(5)],],
+      comments: ['', Validators.required],
+    },
+    );
   }
-
   ngOnInit(): void {
     setTimeout(() => {
       this.loadingg = false;
     }, 2000);
     this.viewdata();
+    this.viewsubscribebanner();
     this.viewtodayoffer();
+    this.viewdata3();
+    this.viewbestsellpro();
+    this.viewtopcategory();
+    this.viewdaydeal();
     this.viewcategorydata();
     this.gethomeecat();
-    this.viewbestsellpro();
     this.viewfuturedpro();
-    this.viewdata3();
     this.viewbrands();
     this.viewdata4();
+
     this.register = this.fb.group({
       rating: [''],
       comment: [''],
 
-    });  
-          
+    });
+
   }
+  onSubmit() {
+    this.btnloading = true;
+    this.error2 = '';
+    if (this.registerForm.invalid) {
+      this.error2 = '* Enter all details';
+      this.toastr.info(this.error2);
+      this.btnloading = false;
+      return;
+    } else {
+      let edata = {
+        name: "" + this.registerForm.controls['fname'].value,
+        email: "" + this.registerForm.controls['email'].value,
+        phone: "" + this.registerForm.controls['Mobile'].value,
+        business_name: "" + this.registerForm.controls['businessname'].value,
+        buyer_type: 1,
+      }
+      this.authService.Quickregister(edata).subscribe(
+        (res: any) => {
+          console.log("res", res);
+          if (res.result == true) {
+            this.toastr.success('You can login with OTP ', 'Registered Successfully');
+            this.btnloading = false;
+            this.registerForm.reset()
+          }
+          else if (res.result == false) {
+            this.error2 = res.message
+            this.toastr.info(this.error2);
+            this.btnloading = false;
+          }
+          else {
+            this.error2 = res.message;
+            this.toastr.info(this.error2);
+            this.btnloading = false;
+          }
+        },
+      );
+    }
+  }
+  enqueryonSubmit() {
+    this.btnloading1 = true;
+    this.error2 = '';
+    if (this.userid < 0) {
+      this.toastr.info('Please login to enquiry', '');
+    }
+    else if (this.enquiryForm.invalid) {
+      if (!this.enquiryForm.get('mobile')?.valid) {
+        this.error2 = '* Enter valid mobile number';
+      }
+      else if(!this.enquiryForm.get('email')?.valid) {
+        this.error2 = '* Enter valid emailid ';
+      }
+      else{
+        this.error2 = '* Enter all details';
+      } 
+      this.toastr.info(this.error2);
+      this.btnloading1 = false;
+      return;
+    }
+    else {
+      let edata = {
+        user_id: this.userid,
+        enqfor: "" + this.enquiryForm.controls['enqfor'].value,
+        product: "" + this.enquiryForm.controls['title'].value,
+        name: "" + this.enquiryForm.controls['name'].value,
+        email: "" + this.enquiryForm.controls['email'].value,
+        phone: "" + this.enquiryForm.controls['mobile'].value,
+        comments: "" + this.enquiryForm.controls['comments'].value,
+        product_description: null,
+        image: null,
+        imagename: null,
+        image2: null,
+        imagename2: null,
+        image3: null,
+        imagename3: null
+      }
+      console.log("edata", edata);
+       this.request.sendenquiry(edata).subscribe((res: any) => {  
+        console.log("sendenquiry response", res);
+        if (res.result == true) {       
+          this.enquiryForm.reset() 
+          this.toastr.success('Submited Successfully','');
+        this.modalService.dismissAll();  
+        }
+        else  {
+      this.toastr.info('Something went wrong','');
+        }
+      }, (error: any) => {
+        console.log("error",error);
+        this.toastr.info('Something went wrong','');
 
+      });
+    }
 
-  
+  }
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
@@ -250,11 +370,30 @@ export class HomeComponent implements OnInit {
       }, 500);
     });
   }
+  viewtopcategory() {
+    this.request.gettopcat().subscribe((response: any) => {
+      this.Topcat = response.data;
+      console.log("this.Topcat", this.Topcat);
+
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+  }
 
   viewtodayoffer() {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data;
       this.loader4 = false;
+
+    });
+  }
+  viewsubscribebanner() {
+    this.request.getsubscribebanner().subscribe((response: any) => {
+      this.subscribebanner = response.data[0];
+      this.loader4 = false;
+      console.log("this.subscribebanner", this.subscribebanner);
+
 
     });
   }
@@ -271,6 +410,7 @@ export class HomeComponent implements OnInit {
     this.request.getbestsellpro().subscribe((response: any) => {
       console.log("best selling pro", response)
       this.Bestsellpro = response.data.slice(0, 12);
+      this.Bestsellpro1 = response.data.slice(0, 5);
       this.loader3 = false;
       setTimeout(() => {
         this.imgloader = false;
@@ -284,6 +424,14 @@ export class HomeComponent implements OnInit {
       setTimeout(() => {
         this.imgloader2 = false;
       }, 3000);
+    });
+  }
+  viewdaydeal() {
+    this.request.getdaydealpro().subscribe((response: any) => {
+      this.Daydealpro = response.data;
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
     });
   }
   gethomeecat() {
@@ -377,42 +525,42 @@ export class HomeComponent implements OnInit {
   }
   addtocart(_id: any) {
 
-      if (this.userid == 0) {
-        this.toastr.info('You need to login', '');
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      let edata = {
+        id: _id,
+        variant: this.varient_value.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity: this.quantityyy,
+        buyertype: this.buyertypeid,
       }
-      else {
-        let edata = {
-          id: _id,
-          variant: this.varient_value.replace(/\s/g, ""),
-          user_id: this.userid,
-          quantity: this.quantityyy,
-          buyertype: this.buyertypeid,
+      console.log(edata);
+
+      this.request.addtocart(edata).subscribe((res: any) => {
+        console.log("resssssssssssssss", res);
+        if (res.message == 'Product added to cart successfully') {
+          console.log("Product added to cart successfully");
+          this.addRecordSuccess();
+          this.modalService.dismissAll();
+          this.sharedService.sendClickEvent();
         }
-        console.log(edata);
-  
-        this.request.addtocart(edata).subscribe((res: any) => {
-          console.log("resssssssssssssss", res);
-          if (res.message == 'Product added to cart successfully') {
-            console.log("Product added to cart successfully");
-            this.addRecordSuccess();
-            this.modalService.dismissAll();
-            this.sharedService.sendClickEvent();
-          }
-          else if (res.message == 'Minimum 1 item(s) should be ordered') {
-            this.toastr.success(res.message);
-  
-          }
-          else if (res.message == 'Stock out') {
-            this.toastr.error(res.message);
-            console.log("Stock out");
-          }
-        },
-          (error: any) => {
-            this.toastr.error(error);
-            console.log("error", error);
-  
-          });
-      }
+        else if (res.message == 'Minimum 1 item(s) should be ordered') {
+          this.toastr.success(res.message);
+
+        }
+        else if (res.message == 'Stock out') {
+          this.toastr.error(res.message);
+          console.log("Stock out");
+        }
+      },
+        (error: any) => {
+          this.toastr.error(error);
+          console.log("error", error);
+
+        });
+    }
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
@@ -422,7 +570,7 @@ export class HomeComponent implements OnInit {
       let edata4 = {
         user_id: this.userid,
         product_id: prd_id
-      }  
+      }
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         if (res.message == 'Product is successfully added to your wishlist') {
 
@@ -462,7 +610,7 @@ export class HomeComponent implements OnInit {
       this.Allbrands = response.data;
       this.page1 = true,
         this.page2 = false,
-      this.loader5 = false
+        this.loader5 = false
       setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
@@ -519,7 +667,7 @@ export class HomeComponent implements OnInit {
       this.Peoduct = response.data[0];
 
       this.prod_price = this.Peoduct.main_price;
-      this.storked_pricee=this.Peoduct.stroked_price;
+      this.storked_pricee = this.Peoduct.stroked_price;
 
       this.choice = this.Peoduct.choice_options;
       //  this.stocck=(this.Peoduct.current_stock)-1;
@@ -529,10 +677,10 @@ export class HomeComponent implements OnInit {
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
-      this.totalprice=this.Peoduct.main_price.replace('Rs','');
+      this.totalprice = this.Peoduct.main_price.replace('Rs', '');
       console.log("res", this.Peoduct);
       console.log("choise option", this.Peoduct.choice_options);
-      this.subItem=0
+      this.subItem = 0
       //  console.log("stocck",this.stocck); 
       console.log("stk", this.stk);
       if (this.Peoduct.current_stock == 0) {
@@ -540,7 +688,7 @@ export class HomeComponent implements OnInit {
 
       }
       else {
-        this.stocck = (this.Peoduct.current_stock) ;
+        this.stocck = (this.Peoduct.current_stock);
       }
       //  window.scroll(0,0);             
       if (this.Peoduct.choice_options.length == 0) {
@@ -564,78 +712,78 @@ export class HomeComponent implements OnInit {
 
   }
   getValue(val: any) {
-        
-    if (val<= 0) {
+
+    if (val <= 0) {
       val = 1
-     
+
     }
     else if (val > this.stocckkk) {
       val = this.stocckkk
-      
+
     }
     this.quantityyy = val
     this.stocck = this.stocckkk - val
-  
+
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
       console.log(res);
-      
+
       this.totalprice = res.price.toFixed(2);
-      
-    // this.totalprice = this.dec.toFixed(2) 
-   
+
+      // this.totalprice = this.dec.toFixed(2) 
+
     })
 
   }
-  increaseqty(){
+  increaseqty() {
     this.quantityyy++;
     this.stocck--;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
       console.log(res);
-      
-      this.totalprice = res.price.toFixed(2);
-      
-    // this.totalprice = this.dec.toFixed(2) 
-   
-    })
-      }
-      decreaseqty(){
 
-        this.quantityyy--;
-        this.stocck++;    
-        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-          console.log(res);
-          
-          this.totalprice = res.price.toFixed(2);
-          
-        // this.totalprice = this.dec.toFixed(2) 
-       
-        })   
+      this.totalprice = res.price.toFixed(2);
+
+      // this.totalprice = this.dec.toFixed(2) 
+
+    })
+  }
+  decreaseqty() {
+
+    this.quantityyy--;
+    this.stocck++;
+    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+      console.log(res);
+
+      this.totalprice = res.price.toFixed(2);
+
+      // this.totalprice = this.dec.toFixed(2) 
+
+    })
+  }
+  selectvar(weight: any, i: any) {
+    this.varient_value = weight.replace(/\s/g, "")
+    this.subItem = i
+    this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
+
+      this.prod_price = res?.price_string;
+      this.storked_pricee = res?.stroked_price;
+
+      this.totalprice = (res?.price_string).replace('Rs', '');
+      this.varprise = res?.price_string;
+      this.stk = res?.stock;
+      this.stocckkk = res?.stock;
+      if (res?.stock == 0) {
+        this.stocck = 0
+        this.quantityyy = 0;
       }
-      selectvar(weight:any,i:any){
-        this.varient_value=weight.replace(/\s/g, "")
-        this.subItem=i
-        this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-          
-          this.prod_price = res?.price_string;
-          this.storked_pricee=res?.stroked_price;
-          
-          this.totalprice=(res?.price_string).replace('Rs','');
-          this.varprise=res?.price_string;
-          this.stk=res?.stock;
-          this.stocckkk=res?.stock;
-          if(res?.stock==0){
-            this.stocck=0
-            this.quantityyy=0;
-           }
-           else {
-            this.stocck=(res?.stock);
-            this.quantityyy=0;
-           }  
-        }, (error: any) => {
-          console.log("error",error);
-        
-        });
+      else {
+        this.stocck = (res?.stock);
+        this.quantityyy = 0;
       }
+    }, (error: any) => {
+      console.log("error", error);
+
+    });
+  }
 
   addtocart2() {
     if (this.userid == 0) {

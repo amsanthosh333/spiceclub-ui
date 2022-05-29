@@ -86,14 +86,14 @@ export class SignupComponent implements OnInit {
       this.authService.adduser(edata).subscribe(
         (res: any) => {
           this.userid =res.user_id
-          if (res.message == "Registration Successful. Please verify and log in to your account.") {
-            this.toastr.success('Registration Successfully', '');
+          if (res.result == true) {
+            this.toastr.success('Registered Successfully', '');
             this.modalService.open(content, {
               ariaLabelledBy: 'modal-basic-title',
               size: 'md',
             });
             this.btnloading=false;
-          }else if(res.message == "User already exists.") {      
+          }else if(res.result == false) {      
             this.error2 = res.message
             this.btnloading=false;
           }

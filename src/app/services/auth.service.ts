@@ -125,11 +125,14 @@ export class AuthService {
     return this.http.get(this.url,{headers:headers})
   }
    adduser(body: any) {
-    // console.log('credentials2',body);
     this.url = `${this.endPoint1}/auth/signup`;
     return this.http.post(this.url, body);
   }
-
+  
+  Quickregister(body: any) {
+    this.url = `${this.endPoint1}/auth/quickregister`;
+    return this.http.post(this.url, body);
+  }
   registerotpverification(body: any) {  
     this.url = `${this.endPoint1}/auth/confirm_code`;
     return this.http.post<any>(this.url, body)
