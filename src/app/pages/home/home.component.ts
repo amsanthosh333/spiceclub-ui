@@ -13,6 +13,7 @@ import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { SharedService } from 'src/app/services/shared.service'
 import { AuthService } from 'src/app/services/auth.service';
+import { LoginComponent } from 'src/app/auth/login/login.component';
 
 declare var jQuery: any;
 @Component({
@@ -156,6 +157,14 @@ export class HomeComponent implements OnInit {
   Topcat: any;
   enquiryForm: FormGroup;
   btnloading1: boolean = false;
+  selectedvar: any;
+  showaddbtn: any;
+  quantityinput: any;
+  public quantityarray: any[] = [];
+   
+  prdindex: any;
+  quantityarray1!: void;
+  totalqty: any;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -237,7 +246,7 @@ export class HomeComponent implements OnInit {
         email: "" + this.registerForm.controls['email'].value,
         phone: "" + this.registerForm.controls['Mobile'].value,
         business_name: "" + this.registerForm.controls['businessname'].value,
-        buyer_type: 1,
+
       }
       this.authService.Quickregister(edata).subscribe(
         (res: any) => {
@@ -271,12 +280,12 @@ export class HomeComponent implements OnInit {
       if (!this.enquiryForm.get('mobile')?.valid) {
         this.error2 = '* Enter valid mobile number';
       }
-      else if(!this.enquiryForm.get('email')?.valid) {
+      else if (!this.enquiryForm.get('email')?.valid) {
         this.error2 = '* Enter valid emailid ';
       }
-      else{
+      else {
         this.error2 = '* Enter all details';
-      } 
+      }
       this.toastr.info(this.error2);
       this.btnloading1 = false;
       return;
@@ -299,23 +308,28 @@ export class HomeComponent implements OnInit {
         imagename3: null
       }
       console.log("edata", edata);
-       this.request.sendenquiry(edata).subscribe((res: any) => {  
+      this.request.sendenquiry(edata).subscribe((res: any) => {
         console.log("sendenquiry response", res);
-        if (res.result == true) {       
-          this.enquiryForm.reset() 
-          this.toastr.success('Submited Successfully','');
-        this.modalService.dismissAll();  
+        if (res.result == true) {
+          this.enquiryForm.reset()
+          this.toastr.success('Submited Successfully', '');
+          this.modalService.dismissAll();
         }
-        else  {
-      this.toastr.info('Something went wrong','');
+        else {
+          this.toastr.info('Something went wrong', '');
         }
       }, (error: any) => {
-        console.log("error",error);
-        this.toastr.info('Something went wrong','');
+        console.log("error", error);
+        this.toastr.info('Something went wrong', '');
 
       });
     }
-
+  }
+  openlogin() {
+    this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
@@ -406,11 +420,12 @@ export class HomeComponent implements OnInit {
     this.brnd_id = this.Allbrands[i].id
     this.brandnavigate(this.brnd_id)
   }
+
   viewbestsellpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
       console.log("best selling pro", response)
       this.Bestsellpro = response.data.slice(0, 12);
-      this.Bestsellpro1 = response.data.slice(0, 5);
+
       this.loader3 = false;
       setTimeout(() => {
         this.imgloader = false;
@@ -495,24 +510,96 @@ export class HomeComponent implements OnInit {
         console.log(error);
       });
   }
-  // selectvar(weight:any){
-  //   this.varient_value=weight.replace(/\s/g, "")
-  //   this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-  //     console.log(res);
-  //     this.varprise=res?.price_string;
-  //     this.stocck=res?.stock;
-  //     // if (res.message == 'Product added to cart successfully') {       
-  //     // }
-  //     // else  {
-  //     //   console.log("error",res);
 
-  //     // }
-  //     console.log(this.varprise);
-  //   }, (error: any) => {
-  //     console.log("error",error);
+  qtyChange(event: any, i: any, img: any) {
 
-  //   });
-  // }
+    if(this.quantityarray.length == 0){
+      this.quantityarray.push({ "id": img.id, "value": event.target.value });
+    }
+    else{
+      console.log(" this.quantityarray",  this.quantityarray);
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+          console.log("obj", index);  
+          if(index>-1){
+            console.log("if",index);
+            
+            this.quantityarray[index].value = event.target.value;
+          }
+          else{
+            console.log("else",index);
+            this.quantityarray.push({ "id": img.id, "value": event.target.value });
+          }
+          
+    }
+  
+    console.log("this.quantityarray", this.quantityarray);
+  }
+
+  prodselectvar(weight: any, i: any) {
+    console.log("weight", weight, i);
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+  }
+  prodaddtocart(img: any) {
+    console.log("img", img);
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      
+      if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else if (img.variants[0]?.options?.length == 1) {
+        this.varient_value = img.variants[0]?.options[0];
+      }
+      else {
+        this.varient_value = this.selectedvar;
+      }
+
+     
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+      if( index>-1){
+        this.totalqty = this.quantityarray[index].value;
+      }
+      else{
+        this.totalqty =1
+      }
+    
+      let edata = {
+        id: img.id,
+        variant: this.varient_value?.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity:this.totalqty,
+        buyertype: this.buyertypeid,
+      }
+      console.log(edata);
+      this.request.addtocart(edata).subscribe((res: any) => {
+        console.log("resssssssssssssss", res);
+        if (res.message == 'Product added to cart successfully') {
+          console.log("Product added to cart successfully");
+          this.addRecordSuccess();
+          this.modalService.dismissAll();
+          this.sharedService.sendClickEvent();
+        }
+        else if (res.message == 'Minimum 1 item(s) should be ordered') {
+          this.toastr.success(res.message);
+
+        }
+        else if (res.message == 'Stock out') {
+          this.toastr.error(res.message);
+          console.log("Stock out");
+        }
+      },
+        (error: any) => {
+          this.toastr.error(error);
+          console.log("error", error);
+
+        });
+    }
+  }
+
   backk() {
     // this._location.back();
     this.page1 = true;
@@ -608,6 +695,8 @@ export class HomeComponent implements OnInit {
   viewbrands() {
     this.request.getallbrands().subscribe((response: any) => {
       this.Allbrands = response.data;
+      console.log(this.Allbrands);
+
       this.page1 = true,
         this.page2 = false,
         this.loader5 = false
