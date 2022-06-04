@@ -512,7 +512,6 @@ public gettopcat() {
 public getcatprod(id:any,page:any) {
   this.url = `${this.endPoint1}/products/category/` + id +'?page='+ page +'&name=&user_id='+ this.userid;
   console.log(this.url);
-  
   return this.http.get(this.url);
 }
 public getcatdetail(id:any) {

@@ -77,6 +77,11 @@ export class ProductdetailComponent implements OnInit {
   iswishlistt: any;
   likedd = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   likeddd = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+ iindex: any;
+  img: any;
+  likesss = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+ 
   showFlag: boolean = false;
   selectedImageIndex: number = -1;
   currentIndex: any;
@@ -113,6 +118,11 @@ export class ProductdetailComponent implements OnInit {
   ingItemm: boolean=true;
   issubscribed: any;
   product_idd: any;
+  totalqty: any;
+  public quantityarray: any[] = [];
+  selectedvar: any;
+  showaddbtn: any;
+  imgloader2: boolean=true;
 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -336,6 +346,9 @@ export class ProductdetailComponent implements OnInit {
         this.varient_value = this.choice[0]?.options[0];
         this.checkvarientprice();
       }
+      setTimeout(() => {
+        this.imgloader2 = false;
+      }, 3000);
     },
       (error: any) => {
         console.log("error",error.message);
@@ -886,4 +899,131 @@ export class ProductdetailComponent implements OnInit {
      encodeURIComponent('https://spiceclub-a8420.web.app/' + foodid));
     return false;
   }
+
+  qtyChange(event: any, i: any, img: any) {
+
+    if(this.quantityarray.length == 0){
+      this.quantityarray.push({ "id": img.id, "value": event.target.value });
+    }
+    else{
+      console.log(" this.quantityarray",  this.quantityarray);
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+          console.log("obj", index);  
+          if(index>-1){
+            console.log("if",index);
+            
+            this.quantityarray[index].value = event.target.value;
+          }
+          else{
+            console.log("else",index);
+            this.quantityarray.push({ "id": img.id, "value": event.target.value });
+          }
+          
+    }
+  
+    console.log("this.quantityarray", this.quantityarray);
+  }
+
+  prodselectvar(weight: any, i: any,id:any) {
+    console.log("weight", weight, i);
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    this.request.addvarient(id, this.selectedvar).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.Relatedprod[i].stroked_price = res.stroked_price
+      this.Relatedprod[i].main_price = res.price_string
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  prodaddtocart(img: any) {
+    console.log("img", img);
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      
+      if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else if (img.variants[0]?.options?.length == 1) {
+        this.varient_value = img.variants[0]?.options[0];
+      }
+      else {
+        this.varient_value = this.selectedvar;
+      }
+
+     
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+      if( index>-1){
+        this.totalqty = this.quantityarray[index].value;
+      }
+      else{
+        this.totalqty =1
+      }
+    
+      let edata = {
+        id: img.id,
+        variant: this.varient_value?.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity:this.totalqty,
+        buyertype: this.buyertypeid,
+      }
+      console.log(edata);
+      this.request.addtocart(edata).subscribe((res: any) => {
+        console.log("resssssssssssssss", res);
+        if (res.message == 'Product added to cart successfully') {
+          console.log("Product added to cart successfully");
+          this.addRecordSuccess();
+          this.modalService.dismissAll();
+          this.sharedService.sendClickEvent();
+        }
+        else if (res.message == 'Minimum 1 item(s) should be ordered') {
+          this.toastr.success(res.message);
+
+        }
+        else if (res.message == 'Stock out') {
+          this.toastr.error(res.message);
+          console.log("Stock out");
+        }
+      },
+        (error: any) => {
+          this.toastr.error(error);
+          console.log("error", error);
+
+        });
+    }
+  }
+  proddetail(id: any) {
+    window.scroll(0, 0);
+    this.router.navigate(['productdetail', id]);
+  }
+  toggle1(img: any, index: any): void {  
+    console.log(this.userid);
+     
+     this.likesss[index] = !this.likesss[index];
+     if (this.likesss[index] == true) {
+       this.addtowishlist(img.id);
+     }
+     else if (this.likesss[index] == false) {
+       this.deleteRecord(img.id);
+     }
+ }
+ toggledelete1(img: any, index: any): void {
+  
+   if(this.userid!==0){
+   this.likess[index] = !this.likess[index];
+
+   if (this.likess[index] == true) {
+     this.addtowishlist(img.id);
+   }
+   else if (this.likedd[index] == false) {
+     this.deleteRecord(img.id);
+   }
+ }
+ else{
+   this.toastr.info('','you need to login');
+ }
+ }
 }

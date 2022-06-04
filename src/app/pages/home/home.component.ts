@@ -14,6 +14,7 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { SharedService } from 'src/app/services/shared.service'
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from 'src/app/auth/login/login.component';
+import { SignupComponent } from 'src/app/auth/signup/signup.component';
 
 declare var jQuery: any;
 @Component({
@@ -161,10 +162,21 @@ export class HomeComponent implements OnInit {
   showaddbtn: any;
   quantityinput: any;
   public quantityarray: any[] = [];
-   
+
   prdindex: any;
   quantityarray1!: void;
   totalqty: any;
+  subscribe: FormGroup;
+  error: any;
+  top1id: any;
+  topfirstcat: any;
+  top1name: any;
+  top2id: any;
+  top2name: any;
+  topsecondcat: any;
+  oldBestsellpro: any;
+  parentbesrsellpro: Array<any>=[];
+  parentbesrsell: any;
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -207,8 +219,14 @@ export class HomeComponent implements OnInit {
       comments: ['', Validators.required],
     },
     );
+
+    this.subscribe = this.fb.group({
+      mail: ['', [Validators.required, Validators.email]],
+    });
+
   }
   ngOnInit(): void {
+
     setTimeout(() => {
       this.loadingg = false;
     }, 2000);
@@ -325,13 +343,49 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+  mailsubscribe(form: FormGroup) {
+    this.error = '';
+    if (this.subscribe.invalid) {
+      this.error = '* Enter valid email';
+      this.toastr.info(this.error);
+      return;
+    } else {
+      let edata = {
+        email: form.value.mail
+      };
+      this.request.emailsubscribe(edata).subscribe((res: any) => {
+        console.log(res);
+        if (res.result == true) {
+          this.toastr.success(res.message);
+          this.subscribe.reset();
+        }
+        else {
+          this.toastr.info(res.message);
+          this.subscribe.reset();
+        }
+      });
+    }
+  }
   openlogin() {
     this.modalService.open(LoginComponent, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
     });
   }
+  openSignup() {
+    this.modalService.open(SignupComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
+  }
+  gotocategory4() {
+
+    this.router.navigate(['category', 33], { queryParams: { subcategory: 34, category1: 35, subcategory1: 36 } });
+
+    // category/33?subcategory=34&category1=35&subcategory1=36
+  }
   toggle(img: any, index: any): void {
+    console.log("toggle1", this.userid);
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
       this.addtowishlist(img.id);
@@ -351,6 +405,8 @@ export class HomeComponent implements OnInit {
     }
   }
   toggle1(img: any, index: any): void {
+    console.log(this.userid);
+
     this.likesss[index] = !this.likesss[index];
     if (this.likesss[index] == true) {
       this.addtowishlist(img.id);
@@ -361,13 +417,19 @@ export class HomeComponent implements OnInit {
 
   }
   toggledelete1(img: any, index: any): void {
-    this.likess[index] = !this.likess[index];
 
-    if (this.likess[index] == true) {
-      this.addtowishlist(img.id);
+    if (this.userid !== 0) {
+      this.likess[index] = !this.likess[index];
+
+      if (this.likess[index] == true) {
+        this.addtowishlist(img.id);
+      }
+      else if (this.likedd[index] == false) {
+        this.deleteRecord(img.id);
+      }
     }
-    else if (this.likedd[index] == false) {
-      this.deleteRecord(img.id);
+    else {
+      this.toastr.info('', 'you need to login');
     }
   }
   clickme() {
@@ -387,14 +449,32 @@ export class HomeComponent implements OnInit {
   viewtopcategory() {
     this.request.gettopcat().subscribe((response: any) => {
       this.Topcat = response.data;
-      console.log("this.Topcat", this.Topcat);
+      this.top1id = this.Topcat[0].id
+      this.top2id = this.Topcat[1].id
+      this.top1name = this.Topcat[0].name;
+      this.top2name = this.Topcat[1].name;
+      console.log("this.Topcat", this.Topcat, this.top1id, this.top2id);
+      this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
+        this.topfirstcat = response.data
 
+      });
+      this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
+        this.topsecondcat = response.data
+    
+      });
     },
       (error: any) => {
         console.log("error", error);
       });
   }
-
+  gotocategory() {
+    console.log("goto");
+    this.router.navigate(['category', this.top1id]);
+  }
+  gotocategory2() {
+    console.log("goto");
+    this.router.navigate(['category', this.top2id]);
+  }
   viewtodayoffer() {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data;
@@ -424,8 +504,11 @@ export class HomeComponent implements OnInit {
   viewbestsellpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
       console.log("best selling pro", response)
-      this.Bestsellpro = response.data.slice(0, 12);
+      // this. oldBestsellpro = response.data;
+      // this.parentbesrsell = response;
+      // this.parentbesrsellpro= this.parentbesrsell.data
 
+      this.Bestsellpro = response.data;
       this.loader3 = false;
       setTimeout(() => {
         this.imgloader = false;
@@ -513,40 +596,86 @@ export class HomeComponent implements OnInit {
 
   qtyChange(event: any, i: any, img: any) {
 
-    if(this.quantityarray.length == 0){
+    if (this.quantityarray.length == 0) {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
-    else{
-      console.log(" this.quantityarray",  this.quantityarray);
+    else {
+      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-          console.log("obj", index);  
-          if(index>-1){
-            console.log("if",index);
-            
-            this.quantityarray[index].value = event.target.value;
-          }
-          else{
-            console.log("else",index);
-            this.quantityarray.push({ "id": img.id, "value": event.target.value });
-          }
-          
+      console.log("obj", index);
+      if (index > -1) {
+        console.log("if", index);
+
+        this.quantityarray[index].value = event.target.value;
+      }
+      else {
+        console.log("else", index);
+        this.quantityarray.push({ "id": img.id, "value": event.target.value });
+      }
+
     }
-  
+
     console.log("this.quantityarray", this.quantityarray);
   }
 
-  prodselectvar(weight: any, i: any) {
-    console.log("weight", weight, i);
+  selectbestsell(){
+    console.log("this.parentbesrsellpro",this.parentbesrsellpro);
+  }
+  bestsellingselectvar(weight: any, i: any, id: any) {  
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
+    this.request.addvarient(id, weight).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      
+       this.Bestsellpro[i].stroked_price = res.stroked_price;
+       this.Bestsellpro[i].main_price = res.price_string;
+      // this.Bestsellpro[i].stroked_price = res.stroked_price;
+      // this.Bestsellpro[i].main_price = res.price_string;
+    }, (error: any) => {
+      console.log("error", error);
+    });
   }
+  featuuresselectvar(weight: any, i: any, id: any) {  
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    this.request.addvarient(id, this.selectedvar).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.Futuredpro[i].stroked_price = res.stroked_price
+      this.Futuredpro[i].main_price = res.price_string
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  topcat1selectvar(weight: any, i: any, id: any) {  
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    this.request.addvarient(id, weight).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.topfirstcat[i].stroked_price = res.stroked_price
+      this.topfirstcat[i].main_price = res.price_string
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  topcat2selectvar(weight: any, i: any, id: any) {  
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    this.request.addvarient(id, weight).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.topsecondcat[i].stroked_price = res.stroked_price
+      this.topsecondcat[i].main_price = res.price_string
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
       this.toastr.info('You need to login', '');
     }
     else {
-      
+
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         console.log("empty");
         this.varient_value = ''
@@ -558,20 +687,20 @@ export class HomeComponent implements OnInit {
         this.varient_value = this.selectedvar;
       }
 
-     
+
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      if( index>-1){
+      if (index > -1) {
         this.totalqty = this.quantityarray[index].value;
       }
-      else{
-        this.totalqty =1
+      else {
+        this.totalqty = 1
       }
-    
+
       let edata = {
         id: img.id,
         variant: this.varient_value?.replace(/\s/g, ""),
         user_id: this.userid,
-        quantity:this.totalqty,
+        quantity: this.totalqty,
         buyertype: this.buyertypeid,
       }
       console.log(edata);
@@ -604,7 +733,6 @@ export class HomeComponent implements OnInit {
     // this._location.back();
     this.page1 = true;
     this.page2 = false;
-
   }
   gotodeals() {
     this.router.navigate(['/daydeal']);
