@@ -1761,6 +1761,9 @@ export class HeaderComponent implements OnInit {
     this.subcategory1 = id
   }
 
+  gotoproduct(id:any){
+    this.router.navigate(['/productdetail', id]);
+  }
   gotocategory(id: any) {
     console.log("goto");
     this.router.navigate(['category', id]);

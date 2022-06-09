@@ -517,6 +517,7 @@ export class HomeComponent implements OnInit {
   }
   viewfuturedpro() {
     this.request.getfuturedpro().subscribe((response: any) => {
+      console.log("Futuredpro",response);  
       this.Futuredpro = response.data;
       this.loader6 = false;
       setTimeout(() => {

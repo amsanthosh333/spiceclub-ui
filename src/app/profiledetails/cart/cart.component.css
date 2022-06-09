@@ -1,10 +1,54 @@
+#featureddiv{
+  max-height: 300px;
+  overflow: auto;
+}
+#featureddiv::-webkit-scrollbar {
+  display: none;
+}
+#price{
+  padding-left: 15px;display: grid;text-align: center;margin-top: 15px;
+}
+#subsave span{
+  background-color: rgb(199, 15, 15);
+  font-size: 0.8rem;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+/* #subsave{
+  padding-left: 20px;
+} */
+#qty{
+  border:1px solid gray ;
+   padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 0px;
+    margin-top: 10px;
+
+}
+#summerydiv th{
+font-size: 0.7rem;
+}
+.listcard {
+  background-color:white;
+  margin-left: 22px;
+  width: 97%;
+  padding: 0px;
+  border: 1px solid #e5e1e1;
+}
+
 .menu-item a {
 	color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
 }
-td {
+ #producttable td {
+  padding-top: 25px;
 	color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
+  padding-bottom: 25px;
+  vertical-align:top;
+
 }
 tr {
 	color: #140f0f ;
@@ -25,6 +69,10 @@ input{
 		margin: 0 auto;
 	}
   }
+  @media (min-width: 1200px){
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1300px;
+}}
    /* to remove arroys form input box */
    input::-webkit-outer-spin-button,
    input::-webkit-inner-spin-button {
@@ -49,7 +97,10 @@ input{
 	margin-top: 10px;
 }
 .cart-table td.product-name a {
-	font-size: 13px;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 2px;
 }
 .cart-table th {
 	font-size: 13px;

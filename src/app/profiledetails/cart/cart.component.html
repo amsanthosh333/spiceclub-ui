@@ -1,101 +1,113 @@
-<div class="breadcrumb-area breadcrumb-bg-1 pt-10  mb-30">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<h1 class="breadcrumb-title">Shopping Cart</h1>
-
-				<!--=======  breadcrumb list  =======-->
-
-				<ul class="breadcrumb-list" style="padding-left: 0px;">
-					<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-					<li class="breadcrumb-list__item breadcrumb-list__item--active">shopping cart</li>
-				</ul>
-
-				<!--=======  End of breadcrumb list  =======-->
-
-			</div>
-		</div>
-	</div>
-</div>
 <!--=============================================
 	=            cart page content         =
 	=============================================-->
-
-
-
-
-<div class="shopping-cart-area mb-30" >
+<div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;">
 	<div class="container">
 		<div class="row">
 
-			<div class="col-lg-8 mb-10">
+			<div class="col-lg-9 mb-10" style="background-color: white;">
+				<div class="col-lg-12" style="  border-bottom: 2px solid #d3d3d3;" *ngIf="(Cart.length!==0)">
+					<div class="section-title section-title--one  mb-0">
+						<h6
+							style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
+							Cart</h6>
+					</div>
+				</div>
 				<!--=======  cart table  =======-->
-
-				<div class="cart-table-container" *ngIf="!loader">
-					<table class="cart-table" *ngIf="(Cart.length!==0)">
-						<thead>
-							<tr>
-								<th class="product-name" colspan="2">Product</th>
-								<th class="product-price">Price</th>
-								<th class="product-quantity" >Quantity</th>
-								<th class="product-subtotal">Total</th>
-								<th class="product-remove">&nbsp;</th>
-							</tr>
-						</thead>
+				<div class="cart-table-container pl-40" *ngIf="!loader">
+					<table id="producttable" class="cart-table" *ngIf="(Cart.length!==0)" style="border: none;">
 
 						<tbody *ngFor="let a of Cart">
-							<tr *ngFor="let b of a.cart_items" >
-								<td class="product-thumbnail" (click)="proddetail(b.product_id)" >
+							<tr *ngFor="let b of a.cart_items">
+								<td class="product-thumbnail" (click)="proddetail(b.product_id)">
 									<a>
 										<img src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}"
 											class="img-fluid" alt="">
 									</a>
 								</td>
-								<td class="product-name" (click)="proddetail(b.product_id)">
-									<a style="text-decoration: none;">{{b.product_name}}</a>
-									<span class="product-variation">{{b.variation}}</span>
-								</td>
+								<td class="product-name">
+									<a style="text-decoration: none;"
+										(click)="proddetail(b.product_id)">{{b.product_name}}</a>
+									<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">Brand</a>
+									<a
+										style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">In-stock</a>
+									<span class="price" style="font-weight: 600;
+										color: rgb(66, 66, 66);">Rs.{{b.price}} &nbsp;&nbsp;<span style="font-size: 0.7rem;font-weight: 100;"> Varient: {{b.variation}} (pack of 1) </span></span>
+								<br>
 
-								<td class="product-price" style="padding-left: 13px;"><span class="price">Rs
-										{{b.price}}</span></td>
+									<div class="pro-qty d-inline-block mx-0 " id="qty">
 
-								<td class="product-quantity" style="padding-left: 1px; padding: 20px;"  >
-									<div class="pro-qty d-inline-block mx-0 pt-0">
-
-										<span style="position: absolute;"><a class="dec qty-btn"
+										<span style="display: inherit;"><a class="dec qty-btn"
 												style="text-decoration: none;" type="submit"
 												(click)="decreaseqty(b.id,b.quantity-1)"
 												(click)="b.quantity = b.quantity - 1"
 												*ngIf="b.quantity!>b.lower_limit">-</a></span>
 										<!-- <input type="text" value="{{b.quantity}}"> -->
-										  <input type="number" #box value="{{b.quantity}}"  (keyup)="getValue(box.value,b.id,b.upper_limit)" name="qqty" style="background: transparent;">
-										<span style="position: absolute;"> <a class="inc qty-btn" 
+										<input type="number" #box value="{{b.quantity}}"
+											(keyup)="getValue(box.value,b.id,b.upper_limit)" name="qqty"
+											style="background: transparent;">
+										<span style="display: inherit;"> <a class="inc qty-btn"
 												style="text-decoration: none;" (click)="b.quantity = b.quantity + 1"
 												(click)="increaseqty(b.id,b.quantity)"
 												*ngIf="b.quantity!=b.upper_limit">+</a> </span>
+
+
 									</div>
 
+									<span style="margin-left:30px ;">
+										<button class="btn btn-light sm" style="padding-top: 1px;
+											padding-bottom: 1px;
+											font-size: 0.9rem;" (click)="deleteRecord(b.id)">Delete</button>
+									</span>
 
 								</td>
 
-								<td class="total-price" style="padding-left: 15px;"><span class="price"
-										style="color: red;">Rs {{b.total}}</span></td>
-								<td class="product-remove" style="">
-									<a (click)="deleteRecord(b.id)" style="height: 25px;width: 25px;">
-										<i class="ion-android-close" ></i>
+
+
+								<td class="product-quantity" style="padding-left: 1px; padding: 20px;">
+									<!-- <div class="pro-qty d-inline-block mx-0 pt-0">
+	
+											<span style="position: absolute;"><a class="dec qty-btn"
+													style="text-decoration: none;" type="submit"
+													(click)="decreaseqty(b.id,b.quantity-1)"
+													(click)="b.quantity = b.quantity - 1"
+													*ngIf="b.quantity!>b.lower_limit">-</a></span>
+										
+											  <input type="number" #box value="{{b.quantity}}"  (keyup)="getValue(box.value,b.id,b.upper_limit)" name="qqty" style="background: transparent;">
+											<span style="position: absolute;"> <a class="inc qty-btn" 
+													style="text-decoration: none;" (click)="b.quantity = b.quantity + 1"
+													(click)="increaseqty(b.id,b.quantity)"
+													*ngIf="b.quantity!=b.upper_limit">+</a> </span>
+										</div> -->
+								</td>
+
+								<td class="total-price" id="price"><span class="price"
+										style="color: rgb(41, 41, 41);font-size: 1.2rem;">Rs {{b.total}}</span>
+									<a style="vertical-align: middle;" id="subsave">
+										<span>save</span>
+										<p style="font-size:0.8rem ;">
+											subscribe & save
+										</p>
 									</a>
+								</td>
+
+								<td class="product-remove">
+									<!-- <a (click)="deleteRecord(b.id)" style="height: 25px;width: 25px;">
+											<i class="ion-android-close" ></i>
+										</a> -->
 								</td>
 							</tr>
 
 						</tbody>
 					</table>
 					<div id="pggg" *ngIf="(Cart.length==0)" style=" display: flex;
-	                       justify-content: center;
-	                       align-items: center;
-	                       height: 200px;
-                          	margin-right: 100px;
-                         	margin-left: 100px;
-                         	border: 3px solid rgb(139, 139, 139);">
+							   justify-content: center;
+							   align-items: center;
+							   height: 200px;
+								  margin-right: 100px;
+								 margin-left: 100px;
+								 margin-top: 100px;
+								 border: 3px solid rgb(139, 139, 139);">
 						<div>
 							<h5>
 								Cart is empty
@@ -113,110 +125,249 @@
 
 				</div>
 				<!--=======  End of cart table  =======-->
-				<div class="col-lg-12 mb-10" *ngIf="!loader" >
+				<div class="col-lg-12 mb-10" *ngIf="!loader">
 					<!--=======  coupon area  =======-->
-	
+
 					<div class="cart-coupon-area pb-20" *ngIf="(Cart.length!==0)">
 						<div class="row align-items-center">
 							<div class="col-lg-6 mb-md-30 mb-sm-30">
 								<!--=======  coupon form  =======-->
-	
-								<div class="lezada-form coupon-form">
-									<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
-										<div class="row">
-											<div class="col-md-7 mb-sm-10">
-												<input type="text" placeholder="Enter your coupon code"
-													formControlName="coupan" required>
+
+								<!-- <div class="lezada-form coupon-form">
+										<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
+											<div class="row">
+												<div class="col-md-7 mb-sm-10">
+													<input type="text" placeholder="Enter your coupon code"
+														formControlName="coupan" required>
+												</div>
+												<div class="col-md-5">
+													<button class="lezada-button lezada-button--medium" type="submit"
+														*ngIf="applycou" >applycoupon</button>
+													<button class="lezada-button lezada-button--medium" *ngIf="removecou"
+														(click)="removecoupon()">remove</button>
+												</div>
+		
 											</div>
-											<div class="col-md-5">
-												<button class="lezada-button lezada-button--medium" type="submit"
-													*ngIf="applycou" >applycoupon</button>
-												<button class="lezada-button lezada-button--medium" *ngIf="removecou"
-													(click)="removecoupon()">remove</button>
-											</div>
-	
+										</form>
+										<div class="col-md-5" *ngIf="removecou">
+		
 										</div>
-									</form>
-									<div class="col-md-5" *ngIf="removecou">
-	
-									</div>
-								</div>
-	
+									</div> -->
+
 								<!--=======  End of coupon form  =======-->
 							</div>
-	
+
 							<div class="col-lg-6 text-left text-lg-right">
 								<!--=======  update cart button  =======-->
-	
+
 								<button class="lezada-button lezada-button--medium" (click)="updatecart()">update
 									cart</button>
-	
+
 								<!--=======  End of update cart button  =======-->
 							</div>
 						</div>
 					</div>
-	
+
 					<!--=======  End of coupon area  =======-->
 				</div>
 			</div>
-		
-			
-			<div class="col-xl-4 offset-xl-8 col-lg-5 offset-lg-7"  style="margin-left: 0px;" >
-			<div *ngIf="!Summeryload">
-				<div class="cart-calculation-area" *ngIf="(Cart.length!==0)"  >
-					<h5 class="mb-0">Shopping Cart</h5>
 
-					<table class="cart-calculation-table mb-10">
-						<tr *ngIf="couponn==true">
-							<th>Coupon applied</th>
-							<td class="subtotal">yes</td>
-						</tr>
-						<tr>
-							<th>Discount</th>
-							<td class="subtotal">{{Summery?.discount}}</td>
-						</tr>
-						<!-- <tr>
-							<th>SHIPPING COST</th>
-							<td class="subtotal">{{Summery?.shipping_cost}}</td>
-						</tr> -->
-					
-						<!-- <tr>
-							<th>Tax</th>
-							<td class="subtotal">{{Summery?.tax}}</td>
-						</tr> -->
-						<!-- <tr>
-							<th>SUBTOTAL</th>
-							<td class="subtotal">{{subtot}}</td>
-						</tr> -->
-						<tr>
-							<th>SUBTOTAL</th>
-							<td class="total">{{subtot}}</td>
-						</tr>
-						<!-- <tr>
-							<th>TOTAL</th>
-							<td class="total">{{Grandtot}}</td>
-						</tr> -->
 
-					</table>
+			<div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" style="margin-left: 0px;">
 
-					<div class="cart-calculation-button text-center">
-						<button class="lezada-button lezada-button--medium" routerLink="/checkout">proceed to
-							checkout</button>
+				<div class="row mb-10">
+					<div *ngIf="!Summeryload">
+						<div class="cart-calculation-area" *ngIf="(Cart?.length!==0)" style="background-color: white;">
+							<p class="mb-0" style="font-size: 0.8rem;font-weight: 500;">Available coupans for you</p>
+							<span *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan"
+									value="{{a.code}}" (change)="changecoupan($event)">
+								<p style="font-size: 0.8rem;display: contents;"> {{a.code}}</p>
+							</span>
+							<div class="lezada-form coupon-form">
+								<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
+									<div class="row">
+										<div class="col-md-8 mb-sm-10">
+											<input type="text" placeholder="Enter your coupon code"
+												formControlName="coupan" required>
+										</div>
+										<div class="col-md-4">
+											<button class="btn btn-danger sm" type="submit" *ngIf="applycou" style="padding-top: 0px;
+													padding-bottom: 3px;
+													font-size: 0.8rem;margin-top: 12px;">Apply</button>
+											<button class="btn btn-danger sm" *ngIf="removecou" (click)="removecoupon()"
+												type="button" style="padding-top: 0px;
+													padding-bottom: 3px;
+													font-size: 0.8rem;margin-top: 12px;">remove</button>
+										</div>
+									</div>
+								</form>
+
+							</div>
+
+
+						</div>
+					</div>
+					<div class="skll" *ngIf="Summeryload">
+						<ngx-skeleton-loader count="1" [theme]="{ 
+										'border-radius': '5px',
+										height: '350px',
+										'background-color': '##b9b8b8',
+										border: '1px solid white'
+									  }" animation="pulse"></ngx-skeleton-loader>
+					</div>
+					<div *ngIf="!Summeryload">
+						<div class="cart-calculation-area" *ngIf="(Cart.length!==0)" style="background-color: white;">
+							<p class="mb-0" style="font-size: 0.8rem;font-weight: 500;">Shopping Cart</p>
+
+							<table class="cart-calculation-table mb-10" id="summerydiv">
+								<tr *ngIf="couponn==true">
+									<th>Coupon applied</th>
+									<td class="subtotal">yes</td>
+								</tr>
+								<tr>
+									<th>Discount : </th>
+									<td class="subtotal">{{Summery?.discount}}</td>
+								</tr>
+								<!-- <tr>
+											<th>SHIPPING COST</th>
+											<td class="subtotal">{{Summery?.shipping_cost}}</td>
+										</tr> -->
+
+								<!-- <tr>
+											<th>Tax</th>
+											<td class="subtotal">{{Summery?.tax}}</td>
+										</tr> -->
+								<!-- <tr>
+											<th>SUBTOTAL</th>
+											<td class="subtotal">{{subtot}}</td>
+										</tr> -->
+								<tr>
+									<th>Subtotal({{cartlength}} <span style="text-transform: lowercase;">items</span>):
+									</th>
+									<td class="total" style="font-size:15px;">{{subtot}}</td>
+								</tr>
+								<!-- <tr>
+											<th>TOTAL</th>
+											<td class="total">{{Grandtot}}</td>
+										</tr> -->
+
+							</table>
+
+							<div class="cart-calculation-button text-center">
+								<button class="lezada-button lezada-button--medium" routerLink="/checkout">proceed to
+									checkout</button>
+							</div>
+						</div>
 					</div>
 				</div>
-			</div>
-				<div class="skll" *ngIf="Summeryload">
-					<ngx-skeleton-loader count="1" [theme]="{ 
-							'border-radius': '5px',
-							height: '350px',
-							'background-color': '##b9b8b8',
-							border: '1px solid white'
-						  }" animation="pulse" ></ngx-skeleton-loader>
+
+
+				<div class="row mb-10">
+					<div *ngIf="!Summeryload">
+						<div class="cart-calculation-area" style="background-color: white;">
+							<p class="mb-10" style="font-size: 1rem;font-weight: 500;">Featured Products</p>
+							<div class="widget-product-wrapper" id="featureddiv">
+								<!--=======  single widget product  =======-->
+								<div class="single-widget-product-wrapper">
+									<div class="single-widget-product" *ngFor="let img of Futuredpro"
+										style="padding-bottom: 17px;" (click)="proddetail(img.id)">
+										<!--=======  image  =======-->
+
+										<div class="single-widget-product__image">
+											<a>
+												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+													class="img-fluid" alt="">
+											</a>
+										</div>
+										<div class="single-widget-product__content">
+
+											<div class="single-widget-product__content__top">
+												<h3 class="product-title"><a>{{img.name}}</a>
+												</h3>
+												<br>
+												<div class="price">
+													<span class="main-price discounted"
+														style="text-decoration:line-through"
+														*ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
+													<span class="discounted-price">{{img.main_price}}</span>
+												</div>
+												<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+												</ngb-rating>
+											</div>
+										</div>
+										<!--=======  End of content  =======-->
+									</div>
+								</div>
+
+								<!--=======  End of single widget product  =======-->
+							</div>
+							<!-- lazyloading -->
+							<div class="widget-product-wrapper" *ngIf="poploader">
+								<!--=======  single widget product  =======-->
+								<div class="single-widget-product-wrapper">
+									<div class="single-widget-product" style="padding-bottom: 17px;">
+										<div class="single-widget-product__image" style="height: 120px; width:80px">
+											<ngx-skeleton-loader count="1"
+												[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+											</ngx-skeleton-loader>
+										</div>
+										<div class="single-widget-product__content">
+											<div class="single-widget-product__content__top">
+												<ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+											</div>
+										</div>
+									</div>
+									<div class="single-widget-product" style="padding-bottom: 17px;">
+										<div class="single-widget-product__image" style="height: 120px; width:80px">
+											<ngx-skeleton-loader count="1"
+												[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+											</ngx-skeleton-loader>
+										</div>
+										<div class="single-widget-product__content">
+											<div class="single-widget-product__content__top">
+												<ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+											</div>
+										</div>
+									</div>
+									<div class="single-widget-product" style="padding-bottom: 17px;">
+										<div class="single-widget-product__image" style="height: 120px; width:80px">
+											<ngx-skeleton-loader count="1"
+												[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+											</ngx-skeleton-loader>
+										</div>
+										<div class="single-widget-product__content">
+											<div class="single-widget-product__content__top">
+												<ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+											</div>
+										</div>
+									</div>
+								</div>
+
+								<!--=======  End of single widget product  =======-->
+							</div>
+
+
+
+						</div>
+					</div>
+					<div class="skll" *ngIf="Summeryload">
+						<ngx-skeleton-loader count="1" [theme]="{ 
+										'border-radius': '5px',
+										height: '350px',
+										'background-color': '##b9b8b8',
+										border: '1px solid white'
+									  }" animation="pulse"></ngx-skeleton-loader>
+					</div>
+
 				</div>
+
 			</div>
-			
+
 		</div>
 	</div>
+
 </div>
+
+
 
 <!--=====  End of cart page content  ======-->

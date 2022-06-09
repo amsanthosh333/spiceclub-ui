@@ -131,6 +131,14 @@ public gettestimonial() {
     this.url = `${this.endPoint1}/cart-count/` + id;
     return this.http.get(this.url,{headers:headers});      
   }
+  
+  public availablecoupan() {  
+    const headers = new HttpHeaders()
+    .set('content-type', 'application/json')
+    .set('Authorization', 'Bearer'+' '+ this.accesstoken)
+    this.url = `${this.endPoint1}/coupon/availablecoupon`;
+    return this.http.get(this.url,{headers:headers});      
+  }
   public fetchusercart(id:any,) {  
     const headers = new HttpHeaders()
     .set('content-type', 'application/json')

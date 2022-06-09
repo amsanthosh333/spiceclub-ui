@@ -228,10 +228,7 @@ export class CheckoutComponent implements OnInit {
       // this. processdata()    
     });
   }
-  selectpaytype(row: any) {
-    // console.log("paytype", row.payment_type)
-    // this.payytype = row.payment_type
-  }
+
   shippingcost(row: any) {
     this.address_id = row?.id;
     this.city = row?.city_name;
@@ -369,43 +366,6 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  razorpayment1(edata1: any) {
-    this.request.razorpay1(edata1).subscribe((response: any) => {
-    });
-  }
-
-
-  //test razorpay
-  razorpayment2() {
-    let edata1 = {
-      payment_type: "cart_payment",
-      combined_order_id: 111,
-      amount: 82,
-      user_id: 8
-    }
-    console.log("edata3", edata1);
-    this.request.razorpay3().subscribe((response: any) => {
-      response.json();
-      console.log("razorpay1 response", response);
-      console.log("razorpay1 response json", response.json());
-    },
-    );
-  }
-
-  //test razorpay
-  razzzzorpay() {
-    let edata1 = {
-      payment_type: "cart_payment",
-      combined_order_id: 111,
-      amount: 82,
-      user_id: 8
-    }
-    console.log("edata1", edata1);
-    this.request.razorpay2(edata1).subscribe((response: any) => {
-      console.log("razorpay1 response", response);
-    });
-
-  }
 
   opennewaddress() {
     this.shippaddress = !this.shippaddress
@@ -674,6 +634,7 @@ console.log("edata4",edata4);
 
     })
   }
+
   //youtube
   options = {
     "key": "rzp_test_7Hdkaz1xFGPomB",

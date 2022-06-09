@@ -1,3 +1,135 @@
+#addcart1 {
+  color: #fff;
+  background-color:#fbc413;
+  border-color: #fbc413;
+  font-weight: 600;
+}
+#addcart2 {
+  color: #fff;
+  background-color: #fb6413;
+  border-color: #fb6413;
+  font-weight: 600;
+}
+#savesub1{
+  color: #fff;
+  background-color:#2aa0fd;
+  border-color:#2aa0fd;
+  font-weight: 600;
+}
+
+#sideslider::-webkit-scrollbar {
+  display: none;
+}
+#sideslider{
+ max-height: 403px;
+ overflow: auto;
+ padding-top: 5px;
+}
+#sideslider a{
+ height:50px;
+  width: 50px;
+  padding: 3px;
+  border: 1px solid #e0e0e0
+}
+#sideslider a.active{
+  height:50px;
+   width: 50px;
+   padding: 3px;
+   box-shadow: 0px 1px 7px #fd3907;
+ }
+
+#saveoffer p{
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+#saveoffer tr{
+  border: 1px solid  #e9e9e9;
+}
+
+#saveoffer table{
+  width: 100%;
+  text-align: center;
+}
+#saveoffer td{
+ padding: 5px;
+}
+#saveoffer{
+  padding-bottom: 20px;
+}
+#saveoffer span{
+  color: red;
+  font-weight: 600;
+}
+
+#subsave span{
+  background-color: rgb(199, 15, 15);
+  font-size: 0.8rem;
+  padding: 5px;
+  color: rgb(255, 255, 255);
+  border-radius: 5px;
+}
+#subsave{
+  padding-left: 20px;
+}
+#sucscribtiondiv #name{
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+#sucscribtiondiv{
+  background-color:#f2f2f2;text-align: center;
+}
+
+
+#subcatdiv{
+  display:flex;
+  font-size: 0.7rem;
+  padding-top: 7px;
+  margin-bottom: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#nutrients{
+  text-align: center;
+  background-color:  #d31a1a;
+  color: white;
+}
+.overview{
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  /* width: 5%; */
+}
+.overview th{
+  background-color: #f2f2f2;
+  border: 1px solid #e9e9e9;
+  color: #666565;
+   padding-left: 15px;
+   padding-right: 15px;
+   vertical-align: text-top;
+   padding-top: 10px;
+}
+
+.overview td{
+  background-color: #ffffff;
+   border: 1px solid #e9e9e9;
+  padding: 8px;
+  font-size: 0.9rem;
+}
+
+#dropdowncard .btn span{
+  text-decoration: none;
+  font-size:1rem;
+}
+#dropdowncard .btn {
+  text-decoration: none; 
+}
+#dropdowncard .row{
+    width: 85%;
+}
+#dropdowncard .col-3{
+ padding: 0px;
+}
+
 #offer{
 padding: 3px;
 border-radius: 4px;
@@ -28,6 +160,7 @@ input {
 
 .questions{
   padding-left: 20px;
+  padding-top: 20px ;
 }
 
 .imglazy {
@@ -275,7 +408,7 @@ body {
   height: auto;
   padding-bottom: 0px;
   padding:10px;
-border: 1px solid gray;
+border: 1px solid #dbdada;
 }
 
 .breadcrumb-list__item{
@@ -501,16 +634,19 @@ font { font-family: 'Poppins', sans-serif; }
     line-height: 22px;
     margin-right: 11px;
     cursor: pointer;
-    color: #ffffff;
-    padding: 4px;
-    border-radius: 4px;
-    background-color: #f14014;
+    color:#505050;
+    padding: 4px; 
+    border: 1px solid #fd3907;
+    border-radius: initial;
+    /* box-shadow:  #fd3907; */
+    box-shadow: 1px 1px 8px #fd3907;
 }
 
 .shop-product__block__value .shop-product-size-list .single-size {
   background-color: #cc3c2200;
-  color:#f14014;
-  border: 1px solid red;
+  color:#505050;
+  border: 1px solid #505050;
+  border-radius: initial;
 }
 @media (max-width : 768px) {  
  
