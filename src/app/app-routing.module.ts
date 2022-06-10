@@ -23,6 +23,7 @@ const routes: Routes = [
   { path: 'wishlist', loadChildren: () => import('./profiledetails/wishlist/wishlist.module').then(m => m.WishlistModule),canActivate: [AuthGuard], },
   { path: 'cart', loadChildren: () => import('./profiledetails/cart/cart.module').then(m => m.CartModule) ,canActivate: [AuthGuard],},
   { path: 'checkout', loadChildren: () => import('./profiledetails/checkout/checkout.module').then(m => m.CheckoutModule),canActivate: [AuthGuard], },
+  { path: 'checkout/:id', loadChildren: () => import('./profiledetails/checkout/checkout.module').then(m => m.CheckoutModule),canActivate: [AuthGuard], },
   { path: 'blog', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
   { path: 'blog/:id', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
   { path: 'recipe', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },

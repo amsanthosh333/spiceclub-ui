@@ -6,17 +6,15 @@
 		<div class="row">
 
 			<div class="col-lg-9 mb-10" style="background-color: white;">
-				<div class="col-lg-12" style="  border-bottom: 2px solid #d3d3d3;" *ngIf="(Cart.length!==0)">
+				<div class="col-lg-12" style="  border-bottom: 2px solid #d3d3d3;" >
 					<div class="section-title section-title--one  mb-0">
-						<h6
-							style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
+						<h6 style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
 							Cart</h6>
 					</div>
 				</div>
 				<!--=======  cart table  =======-->
 				<div class="cart-table-container pl-40" *ngIf="!loader">
 					<table id="producttable" class="cart-table" *ngIf="(Cart.length!==0)" style="border: none;">
-
 						<tbody *ngFor="let a of Cart">
 							<tr *ngFor="let b of a.cart_items">
 								<td class="product-thumbnail" (click)="proddetail(b.product_id)">
@@ -28,17 +26,17 @@
 								<td class="product-name">
 									<a style="text-decoration: none;"
 										(click)="proddetail(b.product_id)">{{b.product_name}}</a>
-									<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">Brand</a>
-									<a
-										style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">In-stock</a>
+									<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">{{b.brand_name}}</a>
+									<a *ngIf="b.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">In-stock</a>
+                                    <a  *ngIf="b.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">Out of stock</a>
 									<span class="price" style="font-weight: 600;
-										color: rgb(66, 66, 66);">Rs.{{b.price}} &nbsp;&nbsp;<span style="font-size: 0.7rem;font-weight: 100;"> Varient: {{b.variation}} (pack of 1) </span></span>
+										color: rgb(66, 66, 66);">Rs.{{b.price}} &nbsp;&nbsp;<span style="font-size: 0.7rem;font-weight: 100;"> {{b.attribute[0].title}}: {{b.variation}} (pack of 1) </span></span>
 								<br>
 
 									<div class="pro-qty d-inline-block mx-0 " id="qty">
 
 										<span style="display: inherit;"><a class="dec qty-btn"
-												style="text-decoration: none;" type="submit"
+												 type="submit"
 												(click)="decreaseqty(b.id,b.quantity-1)"
 												(click)="b.quantity = b.quantity - 1"
 												*ngIf="b.quantity!>b.lower_limit">-</a></span>
@@ -47,7 +45,7 @@
 											(keyup)="getValue(box.value,b.id,b.upper_limit)" name="qqty"
 											style="background: transparent;">
 										<span style="display: inherit;"> <a class="inc qty-btn"
-												style="text-decoration: none;" (click)="b.quantity = b.quantity + 1"
+												style="text-decoration: none;color: gray;" (click)="b.quantity = b.quantity + 1"
 												(click)="increaseqty(b.id,b.quantity)"
 												*ngIf="b.quantity!=b.upper_limit">+</a> </span>
 
@@ -100,14 +98,7 @@
 
 						</tbody>
 					</table>
-					<div id="pggg" *ngIf="(Cart.length==0)" style=" display: flex;
-							   justify-content: center;
-							   align-items: center;
-							   height: 200px;
-								  margin-right: 100px;
-								 margin-left: 100px;
-								 margin-top: 100px;
-								 border: 3px solid rgb(139, 139, 139);">
+					<div id="pggg" *ngIf="(Cart.length==0)" >
 						<div>
 							<h5>
 								Cart is empty
@@ -116,7 +107,7 @@
 					</div>
 				</div>
 
-				<div class="cart-table-container" *ngIf="loader">
+				<div class="cart-table-container mt-20" *ngIf="loader">
 					<div id="tit" style="width: 100%;">
 						<ngx-skeleton-loader count="4"
 							[theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
@@ -280,7 +271,6 @@
 											</a>
 										</div>
 										<div class="single-widget-product__content">
-
 											<div class="single-widget-product__content__top">
 												<h3 class="product-title"><a>{{img.name}}</a>
 												</h3>

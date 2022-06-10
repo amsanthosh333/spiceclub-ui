@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
@@ -99,16 +99,18 @@ export class CheckoutComponent implements OnInit {
   indexx: any;
   curshipaddress: any;
   address: any;
-  shipadds: boolean=true;
+  shipadds: boolean = true;
   dis: any;
-  nocart: boolean= false;
-  loadingg: boolean =false;
+  nocart: boolean = false;
+  loadingg: boolean = false;
   winRef: any;
+  buynowvalue: any;
+  buyvalue: any;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
-    private toastr: ToastrService, private toast: ToastrService,
+    private toastr: ToastrService, private toast: ToastrService, private activatedRoute: ActivatedRoute,
     private sharedService: SharedService, private payservice: PaymentService, private spinner: NgxSpinnerService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -123,7 +125,7 @@ export class CheckoutComponent implements OnInit {
     this.useremail = this.currentdetail.user.email;
     this.terms = this.fb.group({
       type: ['', [Validators.required]],
-    
+
 
     });
     this.register = this.fb.group({
@@ -140,16 +142,33 @@ export class CheckoutComponent implements OnInit {
     })
   }
   ngOnInit(): void {
+
     window.scroll(0, 0)
-    this.viewsummery();
-    this.viewcart();
-    this.paymettype();
-    this.viewcountry();
-    this.viewstate();
-    this.viewCity();
-    this.getaddress();
+    this.buyvalue = this.activatedRoute.snapshot.params['id'];
+    console.log("this.buyvalue ", this.buyvalue);
+    if (this.buyvalue == undefined || this.buyvalue == null) {
+      console.log("rec!undefined", this.buyvalue);
+      this.buynowvalue = 0;
+      this.viewsummery();
+      this.viewcart();
+      this.paymettype();
+      this.viewcountry();
+      this.viewstate();
+      this.viewCity();
+      this.getaddress();
 
-
+    }
+    else {
+      console.log("rec!else", this.buyvalue);
+      this.buynowvalue = this.buyvalue;
+      this.viewsummery();
+      this.viewcart();
+      this.paymettype();
+      this.viewcountry();
+      this.viewstate();
+      this.viewCity();
+      this.getaddress();
+    }
   }
 
   getSelecteditem() {
@@ -162,10 +181,10 @@ export class CheckoutComponent implements OnInit {
     this.getSelecteditem();
   }
   viewcart() {
-    this.request.fetchusercart(this.userid).subscribe((response: any) => {
+    this.request.fetchusercart(this.userid, this.buynowvalue).subscribe((response: any) => {
       this.Cart = response;
       console.log(this.Cart);
-      
+
       this.owneriid = this.Cart[0]?.owner_id;
       setTimeout(() => {
         this.loadingIndicator = false;
@@ -174,11 +193,11 @@ export class CheckoutComponent implements OnInit {
 
   }
   viewsummery() {
-    this.request.fetchsummery(this.userid).subscribe((response: any) => {
-      console.log("fetchsummery",response);    
+    this.request.fetchsummery(this.userid, this.buynowvalue).subscribe((response: any) => {
+      console.log("fetchsummery", response);
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total;
-      this.dis=this.Summery.discount;
+      this.dis = this.Summery.discount;
       this.subtot = this.Summery.sub_total;
       this.shippingfee = this.Summery.shipping_cost;
       this.tax = this.Summery.tax;
@@ -193,18 +212,18 @@ export class CheckoutComponent implements OnInit {
       console.log("address", this.Address);
       this.loader = false;
       if (this.Address.length === 0) {
-        this.shipadds=false
+        this.shipadds = false
         console.log("add some address");
         this.opennewaddress();
 
       }
       else {
-        this.shipadds=true
+        this.shipadds = true
         this.indexx = this.Address.findIndex((x: any) => x.set_default == 1);
         this.address_id = this.Address[this.indexx]?.id
         this.curshipaddress = this.Address[this.indexx]
         console.log("this.address_id", this.address_id);
-        if (this.address_id === undefined) {
+        if (this.address_id == undefined) {
           console.log("if");
           this.address_id = this.Address[0]?.id
           this.curshipaddress = this.Address[0]
@@ -214,13 +233,10 @@ export class CheckoutComponent implements OnInit {
         else {
           console.log("else",);
           console.log("shipping address id", this.address_id);
-          this.shippingcost(this.curshipaddress)
+          // this.shippingcost(this.curshipaddress)
         }
       }
-
-
     });
-
   }
   paymettype() {
     this.request.fetchpaytype().subscribe((response: any) => {
@@ -253,36 +269,51 @@ export class CheckoutComponent implements OnInit {
 
 
     this.request.makeshipingaddress(edata5).subscribe((res: any) => {
-      console.log("makeshipingaddress ===========",edata5)
-      console.log("makeshipingaddress response", res)
       if (res.result == true) {
-        // this.getaddress();
-    this.request.updateshippingaddress(edata2).subscribe((response: any) => {
-      console.log("updateshippingaddress=======",edata2)
-      console.log("updateshippingaddress response", response)
-      if(response.result==true){
 
-      }    
-    });
+        this.request.fetchaddress(this.userid).subscribe((response: any) => {
+          this.Address = response.data;
+          this.toastr.success('Address Updated Successfully', '');
+        });
+        // this.getaddress();
+        this.request.updateshippingaddress(edata2).subscribe((response: any) => {
+          if (response.result == true) {
+
+          }
+        });
 
       }
       else {
         console.log("error");
-        
+
       }
     });
 
-    this.request.fetchcost(edata).subscribe((response: any) => {
-      console.log("fetchcost ===========",edata)
-      console.log("fetchcost", response)
-      this.Scost = response;
-      this.cost = this.Scost.value_string
-      if (response.result == true) {
-        this.viewsummery();
-      }
-    });
+    // this.request.fetchcost(edata).subscribe((response: any) => {
+    //   console.log("fetchcost ===========",edata)
+    //   console.log("fetchcost", response)
+    //   this.Scost = response;
+    //   this.cost = this.Scost.value_string
+    //   if (response.result == true) {
+    //     this.viewsummery();
+    //   }
+    // });
 
   }
+  deleteRow(row: any) {
+    this.request.deleteaddress(row.id).subscribe((response: any) => {
+      if (response.result == true) {
+        this.modalService.dismissAll();
+        this.toastr.error('Removed Successfully', '');
+        this.getaddress();
+
+      }
+      else {
+        this.modalService.dismissAll();
+      }
+    });
+  }
+
   findInvalidControls(f: FormGroup) {
     const invalid = [];
     const controls = f.controls;
@@ -305,7 +336,7 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     else {
-      this.loadingg=true
+      this.loadingg = true
       let edata = {
         owner_id: this.owneriid,
         user_id: this.userid,
@@ -325,11 +356,11 @@ export class CheckoutComponent implements OnInit {
       else if (this.payytype == "razorpay") {
         this.request.placeorder(edata).subscribe((response: any) => {
 
-          console.log("placeorder response",response);    
+          console.log("placeorder response", response);
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
             this.sharedService.sendClickEvent();
-          //  this.nocart=true;
+            //  this.nocart=true;
 
             let edata1 = {
               payment_type: "cart_payment",
@@ -337,8 +368,8 @@ export class CheckoutComponent implements OnInit {
               amount: this.grandtotal_value,
               user_id: this.userid,
             }
-            this.initPay(edata1);  
-            
+            this.initPay(edata1);
+
           }
           else {
             console.log("fail", response.message);
@@ -348,15 +379,15 @@ export class CheckoutComponent implements OnInit {
       }
       else {
         this.request.placeorder(edata).subscribe((response: any) => {
-          console.log("cod response",response);
-          
+          console.log("cod response", response);
+
           this.combined_orderid = response.combined_order_id
           if (response.result == true) {
             console.log("if  response");
             this.toastr.success('Order placed');
             this.sharedService.sendClickEvent();
-            this.loadingg=false
-             this.router.navigate(['/orders']);
+            this.loadingg = false
+            this.router.navigate(['/orders']);
           }
           else {
             this.toastr.error(response.message);
@@ -479,14 +510,14 @@ export class CheckoutComponent implements OnInit {
     this.toastr.error(' Removed Successfully', '');
   }
 
-spiiner(){
-  this.spinner.show();
-}
+  spiiner() {
+    this.spinner.show();
+  }
 
   initPayold(edata: any) {
 
     console.log(edata);
-    
+
     let options = {
       "key": "rzp_test_DYDr3B0KYe4086",
       "amount": edata.amount * 100,
@@ -519,19 +550,19 @@ spiiner(){
       },
       "handler": (response: any) => {
         this.razpaysuccess = response
-        console.log("razpay responseeee",response);
+        console.log("razpay responseeee", response);
         console.log(this.razpaysuccess);
         // this.loadingg=true
-       ////////****//  // this.spinner.show();
+        ////////****//  // this.spinner.show();
         this.razorpaypayment();
       },
       modal: {
         // We should prevent closing of the form when esc key is pressed.
         escape: false,
       },
-     
+
     };
-  
+
     console.log("options,", options)
 
     let rzp1 = new this.authService.nativeWindow.Razorpay(options);
@@ -576,8 +607,8 @@ spiiner(){
       // handle the case when user closes the form while transaction is in progress
       console.log('Transaction cancelled.');
       this.paymentfailed();
-      this.loadingg=false;
-      
+      this.loadingg = false;
+
     });
     const rzp = new this.authService.nativeWindow.Razorpay(options);
     rzp.open();
@@ -585,12 +616,12 @@ spiiner(){
 
 
   razorpaypayment() {
-this.loadingg=true
+    this.loadingg = true
     ////////****//  this.spinner.show();
     console.log("razorpay1 response process");
     this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
       console.log("razorpay1 response", response);
-     
+
       if (response.result == true) {
         this.paymentdetails = response.payment_details
         this.razorpaysuccess();
@@ -606,13 +637,13 @@ this.loadingg=true
       amount: this.grandtotal_value,
       user_id: this.userid,
     }
-console.log("edata4",edata4);
+    console.log("edata4", edata4);
     this.request.razsuccess(edata4).subscribe((response: any) => {
-      console.log("razsuccess response",response);
-      
+      console.log("razsuccess response", response);
+
       if (response.result == true) {
         this.sharedService.sendClickEvent();
-        this.loadingg=false
+        this.loadingg = false
         //////////////****/ this.spinner.hide();
 
         alert(response.message)
@@ -625,12 +656,12 @@ console.log("edata4",edata4);
       }
     })
   }
-  paymentfailed(){
-    let edata5= {
-      combined_order_id: this.combined_orderid,   
+  paymentfailed() {
+    let edata5 = {
+      combined_order_id: this.combined_orderid,
     }
     this.request.razfailure(edata5).subscribe((response: any) => {
-      console.log("razfailure response",response);
+      console.log("razfailure response", response);
 
     })
   }

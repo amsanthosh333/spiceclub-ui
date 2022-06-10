@@ -139,11 +139,11 @@ public gettestimonial() {
     this.url = `${this.endPoint1}/coupon/availablecoupon`;
     return this.http.get(this.url,{headers:headers});      
   }
-  public fetchusercart(id:any,) {  
+  public fetchusercart(id:any,buynowid:any) {  
     const headers = new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
-    this.url = `${this.endPoint1}/carts/` + id;
+    this.url = `${this.endPoint1}/carts/` + id +`?is_buynow=`+ buynowid;
     return this.http.post(this.url,null,{headers:headers});      
   }
   public fetchcartprocess(body:any) {
@@ -169,11 +169,11 @@ updatecart(body:any) {
   this.url = `${this.endPoint1}/carts/change-quantity`;
   return this.http.post(this.url,body,{headers:headers});
 }
-fetchsummery(id:any) {  
+fetchsummery(id:any,buynowid:any) {  
   const headers = new HttpHeaders()
   .set('content-type', 'application/json')
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)
-  this.url = `${this.endPoint1}/cart-summary/` + id;
+  this.url = `${this.endPoint1}/cart-summary/` + id+`?is_buynow=`+ buynowid;
   return this.http.get(this.url,{headers:headers});
 }
 

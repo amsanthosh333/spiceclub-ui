@@ -532,6 +532,7 @@ export class ProductdetailComponent implements OnInit {
           user_id: this.userid,
           quantity: 1,
           buyertype: this.buyertypeid,
+          is_buynow:1
         }
         this.toastr.info('minimun 1 product should be selected', '');
       }
@@ -543,6 +544,7 @@ export class ProductdetailComponent implements OnInit {
           user_id: this.userid,
           quantity: this.quantityy,
           buyertype: this.buyertypeid,
+          is_buynow:1
         }
         this.addtoocartt2(edata);
       }
@@ -552,10 +554,13 @@ export class ProductdetailComponent implements OnInit {
     this.request.addtocart(edata).subscribe((res: any) => {
       console.log("buyres",res);
       
-      if (res.message == 'Product added to cart successfully') {
+      if (res.result == true) {
         this.addRecordSuccess();
         this.sharedService.sendClickEvent();
-        this.router.navigate(['/checkout']);
+        if( res.is_buynow!==0){
+          const buynowId =res.is_buynow
+          this.router.navigate(['/checkout',buynowId]);
+        }     
       }
       else if (res.message == 'Minimum 1 item(s) should be ordered') {
         this.toastr.info(res.message);
@@ -1061,7 +1066,7 @@ export class ProductdetailComponent implements OnInit {
       }
       console.log(edata);
       this.request.addtocart(edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
+        console.log("res", res);
         if (res.message == 'Product added to cart successfully') {
           console.log("Product added to cart successfully");
           this.addRecordSuccess();

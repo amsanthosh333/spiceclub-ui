@@ -7,6 +7,9 @@ margin-bottom: 0px;
 font-size: smaller;
 font-weight: 700;
  }
+ input[type="text"] {
+  font-size:0.9rem;
+}
  
  input {
   border: 2px solid #d3d3d3;

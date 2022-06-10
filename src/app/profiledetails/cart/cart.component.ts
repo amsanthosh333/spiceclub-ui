@@ -129,7 +129,7 @@ export class CartComponent implements OnInit {
     });
   }
   viewcart() {
-    this.request.fetchusercart(this.userid).subscribe((response: any) => {
+    this.request.fetchusercart(this.userid,0).subscribe((response: any) => {
 
       this.Cart = response;
       console.log("this.Cart",this.Cart)
@@ -279,7 +279,7 @@ export class CartComponent implements OnInit {
     });
   }
   viewcart3() {
-    this.request.fetchsummery(this.userid).subscribe((response: any) => {
+    this.request.fetchsummery(this.userid,0).subscribe((response: any) => {
       console.log("summery",response); 
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
