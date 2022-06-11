@@ -217,11 +217,17 @@ export class CartComponent implements OnInit {
     if(e.target.checked){ 
       console.log(e.target.value);
       this.comment.value.coupan= e.target.value
-             
+      this.comment.setValue({
+        coupan: e.target.value,    
+      });         
     }
+
     else{
       console.log("no");
       this.comment.value.coupan= ''
+      this.comment.setValue({
+        coupan:'',    
+      });
     }
  }
   proddetail(id: any) {

@@ -1,7 +1,6 @@
-<div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;">
+<div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;" >
 	<div class="container">
-		<div class="row">
-
+		<div class="row" *ngIf="!review">
 			<div class="col-lg-6 mb-10 p-0" style="background-color: white; ">
 				<div id="coldiv">
 					<div class="col-lg-12 pl-0" style="  border-bottom: 1px solid #cbcbcb">
@@ -10,181 +9,390 @@
 								Select Your Delivery Address</h6>
 						</div>
 					</div>
-
 					<p class="mb-1" style="font-size: 0.9rem;">Create a new address here</p>
 					<div style="text-align:center;border-bottom: 1px solid #cbcbcb;padding-bottom: 10px;">
 						<button id="newaddbtn" class="btn btn-info" (click)="opennewaddress()">Add new address</button>
 					</div>
+					<!-- Shipping Address -->
+					<div id="shipping-formm" class="mb-40" *ngIf="shippaddress" style="padding-top: 20px;">
+						<h4 class="checkout-title">Shipping Address</h4>
+						<form [formGroup]="register" (ngSubmit)="onAddRowSave(register)">
+							<div class="row">
 
-							<!-- Shipping Address -->
-							<div id="shipping-formm" class="mb-40" *ngIf="shippaddress" style="padding-top: 20px;">
-								<h4 class="checkout-title">Shipping Address</h4>
-								<form [formGroup]="register" (ngSubmit)="onAddRowSave(register)">
-									<div class="row">
-
-										<div class="col-md-6 col-12 mb-20">
-											<label class="shipplable">Phone no<span
-													class="text-danger">*</span></label>
-											<input type="text"  formControlName="phone"
-												required  style="width:100%">
-										</div>
+								<div class="col-md-6 col-12 mb-20">
+									<label class="shipplable">Phone no<span class="text-danger">*</span></label>
+									<input type="text" formControlName="phone" required style="width:100%">
+								</div>
 
 
-										<div class="col-md-6 col-12 mb-20">
-											<label class="shipplable">Country<span
-													class="text-danger">*</span></label>
-											<select class="nice-select" (change)="selectcountry($event)"
-												formControlName="country" style="width:100%">
-												<option value="" selected disabled><span style="color:gray;"> select</span></option>
-												<option *ngFor="let tab of Country" [value]="tab.id">{{tab.name}}
-												</option>
-											</select>
-										</div>
-										<div class="col-12 mb-20">
-											<label class="shipplable">Address<span
-													class="text-danger">*</span></label>
-											<input type="text" placeholder="Address line 1"
-												formControlName="address" style="width:100%; margin-bottom: 10px;">
-												<br>
-											<input type="text" placeholder="Address line 2"
-												formControlName="address" style="width:100%">
-										</div>
+								<div class="col-md-6 col-12 mb-20">
+									<label class="shipplable">Country<span class="text-danger">*</span></label>
+									<select class="nice-select" (change)="selectcountry($event)"
+										formControlName="country" style="width:100%">
+										<option value="" selected disabled><span style="color:gray;"> select</span>
+										</option>
+										<option *ngFor="let tab of Country" [value]="tab.id">{{tab.name}}
+										</option>
+									</select>
+								</div>
+								<div class="col-12 mb-20">
+									<label class="shipplable">Address<span class="text-danger">*</span></label>
+									<input type="text" placeholder="Address line 1" formControlName="address"
+										style="width:100%; margin-bottom: 10px;">
+									<br>
+									<input type="text" placeholder="Address line 2" formControlName="address"
+										style="width:100%">
+								</div>
 
-										<div class="col-md-6 col-12 mb-20">
-											<label class="shipplable">State<span
-													class="text-danger">*</span></label>
-											<select class="nice-select" (change)="selectstate($event)"
-												formControlName="state" style="width:100%">
-												<option value="" selected disabled><span style="color:gray;"> select</span></option>
-												<option *ngFor="let tab of State" [value]="tab.id">{{tab.name}}
-												</option>
-											</select>
-				
-										</div>
+								<div class="col-md-6 col-12 mb-20">
+									<label class="shipplable">State<span class="text-danger">*</span></label>
+									<select class="nice-select" (change)="selectstate($event)" formControlName="state"
+										style="width:100%">
+										<option value="" selected disabled><span style="color:gray;"> select</span>
+										</option>
+										<option *ngFor="let tab of State" [value]="tab.id">{{tab.name}}
+										</option>
+									</select>
+
+								</div>
 
 
 
-										<!-- <div class="col-md-6 col-12 mb-20">
+								<!-- <div class="col-md-6 col-12 mb-20">
 											<label class="shipplable">Town/City*</label>
 											<select class="nice-select">
 												<option value="" selected disabled>select</option>
 												<option *ngFor="let tab of City" [value]="tab.id">{{tab.name}}</option>									
 											</select>
 										</div> -->
-										<div class="col-md-6 col-12 mb-20">
-											<label class="shipplable">Town/City<span
-													class="text-danger">*</span></label>
-											<!-- <ng-select class="nice-select" formControlName="city" [items]="City"
+								<div class="col-md-6 col-12 mb-20">
+									<label class="shipplable">Town/City<span class="text-danger">*</span></label>
+									<!-- <ng-select class="nice-select" formControlName="city" [items]="City"
 												bindLabel="name" bindValue="id" required placeholder="">
 											</ng-select> -->
-											<select class="nice-select" formControlName="city" required style="width:100%">
-												<option value="" selected disabled><span style="color:gray;"> select</span></option>
-												<option *ngFor="let mem of City" [value]="mem.id">
-													{{mem.name}}
-												</option>
-											</select>
-										</div>
+									<select class="nice-select" formControlName="city" required style="width:100%">
+										<option value="" selected disabled><span style="color:gray;"> select</span>
+										</option>
+										<option *ngFor="let mem of City" [value]="mem.id">
+											{{mem.name}}
+										</option>
+									</select>
+								</div>
 
 
-										<div class="col-md-6 col-12 mb-20">
-											<label class="shipplable">Zip Code<span
-													class="text-danger">*</span></label>
-											<input type="text" formControlName="postal_code" style="width:100%">
-										</div>
+								<div class="col-md-6 col-12 mb-20">
+									<label class="shipplable">Zip Code<span class="text-danger">*</span></label>
+									<input type="text" formControlName="postal_code" style="width:100%">
+								</div>
 
-									</div>
-									<h6 class="form-text text-danger" style="height: 12px;">
-										<span *ngIf="error3">{{error3}}</span>
-									</h6>
-									<button class="lezada-button lezada-button--medium mt-10" style=" display: block;
-									margin: 0 auto;" type="submit">Save
-										address </button>
-								</form>
 							</div>
-						<h6>My Addresses</h6>
-						<p style="font-size: 0.7rem; margin-bottom: 0px;">Select delivery address</p>
+							<h6 class="form-text text-danger" style="height: 12px;">
+								<span *ngIf="error3">{{error3}}</span>
+							</h6>
+							<button class="lezada-button lezada-button--medium mt-10" style=" display: block;
+									margin: 0 auto;" type="submit">Save
+								address </button>
+						</form>
+					</div>
+					<h6>My Addresses</h6>
+					<p style="font-size: 0.7rem; margin-bottom: 0px;">Select delivery address</p>
 
-						<div class="row">
-						<div class="col-6" *ngFor="let Connectdtls of Address; let i=index" >
-							<div class="addresss mb-2" 
-							 [ngClass]="{'active': Connectdtls.set_default== 1}"> 
-						<a id="addressdiv">	<p style="margin-bottom: 0px; margin-top: 10px;"> <strong>{{username}}
-								</strong> <strong> {{Connectdtls.phone}}</strong> </p>
-							<span id="sssp"> {{Connectdtls.address}} , {{Connectdtls.city_name}} ,
-								{{Connectdtls.state_name}} ,
-								{{Connectdtls.country_name}} -</span>
-							<p><strong> {{Connectdtls.postal_code}}</strong> </p>
-						</a>
-						<p style="text-align: center;">
-							<button id="newaddbtn" class="btn btn-info" (click)="shippingcost(Connectdtls)">Deliver to this address</button>
-						</p>
-						<p id="btns"> <button id="newaddbtn" class="btn btn-info" routerLink="/address" >Update</button>
-						<button id="newaddbtn" class="btn btn-info"  (click)="deleteRow(Connectdtls)" >Delete</button></p>
-						</div>
-						
+					<div class="row">
+						<div class="col-6" *ngFor="let Connectdtls of Address; let i=index">
+							<div class="addresss mb-2" [ngClass]="{'active': Connectdtls.set_default== 1}">
+								<a id="addressdiv">
+									<p style="margin-bottom: 0px; margin-top: 10px;"> <strong>{{username}}
+										</strong> <strong> {{Connectdtls.phone}}</strong> </p>
+									<span id="sssp"> {{Connectdtls.address}} , {{Connectdtls.city_name}} ,
+										{{Connectdtls.state_name}} ,
+										{{Connectdtls.country_name}} -</span>
+									<p><strong> {{Connectdtls.postal_code}}</strong> </p>
+								</a>
+								<p style="text-align: center;">
+									<button id="newaddbtn" class="btn btn-info"
+										(click)="shippingcost(Connectdtls)">Deliver to this address</button>
+								</p>
+								<p id="btns"> <button id="newaddbtn" class="btn btn-info"
+										routerLink="/address">Update</button>
+									<button id="newaddbtn" class="btn btn-info"
+										(click)="deleteRow(Connectdtls)">Delete</button>
+								</p>
+							</div>
+
 						</div>
 					</div>
 				</div>
 
 			</div>
 			<div class="col-lg-6 mb-10" style="background-color: white;">
-				<div id="coldiv" >
-				<div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
-					<div class="section-title section-title--one  mb-0">
-						<h6 >
-							Select Payment Method</h6>
+				<div id="coldiv">
+					<div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
+						<div class="section-title section-title--one  mb-0">
+							<h6>
+								Select Payment Method</h6>
+						</div>
+					</div>
+					<!-- Payment Method -->
+					<div class="col-12 mt-10">
+						<p style="font-weight: 600;font-size: 0.8rem;margin: 0px; ">Your Wallet balance</p>
+						<span style="display:flex;"><input type="checkbox" id="wallet"> &nbsp; <label
+								style="margin-top:10px;" for="wallet">use my spice club's wallet balance</label></span>
+					</div>
+					<div class="col-12">
+						<h6
+							style="font-weight: 600; font-size: 0.9rem; color: black;margin-top: 10px;margin-bottom: 0px;">
+							Payment Methods</h6>
+						<form [formGroup]="terms" (ngSubmit)="placeorder(terms)">
+							<div class="checkout-payment-method" *ngFor="let b of Paymenttype"
+								style="background-color:white;">
+								<div class="single-method">
+									<input type="radio" id="{{b.payment_type}}" [(ngModel)]="radioSelected"
+										value="{{b.payment_type_key}}" (change)="onItemChange(b.payment_type_key)"
+										formControlName="type">
+									<label for="{{b.payment_type}}">{{b.title}}</label>
+
+									<!-- <p data-method="check">{{b.title}}</p> -->
+								</div>
+							</div>
+
+							<h6 class="form-text text-danger" style="height: 12px; text-align: center;">
+								<span *ngIf="error2" style="color: red;">{{error2}}</span>
+							</h6>
+
+							<button class="lezada-button lezada-button--medium mt-10" type="submit" style=" display: block;
+							margin: 0 auto;" *ngIf="!loadingg">Proceed to Checkout</button>
+							<button class="lezada-button lezada-button--medium mt-10" type="button"
+								style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i
+									class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+						</form>
+
+
 					</div>
 				</div>
-				<!-- Payment Method -->
-				<div class="col-12 mt-10">
-					<p style="font-weight: 600;font-size: 0.8rem;margin: 0px; ">Your Wallet balance</p>
-					<span style="display:flex;"><input type="checkbox" id="wallet"> &nbsp;  <label  style="margin-top:10px;" for="wallet">use my spice club's wallet balance</label></span>
-				</div>
-				<div class="col-12">
-					<h6 style="font-weight: 600; font-size: 0.9rem; color: black;margin-top: 10px;margin-bottom: 0px;">
-							 Payment Methods</h6>
-					<form [formGroup]="terms" (ngSubmit)="placeorder(terms)">
-						<div class="checkout-payment-method" *ngFor="let b of Paymenttype" style="background-color:white;">
-							<div class="single-method">
-								<input type="radio" id="{{b.payment_type}}"
-									[(ngModel)]="radioSelected" value="{{b.payment_type_key}}"
-									(change)="onItemChange(b.payment_type_key)"
-									formControlName="type">
-								<label for="{{b.payment_type}}">{{b.title}}</label>
 
-								<!-- <p data-method="check">{{b.title}}</p> -->
-							</div>
-						</div>
-
-						<!-- <div class="single-method mt-10">
-							<input type="checkbox" id="accept_terms" formControlName="terms"
-								value="">
-							<label for="accept_terms"><span style="color: red;">*</span>I’ve read
-								and accept the terms & conditions</label>
-
-						</div> -->
-						<h6 class="form-text text-danger" style="height: 12px; text-align: center;">
-							<span *ngIf="error2" style="color: red;">{{error2}}</span>
-						</h6>
-
-						<button class="lezada-button lezada-button--medium mt-10" type="submit"
-							style=" display: block;
-							margin: 0 auto;" *ngIf="!loadingg">Place order</button>
-						<button class="lezada-button lezada-button--medium mt-10" type="button"
-							style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i
-								class="fa fa-spinner fa-spin"></i>&nbsp;</button>
-					</form>
-
-
-				</div>
-			</div>
-			
 			</div>
 
 
 		</div>
+
+		<div class="row" style="background-color: white;" *ngIf="review">
+			<div class="section-title section-title--one  mb-0 ml-20">
+				<h6> Review your order</h6>
+			</div>
+			<div class="col-lg-8  p-0" id="firstdiv">
+				<div class="col-lg-12 pl-0" style="display: flex; padding: 15px;border: 1px solid rgb(214, 214, 214);">
+					<div class="col-4" id="addressreview">
+						<div class="" *ngFor="let Connectdtls of Address; let i=index">
+							<p style="font-size:0.8rem; font-weight: 600;">Shipping address <span
+									style="color:rgb(12, 171, 245);"><a (click)="backtocheckpage()" >change</a> </span></p>
+							<div class="addresss mb-2" id="addresss" *ngIf="Connectdtls.set_default== 1"
+								style="border: 0px;">
+								<a id="addressdiv">
+									<p style="margin-top: 10px;"> <strong>{{username}}
+										</strong> <strong> {{Connectdtls.phone}}</strong> </p>
+									<span id="sssp"> {{Connectdtls.address}} , {{Connectdtls.city_name}} ,
+										{{Connectdtls.state_name}} ,
+										{{Connectdtls.country_name}} -</span>
+									<p><strong> {{Connectdtls.postal_code}}</strong> </p>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-4">
+						<p style="font-size:0.8rem; font-weight:600; margin-bottom: 8px;">Payment method</p>
+
+						<p style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;">{{payytype}}</p>
+					</div>
+					<div class="col-4">
+						<p style="font-size:0.8rem; font-weight:600; margin-bottom: 8px;">Apply coupan</p>
+
+						<p class="mb-0" style="font-size: 0.7rem;font-weight: 500;">Available coupans for you</p>
+						<span *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan" value="{{a.code}}"
+								(change)="changecoupan($event)" style="vertical-align: middle;">
+							<p style="font-size: 0.8rem;display: contents;"> {{a.code}}</p>
+						</span>
+
+						<div class="lezada-form coupon-form">
+							<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
+								<div class="row">
+									<div class="col-md-7 mb-sm-10">
+										<input type="text" placeholder="Enter your coupon code" formControlName="coupan"
+											required>
+									</div>
+									<div class="col-md-5">
+										<button class="lezada-button lezada-button--small" type="submit"
+											*ngIf="applycou" style="padding-top: 5px;
+											padding-bottom: 5px;">apply</button>
+										<button class="lezada-button lezada-button--small" *ngIf="removecou"
+											(click)="removecoupon()" style="padding-top: 5px;
+											padding-bottom: 5px;" type="button">remove</button>
+									</div>
+
+								</div>
+							</form>
+
+						</div>
+
+					</div>
+				</div>
+				<div class="col-lg-12 pl-0 mt-10" style=" padding: 15px;border: 1px solid rgb(214, 214, 214);">
+					<p style="font-size:0.8rem; font-weight: 600;color: brown;margin: 0px; padding-left: 15px;">Expected
+						Delivery date:</p>
+					<div class="cart-table-container pl-40" *ngIf="!cartloader">
+						<table id="producttable" class="cart-table" *ngIf="(Cart.length!==0)" style="border: none;">
+							<tbody *ngFor="let a of Cart">
+								<tr *ngFor="let b of a.cart_items">
+									<td class="product-thumbnail">
+										<a>
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}"
+												class="img-fluid" alt="">
+										</a>
+									</td>
+									<td class="product-name">
+										<a style="text-decoration: none;">{{b.product_name}}</a>
+										<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">{{b.brand_name}}</a>
+										<a style="font-size: 0.7rem;font-weight: 100; text-decoration:none;color: rgb(66, 66, 66);" *ngIf="b.attribute.length!==0">
+											{{b.attribute[0]?.title}}: {{b.variation}} (pack of 1) </a>
+										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: line-through;">
+											<span>MRP:</span>{{b.stroked_price}}</a>
+										<a style="font-weight: 600;
+											color: rgb(66, 66, 66);font-size: 0.7rem ">Price:<span style="color: red;">Rs.{{b.price}}</span>
+											&nbsp;&nbsp;
+										</a>
+										<a style="font-size: 0.7rem;font-weight: 100;">
+											<span>Quantity:</span>{{b.quantity}} </a>
+										<a style="font-weight: 600;
+											color: rgb(66, 66, 66);font-size: 0.7rem ">Total:<span style="color: red;">Rs.{{b.total}}</span>
+											&nbsp;&nbsp;
+										</a>
+										<a style="margin-top: 15px;">
+											<p style="font-size: 0.7rem;font-weight: 500;margin: 0px;">subscribe & save:</p>
+											<input type="checkbox">
+											<span style="font-size: 0.7rem;font-weight: 100;">  Save % now and _% in
+												future</span>
+										</a>
+
+									</td>
+
+
+
+									<td class="product-quantity" style="padding-left: 1px; padding: 20px;">
+
+									</td>
+
+									<td class="total-price" id="price">
+
+									</td>
+
+									<td class="product-remove">
+
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+					</div>
+
+					<div class="cart-table-container mt-20" *ngIf="cartloader">
+						<div id="tit" style="width: 100%;">
+							<ngx-skeleton-loader count="4"
+								[theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+							</ngx-skeleton-loader>
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-3 mb-10 p-0" style="background-color: white; ">
+				<div class="row mb-10">
+					<div class="skll" *ngIf="Summeryload">
+						<ngx-skeleton-loader count="1" [theme]="{ 
+										'border-radius': '5px',
+										height: '350px',
+										'background-color': '##b9b8b8',
+										border: '1px solid white'
+									  }" animation="pulse"></ngx-skeleton-loader>
+					</div>
+					<div *ngIf="!Summeryload" id="secondiv">
+						<div class="cart-calculation-area" *ngIf="(Cart?.length!==0)"
+							style="background-color: white;padding: 20px;">
+							<p style="font-size:0.8rem; font-weight: 600;margin-bottom: 0px;">Order Summary</p>
+							<table class="cart-calculation-table mb-20" id="summerydiv">
+								<tr *ngIf="couponn==true">
+									<th>Coupon applied :</th>
+									<td class="subtotal">{{(Summery?.coupon_code)}}</td>
+								</tr>
+								<tr>
+									<th>Products:</th>
+									<td class="subtotal" style="font-size:15px;">{{subtot}}</td>
+								</tr>
+								<tr>
+									<th>Delivery charges:</th>
+									<td class="subtotal" style="font-size:15px;">{{Summery?.shipping_cost}}</td>
+								</tr>
+
+								<tr style="border-bottom: 1px solid rgb(214, 214, 214);">
+									<th>Discount: </th>
+									<td class="subtotal">{{Summery?.discount}}</td>
+								</tr>
+
+								<tr id="total" style="border-bottom: 1px solid rgb(214, 214, 214);">
+									<th id="title">Total Order value: </th>
+									<td class="">{{Summery?.grand_total}}</td>
+								</tr>
+								<!-- <tr>
+											<th>SHIPPING COST</th>
+											<td class="subtotal">{{Summery?.shipping_cost}}</td>
+										</tr> -->
+								<!-- <tr>
+											<th>Tax</th>
+											<td class="subtotal">{{Summery?.tax}}</td>
+										</tr> -->
+								<!-- <tr>
+											<th>SUBTOTAL</th>
+											<td class="subtotal">{{subtot}}</td>
+										</tr> -->
+							</table>
+							<div>
+								<span>
+									<p style="color:rgb(207, 38, 8);font-size:0.9rem;font-weight: 600;">You're saving
+										___ with this order</p>
+								</span>
+
+								<span id="ordersave">
+									<p *ngIf="couponn==true"><i class="bi bi-star-fill" style="color:red;"></i> Coupan
+									</p>
+									<p *ngIf="Summery?.discount!==0"><i class="bi bi-star-fill" style="color:red;"></i>
+										Product discount</p>
+								</span>
+							</div>
+							<div class="cart-calculation-button text-center mt-20">
+								<button class="lezada-button lezada-button--medium" *ngIf="!loadingg" (click)="finallyplaceorder()">Place Order</button>
+								<button class="lezada-button lezada-button--medium mt-10" type="button"
+								style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i
+									class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+							</div>
+						</div>
+					</div>
+					<div id="secondiv" style="padding: 10px; text-align: center;background-color: #e9e3e3;">
+						<p style="font-size: 0.8rem;">
+								<a style="color:rgb(92, 201, 252);" routerLink="/faq" >Order FAQs</a>  from Help & Suppprt
+						</p>
+					</div>
+				</div>
+			</div>
+			<div class="col-12" style="padding: 20px;padding-top: 0px;">
+				<p style="font-size:0.7rem;color: gray;">After placing the order email and SMS notification will triggered to your registred mail box and mobile number. If the order is placed with netbanking, cards, UPI complete the payment process with your banking credentials, 
+					then if the order is place on COD ,pay the order amount during the delivery of the goods </p>
+			</div>
+		
+		</div>
 	</div>
 </div>
+
 
 <!--=======  breadcrumb area =======-->
 
@@ -208,8 +416,9 @@
 	<p style="font-size: 20px; color: white">Please wait...</p>
 </ngx-spinner>
 
-<!-- old -->
 
+
+<!-- old -->
 <!-- <div class="checkout-page-area mb-130">
 	<div class="container">
 		<div class="row">

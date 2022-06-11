@@ -20,7 +20,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class CheckoutComponent implements OnInit {
 
-
+  review: boolean = false;
   @ViewChild('form') form!: ElementRef;
   accessCode: any;
   encRequestRes: any;
@@ -106,6 +106,10 @@ export class CheckoutComponent implements OnInit {
   winRef: any;
   buynowvalue: any;
   buyvalue: any;
+  couponn: any;
+  Summeryload: boolean= true;
+  availcoupan: any;
+  cartloader: boolean=true;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
@@ -140,6 +144,11 @@ export class CheckoutComponent implements OnInit {
     this.addresssss = this.fb.group({
       addresss: [''],
     })
+
+    this.comment = this.fb.group({
+      coupan: ['', [Validators.required]],
+    });
+
   }
   ngOnInit(): void {
 
@@ -156,6 +165,7 @@ export class CheckoutComponent implements OnInit {
       this.viewstate();
       this.viewCity();
       this.getaddress();
+      this.availabecoupan();
 
     }
     else {
@@ -168,6 +178,7 @@ export class CheckoutComponent implements OnInit {
       this.viewstate();
       this.viewCity();
       this.getaddress();
+      this.availabecoupan();
     }
   }
 
@@ -182,7 +193,9 @@ export class CheckoutComponent implements OnInit {
   }
   viewcart() {
     this.request.fetchusercart(this.userid, this.buynowvalue).subscribe((response: any) => {
+      console.log("Cart", response);
       this.Cart = response;
+      this.cartloader=false;
       console.log(this.Cart);
 
       this.owneriid = this.Cart[0]?.owner_id;
@@ -203,8 +216,39 @@ export class CheckoutComponent implements OnInit {
       this.tax = this.Summery.tax;
       this.grandtotal = this.Summery.grand_total;
       this.grandtotal_value = this.Summery.grand_total_value;
+      this.couponn=this.Summery.coupon_applied;
+      this.Summeryload=false;
+      if( this.couponn==true){
+        this.removecou = true;
+        this.applycou = false;
+      }
     });
   }
+  availabecoupan(){
+    this.request.availablecoupan().subscribe((response: any) => {    
+      this.availcoupan = response.data;
+     
+    });
+
+  }
+  changecoupan(e:any) {
+    if(e.target.checked){ 
+      console.log(e.target.value);
+      this.comment.value.coupan= e.target.value
+      this.comment.setValue({
+        coupan: e.target.value,    
+      });         
+    }
+
+    else{
+      console.log("no");
+      this.comment.value.coupan= ''
+      this.comment.setValue({
+        coupan:'',    
+      });
+    }
+ }
+
   getaddress() {
     this.loader = true
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
@@ -336,68 +380,135 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     else {
-      this.loadingg = true
-      let edata = {
-        owner_id: this.owneriid,
-        user_id: this.userid,
-        payment_type: this.payytype
-      }
-      if (this.payytype == "billdesk") {
-        this.request.placeorder(edata).subscribe((response: any) => {
-          this.combined_orderid = response.combined_order_id;
-          if (response.result = true) {
-            this.billdesk()
-          }
-          else {
-            this.toastr.error(response.message);
-          }
-        });
-      }
-      else if (this.payytype == "razorpay") {
-        this.request.placeorder(edata).subscribe((response: any) => {
-
-          console.log("placeorder response", response);
-          this.combined_orderid = response.combined_order_id
-          if (response.result == true) {
-            this.sharedService.sendClickEvent();
-            //  this.nocart=true;
-
-            let edata1 = {
-              payment_type: "cart_payment",
-              combined_order_id: this.combined_orderid,
-              amount: this.grandtotal_value,
-              user_id: this.userid,
-            }
-            this.initPay(edata1);
-
-          }
-          else {
-            console.log("fail", response.message);
-            this.toastr.error(response.message);
-          }
-        });
-      }
-      else {
-        this.request.placeorder(edata).subscribe((response: any) => {
-          console.log("cod response", response);
-
-          this.combined_orderid = response.combined_order_id
-          if (response.result == true) {
-            console.log("if  response");
-            this.toastr.success('Order placed');
-            this.sharedService.sendClickEvent();
-            this.loadingg = false
-            this.router.navigate(['/orders']);
-          }
-          else {
-            this.toastr.error(response.message);
-          }
-        });
-      }
+     this.review=true
     }
   }
 
+  finallyplaceorder(){
+    console.log(" finallyplaceorder");
+    this.loadingg = true
+    let edata = {
+      owner_id: this.owneriid,
+      user_id: this.userid,
+      payment_type: this.payytype
+    }
+    if (this.payytype == "billdesk") {
+      this.request.placeorder(edata).subscribe((response: any) => {
+        this.combined_orderid = response.combined_order_id;
+        if (response.result = true) {
+          this.billdesk()
+        }
+        else {
+          this.toastr.error(response.message);
+        }
+      });
+    }
+    else if (this.payytype == "razorpay") {
+      console.log("elseif razorpay");
+      this.request.placeorder(edata).subscribe((response: any) => {
+        console.log("placeorder response", response);
+        this.combined_orderid = response.combined_order_id
+        if (response.result == true) {
+          this.sharedService.sendClickEvent();
+          //  this.nocart=true;
+          let edata1 = {
+            payment_type: "cart_payment",
+            combined_order_id: this.combined_orderid,
+            amount: this.grandtotal_value,
+            user_id: this.userid,
+          }
+          this.initPay(edata1);
+        }
+        else {
+          console.log("fail", response.message);
+          this.toastr.error(response.message);
+        }
+      });
+    }
+    else {
+      console.log("else cashondelivery");
+      this.request.placeorder(edata).subscribe((response: any) => {
+        console.log("cod response", response);
 
+        this.combined_orderid = response.combined_order_id
+        if (response.result == true) {
+          console.log("if  response");
+          this.toastr.success('Order placed');
+          this.sharedService.sendClickEvent();
+          this.loadingg = false
+          this.router.navigate(['/orders']);
+        }
+        else {
+          this.toastr.error(response.message);
+        }
+      });
+    }
+  }
+
+  backtocheckpage(){
+    this.review=false
+  }
+  applycoupan(form: FormGroup) {
+    let edata2 = {
+      user_id: this.userid,
+      owner_id: this.owneriid,
+      coupon_code: form.value.coupan,
+    }
+
+    this.request.appycoupan(edata2).subscribe((res: any) => {
+      console.log(res);
+      if (res.message == 'Coupon Applied') {
+        this.removecou = true;
+        this.applycou = false;
+        this.viewsummery();
+        this.toastr.success('Coupon Applied', '');
+        
+        // this.updatecart();
+      }
+      else if (res.message == 'Invalid coupon code!') {
+        this.toastr.error('Invalid coupon code!', '');
+
+      }
+      else {
+        this.toastr.error(res.message);
+      }
+    }, (error: any) => {
+      this.toastr.error(error);
+      console.log("error", error);
+
+    });
+
+  }
+  removecoupon() {
+    let edata2 = {
+      user_id: this.userid,
+      owner_id: this.owneriid,
+    }
+    this.request.removecoupan(edata2).subscribe((res: any) => {
+      console.log("res",res);  
+      if (res.result == true) {
+        this.removecou = false;
+        this.applycou = true;
+        this.toastr.success('Coupon Removed', '');
+        this.viewsummery();
+        this.availabecoupan();
+        this.comment.setValue({
+          coupan:'',    
+        });
+      }
+      else if (res.message == 'Invalid coupon code!') {
+        this.toastr.error('Invalid coupon code!', '');
+      }
+      else {
+        this.toastr.error(res.message);
+      }
+    }, (error: any) => {
+      this.toastr.error(error);
+      console.log("error", error);
+
+    });
+
+  }
   opennewaddress() {
     this.shippaddress = !this.shippaddress
     this.viewcountry();
@@ -476,7 +587,6 @@ export class CheckoutComponent implements OnInit {
       this.request.addaddress(edata).subscribe((res: any) => {
 
         if (res.message == 'Shipping information has been added successfully') {
-          this.toastr.success('Shipping information has been added successfully', '');
           form.reset()
           this.reloadCurrentRoute();
           window.scroll(0, 0);
