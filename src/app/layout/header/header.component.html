@@ -495,7 +495,7 @@
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{b.product_name}}</a></h5>
 								<p>
-									<span *ngIf="b?.stroked_price!==b.price"
+									<span *ngIf="b?.stroked_price!==b?.pricestring"
 										class="main-price discounted">{{b?.stroked_price}}</span>
 									<span class="discounted-price" style="color: red;">Rs {{b.price}}</span>
 								</p>

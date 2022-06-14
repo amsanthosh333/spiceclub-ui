@@ -34,6 +34,7 @@ padding: 10px;
 .dropdownBasic2 button{
   font-size: 0.8rem;
 }
+
 .btn{
 	box-shadow: none !important
 }
@@ -46,8 +47,6 @@ input[type=number]::-webkit-inner-spin-button {
   border-radius: 4px;
   font: sans-serif;
 }
-
-
 #addcarrtbtn:hover {
   color: #e61717;
   background-color: #ffffff;
@@ -77,6 +76,7 @@ input[type=number]::-webkit-inner-spin-button {
   height: 30px;
   padding: 0.1rem 0.75rem;
 }
+
 
   #subsc input,
 input::placeholder {

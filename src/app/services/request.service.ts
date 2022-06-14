@@ -548,6 +548,10 @@ public getsubcatsearchprod(id:any,page:any,key:any) {
 public getcatsubprod(link: string) {
   return this.http.get(link);
 }
+public getcatbrands(id:any){
+  this.url = `${this.endPoint1}/products/categorybrand/` + id ;
+  return this.http.get(this.url);
+}
 // shopbyproducts
 public getallproducts(page:any) { 
   this.url = `${this.endPoint1}/products?page=` + page+`&user_id=`+this.userid+`&buyertype=` +this.buyertypeid;
@@ -566,7 +570,6 @@ public getpage3(link:any,deliveryy:any,paymentt:any){
 public getpage2(link:any,categoryy_id:any,brandd_id:any,sort: string,min:any,max:any){
   this.url= link+  `&categories=`+categoryy_id+`&brands=`+brandd_id+`&min=` + min+`&max=` + max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
   console.log("page url",this.url);
-  
   return this.http.get(this.url);
 }
 // productbybrand
@@ -633,7 +636,6 @@ public filterdataa2(min:any,max:any) {
 public filterdataa3(page:any,category:any,brand:any,min:any,max:any,sort:any) {
   this.url = `${this.endPoint1}/products/search?page=`+ page+`&categories=` + category +`&brands=` + brand +`&name=` +`&min=` + min +`&max=` +max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
   console.log(this.url);
-  
   return this.http.get(this.url);
 }
 public filtersearchdataa(name:any) {

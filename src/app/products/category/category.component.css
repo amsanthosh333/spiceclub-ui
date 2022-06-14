@@ -1,3 +1,163 @@
+
+:host ::ng-deep .ng5-slider .ng5-slider-selection {
+  z-index: 2;
+  
+  border-radius: 2px;
+  background-color: rgb(204, 2, 12);
+}
+:host ::ng-deep .ng5-slider .ng5-slider-bubble {
+  font-size: 12px;
+}
+:host ::ng-deep .ng5-slider {
+  width: 90%;
+}
+#pricefilter p{
+margin-bottom: 5px;
+font-size: 0.7rem;
+}
+#pricefilter p a{
+  font-size: 0.7rem;
+  }
+  #priceinput {
+    padding: 10px 15px;
+    text-align: center;
+    margin-right: 30px;
+  }
+
+.catname{
+  margin-left: 7px;
+  font-size: 0.9rem;
+}
+/* productlist css */
+.dropdown-item{
+  font-size: 0.6rem;
+}
+.dropdownBasic2 button{
+  font-size: 0.8rem;
+}
+.btn{
+	box-shadow: none !important
+}
+input[type=number]::-webkit-inner-spin-button {
+  opacity: 1
+}
+ input {
+  border: 2px solid #d3d3d3;
+  border-radius: 4px;
+  font: sans-serif;
+}
+#addcarrtbtn:hover {
+  color: #e61717;
+  background-color: #ffffff;
+  border-color: #e61717;
+}
+#addcarrtbtn:hover >.ion-ios-cart{
+  color:#e61717;
+}
+.ion-ios-cart{
+  color: rgb(255, 255, 255);
+}
+#addcarrtbtn {
+  color: rgb(255, 255, 255);
+  background-color:#e61717;
+  border-color:#e61717;
+  font-size: 0.8rem;
+  width: -webkit-fill-available;
+  height: 28px;
+  padding: 0.1rem 0.75rem;
+}
+.addcarrtbtn {
+  color: rgb(255, 255, 255);
+  background-color:#e61717;
+  border-color: #e61717;
+  font-size: 0.8rem;
+  width: -webkit-fill-available;
+  height: 30px;
+  padding: 0.1rem 0.75rem;
+}
+/* productlist css end */
+
+#productdiv{
+  /* border: 0.8px solid #e9e7e7; */
+  margin-right: 10px;
+  margin-left: 10px;
+background-color:#f3f3f3;
+border-radius: 3px;
+}
+#sidenavg{
+  width: 17.666667%;
+}
+input {
+  border: 1px solid #d3d3d3;
+  border-radius: 2px;
+  font: sans-serif;
+}
+:host ::ng-deep .ng5-slider .ng5-slider-pointer:after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  position: absolute;
+  top: 9px;
+  left: 9px;
+  border-radius: 4px;
+  background: #fff;
+}
+:host ::ng-deep .ng5-slider .ng5-slider-pointer {
+  cursor: pointer;
+  width: 25px;
+  height: 25px;
+  top: -11px;
+  /* background-color: #0db9f0; */
+  z-index: 3;
+  border-radius: 16px;
+  background-color: rgb(204, 2, 12);
+}
+:host ::ng-deep .ng5-slider .ng5-slider-bubble {
+  font-size: 12px;
+  
+}
+:host ::ng-deep .ng5-slider {
+  width: 90%;
+}
+#pricefilter p{
+margin-bottom: 5px;
+font-size: 0.7rem;
+}
+#pricefilter p a{
+  font-size: 0.7rem;
+  }
+  #priceinput {
+    padding: 10px 15px;
+    text-align: center;
+    margin-right: 30px;
+  }
+.single-sidebar-widget--title {
+  margin-bottom: 0px;
+  font-size: 1.2rem;
+}
+@media (min-width: 1200px){
+.container, .container-lg, .container-md, .container-sm, .container-xl {
+    max-width: 1300px;
+}
+}
+@media (min-width: 992px){
+#offerdiv {
+    flex: 0 0 auto;
+    width: 70.666667%;
+    bottom: 15px;
+}
+#sortdiv {
+  flex: 0 0 auto;
+  width: 29.333333%;
+  bottom: 15px;
+}
+#sortfilter{
+  justify-content: flex-start;
+}
+}
+/* new above */
+
+
 .subcatt{
   /* font-family: 'Poppins', sans-serif; */
   font-size: small;
@@ -8,7 +168,7 @@
   padding: 0px;
 }
 .has-children{
-  padding-bottom: 12px;
+  padding-bottom: 3px;
 
 }
 #catnamee strong{
@@ -105,13 +265,13 @@ input{
   font-family: Arial, Helvetica, sans-serif;
 }
 
-li.has-children.active {color: red}
+
 li.has-children.active{
-    color: red;
+    color: rgb(36, 35, 35);
 }
 .imglazy{
     height: 240px;
-    width: 200px;
+    width: auto;
     position: relative;
     overflow: hidden;
   }
@@ -133,6 +293,7 @@ li.has-children.active{
 .breadcrumb-list__item{
   color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
 }
 
 .single-product__floating-badges {
@@ -328,11 +489,11 @@ li.has-children.active{
     .dropdown:hover #dropbtn {background-color: #3e8e4100;}
 
        /* to remove arroys form input box */
-   input::-webkit-outer-spin-button,
+   /* input::-webkit-outer-spin-button,
    input::-webkit-inner-spin-button {
      -webkit-appearance: none;
      margin: 0;
-   }
+   } */
    input[type=number] {
      -moz-appearance: textfield;
    }  

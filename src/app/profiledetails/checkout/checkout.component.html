@@ -97,7 +97,7 @@
 					<h6>My Addresses</h6>
 					<p style="font-size: 0.7rem; margin-bottom: 0px;">Select delivery address</p>
 
-					<div class="row">
+					<div class="row" *ngIf="!loadaddress" >
 						<div class="col-6" *ngFor="let Connectdtls of Address; let i=index">
 							<div class="addresss mb-2" [ngClass]="{'active': Connectdtls.set_default== 1}">
 								<a id="addressdiv">
@@ -121,6 +121,29 @@
 
 						</div>
 					</div>
+
+					<div class="row" *ngIf="loadaddress" >
+						<div class="col-6" >
+							<ngx-skeleton-loader count="1" 
+							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+						</ngx-skeleton-loader>
+						</div>
+						<div class="col-6" >
+							<ngx-skeleton-loader count="1" 
+							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+						</ngx-skeleton-loader>
+						</div>
+						<div class="col-6" >
+							<ngx-skeleton-loader count="1" 
+							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+						</ngx-skeleton-loader>
+						</div>
+						<div class="col-6" >
+							<ngx-skeleton-loader count="1" 
+							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+						</ngx-skeleton-loader>
+						</div>
+					</div>
 				</div>
 
 			</div>
@@ -142,7 +165,7 @@
 						<h6
 							style="font-weight: 600; font-size: 0.9rem; color: black;margin-top: 10px;margin-bottom: 0px;">
 							Payment Methods</h6>
-						<form [formGroup]="terms" (ngSubmit)="placeorder(terms)">
+						<form [formGroup]="terms" (ngSubmit)="placeorder(terms)" *ngIf="!paymentload">
 							<div class="checkout-payment-method" *ngFor="let b of Paymenttype"
 								style="background-color:white;">
 								<div class="single-method">
@@ -165,7 +188,13 @@
 								style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i
 									class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 						</form>
-
+  
+						<div class="col-6" *ngIf="paymentload">
+							
+							<ngx-skeleton-loader count="4" 
+							[theme]="{'border-radius': '4px',  height: '25px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+						</ngx-skeleton-loader>
+						</div>
 
 					</div>
 				</div>
@@ -236,8 +265,8 @@
 					</div>
 				</div>
 				<div class="col-lg-12 pl-0 mt-10" style=" padding: 15px;border: 1px solid rgb(214, 214, 214);">
-					<p style="font-size:0.8rem; font-weight: 600;color: brown;margin: 0px; padding-left: 15px;">Expected
-						Delivery date:</p>
+					<p style="font-size:0.8rem; font-weight: 600;color: brown;margin: 0px; padding-left: 15px;">
+						Expected Delivery date: {{Summery?.expected_delivery_date}}</p>
 					<div class="cart-table-container pl-40" *ngIf="!cartloader">
 						<table id="producttable" class="cart-table" *ngIf="(Cart.length!==0)" style="border: none;">
 							<tbody *ngFor="let a of Cart">
@@ -253,12 +282,13 @@
 										<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">{{b.brand_name}}</a>
 										<a style="font-size: 0.7rem;font-weight: 100; text-decoration:none;color: rgb(66, 66, 66);" *ngIf="b.attribute.length!==0">
 											{{b.attribute[0]?.title}}: {{b.variation}} (pack of 1) </a>
-										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: line-through;">
+										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: line-through;color: gray;" *ngIf="b.pricestring!==b.stroked_price">
 											<span>MRP:</span>{{b.stroked_price}}</a>
-										<a style="font-weight: 600;
-											color: rgb(66, 66, 66);font-size: 0.7rem ">Price:<span style="color: red;">Rs.{{b.price}}</span>
+										<a style="font-weight: 600; color: rgb(66, 66, 66);font-size: 0.7rem ">Price:<span style="color: red;">Rs.{{b.price}}</span>
 											&nbsp;&nbsp;
 										</a>
+										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray;" *ngIf="b.discount!==0">
+											you save Rs.{{b.discount}}   {{b.discount_percentage}}% </a>
 										<a style="font-size: 0.7rem;font-weight: 100;">
 											<span>Quantity:</span>{{b.quantity}} </a>
 										<a style="font-weight: 600;
@@ -271,7 +301,6 @@
 											<span style="font-size: 0.7rem;font-weight: 100;">  Save % now and _% in
 												future</span>
 										</a>
-
 									</td>
 
 
@@ -357,9 +386,9 @@
 										</tr> -->
 							</table>
 							<div>
-								<span>
+								<span *ngIf="Summery?.discount!==0||couponn==true">
 									<p style="color:rgb(207, 38, 8);font-size:0.9rem;font-weight: 600;">You're saving
-										___ with this order</p>
+										{{Summery?.discount}} ({{Summery?.discount_percentage}}%) with this order</p>
 								</span>
 
 								<span id="ordersave">

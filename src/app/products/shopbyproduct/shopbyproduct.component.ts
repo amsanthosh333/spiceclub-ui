@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
@@ -28,6 +29,7 @@ export class ShopbyproductComponent implements OnInit {
   poploader: boolean = true;
   imgloader: boolean = false;
   prodloader: boolean = true;
+  prodloadermain: boolean=false
 
   minValue: number = 0;
   maxValue: number = 10000;
@@ -123,6 +125,15 @@ export class ShopbyproductComponent implements OnInit {
   storked_pricee: any;
   prod_pricee: any;
   directpage: boolean =true;
+  categoryItem: any='';
+  public quantityarray: any[] = [];
+  selectedvar: any;
+  showaddbtn: any;
+  totalqty: any;
+  newpageProduct: any;
+  pagenum: number=1;
+  pageload: boolean=true;
+  sidepoploader: boolean=false;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
@@ -165,7 +176,7 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
     this.keyy = this.route.snapshot.params['key'];
     this.route.queryParams.subscribe((data2: Params) => {
       console.log("queryParams data", data2);
@@ -178,7 +189,8 @@ export class ShopbyproductComponent implements OnInit {
       this.sortval = data2['sort_key']
     })
 
-    if (this.keyy !== undefined || this.categoryy_id !== undefined || this.brandd_id !== undefined || this.minValue !== undefined || this.maxValue !== undefined) {
+    if (this.keyy !== undefined || this.categoryy_id !== undefined || this.brandd_id !== undefined ||
+       this.minValue !== undefined || this.maxValue !== undefined) {
       console.log("if ", this.keyy);
       this.directpage=false
       if (this.keyy !== undefined) {
@@ -207,7 +219,6 @@ export class ShopbyproductComponent implements OnInit {
       this.viewdata(this.pagee);
       this.directpage=true
     }
-
     this.viewbrand();
     this.viewcat();
     this.viewbestpro();
@@ -217,15 +228,13 @@ export class ShopbyproductComponent implements OnInit {
       rating: [''],
       comment: [''],
     });
-
     this.message = this.fb.group({
       title: ['', [Validators.required]],
       message: ['', [Validators.required]],
 
     });
-
-
   }
+
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
@@ -276,6 +285,16 @@ export class ShopbyproductComponent implements OnInit {
       }
     });
   }
+  under200(){
+    this.minValue=0;
+    this.maxValue=200;
+    this.pricerange()
+  }
+  uptoto500(){
+    this.minValue=200;
+    this.maxValue=500;
+    this.pricerange()
+  }
   pricerange() {
     if (this.categoryy_id == undefined) {
       this.categoryy_id = ''
@@ -298,21 +317,23 @@ export class ShopbyproductComponent implements OnInit {
     // });
   }
   viewdata(page: any) {
+    this.prodloadermain=false
     this.prodloader = true;
     console.log("viewdataaaaaaaaaaaaa");
-    
     this.request.getallproducts(page).subscribe((response: any) => {
       this.Product = response.data;
-    
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      console.log("viewdataaaaaaaaaaaaa response",this.pagess);
+      console.log("viewdata response",this.pagess);
+      this.prodloadermain=true
       this.prodloader = false;
+    
       this.minValue = 0
       this.maxValue = 10000
       this.brand_id = ''
       this.categoryy_id = ''
       this.subItem = ''
+      this.categoryItem=''
       // console.log("brnd,category", this.brand_id, this.categoryy_id);
       setTimeout(() => {
         this.imgloader = true;
@@ -323,7 +344,7 @@ export class ShopbyproductComponent implements OnInit {
 
   viewbestpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
-      this.Bestsellpro = response.data.slice(0, 3);
+      this.Bestsellpro = response.data.slice(0, 6);
       this.rating = this.Bestsellpro.rating;
       this.poploader = false;
     });
@@ -366,16 +387,20 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   viewtodaysdeal() {
+    this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
     this.request.gettodaysdeal().subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
+      this.prodloadermain=true
       this.prodloader = false;
+      
       this.minValue = 0;
       this.maxValue = this.maximumprize;
       this.subItem = ''
+      this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -385,16 +410,20 @@ export class ShopbyproductComponent implements OnInit {
       });
   }
   viewdealofday() {
+    this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
     this.request.getdaydealpro().subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
+      this.prodloadermain=true
       this.prodloader = false;
+     
       this.minValue = 0;
       this.maxValue = this.maximumprize;
       this.subItem = ''
+      this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -404,16 +433,20 @@ export class ShopbyproductComponent implements OnInit {
       });
   }
   viewdealofmonth() {
+    this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
     this.request.getmonthdealpro().subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
+      this.prodloadermain=true;
       this.prodloader = false;
+     
       this.minValue = 0;
       this.maxValue = this.maximumprize;
       this.subItem = ''
+      this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -448,22 +481,25 @@ export class ShopbyproductComponent implements OnInit {
     this.page2 = false;
   }
   getprodofcategory(id: any, page: any) {
-    this.prodloader = true;
-    this.imgloader = false;
-    this.request.getcatprod(id, page).subscribe((response: any) => {
-      this.Product = response.data;
-      this.pagenation = response.meta;
-      this.pagess = this.pagenation.links;
-      this.prodloader = false;
-      setTimeout(() => {
-        this.imgloader = true;
-      }, 2000);
-    },
-      (error: any) => {
-        console.log("error", error);
-      });
+    // this.prodloader = true;
+    // this.imgloader = false;
+    // this.request.getcatprod(id, page).subscribe((response: any) => {
+    //   this.Product = response.data;
+    //   this.pagenation = response.meta;
+    //   this.pagess = this.pagenation.links;
+    //   this.prodloader = false;
+    //   setTimeout(() => {
+    //     this.imgloader = true;
+    //   }, 2000);
+    // },
+    //   (error: any) => {
+    //     console.log("error", error);
+    //   });
+      this.router.navigate(['/shopbyproduct'], { queryParams: { page: 1,categories: id, min: 0, max: this.maximumprize, } });
+
   }
   getprodofbrand(id: any, page: any) {
+    this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
     this.headItem = 1
@@ -473,7 +509,9 @@ export class ShopbyproductComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
+      this.prodloadermain=true
       this.prodloader = false;
+     
       this.minValue = 0
       this.maxValue = this.maximumprize
       setTimeout(() => {
@@ -483,7 +521,6 @@ export class ShopbyproductComponent implements OnInit {
     );
   }
   getprodofbrand2(id: any, i: any) {
-    // this.router.navigate(['/shopbyproduct'], {queryParams:{page:1,brands:id,}});
     this.router.navigate(['/shopbyproduct'], { queryParams: { page: 1, brands: id, min: 0, max: this.maximumprize, } });
     //   window.scroll(0,0);
     //  this.brand_id=id;
@@ -515,6 +552,7 @@ export class ShopbyproductComponent implements OnInit {
     console.log("urll page",url);
     
     if(url!==null){
+      this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
     this.request.getpage2(url, this.categoryy_id, this.brand_id, this.sortval, this.minValue, this.maxValue,).subscribe((response: any) => {
@@ -524,7 +562,9 @@ export class ShopbyproductComponent implements OnInit {
       this.pagee = this.pagenation.current_page
       this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee, categories: this.categoryy_id, brands: this.brandd_id, min: this.minValue, max: this.maxValue, sort_key: this.sortval } });
       window.scroll(0, 0);
+      this.prodloadermain=true
       this.prodloader = false;
+     
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -533,18 +573,20 @@ export class ShopbyproductComponent implements OnInit {
   }
   getpage1(url: any) {
     console.log("urll page",url);
-    
     if(url!==null){
+      this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
     this.request.getpage(url).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
-      this.pagee = this.pagenation.current_page
+      this.pagee = this.pagenation.current_page;
       this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
       window.scroll(0, 0);
+      this.prodloadermain=true
       this.prodloader = false;
+     
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -640,6 +682,7 @@ export class ShopbyproductComponent implements OnInit {
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.prodloader = false;
+      this.prodloadermain=true
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -653,6 +696,10 @@ export class ShopbyproductComponent implements OnInit {
     this.request.getallcat().subscribe((response: any) => {
       this.Allcat = response.data;
       this.sideloader1 = false;
+      if (this.categoryy_id !== undefined) {
+        let index = this.Allcat.findIndex((x: any) => x.id == this.categoryy_id);
+        this.categoryItem = index
+      }
       setTimeout(() => {
         this.loadingIndicator = false;
       }, 500);
@@ -780,22 +827,6 @@ export class ShopbyproductComponent implements OnInit {
       form.value.max = this.maximumprize
       this.maxValue = this.maximumprize
     }
-    // this.request.filterdataa3(1,form.value.category,form.value.brand, form.value.min, form.value.max).subscribe((response: any) => {
-
-    //   this.Product = response.data;
-    //   console.log("filter response",this.Product);
-
-    //   this.pagenation = response.meta;
-    //   this.pagess = this.pagenation.links
-    //   this.modalService.dismissAll();
-    //   this.subItem=this.subbbItem
-    //   this.headItem=1
-    //   this.prodloader = false;
-    //   setTimeout(() => {
-    //     this.imgloader = true;
-    //   }, 2000);
-
-    // });
     this.router.navigate(['/shopbyproduct'], { queryParams: { page: 1, categories: this.categoryy_id, brands: this.brandd_id, min: this.minValue, max: this.maxValue } });
 
   }
@@ -808,6 +839,9 @@ export class ShopbyproductComponent implements OnInit {
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.prodloader = false;
+      this.prodloadermain=true
+      this.subItem=''
+      this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -821,7 +855,9 @@ export class ShopbyproductComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      this.prodloadermain=true
       this.prodloader = false;
+     
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -830,13 +866,16 @@ export class ShopbyproductComponent implements OnInit {
 
   // search from home
   filterDatatable1(key: any) {
+    window.scroll(0,0);   
     this.prodloader = true;
 
     this.request.filtersearchdataa(key).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      this.prodloadermain=true
       this.prodloader = false;
+     
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -844,6 +883,7 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   filterDatatable2() {
+    window.scroll(0,0);
     this.prodloader = true;
     this.modalService.dismissAll();
     if (this.categoryy_id === undefined) {
@@ -852,9 +892,7 @@ export class ShopbyproductComponent implements OnInit {
     if (this.brandd_id === undefined) {
       this.brandd_id = ''
     }
-    // console.log("this.categoryy_id", this.categoryy_id);
-    // console.log("this.brandd_id", this.brandd_id);
-
+ 
     this.request.filterdataa3(this.pagee, this.categoryy_id, this.brandd_id, this.minValue, this.maxValue, this.sortvalue).subscribe((response: any) => {
       // this.request.filtersearchdataa(key).subscribe((response: any) => {
       // console.log("filterdataa3", response);
@@ -862,6 +900,7 @@ export class ShopbyproductComponent implements OnInit {
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
       this.headItem = 1
+      this.prodloadermain=true
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
@@ -1091,6 +1130,137 @@ export class ShopbyproductComponent implements OnInit {
   }
   deleteRecordSuccess() {
     this.toastr.error(' Removed Successfully', '');
+  }
+
+  qtyChange(event: any, i: any, img: any) {
+
+    if (this.quantityarray.length == 0) {
+      this.quantityarray.push({ "id": img.id, "value": event.target.value });
+    }
+    else {
+      console.log(" this.quantityarray", this.quantityarray);
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+      console.log("obj", index);
+      if (index > -1) {
+        console.log("if", index);
+
+        this.quantityarray[index].value = event.target.value;
+      }
+      else {
+        console.log("else", index);
+        this.quantityarray.push({ "id": img.id, "value": event.target.value });
+      }
+
+    }
+
+    console.log("this.quantityarray", this.quantityarray);
+  }
+
+  prodaddtocart(img: any) {
+    console.log("img", img);
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else if (img.variants[0]?.options?.length == 1) {
+        this.varient_value = img.variants[0]?.options[0];
+      }
+      else {
+        this.varient_value = this.selectedvar;
+      }
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+      if (index > -1) {
+        this.totalqty = this.quantityarray[index].value;
+      }
+      else {
+        this.totalqty = 1
+      }
+
+      let edata = {
+        id: img.id,
+        variant: this.varient_value?.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity: this.totalqty,
+        buyertype: this.buyertypeid,
+      }
+      console.log(edata);
+      this.request.addtocart(edata).subscribe((res: any) => {
+        console.log("resssssssssssssss", res);
+        if (res.message == 'Product added to cart successfully') {
+          console.log("Product added to cart successfully");
+          this.addRecordSuccess();
+          this.modalService.dismissAll();
+          this.sharedService.sendClickEvent();
+        }
+        else if (res.message == 'Minimum 1 item(s) should be ordered') {
+          this.toastr.success(res.message);
+
+        }
+        else if (res.message == 'Stock out') {
+          this.toastr.error(res.message);
+          console.log("Stock out");
+        }
+      },
+        (error: any) => {
+          this.toastr.error(error);
+          console.log("error", error);
+
+        });
+    }
+  }
+  bestsellingselectvar(weight: any, i: any, id: any) {  
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    this.request.addvarient(id, weight).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.Product[i].stroked_price= res.stroked_price
+       this.Product[i].main_price = res.price_string;
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  onScrollDown(eve: any) {
+    console.log("scrolled down!!",this.pagenum );
+    this.pagenum+=1
+    console.log("scrolled down!!",this.pagenum );
+  const pageurl =  this.pagess[this.pagenum]
+  console.log("scrolled down url!!",pageurl );
+
+    if(pageurl.url!==null && pageurl!==undefined ){
+      this.pageload=false;
+    this.prodloader = true;
+    this.sidepoploader=true;
+    // this.imgloader = false;
+    this.request.getpage(pageurl.url).subscribe((response: any) => {
+      this.newpageProduct = response.data;
+      this.pagenation = response.meta;
+      this.pagess = this.pagenation.links;
+      console.log("this.pagess",this.pagess);
+      this.pagee = this.pagenation.current_page;
+      // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
+      // window.scroll(0, 0);
+      this.Product.push(...this.newpageProduct)
+      this.pageload=true;
+      this.prodloader = false;
+      this.sidepoploader=false;
+      console.log("this.Product",this.Product);
+      
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    })
+  }
+
+  
+  }
+
+  onScrollUp(ev: any) {
+    console.log("scrolled up!",);
+
   }
 
 }

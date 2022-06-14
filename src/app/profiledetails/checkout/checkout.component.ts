@@ -110,6 +110,8 @@ export class CheckoutComponent implements OnInit {
   Summeryload: boolean= true;
   availcoupan: any;
   cartloader: boolean=true;
+  loadaddress: boolean=true;
+  paymentload: boolean=true;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
@@ -251,15 +253,16 @@ export class CheckoutComponent implements OnInit {
 
   getaddress() {
     this.loader = true
+   this.loadaddress=true
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
       this.Address = response.data;
+      this.loadaddress=false
       console.log("address", this.Address);
       this.loader = false;
       if (this.Address.length === 0) {
         this.shipadds = false
         console.log("add some address");
         this.opennewaddress();
-
       }
       else {
         this.shipadds = true
@@ -283,8 +286,10 @@ export class CheckoutComponent implements OnInit {
     });
   }
   paymettype() {
+
     this.request.fetchpaytype().subscribe((response: any) => {
       this.Paymenttype = response;
+      this.paymentload=false;
       // this. processdata()    
     });
   }
@@ -322,7 +327,6 @@ export class CheckoutComponent implements OnInit {
         // this.getaddress();
         this.request.updateshippingaddress(edata2).subscribe((response: any) => {
           if (response.result == true) {
-
           }
         });
 
@@ -390,7 +394,9 @@ export class CheckoutComponent implements OnInit {
     let edata = {
       owner_id: this.owneriid,
       user_id: this.userid,
-      payment_type: this.payytype
+      payment_type: this.payytype,
+      // is_buynow=
+
     }
     if (this.payytype == "billdesk") {
       this.request.placeorder(edata).subscribe((response: any) => {
@@ -582,17 +588,13 @@ export class CheckoutComponent implements OnInit {
         postal_code: form.value.postal_code,
         phone: form.value.phone,
       }
-
-
       this.request.addaddress(edata).subscribe((res: any) => {
-
         if (res.message == 'Shipping information has been added successfully') {
           form.reset()
           this.reloadCurrentRoute();
           window.scroll(0, 0);
         }
         else {
-
           this.toastr.error(res.message);
           form.reset();
         }
