@@ -125,7 +125,7 @@ export class TodaysdealComponent implements OnInit {
   viewdaydeal(){
     // this.prodloader=true;
     // this.imgloader = false;
-    this.request.getdaydealpro().subscribe((response: any) => {
+    this.request.getdaydealpro('').subscribe((response: any) => {
       this.Daydealpro=response.data.slice(0, 3);
       this.prodloader=false;  
       setTimeout(() => {
@@ -136,7 +136,7 @@ export class TodaysdealComponent implements OnInit {
   viewmonthdeal(){
     // this.prodloader=true;
     // this.imgloader = false;
-    this.request.getmonthdealpro().subscribe((response: any) => {
+    this.request.getmonthdealpro('').subscribe((response: any) => {
       this.Monthdealpro=response.data.slice(0, 3);
       this.poploader=false;
       setTimeout(() => {
@@ -148,7 +148,7 @@ export class TodaysdealComponent implements OnInit {
   viewtodaysdeal() {
     // this.prodloader = true;
     // this.imgloader = false;
-    this.request.gettodaysdeal().subscribe((response: any) => {
+    this.request.gettodaysdeal('').subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;

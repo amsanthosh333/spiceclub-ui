@@ -363,21 +363,27 @@ export class ShopbyproductComponent implements OnInit {
     });
   }
   viewflashdeal() {
-    // this.prodloader=true;
-    // this.imgloader = false;
-    // this.request. gettodaysdeal().subscribe((response: any) => {
-    //   this.Product=response.data;
-    //     this.pagenation=response?.meta   ;
-    //     this.pagess=this.pagenation?.links;
-    //     this.prodloader=false;
-    //     console.log("allcatproduct",this.Product);
-    //     setTimeout(() => {
-    //       this.imgloader = true;
-    //     }, 2000);
-    // },
-    // (error: any) => {
-    //   console.log("error",error);
-    // });
+    this.prodloadermain=false
+    this.prodloader = true;
+    this.imgloader = false;
+    this.request.getflashdealpro('').subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response?.meta;
+      this.pagess = this.pagenation?.links;
+      this.prodloadermain=true
+      this.prodloader = false;
+      
+      this.minValue = 0;
+      this.maxValue = this.maximumprize;
+      this.subItem = ''
+      this.categoryItem=''
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
   }
   viewalldeal() {
     //this.router.navigate(['/shopbyproduct'], {queryParams:{page:1,min:0,max:this.maximumprize,}});
@@ -390,7 +396,7 @@ export class ShopbyproductComponent implements OnInit {
     this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
-    this.request.gettodaysdeal().subscribe((response: any) => {
+    this.request.gettodaysdeal('').subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
@@ -413,7 +419,7 @@ export class ShopbyproductComponent implements OnInit {
     this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
-    this.request.getdaydealpro().subscribe((response: any) => {
+    this.request.getdaydealpro('').subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
@@ -436,7 +442,7 @@ export class ShopbyproductComponent implements OnInit {
     this.prodloadermain=false
     this.prodloader = true;
     this.imgloader = false;
-    this.request.getmonthdealpro().subscribe((response: any) => {
+    this.request.getmonthdealpro('').subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
@@ -455,6 +461,7 @@ export class ShopbyproductComponent implements OnInit {
         console.log("error", error);
       });
   }
+ 
   maximunprice() {
     this.request.getmaximumprice().subscribe((response: any) => {
       console.log(response);

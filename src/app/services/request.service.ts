@@ -228,19 +228,22 @@ public addtowishlist(body: any) {
           return this.http.get(this.url, {headers:headers});     
       }
   // deals
-  public gettodaysdeal() {
-    this.url = `${this.endPoint1}/products/todays-deal?user_id=`+ this.userid+`&buyertype=` +this.buyertypeid;
+  public gettodaysdeal(categoryid:any) {
+    this.url = `${this.endPoint1}/products/todays-deal?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
     return this.http.get(this.url);
   }
-  public getdaydealpro() {
-    this.url = `${this.endPoint1}/products/deal-of-day?user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+  public getdaydealpro(categoryid:any) {
+    this.url = `${this.endPoint1}/products/deal-of-day?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
     return this.http.get(this.url);
   }
-  public getmonthdealpro() {
-    this.url = `${this.endPoint1}/products/deal-of-month?user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+  public getmonthdealpro(categoryid:any) {
+    this.url = `${this.endPoint1}/products/deal-of-month?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
     return this.http.get(this.url);
   }
-
+  public getflashdealpro(categoryid:any) {
+    this.url = `${this.endPoint1}/flash-deal-products/1?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+    return this.http.get(this.url);
+  }
   public fetchuserwishlist(id:any,) {  
     const headers = new HttpHeaders() 
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)

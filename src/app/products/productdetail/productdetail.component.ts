@@ -242,7 +242,7 @@ export class ProductdetailComponent implements OnInit {
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
-      this.addtowishlist(img.id);
+      this.addtowishlist(img.id,);
     }
     else if (this.likeddd[index] == false) {
       this.deleteRecord(img.id);
@@ -252,7 +252,7 @@ export class ProductdetailComponent implements OnInit {
   toggledelete(img: any, index: any): void {
     this.likedd[index] = !this.likedd[index];
     if (this.likedd[index] == true) {
-      this.addtowishlist(img.id);
+      this.addtowishlist(img.id,);
     }
     else if (this.likedd[index] == false) {
       this.deleteRecord(img.id);
@@ -282,6 +282,41 @@ export class ProductdetailComponent implements OnInit {
 
       });
     }
+  }
+  addtowishlistmain(prd_id: any,content:any) {
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      let edata4 = {
+        user_id: this.userid,
+        product_id: prd_id
+      }
+      this.request.addtowishlist(edata4).subscribe((res: any) => {
+        if (res.message == 'Product is successfully added to your wishlist') {
+          this.iswishlist(prd_id)
+          this.modalService.open(content, {
+            ariaLabelledBy: 'modal-basic-title',
+            size: 'lg',
+          });
+          // this.addRecordSuccess();
+          this.sharedService.sendClickEvent();
+        }
+        else {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log("error", error);
+
+      });
+    }
+  }
+  gotowishlist(){
+    this.modalService.dismissAll()
+    this.router.navigate(['/wishlist']);
+  }
+  closemodal(){
+    this.modalService.dismissAll()
   }
   deleteRecord(id: any) {
     this.request.deletewishproud2(id).subscribe((response: any) => {
@@ -391,60 +426,6 @@ export class ProductdetailComponent implements OnInit {
     this.contentloader = true;
     this.discriptloader = true;
     console.log("viewprod2", this.product_idd);
-    // this.request.getproddetail(this.product_id).subscribe((response: any) => {
-
-    //   console.log("proddetail", response);
-    //   this.Peoduct = response.data[0];
-    //   this.choice = this.Peoduct.choice_options;
-    //   this.stocck = (this.Peoduct.current_stock); 1
-    //   this.stocckkk = (this.Peoduct.current_stock); 1
-    //   this.stk = this.Peoduct.current_stock;
-    //   this.photoos = this.Peoduct.photos;
-    //  ///// //  this.photoos = response.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.data[0].photos.path);
-    //   this.colors = this.Peoduct.colors;
-    //   this.tags = this.Peoduct.tags;
-    //   this.varprise = this.Peoduct.main_price;
-    //   this.currentRatess = this.Peoduct.rating;
-    //   this.photoloader = false;
-    //   this.contentloader = false;
-    //   this.discriptloader = false;
-    //   this.productname = this.Peoduct.name;
-
-    //  ///// // array push photo
-    //   this.newphotos = this.photoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path)
-
-    //   this.newphotos.forEach((item: any) => {
-    //     this.galleryphotos.push({ image: item });
-    //    ///// // this.allgalleryphotos.push({ thumbImage: item });
-    //   })
-    //   this.newphotos.forEach((item: any) => {
-    //    //// // this.galleryphotos.push({ image: item });
-    //     this.allgalleryphotos.push({ thumbImage: item, image: item });
-
-    //   })
-    //   this.getcommentsss()
-    //   if (this.Peoduct.choice_options.length == 0) {
-
-    //     this.varient_value = ''
-    //   }
-    //   else {
-
-    //     this.varient_value = this.choice[0]?.options[0];
-    //     this.checkvarientprice();
-    //   }
-    // },
-    //   (error: any) => {
-    //     console.log(error);
-    //   });
-    // this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
-    //   this.Relatedprod = response.data;
-    //   this.loader6 = false;
-    //   this.viewbulkdiscount(this.product_id);
-    //   this.viewdiscount(this.product_id)
-    // },
-    //   (error: any) => {
-    //     console.log(error);
-    //   });
     this.router.navigate(['/productdetail', this.product_idd]);
   }
   viewbulkdiscount(id: any) {
@@ -518,6 +499,61 @@ export class ProductdetailComponent implements OnInit {
       console.log("error", error);
 
     });
+  }
+  addtocartmain(_id: any,content:any) {
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      if (this.quantityyy == 0) {
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: 1,
+          buyertype: this.buyertypeid,
+        }
+        this.toastr.info('minimun 1 product should be selected', '');
+      }
+      else {
+        this.quantityy = this.quantityyy
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.quantityy,
+          buyertype: this.buyertypeid,
+        }
+        this.addtoocarttmain(edata,content);
+      }
+    }
+  }
+  addtoocarttmain(edata: any,content:any) {
+    this.request.addtocart(edata).subscribe((res: any) => {
+      if (res.message == 'Product added to cart successfully') {
+        this.modalService.open(content, {
+          ariaLabelledBy: 'modal-basic-title',
+          size: 'lg',
+        });
+        this.sharedService.sendClickEvent();
+      }
+      else if (res.message == 'Minimum 1 item(s) should be ordered') {
+        this.toastr.info(res.message);
+      }
+      else if (res.message == 'Stock out') {
+        this.toastr.error(res.message);
+      }
+      else {
+        console.log("error", res);
+      }
+    }, (error: any) => {
+      console.log("error", error);
+
+    });
+  }
+  gotoCartlist(){
+    this.modalService.dismissAll()
+    this.router.navigate(['/cart']);
   }
 
   addtocartbuy(_id: any) {

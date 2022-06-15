@@ -116,12 +116,12 @@ font-size: 0.7rem;
 @media (min-width: 992px){
 #offerdiv {
     flex: 0 0 auto;
-    width: 70.666667%;
+    width: 72.666667%;
     bottom: 15px;
 }
 #sortdiv {
   flex: 0 0 auto;
-  width: 29.333333%;
+  width: 27.333333%;
   bottom: 15px;
 }
 #sortfilter{

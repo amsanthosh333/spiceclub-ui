@@ -526,7 +526,7 @@ export class HomeComponent implements OnInit {
     });
   }
   viewdaydeal() {
-    this.request.getdaydealpro().subscribe((response: any) => {
+    this.request.getdaydealpro('').subscribe((response: any) => {
       this.Daydealpro = response.data;
       setTimeout(() => {
         this.imgloader = true;

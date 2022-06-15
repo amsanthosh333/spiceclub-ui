@@ -221,7 +221,7 @@ export class BestsellingComponent implements OnInit {
     viewtodaysdeal(){
       this.prodloader=true;
       this.imgloader = false;
-      this.request. gettodaysdeal().subscribe((response: any) => {
+      this.request. gettodaysdeal('').subscribe((response: any) => {
         this.Product=response.data;
           this.pagenation=response?.meta   ;
           this.pagess=this.pagenation?.links;

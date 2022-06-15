@@ -120,7 +120,7 @@ export class MonthdealComponent implements OnInit {
     }
   }
   viewdaydeal(){
-    this.request.getdaydealpro().subscribe((response: any) => {
+    this.request.getdaydealpro('').subscribe((response: any) => {
       this.Daydealpro=response.data.slice(0, 4);
       this.prodloader=false; 
       setTimeout(() => {
@@ -129,7 +129,7 @@ export class MonthdealComponent implements OnInit {
     });
   }
   viewmonthdeal(){
-    this.request.getmonthdealpro().subscribe((response: any) => {
+    this.request.getmonthdealpro('').subscribe((response: any) => {
       this.Monthdealpro=response.data;
       this.poploader=false;
       setTimeout(() => {
@@ -140,7 +140,7 @@ export class MonthdealComponent implements OnInit {
   viewtodaysdeal() {
     // this.prodloader = true;
     // this.imgloader = false;
-    this.request.gettodaysdeal().subscribe((response: any) => {
+    this.request.gettodaysdeal('').subscribe((response: any) => {
 
       this.Product = response.data.slice(0,4);
      

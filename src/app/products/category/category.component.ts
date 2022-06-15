@@ -146,6 +146,10 @@ export class CategoryComponent implements OnInit {
   prodloadermain: any
   pagee: any;
   Catbrand: any;
+  maximumprize: any;
+  headItem: any;
+  brandd_id: any;
+  brandItem: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private toastr: ToastrService,
@@ -238,10 +242,12 @@ export class CategoryComponent implements OnInit {
           this.SubofSubcat1 = []
           this.viewtopcategory();
           this.viewfeatured();
-          this.categorybrand(this.id);    
+          this.categorybrand(this.id);
           this.page2 = true;
           this.selectedItem = this.id;
+          this.categoryy_id = this.id;
         }
+        this.maximunprice();
       }
     }),
 
@@ -275,10 +281,10 @@ export class CategoryComponent implements OnInit {
     }
   }
 
-  categorybrand(id:any){
+  categorybrand(id: any) {
     this.request.getcatbrands(id).subscribe((response: any) => {
       this.Catbrand = response.data;
-      console.log("this.Catbrand",this.Catbrand);  
+      console.log("this.Catbrand", this.Catbrand);
       // this.loader2 = false
     },
       (error: any) => {
@@ -330,7 +336,8 @@ export class CategoryComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.selectedItem = this.id;
-    // this.topItem=''
+    this.brandItem = ''
+    this.topItem=''
     this.subItem = ''
     this.request.getcatprod(id, page).subscribe((response: any) => {
       console.log(response);
@@ -419,6 +426,7 @@ export class CategoryComponent implements OnInit {
     this.selectedItem = id;
     this.subItem = '';
     this.topItem = '';
+    this.brandItem = '';
     this.getsubcategory(id)
     this.request.getcatprod(id, page).subscribe((response: any) => {
       this.Product = response.data;
@@ -447,6 +455,7 @@ export class CategoryComponent implements OnInit {
     this.selectedItem = '';
     this.subItem = '';
     this.topItem = i;
+    this.brandItem = '';
     this.getsubcategory(id)
     this.request.getcatprod(id, page).subscribe((response: any) => {
       this.Product = response.data;
@@ -475,8 +484,9 @@ export class CategoryComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.selectedItem = '';
-    this.topItem = i;
+    this.topItem = '';
     this.topItem1 = '';
+    this.brandItem = '';
 
     this.request.getcatprod(id, page).subscribe((response: any) => {
       this.Product = response.data;
@@ -499,6 +509,7 @@ export class CategoryComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.selectedItem = '';
+    this.brandItem = '';
     // this.topItem1 = i;
 
     this.request.getcatprod(id, page).subscribe((response: any) => {
@@ -520,13 +531,10 @@ export class CategoryComponent implements OnInit {
   viewctopcatprod3sub(id: any, i: any) {
     this.topItem = i
     this.category1_id = id
-    console.log("this.subcategory_id", this.subcategory_id);
     this.router.navigate(['category', this.categorynameid], { queryParams: { subcategory: this.subcategory_id, category1: id, } });
   }
-  viewctopcatprod3sub1(id: any, i: any) {
+  viewctopcatprod3sub1(id: any, i: any,event:any) {
     this.topItem1 = i
-    console.log("this.subcategory_id", this.subcategory_id);
-    console.log("this.category1_id", this.category1_id);
     this.router.navigate(['category', this.categorynameid], { queryParams: { subcategory: this.subcategory_id, category1: this.category1_id, subcategory1: id } });
   }
 
@@ -537,6 +545,7 @@ export class CategoryComponent implements OnInit {
     this.selectedItem = '';
     this.subItem = '';
     this.topItem = '';
+    this.brandItem = '';
     this.SubofSubcat1 = []
     this.SubofSubcat = []
     window.scroll(0, 0);
@@ -574,6 +583,7 @@ export class CategoryComponent implements OnInit {
     this.search2 = true;
     // this.subItem=i;
     this.topItem = '';
+    this.brandItem = '';
     this.request.getsubcatprod(id, page).subscribe((response: any) => {
       console.log("subcatprod", response, this.subItem);
       this.Product = response.data;
@@ -642,6 +652,7 @@ export class CategoryComponent implements OnInit {
     this.prodloadermain = false
     this.prodloader = true;
     this.imgloader = false;
+    this.brandItem = '';
     this.request.getcatsearchprod(this.categoryy_id, page, key).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
@@ -660,6 +671,7 @@ export class CategoryComponent implements OnInit {
     this.prodloadermain = false
     this.prodloader = true;
     this.imgloader = false;
+    this.brandItem = '';
     this.request.getsubcatsearchprod(this.categoryy_id, page, key).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
@@ -964,7 +976,12 @@ export class CategoryComponent implements OnInit {
   pricerange() {
     this.prodloadermain = false;
     this.prodloader = true;
-    this.request.filterdataa3(1, this.categoryy_id, '', this.minValue, this.maxValue, '').subscribe((response: any) => {
+    
+    if (this.brandd_id == null||this.brandd_id == undefined ) {
+      this.brandd_id = ''
+      this.brandItem = '';
+    }
+    this.request.filterdataa3(1, this.categoryy_id, this.brandd_id, this.minValue, this.maxValue, '').subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
@@ -983,8 +1000,8 @@ export class CategoryComponent implements OnInit {
     console.log("scroll down", this.pagess);
     console.log("scroll pagenum", this.pagenum);
     const pageurl = this.pagess[this.pagenum]
-    console.log("pageurl",pageurl);
-    if (pageurl?.url !== null && pageurl!==undefined) {
+    console.log("pageurl", pageurl);
+    if (pageurl?.url !== null && pageurl !== undefined) {
       this.pageload = false;
       this.prodloader = true;
       this.sidepoploader = true;
@@ -1013,5 +1030,162 @@ export class CategoryComponent implements OnInit {
   onScrollUp(ev: any) {
     console.log("scrolled up!",);
   }
+
+  viewtodaysdeal() {
+    this.prodloadermain = false
+    this.prodloader = true;
+    this.imgloader = false;
+    this.request.gettodaysdeal(this.categoryy_id).subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response?.meta;
+      this.pagess = this.pagenation?.links;
+      this.prodloadermain = true
+      this.prodloader = false;
+      this.minValue = 0;
+      this.maxValue = this.maximumprize;
+      this.subItem = ''
+      this.brandd_id='';
+      // this.categoryItem=''
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+  }
+  viewdealofday() {
+    this.prodloadermain = false
+    this.prodloader = true;
+    this.imgloader = false;
+    this.request.getdaydealpro(this.categoryy_id).subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response?.meta;
+      this.pagess = this.pagenation?.links;
+      this.prodloadermain = true
+      this.prodloader = false;
+
+      this.minValue = 0;
+      this.maxValue = this.maximumprize;
+      this.subItem = ''
+      this.brandd_id='';
+      // this.categoryItem=''
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+  }
+  viewdealofmonth() {
+    this.prodloadermain = false
+    this.prodloader = true;
+    this.imgloader = false;
+    this.request.getmonthdealpro(this.categoryy_id).subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response?.meta;
+      this.pagess = this.pagenation?.links;
+      this.prodloadermain = true;
+      this.prodloader = false;
+
+      this.minValue = 0;
+      this.maxValue = this.maximumprize;
+      this.subItem = '';
+      this.brandd_id='';
+      // this.categoryItem=''
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+  }
+  viewflashdeal() {
+    this.prodloadermain=false
+    this.prodloader = true;
+    this.imgloader = false;
+    this.request.getflashdealpro(this.categoryy_id).subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response?.meta;
+      this.pagess = this.pagenation?.links;
+      this.prodloadermain=true
+      this.prodloader = false;
+      
+      this.minValue = 0;
+      this.maxValue = this.maximumprize;
+      this.subItem = ''
+      this.brandd_id='';
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+  }
+
+  maximunprice() {
+    this.request.getmaximumprice().subscribe((response: any) => {
+      console.log(response);
+      this.maximumprize = response.price;
+      // this.maxValue=this.maximumprize
+      let opts: Options = {
+        floor: 0,
+        ceil: this.maximumprize,
+        getPointerColor: () => { return '#cc020c' },
+        getSelectionBarColor: () => { return '#cc020c' }
+      };
+      this.options = opts;
+
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+
+  }
+  headactive(i: any) {
+    console.log("iiii", i);
+
+    this.headItem = i
+
+  }
+  viewcatbrandprod(id: any, i: any ,event:any) {
+    
+    this.brandItem = i
+    this.prodloadermain = false;
+    this.prodloader = true;
+    this.brandd_id = id,
+      this.categoryy_id = this.categoryy_id,
+      this.minValue = 0
+    this.maxValue = this.maximumprize
+    if (!event.target.checked) {
+      this.brandd_id='' 
+    }
+
+    this.request.filterdataa3(1, this.categoryy_id, this.brandd_id, this.minValue, this.maxValue, '').subscribe((response: any) => {
+      this.Product = response.data;
+      this.pagenation = response.meta;
+      this.pagess = this.pagenation.links;
+      this.prodloadermain = true
+      window.scroll(0, 0);
+      this.prodloader = false;
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    });
+  }
+  under200(){
+    this.minValue=0;
+    this.maxValue=200;
+    this.pricerange()
+  }
+  uptoto500(){
+    this.minValue=200;
+    this.maxValue=500;
+    this.pricerange()
+  }
+
 
 }
