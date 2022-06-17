@@ -475,6 +475,10 @@ export class HomeComponent implements OnInit {
     console.log("goto");
     this.router.navigate(['category', this.top2id]);
   }
+  gotocategoryproduct(id:any) {
+    console.log("goto");
+    this.router.navigate(['category', id]);
+  }
   viewtodayoffer() {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data;

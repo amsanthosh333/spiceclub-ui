@@ -172,6 +172,11 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const queryParams = this.activatedRoute.snapshot.queryParams
+        const routeParams = this.activatedRoute.snapshot.params;
+        console.log("queryParams",queryParams);
+        console.log("routeParams",routeParams);   
+        // do something with the parameters       
     this.activatedRoute.queryParams.subscribe((data2: Params) => {
       console.log("activatedRoute");
       this.id = this.route.snapshot.params['id'];
@@ -180,6 +185,7 @@ export class CategoryComponent implements OnInit {
       this.subcategory1id = this.route.snapshot.queryParams['subcategory1']
       console.log("category1id", this.catedory1id);
       let locationPath = this.location.path();
+      this.headItem =0;
       if (locationPath.length) {
         this.locationSegments = locationPath.split('/');
       }
@@ -246,11 +252,29 @@ export class CategoryComponent implements OnInit {
           this.page2 = true;
           this.selectedItem = this.id;
           this.categoryy_id = this.id;
+        
         }
-        this.maximunprice();
+        
       }
     }),
 
+    this.activatedRoute.params.subscribe((data2: Params) => {
+      this.id = this.route.snapshot.params['id']; 
+      this.headItem =0;
+      this.viewallcategory();
+          this.categorydetail(this.id);
+          this.getprodofcategory(this.id, 1);
+          this.getsubcategory(this.id);
+          this.SubofSubcat = []
+          this.SubofSubcat1 = []
+          this.viewtopcategory();
+          this.viewfeatured();
+          this.categorybrand(this.id);
+          this.page2 = true;
+          this.selectedItem = this.id;
+          this.categoryy_id = this.id; 
+    });
+    this.maximunprice();
       this.search = this.fb.group({
         key: [''],
       });
@@ -653,6 +677,7 @@ export class CategoryComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.brandItem = '';
+    this.headItem ='';
     this.request.getcatsearchprod(this.categoryy_id, page, key).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
@@ -672,6 +697,7 @@ export class CategoryComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.brandItem = '';
+    this.headItem ='';
     this.request.getsubcatsearchprod(this.categoryy_id, page, key).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
@@ -692,9 +718,7 @@ export class CategoryComponent implements OnInit {
       this.Futurecatg = response.data;
       this.loader1 = false
     });
-
   }
-
   quickview(id: any, content: any) {
     this.quantityyy = 0
     this.product_id = id
@@ -846,33 +870,6 @@ export class CategoryComponent implements OnInit {
     } else {
       this.element.className = "topnav";
     }
-  }
-
-  yourMethod(id: any) {
-    console.log("catid", id);
-    this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-      console.log("res", res);
-      this.viewSubcat = res.data;
-    });
-
-  }
-
-  //   public subcat(id:any): Array<any> {
-  //     console.log("subcat",id);
-  //     let stars: any[] = [];
-  //     //---> some logic
-  //     // this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-  //     //   console.log("res",res);
-  //     //   this.viewSubcat=res.data; 
-  //     // });
-  //      return stars;
-  // }
-  myFunction1(testf: any) {
-
-    console.log(testf);
-
-    return testf;
-
   }
 
   viewproducts() {

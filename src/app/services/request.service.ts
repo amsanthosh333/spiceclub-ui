@@ -741,12 +741,16 @@ public getallblog(page:any) {
   this.url = `${this.endPoint1}/blog`+`?page=`+page;
   return this.http.get(this.url);
 }
+public getbestblog(id:any) {
+  this.url = `${this.endPoint1}/blog/bestof/`+id;
+  return this.http.get(this.url);
+}
 public getallblogcat() {
   this.url = `${this.endPoint1}/blog/categories`;
   return this.http.get(this.url);
 }
 public getblogbycat(id: string,page:any) {
-  this.url = `${this.endPoint1}/blog/category/` + id+`?page=` +page ;
+  this.url = `${this.endPoint1}/blog/category/` + id+`?page=` +page;
   return this.http.get(this.url);
 }
 public getblogdetail(id: string) {
@@ -769,6 +773,7 @@ public searchbyblog(key:any) {
   this.url = `${this.endPoint1}/blogcomment/submit`;     ////////////////////////add search//////////////////////////////////////
   return this.http.get(this.url);
 }
+
 
 //feedbacks
 public getfeedbacks() {

@@ -1,77 +1,47 @@
 
 
-	<div class="breadcrumb-area breadcrumb-bg-2 pt-15 pb-15">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<h1 class="breadcrumb-title">Shop</h1>
 
-					<!--=======  breadcrumb list  =======-->
-
-					<ul class="breadcrumb-list" style="padding-left: 0px;">
-						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-						<li class="breadcrumb-list__item breadcrumb-list__item--active">Deal of month</li>
-					</ul>
-
-					<!--=======  End of breadcrumb list  =======-->
-
-				</div>
-			</div>
-		</div>
-	</div>
+	<div class="breadcrumb-area breadcrumb-bg-2">
+        <div class="container" style="margin: 0px;">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Shop</h4>
+                    <!--=======  breadcrumb list  =======-->
+                    <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+                        <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                        <li class="breadcrumb-list__item breadcrumb-list__item--active">Deal of Month</li>
+                    </ul>
+                    <!--=======  End of breadcrumb list  =======-->
+                </div>
+            </div>
+        </div>
+    </div>
 
 		<!--=============================================
     =            shop page content         =
     =============================================-->
 
 	<div class="shop-page-wrapper">
-		<!--=============================================
-        =            shop advance filter area         =
-        =============================================-->
-
-	
-
-		<!--=====  End of shop advance filter area  ======-->
-
-		<!--=============================================
-		=            shop page content         =
-		=============================================-->
-
 		<div class="shop-page-content mt-15 mb-15">
 			<div class="container">
 				<div class="row">
-					<div class="col-lg-3 order-2 order-lg-1">
-						<!--=======  page sidebar  =======-->
+					<div id="sidenavg" class="col-lg-2 order-2 order-lg-1">
 					<div class="page-sidebar">
-							<!--=======  End of single sidebar widget  =======-->
-
-							<!--=======  single sidebar widget  =======-->
-
                             <div class="single-sidebar-widget mb-40 mt-30">
-                                <h2 class="single-sidebar-widget--title">Deal of the day</h2>
-
-                                <!--=======  widget product wrapper  =======-->
-
+								<h2 class="single-sidebar-widget--title"
+                                    style="padding-bottom: 0px; margin-bottom: 10px;">Deal of the day</h2>
+                              
                                 <div class="widget-product-wrapper">
-                                    <!--=======  single widget product  =======-->
                                     <div class="single-widget-product-wrapper">
                                         <div class="single-widget-product" *ngFor="let img of Daydealpro"
                                             style="padding-bottom: 17px;">
-                                            <!--=======  image  =======-->
-
                                             <div class="single-widget-product__image" (click)="proddetail(img.id)">
                                                 <a >
                                                     <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                                         class="img-fluid" alt="">
                                                 </a>
                                             </div>
-
-                                            <!--=======  End of image  =======-->
-
-                                            <!--=======  content  =======-->
-
                                             <div class="single-widget-product__content" (click)="proddetail(img.id)">
-
                                                 <div class="single-widget-product__content__top">
                                                     <h3 class="product-title"><a>{{img.name}}</a>
                                                     </h3>
@@ -163,34 +133,20 @@
 
 						<!-- todays_deal -->
 					<div class="page-sidebar">
-						<!--=======  End of single sidebar widget  =======-->
-
-						<!--=======  single sidebar widget  =======-->
-
 						<div class="single-sidebar-widget mb-40 mt-30">
-							<h2 class="single-sidebar-widget--title">Today's deal</h2>
-							<!--=======  widget product wrapper  =======-->
+							<h2 class="single-sidebar-widget--title"
+							style="padding-bottom: 0px; margin-bottom: 10px;">Today's deal</h2>
 							<div class="widget-product-wrapper">
-								<!--=======  single widget product  =======-->
 								<div class="single-widget-product-wrapper">
 									<div class="single-widget-product" *ngFor="let img of Product"
-										style="padding-bottom: 17px; "  >
-										<!--=======  image  =======-->
-
+										style="padding-bottom: 17px; " >
 										<div class="single-widget-product__image" (click)="proddetail(img.id)" style="overflow: hidden;">
 											<a >
 												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-													class="img-fluid" alt="">
-												
-											</a>
-											
+													class="img-fluid" alt="">												
+											</a>											
 										</div>
-										
-										<!--=======  End of image *ngIf="img.deal_of_day!=0"  =======-->
-										<!--=======  content  =======-->
-
 										<div class="single-widget-product__content" (click)="proddetail(img.id)">
-
 											<div class="single-widget-product__content__top">
 												<h3 class="product-title"><a>{{img.name}}</a>
 												</h3>
@@ -204,15 +160,11 @@
 												</ngb-rating>
 											</div>
 										</div>
-										<!--=======  End of content  =======-->
 									</div>
 								</div>
-
-								<!--=======  End of single widget product  =======-->
 							</div>
 							<!-- lazyloading -->
 							<div class="widget-product-wrapper" *ngIf="poploader">
-								<!--=======  single widget product  =======-->
 								<div class="single-widget-product-wrapper">
 									<div class="single-widget-product" style="padding-bottom: 17px;">
 										<div class="single-widget-product__image" style="height: 120px; width:80px">
@@ -271,131 +223,171 @@
 									</h5>
 								</div>
 							</div>
-							<!--=======  End of widget product wrapper  =======-->
 						</div>
-
-						<!--=======  End of single sidebar widget  =======-->
-
 					</div>
 
 						<!--=======  End of page sidebar  =======-->
 					</div>
 
-					<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" *ngIf="!prodloader">
-
-						<div class="row product-isotope shop-product-wrap four-column" >
-
-							<!--=======  single product  =======-->
-							<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 pt-10 pb-10 hot sale"  *ngFor="let img of Monthdealpro  | paginate: { itemsPerPage: 12, currentPage: p };let i=index"
-							style="border: 0.8px solid #e9e7e7; margin-right: 10px;" >
-								<div class="single-product" *ngIf="Monthdealpro?.length!==0" >
-									<!--=======  single product image  =======-->
-		
-									<div class="single-product__image " style="overflow: hidden;">
-										<div class="imglazy">
+					<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" infinite-scroll
+                    [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
+                        <div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloadermain">
+                            <!--=======  single product  =======-->
+                            <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
+                                *ngFor="let img of Monthdealpro;let i = index">
+                                <div class="single-product">
+                                    <!--=======  single product image  =======-->
+                                    <div class="single-product__image" style="overflow: hidden;">
+                                        <div class="imglazy">
                                             <ngx-skeleton-loader count="1" *ngIf="!imgloader"
-                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                        </ngx-skeleton-loader>
-                                        <a class="image-wrap"  *ngIf="imgloader" (click)="proddetail(img.id)">
-                                            
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="">
-                                        </a>
-                                        </div>
-										<!-- <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
-										<span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
-									   <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span>  -->
-									   
-										<div class="single-product__floating-badges">
-											<!-- <span class="onsale">-10%</span> -->
-											<span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
-											<!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span> -->
-										</div>
-		
-										<div class="single-product__floating-icons">
-			
-											<span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
-												data-tippy-inertia="true" data-tippy-animation="shift-away"
-												data-tippy-delay="50" data-tippy-arrow="true"
-												data-tippy-theme="sharpborder" data-tippy-placement="left">
-												<i [ngClass]="{'ion-android-favorite':likeddd[i]===true, 'ion-android-favorite-outline':likeddd[i]===false}"
-													(click)='toggle(img,i)'
-													style="color: rgb(214, 5, 5);"></i></a></span>
+                                                [theme]="{ 'margin-left':'10px', 'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                            <div *ngIf="img.iscertificated==1" class="like-button"
+                                                style="text-align: end; margin-right: 20px;">
+                                                <a
+                                                    style=" position: absolute;  z-index: 2; color: rgb(97, 216, 0); position: absolute;">
+                                                    <img src="assets/images/icons/green2.jpg" class="img-g"
+                                                        style="height: 15px;" alt=""></a>
+                                            </div>
 
-									    	<span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
-									  			data-tippy-inertia="true" data-tippy-animation="shift-away"
-												data-tippy-delay="50" data-tippy-arrow="true"
-												data-tippy-theme="sharpborder" data-tippy-placement="left">
-												<i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
-													(click)='toggledelete(img,i)'
-													style="color: rgb(214, 5, 5);"></i></a></span>
-		
-		
-											<span class="quickview" (click)="quickview(img.id,openRecord)"><a class="cd-trigger"  data-tippy="Quick View"
-													data-tippy-inertia="true" data-tippy-animation="shift-away"
-													data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
-													data-tippy-placement="left"><i class="bi bi-cart3"></i></a></span>
-										</div>
-									</div>
-									<!--=======  End of single product image  =======-->
-		
-									<!--=======  single product content  =======-->
-									<div class="single-product__content" (click)=" proddetail(img.id)">      
-										<div class="title" >
-											<h3> <a style="line-height: 1.6rem;
-												overflow: hidden;
-												display: -webkit-box; 
-												-webkit-line-clamp: 2;
-												-webkit-box-orient: vertical;
-												max-height: 3.2rem;" >{{img.name}}</a> </h3>
-												<a id="vieww" style="font-size: small;color: red;font-size: small; margin-left: 10px;">View Details</a>
-										</div>
-										
-										<div class="price" >
-											<span  *ngIf="img?.stroked_price!==img?.main_price" class="main-price discounted">{{img.stroked_price}}</span>
-											<span class="discounted-price">{{img.main_price}} </span>
-										</div>    
-								
-										<div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
-										overflow: hidden;
-										display: -webkit-box; 
-										-webkit-line-clamp: 1;
-										-webkit-box-orient: vertical;
-										max-height: 1.7rem; font-size: 0.7rem;"> 
-											<span class="discounted-price" *ngFor="let imgggg of imggg.options;"  > {{imgggg}}| </span>
-										</div>
-										<div class="pri" style="text-align: center;"> 
-											<span class="discounted-price" style="line-height: 1.6rem;
-											overflow: hidden;
-											display: -webkit-box; 
-											-webkit-line-clamp: 1;
-											-webkit-box-orient: vertical;
-											max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
-										</div>
-									</div>
-									
-									<!--=======  End of single product content  =======-->
-								</div>
-								<button type="button" class="btn btn-primary" style=" width: -webkit-fill-available;" (click)="quickview(img.id,openRecord)">Add to cart</button>
-								
-								
-							</div>
-                            <div id="pgg" style="text-align: center;" *ngIf="Monthdealpro?.length!==0">
-                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                            <img *ngIf="imgloader" (click)="proddetail(img.id)"
+                                                src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                class="img-fluid" alt="" style="height: -webkit-fill-available;">
+<!-- 
+                                            <span id="offtag" *ngIf="img.deal_of_day!=0">Deal of the day</span>
+                                            <span id="offtag" *ngIf="img.deal_of_month!=0">Deal of the month</span>
+                                            <span id="offtag" *ngIf="img.todays_deal!=0">Today's deal</span> -->
+                                        </div>
+                                        <div class="single-product__floating-badges">
+                                            <span class="hot"
+                                                *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                        </div>
+
+                                        <div class="single-product__floating-icons">
+                                            <span class="wishlist" *ngIf="(img.wishlist==1)"><a
+                                                    data-tippy="Add to wishlist" data-tippy-inertia="true"
+                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                    data-tippy-placement="left">
+                                                    <i [ngClass]="{'ion-android-favorite':likeddd[i]===true, 'ion-android-favorite-outline':likeddd[i]===false}"
+                                                        (click)='toggle(img,i)'
+                                                        style="color: rgb(214, 5, 5);"></i></a></span>
+
+                                            <span class="wishlist" *ngIf="(img.wishlist==0)"><a
+                                                    data-tippy="Add to wishlist" data-tippy-inertia="true"
+                                                    data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                    data-tippy-arrow="true" data-tippy-theme="sharpborder"
+                                                    data-tippy-placement="left">
+                                                    <i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
+                                                        (click)='toggledelete(img,i)'
+                                                        style="color: rgb(214, 5, 5);"></i></a></span>
+
+                                        </div>
+                                    </div>
+                                    <div class="single-product__content" (click)=" proddetail(img.id)">
+                                        <div class="title">
+                                            <h3> <a style="line-height: 1.6rem;
+                                                overflow: hidden;
+                                                display: -webkit-box; 
+                                                -webkit-line-clamp: 2;
+                                                -webkit-box-orient: vertical;
+                                                max-height: 3.2rem;">{{img.name}}</a> </h3>
+                                            <a id="vieww"
+                                                style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
+                                                Details</a>
+                                        </div>
+
+                                        <div class="price">
+                                            <span *ngIf="img?.stroked_price!==img?.main_price"
+                                                class="main-price discounted">{{img.stroked_price}}</span>
+                                            <span class="discounted-price">{{img.main_price}} </span>
+                                        </div>
+
+                                        <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                                        overflow: hidden;
+                                        display: -webkit-box; 
+                                        -webkit-line-clamp: 1;
+                                        -webkit-box-orient: vertical;
+                                        max-height: 1.7rem; font-size: 0.7rem;">
+                                            <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
+                                                {{imgggg}}| </span>
+                                        </div>
+                                        <div class="pri" style="text-align: center;">
+                                            <span class="discounted-price"
+                                                style="line-height: 1.6rem;
+                                            overflow: hidden;
+                                            display: -webkit-box; 
+                                            -webkit-line-clamp: 1;
+                                            -webkit-box-orient: vertical;
+                                            max-height: 1.7rem; color:#005bd1;font-size: 0.7rem;">{{img.usp_text}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row"
+                                        *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
+                                        <div class="col-6 " style="padding-left:4px ; padding-right: 6px;">
+                                            <input (change)="qtyChange($event,i,img)" type="number" id="quantity"
+                                                name="quantity" value="1" style="width:100%;text-align: center;">
+                                        </div>
+                                        <div class="col-6 p-0" style="margin-left: -4px;">
+                                            <button type="button" id="addcarrtbtn" class="btn btn-primary"
+                                                (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i> Add</button>
+                                        </div>
+                                    </div>
+
+                                    <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                                        <div class="col-12 ">
+                                            <div ngbDropdown placement="top-end" class="d-inline-block"
+                                                style="width:100%;">
+                                                <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
+                                                    ngbDropdownToggle>Select Options</button>
+                                                <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
+                                                    style="margin-left:-5px;">
+                                                    <button ngbDropdownItem
+                                                        *ngFor="let imgggg of img.variants[0]?.options;"
+                                                        (click)="bestsellingselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-							<div id="pggg" *ngIf="Monthdealpro?.length==0" style=" display: flex;
-							justify-content: center;
-							align-items: center;
-							height: 200px;
-							border: 3px solid rgb(139, 139, 139);">
-								<div>
-									<h5>
-										There is no product
-									</h5>
-								</div>
-							</div>
-						</div>
-					</div>
+
+                        </div>
+
+                        <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;" *ngIf="prodloader">
+                            <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+                                <div class="single-product" style="height: 250px; width: 200px;">
+                                    <ngx-skeleton-loader count="1"
+                                        [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- <div id="pgg" *ngIf="Product?.length!=0">
+                            <ul class="pagination" style="justify-content: center;
+                            display: flex;">
+                                <li [ngClass]="{disabled:p.url === null,'active': p.active}"
+                                    class="page-item first-item" *ngFor="let p of pagess" (click)="getpage(p.url)">
+                                    <a class="page-link">{{p.label}}</a>
+                                </li>
+                            </ul>
+                        </div> -->
+                      
+                        <div id="pggg" *ngIf="Monthdealpro?.length==0" style=" display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 200px;
+                        border: 3px solid rgb(139, 139, 139);">
+                            <div>
+                                <h5>
+                                    There is no product
+                                </h5>
+                            </div>
+                        </div>
+
+                    </div>
        <!--  productslazyloading -->
 	   <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
 		<div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;">

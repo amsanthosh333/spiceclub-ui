@@ -4,7 +4,6 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { HeaderComponent } from './layout/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
-import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
 
 
 const routes: Routes = [
@@ -14,7 +13,7 @@ const routes: Routes = [
   { path :'home',component:HomeComponent},
   { path :'login',component:LoginComponent},
   { path :'header',component:HeaderComponent},
-  { path :'bestseller',component:BestsellersComponent},
+ 
   { path: 'bestselling', loadChildren: () => import('./products/bestselling/bestselling.module').then(m => m.BestsellingModule) },
   { path: 'shopbyproduct/brand/:id', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
   { path: 'shopbyproduct', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },

@@ -1,19 +1,16 @@
-<div >
-	<div class="breadcrumb-area breadcrumb-bg-1 pt-20 pb-20 mb-30">
-		<div class="container">
+<div>
+	<div class="breadcrumb-area breadcrumb-bg-2">
+		<div class="container" style="margin: 0px;">
 			<div class="row">
 				<div class="col-lg-12">
-					<h1 class="breadcrumb-title">Blog</h1>
-
+					<h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Spice club's
+						Blogs</h4>
 					<!--=======  breadcrumb list  =======-->
-
-					<ul class="breadcrumb-list" style="padding-left: 0px;">
+					<ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
 						<li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-						<li class="breadcrumb-list__item breadcrumb-list__item--active">Blog</li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active" (click)="goback()">Blog</li>
 					</ul>
-
 					<!--=======  End of breadcrumb list  =======-->
-
 				</div>
 			</div>
 		</div>
@@ -21,46 +18,43 @@
 	<!--=============================================
 	=           blog page content         =
 	=============================================-->
-
-	<div class="blog-page-wrapper mb-100">
-		<div class="container">
+	<div class="blog-page-wrapper mb-10">
+		<div class="container" style="margin: 10px 20px;">
 			<div class="row">
 				<div class="col-lg-3 order-2 order-lg-1">
 					<!--=======  page sidebar  =======-->
-
 					<div class="page-sidebar">
 						<div class="single-sidebar-widget mb-20" *ngIf="!loader">
-							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category" 
-							style="padding-left: 0px;max-height: 250px;overflow-y: auto;" *ngFor="let cat of Allcat;let i=index">
-								<li><a  (click)="getblogbycatg2(cat.id,i)" [ngClass]="{'active': topItem === i}" >{{cat.name}} </a></li>
+							<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Category </h5>
+							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+								style="padding-left: 0px;max-height: 250px;overflow-y: auto;">
+								<li *ngFor="let cat of Allcat;let i=index">
+									<label style="display: flex;"> <a (click)="getblogbycatg2(cat.id,i)"
+											style="padding-top: 3px;"><input [checked]="topItem === i"
+												type="checkbox"></a>
+										<div class="catname"> <span>{{cat.name}}</span></div>
+									</label>
+								</li>
 							</ul>
 
 						</div>
 						<div class="single-sidebar-widget mb-20" *ngIf="loader">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
 							<ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
-
 						</div>
 
-						<!--=======  End of single sidebar widget  =======-->
-
-
-
-						<!--=======  single sidebar widget  =======-->
-
-						<div class="single-sidebar-widget mb-20">
+						<div class="single-sidebar-widget mb-0">
 							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">All Blogs</h2>
-							<!--=======  widget post wrapper  =======-->
-							<div class="widget-post-wrapper" *ngIf="!loader1" style="max-height: 350px;overflow-y: auto;">
-								<!--=======  single widget post  =======-->
-								<div class="single-widget-post" *ngFor="let img of Blogs" (click)="getblogdetail(img.id)">
+							<div class="widget-post-wrapper" *ngIf="!loader1"
+								style="max-height: 650px;overflow-y: auto;">
+								<div class="single-widget-post" *ngFor="let img of Blogs"
+									(click)="getblogdetail(img.id)">
 									<div class="image">
 										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
 											class="img-fluid" alt="">
 									</div>
-									<div class="content" >
-										<h3 class="widget-post-title"><a >{{img.name}}</a></h3>
+									<div class="content">
+										<h3 class="widget-post-title"><a>{{img.name}}</a></h3>
 										<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
 										<p class="widget-post-date"></p>
 									</div>
@@ -83,80 +77,190 @@
 					<!--=======  End of page sidebar  =======-->
 				</div>
 
-				<!-- all blogs -->
 				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!loader1">
-					<div class="row">
+					<div *ngIf="!catblogs">
+						<div *ngFor="let cat of Allcat;let i=index">
+							<div class="row mb-10 pb-10" style="background-color:rgb(218 255 246);" *ngIf="cat.bestof.data.length!==0">
+								<div class="col-lg-12">
+									<div class="section-title section-title--one  mb-0 ">
+										<h6
+											style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
+											Best of {{cat.name}} </h6>
+									</div>
+								</div>
+								<div class="col-lg-12" style="display: flex;" >
+									<div class="col-6 " style="padding-right:3px;">
+										<div class="col-12" style="padding:5px;"
+											*ngFor="let img of cat.bestof.data;let i=index">
+											<div class="single-slider-post p-0" *ngIf="i == 0">
+												<div id="firstimage" class="single-slider-post__image mb-10">
+													<ngx-skeleton-loader count="1" *ngIf="!imgloader"
+														[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+													</ngx-skeleton-loader>
+													<a class="mainimagediv" *ngIf="imgloader"
+														(click)="getblogdetail(img.id)">
+														<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+															class="img-fluid" alt=""
+															style="height: 100%; width: 100%; object-fit:cover;">
+													</a>
+												</div>
+												<div class="single-slider-post__content"
+													style="padding:10px;padding-top: 0px;"
+													(click)="getblogdetail(img.id)">
+													<div class="post-date">
+														&nbsp;<ngb-rating [rate]="img.rating"
+															style="color: rgb(245, 153, 14);">
+														</ngb-rating>
+													</div>
 
-						<div class="col-md-4 mb-60" *ngFor="let img of Blogs">
-							<div class="single-slider-post" *ngIf="Blogs?.length!==0">
-								<!--=======  image  style="height: 200px; width: 200px;"=======-->
+													<h4 class="post-title"
+														style="font-size: 1.1rem;padding-bottom: 0px;"><a style="line-height: 1.6rem;
+												overflow: hidden;
+												display: -webkit-box;
+												-webkit-line-clamp: 3;
+												-webkit-box-orient: vertical;
+												max-height: 5.2rem;">{{img.name}} </a></h4>
+													<div style="text-align:end;">
+														<a class="blog-readmore-btn" (click)="getblogdetail(img.id)">
+															<button style="padding-top: 2px;padding-bottom: 2px;"
+																class="btn btn-success btn-sm">Read more</button></a>
+													</div>
 
-								<div class="single-slider-post__image mb-10" style="height: 200px;   display: block;
+													<!-- <p class="post-excerpt" style=" height: 50px; width: 100%;
+											overflow: hidden;margin-bottom: 0px">{{Firstblog.short_description}}
+											</p> -->
+													<!-- <a class="blog-readmore-btn" (click)="getblogdetail(Firstblog.id)">
+												<button style="padding-top: 2px;padding-bottom: 2px;" class="btn btn-success btn-sm" >Read more</button></a> -->
+												</div>
+											</div>
+										</div>
+
+										<span id="viewmore"><button class="btn btn-outline-info"
+												(click)="getblogbycatg2(cat.id,i)">View more...</button></span>
+									</div>
+
+									<div class="col-6" style="padding-left:3px;">
+										<div class="col-md-12" *ngFor="let img of cat.bestof.data.slice(1)"
+											style="padding:5px ;">
+											<div class="single-slider-post" style="display:flex;">
+												<div class="single-slider-post__image mb-10">
+													<ngx-skeleton-loader count="1" *ngIf="!imgloader"
+														[theme]="{  'border-radius': '4px',height: '100%',width:'100%','opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+													</ngx-skeleton-loader>
+													<a class="imagediv" *ngIf="imgloader"
+														(click)="getblogdetail(img.id)">
+														<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+															class="img-fluid" alt=""
+															style="height: 100%; width: 100%; object-fit:cover;">
+													</a>
+												</div>
+												<div class="single-slider-post__content pl-10"
+													(click)="getblogdetail(img.id)">
+													<h6 class="post-title"><a style="line-height: 1.6rem;
+												overflow: hidden;
+												display: -webkit-box;
+												-webkit-line-clamp: 3;
+												-webkit-box-orient: vertical;
+												max-height: 5.2rem;">{{img.name}} </a></h6>
+													<div class="post-date">
+														&nbsp;<ngb-rating [rate]="img.rating"
+															style="color: rgb(245, 153, 14);">
+														</ngb-rating>
+													</div>
+													<a class="" (click)="getblogdetail(img.id)">
+														<button style="padding-top: 2px;padding-bottom: 2px;"
+															class="btn btn-success btn-sm">Read more</button></a>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+					<div *ngIf="catblogs">
+						<div class="row">
+							<div class="col-md-4 mb-60" *ngFor="let img of Blogs">
+								<div class="single-slider-post" *ngIf="Blogs?.length!==0">
+									<div class="single-slider-post__image mb-10" style="height: 200px;   display: block;
 								margin-left: auto;
 								margin-right: auto;">
-									<ngx-skeleton-loader count="1" *ngIf="!imgloader"
-										[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-									</ngx-skeleton-loader>
-									<a *ngIf="imgloader" (click)="getblogdetail(img.id)">
-										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
-											class="img-fluid" alt="" style="height: 200px;">
-									</a>
-								</div>
-
-								<!--=======  End of image  =======-->
-
-								<!--=======  content  =======-->
-
-								<div class="single-slider-post__content" (click)="getblogdetail(img.id)">
-									<div class="post-date">
-										<i class="ion-android-calendar"></i>
-										<!-- <a> june 5, 2021</a> -->
-										&nbsp;<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
-										</ngb-rating>
+										<ngx-skeleton-loader count="1" *ngIf="!imgloader"
+											[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+										</ngx-skeleton-loader>
+										<a *ngIf="imgloader" (click)="getblogdetail(img.id)">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+												class="img-fluid" alt="" style="height: 200px;">
+										</a>
 									</div>
-									<h4 class="post-title" style=" height:80px; width: 100%;
-                                    overflow: hidden;"><a>{{img.name}} </a></h4>
-									<p class="post-excerpt" style=" height: 50px; width: 100%;
+									<div class="single-slider-post__content" (click)="getblogdetail(img.id)">
+										<div class="post-date">
+											<i class="ion-android-calendar"></i>
+											&nbsp;<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+											</ngb-rating>
+										</div>
+										<h4 class="post-title" style="width: 100%;
+                                    overflow: hidden;"><a style="line-height: 1.6rem;
+												overflow: hidden;
+												display: -webkit-box;
+												-webkit-line-clamp: 3;
+												-webkit-box-orient: vertical;
+												max-height: 5.2rem;">{{img.name}} </a></h4>
+										<p class="post-excerpt" style=" height: 50px; width: 100%;
                                     overflow: hidden;margin-bottom: 0px">{{img.short_description}}
 										</p>
-									<a class="blog-readmore-btn" (click)="getblogdetail(img.id)">read more</a>
+										<a class="blog-readmore-btn" (click)="getblogdetail(img.id)">read more</a>
+									</div>
 								</div>
-
-								<!--=======  End of content  =======-->
 							</div>
+
 						</div>
 
-					</div>
-
-					<div class="row">
-						<div class="col-lg-12">
-							<!--=======  pagination  =======-->
-
-							<div id="pgg"  *ngIf="Blogs?.length!==0">
-								<ul class="pagination" style="justify-content: center;
+						<div class="row">
+							<div class="col-lg-12">
+								<div id="pgg" *ngIf="Blogs?.length!==0">
+									<ul class="pagination" style="justify-content: center;
                                 display: flex;">
-									<li  [ngClass]="{disabled:p.url === null,'active': p.active}" class="page-item first-item"
-										*ngFor="let p of pagess" (click)="getpage(p.url)">
-										<a class="page-link">{{p.label}}</a>
-									</li>
-								</ul>
-							</div>
-							<div id="pggg" *ngIf="Blogs?.length==0" style=" display: flex;
+										<li [ngClass]="{disabled:p.url === null,'active': p.active}"
+											class="page-item first-item" *ngFor="let p of pagess"
+											(click)="getpage(p.url)">
+											<a class="page-link">{{p.label}}</a>
+										</li>
+									</ul>
+								</div>
+								<div id="pggg" *ngIf="Blogs?.length==0" style=" display: flex;
                             justify-content: center;
                             align-items: center;
                             height: 200px;
                             border: 3px solid rgb(139, 139, 139);">
-                                <div>
-                                    <h5>
-                                        There is no recipe
-                                    </h5>
-                                </div>
-                            </div>
-							<!--=======  End of pagination  =======-->
+									<div>
+										<h5>
+											There is no Blog
+										</h5>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
-				<!-- bloglazyloading -->
+
+				<!-- blogs -->
+
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 " *ngIf="loader2">
+					<div class="row product-isotope shop-product-wrap four-column">
+						<div class="col-12 col-lg-6 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+							<div class="single-product mb-20" style="height: 280px; width: 460px;">
+								<ngx-skeleton-loader count="1"
+									[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+								</ngx-skeleton-loader>
+
+							</div>
+							<ngx-skeleton-loader count="2" animation="pulse"></ngx-skeleton-loader>
+						</div>
+					</div>
+				</div>
+
 				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 " *ngIf="loader1">
 					<div class="row product-isotope shop-product-wrap four-column">
 						<div class="col-12 col-lg-4 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
@@ -170,12 +274,11 @@
 						</div>
 					</div>
 				</div>
-				<!--  bloglazyloading  end-->
+
+
 			</div>
 		</div>
+
+
 	</div>
-
-
-</div>
-<!--=====  End of blog page content  ======-->
-
+	<!--=====  End of blog page content  ======-->
