@@ -10,6 +10,16 @@
   /* input[type=number]::-webkit-inner-spin-button {
     opacity: 5
 } */
+
+.unhappy {
+  /* position: absolute; */
+    bottom: 0;
+    padding: 12px;
+    padding-right: 0px;
+    padding-left: 0px;
+    background-color: rgb(79, 196, 216); 
+    text-align: center;margin-top: 5px;
+}
 .recipebanner{
   margin-bottom: -130px;
   height: 300px;
@@ -150,8 +160,10 @@ input::placeholder {
 }
 
 #enqueryformrow div {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
+
+    
 #enqueryformrow{
   padding: 20px;
     padding-bottom: 0px;
