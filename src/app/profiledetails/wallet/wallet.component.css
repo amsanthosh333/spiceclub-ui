@@ -75,6 +75,7 @@ td{
 .breadcrumb-list__item{
   color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
 }
 
 #loading{

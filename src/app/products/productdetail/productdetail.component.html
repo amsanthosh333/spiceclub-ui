@@ -586,9 +586,8 @@
                                             <div class="row">
                                                 <div class="col-3">
                                                     <div class="card-header" id="headingOne">
-                                                        <h5 class="mb-0" (click)="collapsebtn2()">
-                                                            <button class="btn btn-link"
-                                                                style="background-color:#d31a1a;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
+                                                        <h5  class="mb-0" (click)="collapsebtn2()">
+                                                            <button id="btndiv" class="btn btn-link"
                                                                 data-toggle="collapse" data-target="#collapseOne"
                                                                 aria-expanded="true" aria-controls="collapseOne">
                                                                 <i class="bi bi-list-stars"
@@ -603,8 +602,7 @@
                                                 <div class="col-3">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn()">
-                                                            <button class="btn btn-link"
-                                                                style="background-color:#d31a1a;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
+                                                            <button id="btndiv" class="btn btn-link"
                                                                 data-toggle="collapse" data-target="#collapseTwo"
                                                                 aria-expanded="true" aria-controls="collapseTwo">
                                                                 <i class="bi bi-list-stars"
@@ -619,8 +617,7 @@
                                                 <div class="col-3">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn1()">
-                                                            <button class="btn btn-link collapsed"
-                                                                style="background-color:#d31a1a;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
+                                                            <button id="btndiv"  class="btn btn-link collapsed"                                                 
                                                                 data-toggle="collapse" data-target="#collapseThree"
                                                                 aria-expanded="false" aria-controls="collapseThree">
                                                                 <i class="bi bi-list-stars"
@@ -636,8 +633,7 @@
                                                 <div class="col-3" *ngIf="choice?.length!==0">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn3()">
-                                                            <button class="btn btn-link collapsed"
-                                                                style="background-color:#d31a1a;width: 100%;color: white;font-size: 19px;padding-left: 12px;"
+                                                            <button id="btndiv" class="btn btn-link collapsed"  
                                                                 data-toggle="collapse" data-target="#collapseFour"
                                                                 aria-expanded="false" aria-controls="collapseFour">
                                                                 <i class="bi bi-list-stars"
@@ -653,7 +649,7 @@
 
                                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                                 data-parent="#shippingInfo">
-                                                <div class="card-body" style=" margin-top: -17px;">
+                                                <div class="card-body" style=" margin-top: -17px;padding: 4px;">
                                                     <div class="crdbdy" style="padding:10px;display: flex;">
                                                         <div style="width:80%; padding-right: 20px;">
                                                             <table class="overview">

@@ -1,3 +1,6 @@
+<button (click)="billdesk2()"> BILLDESK payy</button>
+<button (click)="billdesk()"> BILLDESK payy server</button>
+
 <div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;" >
 	<div class="container">
 		<div class="row" *ngIf="!review">
@@ -95,7 +98,7 @@
 						</form>
 					</div>
 					<h6>My Addresses</h6>
-					<p style="font-size: 0.7rem; margin-bottom: 0px;">Select delivery address</p>
+					<p style="font-size: 0.7rem; margin-bottom:0px;">Select delivery address</p>
 
 					<div class="row" *ngIf="!loadaddress" >
 						<div class="col-6" *ngFor="let Connectdtls of Address; let i=index">
@@ -428,17 +431,10 @@
 <!-- <button (click)="payWithRazor(21)">razorpay</button>
 	<button (click)="initPay()">razorpay</button>
 	<button (click)="pay()">Pay</button> -->
+	
 <!-- <button (click)="billdesk2()"> BILLDESK payy</button>
 	<button (click)="billdesk()"> BILLDESK payy server</button> -->
 
-<!-- <button (click)="initPay()">razorpay initpay</button> ------->
-
-
-
-
-<!-- <button (click)="razorpayment2()">RaaaaazorPay2</button> ------->
-
-<!-- <iframe width="100%" height="300" [src]="urlSafe"></iframe> -->
 
 
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#e00707" type="ball-scale-multiple">

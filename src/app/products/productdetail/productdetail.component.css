@@ -422,6 +422,15 @@ body {
   background-color: #ce2127;
   border-color: #ce2127;
   font-weight: 600;
+  padding: 0px;
+  font-size:small;
+}
+#btndiv{
+  background-color: #d31a1a;
+    width: 100%;
+    color: white;
+    font-size: 19px;
+    padding: 0px 10px;
 }
 
 .sidecard{

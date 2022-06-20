@@ -271,9 +271,10 @@ export class CheckoutComponent implements OnInit {
         this.curshipaddress = this.Address[this.indexx]
         console.log("this.address_id", this.address_id);
         if (this.address_id == undefined) {
-          console.log("if");
+          console.log("if undefined");
           this.address_id = this.Address[0]?.id
           this.curshipaddress = this.Address[0]
+          console.log("curshipaddress",this.curshipaddress);
           this.shippingcost(this.curshipaddress)
           this.getaddress();
         }
@@ -286,7 +287,6 @@ export class CheckoutComponent implements OnInit {
     });
   }
   paymettype() {
-
     this.request.fetchpaytype().subscribe((response: any) => {
       this.Paymenttype = response;
       this.paymentload=false;
@@ -315,7 +315,6 @@ export class CheckoutComponent implements OnInit {
       user_id: this.userid,
       id: row.id,
     }
-
 
     this.request.makeshipingaddress(edata5).subscribe((res: any) => {
       if (res.result == true) {
@@ -396,12 +395,21 @@ export class CheckoutComponent implements OnInit {
       user_id: this.userid,
       payment_type: this.payytype,
       // is_buynow=
-
     }
+    console.log("finallyplaceorder",edata);
+    
     if (this.payytype == "billdesk") {
       this.request.placeorder(edata).subscribe((response: any) => {
         this.combined_orderid = response.combined_order_id;
         if (response.result = true) {
+          this.sharedService.sendClickEvent(); 
+          let edata1 = {
+            payment_type: "cart_payment",
+            combined_order_id: this.combined_orderid,
+            amount: this.grandtotal_value,
+            user_id: this.userid,
+          }
+          console.log("billdesk edata",edata1);       
           this.billdesk()
         }
         else {
@@ -415,14 +423,14 @@ export class CheckoutComponent implements OnInit {
         console.log("placeorder response", response);
         this.combined_orderid = response.combined_order_id
         if (response.result == true) {
-          this.sharedService.sendClickEvent();
-          //  this.nocart=true;
+          this.sharedService.sendClickEvent(); 
           let edata1 = {
             payment_type: "cart_payment",
             combined_order_id: this.combined_orderid,
             amount: this.grandtotal_value,
             user_id: this.userid,
           }
+          // razorpay final
           this.initPay(edata1);
         }
         else {
@@ -626,62 +634,6 @@ export class CheckoutComponent implements OnInit {
     this.spinner.show();
   }
 
-  initPayold(edata: any) {
-
-    console.log(edata);
-
-    let options = {
-      "key": "rzp_test_DYDr3B0KYe4086",
-      "amount": edata.amount * 100,
-      "currency": "INR",
-      "name": "Spice Club",
-      "description": "Test Transaction",
-      "image": "assets/images/LOGOWHITE.jpg",
-      "order_id": "",
-      // "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-      // "handler": function (response: { razorpay_payment_id: any; razorpay_order_id: any; razorpay_signature: any; }) {
-      //   alert(response.razorpay_payment_id);
-      //   alert(response.razorpay_order_id);
-      //   alert(response.razorpay_signature)
-      //   console.log("razzzerrespnse",response.razorpay_payment_id);
-      //   // this.razorpayid = response.razorpay_payment_id
-
-      // },
-      // "handler": this.paymentResponseHander(response);
-
-      "prefill": {
-        "name": this.username,
-        "email": this.useremail,
-        "contact": this.userphone
-      },
-      "notes": {
-        "address": "Razorpay Corporate Office"
-      },
-      "theme": {
-        "color": "#f0240a"
-      },
-      "handler": (response: any) => {
-        this.razpaysuccess = response
-        console.log("razpay responseeee", response);
-        console.log(this.razpaysuccess);
-        // this.loadingg=true
-        ////////****//  // this.spinner.show();
-        this.razorpaypayment();
-      },
-      modal: {
-        // We should prevent closing of the form when esc key is pressed.
-        escape: false,
-      },
-
-    };
-
-    console.log("options,", options)
-
-    let rzp1 = new this.authService.nativeWindow.Razorpay(options);
-    rzp1.open();
-    console.log("works");
-  }
-
   initPay(edata: any) {
     const options: any = {
       key: 'rzp_test_DYDr3B0KYe4086',
@@ -725,7 +677,6 @@ export class CheckoutComponent implements OnInit {
     const rzp = new this.authService.nativeWindow.Razorpay(options);
     rzp.open();
   }
-
 
   razorpaypayment() {
     this.loadingg = true
@@ -778,38 +729,11 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  //youtube
-  options = {
-    "key": "rzp_test_7Hdkaz1xFGPomB",
-    "amount": "5000",
-    "currency": "INR",
-    "name": "Acme Corp",
-    "description": "Test Transaction",
-    "image": "https://example.com/your_logo",
-    "order_id": "order_9A33XWu170gUtm",
-    "callback_url": "https://eneqd3r9zrjok.x.pipedream.net/",
-    "prefill": {
-      "name": "santo ",
-      "email": "santo.kumar@example.com",
-      "contact": "9999999999"
-    },
-    "notes": {
-      "address": "Razorpay Corporate Office"
-    },
-    "theme": {
-      "color": "#3399cc"
-    }
-  };
-  rzp1: any;
-  pay() {
-    this.rzp1 = new this.authService.nativeWindow.Razorpay(this.options);
-    this.rzp1.open();
-  }
+//  testing billdesk
   billdesk2() {
-    window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8')
-    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=135&amount=395.00&user_id=8').subscribe(
+    window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=378&amount=324.00&user_id=59')
+    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=378&amount=324.00&user_id=59').subscribe(
       data => {
-
       },
       (err: HttpErrorResponse) => {
         console.log("err", err);
@@ -823,16 +747,12 @@ export class CheckoutComponent implements OnInit {
   }
   billdesk() {
     console.log("billdest called");
-    // this.request.billdeskpay(this.combined_orderid,this.grandtotal.replace('Rs',""),this.userid)
-    this.request.billdeskpay(157, 115.00, 8).subscribe(
+    this.request.billdeskpay(378, 324.00, 59).subscribe(
       (response: any) => {
         response.json()
         console.log("billdesktype", response.json());
         console.log("billresponse", response);
-
       },
-
-
     );
   }
 }

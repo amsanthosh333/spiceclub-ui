@@ -7743,23 +7743,23 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 }
 
 .single-product:hover .single-product__content .title h3 a {
-  visibility: hidden;
+  /* visibility: hidden;
 
   -webkit-transform: translateY(-60%);
       -ms-transform: translateY(-60%);
           transform: translateY(-60%);
 
-  opacity: 0;
+  opacity: 0; */
 }
 
 .single-product:hover .single-product__content .title > a {
-  visibility: visible;
+  /* visibility: visible;
 
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
 
-  opacity: 1;
+  opacity: 1; */
 }
 
 .single-product:hover .single-product__floating-icons span {
@@ -7884,23 +7884,23 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 }
 
 .single-product--wearablehome:hover .single-product__content {
-  visibility: visible;
+  /* visibility: visible;
 
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
 
-  opacity: 1;
+  opacity: 1; */
 }
 
 .single-product--wearablehome:hover .title h3 a {
-  visibility: visible !important;
+  /* visibility: visible !important;
 
   -webkit-transform: none !important;
       -ms-transform: none !important;
           transform: none !important;
 
-  opacity: 1 !important;
+  opacity: 1 !important; */
 }
 
 .single-product--list {
