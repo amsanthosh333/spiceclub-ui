@@ -345,6 +345,15 @@ input[type=number]::-webkit-inner-spin-button {
   padding: 0px;
   margin-left: 22px;
 }
+#sliderrow5 {
+  margin-right: 2.4%;
+  margin-left: 2.8%;
+  margin-right: 3.7%;
+  margin-left: 1.5%;
+  width: 97%;
+  padding: 0px;
+  margin-left: 22px;
+}
 
 .btn-group-sm>.btn,
 .btn-sm {
@@ -474,8 +483,8 @@ input::placeholder {
   .caroussellll {
     /* height: 300px; */
     z-index: unset;
-    padding-left: 150px;
-    padding-right: 180px;
+    padding-left: 94px;
+    padding-right: 134px;
   }
 
   .header-bottom-container .header-right-container {

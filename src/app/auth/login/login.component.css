@@ -174,7 +174,7 @@ body { padding: 2em; }
   position: absolute;
   top: 0;
   left: 0;
-  width: 30px;
+  width: 36px;
   height: 100%;
 }
 .loginBtn:focus {
@@ -220,7 +220,7 @@ body { padding: 2em; }
 }
 .loginBtn--google:hover,
 .loginBtn--google:focus {
-  background: #e65b49;
+  background: #3975d4;
 }
 select {
   -webkit-appearance: menulist;

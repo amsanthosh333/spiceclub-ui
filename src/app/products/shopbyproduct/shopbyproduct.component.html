@@ -5,8 +5,8 @@
                 <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Shop</h4>
                 <!--=======  breadcrumb list  =======-->
                 <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
-                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-                    <li class="breadcrumb-list__item breadcrumb-list__item--active">SHOP BY PRODUCTS</li>
+                    <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active" style="content:'';">Shop by Products</li>
                 </ul>
 
                 <!--=======  End of breadcrumb list  =======-->
@@ -45,7 +45,7 @@
                             <li [ngClass]="{'active': headItem === 1}" (click)="viewalldeal()" (click)="headactive(1)">
                                 All Products</li>
                             <li [ngClass]="{'active': headItem === 2}" (click)="viewtodaysdeal()"
-                                (click)="headactive(2)">Todays deal</li>
+                                (click)="headactive(2)">Today's deal</li>
                             <!-- <li (click)="viewflashdeal()">Flashdeal</li> -->
                             <li [ngClass]="{'active': headItem === 3}" (click)="viewdealofday()"
                                 (click)="headactive(3)">Deal o fday</li>
@@ -108,15 +108,15 @@
                 <div id="sidenavg" class="col-lg-2 order-2 order-lg-1">
                     <!--=======  page sidebar  =======-->
                     <div class="page-sidebar">
-                        <div class="single-sidebar-widget mb-40">
+                        <div class="single-sidebar-widget mb-10">
                             <h2 class="single-sidebar-widget--title">Categories</h2>
                             <ul class="single-sidebar-widget--list single-sidebar-widget--list--category "
                                 style="padding-left: 0px;max-height: 275px;overflow-y: auto;">
                                 <li class="has-children" *ngFor="let img of Allcat;let i=index">
-                                            <label style="display: flex;" (click)="getprodofcategory(img.id,1)"> <a style="padding-top: 3px;">
+                                            <label style="display: flex;" (click)="getprodofcategory(img.id,1)"> 
+                                                <a style="padding-top: 1px;">
                                                 <input [checked]="categoryItem === i" type="checkbox"></a> 
                                                 <div class="catname"> <span>{{img.name}}</span></div> </label>
-
                                     <!-- <span class="quantity">{{img.number_of_children}}</span>  -->
                                 </li>
                                 <li *ngIf="sideloader1">
@@ -140,7 +140,7 @@
                             </p>
                         </div>
                         <div class="single-sidebar-widget mb-10">
-                            <h2 class="single-sidebar-widget--title mb-2">Brands</h2>
+                            <h2 class="single-sidebar-widget--title">Brands</h2>
                             <ul *ngIf="!sideloader1"
                                 class="single-sidebar-widget--list single-sidebar-widget--list--category "
                                 style="padding-left: 0px;max-height: 275px;overflow-y: auto;">
@@ -179,7 +179,7 @@
 
                                 </form>
                             </div> -->
-                        <br>
+                        
 
 
                         <div class="single-sidebar-widget mb-20">
@@ -202,7 +202,14 @@
                                         </div>
                                         <div class="single-widget-product__content">
                                             <div class="single-widget-product__content__top">
-                                                <h3 class="product-title"><a>{{img.name}}</a>
+                                                <h3 class="product-title" id="popularproname"><a style="line-height: 1.2rem;
+                                                    overflow: hidden;
+                                                    display: -webkit-box; 
+                                                    -webkit-line-clamp: 3;
+                                                    -webkit-box-orient: vertical;
+                                                    max-height: 3.5rem;
+                                                    
+                                                     margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}} </a>
                                                 </h3>
                                                 <br>
                                                 <div class="price">
@@ -352,17 +359,16 @@
                                 <!--=======  single product content  routerLink="/productdetail"=======-->
                                 <div class="single-product__content" (click)=" proddetail(img.id)">
                                     <div class="title">
-                                        <h3> <a style="line-height: 1.6rem;
+                                        <h3 > <a style="line-height: 1.2rem;
                                         overflow: hidden;
                                         display: -webkit-box; 
                                         -webkit-line-clamp: 2;
                                         -webkit-box-orient: vertical;
-                                        max-height: 3.2rem;">{{img.name}}</a> </h3>
-                                        <a id="vieww"
-                                            style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
-                                            Details</a>
+                                        max-height: 3.2rem;
+                                        height: 2.2rem;
+                                         margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>    
                                     </div>
-
+        
                                     <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                                 overflow: hidden;
                                 display: -webkit-box; 
@@ -370,11 +376,10 @@
                                 -webkit-box-orient: vertical;
                                 max-height: 1.7rem;
                                  font-size: 0.7rem;">
-                                        <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
-                                            {{imgggg}}|
+                                        <span class="discounted-price" *ngFor="let imgggg of imggg.options;">  {{imgggg}} &nbsp;
                                         </span>
                                     </div>
-                                    <div class="price" style="margin-top: -4px;">
+                                    <div class="price" style="margin-top: 2px;">
                                         <span *ngIf="img?.stroked_price!==img?.main_price"
                                             class="main-price discounted">{{img.stroked_price}}</span>
                                         <span class="discounted-price">{{img.main_price}} </span>

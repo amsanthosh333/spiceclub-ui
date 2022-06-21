@@ -8016,7 +8016,7 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
   justify-content: space-between;
 
   width: calc(100% - 120px);
-  padding-left: 20px;
+  padding-left: 5px;
 }
 
 .single-widget-product__content__top h3 {
@@ -12074,8 +12074,7 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 }
 
 .single-sidebar-widget--list li {
-  font-size: 15px;
-
+  font-size: 13px;
   padding: 10px 0;
 }
 
