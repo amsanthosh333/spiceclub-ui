@@ -10,41 +10,34 @@
 
 			<div class="col-lg-12 mb-md-50 mb-sm-50">
 				<div class="lezada">
-					<div class="col-lg-12">
-						<!--=======  login title  =======-->
+					<!-- <div class="col-lg-12">
 						<div class="section-title section-title--login text-center mb-10">
 							<div class="loginbanner">
 								<img src="assets/images/spicelogo.jpeg" alt=""
 									style='height: 100%; width: 100%; object-fit: cover'>
 							</div>
 						</div>
-
-						<!--=======  End of login title  =======-->
-					</div>
-					<form [formGroup]="loginForm" (ngSubmit)="onSubmit(otpRecord)" style="    border: 1px solid #e1e1e1;
-    padding: 40px;
-    margin: 30px;
-    margin-top: 15px;
-    padding-top: 26px;">
+					</div> -->
+					<form [formGroup]="loginForm" (ngSubmit)="onSubmit(otpRecord)" style="    border: 1px solid #e1e1e1;padding: 40px;margin: 25px;">
 						<div class="row" id="loginformrow">
-							<h5 style="font-weight: 700;">Login</h5>
+							<h5 style="font-weight: 700;">Sign-In</h5>
 							<div class="col-lg-12 mb-10">
-								<p>Your mobile number or email</p>
+								<p>Mobile Number or email</p>
 								<input type="text" formControlName="username" style="width:100%;" required>
 							</div>
-							<div class="col-lg-6 mb-10">
-								<p *ngIf="!otpinput">Enter your password</p>
+							<div class="col-lg-7 " style="margin-bottom:5px;">
+								<p *ngIf="!otpinput">Password</p>
 								<p *ngIf="otpinput" style="color:red ;">Enter the OTP</p>
-								<input type="password" formControlName="password" required>
+								<input style="width:100%;" type="password" formControlName="password" required>
 								<a class="reset-pass-link" (click)="forgotpass(Forgotpassword)" style="margin-top: 0px;
 								font-size: 0.7rem;">Forgot Password?</a>
 							</div>
 
-							<div class="col-lg-5 " style="margin-top:19px ; margin-left: 29px;" >
-								or <button *ngIf="!otpbtnloading" type="button" class="btn btn-danger"
-									(click)="requestloginotpnew()" style="font-size:0.8rem;">Request Otp</button>
+							<div class="col-lg-5 " id="reqOTPdiv" style="margin-top:19px ;padding-left: 0px;">
+								<span>or</span>  <button id="reqOTPbtn" *ngIf="!otpbtnloading" type="button" class="btn btn-danger"
+									(click)="requestloginotpnew()">Request OTP</button>
 								<button class="btn btn-danger" type="button"
-									style="padding-left: 22px;padding-right: 22px;font-size:0.8rem;padding-top: 2px;" 
+									style="padding-left: 22px;padding-right: 22px;font-size:0.8rem;padding-top: 2px;"
 									*ngIf="otpbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 							</div>
 							<!-- <div class="col-lg-5 " style="margin-top:19px ; margin-left: 15px;" *ngIf="resendotp">
@@ -55,7 +48,7 @@
 									*ngIf="otpbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 							</div> -->
 
-							<div class="col-lg-12 text-center mb-10"  *ngIf="!verifibyn">
+							<div class="col-lg-12 text-center" style="margin-bottom:5px;" *ngIf="!verifibyn">
 								<h6 class="form-text text-danger" style="height: 12px;">
 									<span *ngIf="error1" id="errormsg">{{error1}}</span>
 								</h6>
@@ -64,17 +57,17 @@
 								<button class="lezada-button lezada-button--medium" style="padding-top: 7px;"
 									*ngIf="logbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 							</div>
-							<div class="col-lg-12 text-center mb-10"  *ngIf="verifibyn">
+							<div class="col-lg-12 text-center mb-10" *ngIf="verifibyn">
 								<h6 class="form-text text-danger" style="height: 12px;">
 									<span *ngIf="error1" id="errormsg">{{error1}}</span>
 								</h6>
-								<button class="lezada-button lezada-button--medium"
-									*ngIf="!logbtnloading"  (click)="verifyloginotpnew(otpRecord)">Verify OTP</button>
+								<button class="lezada-button lezada-button--medium" *ngIf="!logbtnloading"
+									(click)="verifyloginotpnew(otpRecord)">Verify OTP</button>
 								<button class="lezada-button lezada-button--medium" style="padding-top: 7px;"
 									*ngIf="logbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 							</div>
 
-						
+
 							<!-- <div class="col-lg-12 text-center ">
 								<a class="reset-pass-link" (click)="forgotpass(Forgotpassword)">Forgot Password?</a>
 							</div> -->
@@ -86,33 +79,46 @@
 								
 							</div> -->
 
-						
 
+							
 							<div style="text-align: center;">
-								<p>or</p>
+								<p style="padding-bottom: 5px;">or</p>
 								<button class="loginBtn loginBtn--facebook" type="button"
 									(click)="loginWithFacebook(byertype)">
-									Login with Facebook
+									Sign in with Facebook
 								</button>
 
 								<button class="loginBtn loginBtn--google" type="button"
 									(click)="loginWithGoogle(byertype)">
-									Login with Google
+									Sign in with Google
 								</button>
-							</div>
-							<div class="col-lg-12 text-center " style="padding-bottom: 10px; border-bottom: 1px solid rgb(193 193 193);" >		
-								<span style="font-size:0.7rem ;">By continuing, you agree to the Spice Club's 
-									<a style="text-decoration: none;color:rgb(67, 170, 255) ;" routerLink="/privacypolicy"> Term & Conditions</a> and  <a style="text-decoration: none;color:rgb(67, 170, 255);" routerLink="/privacypolicy"> Privacy Policy</a> </span>												
+
+								<!-- <div class="google-btn">
+									<div class="google-icon-wrapper">
+									  <img class="google-icon" src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"/>
+									</div>
+									<p class="btn-text"><b>Sign in with google</b></p>
+								  </div> -->
 							</div>
 
-						
+							<div class="col-lg-12 "
+								style="padding-bottom: 10px; border-bottom: 1px solid rgb(193 193 193); line-height: 16px;
+								padding-top: 10px;">
+								<span style="font-size:0.7rem ;">By continuing, you agree to the Spice Club's
+									<a style="text-decoration: none;color:rgb(67, 170, 255) ;"
+										routerLink="/privacypolicy"> Terms & Conditions</a> and <a
+										style="text-decoration: none;color:rgb(67, 170, 255);"
+										routerLink="/privacypolicy"> Privacy Policy</a> </span>
+							</div>
+
+
 							<div class="col-lg-12 mt-10 text-center">
-								<h5 style="font-weight: 700; text-align: left;">New to Spice Club?</h5>
-								
-								<p style="color: rgb(90, 90, 90); font-size: 0.7rem;">If you don’t have an account, register now!</p>
-								<button class="lezada-button lezada-button--medium"  type="button"
-									(click)="openregister()"><a
-										style="text-decoration: none; ">signup</a>
+								<h6 style="font-weight: 700; text-align:center;padding-bottom: 5px;">New to Spice Club?</h6>
+
+								<!-- <p style="color: rgb(90, 90, 90); font-size: 0.7rem;">If you don’t have an account,
+									register now!</p> -->
+								<button class="lezada-button lezada-button--medium" type="button"
+									(click)="openregister()"><a style="text-decoration: none; ">Create Account</a>
 								</button>
 							</div>
 
@@ -228,14 +234,14 @@
 								<h6 class="form-text text-danger" style="height: 12px;">
 									<span *ngIf="error5">{{error5}}</span>
 								</h6>
-								<div class="modal-footer" style="justify-content: center; border: none;" >
+								<div class="modal-footer" style="justify-content: center; border: none;">
 									<button type="submit" class="btn btn-danger" *ngIf="!loginloading">login
-									</button>					
+									</button>
 									<button type="submit" class="btn btn-danger" *ngIf="loginloading"><i
 											class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 								</div>
-						
-							
+
+
 
 							</form>
 							<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
@@ -398,7 +404,7 @@
 	</div>
 </div>
 
-
+<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
 <!--=============================================
 	=            =
 	=============================================-->

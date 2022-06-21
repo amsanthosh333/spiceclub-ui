@@ -1,8 +1,8 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<!--=======  header bottom  =======-->
-	<div class="scroller" style="background:#fff34b; text-align: end;">
+	<div class="scroller" style="background:#ce2127; text-align: end;margin-left: 10px;">
 		<!-- <marquee behavior="scrol" direction="left"><h3 style="color: white;">Spice Club</h3></marquee> -->
-		<p style="color: rgb(0, 0, 0); font-size: 0.6rem;
+		<p style="color: rgb(255, 255, 255); font-size: 0.6rem;
 		font-weight: 400;">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p>
 	</div>
 	<div class="header-bottom pt-md-40 pb-md-40 ">
@@ -11,7 +11,7 @@
 			<div class="header-bottom-container">
 				<div class="logo-with-offcanvas d-flex ">
 					<!--=======  logo   =======-->
-					<div class="logo ml-3" id="loogo">
+					<div class="logo " id="loogo" style="margin-left:10px;">
 						<a routerLink="/home"><img src="assets/images/spicelogo.jpeg" class="img-fluid sitelogo"
 								alt=""></a>
 					</div>
@@ -20,11 +20,11 @@
 				<div class="main">
 					<div class="inputroup">
 						<form class="input-group" [formGroup]="search" (ngSubmit)="search1(search)" style="width:100%;">
-							<input type="text" class="form-control" placeholder="Search for products"
+							<input type="text" class="form-control" placeholder="Search for a product"
 								formControlName="key" style="height: 30px;">
 							<div class="input-group-append" style="height: 30px;">
 								<button class="btn btn-dark" type="submit" id="searchbar" style="display:inline;">
-									<i class="ion-ios-search-strong"></i><span> Search</span>
+									<i class="ion-ios-search-strong"></i><span></span>
 								</button>
 							</div>
 						</form>
@@ -178,9 +178,9 @@
 				<span *ngIf="(userid==0)" (click)="openlogin()" class="wrapper1"><a
 						id="buttonsubscribe">Subscription</a></span>
 				<ul style="margin-left: 10px;">
-					<li class="menu-item"><a routerLink="/shopbyproduct">SHOP BY PRODUCTS</a> </li>
+					<li class="menu-item"><a routerLink="/shopbyproduct">Shop by Products</a> </li>
 
-					<li class="menu-item-has-children "><i class="bi bi-list"></i><a>SHOP BY CATEGORIES</a>
+					<li class="menu-item-has-children"><i class="bi bi-list" style="font-weight:500;"></i>&nbsp;<a>Shop by Categories</a>
 						<ul class="sub-menu mega-menu mega-menu-column-4 center-menu">
 							<li class="lii" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
@@ -258,11 +258,11 @@
 						</ul>
 					</li>
 
-					<li class="menu-item"><a routerLink="/blog">BLOG</a> </li>
+					<li class="menu-item"><a routerLink="/blog">Blogs</a> </li>
 
-					<li class="menu-item"><a routerLink="/recipe">RECIPE</a></li>
+					<li class="menu-item"><a routerLink="/recipe">Recipes</a></li>
 
-					<li class="menu-item"><a routerLink="/orders">QUICK ORDER</a></li>
+					<li class="menu-item"><a routerLink="/orders">Quick Order</a></li>
 				</ul>
 
 			</nav>

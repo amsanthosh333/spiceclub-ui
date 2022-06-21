@@ -1,18 +1,19 @@
+input::placeholder{
+	font-family: Arial, Helvetica, sans-serif ;
+	font-size: 0.8rem;
+	color: rgb(190, 190, 190);
+}
+
 .wrapper1 {
-	/* display: flex;
-	height: 20vh;
-	flex-direction: row;
-	justify-content: center;
-	align-items: center; */
-
-
 	background-color: #ffc801;
 	padding: -4px;
-	font-size: 1rem;
-	padding: 5px;
+	font-size: 0.8rem;
+	padding: 0px 2px;
 	border-radius: 6px;
-	margin-bottom: 16px;
+	margin-bottom: 26px;
 	animation: wrapper1 1300ms infinite;
+	font-family: inherit;
+	margin-top: 7px;
 }
 
 #buttonsubscribe {
@@ -198,7 +199,7 @@ nav.site-nav>ul>li {
 
 .header-right-container {
 	margin-left: 0px;
-	display: contents;
+	/* display: contents; */
 }
 
 /* #loogo {
@@ -328,9 +329,9 @@ a {
 	font-size: 0.8rem;
 	font-weight: 600;
 
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: inherit;
 	/* font-family: Lato;  */
-	text-transform: capitalize;
+	text-transform: none;
 	/* font-family: 'Roboto',Arial,sans-serif; */
 	letter-spacing: 0;
 
@@ -346,29 +347,21 @@ a {
 
 .menu-item-has-children {
 	color: #474747;
-	/* margin-top: 1rem; */
 	font-size: 0.8rem;
-	font-weight: 600;
+	font-weight: 200;
 
-	font-family: Arial, Helvetica, sans-serif;
-	text-transform: capitalize;
+	font-family:inherit;
+	text-transform: none;
 	letter-spacing: 0;
 
 }
 
 .menu-item-has-children a {
 	color: #474747;
-	/* font-family: 'Poppins', sans-serif; */
-	/* margin-top: 1rem; */
-	/* color: rgb(152, 152, 152); */
 	font-size: 0.8rem;
-	font-weight: 600;
-
-	font-family: Arial, Helvetica, sans-serif;
-
-	/* font-family: Lato;  */
+	font-weight: 500;
+	font-family: inherit;
 	text-transform: capitalize;
-	/* font-family: 'Roboto',Arial,sans-serif; */
 	letter-spacing: 0;
 }
 
@@ -544,6 +537,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 
 	#loogo {
 		margin-top: 7px;
+		
 	}
 
 	.header-right-icons {

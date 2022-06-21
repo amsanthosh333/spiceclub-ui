@@ -7713,7 +7713,7 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 
   margin-right: 5px;
 
-  color: #333333;
+  color: #ce2127;
 }
 
 .single-product__content .price .main-price.discounted {
@@ -7723,7 +7723,7 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 
   text-decoration: line-through;
 
-  color: #aaaaaa;
+  color: #ff9494;
 }
 
 .single-product__content:hover .single-product__variations {
@@ -8129,9 +8129,9 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
   text-transform: uppercase;
 
   color: #fff !important;
-  border: 1px solid #e6272e;
+  border: 1px solid #ce2127;
   border-radius: 0;
-  background-color:#e6272e;
+  background-color:#ce2127;
   /*----------  small button style  ----------*/
   /*----------  medium button style  ----------*/
   /*----------  large button style  ----------*/
@@ -10413,7 +10413,7 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 }
 
 .multi-testimonial-single-item__author-info .content .name {
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 600;
   line-height: 25px;
 
@@ -16139,12 +16139,11 @@ nav.site-nav > ul > li ul.mega-menu-column-5 > li .mega-sub-menu li:last-child a
 }
 
 .footer-subscription-widget .footer-subscription-title {
-  font-size: 34px;
-  line-height: 34px;
-
-  margin-bottom: 30px;
-
-  color: #333;
+  font-size: 22px;
+    line-height: 29px;
+    margin-bottom: 30px;
+    color: #333;
+    padding-bottom: 2px;
 }
 
 .footer-subscription-widget .subscription-subtitle {

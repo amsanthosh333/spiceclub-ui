@@ -10,6 +10,11 @@
   /* input[type=number]::-webkit-inner-spin-button {
     opacity: 5
 } */
+
+.title h3{
+  padding-bottom: 0px;
+}
+
 input, select, textarea{
   color: rgb(49, 49, 49) !important;
 }
@@ -19,6 +24,10 @@ input, select, textarea{
 }
 #shopnowbtn:hover > #shopnowicon{
   color: rgb(226, 8, 8) !important;
+}
+#shopnowbtn{
+  text-decoration: none;
+  text-transform: none;
 }
 
 
@@ -123,11 +132,13 @@ input[type=number]::-webkit-inner-spin-button {
 #enqueryformrow input::placeholder {
   font-size: 0.7rem;
   font-family: Arial, Helvetica, sans-serif;
+  color: rgb(190, 190, 190);
 }
 #enqueryformrow textarea::placeholder {
   font-size: 0.7rem;
   font-family: Arial, Helvetica, sans-serif;
   padding-left: 10px;
+  color: rgb(190, 190, 190);
 }
   #subsc input,input::placeholder {
   font: sans-serif;
@@ -156,8 +167,6 @@ input[type=number]::-webkit-inner-spin-button {
   #deliverydivcol{
     display: flex;
     padding-left: 35px;
-    border: 0.5px solid #d3d3d3;
-
   }
   #deliverydiv{
     padding:10px;
@@ -418,7 +427,7 @@ input::placeholder {
 }
 
 .discounted-price {
-  color:#58d958;;
+  color:#44bf44;
   font-weight: 200;
   font-size: 0.8rem;
   font-family: Arial, Helvetica, sans-serif;
@@ -429,7 +438,7 @@ input::placeholder {
   font-size: 14px;
   font-weight: 700;
   line-height: 1;
-  color: #333333;
+  color: #ce2127;; 
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0;
 }
@@ -465,8 +474,8 @@ input::placeholder {
   .caroussellll {
     /* height: 300px; */
     z-index: unset;
-    padding-left: 230px;
-    padding-right: 250px;
+    padding-left: 150px;
+    padding-right: 180px;
   }
 
   .header-bottom-container .header-right-container {
@@ -532,7 +541,7 @@ body {
   border: 0px solid #ffffff;
 }
 #dealimg{
-  height: 125px;
+  height: 144px;
   width: auto;
   position: relative;
   overflow: hidden;
@@ -748,7 +757,7 @@ element.style {
   font-size: 25px;
   line-height: 35px;
   margin-top: -10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   color: #140f0f;
   font-family: Arial, Helvetica, sans-serif;
   text-transform: capitalize;

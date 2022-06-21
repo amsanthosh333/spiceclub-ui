@@ -1,4 +1,13 @@
-
+#reqOTPdiv{
+  margin-top:19px ;
+  padding-left: 0px;
+  font-size: 0.8rem;
+}
+#reqOTPbtn{
+  font-size:0.8rem;
+  padding: 3px 17px;
+    float: right;
+}
 div{
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0;
@@ -11,13 +20,15 @@ input, select, textarea{
 }
  #loginformrow p{
 margin-bottom: 0px;
-color: #414141;
+color: black;
 font-size: smaller;
  }
- input[type="text"] {
+ input{
   font-size:0.9rem;
   font-family: Arial, Helvetica, sans-serif;
   letter-spacing: 0;
+  font-size: 0.8rem;
+  height: 1.7rem;
 }
  
  input {
@@ -82,7 +93,10 @@ button{
 
 .lezada-button--medium {
   font-size: 14px;
-  padding: 5px 85px;
+  padding: 3px 85px;
+  width: 100%;
+  border-radius: 3px;
+  text-transform: none;
  
 }
 
@@ -131,8 +145,8 @@ button{
 
 .btn-danger {
   color: #fff;
-  background-color: #e6272e;
-  border-color: #e6272e;
+  background-color: #ce2127;
+  border-color:  #ce2127;
 }
 
 body { padding: 2em; }
@@ -193,14 +207,16 @@ body { padding: 2em; }
 
 /* Google */
 .loginBtn--google {
-  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
-  background:#dc3545;
+ 
+  /* background:#dc3545; */
+  background: #4285f4;
   font-size: 0.9rem;
   text-align: center;
 }
 .loginBtn--google:before {
-  border-right: #BB3F30 1px solid;
+  border-right: #ffffff 1px solid;
   background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+  
 }
 .loginBtn--google:hover,
 .loginBtn--google:focus {
@@ -212,3 +228,46 @@ select {
   appearance: menulist;     /* Remove default arrow */
  
 }
+
+/* 
+new google button */
+/* .google-btn {
+  width: 184px;
+  height: 42px;
+  background-color: #4285f4;
+  border-radius: 2px;
+  box-shadow: 0 3px 4px 0 rgba(0,0,0,.25);
+}
+.google-btn .google-icon-wrapper {
+    position: absolute;
+    margin-top: 1px;
+    margin-left: 1px;
+    width: 40px;
+    height: 40px;
+    border-radius: 2px;
+    background-color: white;
+  }
+  .google-btn.google-icon {
+    position: absolute;
+    margin-top: 11px;
+    margin-left: 11px;
+    width: 18px;
+    height: 18px;
+  }
+  .google-btn.btn-text {
+    float: right;
+    margin: 11px 11px 0 0;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 0.2px;
+    font-family: "Roboto";
+  }
+  .google-btn:hover {
+    box-shadow: 0 0 6px  #4285f4;
+  }
+  .google-btn:active {
+    background: #4285f4;
+  }
+
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:500); */
