@@ -73,6 +73,10 @@ export class LoginComponent implements OnInit {
   fpassotploading!: boolean;
   resendloading!: boolean;
   logbtnloading: boolean = false;
+  otpinput: boolean = false;
+  otpbtnloading: boolean = false;
+  verifibyn: boolean = false;
+  resendotp: boolean= false;
   // @ViewChild('myModal') myModal : any;
 
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
@@ -123,7 +127,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  openloginn(content:any) {
+  openloginn(content: any) {
     console.log("open");
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
@@ -164,21 +168,28 @@ export class LoginComponent implements OnInit {
       this.logbtnloading = true;
       this.authService
         .login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value,).subscribe((res) => {
+        console.log("res",res);
+        
           if (res) {
             this.logbtnloading = false;
             if (res.message == "User not found") {
               this.error1 = '* User not found';
               return;
             }
-            if (res.message == "Unauthorized") {
+            else if (res.message == "Unauthorized") {
               this.error1 = '* Invalid credentials';
             }
-            if (res.message == "Successfully logged in") {
+            else if (res.message == "Please verify your account") {
+              this.toastr.info('verify your account', '');
+              this.resend();
+              this.otpSubmit(content)
+            }
+            else if (res.message == "Successfully logged in") {
               this.toastr.success('logged in Successfully', '');
               this.sharedService.sendClickEvent();
               this.router.navigate(['/home']).then(() => {
-                  window.location.reload();
-                });
+                window.location.reload();
+              });
             }
           } else {
             this.error1 = '* Invalid Login';
@@ -289,6 +300,99 @@ export class LoginComponent implements OnInit {
     });
   }
 
+
+  requestloginotpnew() {
+    this.error1 = ''
+    if (!this.loginForm.get('username')?.valid) {
+      this.error1 = '*Enter phone number';
+    }
+    else {
+      this.otpbtnloading = true;
+      let edata1 = {
+        phone: "" + this.loginForm.controls['username'].value,
+      }
+      console.log("edata1", edata1);
+
+      this.authService.reqotplogin(edata1).subscribe((res) => {
+        this.otpuserid = res.user_id
+        if (res) {
+          if (res.result == true) {
+            this.otpbtnloading = false;
+            this.otpinput = true;
+            this.verifibyn = true;
+            // this.resendotp=true;
+            // this.modalService.open(content, {
+            //   ariaLabelledBy: 'modal-basic-title',
+            //   size: 'md',
+            // });
+            return;
+          }
+          else if (res.result == false) {
+            this.otpbtnloading = false;
+            this.error1 = '* Not a registered mobile number';
+          }
+        } else {
+          this.otpbtnloading = false;
+          this.error1 = '*Enter correct details';
+        }
+      },
+        (error: any) => {
+          console.log("test", "", error.error);
+          this.error1 = '*Some thing went wrong';
+        }
+      );
+    }
+  }
+  verifyloginotpnew(content: any) {
+    this.error1 = ''
+    if (!this.loginForm.get('password')?.valid) {
+      this.error1 = '*Enter OTP';
+    }
+    else {
+      let edata1 = {
+        user_id: this.otpuserid,
+        otp_code: "" + this.loginForm.controls['password'].value,
+      }
+      console.log("edata otp", edata1);
+
+      this.loginloading = true
+      this.authService.otplogin(edata1).subscribe((res) => {
+        this.loginloading = false
+        console.log("res", res);
+
+        if (res) {
+          if (res.message == "User not found") {
+            this.error1 = '* User not found';
+            return;
+          }
+          else if (res.message == "Unauthorized") {
+            this.error1 = '* Invalid credentials';
+          }
+          else if (res.message == "Please verify your account") {
+            this.toastr.info('verify your account', '');
+            this.resend();
+            this.otpSubmit(content)
+          }
+          else if (res.result == true) {
+            this.sharedService.sendClickEvent();
+            this.toastr.success('logged in Successfully', '');
+            this.router.navigate(['/home'])
+              .then(() => {
+                window.location.reload();
+              });
+          }
+        } else {
+          this.error1 = 'Invalid Login';
+        }
+      },
+        (error: any) => {
+          console.log("test", "", error.error);
+          this.error1 = '*Some thing went wrong';
+        }
+      );
+    }
+  }
+
   requestloginotp(form: FormGroup, content: any) {
     this.error3 = ''
     if (this.loginotpform.invalid) {
@@ -327,28 +431,24 @@ export class LoginComponent implements OnInit {
     }
   }
   verifyloginotp(form: FormGroup) {
-    this.error5 = ''
-    if (this.loginverifyform.invalid) {
-      this.error3 = '* Enter Otp';
-      return;
-    } else {
+    this.error1 = ''
+    if (!this.loginForm.get('password')?.valid) {
+      this.error1 = '*Enter OTP';
+    }
+    else {
       let edata1 = {
         user_id: this.otpuserid,
-        otp_code: form.value.otp_code,
+        otp_code: "" + this.loginForm.controls['password'].value,
       }
       this.loginloading = true
       this.authService.otplogin(edata1).subscribe((res) => {
         this.loginloading = false
         if (res) {
-          if (res.message == "User not found") {
-            this.error5 = 'User not found';
+          if (res.result == false) {
+            this.error1 = res.message;
             return;
           }
-          if (res.message == "Unauthorized") {
-            this.error5 = '* Invalid credentials';
-          }
-          if (res.message == "Successfully logged in") {
-            this.modalService.dismissAll();
+          if (res.result == true) {
             this.sharedService.sendClickEvent();
             this.toastr.success('logged in Successfully', '');
             this.router.navigate(['/home'])
@@ -357,7 +457,7 @@ export class LoginComponent implements OnInit {
               });
           }
         } else {
-          this.error5 = 'Invalid Login';
+          this.error1 = 'Invalid Login';
         }
       },
         (error: any) => {
@@ -629,7 +729,7 @@ export class LoginComponent implements OnInit {
               this.toastr.success('Reset Successfully', '');
               this.modalService.dismissAll();
               this.router.navigate(['/login']);
-              window.scroll(0,0)
+              window.scroll(0, 0)
             }
             else if (res.message == "No user found") {
               this.error7 = '* Invalid code';
@@ -667,13 +767,14 @@ export class LoginComponent implements OnInit {
     );
   }
 
-  openregister(){
+  openregister() {
+    this.modalService.dismissAll();
     this.modalService.open(SignupComponent, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'lg',
+      size: 'md',
     });
   }
-  
+
 }
 
 

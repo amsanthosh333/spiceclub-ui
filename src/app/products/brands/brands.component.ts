@@ -72,6 +72,16 @@ export class BrandsComponent implements OnInit {
   pagee: any = 1;
   storked_pricee: any;
 
+  public quantityarray: any[] = [];
+  totalqty: any;
+  selectedvar: any;
+  showaddbtn: any;
+  pagenum: number = 1;
+  pageload: boolean = true;
+  sidepoploader: boolean = false;
+  newpageProduct: any;
+  prodloadermain: boolean=true;
+
 
 
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -164,6 +174,7 @@ export class BrandsComponent implements OnInit {
     }
   }
   viewdata(id: any, page: any) {
+    this.prodloadermain = false;
     this.prodloader = true;
     this.imgloader = false;
 
@@ -175,6 +186,7 @@ export class BrandsComponent implements OnInit {
       this.prodloader = false;
       let index = this.Allbrands?.findIndex((x: any) => x.id == id);
       this.subItemm = index
+      this.prodloadermain = true
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -198,6 +210,7 @@ export class BrandsComponent implements OnInit {
   }
   getpage(url: any) {
     if (url !== null) {
+      this.prodloadermain = false
       this.prodloader = true;
       window.scroll(0, 0);
       this.imgloader = false;
@@ -211,7 +224,9 @@ export class BrandsComponent implements OnInit {
         this.router.navigate(['brands', this.id, this.currentpage],
           // this.router.navigate(['brands',this.id],{  queryParams: { page: this.currentpage }},
         );
+        this.prodloadermain = true
         this.prodloader = false;
+  
 
         setTimeout(() => {
           this.imgloader = true;
@@ -266,6 +281,7 @@ export class BrandsComponent implements OnInit {
   }
 
   search1(form: FormGroup, page = 1) {
+    this.prodloadermain = false
     this.prodloader = true;
     this.imgloader = false;
     let key = form.value.key
@@ -273,6 +289,7 @@ export class BrandsComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      this.prodloadermain = true
       this.prodloader = false;
 
       setTimeout(() => {
@@ -448,4 +465,133 @@ export class BrandsComponent implements OnInit {
   deleteRecordSuccess() {
     this.toastr.error(' Removed Successfully', '');
   }
+
+
+  
+  qtyChange(event: any, i: any, img: any) {
+    if (this.quantityarray.length == 0) {
+      this.quantityarray.push({ "id": img.id, "value": event.target.value });
+    }
+    else {
+      console.log(" this.quantityarray", this.quantityarray);
+      const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
+      console.log("obj", index);
+      if (index > -1) {
+        console.log("if", index);
+
+        this.quantityarray[index].value = event.target.value;
+      }
+      else {
+        console.log("else", index);
+        this.quantityarray.push({ "id": img.id, "value": event.target.value });
+      }
+    }
+    console.log("this.quantityarray", this.quantityarray);
+  }
+
+  prodaddtocart(img: any) {
+    console.log("img", img);
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else if (img.variants[0]?.options?.length == 1) {
+        this.varient_value = img.variants[0]?.options[0];
+      }
+      else {
+        this.varient_value = this.selectedvar;
+      }
+      const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
+      if (index > -1) {
+        this.totalqty = this.quantityarray[index].value;
+      }
+      else {
+        this.totalqty = 1
+      }
+
+      let edata = {
+        id: img.id,
+        variant: this.varient_value?.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity: this.totalqty,
+        buyertype: this.buyertypeid,
+      }
+      console.log(edata);
+      this.request.addtocart(edata).subscribe((res: any) => {
+        console.log("resssssssssssssss", res);
+        if (res.message == 'Product added to cart successfully') {
+          console.log("Product added to cart successfully");
+          this.addRecordSuccess();
+          this.modalService.dismissAll();
+          this.sharedService.sendClickEvent();
+        }
+        else if (res.message == 'Minimum 1 item(s) should be ordered') {
+          this.toastr.success(res.message);
+
+        }
+        else if (res.message == 'Stock out') {
+          this.toastr.error(res.message);
+          console.log("Stock out");
+        }
+      },
+        (error: any) => {
+          this.toastr.error(error);
+          console.log("error", error);
+
+        });
+    }
+  }
+  bestsellingselectvar(weight: any, i: any, id: any) {
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    this.request.addvarient(id, weight).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.Product[i].stroked_price = res.stroked_price
+      this.Product[i].main_price = res.price_string;
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+
+  onScrollDown(eve: any) {
+    console.log("scroll down");
+    this.pagenum += 1
+    console.log("scroll down", this.pagess);
+    console.log("scroll pagenum", this.pagenum);
+    const pageurl = this.pagess[this.pagenum]
+    console.log("pageurl", pageurl);
+    if (pageurl?.url !== null && pageurl !== undefined) {
+      this.pageload = false;
+      this.prodloader = true;
+      this.sidepoploader = true;
+      // this.imgloader = false;
+      this.request.getpage(pageurl?.url).subscribe((response: any) => {
+        this.newpageProduct = response.data;
+        this.pagenation = response.meta;
+        this.pagess = this.pagenation.links;
+        console.log("this.pagess", this.pagess);
+        this.pagee = this.pagenation.current_page;
+        // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
+        // window.scroll(0, 0);
+        this.Product.push(...this.newpageProduct)
+        this.pageload = true;
+        this.prodloader = false;
+        this.sidepoploader = false;
+        console.log("this.Product", this.Product);
+
+        setTimeout(() => {
+          this.imgloader = true;
+        }, 2000);
+      })
+    }
+  }
+
+  onScrollUp(ev: any) {
+    console.log("scrolled up!",);
+  }
+  
 }

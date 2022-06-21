@@ -1,22 +1,53 @@
+
+
+div{
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0;
+}
+input, select, textarea{
+  color: rgb(49, 49, 49) !important;
+}
+
+#loginformrow p{
+  margin-bottom: 0px;
+  color: #414141;
+  font-size: smaller;
+   }
+     input[type="text"] {
+      font-size:0.8rem;
+    } 
+     input,select, textarea {
+      border: 1px solid #d3d3d3;
+      border-radius: 4px;
+      font: sans-serif;
+      width: 100%;
+    }
+    .loginbanner {
+      height: 80px;
+        width: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
 .breadcrumb-list__item{
 	color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
 }
 p{
 	color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
 }
 label{
 	color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
 }
 option{
 	color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
 }
 .login-form--register label {
     font-size: 10px;
@@ -29,4 +60,89 @@ option{
 .lezada-button--medium {
     font-size: 14px;
     padding: 5px 45px;
+}
+
+body { padding: 2em; }
+
+
+.btn-danger {
+    color: #fff;
+    background-color: #e6272e;
+    border-color: #e6272e;
+}
+
+/* Shared */
+.loginBtn {
+  box-sizing: border-box;
+  position: relative;
+  /* width: 13em;  - apply for fixed size */
+  margin: 0.2em;
+  padding: 0 15px 0 46px;
+  border: none;
+  text-align: left;
+  line-height: 30px;
+  white-space: nowrap;
+  border-radius: 0.2em;
+  font-size: 16px;
+  color: #FFF;
+  width: 220px;
+}
+.loginBtn:before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 30px;
+  height: 100%;
+}
+.loginBtn:focus {
+  outline: none;
+}
+.loginBtn:active {
+  box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+}
+
+
+/* Facebook */
+.loginBtn--facebook {
+  background-color: #4C69BA;
+  background-image: linear-gradient(#4C69BA, #3B55A0);
+  /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
+  text-shadow: 0 -1px 0 #354C8C;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.loginBtn--facebook:before {
+  border-right: #364e92 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_facebook.png') 6px 6px no-repeat;
+}
+.loginBtn--facebook:hover,
+.loginBtn--facebook:focus {
+  background-color: #5B7BD5;
+  background-image: linear-gradient(#5B7BD5, #4864B1);
+}
+
+
+/* Google */
+.loginBtn--google {
+  /*font-family: "Roboto", Roboto, arial, sans-serif;*/
+  background:#dc3545;
+  font-size: 0.9rem;
+  text-align: center;
+}
+.loginBtn--google:before {
+  border-right: #BB3F30 1px solid;
+  background: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/14082/icon_google.png') 6px 6px no-repeat;
+}
+.loginBtn--google:hover,
+.loginBtn--google:focus {
+  background: #e65b49;
+}
+select {
+ 
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist; 
+  appearance: menulist;     /* Remove default arrow */
+ 
 }

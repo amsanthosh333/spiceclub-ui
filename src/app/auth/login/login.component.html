@@ -4,377 +4,401 @@
 <ngx-spinner bdColor="rgba(51,51,51,0.8)" size="large" color="#e00707" type="ball-scale-multiple">
 	<p style="font-size: 20px; color: white">Loading...</p>
 </ngx-spinner>
+<div class="login-area mb-20 mb-md-70 mb-sm-70 mb-xs-70 mb-xxs-70 mt-2">
+	<div class="container">
+		<div class="row">
 
+			<div class="col-lg-12 mb-md-50 mb-sm-50">
+				<div class="lezada">
+					<div class="col-lg-12">
+						<!--=======  login title  =======-->
+						<div class="section-title section-title--login text-center mb-10">
+							<div class="loginbanner">
+								<img src="assets/images/spicelogo.jpeg" alt=""
+									style='height: 100%; width: 100%; object-fit: cover'>
+							</div>
+						</div>
 
-<!--=======  End of breadcrumb area =======-->
+						<!--=======  End of login title  =======-->
+					</div>
+					<form [formGroup]="loginForm" (ngSubmit)="onSubmit(otpRecord)" style="    border: 1px solid #e1e1e1;
+    padding: 40px;
+    margin: 30px;
+    margin-top: 15px;
+    padding-top: 26px;">
+						<div class="row" id="loginformrow">
+							<h5 style="font-weight: 700;">Login</h5>
+							<div class="col-lg-12 mb-10">
+								<p>Your mobile number or email</p>
+								<input type="text" formControlName="username" style="width:100%;" required>
+							</div>
+							<div class="col-lg-6 mb-10">
+								<p *ngIf="!otpinput">Enter your password</p>
+								<p *ngIf="otpinput" style="color:red ;">Enter the OTP</p>
+								<input type="password" formControlName="password" required>
+								<a class="reset-pass-link" (click)="forgotpass(Forgotpassword)" style="margin-top: 0px;
+								font-size: 0.7rem;">Forgot Password?</a>
+							</div>
 
-<!--=============================================
-    =            shop page content         =
-    =============================================-->
-
-
-
-	<div class="login-area mb-20 mb-md-70 mb-sm-70 mb-xs-70 mb-xxs-70 mt-2">
-		<div class="container">
-			<div class="row">
-				
-				<div class="col-lg-12 mb-md-50 mb-sm-50">
-					<div class="lezada-form login-form">
-						<form [formGroup]="loginForm" (ngSubmit)="onSubmit(otpRecord)">
-							<div class="row">
-								<div class="col-lg-12">
-									<!--=======  login title  =======-->
-
-
-									<div class="section-title section-title--login text-center mb-10">
-										<h2 class="mb">Login</h2>
-										<p>Great to have you back!</p>
-									</div>
-
-									<!--=======  End of login title  =======-->
-								</div>
-								<div class="col-lg-12 mb-20">
-									<input type="text" placeholder="email address" formControlName="username" required>
-
-								</div>
-								<div class="col-lg-12 mb-20">
-									<input type="password" placeholder="Password" formControlName="password" required>
-								</div>
-
-								<div class="col-lg-12 text-center mb-10">
-									<h6 class="form-text text-danger" style="height: 12px;">
-										<span *ngIf="error1">{{error1}}</span>
-									</h6>
-									<button class="lezada-button lezada-button--medium"
-										*ngIf="!logbtnloading">login</button>
-									<button class="lezada-button lezada-button--medium" style="padding-top: 7px;"
-										*ngIf="logbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
-								</div>
-
-								<!-- <div class="col-lg-12 ">
-									<input type="checkbox"> <span class="remember-text">Remember me</span>
-									
-								</div> -->
-								<div class="col-lg-12 text-center ">
-									<a class="reset-pass-link" (click)="forgotpass(Forgotpassword)">Forgot Password?</a>
-								</div>
-
-								<div class="col-lg-12 text-center mb-10">
-
-									<a class="reset-pass-link" (click)="loginotp(loginotpRequest)">Login with OTP</a>
-									<span style="font-size: 0.7rem;">OR</span>
-									<!-- <i class="fa fa-facebook" style="color: rgb(8, 96, 228);"></i> <i class="fa fa-google" style="color: rgb(194, 207, 7);"></i>  -->
-								</div>
-
-								<!-- <div class="google-btn" >
-								<div class="google-icon-wrapper" (click)="loginWithGoogle(byertype)" >
-									<img class="google-icon"
-										src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" />
-								</div>
-								<p class="btn-text"><b>Sign in with google</b></p>
+							<div class="col-lg-5 " style="margin-top:19px ; margin-left: 29px;" >
+								or <button *ngIf="!otpbtnloading" type="button" class="btn btn-danger"
+									(click)="requestloginotpnew()" style="font-size:0.8rem;">Request Otp</button>
+								<button class="btn btn-danger" type="button"
+									style="padding-left: 22px;padding-right: 22px;font-size:0.8rem;padding-top: 2px;" 
+									*ngIf="otpbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+							</div>
+							<!-- <div class="col-lg-5 " style="margin-top:19px ; margin-left: 15px;" *ngIf="resendotp">
+								or <button *ngIf="!otpbtnloading" type="button" class="btn btn-danger"
+									(click)="requestloginotpnew()" style="font-size:0.8rem;">Resend Otp</button>
+								<button class="btn btn-danger" type="button"
+									style="padding-left: 22px;padding-right: 22px;font-size:0.8rem;padding-top: 2px;" 
+									*ngIf="otpbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 							</div> -->
 
-								<div style="text-align: center;">
-									<button class="loginBtn loginBtn--facebook" type="button"
-										(click)="loginWithFacebook(byertype)">
-										Login with Facebook
-									</button>
+							<div class="col-lg-12 text-center mb-10"  *ngIf="!verifibyn">
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error1" id="errormsg">{{error1}}</span>
+								</h6>
+								<button class="lezada-button lezada-button--medium"
+									*ngIf="!logbtnloading">Continue</button>
+								<button class="lezada-button lezada-button--medium" style="padding-top: 7px;"
+									*ngIf="logbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+							</div>
+							<div class="col-lg-12 text-center mb-10"  *ngIf="verifibyn">
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error1" id="errormsg">{{error1}}</span>
+								</h6>
+								<button class="lezada-button lezada-button--medium"
+									*ngIf="!logbtnloading"  (click)="verifyloginotpnew(otpRecord)">Verify OTP</button>
+								<button class="lezada-button lezada-button--medium" style="padding-top: 7px;"
+									*ngIf="logbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+							</div>
 
-									<button class="loginBtn loginBtn--google" type="button"
-										(click)="loginWithGoogle(byertype)">
-										Login with Google
-									</button>
-								</div>
+						
+							<!-- <div class="col-lg-12 text-center ">
+								<a class="reset-pass-link" (click)="forgotpass(Forgotpassword)">Forgot Password?</a>
+							</div> -->
 
-								<div class="col-lg-12 text-center mt-10 mb-10">
-									<p style="font-size: smaller;">If you don’t have an account, register now!</p>
-									<button class="lezada-button lezada-button--medium" type="button" (click)="openregister()"><a 
-											style="text-decoration: none; color: rgb(252, 248, 248);">signup</a>
-									</button>
-								</div>
+							<!-- <div class="col-lg-12 text-center mb-10">
 
-								<!-- <button (click)="loginWithGoogle(byertype)" type="button" class="btn btn-warning">
+								<a class="reset-pass-link" (click)="loginotp(loginotpRequest)">Login with OTP</a>
+								<span style="font-size: 0.7rem;">OR</span>
+								
+							</div> -->
+
+						
+
+							<div style="text-align: center;">
+								<p>or</p>
+								<button class="loginBtn loginBtn--facebook" type="button"
+									(click)="loginWithFacebook(byertype)">
+									Login with Facebook
+								</button>
+
+								<button class="loginBtn loginBtn--google" type="button"
+									(click)="loginWithGoogle(byertype)">
+									Login with Google
+								</button>
+							</div>
+							<div class="col-lg-12 text-center " style="padding-bottom: 10px; border-bottom: 1px solid rgb(193 193 193);" >		
+								<span style="font-size:0.7rem ;">By continuing, you agree to the Spice Club's 
+									<a style="text-decoration: none;color:rgb(67, 170, 255) ;" routerLink="/privacypolicy"> Term & Conditions</a> and  <a style="text-decoration: none;color:rgb(67, 170, 255);" routerLink="/privacypolicy"> Privacy Policy</a> </span>												
+							</div>
+
+						
+							<div class="col-lg-12 mt-10 text-center">
+								<h5 style="font-weight: 700; text-align: left;">New to Spice Club?</h5>
+								
+								<p style="color: rgb(90, 90, 90); font-size: 0.7rem;">If you don’t have an account, register now!</p>
+								<button class="lezada-button lezada-button--medium"  type="button"
+									(click)="openregister()"><a
+										style="text-decoration: none; ">signup</a>
+								</button>
+							</div>
+
+							<!-- <button (click)="loginWithGoogle(byertype)" type="button" class="btn btn-warning">
 								Googlelogin</button> 
 							 <button (click)="loginWithFacebook(byertype)" type="button" class="btn btn-primary">
 								Facebooklogin</button> -->
-							</div>
-						</form>
+						</div>
+					</form>
 
 
-						<ng-template #otpRecord let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Waiting for OTP </div>
-										</div>
+					<!-- verifiy account -->
+					<ng-template #otpRecord let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Waiting for OTP </div>
 									</div>
+								</div>
+							</h6>
+						</div>
+						<div class="modal-body">
+							<h6 style="color: green;"> Check your mail or phone</h6>
+							<form class="register-form" [formGroup]="otpform" (ngSubmit)="onAddRowSave(otpform)">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>Verification Code<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" placeholder="otp" formControlName="otp"
+											required>
+									</div>
+								</div>
+
+								<!-- <div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error1}}</div> -->
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error2">{{error2}}</span>
 								</h6>
-							</div>
-							<div class="modal-body">
-								<h6 style="color: green;"> Check your mail or phone</h6>
-								<form class="register-form" [formGroup]="otpform" (ngSubmit)="onAddRowSave(otpform)">
-									<div class="row">
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-											<label>Verification Code<span class="text-danger">*</span></label>
-											<input type="text" class="form-control" placeholder="otp"
-												formControlName="otp" required>
-										</div>
-									</div>
+								<div class="modal-footer" style="justify-content: center;">
+									<button type="submit" class="btn btn-primary "> &nbsp; Verify&nbsp;</button>
+									<button class="btn btn-danger" type="button" (click)="resend()">Resend</button>
+									<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+								</div>
+							</form>
 
-									<!-- <div *ngIf="error1" class="alert alert-danger mb-3 ml-3">{{error1}}</div> -->
-									<h6 class="form-text text-danger" style="height: 12px;">
-										<span *ngIf="error2">{{error2}}</span>
-									</h6>
-									<div class="modal-footer" style="justify-content: center;">
-										<button type="submit" class="btn btn-primary "> &nbsp; Verify&nbsp;</button>
-										<button class="btn btn-danger" type="button" (click)="resend()">Resend</button>
-										<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
-									</div>
-								</form>
+						</div>
+					</ng-template>
+					<!-- <p>you can logout now</p> <button (click)="logout1()">Logout</button> -->
 
-							</div>
-						</ng-template>
-						<!-- <p>you can logout now</p> <button (click)="logout1()">Logout</button> -->
-						<ng-template #loginotpRequest let-modal>
-							<div class="modal-header editRowModal">
-								<h4 class="modal-title" id="modal-basic-title" style="padding: 0px;">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Login with OTP</div>
-										</div>
+
+					<ng-template #loginotpRequest let-modal>
+						<div class="modal-header editRowModal">
+							<h4 class="modal-title" id="modal-basic-title" style="padding: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Login with OTP</div>
 									</div>
-								</h4>
-								<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								</div>
+							</h4>
+							<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
 									<span aria-hidden="true"><i class="material-icons">close</i></span>
 								</button> -->
-							</div>
-							<div class="modal-body">
-								<p class="form-text" style="color: green; ">* Enter your Registered mobile number</p>
-								<form class="register-form" [formGroup]="loginotpform"
-									(ngSubmit)="requestloginotp(loginotpform,loginotpverify)">
-									<div class="row">
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-											<!-- <label>Mobile<span class="text-danger">*</span></label> -->
-											<input type="text" class="form-control" formControlName="phone" required>
-										</div>
+						</div>
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">* Enter your Registered mobile number</p>
+							<form class="register-form" [formGroup]="loginotpform"
+								(ngSubmit)="requestloginotp(loginotpform,loginotpverify)">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<!-- <label>Mobile<span class="text-danger">*</span></label> -->
+										<input type="text" class="form-control" formControlName="phone" required>
 									</div>
-									<h6 class="form-text text-danger" style="height: 12px;">
-										<span *ngIf="error3">{{error3}}</span>
-									</h6>
-									<div class="modal-footer" style="justify-content: center; border: none;">
-										<button type="submit" class="btn btn-danger" *ngIf="!btnloading">Send
-											OTP</button>
-										<button type="submit" class="btn btn-danger" *ngIf="btnloading"><i
-												class="fa fa-spinner fa-spin"></i>&nbsp;</button>
-									</div>
-								</form>
-								<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
-							</div>
+								</div>
 
-						</ng-template>
+								<div class="modal-footer" style="justify-content: center; border: none;">
+									<button type="submit" class="btn btn-danger" *ngIf="!btnloading">Send
+										OTP</button>
+									<button type="submit" class="btn btn-danger" *ngIf="btnloading"><i
+											class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+								</div>
+							</form>
+							<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
+						</div>
 
-						<ng-template #loginotpverify let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Waiting for OTP</div>
-										</div>
+					</ng-template>
+
+					<ng-template #loginotpverify let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Waiting for OTP</div>
 									</div>
-								</h6>
-								<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								</div>
+							</h6>
+							<!-- <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
 								<span aria-hidden="true"><i class="material-icons"></i></span>
 							</button> -->
-							</div>
-							<div class="modal-body">
-								<p class="form-text" style="color: green; ">* OTP code is sent to Mobile </p>
-								<form class="register-form" [formGroup]="loginverifyform"
-									(ngSubmit)="verifyloginotp(loginverifyform)">
-									<div class="row">
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-											<label>OTP<span class="text-danger">*</span></label>
-											<input type="text" class="form-control" placeholder=""
-												formControlName="otp_code" required>
-										</div>
+						</div>
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">* OTP code is sent to Mobile </p>
+							<form class="register-form" [formGroup]="loginverifyform"
+								(ngSubmit)="verifyloginotp(loginverifyform)">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>OTP<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" placeholder=""
+											formControlName="otp_code" required>
 									</div>
-									<h6 class="form-text text-danger" style="height: 12px;">
-										<span *ngIf="error5">{{error5}}</span>
-									</h6>
-									<div class="modal-footer" style="justify-content: center; border: none;">
-										<button type="submit" class="btn btn-danger" *ngIf="!loginloading">login
-										</button>
-										<button type="submit" class="btn btn-danger" *ngIf="loginloading"><i
-												class="fa fa-spinner fa-spin"></i>&nbsp;</button>
-									</div>
-								</form>
-								<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
-							</div>
-						</ng-template>
-
-						<!-- forget form -->
-						<ng-template #Forgotpassword let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Forgot Password</div>
-										</div>
-									</div>
+								</div>
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error5">{{error5}}</span>
 								</h6>
-								<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-									<span aria-hidden="true"><i class="material-icons"></i></span>
-								</button>
-							</div>
-							<div class="modal-body">
-								<p class="form-text" style="color: green; ">*We will send a code to reset your password
-								</p>
-								<form class="validate-form" [formGroup]="forgotForm" (ngSubmit)="onSubmit2(addRecord)">
-									<div class="row">
-										<div class="col-lg-12 ">
-											<label for="regPassword">Send code by<span class="text-danger">*</span>
-											</label>
-											<div class="form-group position-relative">
+								<div class="modal-footer" style="justify-content: center; border: none;" >
+									<button type="submit" class="btn btn-danger" *ngIf="!loginloading">login
+									</button>					
+									<button type="submit" class="btn btn-danger" *ngIf="loginloading"><i
+											class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+								</div>
+						
+							
 
-												<select class="form-control pl-5" formControlName="Type" required>
+							</form>
+							<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
+						</div>
+					</ng-template>
 
-													<option *ngFor="let meet of meetings" [value]="meet.id">
-														{{meet.value}}
-													</option>
-												</select>
-												<!-- <h6 class="form-text text-danger"
+					<!-- forget form -->
+					<ng-template #Forgotpassword let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title" style="padding: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Forgot Password</div>
+									</div>
+								</div>
+							</h6>
+							<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								<span aria-hidden="true"><i class="material-icons"></i></span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">*We will send a code to reset your password
+							</p>
+							<form class="validate-form" [formGroup]="forgotForm" (ngSubmit)="onSubmit2(addRecord)">
+								<div class="row">
+									<div class="col-lg-12 ">
+										<label for="regPassword">Send code by<span class="text-danger">*</span>
+										</label>
+										<div class="form-group position-relative">
+
+											<select class="form-control pl-5" formControlName="Type" required>
+
+												<option *ngFor="let meet of meetings" [value]="meet.id">
+													{{meet.value}}
+												</option>
+											</select>
+											<!-- <h6 class="form-text text-danger"
 										*ngIf="!registerForm.get('register_by')?.valid && registerForm.get('register_by')?.touched">
 										*Please select</h6> -->
-											</div>
 										</div>
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-											<label>Email or phone<span class="text-danger">*</span></label>
-											<input type="text" class="form-control " formControlName="Mobile" required>
-										</div>
+									</div>
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>Email or phone<span class="text-danger">*</span></label>
+										<input type="text" class="form-control " formControlName="Mobile" required>
+									</div>
 
-										<h6 class="form-text text-danger" style="height: 12px;">
-											<span *ngIf="error6">{{error6}}</span>
-										</h6>
-										<div class="modal-footer" style="justify-content: center; border: none;">
-											<button type="submit" class="btn btn-danger" *ngIf="!fpassloading">Send code
-											</button>
-											<button type="submit" class="btn btn-danger" *ngIf="fpassloading"><i
-													class="fa fa-spinner fa-spin"></i>&nbsp;</button>
-										</div>
+									<h6 class="form-text text-danger" style="height: 12px;">
+										<span *ngIf="error6">{{error6}}</span>
+									</h6>
+									<div class="modal-footer" style="justify-content: center; border: none;">
+										<button type="submit" class="btn btn-danger" *ngIf="!fpassloading">Send code
+										</button>
+										<button type="submit" class="btn btn-danger" *ngIf="fpassloading"><i
+												class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 									</div>
-								</form>
-								<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
-							</div>
-						</ng-template>
-						<!-- forgot form2 -->
-						<ng-template #addRecord let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Enter code and new password</div>
-										</div>
+								</div>
+							</form>
+							<!-- <button  class="btn btn-success"  (click)="resend()">Resend</button> -->
+						</div>
+					</ng-template>
+					<!-- forgot form2 -->
+					<ng-template #addRecord let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Enter code and new password</div>
 									</div>
-								</h6>
-								<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-									<span aria-hidden="true"><i class="material-icons"></i></span>
-								</button>
-							</div>
-							<!-- (ngSubmit)="onAddRowSave(passwordform)" [formGroup]="passwordform" -->
-							<div class="modal-body">
-								<p class="form-text" style="color: green; ">*A code is sent </p>
-								<form class="register-form" [formGroup]="passwordForm" (ngSubmit)="onAddRowSave2()">
-									<div class="row">
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-											<label>Verification Code<span class="text-danger">*</span></label>
-											<input type="text" class="form-control" formControlName="otp" required>
-											<!-- <small class="form-text text-danger"
+								</div>
+							</h6>
+							<button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+								<span aria-hidden="true"><i class="material-icons"></i></span>
+							</button>
+						</div>
+						<!-- (ngSubmit)="onAddRowSave(passwordform)" [formGroup]="passwordform" -->
+						<div class="modal-body">
+							<p class="form-text" style="color: green; ">*A code is sent </p>
+							<form class="register-form" [formGroup]="passwordForm" (ngSubmit)="onAddRowSave2()">
+								<div class="row">
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>Verification Code<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" formControlName="otp" required>
+										<!-- <small class="form-text text-danger"
 										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
 										  required</small>  -->
-										</div>
-										<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
-											<label>New password<span class="text-danger">*</span></label>
-											<input type="text" class="form-control" formControlName="newpassword"
-												required>
-											<!-- <small class="form-text text-danger"
+									</div>
+									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
+										<label>New password<span class="text-danger">*</span></label>
+										<input type="text" class="form-control" formControlName="newpassword" required>
+										<!-- <small class="form-text text-danger"
 										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
 										  required</small>  -->
-										</div>
 									</div>
-									<h6 class="form-text text-danger" style="height: 12px;">
-										<span *ngIf="error7">{{error7}}</span>
-									</h6>
-									<!-- <div *ngIf="error7" class="alert alert-danger mb-3 ml-3">{{error7}}</div> -->
-									<div class="modal-footer" style="border: none;text-align: center;">
-										<button type="submit" class="btn btn-danger" *ngIf="!fpassotploading">Verify
-											&nbsp;</button>
-										<button type="submit" class="btn btn-danger" *ngIf="fpassotploading"><i
-												class="fa fa-spinner fa-spin"></i>&nbsp;</button>
-										<button class="btn btn-success" type="button" *ngIf="!resendloading"
-											(click)="resend2()">Resend</button>
-										<button type="button" class="btn btn-success" *ngIf="resendloading"><i
-												class="fa fa-spinner fa-spin"></i>&nbsp;</button>
-										<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
-									</div>
-								</form>
-
-							</div>
-						</ng-template>
-
-						<!-- select buyertype -->
-						<ng-template #byertype let-modal>
-							<div class="modal-header editRowModal">
-								<h6 class="modal-title" id="modal-basic-title" style="padding-bottom: 0px;">
-									<div class="table-modal-header">
-										<div class="modal-about">
-											<div class="font-weight-bold p-t-10 font-17">
-												Need to select buyertype</div>
-										</div>
-									</div>
+								</div>
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="error7">{{error7}}</span>
 								</h6>
-							</div>
-							<div class="modal-body">
-								<form class="register-form" [formGroup]="byertypeform"
-									(ngSubmit)="submitbyertype(byertypeform)">
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group position-relative">
-												<label>Buyer type <span class="text-danger">*</span></label>
-												<select class="form-control pl-5" formControlName="buyer_type" required>
-													<option value="" selected disabled>Please select</option>
-													<option *ngFor="let reg of buyer" [value]="reg.id">
-														{{reg.name}}
-													</option>
-												</select>
-											</div>
+								<!-- <div *ngIf="error7" class="alert alert-danger mb-3 ml-3">{{error7}}</div> -->
+								<div class="modal-footer" style="border: none;text-align: center;">
+									<button type="submit" class="btn btn-danger" *ngIf="!fpassotploading">Verify
+										&nbsp;</button>
+									<button type="submit" class="btn btn-danger" *ngIf="fpassotploading"><i
+											class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+									<button class="btn btn-success" type="button" *ngIf="!resendloading"
+										(click)="resend2()">Resend</button>
+									<button type="button" class="btn btn-success" *ngIf="resendloading"><i
+											class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+									<!-- <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button> -->
+								</div>
+							</form>
+
+						</div>
+					</ng-template>
+
+					<!-- select buyertype -->
+					<ng-template #byertype let-modal>
+						<div class="modal-header editRowModal">
+							<h6 class="modal-title" id="modal-basic-title" style="padding-bottom: 0px;">
+								<div class="table-modal-header">
+									<div class="modal-about">
+										<div class="font-weight-bold p-t-10 font-17">
+											Need to select buyertype</div>
+									</div>
+								</div>
+							</h6>
+						</div>
+						<div class="modal-body">
+							<form class="register-form" [formGroup]="byertypeform"
+								(ngSubmit)="submitbyertype(byertypeform)">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group position-relative">
+											<label>Buyer type <span class="text-danger">*</span></label>
+											<select class="form-control pl-5" formControlName="buyer_type" required>
+												<option value="" selected disabled>Please select</option>
+												<option *ngFor="let reg of buyer" [value]="reg.id">
+													{{reg.name}}
+												</option>
+											</select>
 										</div>
 									</div>
-									<h6 class="form-text text-danger" style="height: 12px;">
-										<span *ngIf="errorb">{{errorb}}</span>
-									</h6>
-									<div class="modal-footer" style="justify-content: center;">
+								</div>
+								<h6 class="form-text text-danger" style="height: 12px;">
+									<span *ngIf="errorb">{{errorb}}</span>
+								</h6>
+								<div class="modal-footer" style="justify-content: center;">
 
-										<button type="submit" style="width: 200px;"
-											class="btn btn-danger">Submit</button>
-									</div>
-								</form>
+									<button type="submit" style="width: 200px;" class="btn btn-danger">Submit</button>
+								</div>
+							</form>
 
-							</div>
-						</ng-template>
-					</div>
+						</div>
+					</ng-template>
 				</div>
-				
 			</div>
+
 		</div>
 	</div>
+</div>
 
 
 <!--=============================================
 	=            =
 	=============================================-->
-

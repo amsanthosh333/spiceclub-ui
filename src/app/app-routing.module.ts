@@ -4,17 +4,16 @@ import { LoginComponent } from './auth/login/login.component';
 import { AuthGuard } from './guard/auth.guard';
 import { HeaderComponent } from './layout/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
-import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
 
 
 const routes: Routes = [
-  { path :'', redirectTo:'/home',pathMatch:'full'},
 
+  { path :'', redirectTo:'home',pathMatch:'full'},
   // { path :'login',component:LoginComponent},
   { path :'home',component:HomeComponent},
   { path :'login',component:LoginComponent},
   { path :'header',component:HeaderComponent},
-  { path :'bestseller',component:BestsellersComponent},
+ 
   { path: 'bestselling', loadChildren: () => import('./products/bestselling/bestselling.module').then(m => m.BestsellingModule) },
   { path: 'shopbyproduct/brand/:id', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
   { path: 'shopbyproduct', loadChildren: () => import('./products/shopbyproduct/shopbyproduct.module').then(m => m.ShopbyproductModule) },
@@ -23,6 +22,7 @@ const routes: Routes = [
   { path: 'wishlist', loadChildren: () => import('./profiledetails/wishlist/wishlist.module').then(m => m.WishlistModule),canActivate: [AuthGuard], },
   { path: 'cart', loadChildren: () => import('./profiledetails/cart/cart.module').then(m => m.CartModule) ,canActivate: [AuthGuard],},
   { path: 'checkout', loadChildren: () => import('./profiledetails/checkout/checkout.module').then(m => m.CheckoutModule),canActivate: [AuthGuard], },
+  { path: 'checkout/:id', loadChildren: () => import('./profiledetails/checkout/checkout.module').then(m => m.CheckoutModule),canActivate: [AuthGuard], },
   { path: 'blog', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
   { path: 'blog/:id', loadChildren: () => import('./products/blog/blog.module').then(m => m.BlogModule) },
   { path: 'recipe', loadChildren: () => import('./products/recipe/recipe.module').then(m => m.RecipeModule) },

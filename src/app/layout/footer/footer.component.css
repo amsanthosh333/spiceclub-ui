@@ -1,3 +1,17 @@
+.app{
+  height: 65px;
+}
+#socialmedia{
+  width: 20.6%;
+}
+input,
+input::placeholder {
+    font: 0.8rem sans-serif;
+}
+#about{
+  width: 11.6%;
+}
+
 .footer-single-widget h5.widget-title {
   margin-bottom: 0px;
 }
@@ -10,7 +24,7 @@
   padding: 3px 0;
 }
 .footer-nav-container nav ul li a {
-  font-size: 15px;
+  font-size: 12px;
   line-height: 20px;
   position: relative;
   color: #464545;
@@ -20,7 +34,7 @@
 }
 .footer-subscription-widget .subscription-subtitle {
   margin-bottom: 0px;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 .footer-container.footer-one .col {
   -ms-flex-preferred-size: 17.5%;
@@ -95,9 +109,8 @@ p{
 .copyright-text p{
   font-size: 10px;display: flex;
 }
-#downloadd{
-  font-size: 15px;
-}
+
+
 }
 @media (min-width : 995px) {
   .social-icon {
@@ -114,5 +127,15 @@ p{
 }
 .copyright-text p{
   font-size: 11px;display: flex;
+}
+#logocol{
+  width: 22%;
+}
+#downloadd{
+  font-size: 15px; 
+  padding-left: 4px;
+}
+#socialbtn{
+  
 }
 }

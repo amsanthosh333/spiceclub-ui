@@ -1,36 +1,70 @@
+
+div{
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0;
+}
+input, select, textarea{
+  color: rgb(49, 49, 49) !important;
+}
+#errormsg{
+  font-size: 0.8rem;
+}
+ #loginformrow p{
+margin-bottom: 0px;
+color: #414141;
+font-size: smaller;
+ }
+ input[type="text"] {
+  font-size:0.9rem;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+}
+ 
+ input {
+  border: 1px solid #d3d3d3;
+  border-radius: 4px;
+  font: sans-serif;
+}
+.loginbanner {
+  height: 80px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .breadcrumb-list__item{
 	color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif ;
+  letter-spacing: 0;
 }
 h2{
   color: #141414;
-  font-family: 'Roboto',Arial,sans-serif;
+  font-family: Arial, Helvetica, sans-serif ;
   letter-spacing: 0;
 }
 select{
   color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif ;
+  letter-spacing: 0;
 }
 input{
   color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif ;
+  letter-spacing: 0;
 }
 option{
 	color: #141414;
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif ;
+  letter-spacing: 0;
 }
 p{
   color: #141414;
-  font-family: 'Roboto',Arial,sans-serif;
+  font-family: Arial, Helvetica, sans-serif ;
   letter-spacing: 0;
 }
 .reset-pass-link{
     color: #474747 ;
-	  font-family: 'Roboto',Arial,sans-serif;
+	  font-family: Arial, Helvetica, sans-serif ;
   letter-spacing: 0;
   margin-top: 8px;
   text-decoration: none;
@@ -38,20 +72,20 @@ p{
 }
 label{
 	color: #474747 ;
-
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif ;
+  letter-spacing: 0;
 }
 button{
-
-    font-family: 'Roboto',Arial,sans-serif;
-    letter-spacing: 0;
+  font-family: Arial, Helvetica, sans-serif ;
+  letter-spacing: 0;
 }
 
 .lezada-button--medium {
   font-size: 14px;
   padding: 5px 85px;
+ 
 }
+
 /* 
 @import url(https://fonts.googleapis.com/css?family=Roboto:500);
 .google-btn {
@@ -95,7 +129,11 @@ button{
   background: #1669f2;
 }  */
 
-
+.btn-danger {
+  color: #fff;
+  background-color: #e6272e;
+  border-color: #e6272e;
+}
 
 body { padding: 2em; }
 
@@ -139,6 +177,8 @@ body { padding: 2em; }
   background-image: linear-gradient(#4C69BA, #3B55A0);
   /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
   text-shadow: 0 -1px 0 #354C8C;
+  font-size: 0.9rem;
+  text-align: center;
 }
 .loginBtn--facebook:before {
   border-right: #364e92 1px solid;
@@ -154,7 +194,9 @@ body { padding: 2em; }
 /* Google */
 .loginBtn--google {
   /*font-family: "Roboto", Roboto, arial, sans-serif;*/
-  background: #DD4B39;
+  background:#dc3545;
+  font-size: 0.9rem;
+  text-align: center;
 }
 .loginBtn--google:before {
   border-right: #BB3F30 1px solid;
@@ -165,7 +207,6 @@ body { padding: 2em; }
   background: #e65b49;
 }
 select {
- 
   -webkit-appearance: menulist;
   -moz-appearance: menulist; 
   appearance: menulist;     /* Remove default arrow */

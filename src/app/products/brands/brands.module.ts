@@ -10,6 +10,7 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { RouterModule } from '@angular/router';
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 @NgModule({
   declarations: [
     BrandsComponent
@@ -17,7 +18,7 @@ import { RouterModule } from '@angular/router';
   imports: [
     CommonModule,
     BrandsRoutingModule,ReactiveFormsModule,NgbModule,
-    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
+    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,InfiniteScrollModule,
     ToastrModule.forRoot(), ]
 })
 export class BrandsModule { }

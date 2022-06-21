@@ -8,7 +8,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 @NgModule({
   declarations: [
     SubscribedprodComponent
@@ -16,7 +16,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     SubscribedprodRoutingModule, NgxPaginationModule, NgxSkeletonLoaderModule,
-    ToastrModule.forRoot(),NgbModule,ReactiveFormsModule
+    ToastrModule.forRoot(),NgbModule,ReactiveFormsModule,InfiniteScrollModule
   ]
 })
 export class SubscribedprodModule { }

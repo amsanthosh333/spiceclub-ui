@@ -131,11 +131,19 @@ public gettestimonial() {
     this.url = `${this.endPoint1}/cart-count/` + id;
     return this.http.get(this.url,{headers:headers});      
   }
-  public fetchusercart(id:any,) {  
+  
+  public availablecoupan() {  
     const headers = new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
-    this.url = `${this.endPoint1}/carts/` + id;
+    this.url = `${this.endPoint1}/coupon/availablecoupon`;
+    return this.http.get(this.url,{headers:headers});      
+  }
+  public fetchusercart(id:any,buynowid:any) {  
+    const headers = new HttpHeaders()
+    .set('content-type', 'application/json')
+    .set('Authorization', 'Bearer'+' '+ this.accesstoken)
+    this.url = `${this.endPoint1}/carts/` + id +`?is_buynow=`+ buynowid;
     return this.http.post(this.url,null,{headers:headers});      
   }
   public fetchcartprocess(body:any) {
@@ -161,11 +169,11 @@ updatecart(body:any) {
   this.url = `${this.endPoint1}/carts/change-quantity`;
   return this.http.post(this.url,body,{headers:headers});
 }
-fetchsummery(id:any) {  
+fetchsummery(id:any,buynowid:any) {  
   const headers = new HttpHeaders()
   .set('content-type', 'application/json')
   .set('Authorization', 'Bearer'+' '+ this.accesstoken)
-  this.url = `${this.endPoint1}/cart-summary/` + id;
+  this.url = `${this.endPoint1}/cart-summary/` + id+`?is_buynow=`+ buynowid;
   return this.http.get(this.url,{headers:headers});
 }
 
@@ -220,19 +228,22 @@ public addtowishlist(body: any) {
           return this.http.get(this.url, {headers:headers});     
       }
   // deals
-  public gettodaysdeal() {
-    this.url = `${this.endPoint1}/products/todays-deal?user_id=`+ this.userid+`&buyertype=` +this.buyertypeid;
+  public gettodaysdeal(categoryid:any) {
+    this.url = `${this.endPoint1}/products/todays-deal?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
     return this.http.get(this.url);
   }
-  public getdaydealpro() {
-    this.url = `${this.endPoint1}/products/deal-of-day?user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+  public getdaydealpro(categoryid:any) {
+    this.url = `${this.endPoint1}/products/deal-of-day?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
     return this.http.get(this.url);
   }
-  public getmonthdealpro() {
-    this.url = `${this.endPoint1}/products/deal-of-month?user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+  public getmonthdealpro(categoryid:any) {
+    this.url = `${this.endPoint1}/products/deal-of-month?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
     return this.http.get(this.url);
   }
-
+  public getflashdealpro(categoryid:any) {
+    this.url = `${this.endPoint1}/flash-deal-products/1?category=`+ categoryid +`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
+    return this.http.get(this.url);
+  }
   public fetchuserwishlist(id:any,) {  
     const headers = new HttpHeaders() 
     .set('Authorization', 'Bearer'+' '+ this.accesstoken)
@@ -512,7 +523,6 @@ public gettopcat() {
 public getcatprod(id:any,page:any) {
   this.url = `${this.endPoint1}/products/category/` + id +'?page='+ page +'&name=&user_id='+ this.userid;
   console.log(this.url);
-  
   return this.http.get(this.url);
 }
 public getcatdetail(id:any) {
@@ -541,6 +551,10 @@ public getsubcatsearchprod(id:any,page:any,key:any) {
 public getcatsubprod(link: string) {
   return this.http.get(link);
 }
+public getcatbrands(id:any){
+  this.url = `${this.endPoint1}/products/categorybrand/` + id ;
+  return this.http.get(this.url);
+}
 // shopbyproducts
 public getallproducts(page:any) { 
   this.url = `${this.endPoint1}/products?page=` + page+`&user_id=`+this.userid+`&buyertype=` +this.buyertypeid;
@@ -559,7 +573,6 @@ public getpage3(link:any,deliveryy:any,paymentt:any){
 public getpage2(link:any,categoryy_id:any,brandd_id:any,sort: string,min:any,max:any){
   this.url= link+  `&categories=`+categoryy_id+`&brands=`+brandd_id+`&min=` + min+`&max=` + max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid;
   console.log("page url",this.url);
-  
   return this.http.get(this.url);
 }
 // productbybrand
@@ -626,7 +639,6 @@ public filterdataa2(min:any,max:any) {
 public filterdataa3(page:any,category:any,brand:any,min:any,max:any,sort:any) {
   this.url = `${this.endPoint1}/products/search?page=`+ page+`&categories=` + category +`&brands=` + brand +`&name=` +`&min=` + min +`&max=` +max+`&sort_key=` + sort+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
   console.log(this.url);
-  
   return this.http.get(this.url);
 }
 public filtersearchdataa(name:any) {
@@ -644,6 +656,11 @@ public getallflashdeal() {
 }
 public gettodaysoffer() {
   this.url = `${this.endPoint1}/todayoffer?user_id=`+this.userid +`&buyertype=` +this.buyertypeid;
+  return this.http.get(this.url);
+}
+
+public getsubscribebanner() {
+  this.url = `${this.endPoint1}/subscriptionbanners`;
   return this.http.get(this.url);
 }
 //review
@@ -724,12 +741,16 @@ public getallblog(page:any) {
   this.url = `${this.endPoint1}/blog`+`?page=`+page;
   return this.http.get(this.url);
 }
+public getbestblog(id:any) {
+  this.url = `${this.endPoint1}/blog/bestof/`+id;
+  return this.http.get(this.url);
+}
 public getallblogcat() {
   this.url = `${this.endPoint1}/blog/categories`;
   return this.http.get(this.url);
 }
 public getblogbycat(id: string,page:any) {
-  this.url = `${this.endPoint1}/blog/category/` + id+`?page=` +page ;
+  this.url = `${this.endPoint1}/blog/category/` + id+`?page=` +page;
   return this.http.get(this.url);
 }
 public getblogdetail(id: string) {
@@ -752,6 +773,7 @@ public searchbyblog(key:any) {
   this.url = `${this.endPoint1}/blogcomment/submit`;     ////////////////////////add search//////////////////////////////////////
   return this.http.get(this.url);
 }
+
 
 //feedbacks
 public getfeedbacks() {

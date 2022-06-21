@@ -28,7 +28,7 @@ export class FooterComponent implements OnInit {
     this.getinstagramurl();
     this.gettwitterurl();
     this.getyoutubeurl();
-    this.getpayment();
+    // this.getpayment();
     this.getlinkedurl();
 
   }
@@ -55,12 +55,12 @@ export class FooterComponent implements OnInit {
     }
   }
 
-  getpayment() {
-    this.request.fetchpayment().subscribe((res: any) => {
-      this.Paymentmethod = res;
-      console.log("this.Paymentmethod", this.Paymentmethod);
-    });
-  }
+  // getpayment() {
+  //   this.request.fetchpayment().subscribe((res: any) => {
+  //     this.Paymentmethod = res;
+  //     console.log("this.Paymentmethod", this.Paymentmethod);
+  //   });
+  // }
 
   getfacebookurl() {
     this.request.fetchfacebookurl().subscribe((res: any) => {

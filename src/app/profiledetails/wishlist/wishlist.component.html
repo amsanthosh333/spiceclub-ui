@@ -1,106 +1,79 @@
-<!--=======  breadcrumb area =======-->
-
-<div class="breadcrumb-area breadcrumb-bg-1 pt-10 mb-30">
+<div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-12">
-                <h1 class="breadcrumb-title">Wishlist</h1>
-
-                <!--=======  breadcrumb list  =======-->
-
-                <ul class="breadcrumb-list" style="padding-left: 0px;">
-                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
-                    <li class="breadcrumb-list__item breadcrumb-list__item--active">wishlist</li>
-                </ul>
-
-                <!--=======  End of breadcrumb list  =======-->
-
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- 
-<div id="pggg" *ngIf="(Wishlist.length==0)" style=" display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 200px;
-	margin-right: 100px;
-	margin-left: 100px;
-	border: 3px solid rgb(139, 139, 139);">
-    <div>
-        <h5>
-            Wishlist is empty
-        </h5>
-    </div>
-</div> -->
-
-<div class="shopping-cart-area mb-30">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-
-
-
-                <!--=======  cart table  =======-->
-
+            <div class="col-lg-9" style="background-color: white;">
+                <div class="col-lg-12" style="  border-bottom: 2px solid #d3d3d3;" *ngIf="(Wishlist?.length!==0)">
+                    <div class="section-title section-title--one  mb-0">
+                        <h6
+                            style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
+                            Wishlist</h6>
+                    </div>
+                </div>
                 <div class="cart-table-container" *ngIf="!loader">
-                    <table class="cart-table" *ngIf="(Wishlist.length!==0)">
-                        <thead>
-                            <tr>
-                                <th class="product-name" colspan="2">Product</th>
-                                <th class="product-price">Price</th>
-
-                                <th class="product-subtotal">&nbsp;</th>
-                                <th class="product-remove">&nbsp;</th>
-                            </tr>
-                        </thead>
-
+                    <table id="producttable" class="cart-table" *ngIf="(Wishlist?.length!==0)" style="border: none;">
                         <tbody>
                             <tr *ngFor="let b of Wishlist">
-                                <td class="product-thumbnail"  (click)="proddetail(b.product.id)">
+                                <td class="product-thumbnail" (click)="proddetail(b.product.id)">
                                     <a>
                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{b.product.thumbnail_image}}"
                                             class="img-fluid" alt="">
                                     </a>
                                 </td>
-                                <td class="product-name"  (click)="proddetail(b.product.id)">
-                                    <a>{{b.product.name}}</a>
-                                    <!-- <span class="product-variation">Color: Black</span> -->
+                                <td class="product-name">
+                                    <a style="text-decoration: none;"
+                                        (click)="proddetail(b.product_id)">{{b.product.name}}</a>
+                                    <a
+                                        style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">{{b.product.brand}}</a>
+
+                                    <a *ngIf="b.product.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">In-stock</a>
+                                    <a  *ngIf="b.product.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">Out of stock</a>
+                                    <span class="price" style="font-weight: 600;
+										color: rgb(66, 66, 66);">{{b.product.base_price}} &nbsp;&nbsp;</span>
+                                    <br>
+                                    <a style="vertical-align: middle;" id="subsave">
+                                        <span>save</span>
+                                        <p style="font-size:0.8rem ;">
+                                            subscribe & save
+                                        </p>
+                                    </a>                            
+                                </td>
+                                <td class="product-price" style="padding: 10px;">
+
+                                    <!-- <span
+                                        class="price">{{b.product.base_price}}</span> -->
                                 </td>
 
-                                <td class="product-price" style="padding: 10px;"><span
-                                        class="price">{{b.product.base_price}}</span></td>
-
-
-                                <!-- <div class="pro-qty d-inline-block mx-0 pt-25">
-                                        <a  class="dec qty-btn" style="text-decoration: none;" (click)="decreaseqty()">-</a>
-                                        <input type="text" value="{{b.product.qty}}" >
-                                    <a  class="inc qty-btn" style="text-decoration: none;" (click)="increaseqty()">+</a></div> -->
-
-                                <td class="add-to-cart">
-                                    <button class="lezada-button lezada-button--small lezada-button--icon--left"
-                                        (click)="addtocart1(b.product.id,openRecord)">
-                                        <i class="ion-ios-cart-outline"></i>add to cart</button>
-
+                                <td class="add-to-cart" style="vertical-align:bottom;">
+                                   
                                 </td>
                                 <td class="product-remove">
-                                    <a (click)="deleteRecord(b.id)">
-                                        <i class="ion-android-close"></i>
-                                    </a>
+                                    <span *ngIf="b.product.stock!==0">
+                                        <button class="lezada-button lezada-button--small lezada-button--icon--left"
+                                        (click)="addtocart1(b.product.id,openRecord)" (click)="openaddcart()" style="padding-top: 3px;
+                                        padding-bottom: 3px;">
+                                        <i class="ion-ios-cart-outline"></i>add to cart</button>
+
+                                        <button class="lezada-button lezada-button--small lezada-button--icon--left mt-10"
+                                        (click)="addtocart1(b.product.id,openRecord)" (click)="openbuynow()" style="padding-left: 15px;padding-top: 3px; padding-bottom: 3px;
+                                        padding-right: 22px;">&nbsp;
+                                        <i  class="bi bi-lightning-fill"></i> Buy Now&nbsp;</button>
+                                        
+                                    </span>
+                                   <span  *ngIf="b.product.stock==0">
+                                    <span > <button class="btn btn-warning " style="padding-top: 1px;
+                                        padding-bottom: 1px;
+                                        font-size: 0.9rem;" (click)="deleteRecord(b.id)">Set alert,if stock arrives later</button></span>
+                                   </span>
+
+                                     <span style="display:block;margin-top: 50px;"> <button class="btn btn-light sm" style="padding-top: 1px;
+                                        padding-bottom: 1px;
+                                        font-size: 0.9rem;" (click)="deleteRecord(b.id)">Delete</button></span>  
                                 </td>
                             </tr>
                         </tbody>
                     </table>
 
-                    <div id="pggg" *ngIf="(Wishlist.length==0)" style=" display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 200px;
-	margin-right: 100px;
-	margin-left: 100px;
-	border: 3px solid rgb(139, 139, 139);">
+                    <div id="pggg" *ngIf="(Wishlist?.length==0)" >
                         <div>
                             <h5>
                                 Wishlist is empty
@@ -117,360 +90,433 @@
                             [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                         </ngx-skeleton-loader>
                     </div>
-
                 </div>
-
                 <!--=======  End of cart table  =======-->
             </div>
 
+            <div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" style="margin-left: 0px;">
+                <div class="row mb-10">
+                    <div *ngIf="!Summeryload">
+                        <div class="cart-calculation-area" style="background-color: white; padding: 20px;">
+                            <p class="mb-10" style="font-size: 1rem;font-weight: 500;">Featured Products</p>
+                            <div class="widget-product-wrapper" id="featureddiv">
+                                <!--=======  single widget product  =======-->
+                                <div class="single-widget-product-wrapper">
+                                    <div class="single-widget-product" *ngFor="let img of Futuredpro"
+                                        style="padding-bottom: 17px;" (click)="proddetail(img.id)">
+                                        <!--=======  image  =======-->
 
-        </div>
-    </div>
-</div>
-<!-- poup dummy-->
-<ng-template #openRecordd let-modal>
-    <div class="modal-body">
-        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
-            <span aria-hidden="true"><i class="ion-android-close"></i></span>
-        </button>
-        <div class="py-4" style="margin-left: 20px; margin-right: 20px;">
-            <div class="modal-body p-4 c-scrollbar-light">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="row gutters-10 flex-row-reverse"
-                            style="margin-right: 20px;border: 2px solid rgb(163, 163, 163);  border-radius: 0px;">
-                            <div class="col" style="margin-top: 35px;margin-bottom: 35px;">
-                                <div class="aiz-carousel product-gallery slick-initialized slick-slider"
-                                    data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
-                                    <div class="slick-list draggable" style="height: 273.5px;">
-                                        <div class="slick-track" style="opacity: 1; width: 804px;">
-                                            <div class="slick-slide slick-current slick-active" data-slick-index="0"
-                                                aria-hidden="false"
-                                                style="width: 268px; position: relative; left: 0px; top: 0px; z-index: 999; opacity: 1;">
-                                                <div>
-                                                    <div class="carousel-box img-zoom rounded"
-                                                        style="width: 100%; display: inline-block; position: relative; overflow: hidden;">
-                                                        <img class="img-fluid ls-is-cached lazyloaded"
-                                                            src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
-                                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}">
-                                                        <img role="presentation" alt=""
-                                                            src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
-                                                            class="zoomImg"
-                                                            style="position: absolute; top: -1224.65px; left: 0px; opacity: 0; width: 2250px; height: 2250px; border: none; max-width: none; max-height: none;">
-                                                    </div>
+                                        <div class="single-widget-product__image">
+                                            <a>
+                                                <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                    class="img-fluid" alt="">
+                                            </a>
+                                        </div>
+                                        <div class="single-widget-product__content">
+
+                                            <div class="single-widget-product__content__top">
+                                                <h3 class="product-title"><a>{{img.name}}</a>
+                                                </h3>
+                                                <br>
+                                                <div class="price">
+                                                    <span class="main-price discounted"
+                                                        style="text-decoration:line-through"
+                                                        *ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
+                                                    <span class="discounted-price">{{img.main_price}}</span>
                                                 </div>
+                                                <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+                                                </ngb-rating>
+                                            </div>
+                                        </div>
+                                        <!--=======  End of content  =======-->
+                                    </div>
+                                </div>
+
+                                <!--=======  End of single widget product  =======-->
+                            </div>
+                            <!-- lazyloading -->
+                            <div class="widget-product-wrapper" *ngIf="poploader">
+                                <!--=======  single widget product  =======-->
+                                <div class="single-widget-product-wrapper">
+                                    <div class="single-widget-product" style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; width:80px">
+                                            <ngx-skeleton-loader count="1"
+                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                        <div class="single-widget-product__content">
+                                            <div class="single-widget-product__content__top">
+                                                <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-widget-product" style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; width:80px">
+                                            <ngx-skeleton-loader count="1"
+                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                        <div class="single-widget-product__content">
+                                            <div class="single-widget-product__content__top">
+                                                <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-widget-product" style="padding-bottom: 17px;">
+                                        <div class="single-widget-product__image" style="height: 120px; width:80px">
+                                            <ngx-skeleton-loader count="1"
+                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                        <div class="single-widget-product__content">
+                                            <div class="single-widget-product__content__top">
+                                                <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+
+                                <!--=======  End of single widget product  =======-->
                             </div>
-                  
+
+
+
+                        </div>
+                    </div>
+                    <div class="skll" *ngIf="Summeryload">
+                        <ngx-skeleton-loader count="1" [theme]="{ 
+										'border-radius': '5px',
+										height: '350px',
+										'background-color': '##b9b8b8',
+										border: '1px solid white'
+									  }" animation="pulse"></ngx-skeleton-loader>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--=====  End of wishlist page content  ======-->
+
+<!-- poup   (click)="quickview(img.id,openRecord)"-->
+<ng-template #openRecordd let-modal>
+
+    <div class="modal-body" style="background-color: rgb(248, 250, 251);">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
+            <span aria-hidden="true"><i class="ion-android-close"></i></span>
+        </button>
+        <div class="py-4">
+            <div class="modal-body  c-scrollbar-light">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="row gutters-10 flex-row-reverse"
+                            style="border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
+                            <div class="col" style="margin-top: 35px;margin-bottom: 35px;">
+                                <div class="aiz-carousel product-gallery slick-initialized slick-slider"
+                                    data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
+                                    <div class="carousel-box img-zoom rounded"
+                                        style="width: 100%; display: inline-block; position: relative; overflow: hidden;">
+                                        <img class="img-fluid ls-is-cached lazyloaded"
+                                            src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
+                                            data-src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}">
+                                        <img role="presentation" alt=""
+                                            src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
+                                            class="zoomImg"
+                                            style="position: absolute; top: -1224.65px; left: 0px; opacity: 0; width: 2250px; height: 2250px; border: none; max-width: none; max-height: none;">
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
 
-                    <div class="col-lg-6">
-                        <div class="text-left">
-                            <h3 class="mb-2 fs-20 fw-600">
-                                {{Peoduct.name}}
-                            </h3>
+                    <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
+                        <h5 class="item-title mb-4">{{Peoduct.name}}</h5>
+                        <!-- <p class="price">
+                                <span class="main-price discounted" style="text-decoration: line-through"
+                                *ngIf="storked_pricee!==prod_price">{{storked_pricee}}</span>
+                            <span style="color: red;" class="h5 discounted-price">{{prod_price}}</span>
+                            <span class="opacity-70">/{{Peoduct.unit}}</span>
+                            </p> -->
 
-                            <div class="row no-gutters mt-3">
-                                <div class="col-2">
-                                    <div class="opacity-50">Price:</div>
+
+
+                        <div class="quick-view-other-info pb-0 pt-0" #target>
+                            <table>
+                                <tr class="single-info" *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
+                                    <td class="quickview-title" style="color: red;">MRP: </td>
+                                    <td class="quickview-value">
+
+                                        <span class="main-price discounted">{{Peoduct?.stroked_price}}</span>
+
+                                    </td>
+                                </tr>
+                                <tr class="single-info ">
+                                    <td class="quickview-title" style="color: red; ">Price: </td>
+                                    <td class="quickview-value">
+                                        <a style="font-size: 1.3rem;">{{Peoduct?.main_price}}</a>
+                                        <span style="font-size: 0.8rem;font-weight: 500;"> (Including all taxes)</span>
+
+                                    </td>
+                                </tr>
+                                <tr class="single-inf " *ngIf="Peoduct?.discount_percentage!==0">
+                                    <td class="quickview-title" style="color: red;"> </td>
+                                    <td class="quickview-value pt-0">
+                                        <a style="font-weight: 300;">( You save {{Peoduct?.discount_percentage}} % )
+                                        </a>
+                                    </td>
+                                </tr>
+                                <tr class="single-info">
+                                    <td class="quickview-title" style="color: red;">Excluding GST: </td>
+                                    <td class="quickview-value">
+                                        <a style="font-size: 1rem;font-weight: 500;">Rs {{Peoduct?.excl_gst}} </a>
+                                    </td>
+                                </tr>
+                                <tr class="single-info">
+                                    <td class="quickview-title" style="color: red;">Variable Price: </td>
+                                    <td class="quickview-value">
+                                        <a style="font-size: 1rem;font-weight: 500;">{{prod_price}} </a>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+
+
+                        <form id="option-choice-form">
+                            <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
+                            <input type="hidden" name="id" value="21">
+
+                            <div class="row no-gutters ml-1 mt-2">
+                                <div class="col-3 ">
+                                    <div class="quickview-title mt-2 " *ngFor="let a of choice" style="color: red;">
+                                        {{a.title}}:</div>
                                 </div>
-                                <div class="col-10">
-                                    <div class="">
-                                        <strong class="h6 fw-600 text-primary">
-                                            {{prod_price}}
-                                        </strong>
-                                        <span class="opacity-70">/{{Peoduct.unit}}</span>
+                                <div class="col-9 ">
+                                    <div class="shop-product__block__value" *ngFor="let a of choice">
+
+                                        <div class="shop-product-size-list">
+                                            <span class="single-size" *ngFor="let b of a.options;let i=index"
+                                                [ngClass]="{'active': subItem === i}"
+                                                (click)="selectvar(b,i)">{{b}}</span>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="row no-gutters ml-1">
+                                <div class="col-3">
+                                    <div class="quickview-title mt-2" style="color: red;">Quantity:</div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="product-quantity d-flex align-items-center">
+                                        <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
+                                            <a class="dec qty-btn" style="text-decoration: none;"
+                                                (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+                                            <input type="number" #box value="{{quantityyy}}"
+                                                (keyup)="getValue(box.value)" name="qqty"
+                                                style="background: transparent;">
+
+                                            <a class="inc qty-btn" style="text-decoration: none;"
+                                                (click)="increaseqty()" *ngIf="stk>1">+</a>
+                                        </div>
+                                        <!-- <div class="avialable-amount opacity-60">
+                                                &nbsp; (<span id="available-quantity">{{stocck}}</span> available)
+                                            </div> -->
                                     </div>
                                 </div>
                             </div>
                             <hr>
-                            <form id="option-choice-form">
-                                <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
-                                <input type="hidden" name="id" value="21">
-
-                                <!-- Quantity + Add to cart -->
-
-                                <!-- <div class="shop-product__block shop-product__block--size mb-20">
-
-                                    <div class="shop-product__block__title" *ngFor="let a of choice">{{a.title}}:
-                                    </div>
-
-                                    <div class="shop-product__block__value" *ngFor="let a of choice">
-
-                                        <div class="shop-product-size-list">
-                                            <span class="single-size" *ngFor="let b of a.options"
-                                                (click)="selectvar(b)">{{b}}</span>
-
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <div class="row no-gutters">
-                                    <div class="col-3">
-                                        <div class="opacity-50 mt-2 " *ngFor="let a of choice">{{a.title}}:</div>
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="shop-product__block__value" *ngFor="let a of choice">
-
-                                            <div class="shop-product-size-list">
-                                                <span class="single-size" *ngFor="let b of a.options;let i=index"
-                                                [ngClass]="{'active': subItem === i}"     (click)="selectvar(b,i)">{{b}}</span>
-
-                                            </div>
-                                        </div>
+                            <div class="row no-gutters pb-3 ml-1" id="chosen_price_div" *ngIf="quantityyy!==0">
+                                <div class="col-3">
+                                    <div class="quickview-title">Total Price:</div>
+                                </div>
+                                <div class="col-9">
+                                    <div class="product-price">
+                                        <strong id="chosen_price" class="h5 fw-600 text-danger">Rs
+                                            {{totalprice}}</strong>
                                     </div>
                                 </div>
-
-                                <div class="row no-gutters">
-                                    <div class="col-3">
-                                        <div class="opacity-50 mt-2">Quantity:</div>
-                                    </div>
-                                    <!-- <div class="col-9">
-                                        <div class="product-quantity d-flex align-items-center">
-                                            <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stocck!==0">
-                                                <span style="position: absolute;"> <a class="dec qty-btn"
-                                                        style="text-decoration: none;" (click)="decreaseqty()"
-                                                        *ngIf="quantityyy!==1">-</a></span>
-                                                <input type="text" value="{{quantityyy}}">
-                                                <span style="position: absolute;"> <a class="inc qty-btn"
-                                                        style="text-decoration: none;" (click)="increaseqty()"
-                                                        *ngIf="stocck!==0">+</a> </span>
-                                            </div>
-                                            <div class="avialable-amount opacity-60 pl-20">
-                                                (<span id="available-quantity">{{stocck}}</span> available)
-                                            </div>
-                                        </div>
-                                    </div> -->
-                                    <div class="col-9">
-                                        <div class="product-quantity d-flex align-items-center">
-                                            <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
-                                                <a class="dec qty-btn" style="text-decoration: none;"
-                                                    (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
-                                                    <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
-                                               
-                                                <a class="inc qty-btn" style="text-decoration: none;"
-                                                    (click)="increaseqty()" *ngIf="stk>1">+</a>
-                                            </div>
-                                            <div class="avialable-amount opacity-60">
-                                                &nbsp; (<span id="available-quantity">{{stocck}}</span> available)
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row no-gutters pb-3" id="chosen_price_div">
-                                    <div class="col-3">
-                                        <div class="opacity-50">Total Price:</div>
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="product-price">
-                                            <strong id="chosen_price"
-                                                class="h5 fw-600 text-danger">Rs {{totalprice}}</strong>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                            <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
-                                <!-- <button *ngIf="stk!==0" type="button" class="btn btn-primary  add-to-cart"
-                                (click)="addtocart2()">
-                                    <i class="la la-shopping-cart"></i>
-                                    <span class="d-none d-md-inline-block"> Add to cart</span>
-                                </button> -->
-                                <button *ngIf="stk!==0"
-                                    class="lezada-button lezada-button--small lezada-button--icon--left"
-                                    (click)="addtocart2()">
-                                    <i class="ion-ios-cart-outline"></i>add to cart</button>
-
-                                <button *ngIf="stk==0"
-                                    style="background-color: rgb(197, 25, 25);border-color:rgb(197, 25, 25) ;"
-                                    class="lezada-button lezada-button--small lezada-button--icon--left">
-                                    <i class="ion-ios-cart-outline"></i>Out of Stock</button>
-
                             </div>
+                        </form>
+
+                        <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
+                            <button *ngIf="stk!==0" class="lezada-button lezada-button--small lezada-button--icon--left"
+                                (click)="addtocart2()">
+                                <i class="ion-ios-cart-outline"></i>add to cart</button>
+
+                            <button *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
+                                style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
+                                <i class="ion-ios-cart-outline"></i>Out of Stock</button>
 
                         </div>
+
+                        <div class="shop-product__block__title"
+                            style="font-weight: 600;color: green; text-align: start;">
+                            {{Peoduct?.usp_text}}
+                        </div>
+                        <div style="text-align: start;"> <span>
+                                <a *ngFor="let b of Peoduct?.usp_icon">
+                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{b?.icon}}"
+                                        style="height:47px; width:47px; margin-bottom: 3px;margin-left:15px;margin: right 15px; ; "></a>
+                                &nbsp; </span>
+                        </div>
+                        <hr>
+                        <h6> <strong>Description</strong> </h6>
+                        <p class="description" [innerHTML]="Peoduct?.description" style="font-size: small;">
+                            {{Peoduct.description}}
+                        </p>
+
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </ng-template>
-<!--=====  End of wishlist page content  ======-->
 
-    <!-- poup   (click)="quickview(img.id,openRecord)"-->
-    <ng-template #openRecord let-modal>
+<!-- new pop -->
 
-        <div class="modal-body" style="background-color: rgb(248, 250, 251);" >
-            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()"
-                style="padding-right: 15px;">
-                <span aria-hidden="true"><i class="ion-android-close"></i></span>
-            </button>
-            <div class="py-4" >
-                <div class="modal-body  c-scrollbar-light">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="row gutters-10 flex-row-reverse"
-                                style="border: 2px solid rgb(216, 212, 212);  border-radius: 0px;">
-                                <div class="col" style="margin-top: 35px;margin-bottom: 35px;">
-                                    <div class="aiz-carousel product-gallery slick-initialized slick-slider"
-                                        data-nav-for=".product-gallery-thumb" data-fade="true" data-auto-height="true">
-                                        <div class="carousel-box img-zoom rounded"
-                                            style="width: 100%; display: inline-block; position: relative; overflow: hidden;">
-                                            <img class="img-fluid ls-is-cached lazyloaded"
-                                                src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
-                                                data-src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}">
-                                            <img role="presentation" alt=""
-                                                src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.thumbnail_image}}"
-                                                class="zoomImg"
-                                                style="position: absolute; top: -1224.65px; left: 0px; opacity: 0; width: 2250px; height: 2250px; border: none; max-width: none; max-height: none;">
-                                        </div>
-                                    </div>
-                                </div>
-                           
-                            </div>
+<ng-template #openRecord let-modal>
+
+    <div class="modal-body" style="background-color: rgb(248, 250, 251);">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
+            <span aria-hidden="true"><i class="ion-android-close"></i></span>
+        </button>
+        <h6 style="font-weight: 700;
+        padding: 0px;
+        margin-top: 10px;
+        margin-bottom: 0px;">Select options</h6>
+        <div class="py-1">
+            <div class="modal-body  c-scrollbar-light">
+
+                <div class="quick-view-other-info pb-0 pt-0" #target>
+                    <table>
+                        <!-- <tr class="single-info" *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
+                                    <td class="quickview-title" style="color: red;">MRP: </td>
+                                    <td class="quickview-value">
+
+                                        <span class="main-price discounted">{{Peoduct?.stroked_price}}</span>
+
+                                    </td>
+                                </tr> -->
+                        <!-- <tr class="single-info ">
+                                    <td class="quickview-title" style="color: red; ">Price: </td>
+                                    <td class="quickview-value">
+                                        <a style="font-size: 1.3rem;">{{Peoduct?.main_price}}</a>
+                                        <span style="font-size: 0.8rem;font-weight: 500;"> (Including all taxes)</span>
+
+                                    </td>
+                                </tr> -->
+                        <tr class="single-inf ">
+
+
+                        </tr>
+                        <!-- <tr class="single-info">
+                                    <td class="quickview-title" style="color: red;">Excluding GST: </td>
+                                    <td class="quickview-value">
+                                        <a style="font-size: 1rem;font-weight: 500;">Rs {{Peoduct?.excl_gst}} </a>
+                                    </td>
+                                </tr> -->
+                        <tr class="single-info">
+                            <!-- <td class="quickview-title" style="color: red;">Variable Price: </td> -->
+                            <td class="quickview-value">
+                                <a> <span style="color: rgb(56 56 56);font-weight: 400; ">Variable Price:</span>
+                                    <span style="font-size: 1rem;font-weight: 600;color: brown;padding-left: 5px;">
+                                        {{prod_price}} </span>
+                                    <span class="main-price discounted" *ngIf="prod_price!==storked_pricee" style="
+                                             text-decoration: line-through;color:rgb(51, 51, 51); font-size: 0.7rem;">
+                                        {{storked_pricee}}</span></a>
+                                <span *ngIf="Peoduct?.discount_percentage!==0">&nbsp; <a style="font-weight: 300;
+                                    font-size: 0.8rem;
+                                    color: green;">( You save {{Peoduct?.discount_percentage}} % )
+                                    </a></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+
+                <form id="option-choice-form">
+                    <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
+                    <input type="hidden" name="id" value="21">
+
+                    <div class="row no-gutters ml-1 mt-2">
+                        <div class="col-3 ">
+                            <div class="quickview-title mt-2 " *ngFor="let a of choice" style="color: rgb(56 56 56);
+                                    font-weight: 400;">
+                                {{a.title}}:</div>
                         </div>
-                    
-                        <div class="col-lg-6 " style=" height: 450px;overflow-y: auto;">
-                            <h5 class="item-title mb-4">{{Peoduct.name}}</h5>
-                            <!-- <p class="price">
-                                <span class="main-price discounted" style="text-decoration: line-through"
-                                *ngIf="storked_pricee!==prod_price">{{storked_pricee}}</span>
-                            <span style="color: red;" class="h5 discounted-price">{{prod_price}}</span>
-                            <span class="opacity-70">/{{Peoduct.unit}}</span>
-                            </p> -->
-                            
-                            
-                           
-                            <div class="quick-view-other-info pb-0 pt-0" #target>
-                                <table>
-                                    <tr class="single-info"
-                                        *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
-                                        <td class="quickview-title" style="color: red;">MRP: </td>
-                                        <td class="quickview-value">
-    
-                                            <span
-                                                class="main-price discounted">{{Peoduct?.stroked_price}}</span>
-    
-                                        </td>
-                                    </tr>
-                                    <tr class="single-info ">
-                                        <td class="quickview-title" style="color: red; ">Price: </td>
-                                        <td class="quickview-value">
-                                            <a style="font-size: 1.3rem;">{{Peoduct?.main_price}}</a>
-                                            <span style="font-size: 0.8rem;font-weight: 500;"> (Including all taxes)</span>
-    
-                                        </td>
-                                    </tr>
-                                    <tr class="single-inf " *ngIf="Peoduct?.discount_percentage!==0">
-                                        <td class="quickview-title" style="color: red;"> </td>
-                                        <td class="quickview-value pt-0" >
-                                            <a style="font-weight: 300;">( You save {{Peoduct?.discount_percentage}} % ) </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="single-info">
-                                        <td class="quickview-title" style="color: red;">Excluding GST: </td>
-                                        <td class="quickview-value">
-                                            <a style="font-size: 1rem;font-weight: 500;">Rs {{Peoduct?.excl_gst}} </a>
-                                        </td>
-                                    </tr>
-                                    <tr class="single-info">
-                                        <td class="quickview-title" style="color: red;">Variable Price: </td>
-                                        <td class="quickview-value">
-                                            <a style="font-size: 1rem;font-weight: 500;">{{prod_price}} </a>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                            
-    
-                            <form id="option-choice-form">
-                                <input type="hidden" name="_token" value="dhy8KvYTTGug1EMR5yJPArW0ybXT0zbNQQbK20Lk">
-                                <input type="hidden" name="id" value="21">
-    
-                                <div class="row no-gutters ml-1 mt-2">
-                                    <div class="col-3 ">
-                                        <div class="quickview-title mt-2 "  *ngFor="let a of choice" style="color: red;">{{a.title}}:</div>
-                                    </div>
-                                    <div class="col-9 ">
-                                        <div class="shop-product__block__value" *ngFor="let a of choice">
-    
-                                            <div class="shop-product-size-list">
-                                                <span class="single-size" *ngFor="let b of a.options;let i=index"
-                                                [ngClass]="{'active': subItem === i}"    (click)="selectvar(b,i)">{{b}}</span>
-    
-                                            </div>
-                                        </div>
-                                    </div>
+                        <div class="col-9 ">
+                            <div class="shop-product__block__value" *ngFor="let a of choice">
+
+                                <div class="shop-product-size-list">
+                                    <span class="single-size" *ngFor="let b of a.options;let i=index"
+                                        [ngClass]="{'active': subItem === i}" (click)="selectvar(b,i)">{{b}}</span>
+
                                 </div>
-      
-    
-                                <div class="row no-gutters ml-1">
-                                    <div class="col-3">
-                                        <div class="quickview-title mt-2" style="color: red;">Quantity:</div>
-                                    </div>
-                                    <div class="col-9">
-                                        <div class="product-quantity d-flex align-items-center">
-                                            <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
-                                                <a class="dec qty-btn" style="text-decoration: none;"
-                                                    (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
-                                                    <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)" name="qqty" style="background: transparent;">
-                                               
-                                                <a class="inc qty-btn" style="text-decoration: none;"
-                                                    (click)="increaseqty()" *ngIf="stk>1">+</a>
-                                            </div>
-                                            <!-- <div class="avialable-amount opacity-60">
-                                                &nbsp; (<span id="available-quantity">{{stocck}}</span> available)
-                                            </div> -->
-                                        </div>
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="row no-gutters pb-3 ml-1" id="chosen_price_div" *ngIf="quantityyy!==0">
-                                        <div class="col-3">
-                                            <div class="quickview-title">Total Price:</div>
-                                        </div>
-                                        <div class="col-9">
-                                            <div class="product-price">
-                                                <strong id="chosen_price"
-                                                    class="h5 fw-600 text-danger">Rs {{totalprice}}</strong>
-                                            </div>
-                                        </div>
-                                    </div>
-                            </form>
-    
-                            <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
-                                <button   *ngIf="stk!==0" class="lezada-button lezada-button--small lezada-button--icon--left" (click)="addtocart2()">
-                                    <i class="ion-ios-cart-outline"></i>add to cart</button>
-    
-                                <button   *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
-                                 style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
-                                        <i class="ion-ios-cart-outline"></i>Out of Stock</button>
-    
                             </div>
-                            
-                            <div class="shop-product__block__title"
-                            style="font-weight: 600;color: green; text-align: start;">
-                            {{Peoduct?.usp_text}}
-                        </div>
-                        <div  style="text-align: start;"> <span >
-                                <a *ngFor="let b of Peoduct?.usp_icon">
-                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{b?.icon}}"
-                                        style="height:47px; width:47px; margin-bottom: 3px;margin-left:15px;margin: right 15px; ; "></a>
-                           &nbsp; </span>
-                        </div>
-                            <hr>
-                            <h6> <strong>Description</strong> </h6>
-                            <p class="description" [innerHTML]="Peoduct?.description" style="font-size: small;">
-                                {{Peoduct.description}}
-                            </p>
-    
-    
                         </div>
                     </div>
+
+
+                    <div class="row no-gutters ml-1">
+                        <div class="col-3">
+                            <div class="quickview-title mt-2" style="color: rgb(56 56 56);
+                                    font-weight: 400;">Quantity:</div>
+                        </div>
+                        <div class="col-9">
+                            <div class="product-quantity d-flex align-items-center">
+                                <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
+                                    <a class="dec qty-btn" style="text-decoration: none;" (click)="decreaseqty()"
+                                        *ngIf="quantityyy!=0">-</a>
+                                    <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)"
+                                        name="qqty" style="background: transparent;">
+
+                                    <a class="inc qty-btn" style="text-decoration: none;" (click)="increaseqty()"
+                                        *ngIf="stk>1">+</a>
+                                </div>
+                                <!-- <div class="avialable-amount opacity-60">
+                                                &nbsp; (<span id="available-quantity">{{stocck}}</span> available)
+                                            </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row no-gutters pb-3 ml-1" id="chosen_price_div" *ngIf="quantityyy!==0">
+                        <div class="col-3">
+                            <div class="quickview-title" style="font-weight:600 ;">Total Price:</div>
+                        </div>
+                        <div class="col-9">
+                            <div class="product-price">
+                                <strong id="chosen_price" class="h5 fw-600 text-danger">Rs
+                                    {{totalprice}}</strong>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="mt-3" style="display: flex; align-items: center;  justify-content: center;">
+                    <button *ngIf="!buynowbtn" class="lezada-button lezada-button--small lezada-button--icon--left"
+                        (click)="addtocart2()">
+                        <i class="ion-ios-cart-outline"></i>Add to cart</button>
+<br>
+                        <button *ngIf="buynowbtn" class="lezada-button lezada-button--small lezada-button--icon--left"
+                        (click)="addtoocartt2()">
+                        <i  class="bi bi-lightning-fill"></i>Buy Now</button>
+
+                    <button *ngIf="stk==0" class="lezada-button lezada-button--small lezada-button--icon--left"
+                        style="background-color: rgb(235, 54, 30); border: 1px solid #e1830f;">
+                        <i class="ion-ios-cart-outline"></i>Out of Stock</button>
+
                 </div>
             </div>
+
+
         </div>
-    </ng-template>
+    </div>
+</ng-template>

@@ -11,7 +11,7 @@ import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { ToastrModule } from 'ngx-toastr';
 import {NgxPaginationModule} from 'ngx-pagination'; 
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 
 @NgModule({
   declarations: [
@@ -21,7 +21,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     DaydealRoutingModule, NgxPaginationModule,
     ReactiveFormsModule,NgbModule,
-    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,
+    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,InfiniteScrollModule,
     ToastrModule.forRoot()
   ]
 })

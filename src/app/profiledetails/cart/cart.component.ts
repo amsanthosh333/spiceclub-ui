@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
@@ -20,7 +21,7 @@ import { SharedService } from 'src/app/services/shared.service'
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  providers: [ToastrService],
+  providers: [NgbRatingConfig,ToastrService],
 })
 export class CartComponent implements OnInit {
 
@@ -78,16 +79,24 @@ export class CartComponent implements OnInit {
   search!: FormGroup;
   couponn: any;
   Summeryload: boolean=true;
+  cartitems: any;
+  availcoupan: any;
+  Futuredpro: any;
+ 
+  poploader: boolean =true;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
-    private toastr: ToastrService, private toast: ToastrService, private sharedService: SharedService) {
+    private toastr: ToastrService, private toast: ToastrService, private sharedService: SharedService,config: NgbRatingConfig,) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
 
     );
 
+    config.max = 5;
+    config.readonly = true;
+    
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user.id;
@@ -105,6 +114,9 @@ export class CartComponent implements OnInit {
 
     this.viewcart();
     this.viewcart3();
+    this.availabecoupan();
+    this.viewcartcount();
+    this.viewfuturedpro();
 
     this.comment = this.fb.group({
 
@@ -117,10 +129,11 @@ export class CartComponent implements OnInit {
     });
   }
   viewcart() {
-    this.request.fetchusercart(this.userid).subscribe((response: any) => {
+    this.request.fetchusercart(this.userid,0).subscribe((response: any) => {
 
       this.Cart = response;
       console.log("this.Cart",this.Cart)
+      this.cartitems=this.Cart.cart_items
       this.loader = false;
 
       this.owneriid = this.Cart[0].owner_id;
@@ -138,6 +151,7 @@ export class CartComponent implements OnInit {
       if (response.message == "Product is successfully removed from your cart") {
         this.viewcart();
         this.viewcart3();
+        this.viewcartcount(); 
         this.deleteRecordSuccess();
         this.sharedService.sendClickEvent();
       }
@@ -148,6 +162,12 @@ export class CartComponent implements OnInit {
       console.log(error);
     });
   }
+  viewcartcount() {
+    this.request.cartcount(this.userid).subscribe((response: any) => {
+      this.cartlength = response.cartcount;
+    });
+  }
+
   firstDropDownChanged(data: any, _id: any) {
     this.quantityy = data.target.value;
     let edata2 = {
@@ -159,6 +179,7 @@ export class CartComponent implements OnInit {
     this.request.updatecart(edata2).subscribe((response: any) => {
       this.viewcart();
       this.viewcart3();
+      this.viewcartcount();
     });
   }
   increaseqty(_id: any, qty: string) {
@@ -176,6 +197,7 @@ export class CartComponent implements OnInit {
         // this.toastr.success('Cart updated', '');
         this.viewcart();
         this.viewcart3();
+        this.viewcartcount();
         this.sharedService.sendClickEvent();
       }
       else{
@@ -184,6 +206,30 @@ export class CartComponent implements OnInit {
     });
 
   }
+  availabecoupan(){
+    this.request.availablecoupan().subscribe((response: any) => {    
+      this.availcoupan = response.data;
+      console.log(" this.availcoupan");
+    });
+
+  }
+  changecoupan(e:any) {
+    if(e.target.checked){ 
+      console.log(e.target.value);
+      this.comment.value.coupan= e.target.value
+      this.comment.setValue({
+        coupan: e.target.value,    
+      });         
+    }
+
+    else{
+      console.log("no");
+      this.comment.value.coupan= ''
+      this.comment.setValue({
+        coupan:'',    
+      });
+    }
+ }
   proddetail(id: any) {
     window.scroll(0, 0);
     this.router.navigate(['productdetail', id]);
@@ -207,6 +253,7 @@ export class CartComponent implements OnInit {
         // this.toastr.success('Cart updated', '');
         this.viewcart();
         this.viewcart3();
+        this.viewcartcount();
         this.sharedService.sendClickEvent();
       }
       else{
@@ -229,6 +276,7 @@ export class CartComponent implements OnInit {
       if(response.result==true){
         this.viewcart();
         this.viewcart3();
+        this.viewcartcount();
         this.sharedService.sendClickEvent();
       }
       else{
@@ -237,7 +285,7 @@ export class CartComponent implements OnInit {
     });
   }
   viewcart3() {
-    this.request.fetchsummery(this.userid).subscribe((response: any) => {
+    this.request.fetchsummery(this.userid,0).subscribe((response: any) => {
       console.log("summery",response); 
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
@@ -245,13 +293,29 @@ export class CartComponent implements OnInit {
       this.couponn=this.Summery.coupon_applied
       this.grandtotal = this.Summery.grand_total
       this.Summeryload=false
+      if( this.couponn==true){
+        this.removecou = true;
+        this.applycou = false;
+      }
     });
+   
 
   }
+
+  viewfuturedpro() {
+    this.request.getfuturedpro().subscribe((response: any) => {
+      console.log("Futuredpro",response);  
+      this.Futuredpro = response.data;
+      this.poploader = false;
+     
+    });
+  }
+  
   updatecart() {
     this.viewcart();
     this.viewcart3();
-    this.toastr.success('Cart updated', '');
+    this.viewcartcount();
+    // this.toastr.success('Cart updated', '');
   }
   proshipping() {
     this.caart = false
@@ -480,9 +544,10 @@ export class CartComponent implements OnInit {
     this.request.appycoupan(edata2).subscribe((res: any) => {
       console.log(res);
       if (res.message == 'Coupon Applied') {
-        this.toastr.success('Coupon Applied', '');
         this.removecou = true;
         this.applycou = false;
+        this.toastr.success('Coupon Applied', '');
+        
         this.updatecart();
       }
       else if (res.message == 'Invalid coupon code!') {
@@ -505,11 +570,15 @@ export class CartComponent implements OnInit {
       owner_id: this.owneriid,
     }
     this.request.removecoupan(edata2).subscribe((res: any) => {
-      if (res.message == 'Coupon Removed') {
-        this.toastr.success('Coupon Removed', '');
+      console.log("res",res);
+      
+      if (res.result == true) {
         this.removecou = false;
         this.applycou = true;
-        this.updatecart();
+        this.toastr.success('Coupon Removed', '');
+       
+        this.viewcart3();
+        this.availabecoupan();
       }
       else if (res.message == 'Invalid coupon code!') {
         this.toastr.error('Invalid coupon code!', '');
@@ -525,6 +594,7 @@ export class CartComponent implements OnInit {
     });
 
   }
+
   // razorpay
   initPay() {
     console.log("initPay,")

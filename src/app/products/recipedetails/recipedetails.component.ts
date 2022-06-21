@@ -154,8 +154,7 @@ export class RecipedetailsComponent implements OnInit {
       console.log("this.relatedrec",response);
       
       this.videoo =this.Peoduct.video_link;
-      this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);
-      
+      this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);     
       this.sideloader2 = false;
 
       this.discrloading = false;

@@ -77,6 +77,11 @@ export class ProductdetailComponent implements OnInit {
   iswishlistt: any;
   likedd = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   likeddd = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+ iindex: any;
+  img: any;
+  likesss = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+ 
   showFlag: boolean = false;
   selectedImageIndex: number = -1;
   currentIndex: any;
@@ -113,6 +118,17 @@ export class ProductdetailComponent implements OnInit {
   ingItemm: boolean=true;
   issubscribed: any;
   product_idd: any;
+  totalqty: any;
+  public quantityarray: any[] = [];
+  selectedvar: any;
+  showaddbtn: any;
+  imgloader2: boolean=true;
+  addinfobtnItemm: boolean=false;
+  pervarient: any;
+  subcat_id1: any;
+  subcat_id2: any;
+  imgItem: any=0;
+  offers: any;
 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -218,6 +234,7 @@ export class ProductdetailComponent implements OnInit {
   }
   blogClick(event: any) {
     console.log(event);
+    this.imgItem=event
     this.selectedimg = event;
     this.selectedimage = this.allgalleryphotos[event].image;
 
@@ -225,7 +242,7 @@ export class ProductdetailComponent implements OnInit {
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
-      this.addtowishlist(img.id);
+      this.addtowishlist(img.id,);
     }
     else if (this.likeddd[index] == false) {
       this.deleteRecord(img.id);
@@ -235,7 +252,7 @@ export class ProductdetailComponent implements OnInit {
   toggledelete(img: any, index: any): void {
     this.likedd[index] = !this.likedd[index];
     if (this.likedd[index] == true) {
-      this.addtowishlist(img.id);
+      this.addtowishlist(img.id,);
     }
     else if (this.likedd[index] == false) {
       this.deleteRecord(img.id);
@@ -266,6 +283,41 @@ export class ProductdetailComponent implements OnInit {
       });
     }
   }
+  addtowishlistmain(prd_id: any,content:any) {
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      let edata4 = {
+        user_id: this.userid,
+        product_id: prd_id
+      }
+      this.request.addtowishlist(edata4).subscribe((res: any) => {
+        if (res.message == 'Product is successfully added to your wishlist') {
+          this.iswishlist(prd_id)
+          this.modalService.open(content, {
+            ariaLabelledBy: 'modal-basic-title',
+            size: 'lg',
+          });
+          // this.addRecordSuccess();
+          this.sharedService.sendClickEvent();
+        }
+        else {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log("error", error);
+
+      });
+    }
+  }
+  gotowishlist(){
+    this.modalService.dismissAll()
+    this.router.navigate(['/wishlist']);
+  }
+  closemodal(){
+    this.modalService.dismissAll()
+  }
   deleteRecord(id: any) {
     this.request.deletewishproud2(id).subscribe((response: any) => {
       if (response.message == "Product is removed from wishlist") {
@@ -293,22 +345,31 @@ export class ProductdetailComponent implements OnInit {
 
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       console.log("proddetail", response);
+      this.allgalleryphotos=[];
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
       this.stocck = (this.Peoduct.current_stock); 1
       this.stocckkk = (this.Peoduct.current_stock); 1
       this.stk = this.Peoduct.current_stock;
-      this.photoos = this.Peoduct.photos;
-      //  this.photoos = response.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.data[0].photos.path);
+      this.photoos = this.Peoduct.photos;  
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
       this.varprise0 = this.choice
       this.varienttt = this.varprise0[0]?.options[0]
+      this.pervarient = this.varienttt;
       this.currentRatess = this.Peoduct.rating;
       this.photoloader = false;
       this.contentloader = false;
       this.discriptloader = false;
       this.productname = this.Peoduct.name;
+      this.cat_id= this.Peoduct.breadcrumbs[0].id;
+      this.subcat_id1=this.Peoduct.breadcrumbs[1]?.id;
+      this.subcat_id2=this.Peoduct.breadcrumbs[2]?.id
+      this.quantityyy = 1;
+      this.totalprice = this.Peoduct.main_price;
+      this.offers=this.Peoduct.offers.length;
+      console.log("this.offers",this.offers);
+      
 
       // array push photo
       this.newphotos = this.photoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path)
@@ -336,6 +397,9 @@ export class ProductdetailComponent implements OnInit {
         this.varient_value = this.choice[0]?.options[0];
         this.checkvarientprice();
       }
+      setTimeout(() => {
+        this.imgloader2 = false;
+      }, 3000);
     },
       (error: any) => {
         console.log("error",error.message);
@@ -362,64 +426,12 @@ export class ProductdetailComponent implements OnInit {
     this.contentloader = true;
     this.discriptloader = true;
     console.log("viewprod2", this.product_idd);
-    // this.request.getproddetail(this.product_id).subscribe((response: any) => {
-
-    //   console.log("proddetail", response);
-    //   this.Peoduct = response.data[0];
-    //   this.choice = this.Peoduct.choice_options;
-    //   this.stocck = (this.Peoduct.current_stock); 1
-    //   this.stocckkk = (this.Peoduct.current_stock); 1
-    //   this.stk = this.Peoduct.current_stock;
-    //   this.photoos = this.Peoduct.photos;
-    //  ///// //  this.photoos = response.map( (item:any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.data[0].photos.path);
-    //   this.colors = this.Peoduct.colors;
-    //   this.tags = this.Peoduct.tags;
-    //   this.varprise = this.Peoduct.main_price;
-    //   this.currentRatess = this.Peoduct.rating;
-    //   this.photoloader = false;
-    //   this.contentloader = false;
-    //   this.discriptloader = false;
-    //   this.productname = this.Peoduct.name;
-
-    //  ///// // array push photo
-    //   this.newphotos = this.photoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path)
-
-    //   this.newphotos.forEach((item: any) => {
-    //     this.galleryphotos.push({ image: item });
-    //    ///// // this.allgalleryphotos.push({ thumbImage: item });
-    //   })
-    //   this.newphotos.forEach((item: any) => {
-    //    //// // this.galleryphotos.push({ image: item });
-    //     this.allgalleryphotos.push({ thumbImage: item, image: item });
-
-    //   })
-    //   this.getcommentsss()
-    //   if (this.Peoduct.choice_options.length == 0) {
-
-    //     this.varient_value = ''
-    //   }
-    //   else {
-
-    //     this.varient_value = this.choice[0]?.options[0];
-    //     this.checkvarientprice();
-    //   }
-    // },
-    //   (error: any) => {
-    //     console.log(error);
-    //   });
-    // this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
-    //   this.Relatedprod = response.data;
-    //   this.loader6 = false;
-    //   this.viewbulkdiscount(this.product_id);
-    //   this.viewdiscount(this.product_id)
-    // },
-    //   (error: any) => {
-    //     console.log(error);
-    //   });
     this.router.navigate(['/productdetail', this.product_idd]);
   }
   viewbulkdiscount(id: any) {
     this.request.getbulckdisc(this.buyertypeid, id).subscribe((response: any) => {
+      console.log("getbulckdiscresponse",response);
+      
       this.Bulckdis = response.data;
       // console.log(" this.Bulckdis", this.Bulckdis);
 
@@ -441,7 +453,6 @@ export class ProductdetailComponent implements OnInit {
     return this.quantityy = this.quantityy;
   }
   addtocart(_id: any) {
-
     if (this.userid == 0) {
       this.toastr.info('You need to login', '');
     }
@@ -465,7 +476,7 @@ export class ProductdetailComponent implements OnInit {
           quantity: this.quantityy,
           buyertype: this.buyertypeid,
         }
-        this.addtoocartt(edata)
+        this.addtoocartt(edata);
       }
     }
   }
@@ -489,6 +500,119 @@ export class ProductdetailComponent implements OnInit {
 
     });
   }
+  addtocartmain(_id: any,content:any) {
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      if (this.quantityyy == 0) {
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: 1,
+          buyertype: this.buyertypeid,
+        }
+        this.toastr.info('minimun 1 product should be selected', '');
+      }
+      else {
+        this.quantityy = this.quantityyy
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.quantityy,
+          buyertype: this.buyertypeid,
+        }
+        this.addtoocarttmain(edata,content);
+      }
+    }
+  }
+  addtoocarttmain(edata: any,content:any) {
+    this.request.addtocart(edata).subscribe((res: any) => {
+      if (res.message == 'Product added to cart successfully') {
+        this.modalService.open(content, {
+          ariaLabelledBy: 'modal-basic-title',
+          size: 'lg',
+        });
+        this.sharedService.sendClickEvent();
+      }
+      else if (res.message == 'Minimum 1 item(s) should be ordered') {
+        this.toastr.info(res.message);
+      }
+      else if (res.message == 'Stock out') {
+        this.toastr.error(res.message);
+      }
+      else {
+        console.log("error", res);
+      }
+    }, (error: any) => {
+      console.log("error", error);
+
+    });
+  }
+  gotoCartlist(){
+    this.modalService.dismissAll()
+    this.router.navigate(['/cart']);
+  }
+
+  addtocartbuy(_id: any) {
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      if (this.quantityyy == 0) {
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: 1,
+          buyertype: this.buyertypeid,
+          is_buynow:1
+        }
+        this.toastr.info('minimun 1 product should be selected', '');
+      }
+      else {
+        this.quantityy = this.quantityyy
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.quantityy,
+          buyertype: this.buyertypeid,
+          is_buynow:1
+        }
+        this.addtoocartt2(edata);
+      }
+    }
+  }
+  addtoocartt2(edata: any) {
+    this.request.addtocart(edata).subscribe((res: any) => {
+      console.log("buyres",res);
+      
+      if (res.result == true) {
+        this.addRecordSuccess();
+        this.sharedService.sendClickEvent();
+        if( res.is_buynow!==0){
+          const buynowId =res.is_buynow
+          this.router.navigate(['/checkout',buynowId]);
+        }     
+      }
+      else if (res.message == 'Minimum 1 item(s) should be ordered') {
+        this.toastr.info(res.message);
+      }
+      else if (res.message == 'Stock out') {
+        this.toastr.error(res.message);
+      }
+      else {
+        console.log("error", res);
+      }
+    }, (error: any) => {
+      console.log("error", error);
+
+    });
+  }
+
   increaseqty() {
     this.quantityyy++;
     this.stocck--;
@@ -527,13 +651,21 @@ export class ProductdetailComponent implements OnInit {
     this.subItem = i
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
       console.log("selectvar",res);
+      this.Peoduct.main_price= res?.price_string;
+      this.Peoduct.stroked_price= res?.stroked_price;
+      this.Peoduct.excl_gst= res?.excl_gst;
+      this.Peoduct.discount_amount=res?.discount_amount; 
+      this.Peoduct.discount_percentage=res?.discount_percentage;
+      this.Peoduct.current_stock=res?.stock;
+
+      this.pervarient =  res?.variant;
       this.varprise = res?.price_string;
-      this.varstrokedprice=res?.stroked_price
+      this.varstrokedprice=res?.stroked_price;
       // this.totalprice=(res?.price_string).replace('Rs','');
       this.stocck = (res?.stock);
       this.stocckkk = (res?.stock);
-      this.quantityyy = 0;
-      this.totalprice = 0.00;
+      this.quantityyy = 1;
+      this.totalprice = this.Peoduct.main_price;
       this.varphotoos=res.image    
             // array push photo
             this.newvarphotos=[];
@@ -865,6 +997,7 @@ export class ProductdetailComponent implements OnInit {
     this.btnItemm=!this.btnItemm
     this.desbtnItemm=false
     this.ingItemm=false
+    this.addinfobtnItemm=false
     // console.log("collapsebtn",this.btnItemm);
     
   }
@@ -873,12 +1006,22 @@ export class ProductdetailComponent implements OnInit {
     this.desbtnItemm=!this.desbtnItemm
     this.btnItemm=false
     this.ingItemm=false
+    this.addinfobtnItemm=false
     // console.log("collapsebtn1",this.desbtnItemm);
   }
   collapsebtn2(){
     this.ingItemm=!this.ingItemm
     this.btnItemm=false
     this.desbtnItemm=false
+    this.addinfobtnItemm=false
+    // console.log("collapsebtn1",this.desbtnItemm);
+  }
+  collapsebtn3(){
+    this.addinfobtnItemm=!this.addinfobtnItemm
+    this.btnItemm=false
+    this.desbtnItemm=false
+    this.ingItemm=false
+    
     // console.log("collapsebtn1",this.desbtnItemm);
   }
   shareinstaUrl(foodid:any) {
@@ -886,4 +1029,149 @@ export class ProductdetailComponent implements OnInit {
      encodeURIComponent('https://spiceclub-a8420.web.app/' + foodid));
     return false;
   }
+
+  qtyChange(event: any, i: any, img: any) {
+
+    if(this.quantityarray.length == 0){
+      this.quantityarray.push({ "id": img.id, "value": event.target.value });
+    }
+    else{
+      console.log(" this.quantityarray",  this.quantityarray);
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+          console.log("obj", index);  
+          if(index>-1){
+            console.log("if",index);
+            
+            this.quantityarray[index].value = event.target.value;
+          }
+          else{
+            console.log("else",index);
+            this.quantityarray.push({ "id": img.id, "value": event.target.value });
+          }
+          
+    }
+  
+    console.log("this.quantityarray", this.quantityarray);
+  }
+
+  prodselectvar(weight: any, i: any,id:any) {
+    console.log("weight", weight, i);
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    this.request.addvarient(id, this.selectedvar).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.Relatedprod[i].stroked_price = res.stroked_price
+      this.Relatedprod[i].main_price = res.price_string
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  prodaddtocart(img: any) {
+    console.log("img", img);
+    if (this.userid == 0) {
+      this.toastr.info('You need to login', '');
+    }
+    else {
+      
+      if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else if (img.variants[0]?.options?.length == 1) {
+        this.varient_value = img.variants[0]?.options[0];
+      }
+      else {
+        this.varient_value = this.selectedvar;
+      }
+
+     
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+      if( index>-1){
+        this.totalqty = this.quantityarray[index].value;
+      }
+      else{
+        this.totalqty =1
+      }
+    
+      let edata = {
+        id: img.id,
+        variant: this.varient_value?.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity:this.totalqty,
+        buyertype: this.buyertypeid,
+      }
+      console.log(edata);
+      this.request.addtocart(edata).subscribe((res: any) => {
+        console.log("res", res);
+        if (res.message == 'Product added to cart successfully') {
+          console.log("Product added to cart successfully");
+          this.addRecordSuccess();
+          this.modalService.dismissAll();
+          this.sharedService.sendClickEvent();
+        }
+        else if (res.message == 'Minimum 1 item(s) should be ordered') {
+          this.toastr.success(res.message);
+
+        }
+        else if (res.message == 'Stock out') {
+          this.toastr.error(res.message);
+          console.log("Stock out");
+        }
+      },
+        (error: any) => {
+          this.toastr.error(error);
+          console.log("error", error);
+
+        });
+    }
+  }
+  proddetail(id: any) {
+    window.scroll(0, 0);
+    this.router.navigate(['productdetail', id]);
+  }
+  toggle1(img: any, index: any): void {  
+    console.log(this.userid);
+     
+     this.likesss[index] = !this.likesss[index];
+     if (this.likesss[index] == true) {
+       this.addtowishlist(img.id);
+     }
+     else if (this.likesss[index] == false) {
+       this.deleteRecord(img.id);
+     }
+ }
+ toggledelete1(img: any, index: any): void {
+  
+   if(this.userid!==0){
+   this.likess[index] = !this.likess[index];
+
+   if (this.likess[index] == true) {
+     this.addtowishlist(img.id);
+   }
+   else if (this.likedd[index] == false) {
+     this.deleteRecord(img.id);
+   }
+ }
+ else{
+   this.toastr.info('','you need to login');
+ }
+ }
+
+ gotosubcategory(id:any){
+  this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: id } });
+ }
+ gotocategory(id:any,i:any){
+   if(i==0){
+    this.router.navigate(['category', id]);
+   }
+   else if(i==1){
+    this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: id } });
+   }
+   else if(i==2){
+    this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: id, } });
+   }
+   else if(i==3){
+    this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: this.subcat_id2, subcategory1: id } });
+   }
+ }
 }

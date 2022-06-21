@@ -5,7 +5,7 @@ input{
     padding-left: 0px;
     padding-right: 0px;
 }
-textarea{
-    width: 100%;
-    min-height: 75px;
+div{
+    font-family: Arial, Helvetica, sans-serif ;
+    letter-spacing: 0;
 }

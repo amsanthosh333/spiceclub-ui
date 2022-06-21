@@ -11,8 +11,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
 import { FormsModule, } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
-import { BestsellersComponent } from './products/bestsellers/bestsellers.component';
-import { FeaturedComponent } from './products/featured/featured.component';
 import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { CarouselModule } from 'ngx-owl-carousel-o';
 import {BestsellingModule} from './products/bestselling/bestselling.module';
@@ -31,8 +29,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     HeaderComponent,
     FooterComponent,
     HomeComponent, 
-    BestsellersComponent,
-    FeaturedComponent,
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,

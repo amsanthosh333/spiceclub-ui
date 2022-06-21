@@ -1,13 +1,14 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<!--=======  header bottom  =======-->
-	<div class="scroller" style="background:#ce2127; text-align: end;">
+	<div class="scroller" style="background:#fff34b; text-align: end;">
 		<!-- <marquee behavior="scrol" direction="left"><h3 style="color: white;">Spice Club</h3></marquee> -->
-		<h3 style="color: white;">Spice Club</h3>
+		<p style="color: rgb(0, 0, 0); font-size: 0.6rem;
+		font-weight: 400;">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p>
 	</div>
 	<div class="header-bottom pt-md-40 pb-md-40 ">
 		<div class="container wide">
 			<!--=======  header bottom container  =======-->
-			<div class="header-bottom-container" style="height: 80px;">
+			<div class="header-bottom-container">
 				<div class="logo-with-offcanvas d-flex ">
 					<!--=======  logo   =======-->
 					<div class="logo ml-3" id="loogo">
@@ -20,8 +21,8 @@
 					<div class="inputroup">
 						<form class="input-group" [formGroup]="search" (ngSubmit)="search1(search)" style="width:100%;">
 							<input type="text" class="form-control" placeholder="Search for products"
-								formControlName="key">
-							<div class="input-group-append">
+								formControlName="key" style="height: 30px;">
+							<div class="input-group-append" style="height: 30px;">
 								<button class="btn btn-dark" type="submit" id="searchbar" style="display:inline;">
 									<i class="ion-ios-search-strong"></i><span> Search</span>
 								</button>
@@ -29,9 +30,10 @@
 						</form>
 					</div>
 				</div>
-				
+
 				<div>
-					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"  (click)="openkyc()">
+					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
+						(click)="openkyc()">
 						<a class="btn btn-info" id="buttonkyc">Verify Kyc</a>
 					</div>
 					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1">
@@ -39,56 +41,67 @@
 					</div>
 				</div>
 				<div class="header-right-container">
+					<!-- <div style="margin-top:10px;" *ngIf="(userid==0)">
+						<button type="button" class="btn btn-outline-light" (click)="openlogin()"
+							style="width: 115px;border: 1px solid #c5c5c5;color: deepskyblue;font-size: 1rem;">
+							<i class="ion-android-person" style="font-size: 15px;
+						color: #749ca3;padding-right: 10px;"></i>Login</button>
+					</div> -->
 
 					<!--=======  header right icons  =======-->
-
-
-					<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
-						<div class="single-icon search">
+					<div class="header-right-icons d-flex justify-content-end align-items-center h-100 mt-10">
+						<!-- <div class="single-icon search">
 							<a href="javascript:void(0)" id="search-icon">
 								<i class="ion-ios-search-strong"></i>
 							</a>
-						</div>
+						</div> -->
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
 								<i class="ion-android-person" *ngIf="(userid!==0)"></i>
 							</a>
-							<a id="offcanvaout-icon" (click)="openlogin()">
+							<!-- <a id="offcanvaout-icon" (click)="openlogin()">
 								<i class="ion-android-person" *ngIf="(userid==0)"></i>
-							</a>
+							</a> -->
 						</div>
 						<div class="single-icon wishlist">
 							<a href="javascript:void(0)" id="offcanvas-wishlist-icon">
 								<i class="ion-android-favorite-outline" *ngIf="(userid!==0)"></i>
 								<span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
 							</a>
-							<a id="offcanvashlist-icon" class="loggin1" routerLink="/login" *ngIf="(userid==0)">
+							<!-- <a id="offcanvashlist-icon" class="loggin1" routerLink="/login" *ngIf="(userid==0)">
 								<i class="ion-android-favorite-outline"></i>
-							</a>
+							</a> -->
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
-								<button type="button" class="btn " style="background-color: #ccccd3;"
-									(click)="openlogin()">Login</button>
+								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
+									style="width: 115px;border: 1px solid #c5c5c5;color: deepskyblue;font-size: 1rem;">
+									<i class="ion-android-person" style="font-size: 15px;
+						           color: #749ca3;padding-right: 10px;"></i>Login</button>
 							</a>
+
 						</div>
 						<div class="single-icon cart">
 							<a href="javascript:void(0)" id="offcanvas-cart-icon">
 								<i class="ion-ios-cart" *ngIf="(userid!==0)"></i>
 								<span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
 							</a>
-							<a id="offcanvt-icon" class="reg1">
-								<i class="ion-ios-cart" routerLink="/login" *ngIf="(userid==0)"></i>
+							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
+								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
+									style="width: 115px;border: 1px solid #c5c5c5;color: deepskyblue;font-size: 1rem;"><i
+										class="ion-android-cart" style="font-size: 15px;
+									color: #749ca3;padding-right: 10px;"></i>Cart</button>
 							</a>
 							<!-- <a id="offcanart-icon" class="reg" routerLink="/signup" *ngIf="(userid==0)">
 								<button type="button" class="btn" style="background-color: #ccccd3;">Signup</button>
 							</a> -->
 						</div>
-						<div class="single-icon cart" id="logout">
-
+						<!-- <div class="single-icon cart" id="logout">
 							<a id="offcanart-icon" *ngIf="(userid!==0)">
-								<button type="button" (click)="logout1()" class="btn"
-									style="background-color: #ccccd3;">Logout</button>
+								<button type="button" class="btn btn-outline-light" (click)="logout1()"
+									style="width: 86px;border: 1px solid #c5c5c5;color: deepskyblue;font-size: 0.8rem;padding:1px">
+									<i class="bi bi-power" style="font-size: 15px;
+									color: #749ca3;padding-right: 1px;"></i>Logout</button>
 							</a>
-						</div>
+						</div> -->
 						<div class="single-icon drop">
 							<a id="offcanart-icon">
 								<div class="dropdown" style="float:right;">
@@ -100,7 +113,8 @@
 										<a routerLink="/category">ShopByCategory</a>
 										<a routerLink="/blog">Blog</a>
 										<a routerLink="/recipe">Recipe</a>
-										<a *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"  (click)="openkyc()" >Kyc</a>
+										<a *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
+											(click)="openkyc()">Kyc</a>
 										<hr>
 										<a id="loginside" routerLink="/login" *ngIf="(userid==0)">Login</a>
 										<hr>
@@ -154,24 +168,21 @@
 			</div>
 
 			<!-- Mobile Navigation Start Here -->
-
-
-
 		</div>
 	</div>
 
 	<div class="header-bottom-navigation">
-		<div class="site-main-nav d-none d-lg-block">
-			<nav class="site-nav center-menu">
-				<ul>
-					<li class="menu-item"><a *ngIf="(userid!==0)" routerLink="/subscribedprod">SUBSCRIPTION</a>
-						<a id="offcanvaout-icon" *ngIf="(userid==0)" (click)="openlogin()">SUBSCRIPTION	</a></li>
-
+		<div class="site-main-nav d-none d-lg-block" style="padding-left: 250px;">
+			<nav class="site-nav" style="display: flex;">
+				<span *ngIf="(userid!==0)" class="wrapper1"><a id="buttonsubscribe"
+						routerLink="/subscribedprod">Subscription</a></span>
+				<span *ngIf="(userid==0)" (click)="openlogin()" class="wrapper1"><a
+						id="buttonsubscribe">Subscription</a></span>
+				<ul style="margin-left: 10px;">
 					<li class="menu-item"><a routerLink="/shopbyproduct">SHOP BY PRODUCTS</a> </li>
 
-					<li class="menu-item-has-children"><a>SHOP BY CATEGORIES</a>
-
-						<ul class="sub-menu mega-menu mega-menu-column-4">
+					<li class="menu-item-has-children "><i class="bi bi-list"></i><a>SHOP BY CATEGORIES</a>
+						<ul class="sub-menu mega-menu mega-menu-column-4 center-menu">
 							<li class="lii" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
 									<li style="margin-top: 10px;padding-left: 4px;">
@@ -191,11 +202,8 @@
 											</a>
 										</span>
 									</li>
-
 								</ul>
 							</li>
-
-
 
 							<li class="lii" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Subcat;let i=index">
@@ -220,19 +228,13 @@
 								</ul>
 							</li>
 
-
-
 							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Subcat2;let i=index">
 									<li style="margin-top: 10px;padding-left: 4px;">
 										<span class="lispan">
 											<a style="width:190px;" [ngClass]="{'active': subItem2 === i}">
 												<span (click)="gotocategory3(img.id)">{{img.name}}</span>
-												<!-- <img class="imgicon" *ngIf="img.number_of_children!=0" style="float: right;height: 9%;width: 9%;"
-												(click)="viewsubcat2(img.id,i)" 	src="assets/images/icons/chiliY.png"> -->
-
 											</a>
-
 											<i *ngIf="img.number_of_children!=0" style="float: right;margin-top: 8px;"
 												(click)="viewsubcat3(img.id,i)" class="bi bi-caret-right-fill"
 												[ngClass]="{'active': subItem2 === i}"></i>
@@ -240,9 +242,6 @@
 									</li>
 								</ul>
 							</li>
-
-
-
 							<li class="lii" *ngIf="Subcat3?.length!=0" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Subcat3;let i=index">
 									<li style="margin-top: 10px;">
@@ -250,28 +249,21 @@
 										<span class="lispan">
 											<a style="display:inline;" [ngClass]="{'active': subItem3 === i}"> <span
 													(click)="gotocategory4(img.id)">{{img.name}}</span>
-												<!-- <i style="float: right;" (click)="viewsubcat4(img.id,i)"
-													class="bi bi-chevron-right"></i> -->
 											</a>
 										</span>
-
-										<!-- <a (click)="gotocategory4(img.id)"
-											(mouseover)="viewsubcat4(img.id,i)"
-											[ngClass]="{'active': subItem3 === i}">{{img.name}}</a> -->
 									</li>
 
 
 								</ul>
 							</li>
-
-
-
 						</ul>
 					</li>
 
 					<li class="menu-item"><a routerLink="/blog">BLOG</a> </li>
 
 					<li class="menu-item"><a routerLink="/recipe">RECIPE</a></li>
+
+					<li class="menu-item"><a routerLink="/orders">QUICK ORDER</a></li>
 				</ul>
 
 			</nav>
@@ -359,13 +351,14 @@
 					<h6 class="col-2"><i class="ion-android-chat"></i> </h6>
 					<h6 class="col-8"><a>My Chats</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" (click)="openkyc()" *ngIf="buyertypereal===2 && kyc_verify_status==0">
+				<div class="row mb-3 ml-4" id="closeabout" (click)="openkyc()"
+					*ngIf="buyertypereal===2 && kyc_verify_status==0">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
 					<h6 class="col-8"><a>Kyc</a></h6>
 				</div>
-				<div  class="row mb-3 ml-4" id="closeabout"  (click)="openenquery()" *ngIf="buyertypereal==2">
-					<h6 class="col-2" ><i class="ionicons ion-ios-information"></i> </h6>
-					<h6 class="col-8" ><a>Enquiry</a></h6>
+				<div class="row mb-3 ml-4" id="closeabout" (click)="openenquery()" *ngIf="buyertypeid==2">
+					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
+					<h6 class="col-8"><a>Enquiry</a></h6>
 				</div>
 				<hr>
 				<div class="row mb-2 ml-4" id="closeabout">
@@ -425,7 +418,7 @@
 								<img src="https://neophroncrm.com/spiceclubnew/public/{{img.product.thumbnail_image}}">
 							</a>
 						</div>
-						<div class="content">
+						<div class="content"  (click)="gotoproduct(img.id)">
 							<p style="height: 15px;"></p>
 							<h5 style="width: 200px;"><a>{{img.product.name}}</a></h5>
 							<p>
@@ -497,11 +490,11 @@
 										src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}">
 								</a>
 							</div>
-							<div class="content">
+							<div class="content"  (click)="gotoproduct(img.id)">
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{b.product_name}}</a></h5>
 								<p>
-									<span *ngIf="b?.stroked_price!==b.price"
+									<span *ngIf="b?.stroked_price!==b?.pricestring"
 										class="main-price discounted">{{b?.stroked_price}}</span>
 									<span class="discounted-price" style="color: red;">Rs {{b.price}}</span>
 								</p>
@@ -585,87 +578,3 @@
 <!--=======  End of search overlay  =======-->
 
 <!--=====  End of overlay items  ======-->
-
-<!-- =            quick view         =
-	=============================================-->
-<div id="qv-1" class="cd-quick-view">
-	<div class="cd-slider-wrapper">
-		<ul class="cd-slider">
-			<li class="selected"> <img src="assets/images/products/prod5-f.jpeg" class="img-fluid" alt=""></li>
-			<li><img src="assets/images/products/prod5-b.jpeg" class="img-fluid" alt=""></li>
-		</ul> <!-- cd-slider -->
-
-		<ul class="cd-slider-pagination">
-			<li class="active"><a href="#0">1</a></li>
-			<li><a href="#1">2</a></li>
-		</ul> <!-- cd-slider-pagination -->
-
-		<ul class="cd-slider-navigation">
-			<li><a class="cd-prev" href="#0">Prev</a></li>
-			<li><a class="cd-next" href="#0">Next</a></li>
-		</ul> <!-- cd-slider-navigation -->
-	</div> <!-- cd-slider-wrapper -->
-
-	<div class="lezada-item-info cd-item-info ps-scroll">
-
-		<h2 class="item-title">Demo Product One</h2>
-		<p class="price">
-			<span class="main-price discounted">Rs 360.00</span>
-			<span class="discounted-price">Rs 300.00</span>
-		</p>
-
-		<p class="description">Relish the wholesome cooking with millets as a substitute for Rice. Include it in your
-			daily life as a part of variety of dishes like Dosa, Idly, Upma, Roti and baking, Use millets for making
-			variety rices like Biriyani and Puloa.</p>
-
-		<span class="quickview-title">Quantity:</span>
-		<div class="pro-qty d-inline-block mb-40">
-			<input type="text" value="1">
-		</div>
-
-		<div class="add-to-cart-btn mb-25">
-
-			<button class="lezada-button lezada-button--medium">add to cart</button>
-		</div>
-
-		<div class="quick-view-other-info">
-			<table>
-				<tr class="single-info">
-					<td class="quickview-title">SKU: </td>
-					<td class="quickview-value">12345</td>
-				</tr>
-				<tr class="single-info">
-					<td class="quickview-title">Categories: </td>
-					<td class="quickview-value">
-						<a href="#">Edible Oils</a>,
-						<a href="#">Oils</a>,
-						<a href="#">Cooking Oils</a>
-					</td>
-				</tr>
-				<tr class="single-info">
-					<td class="quickview-title">Tags: </td>
-					<td class="quickview-value">
-						<a href="#">The Spice Club</a>,
-						<a href="#">Satinanace</a>
-					</td>
-				</tr>
-				<tr class="single-info">
-					<td class="quickview-title">Share on: </td>
-					<td class="quickview-value">
-						<ul class="quickview-social-icons">
-							<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-							<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-							<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-						</ul>
-					</td>
-				</tr>
-			</table>
-		</div>
-
-
-	</div> <!-- cd-item-info -->
-	<a href="#0" class="cd-close">Close</a>
-</div>
-
-<!--=====  End of quick view  ======-->

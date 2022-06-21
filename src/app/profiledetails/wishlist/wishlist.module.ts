@@ -6,6 +6,7 @@ import { WishlistComponent } from './wishlist.component';
 import { FeatherModule } from 'angular-feather';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 // import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ToastrModule} from 'ngx-toastr'; 
 import {
   Facebook,
@@ -33,7 +34,7 @@ const icons = {
   ],
   imports: [
     CommonModule,
-    WishlistRoutingModule,FeatherModule,NgxSkeletonLoaderModule,FeatherModule.pick(icons),
+    WishlistRoutingModule,FeatherModule,NgxSkeletonLoaderModule,NgbModule,FeatherModule.pick(icons),
     ToastrModule.forRoot()
   ]
 })
