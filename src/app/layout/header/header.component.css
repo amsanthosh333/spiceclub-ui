@@ -259,14 +259,25 @@ nav.site-nav>ul>li {
 	color: #140f0f;
 	font-family: Arial, Helvetica, sans-serif;
 }
-
+.lispan:hover {
+ background-color: #d8d8d8;
+ text-decoration: none;
+}
+.lispan.active {
+	background-color: #d8d8d8;
+	text-decoration: none;
+   }
 .lispan a span {
 	margin-top: 1rem;
 	color: #140f0f;
 	font-size: 0.8rem;
 	font-weight: 500;
 	text-transform: capitalize;
+	text-decoration: none;
 }
+.lispan a span:hover {
+		text-decoration: none;
+   }
 
 .lii {
 	max-height: 350px;
@@ -274,15 +285,10 @@ nav.site-nav>ul>li {
 	padding-left: 5px;
 }
 
-/* li a.active{  
-   color: red;
-	font-weight: bolder;	
-} */
-li a.active span {
+/* li a.active span {
 	color: rgb(10, 9, 9);
 	font-weight: 600;
-	/* font-weight: bolder; */
-}
+} */
 
 .bi-caret-right-fill {
 	color: #999999;

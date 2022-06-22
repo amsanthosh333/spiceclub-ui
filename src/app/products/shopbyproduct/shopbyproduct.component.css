@@ -193,11 +193,10 @@ a:not([href]):not([class]):hover {
   font-weight: 200;
   font-size: 0.8rem;
   font-family: Arial, Helvetica, sans-serif;
-  
 }
 
 .single-product__content .price .discounted-price {
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 700;
   line-height: 1;
   color: #ce2127;; 

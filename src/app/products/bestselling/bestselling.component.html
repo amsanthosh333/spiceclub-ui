@@ -6,7 +6,7 @@
                     <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Shop</h4>
                     <!--=======  breadcrumb list  =======-->
                     <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
-                        <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                        <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
                         <li class="breadcrumb-list__item breadcrumb-list__item--active">Best sellers</li>
                     </ul>
                     <!--=======  End of breadcrumb list  =======-->
@@ -35,15 +35,20 @@
                                         </a>
                                     </div>
                                     <div class="single-widget-product__content">
-
                                         <div class="single-widget-product__content__top">
-                                            <h3 class="product-title"><a>{{img.name}}</a>
+                                            <h3 class="product-title"><a style="line-height: 1.2rem;
+                                                overflow: hidden;
+                                                display: -webkit-box; 
+                                                -webkit-line-clamp: 3;
+                                                -webkit-box-orient: vertical;
+                                                max-height: 3.5rem;       
+                                                 margin-bottom: 2px;font-weight: 600;color: #4a4a4a;" >{{img.name}}</a>
                                             </h3>
                                             <br>
                                             <div class="price">
-                                                <span class="main-price discounted" style="text-decoration:line-through"
+                                                <span class="main-price discounted" style="font-size: 11px;text-decoration:line-through"
                                                     *ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
-                                                <span class="discounted-price">{{img.main_price}}</span>
+                                                <p class="discounted-price">{{img.main_price}}</p>
                                             </div>
                                             <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
                                             </ngb-rating>
@@ -207,12 +212,6 @@
                                             <i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
                                                 (click)='toggledelete(img,i)'
                                                 style="color: rgb(214, 5, 5);"></i></a></span>
-
-                                    <!-- <span class="quickview" (click)="quickview(img.id,openRecord)"><a
-                                            class="cd-trigger" data-tippy="Quick View" data-tippy-inertia="true"
-                                            data-tippy-animation="shift-away" data-tippy-delay="50"
-                                            data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                            data-tippy-placement="left"><i class="bi bi-cart3"></i></a></span> -->
                                 </div>
 
                             </div>
@@ -221,17 +220,15 @@
                             <!--=======  single product content  routerLink="/productdetail"=======-->
                             <div class="single-product__content" (click)=" proddetail(img.id)">
                                 <div class="title">
-                                    <h3> <a style="line-height: 1.6rem;
+                                    <h3  style="padding-bottom:2px;"> <a style="line-height: 1.2rem;
                                     overflow: hidden;
                                     display: -webkit-box; 
                                     -webkit-line-clamp: 2;
                                     -webkit-box-orient: vertical;
-                                    max-height: 3.2rem;">{{img.name}}</a> </h3>
-                                    <a id="vieww"
-                                        style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
-                                        Details</a>
+                                    max-height: 3.2rem;
+                                     margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>    
                                 </div>
-
+    
                                 <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                             overflow: hidden;
                             display: -webkit-box; 
@@ -239,11 +236,10 @@
                             -webkit-box-orient: vertical;
                             max-height: 1.7rem;
                              font-size: 0.7rem;">
-                                    <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
-                                        {{imgggg}}|
+                                    <span class="discounted-price" *ngFor="let imgggg of imggg.options;">  {{imgggg}} &nbsp;
                                     </span>
                                 </div>
-                                <div class="price" style="margin-top: -4px;">
+                                <div class="price" style="margin-top: 2px;">
                                     <span *ngIf="img?.stroked_price!==img?.main_price"
                                         class="main-price discounted">{{img.stroked_price}}</span>
                                     <span class="discounted-price">{{img.main_price}} </span>

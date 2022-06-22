@@ -5,7 +5,7 @@
                 <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Shop</h4>
                 <!--=======  breadcrumb list  =======-->
                 <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
-                    <li class="breadcrumb-list__item"><a routerLink="/home">HOME</a></li>
+                    <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
                     <li class="breadcrumb-list__item breadcrumb-list__item--active">Subscribed products</li>
                 </ul>
 
@@ -101,43 +101,43 @@
                             <!--=======  single product content  routerLink="/productdetail"=======-->
                             <div class="single-product__content" (click)=" proddetail(img.product.id)">
                                 <div class="title">
-                                    <h3> <a style="line-height: 1.6rem;
-                                    overflow: hidden;
-                                    display: -webkit-box; 
-                                    -webkit-line-clamp: 2;
-                                    -webkit-box-orient: vertical;
-                                    max-height: 3.2rem;">{{img.product.name}}</a> </h3>
-                                    <a id="vieww"
-                                        style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
-                                        Details</a>
+                                    <h3  style="padding-bottom:2px;"> <a style="line-height: 1.2rem;
+                                        overflow: hidden;
+                                        display: -webkit-box; 
+                                        -webkit-line-clamp: 2;
+                                        -webkit-box-orient: vertical;
+                                        max-height: 3.2rem;
+                                         margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.product.name}}</a> </h3>
+                                   
                                 </div>
 
                                 <div class="pri" *ngFor="let imggg of img.product.variants;" style="text-align: center;line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 1;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem;
-                             font-size: 0.7rem;">
+                                overflow: hidden;
+                                display: -webkit-box; 
+                                -webkit-line-clamp: 1;
+                                -webkit-box-orient: vertical;
+                                max-height: 1.7rem;
+                                 font-size: 0.7rem;">
                                     <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
                                         {{imgggg}}|
                                     </span>
                                 </div>
-                                <div class="price" style="margin-top: -4px;">
+                                <div class="price" style="margin-top: 2px;">
                                     <span *ngIf="img?.product.stroked_price!==img?.product.main_price"
                                         class="main-price discounted">{{img.product.stroked_price}}</span>
                                     <span class="discounted-price">{{img.product.main_price}} </span>
                                 </div>
                                 <div class="pri" style="text-align: center;">
                                     <span class="discounted-price" style="line-height: 1.6rem;
-                                overflow: hidden;
-                                display: -webkit-box; 
-                                -webkit-line-clamp: 12;
-                                -webkit-box-orient: vertical;
-                                max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.product.usp_text}}</span>
+                                    overflow: hidden;
+                                    display: -webkit-box; 
+                                    -webkit-line-clamp: 12;
+                                    -webkit-box-orient: vertical;
+                                    max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.product.usp_text}}</span>
                                 </div>
                             </div>
 
+                          
                             <!--=======  End of single product content  =======-->
                             <div class="row"
                                 *ngIf="img.product.variants.length == 0 || img.product.variants[0].options?.length == 1 || showaddbtn== i">

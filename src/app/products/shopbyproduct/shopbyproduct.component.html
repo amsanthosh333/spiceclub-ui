@@ -31,7 +31,6 @@
 
                     <!--=======  fitler titles  =======-->
                     <div class="filter-title filter-title--type-two">
-
                         <ul class="product-filter-menu mb-0 pl-0">
                             <li style="border: 0px;">
                                 <div class="search-widget" style="border-bottom: 0px;">
@@ -60,9 +59,6 @@
                 </div>
 
                 <div class="col-12 col-lg-4 col-md-2" id="sortdiv">
-
-                    <!--=======  filter icons  =======-->
-
                     <div class="filter-icons" id="sortfilter">
                         <!--=======  filter dropdown  =======-->
                         <nav class="site-nav center-menu" style="height: 80px;">
@@ -184,9 +180,7 @@
 
                         <div class="single-sidebar-widget mb-20">
                             <h2 class="single-sidebar-widget--title">Popular products</h2>
-
                             <!--=======  widget product wrapper  =======-->
-
                             <div class="widget-product-wrapper">
                                 <!--=======  single widget product  =======-->
                                 <div class="single-widget-product-wrapper">
@@ -207,8 +201,7 @@
                                                     display: -webkit-box; 
                                                     -webkit-line-clamp: 3;
                                                     -webkit-box-orient: vertical;
-                                                    max-height: 3.5rem;
-                                                    
+                                                    max-height: 3.5rem;                        
                                                      margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}} </a>
                                                 </h3>
                                                 <br>
@@ -225,7 +218,6 @@
                                         <!--=======  End of content  =======-->
                                     </div>
                                 </div>
-
                                 <!--=======  End of single widget product  =======-->
                             </div>
                             <!-- lazyloading -->
@@ -288,18 +280,14 @@
                 <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10"  infinite-scroll
                     [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
                     <div class="row product-isotope shop-product-wrap four-column"  *ngIf="prodloadermain">
-                        <!--=======  single product   =======-->
                         <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
                             *ngFor="let img of Product;let i=index">
-                            <!-- <span class="electric">Electric</span> -->
                             <div class="single-product">
-                                <!--=======  single product image  =======-->
                                 <div class="single-product__image" style="overflow: hidden;">
                                     <div class="imglazy">
                                         <ngx-skeleton-loader count="1" *ngIf="!imgloader"
                                             [theme]="{'margin-left':'10px',  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
-
                                         <div *ngIf="img.iscertificated==1" class="like-button"
                                             style="text-align: end; margin-right: 20px;">
                                             <a
@@ -307,7 +295,6 @@
                                                 <img src="assets/images/icons/green2.jpg" class="img-g"
                                                     style="height: 15px;" alt=""></a>
                                         </div>
-
                                         <img *ngIf="imgloader" (click)="proddetail(img.id)"
                                             src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                             class="img-fluid" alt="" style="height: -webkit-fill-available;">
@@ -328,8 +315,6 @@
 
 
                                     <div class="single-product__floating-icons">
-
-
                                         <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
                                                 data-tippy-inertia="true" data-tippy-animation="shift-away"
                                                 data-tippy-delay="50" data-tippy-arrow="true"
@@ -337,7 +322,6 @@
                                                 <i [ngClass]="{'ion-android-favorite':likeddd[i]===true, 'ion-android-favorite-outline':likeddd[i]===false}"
                                                     (click)='toggle(img,i)'
                                                     style="color: rgb(214, 5, 5);"></i></a></span>
-
                                         <span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
                                                 data-tippy-inertia="true" data-tippy-animation="shift-away"
                                                 data-tippy-delay="50" data-tippy-arrow="true"
@@ -345,27 +329,19 @@
                                                 <i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
                                                     (click)='toggledelete(img,i)'
                                                     style="color: rgb(214, 5, 5);"></i></a></span>
-
-                                        <!-- <span class="quickview" (click)="quickview(img.id,openRecord)"><a
-                                                class="cd-trigger" data-tippy="Quick View" data-tippy-inertia="true"
-                                                data-tippy-animation="shift-away" data-tippy-delay="50"
-                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                data-tippy-placement="left"><i class="bi bi-cart3"></i></a></span> -->
                                     </div>
-
                                 </div>
                                 <!--=======  End of single product image  =======-->
 
                                 <!--=======  single product content  routerLink="/productdetail"=======-->
                                 <div class="single-product__content" (click)=" proddetail(img.id)">
                                     <div class="title">
-                                        <h3 > <a style="line-height: 1.2rem;
+                                        <h3  style="padding-bottom:2px;"> <a style="line-height: 1.2rem;
                                         overflow: hidden;
                                         display: -webkit-box; 
                                         -webkit-line-clamp: 2;
                                         -webkit-box-orient: vertical;
                                         max-height: 3.2rem;
-                                        height: 2.2rem;
                                          margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>    
                                     </div>
         
