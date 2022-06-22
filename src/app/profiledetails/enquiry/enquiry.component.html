@@ -16,7 +16,7 @@
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
             <div class="col-lg-12 ">
                 <label >Product <span class="text-danger">*</span> </label>
-                <input type="text"   formControlName="product"  required>
+                <input type="text"  formControlName="product"  required>
                 <h6 class="form-text text-danger"
                 *ngIf="!registerForm.get('product')?.valid && registerForm.get('product')?.touched">
               *Enter the name</h6>
@@ -26,7 +26,7 @@
                 <label >Description <span class="text-danger">*</span> </label>
                 <textarea cols="53" rows="4"
                 formControlName="product_description"
-                placeholder=""></textarea>
+                placeholder="" style="width: 100%;"></textarea>
                 <h6 class="form-text text-danger"
                 *ngIf="!registerForm.get('product_description')?.valid && registerForm.get('product_description')?.touched">
               *Enter some words</h6>

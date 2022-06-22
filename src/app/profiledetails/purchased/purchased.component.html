@@ -2,10 +2,10 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="breadcrumb-title">Orders</h1>
+                <h1 class="breadcrumb-title">My Account</h1>
                 <!--=======  breadcrumb list  =======-->
                 <ul class="breadcrumb-list" style="padding-left: 0px;">
-                    <li class="breadcrumb-list__item"><a routerLink="/home">PROFILE</a></li>
+                    <li class="breadcrumb-list__item"><a routerLink="/home">Profile</a></li>
                     <li class="breadcrumb-list__item breadcrumb-list__item--active">Purchase History</li>
                 </ul>
                 <!--=======  End of breadcrumb list  =======-->
@@ -13,8 +13,6 @@
         </div>
     </div>
 </div>
-
-
 
 <div *ngIf="!loader" >
 <div class="orderss mb-2  mt-40"  *ngFor="let img of Orders"
@@ -36,7 +34,6 @@
                     </span>
                 </div>
             </div>
-
         </div>
         <div class="col-6 mt-1">
             <div class="row">

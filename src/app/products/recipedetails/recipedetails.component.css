@@ -3,6 +3,17 @@ div{
   letter-spacing: 0;
 }
 
+@media (min-width: 1200px) {
+
+  .container,
+  .container-lg,
+  .container-md,
+  .container-sm,
+  .container-xl {
+    max-width: 1300px;
+  }
+}
+
 .title p {
   color: #141414;
   font-family: Arial, Helvetica, sans-serif ;
@@ -26,6 +37,9 @@ div{
 .breadcrumb-list__item{
   color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.7rem;
+  text-transform: none;
+
 }
 .comment-title{
   color: #140f0f ;

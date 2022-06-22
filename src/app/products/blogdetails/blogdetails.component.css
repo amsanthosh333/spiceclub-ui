@@ -1,6 +1,8 @@
 .breadcrumb-list__item{
 	color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
+  text-transform: none;
+  font-size: 0.7rem;
 }
 .comment-title{
   color: #140f0f ;
