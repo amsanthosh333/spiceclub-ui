@@ -2,9 +2,7 @@
     <div class="container" style="margin: 0px;">
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Shop</h4>
-                <!--=======  breadcrumb list  =======-->
-                <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+                <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
                     <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
                     <li class="breadcrumb-list__item breadcrumb-list__item--active">Subscribed products</li>
                 </ul>
@@ -147,7 +145,7 @@
                                 </div>
                                 <div class="col-6 p-0" style="margin-left: -4px;">
                                     <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                        (click)="prodaddtocart(img.product)"><i class="ion-ios-cart"></i> Add</button>
+                                        (click)="prodaddtocart(img.product)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
                                 </div>
                             </div>
 
@@ -155,7 +153,7 @@
                                 <div class="col-12 ">
                                     <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                         <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                            ngbDropdownToggle>Select Options</button>
+                                            ngbDropdownToggle>Select Options&nbsp;</button>
                                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
                                             style="margin-left:-5px;">
                                             <button ngbDropdownItem *ngFor="let imgggg of img.product.variants[0]?.options;"

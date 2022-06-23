@@ -344,7 +344,9 @@ export class ShopbyproductComponent implements OnInit {
 
   viewbestpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
+      console.log("Bestsellpro",);
       this.Bestsellpro = response.data.slice(0, 6);
+      console.log("Bestsellpro",this.Bestsellpro );
       this.rating = this.Bestsellpro.rating;
       this.poploader = false;
     });

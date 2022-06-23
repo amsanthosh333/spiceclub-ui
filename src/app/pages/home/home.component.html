@@ -68,7 +68,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-2" style="background-color:white; width: 24.6%;">
+        <div class="col-lg-2 col-md-6 col-sm-12" id="quickcol">
             <div class="row" id="sliderrow2">
                 <div class="lez">
                     <p>Quick Registeration</p>
@@ -748,7 +748,7 @@
                             </div>
                             <div class="col-6 p-0">
                                 <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                    (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i> Add</button>
+                                    (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
                             </div>
                         </div>
 
@@ -756,7 +756,7 @@
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                        ngbDropdownToggle >Select Options</button>
+                                        ngbDropdownToggle >Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
                                             (click)="featuuresselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
@@ -953,7 +953,7 @@
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                        ngbDropdownToggle>Select Options</button>
+                                        ngbDropdownToggle>Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
                                             (click)="topcat1selectvar(imgggg ,i,img.id)">{{imgggg}}</button>
@@ -1248,7 +1248,7 @@
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                        ngbDropdownToggle>Select Options</button>
+                                        ngbDropdownToggle>Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
                                             (click)="topcat2selectvar(imgggg ,i,img.id)">{{imgggg}}</button>
@@ -1554,18 +1554,18 @@
     </div>
 </div>
     <!-- newlogin -->
-    <div *ngIf="(userid==0)" class="col-lg-12 mb-10 pb-0" class="listcard" style="margin-top: 10px;padding: 2px;">
-        <div class="col-lg-12" style="background-color:#ffffff;text-align:center;font-size:0.8rem;padding: 16px;
-          border: 0.5px solid #d3d3d3;">
-            <p style="margin-bottom: 7px;"> Get extensive Offers</p>
+    <div *ngIf="(userid==0)" class="col-lg-12 mb-10 pb-0" class="listcard" style="margin-top: 10px;">
+        <div class="col-lg-12" style="background-color: #ce2127;text-align:center;font-size:0.8rem;padding: 16px;">
+            <p style="margin-bottom: 7px; color: white;"> Get extensive Offers</p>
             <a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
                 <button type="button" class="btn btn-outline-light" (click)="openlogin()"
-                    style="width: 115px;border: 1px solid #c5c5c5;color: deepskyblue;font-size: 1rem;">
-                    <i class="ion-android-person" style="font-size: 15px;
-                   color: #749ca3;padding-right: 10px;"></i>Login</button>
+									style="width: 115px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 0.9rem;">
+							<span><img src="../../../assets/images/icons/login.png" style="height:20px;width:20px;margin-bottom:1px;
+								margin-right: 5px;" alt=""></span>
+								  <p style="display:contents;">Login</p></button>                
             </a>
-            <p style="padding-top:5px;font-size:0.8rem;">New Customer? <a style="color:rgb(31, 166, 245) ;"
-                    (click)="openSignup()">join with us</a></p>
+            <p style="padding-top:5px;font-size:0.8rem; color: white;">New Customer? <a style="color:rgb(108 218 255);;"
+                    (click)="openSignup()">Join with us</a></p>
         </div>
     </div>
 

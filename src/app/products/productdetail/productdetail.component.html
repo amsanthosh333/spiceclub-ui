@@ -7,7 +7,7 @@
 
     </div>
     <div id="sucscribtiondiv" *ngIf="(issubscribed== true)">
-        <a style="height:50px; width: 50px;padding: 3px;">
+        <a style="height:60px; width: 60px;padding: 3px;">
             <img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct?.thumbnail_image}}" class="img-fluid"
                 alt="">
         </a>
@@ -16,30 +16,30 @@
             <a>{{Peoduct?.name}}</a>
         </span>
 
-        <a style="vertical-align: middle;">
+        <a style="vertical-align: middle;text-align: initial; margin-left: 20px;">
             <span>
                 <ngb-rating style="font-size: 1.2rem; color:rgb(245, 153, 14);" [rate]="Peoduct?.rating"></ngb-rating>
-            </span>
+            </span> &nbsp;
 
             <p style="font-size:0.8rem ;">
-                <span class="" style="color: rgb(190, 51, 51);">
-                    {{Peoduct?.main_price}}</span>
+                <span class="discounted-price" style="color: rgb(190, 51, 51);font-weight: 600;">
+                    {{Peoduct?.main_price}}</span> &nbsp;
                 <span class="main-price discounted" *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price"
                     style="font-size:0.7rem">{{Peoduct?.stroked_price}}</span>
             </p>
         </a>
 
         <a style="vertical-align: middle;" id="subsave">
-            <span>save</span>
-            <p style="font-size:0.8rem ;">
-                subscribe & save
+            <span>Save</span>
+            <p >
+                Subscribe now & Save
             </p>
         </a>
     </div>
     <div id="fromm" style="border-top:1px solid #ededed">
         <ul id="subcatdiv">
-            <li style="padding-right:20px" *ngFor="let f of Peoduct?.breadcrumbs ;let i = index"
-                (click)="gotocategory(f.id,i)">{{f.name}}&nbsp;></li>
+            <li style="padding-right:7px" *ngFor="let f of Peoduct?.breadcrumbs ;let i = index"
+                (click)="gotocategory(f.id,i)">{{f.name}}&nbsp;&nbsp;></li>
         </ul>
     </div>
     <div class="shop-page-wrapper  mb-20">
@@ -48,7 +48,7 @@
                 <div class="col-lg-9">
                     <div class="shop-product">
                         <div class="row pb-10">
-                            <div class="col-lg-6 mb-md-70 mb-sm-70" style="display:flex;">
+                            <div class="col-lg-6 mb-md-70 mb-sm-70 pl-0" style="display:flex;">
                                 <!-- side images  -->
                                 <div class="col-lg-2 " id="sideslider">
                                     <ul style="padding:0px">
@@ -153,12 +153,12 @@
                                                 style=" font-family: Arial, Helvetica, sans-serif;">
                                                 {{Peoduct?.name}}</strong></h5>
                                     </div>
-                                    <div class="shop-product__rating mb-10">
+                                    <div class="shop-product__rating ">
                                         <a (click)="viewbrand(Peoduct?.brand.id)"
                                             style="text-decoration:none;color:rgb(18, 134, 243);font-size: 0.8rem;">{{Peoduct?.brand.name}}</a>
                                         <div>
 
-                                            <ngb-rating style="font-size: 1.5rem; color:rgb(245, 153, 14);"
+                                            <ngb-rating style="font-size: 1.5rem; color:rgb(245, 153, 14);margin-left: -3px;"
                                                 [rate]="Peoduct?.rating"></ngb-rating>
 
                                             <span class="review-link ml-20" id="offer" style="background-color:brown;"
@@ -174,7 +174,7 @@
                                                 <a>Today's Deal</a>
                                             </span>
 
-                                            <span class="review-link " style="display: grid;"
+                                            <span class="review-link" style="display: grid;margin-top: 5px;"
                                                 *ngIf="Peoduct.current_stock > 0">
                                                 <a style="color:green; font-size: 0.8rem;">In Stock
                                                     <span (click)="addtowishlistmain(Peoduct?.id,addwishlistRecord)"
@@ -239,6 +239,7 @@
                                                 <div class="shop-product__block__title " *ngFor="let a of choice"
                                                     style="font-weight: 600;color: #727272;">{{a.title}} :
                                                 </div>
+                                                <!-- <span class="quickview-title" style="color: #727272" *ngFor="let a of choice">{{a.title}} :</span> -->
 
                                                 <div class="shop-product__block__value" *ngFor="let a of choice">
 
@@ -300,7 +301,7 @@
                                                 </tr>
                                             </table> -->
 
-                                            <p style="font-size: 0.8rem;color: #727272"
+                                            <p style="font-size: 0.8rem;color: #727272;padding-bottom: 10px;"
                                                 *ngIf="Peoduct?.discount_percentage!= 0">You save <span
                                                     style="color:rgb(168, 0, 0);">Rs.{{Peoduct?.discount_amount}}
                                                     ({{Peoduct?.discount_percentage}}%)</span>.Inclusive all taxes </p>
@@ -416,9 +417,7 @@
                 </div>
 
                 <div class="col-lg-3 order-2 order-lg-1">
-                    <div class="shop-product__navigation">
-                        <a><i class="ion-ios-arrow-thin-left" (click)="backk()"></i></a>
-                    </div>
+                    
                     <share-buttons theme="modern-light"
                         [include]="['facebook','whatsapp', 'email','twitter', 'telegram','copy']" [showIcon]="true"
                         [size]="0.5" [showText]="false" url="currenturl" [description]="productname" class="pt-0 mb-2">
@@ -430,7 +429,7 @@
                                 <tr>
                                     <td>
                                         <p><i class="bi bi-star" style="color: red;font-size: 1.4rem;"></i><span>Save
-                                                more with</span> {{offers}} offers</p>
+                                                More with</span> {{offers}} offers</p>
                                     </td>
                                 </tr>
                                 <tr *ngFor="let o of Peoduct?.offers">
@@ -446,7 +445,7 @@
                         <div class="shop-product__block shop-product__block--quantity mb-10 "
                             style="justify-content:center;">
                             <div class="shop-product__block__title">Quantity: </div>
-                            <form style="border:1px solid #dddddd;padding: 5px;">
+                            <form style="border:1px solid #dddddd;padding: 5px; padding-top: 0px;padding-bottom: 0px;">
                                 <div class="shop-product__block__value">
                                     <div class="pro-qty d-inline-block mx-0 pt-0"
                                         style="border-bottom: none !important">
@@ -468,24 +467,23 @@
                         </div>
 
                         <div class="shop-product__block shop-product__block--size " style="justify-content: center;">
-                            <span class="shop-product__block__title">You Pay: </span>
-                            <span class="shop-product__block__value ">
-                                <strong><span style="color: red;">{{totalprice}} </span></strong>
+                      <span class="shop-product__block__value ">
+                       <span style="font-size:0.8rem ;"> You Pay </span><strong><span style="color: red;">{{totalprice}} </span></strong>
                                 <!-- <p > (Including all taxes) </p> -->
                             </span>
                         </div>
-                        <button *ngIf="stk!==0" type="button" class="btn btn-primary" id="addcart1"
-                            style=" width: -webkit-fill-available; margin-bottom: 3px;"
+
+                        <div style="text-align:center ;">
+                        <button *ngIf="stk!==0" type="button" class="btn btn-primary" id="addcart1"  
                             (click)="addtocartmain(Peoduct.id,addcartRecord)">
                             <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
-                                class="icon-left ion-ios-cart"></i> Add to cart</button>
+                                class="icon-left ion-ios-cart"></i>  Add to cart</button>
 
-                        <button *ngIf="stk==0" type="button" class="btn btn-danger"
-                            style=" width: -webkit-fill-available;">Out of
+                        <button *ngIf="stk==0" type="button" class="btn btn-danger" id="addcart1"
+                            style="margin-bottom: 3px;">Out of
                             stock</button>
 
-                        <button *ngIf="stk!==0" type="button" class="btn btn-primary" id="addcart2"
-                            style=" width: -webkit-fill-available; margin-bottom: 3px;"
+                        <button *ngIf="stk!==0" type="button" class="btn btn-primary" id="addcart2"  
                             (click)="addtocartbuy(Peoduct.id)">
                             <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
                                 class="bi bi-lightning-fill"></i> Buy Now</button>
@@ -520,8 +518,8 @@
                                 style="color: rgb(255, 255, 255);"></i> Subscribe & Save</button> -->
 
 
-                        <span class="review-link " style="display: grid;" *ngIf="Peoduct?.current_stock > 0">
-                            <a style="color:green; font-size: 0.8rem;">
+                        <span class="review-link " style="display: grid; justify-content:center" *ngIf="Peoduct?.current_stock > 0">
+                            <a style="font-size: 0.8rem;">
                                 <!-- wishlist -->
                                 <!-- <span (click)="addtowishlist(Peoduct?.id)" *ngIf="(iswishlistt?.is_in_wishlist==false)"
                                     style="float:left; color: rgb(253 57 50);font-size: 0.7rem;font-weight: 600;">
@@ -541,35 +539,41 @@
 
                                 <!-- subscribe -->
                                 <span *ngIf="(issubscribed== false)"
-                                    style="float:left; color: #0d73bb;font-size: 0.9rem;font-weight: 600;"
+                                    style="float:left; color:#6d726d;font-size: 0.9rem;font-weight: 600;"
                                     (click)="addtosubscribe(Peoduct?.id)"> <i class="bi bi-hand-thumbs-up-fill"
-                                        style="color: #0d73bb;"></i> Subscribe & Save</span>
+                                        style="color:#6d726d;background-color: #c9c4c4;
+                                        padding: 4px;
+                                        border-radius: 15px;
+                                        font-size: 1.2rem;"></i> Subscribe & Save</span>
 
                                 <span *ngIf="(issubscribed== true)" (click)="removefromsubscribe(Peoduct?.id)"
-                                    style="float:left; color:#0d73bb;font-size: 0.9rem;font-weight: 600;">
-                                    <i class="bi bi-hand-thumbs-down-fill" style="color:#0d73bb;font-size: 1.1rem"></i>
+                                    style="float:left; color:#6d726d;font-size: 0.9rem;font-weight: 600;">
+                                    <i class="bi bi-hand-thumbs-down-fill" style="background-color: #c9c4c4;
+                                    padding: 4px;
+                                    border-radius: 15px;
+                                    font-size: 1.2rem; color:#6d726d;font-size: 1.1rem"></i>
                                     Remove from Subscribe</span>
 
                                 <span *ngIf="userid==0"
-                                    style="float:left; color: #0d73bb;font-size: 0.9rem;font-weight: 600;"
+                                    style="float:left; color:#6d726d;font-size: 0.9rem;font-weight: 600;"
                                     (click)="addtosubscribe(Peoduct?.id)"> <i class="bi bi-hand-thumbs-up-fill"
-                                        style="color:  #0d73bb"></i> Subscribe & Save</span>
+                                        style="color: #6d726d;background-color: #c9c4c4;
+                                        padding: 4px;
+                                        border-radius: 15px;
+                                        font-size: 1.2rem;"></i> Subscribe & Save</span>
                             </a>
                         </span>
+                    </div>
 
-                        <p style="font-size: 0.8rem;
+                        <p style="font-size: 0.7rem;
                                 font-weight: 600;
-                                color:#6d726d;text-align: end;"><i class="bi bi-lock-fill"></i>Buy Securely
+                                color:#4ccaf1;text-align: end; padding-top: 5px;"><i class="bi bi-lock-fill" style="color:#6d726d "></i>Buy Securely
                         </p>
                     </div>
-                    <br>
-                    <!-- <share-buttons theme="modern-dark"
-                        [include]="['facebook','whatsapp', 'email','twitter', 'telegram','copy']" [showIcon]="true"
-                        [size]="1" [showText]="false" url="currenturl" [description]="productname" class="pt-0 mb-2">
-                    </share-buttons> -->
+                 
                 </div>
             </div>
-            <!-- description  & additional information  & Rating -->
+          
 
 
             <!-- FAQ -->
@@ -579,7 +583,7 @@
                         <div class="col-lg-12">
                             <div class="faq-wrapper">
                                 <!--=======  single faq  =======-->
-                                <div class="single-faq mb-20">
+                                <div class="single-faq">
                                     <!-- <h2 class="faq-title mb-20">FAQ</h2> -->
                                     <div class="accordion" id="shippingInfo">
 
@@ -777,10 +781,10 @@
 
             <!-- videos and image -->
             <div class="questions row pt-0">
-                <h5 style="border-bottom:1px solid rgb(185, 182, 182) ; font-weight: 600;">How to use?</h5>
+                <h5 style="border-bottom:1px solid rgb(223, 220, 220) ; font-weight: 600;padding-bottom: 2px;">How to use?</h5>
 
-                <div class="videoo mt-10" style="text-align: center;">
-                    <iframe width="427" height="309" src="https://www.youtube.com/embed/z1aLMpbdoTA"
+                <div class="videoo " style="text-align: start;">
+                    <iframe width="300" height="200" src="https://www.youtube.com/embed/z1aLMpbdoTA"
                         title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
@@ -789,16 +793,9 @@
             </div>
 
             <!-- related -->
-            <div class="col-lg-12 mb-10 pb-0 mt-10 mb-10" class="listcard" style="margin-top: 10px;margin-top: 20px;">
-                <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
-                    <div class="section-title section-title--one  mb-0">
-                        <h6
-                            style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
-                            Products Related to this</h6>
-                        <!-- <button class="btn btn-primary" id="viewall" >View all</button> -->
-                    </div>
-                </div>
-
+           
+                <div class="questions row">
+                    <h5 style="border-bottom:1px solid rgb(223, 220, 220) ; font-weight: 600;padding-bottom: 2px;">Products Related to this</h5>
 
                 <div class="carousall" *ngIf="!loader6">
                     <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
@@ -863,7 +860,8 @@
                                 display: -webkit-box; 
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
-                                max-height: 3.2rem;">{{img.name}}</a> </h3>
+                                max-height: 3.2rem; 
+                                 margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>
                                         <a id="vieww"
                                             style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
                                             Details</a>
@@ -906,7 +904,7 @@
                                     </div>
                                     <div class="col-6 p-0">
                                         <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                            (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i> Add</button>
+                                            (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
                                     </div>
                                 </div>
 
@@ -914,7 +912,7 @@
                                     <div class="col-12 ">
                                         <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                             <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                                ngbDropdownToggle>Select Options</button>
+                                                ngbDropdownToggle>Select Options&nbsp;</button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
                                                 style="margin-left:-5px;">
                                                 <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
@@ -1051,12 +1049,12 @@
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+                </div>
 
-        <!-- questions -->
+
+                 <!-- questions -->
         <div class="questions row">
-            <h5 style="border-bottom:1px solid rgb(185, 182, 182) ; font-weight: 600;">Questions?</h5>
+            <h5 style="border-bottom:1px solid rgb(223, 220, 220) ; font-weight: 600;padding-bottom: 2px;">Questions?</h5>
 
             <div class="shop-product__long-desc" [innerHTML]="Peoduct?.question_answer" *ngIf="!discriptloader">
                 <p style="color: red !important;">
@@ -1068,16 +1066,16 @@
 
         <!-- ratings and reviews -->
         <div class="questions row">
-            <h5 style="border-bottom:1px solid rgb(185, 182, 182) ;width: 99%;font-weight: 600;">Review and Ratings</h5>
+            <h5 style="border-bottom:1px solid rgb(223, 220, 220)  ;width: 99%;font-weight: 600;padding-bottom: 2px;">Review and Ratings</h5>
             <div class="col-12">
                 <div class="row pt-8 pb-16 align-center justify-center">
                     <div class="text-center col-md-12 col-12">
                         <!-- <div class="display-2 opacity-60">
                         {{Peoduct?.rating}}</div> -->
-                        <div id="outt" *ngIf="Peoduct?.rating!==0"><span style="font-size: 2rem;">
+                        <div id="outt" *ngIf="Peoduct?.rating!==0"><span style="font-size: 1.5rem;">
                                 {{Peoduct?.rating}}</span> Out of
                             5.00</div>
-                        <div id="outt" *ngIf="Peoduct?.rating==0"><span style="font-size: 1.5rem;">Be first to rate this
+                        <div id="outt" *ngIf="Peoduct?.rating==0"><span style="font-size: 1.1rem;">Be first to rate this
                                 product </span> </div>
                         <div class="v-rating lh-1-5 v-rating--readonly">
                             <ng-template #t let-fill="fill">
@@ -1088,7 +1086,7 @@
                                 </span>
                             </ng-template>
                             <ngb-rating [(rate)]="currentRatess" [starTemplate]="t" [readonly]="true"
-                                style="color: rgb(245, 153, 14);">
+                                style="color: rgb(245, 153, 14); ">
                             </ngb-rating>
                         </div>
                         <!-- <div class="fs-12 opacity-70 mt-1">
@@ -1099,7 +1097,7 @@
                 </div>
             </div>
             <div class="col-12" style="display:flex;justify-content: center;">
-                <div class="6" id="reviewdiv" style="width: 64%;margin-left: 120px; max-height: 315px; overflow: auto;">
+                <div class="6" id="reviewdiv" style="width: 64%;margin-left: 100px; max-height: 315px; overflow: auto; margin-top: 4px;">
                     <div  *ngIf="Peoduct?.rating!==0">
                         <p style="line-height: 1.6rem;
                     overflow: hidden;
@@ -1107,7 +1105,7 @@
                     -webkit-line-clamp: 1;
                     -webkit-box-orient: vertical;
                     max-height: 3.2rem;font-weight:600;
-                  font-size: 0.9rem; ">{{Peoduct?.rating_count}} Ratings for {{Peoduct?.name}}</p>
+                  font-size: 1rem;color: #626262; ">{{Peoduct?.rating_count}} Ratings for {{Peoduct?.name}}</p>
                         <div *ngIf="!prdcomment">
                             <div class="d-flex py-1" *ngFor="let comm of Comments">
 
@@ -1152,40 +1150,39 @@
                         border: 1px solid rgb(224, 224, 224);">
                             <div>
                                 <h6>
-                                    Not Yet Rated 
+                                    No Review Yet 
                                 </h6>
                             </div>
                         </div></div>
                 </div>
-                <div class="6" style="padding-left:50px;">
+                <div class="6" style="padding-left:50px;margin-top: 4px;">
                     <!-- <h5 class="comment-title">Leave your thought here</h5> -->
-                    <p style="font-weight:600;font-size:0.9rem ;">Add a review</p>
+                    <p style="font-weight:600;font-size:1rem ;margin-bottom: 5px;color: #626262;">Add a review</p>
                     <form [formGroup]="comment" (ngSubmit)="addcomment(comment)" id="ratingform">
-
                         <div class="row">
                             <div class="col-lg-12 mb-10">
-                                <span style="font-size: 0.8rem;">Your Rating</span><span class="text-danger">*</span>
+                                <span style="font-size: 0.7rem;">Your Rating </span> <span class="text-danger">*</span>
                                 <span class="product-rating pl-10">
                                     <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false"
                                         formControlName="rating" style="font-size: 1rem; color: rgb(248, 141, 19);">
                                     </ngb-rating>
                                 </span>
-                            </div>
-                            <!-- style=" border: 2px solid  #ddd5d5;" -->
+                            </div> 
                             <div class="col-lg-12 mb-20" style="display:grid;" id="textarea">
-                                <p style="font-size: 0.8rem;margin-bottom: 0px;">Your Review <span
-                                        class="text-danger">*</span></p>
+                                <p style="font-size: 0.7rem;margin-bottom: 0px;">Your Review <span
+                                        class="text-danger" style="font-size: 0.8rem">*</span></p>
                                 <textarea cols="50" rows="4" formControlName="comment"></textarea>
                             </div>
-                            <div class="col-lg-12 mb-20" style="display:grid;">
-                                <p style="font-size: 0.8rem;margin-bottom: 0px;">Your Name<span
-                                        class="text-danger">*</span></p>
+                            <div class="col-lg-12 mb-10" style="display:grid;">
+                                <p style="font-size: 0.7rem;margin-bottom: 0px;">Your Name<span
+                                        class="text-danger"  style="font-size: 0.8rem">*</span></p>
                                 <input type="text" name="" id="">
                             </div>
-                            <div class="col-lg-12 text-center">
+                            <div class="col-lg-12 ">
                                 <h6><span *ngIf="error1" style="color: red;">{{error1}}</span>
                                 </h6>
-                                <button type="submit" class="lezada-button lezada-button--medium">submit</button>
+                                <button type="submit" class="lezada-button lezada-button--medium"
+                                 style="padding: 2px 12px;">Submit</button>
                             </div>
                         </div>
                     </form>
@@ -1197,14 +1194,9 @@
 
 
         <!-- customer also likes -->
-        <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;">
-            <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
-                <div class="section-title section-title--one  mb-0">
-                    <h6 style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
-                        Customers also bought</h6>
-                    <!-- <button class="btn btn-primary" id="viewall" >View all</button> -->
-                </div>
-            </div>
+            <div class="questions row">
+                <h5 style="border-bottom:1px solid rgb(223, 220, 220) ; font-weight: 600;padding-bottom: 2px;">Customers also bought</h5>
+
             <div class="carousall">
                 <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
                     <div class="carousel-cell" *ngFor="let img of Relatedprod ;let i = index">
@@ -1398,6 +1390,7 @@
             </div>
         </div>
 
+        </div>
     </div>
     <!-- poup -->
     <ng-template #openRecord let-modal>

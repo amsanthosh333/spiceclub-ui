@@ -1,21 +1,58 @@
 .catname{
   margin-left: 7px;
 }
+.explore {
+  padding: 20px;
+}
 
+.explore p {
+  font-size: 0.8rem;
+  padding-top: 10px;
+}
+.section-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+.listcard {
+  background-color: white;
+  margin-left: 22px;
+  width: 97%;
+  padding: 0px;
+  border: 1px solid #e5e5e5;
+}
+#viewall:hover {
+  color: #1b54f0;
+  background-color: #ffffff;
+  border-color: #1b54f0;
+}
+
+#viewall {
+  color: #fff;
+  background-color: #1b54f0;
+  border-color: #1b54f0;
+  font-weight: 400;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  padding: 0rem 1.5rem;
+}
 .filter-title .product-filter-menu li.active {
   color: rgb(219, 4, 4);
-  border: 0px ;
+  border: 1px solid  #fd3907;
+  border-radius: initial;
+  box-shadow: 1px 1px 8px #fd3907;
 }
 .filter-title .product-filter-menu li{
   font-size: 11px;
   text-transform: none;
-  border: 1px solid rgb(217 217 211);
+  border: 0.3px solid#ffccce;
     border-radius: 3px;
     padding: 0 15px;
     margin: 0 15px;
-    background-color: #f5f5f5;
-
-    
+    /* background-color: #f5f5f5; */
+    box-shadow: 1px 1px 8px #9e9e9e;
+    letter-spacing: 0.3px;
 }
 /* headermenu above */
 
@@ -112,24 +149,35 @@ input {
   border-radius: 2px;
   font: sans-serif;
 }
+:host ::ng-deep .ng5-slider .ng5-slider-bar-wrapper {
+  left: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  margin-top: -20px;
+  padding-top: 16px;
+  width: 100%;
+  height: 32px;
+  z-index: 1;
+}
 :host ::ng-deep .ng5-slider .ng5-slider-pointer:after {
   content: '';
-  width: 8px;
-  height: 8px;
+  width: 5px;
+  height: 5px;
   position: absolute;
-  top: 9px;
-  left: 9px;
+  top: 6px;
+  left: 6px;
   border-radius: 4px;
   background: #fff;
 }
 :host ::ng-deep .ng5-slider .ng5-slider-pointer {
   cursor: pointer;
-  width: 25px;
-  height: 25px;
+  width: 17px;
+  height: 17px;
   top: -11px;
   /* background-color: #0db9f0; */
   z-index: 3;
   border-radius: 16px;
+  
   background-color: rgb(204, 2, 12);
 }
 :host ::ng-deep .ng5-slider .ng5-slider-bubble {
@@ -144,7 +192,8 @@ margin-bottom: 5px;
 font-size: 0.7rem;
 }
 #pricefilter p a{
-  font-size: 0.7rem;
+  font-size: 13px;
+  font-weight: 200;
   }
   #priceinput {
     padding: 10px 15px;
@@ -197,9 +246,15 @@ font-size: 0.7rem;
 #catnamee strong{
   font-family: Arial, Helvetica, sans-serif;
 }
-a:not([href]):not([class]),
-a:not([href]):not([class]):hover {
+a:not([href]):not([class]){
   color: #4c4c4c;
+  text-decoration: none;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+a:not([href]):not([class]):hover {
+  color: #3674fa;
   text-decoration: none;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 13px;
