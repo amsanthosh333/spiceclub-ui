@@ -1,6 +1,17 @@
 .card-header {
   padding: 0.5rem 0.3rem;
 }
+#formdiv form{
+  border: 1px solid #cbdae3;
+    padding-left: 10px;
+    border-radius: 9px;
+    padding-right: 10px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    background-color: #e1f1fb;
+    box-shadow: 0px 1px 7px #afafaf;
+}
 .fa {
   font-size: 20px;
   color: #fff;
@@ -10,14 +21,18 @@
 }
 #addcart1{
   border-radius: 25px;
-  margin-bottom: 8px;
+  margin-bottom:13px;
   margin-top: 8px;
+  background-color: #ffab13;
+  border-color: #ff9f00;
 }
 #addcart2{
   border-radius: 25px;
-  margin-bottom: 8px;
-  padding-left: 54px;
-   padding-right:54px;
+  margin-bottom: 12px;
+  padding-left: 55px;
+   padding-right:55px;
+   background-color: #fb641b;
+   border-color: #fb641b;
 }
 .shop-product__block__title {
   flex-basis: 13%;
@@ -193,9 +208,17 @@ input {
 }
 
 .questions{
-  padding-left: 10px;
   padding-top: 10px ;
 }
+
+.questions h5{
+  padding-left: 0px;
+  border-bottom:1px solid rgb(223, 220, 220);
+  width: 100%;
+  font-weight: 600;
+  padding-bottom: 2px;
+  margin-bottom: 10px;
+} 
 
 .imglazy {
   height: 240px;
@@ -277,7 +300,7 @@ input {
 }
 
 .single-product__content {
-  height: 130px;
+  height: 128px;
 }
 
 .section-title {
@@ -364,10 +387,8 @@ input {
 
 /* // */
 @media (min-width: 1200px){
-
-
 .container{
-    max-width: 1300px;
+    max-width: 1327px;
 }
 }
 :host ::ng-deep .sb-group[_ngcontent-gxq-c159], .sb-button[_ngcontent-gxq-c159] {
@@ -403,8 +424,6 @@ body {
 .sb-circles-dark .sb-wrapper {
   --sb-icon-size: 1.rem!important;
 }
-
-
 .title h3 a{
   font-size: 13px;
   color: #140f0f ;
@@ -586,10 +605,29 @@ button{
 }
 .wishlist-icon{
   font-family: Arial, Helvetica, sans-serif;
-  font-size: small;
+  font-size: 14px !important;
   margin-top: 5px;
   float: right;
   color: #ff902b;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  background-color: #ede8e8;
+  border-radius: 25px;
+  padding: 5px;
+
+  /* font-size: 14px;
+  margin-bottom: 20px;
+  background-color: #ede8e8;
+  border-radius: 25px;
+  padding: 5px; */
+
+
+}
+.wishlist-icon a{
+  margin-top: 3px;
+}
+.wishlist-icon a i{
+  padding: 4px;
 }
 .single-image{
   /* border: 1px solid#e3e2e2; */

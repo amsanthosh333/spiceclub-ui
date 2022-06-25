@@ -1,20 +1,20 @@
 <!-- <button (click)="billdesk2()"> BILLDESK payy</button>
 <button (click)="billdesk()"> BILLDESK payy server</button> -->
 
-<div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;" >
+<div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;">
 	<div class="container">
 		<div class="row" *ngIf="!review">
 			<div class="col-lg-6 mb-10 p-0" style="background-color: white; ">
 				<div id="coldiv">
-					<div class="col-lg-12 pl-0" style="  border-bottom: 1px solid #cbcbcb">
+					<div class="col-lg-12 pl-0" style="  border-bottom: 1px solid #e7e7e7">
 						<div class="section-title section-title--one  mb-0">
 							<h6>
 								Select Your Delivery Address</h6>
 						</div>
 					</div>
-					<p class="mb-1" style="font-size: 0.9rem;">Create a new address here</p>
-					<div style="text-align:center;border-bottom: 1px solid #cbcbcb;padding-bottom: 10px;">
-						<button id="newaddbtn" class="btn btn-info" (click)="opennewaddress()">Add new address</button>
+					<p class="mb-1 mt-10" style="font-size: 0.9rem;">Create a new address here</p>
+					<div style="border-bottom: 1px solid#e7e7e7;padding-bottom: 10px;">
+						<button id="newaddbtn" class="btn btn-info" (click)="opennewaddress()">Add New Address</button>
 					</div>
 					<!-- Shipping Address -->
 					<div id="shipping-formm" class="mb-40" *ngIf="shippaddress" style="padding-top: 20px;">
@@ -97,27 +97,32 @@
 								address </button>
 						</form>
 					</div>
-					<h6>My Addresses</h6>
-					<p style="font-size: 0.7rem; margin-bottom:0px;">Select delivery address</p>
+					<h6 style="font-size: 0.9rem;">My Addresses</h6>
+					<p style="font-size: 0.9rem; margin-bottom:0px;">Select delivery address</p>
 
-					<div class="row" *ngIf="!loadaddress" >
+					<div class="row" *ngIf="!loadaddress">
 						<div class="col-6" *ngFor="let Connectdtls of Address; let i=index">
 							<div class="addresss mb-2" [ngClass]="{'active': Connectdtls.set_default== 1}">
 								<a id="addressdiv">
 									<p style="margin-bottom: 0px; margin-top: 10px;"> <strong>{{username}}
-										</strong> <strong> {{Connectdtls.phone}}</strong> </p>
+										</strong> </p>
 									<span id="sssp"> {{Connectdtls.address}} , {{Connectdtls.city_name}} ,
 										{{Connectdtls.state_name}} ,
 										{{Connectdtls.country_name}} -</span>
-									<p><strong> {{Connectdtls.postal_code}}</strong> </p>
+									<p style="margin-bottom: 5px;"><strong> {{Connectdtls.postal_code}}</strong> </p>
+									<p><strong> {{Connectdtls.phone}}</strong></p>
 								</a>
-								<p style="text-align: center;">
-									<button id="newaddbtn" class="btn btn-info"
-										(click)="shippingcost(Connectdtls)">Deliver to this address</button>
+								<p style="text-align: center;" *ngIf="Connectdtls.set_default!== 1">
+									<button id="addressbtn" class="btn btn-info"
+										(click)="shippingcost(Connectdtls)">Deliver to this Address</button>
 								</p>
-								<p id="btns"> <button id="newaddbtn" class="btn btn-info"
+								<p style="text-align: center;" *ngIf="Connectdtls.set_default== 1">
+									<button id="addressbtn" class="btn btn-info"
+										(click)="shippingcost(Connectdtls)">Current Deliver Dddress</button>
+								</p>
+								<p id="btns"> <button id="addressbtn" class="btn btn-info"
 										routerLink="/address">Update</button>
-									<button id="newaddbtn" class="btn btn-info"
+									<button id="addressbtn" class="btn btn-info"
 										(click)="deleteRow(Connectdtls)">Delete</button>
 								</p>
 							</div>
@@ -125,26 +130,26 @@
 						</div>
 					</div>
 
-					<div class="row" *ngIf="loadaddress" >
-						<div class="col-6" >
-							<ngx-skeleton-loader count="1" 
-							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-						</ngx-skeleton-loader>
+					<div class="row" *ngIf="loadaddress">
+						<div class="col-6">
+							<ngx-skeleton-loader count="1"
+								[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+							</ngx-skeleton-loader>
 						</div>
-						<div class="col-6" >
-							<ngx-skeleton-loader count="1" 
-							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-						</ngx-skeleton-loader>
+						<div class="col-6">
+							<ngx-skeleton-loader count="1"
+								[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+							</ngx-skeleton-loader>
 						</div>
-						<div class="col-6" >
-							<ngx-skeleton-loader count="1" 
-							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-						</ngx-skeleton-loader>
+						<div class="col-6">
+							<ngx-skeleton-loader count="1"
+								[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+							</ngx-skeleton-loader>
 						</div>
-						<div class="col-6" >
-							<ngx-skeleton-loader count="1" 
-							[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-						</ngx-skeleton-loader>
+						<div class="col-6">
+							<ngx-skeleton-loader count="1"
+								[theme]="{'border-radius': '4px',  height: '250px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+							</ngx-skeleton-loader>
 						</div>
 					</div>
 				</div>
@@ -152,22 +157,25 @@
 			</div>
 			<div class="col-lg-6 mb-10" style="background-color: white;">
 				<div id="coldiv">
-					<div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
+					<div class="col-lg-12" style=" border-bottom: 1px solid #e7e7e7; padding: 0px;">
 						<div class="section-title section-title--one  mb-0">
 							<h6>
 								Select Payment Method</h6>
 						</div>
 					</div>
 					<!-- Payment Method -->
-					<div class="col-12 mt-10">
-						<p style="font-weight: 600;font-size: 0.8rem;margin: 0px; ">Your Wallet balance</p>
-						<span style="display:flex;"><input type="checkbox" id="wallet"> &nbsp; <label
-								style="margin-top:10px;" for="wallet">use my spice club's wallet balance</label></span>
+					<div class="col-12 mt-10 p-0">
+
+						<h6 style="font-size: 0.9rem;">Your Wallet balance</h6>
+						<span style="display:flex;padding: 0px;background-color:white;" class="checkout-payment-method">
+							<span class="single-method">
+								<input type="radio" id="wallet"> &nbsp; <label style="margin-top:10px;" for="wallet">Use
+									My Spice Club's Wallet Balance</label>
+							</span></span>
 					</div>
-					<div class="col-12">
-						<h6
-							style="font-weight: 600; font-size: 0.9rem; color: black;margin-top: 10px;margin-bottom: 0px;">
-							Payment Methods</h6>
+					<div class="col-12 p-0">
+						<h6 style="font-size: 0.9rem;">Payment Methods</h6>
+
 						<form [formGroup]="terms" (ngSubmit)="placeorder(terms)" *ngIf="!paymentload">
 							<div class="checkout-payment-method" *ngFor="let b of Paymenttype"
 								style="background-color:white;">
@@ -180,23 +188,25 @@
 									<!-- <p data-method="check">{{b.title}}</p> -->
 								</div>
 							</div>
+							<div style="text-align: end;">
+								<h6 class="form-text text-danger" style="height: 12px;padding-right: 30px;font-weight: 200;">
+									<span *ngIf="error2" style="color: red;">{{error2}}</span>
+								</h6>
 
-							<h6 class="form-text text-danger" style="height: 12px; text-align: center;">
-								<span *ngIf="error2" style="color: red;">{{error2}}</span>
-							</h6>
+								<button id="placebtn" class="lezada-button lezada-button--medium mt-10" type="submit" 
+	                            *ngIf="!loadingg">Proceed to Checkout</button>
+								<button class="lezada-button lezada-button--medium mt-10" type="button"
+									style="margin: 0 auto;border-radius: 15px;" *ngIf="loadingg"><i
+										class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+							</div>
 
-							<button class="lezada-button lezada-button--medium mt-10" type="submit" style=" display: block;
-							margin: 0 auto;" *ngIf="!loadingg">Proceed to Checkout</button>
-							<button class="lezada-button lezada-button--medium mt-10" type="button"
-								style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i
-									class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 						</form>
-  
-						<div class="col-6" *ngIf="paymentload">
-							
-							<ngx-skeleton-loader count="4" 
-							[theme]="{'border-radius': '4px',  height: '25px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-						</ngx-skeleton-loader>
+
+						<div class="col-6 p-0" *ngIf="paymentload">
+
+							<ngx-skeleton-loader count="4"
+								[theme]="{'border-radius': '4px',  height: '25px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+							</ngx-skeleton-loader>
 						</div>
 
 					</div>
@@ -208,24 +218,26 @@
 		</div>
 
 		<div class="row" style="background-color: white;" *ngIf="review">
-			<div class="section-title section-title--one  mb-0 ml-20">
-				<h6> Review your order</h6>
+			<div class="section-title section-title--one  mb-0 ml-20" style="padding: 0px;">
+				<h6 > Review your order</h6>
 			</div>
 			<div class="col-lg-8  p-0" id="firstdiv">
 				<div class="col-lg-12 pl-0" style="display: flex; padding: 15px;border: 1px solid rgb(214, 214, 214);">
 					<div class="col-4" id="addressreview">
 						<div class="" *ngFor="let Connectdtls of Address; let i=index">
-							<p style="font-size:0.8rem; font-weight: 600;">Shipping address <span
-									style="color:rgb(12, 171, 245);"><a (click)="backtocheckpage()" >change</a> </span></p>
+							<p  *ngIf="Connectdtls.set_default== 1" style="font-size:0.8rem; font-weight: 600;">Shipping address <span
+									style="color:rgb(12, 171, 245);">&nbsp; <i (click)="backtocheckpage()" class="bi bi-pencil-square"></i></span>
+							</p>
 							<div class="addresss mb-2" id="addresss" *ngIf="Connectdtls.set_default== 1"
 								style="border: 0px;">
 								<a id="addressdiv">
 									<p style="margin-top: 10px;"> <strong>{{username}}
-										</strong> <strong> {{Connectdtls.phone}}</strong> </p>
+										</strong> </p>
 									<span id="sssp"> {{Connectdtls.address}} , {{Connectdtls.city_name}} ,
 										{{Connectdtls.state_name}} ,
 										{{Connectdtls.country_name}} -</span>
-									<p><strong> {{Connectdtls.postal_code}}</strong> </p>
+									<p style="font-size:0.9rem;"> {{Connectdtls.postal_code}} </p>
+									<p><strong> {{Connectdtls.phone}}</strong> </p>
 								</a>
 							</div>
 						</div>
@@ -236,7 +248,7 @@
 						<p style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;">{{payytype}}</p>
 					</div>
 					<div class="col-4">
-						<p style="font-size:0.8rem; font-weight:600; margin-bottom: 8px;">Apply coupan</p>
+						<p style="font-size:0.8rem; font-weight:600; margin-bottom: 8px;">Apply coupon</p>
 
 						<p class="mb-0" style="font-size: 0.7rem;font-weight: 500;">Available coupans for you</p>
 						<span *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan" value="{{a.code}}"
@@ -244,22 +256,19 @@
 							<p style="font-size: 0.8rem;display: contents;"> {{a.code}}</p>
 						</span>
 
-						<div class="lezada-form coupon-form">
+						<div class="lezada-form coupon-form mt-10"  >
 							<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
 								<div class="row">
-									<div class="col-md-7 mb-sm-10">
-										<input type="text" placeholder="Enter your coupon code" formControlName="coupan"
-											required>
+									<div class="col-md-8 mb-sm-10" >
+										<input type="text" placeholder="Enter your coupon code"
+											formControlName="coupan" required style=" background-color: #f3f3f3;
+											border-radius: 4px;border:0px;padding: 3px; padding-left: 8px;">
 									</div>
-									<div class="col-md-5">
-										<button class="lezada-button lezada-button--small" type="submit"
-											*ngIf="applycou" style="padding-top: 5px;
-											padding-bottom: 5px;">apply</button>
-										<button class="lezada-button lezada-button--small" *ngIf="removecou"
-											(click)="removecoupon()" style="padding-top: 5px;
-											padding-bottom: 5px;" type="button">remove</button>
+									<div class="col-md-4">
+										<button id="apply" class="btn btn-danger sm" type="submit" *ngIf="applycou" >Apply</button>
+										<button id="apply" class="btn btn-danger sm" *ngIf="removecou" (click)="removecoupon()"
+											>Remove</button>
 									</div>
-
 								</div>
 							</form>
 
@@ -267,7 +276,7 @@
 
 					</div>
 				</div>
-				<div class="col-lg-12 pl-0 mt-10" style=" padding: 15px;border: 1px solid rgb(214, 214, 214);">
+				<div class="col-lg-12 pl-0 mt-10" style=" padding: 15px;border: 1px solid rgb(214, 214, 214);padding-bottom: 0px;">
 					<p style="font-size:0.8rem; font-weight: 600;color: brown;margin: 0px; padding-left: 15px;">
 						Expected Delivery date: {{Summery?.expected_delivery_date}}</p>
 					<div class="cart-table-container pl-40" *ngIf="!cartloader">
@@ -282,26 +291,33 @@
 									</td>
 									<td class="product-name">
 										<a style="text-decoration: none;">{{b.product_name}}</a>
-										<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">{{b.brand_name}}</a>
-										<a style="font-size: 0.7rem;font-weight: 100; text-decoration:none;color: rgb(66, 66, 66);" *ngIf="b.attribute.length!==0">
-											{{b.attribute[0]?.title}}: {{b.variation}} (pack of 1) </a>
-										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: line-through;color: gray;" *ngIf="b.pricestring!==b.stroked_price">
-											<span>MRP:</span>{{b.stroked_price}}</a>
-										<a style="font-weight: 600; color: rgb(66, 66, 66);font-size: 0.7rem ">Price:<span style="color: red;">Rs.{{b.price}}</span>
+										<a
+											style="color:rgb(2, 183, 207);font-size: 0.7rem;font-weight: 400;">{{b.brand_name}}</a>
+										<a style="font-size: 0.7rem;font-weight: 100; text-decoration:none;color: rgb(75, 75, 75);"
+											*ngIf="b.attribute.length!==0">
+											<span>	{{b.attribute[0]?.title}} </span>{{b.variation}} (pack of 1)  </a>
+										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: line-through;color: gray;"
+											*ngIf="b.pricestring!==b.stroked_price">
+											<span>MRP</span>  {{b.stroked_price}}</a>
+										<a style="font-weight: 600; color:rgb(53, 53, 53);font-size: 0.7rem ">
+											<span>Price</span>  <span
+												style="color: red;">  Rs.{{b.price}}</span>
 											&nbsp;&nbsp;
 										</a>
-										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray;" *ngIf="b.discount!==0">
-											you save Rs.{{b.discount}}   {{b.discount_percentage}}% </a>
-										<a style="font-size: 0.7rem;font-weight: 100;">
-											<span>Quantity:</span>{{b.quantity}} </a>
+										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray;"
+											*ngIf="b.discount!==0">
+											you save Rs.{{b.discount}} {{b.discount_percentage}}% </a>
+										<a style="font-size: 0.7rem;font-weight: 100;color: rgb(53, 53, 53);">
+											<span>Quantity </span>{{b.quantity}} </a>
 										<a style="font-weight: 600;
-											color: rgb(66, 66, 66);font-size: 0.7rem ">Total:<span style="color: red;">Rs.{{b.total}}</span>
+											color: rgb(53, 53, 53);font-size: 0.7rem ">Total<span style="color: red;">Rs.{{b.total}}</span>
 											&nbsp;&nbsp;
 										</a>
-										<a style="margin-top: 15px;">
-											<p style="font-size: 0.7rem;font-weight: 500;margin: 0px;">subscribe & save:</p>
+										<a style="margin-top: 20px;">
+											<p style="font-size: 0.7rem;font-weight: 600;margin: 0px;color: #484848;">subscribe & save:
+											</p>
 											<input type="checkbox">
-											<span style="font-size: 0.7rem;font-weight: 100;">  Save % now and _% in
+											<span style="font-size: 0.7rem;font-weight: 100;"> Save % now and _% in
 												future</span>
 										</a>
 									</td>
@@ -359,11 +375,11 @@
 								</tr>
 								<tr>
 									<th>Products:</th>
-									<td class="subtotal" style="font-size:15px;">{{subtot}}</td>
+									<td class="subtotal" >{{subtot}}</td>
 								</tr>
 								<tr>
 									<th>Delivery charges:</th>
-									<td class="subtotal" style="font-size:15px;">{{Summery?.shipping_cost}}</td>
+									<td class="subtotal" >{{Summery?.shipping_cost}}</td>
 								</tr>
 
 								<tr style="border-bottom: 1px solid rgb(214, 214, 214);">
@@ -389,7 +405,7 @@
 										</tr> -->
 							</table>
 							<div>
-								<span *ngIf="Summery?.discount!==0||couponn==true">
+								<span *ngIf="Summery?.discount_percentage!==0||couponn==true">
 									<p style="color:rgb(207, 38, 8);font-size:0.9rem;font-weight: 600;">You're saving
 										{{Summery?.discount}} ({{Summery?.discount_percentage}}%) with this order</p>
 								</span>
@@ -397,30 +413,33 @@
 								<span id="ordersave">
 									<p *ngIf="couponn==true"><i class="bi bi-star-fill" style="color:red;"></i> Coupan
 									</p>
-									<p *ngIf="Summery?.discount!==0"><i class="bi bi-star-fill" style="color:red;"></i>
+									<p *ngIf="Summery?.discount_percentage!==0"><i class="bi bi-star-fill" style="color:red;"></i>
 										Product discount</p>
 								</span>
 							</div>
 							<div class="cart-calculation-button text-center mt-20">
-								<button class="lezada-button lezada-button--medium" *ngIf="!loadingg" (click)="finallyplaceorder()">Place Order</button>
+								<button class="lezada-button lezada-button--medium" *ngIf="!loadingg"
+									(click)="finallyplaceorder()" id="placebtn">Place Order</button>
 								<button class="lezada-button lezada-button--medium mt-10" type="button"
-								style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i
-									class="fa fa-spinner fa-spin"></i>&nbsp;</button>
+									style=" display: block;margin: 0 auto;" *ngIf="loadingg"><i
+										class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 							</div>
 						</div>
 					</div>
-					<div id="secondiv" style="padding: 10px; text-align: center;background-color: #e9e3e3;">
-						<p style="font-size: 0.8rem;">
-								<a style="color:rgb(92, 201, 252);" routerLink="/faq" >Order FAQs</a>  from Help & Suppprt
+					<div id="secondiv" style="padding: 8px; text-align: center;background-color: #eee8e8;">
+						<p style="font-size: 0.7rem;">
+							<a style="color:rgb(92, 201, 252);" routerLink="/faq">Order FAQs</a> from Help & Suppprt
 						</p>
 					</div>
 				</div>
 			</div>
 			<div class="col-12" style="padding: 20px;padding-top: 0px;">
-				<p style="font-size:0.7rem;color: gray;">After placing the order email and SMS notification will triggered to your registred mail box and mobile number. If the order is placed with netbanking, cards, UPI complete the payment process with your banking credentials, 
+				<p style="font-size:0.7rem;color: gray;">After placing the order email and SMS notification will
+					triggered to your registred mail box and mobile number. If the order is placed with netbanking,
+					cards, UPI complete the payment process with your banking credentials,
 					then if the order is place on COD ,pay the order amount during the delivery of the goods </p>
 			</div>
-		
+
 		</div>
 	</div>
 </div>
@@ -431,7 +450,7 @@
 <!-- <button (click)="payWithRazor(21)">razorpay</button>
 	<button (click)="initPay()">razorpay</button>
 	<button (click)="pay()">Pay</button> -->
-	
+
 <!-- <button (click)="billdesk2()"> BILLDESK payy</button>
 	<button (click)="billdesk()"> BILLDESK payy server</button> -->
 

@@ -292,6 +292,8 @@ export class ProductdetailComponent implements OnInit {
         user_id: this.userid,
         product_id: prd_id
       }
+      console.log("wish");
+      
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         if (res.message == 'Product is successfully added to your wishlist') {
           this.iswishlist(prd_id)
@@ -443,6 +445,8 @@ export class ProductdetailComponent implements OnInit {
   viewdiscount(id: any) {
     this.request.getdisc(this.buyertypeid, id).subscribe((response: any) => {
       this.discount = response.data;
+      console.log("this.discount",this.discount);
+      
     },
       (error: any) => {
         console.log(error);
@@ -974,6 +978,7 @@ export class ProductdetailComponent implements OnInit {
 
   iswishlist(prodid: any) {
     this.request.checkwishlist(prodid, this.userid).subscribe((response: any) => {
+      console.log("this.iswishlistt",this.iswishlistt);
       this.iswishlistt = response;
     },
       (error: any) => {

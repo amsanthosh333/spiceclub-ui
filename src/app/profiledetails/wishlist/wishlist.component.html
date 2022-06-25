@@ -1,11 +1,13 @@
 <div style="background-color: #93939338; padding-bottom: 1px; padding-top: 10px;">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9" style="background-color: white;">
-                <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;" *ngIf="(Wishlist?.length!==0)">
+            <div class="col-lg-9 mb-10" style="background-color: white;">
+                <div class="col-lg-12" style="  border-bottom: 1px solid#ededed;" *ngIf="(Wishlist?.length!==0)">
                     <div class="section-title section-title--one  mb-0">
-                        <h6  style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
-                            Wishlist</h6>
+                        <h6  style="font-weight: 600; color: black;margin-left: 25px;margin-top: 10px;margin-bottom: 0px;">
+                            <span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/heart.png" 
+								style="height:20px;width:20px;
+									margin-right: 5px;" alt=""></span>  Wishlist</h6>
                     </div>
                 </div>
                 <div class="cart-table-container" *ngIf="!loader">
@@ -19,22 +21,24 @@
                                     </a>
                                 </td>
                                 <td class="product-name">
-                                    <a style="text-decoration: none;"
+                                    <a style="text-decoration: none;color: #5e5e5e;padding-bottom: 7px;"
                                         (click)="proddetail(b.product_id)">{{b.product.name}}</a>
                                     <a
-                                        style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">{{b.product.brand}}</a>
+                                        style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;padding-bottom: 7px;">{{b.product.brand}}</a>
 
-                                    <a *ngIf="b.product.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">In-stock</a>
-                                    <a  *ngIf="b.product.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">Out of stock</a>
+                                    <a *ngIf="b.product.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;padding-bottom: 7px;text-decoration: none;">In-stock</a>
+                                    <a  *ngIf="b.product.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;padding-bottom: 7px;text-decoration: none;">Out of stock</a>
                                     <span class="price" style="font-weight: 600;
 										color: rgb(66, 66, 66);">{{b.product.base_price}} &nbsp;&nbsp;</span>
                                     <br>
-                                    <a style="vertical-align: middle;" id="subsave">
-                                        <span>save</span>
-                                        <p style="font-size:0.8rem ;">
-                                            subscribe & save
+                                   
+                                    <a id="subsave">
+                                        <span>Save</span>
+                                        <p>
+                                            Subscribe now & Save
                                         </p>
-                                    </a>                            
+                                    </a>
+                                                         
                                 </td>
                                 <td class="product-price" style="padding: 10px;">
 
@@ -48,14 +52,14 @@
                                 <td class="product-remove">
                                     <span *ngIf="b.product.stock!==0">
                                         <button class="lezada-button lezada-button--small lezada-button--icon--left"
-                                        (click)="addtocart1(b.product.id,openRecord)" (click)="openaddcart()" style="padding-top: 3px;
-                                        padding-bottom: 3px;">
-                                        <i class="ion-ios-cart-outline"></i>add to cart</button>
+                                        (click)="addtocart1(b.product.id,openRecord)" (click)="openaddcart()" style="padding-top: 0px;
+                                        padding-bottom: 0px;border-radius: 15px;text-transform: none;">
+                                        <i class="ion-ios-cart-outline"></i>Add to Cart</button>
 
                                         <button class="lezada-button lezada-button--small lezada-button--icon--left mt-10"
-                                        (click)="addtocart1(b.product.id,openRecord)" (click)="openbuynow()" style="padding-left: 15px;padding-top: 3px; padding-bottom: 3px;
-                                        padding-right: 22px;">&nbsp;
-                                        <i  class="bi bi-lightning-fill"></i> Buy Now&nbsp;</button>
+                                        (click)="addtocart1(b.product.id,openRecord)" (click)="openbuynow()" style="padding-left: 11px;padding-top: 0px; padding-bottom: 0px;
+                                        padding-right: 19px;border-radius: 15px;text-transform: none;">&nbsp;
+                                        <i  class="bi bi-lightning-fill"></i> Buy Now</button>
                                         
                                     </span>
                                    <span  *ngIf="b.product.stock==0">
@@ -64,9 +68,8 @@
                                         font-size: 0.9rem;" (click)="deleteRecord(b.id)">Set alert,if stock arrives later</button></span>
                                    </span>
 
-                                     <span style="display:block;margin-top: 50px;"> <button class="btn btn-light sm" style="padding-top: 1px;
-                                        padding-bottom: 1px;
-                                        font-size: 0.9rem;" (click)="deleteRecord(b.id)">Delete</button></span>  
+                                     <span style="display:block;margin-top: 50px;"> <button id="deletebtn" class="btn btn-light sm"
+                                         (click)="deleteRecord(b.id)">Delete</button></span>  
                                 </td>
                             </tr>
                         </tbody>
@@ -93,11 +96,12 @@
                 <!--=======  End of cart table  =======-->
             </div>
 
-            <div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" style="margin-left: 0px;">
+            <div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" style="margin-left: 0px;padding-right: 0px;">
                 <div class="row mb-10">
                     <div *ngIf="!Summeryload">
                         <div class="cart-calculation-area" style="background-color: white; padding: 20px;">
-                            <p class="mb-10" style="font-size: 1rem;font-weight: 500;">Featured Products</p>
+                            
+                            <h6 class="single-sidebar-widget--title mb-10">Featured Products for you..</h6>
                             <div class="widget-product-wrapper" id="featureddiv">
                                 <!--=======  single widget product  =======-->
                                 <div class="single-widget-product-wrapper">
@@ -120,7 +124,7 @@
                                                 <div class="price">
                                                     <span class="main-price discounted"
                                                         style="text-decoration:line-through"
-                                                        *ngIf="img.stroked_price!==img.main_price">{{img.stroked_price}}</span>
+                                                        *ngIf="img.stroked_price!==img.main_price"  >{{img.stroked_price}}</span>
                                                     <span class="discounted-price">{{img.main_price}}</span>
                                                 </div>
                                                 <ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">

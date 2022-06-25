@@ -6,14 +6,16 @@
 		<div class="row">
 
 			<div class="col-lg-9 mb-10" style="background-color: white;">
-				<div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;" >
+				<div class="col-lg-12" style="  border-bottom: 1px solid #ededed;" >
 					<div class="section-title section-title--one  mb-0">
 						<h6 style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
-							Cart</h6>
+							<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/trolley.png" 
+								style="height:20px;width:20px;
+									margin-right: 5px;" alt=""></span>	Cart</h6>
 					</div>
 				</div>
 				<!--=======  cart table  =======-->
-				<div class="cart-table-container pl-40" *ngIf="!loader">
+				<div class="cart-table-container pl-10" *ngIf="!loader">
 					<table id="producttable" class="cart-table" *ngIf="(Cart.length!==0)" style="border: none;">
 						<tbody *ngFor="let a of Cart">
 							<tr *ngFor="let b of a.cart_items">
@@ -24,16 +26,21 @@
 									</a>
 								</td>
 								<td class="product-name">
-									<a style="text-decoration: none;"
+									<a style="text-decoration: none;color: #5e5e5e;padding-bottom: 7px;"
 										(click)="proddetail(b.product_id)">{{b.product_name}}</a>
-									<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;">{{b.brand_name}}</a>
-									<a *ngIf="b.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">In-stock</a>
-                                    <a  *ngIf="b.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;margin-top: 5px;">Out of stock</a>
+									<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;padding-bottom: 7px;margin-bottom: 0px;">{{b.brand_name}}</a>
+									<a *ngIf="b.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 2px;padding-bottom: 7px;text-decoration: none;">In-stock</a>
+                                    <a  *ngIf="b.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;margin-top: 2px;padding-bottom: 7px;text-decoration: none;">Out of stock</a>
+									
+									<span class="main-price discounted" id="main-stroke"
+									style="text-decoration:line-through"
+									*ngIf="b.stroked_price!==b.pricestring">{{b.stroked_price}}</span>          
 									<span class="price" style="font-weight: 600;
-										color: rgb(66, 66, 66);">Rs.{{b.price}} &nbsp;&nbsp;<span style="font-size: 0.7rem;font-weight: 100;"> {{b.attribute[0]?.title}}: {{b.variation}} (pack of 1) </span></span>
+										color: rgb(66, 66, 66);">{{b.pricestring}}&nbsp;<span style="font-size: 0.7rem;font-weight: 100;" *ngIf="b.variation!==null">({{b.attribute[0]?.title}}: {{b.variation}} (pack of 1)) </span></span>
 								<br>
 
 									<div class="pro-qty d-inline-block mx-0 " id="qty">
+										<span style="font-size: 0.8rem;" >Qty: </span>
 
 										<span style="display: inherit;"><a class="dec qty-btn"
 												 type="submit"
@@ -43,7 +50,7 @@
 										<!-- <input type="text" value="{{b.quantity}}"> -->
 										<input type="number" #box value="{{b.quantity}}"
 											(keyup)="getValue(box.value,b.id,b.upper_limit)" name="qqty"
-											style="background: transparent;">
+											style="background: transparent;padding: 0px; width: 40px;">
 										<span style="display: inherit;"> <a class="inc qty-btn"
 												style="text-decoration: none;color: gray;" (click)="b.quantity = b.quantity + 1"
 												(click)="increaseqty(b.id,b.quantity)"
@@ -52,11 +59,7 @@
 
 									</div>
 
-									<span style="margin-left:30px ;">
-										<button class="btn btn-light sm" style="padding-top: 1px;
-											padding-bottom: 1px;
-											font-size: 0.9rem;" (click)="deleteRecord(b.id)">Delete</button>
-									</span>
+									
 
 								</td>
 
@@ -80,19 +83,20 @@
 								</td>
 
 								<td class="total-price" id="price"><span class="price"
-										style="color: rgb(41, 41, 41);font-size: 1.2rem;">Rs {{b.total}}</span>
-									<a style="vertical-align: middle;" id="subsave">
-										<span>save</span>
+										style="color: rgb(41, 41, 41);font-size: 1.2rem;padding-bottom: 4px;">Rs.{{b.total}}</span>
+									<a  id="subsave">
+										<span>Save</span>
 										<p style="font-size:0.8rem ;">
-											subscribe & save
+											Subscribe now & Save
 										</p>
 									</a>
+									<span style="margin-top:17px ;">
+										<button class="btn btn-light sm"  id="deletebtn" (click)="deleteRecord(b.id)">Delete</button>
+									</span>
 								</td>
 
 								<td class="product-remove">
-									<!-- <a (click)="deleteRecord(b.id)" style="height: 25px;width: 25px;">
-											<i class="ion-android-close" ></i>
-										</a> -->
+									
 								</td>
 							</tr>
 
@@ -118,31 +122,35 @@
 			</div>
 
 
-			<div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" style="margin-left: 0px;">
+			<div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" 
+			style="margin-left:10px;width: 24%;">
 
-				<div class="row mb-10">
+				<div class="row mb-10" style="padding:6px;background-color: white;border: 1px solid #ededed;">
+								<div style="padding: 0px; border: 1px solid #ededed">
+								
 					<div *ngIf="!Summeryload">
 						<div class="cart-calculation-area" *ngIf="(Cart?.length!==0)" style="background-color: white;">
-							<p class="mb-0" style="font-size: 0.8rem;font-weight: 500;">Available coupans for you</p>
+							<p class="mb-0" style="font-size: 0.9rem;font-weight: 600;color:rgb(199, 15, 15)">Available coupons for you</p>
 							<span *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan"
 									value="{{a.code}}" (change)="changecoupan($event)">
 								<p style="font-size: 0.8rem;display: contents;"> {{a.code}}</p>
 							</span>
-							<div class="lezada-form coupon-form">
+							<div class="lezada-form coupon-form mt-10"  >
 								<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
 									<div class="row">
-										<div class="col-md-8 mb-sm-10">
+										<div class="col-md-8 mb-sm-10" >
 											<input type="text" placeholder="Enter your coupon code"
-												formControlName="coupan" required>
+												formControlName="coupan" required style=" background-color: #f3f3f3;
+												border-radius: 4px;border:0px;padding: 3px; padding-left: 8px;">
 										</div>
 										<div class="col-md-4">
-											<button class="btn btn-danger sm" type="submit" *ngIf="applycou" style="padding-top: 0px;
-													padding-bottom: 3px;
-													font-size: 0.8rem;margin-top: 12px;">Apply</button>
-											<button class="btn btn-danger sm" *ngIf="removecou" (click)="removecoupon()"
+											<button id="apply" class="btn btn-danger sm" type="submit" *ngIf="applycou" style="padding-top: 1px;
+													padding-bottom: 1px;
+													font-size: 0.8rem;margin-top:0px;background-color: #ce2127;border-color: #ce2127;">Apply</button>
+											<button id="apply" class="btn btn-danger sm" *ngIf="removecou" (click)="removecoupon()"
 												type="button" style="padding-top: 0px;
 													padding-bottom: 3px;
-													font-size: 0.8rem;margin-top: 12px;">remove</button>
+													font-size: 0.8rem;margin-top: 12px;">Remove</button>
 										</div>
 									</div>
 								</form>
@@ -152,7 +160,7 @@
 
 						</div>
 					</div>
-					<div class="skll" *ngIf="Summeryload">
+					<div class="skll" *ngIf="Summeryload"  >
 						<ngx-skeleton-loader count="1" [theme]="{ 
 										'border-radius': '5px',
 										height: '350px',
@@ -160,10 +168,10 @@
 										border: '1px solid white'
 									  }" animation="pulse"></ngx-skeleton-loader>
 					</div>
-					<div *ngIf="!Summeryload">
-						<div class="cart-calculation-area " *ngIf="(Cart.length!==0)" style="background-color: white;padding-top: 10px;">
-							<p class="mb-0" style="font-size: 0.8rem;font-weight: 500;">Shopping Cart</p>
-							<table class="cart-calculation-table mb-10" id="summerydiv">
+					<div *ngIf="!Summeryload" style="border-top: 1px solid #ededed;">
+						<div class="cart-calculation-area " *ngIf="(Cart.length!==0)" style="background-color: white;">
+							<p class="mb-10" style="font-size: 0.9rem;font-weight: 600;color:rgb(199, 15, 15) ">Shopping Cart</p>
+							<table class="cart-calculation-table" id="summerydiv">
 								<tr *ngIf="couponn==true">
 									<th>Coupon applied</th>
 									<td class="subtotal">yes</td>
@@ -198,18 +206,20 @@
 							</table>
 
 							<div class="cart-calculation-button text-center">
-								<button class="lezada-button lezada-button--medium" routerLink="/checkout">proceed to
-									checkout</button>
+								<button class="lezada-button lezada-button--medium" routerLink="/checkout">Proceed to
+									Checkout</button>
 							</div>
 						</div>
 					</div>
+					
+				</div>
 				</div>
 
 
 				<div class="row mb-10">
-					<div *ngIf="!Summeryload">
+					<div *ngIf="!Summeryload" style="padding: 0px;">
 						<div class="cart-calculation-area" style="background-color: white;">
-							<p class="mb-10" style="font-size: 1rem;font-weight: 500;">Featured Products</p>
+							<h6 class="single-sidebar-widget--title mb-10">Featured Products for you..</h6>
 							<div class="widget-product-wrapper" id="featureddiv">
 								<!--=======  single widget product  =======-->
 								<div class="single-widget-product-wrapper">

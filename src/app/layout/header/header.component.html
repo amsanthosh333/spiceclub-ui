@@ -1,7 +1,7 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<span  style="background:#ce2127; text-align: end;">
 		<!-- <marquee behavior="scrol" direction="left"><h3 style="color: white;">Spice Club</h3></marquee> -->
-		<marquee behavior="scrol" direction="left" scrollamount=2>	<p id="headerbar">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p></marquee>
+		<marquee behavior="scrol" direction="left" scrollamount=1>	<p id="headerbar">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p></marquee>
 	</span>
 	<div class="header-bottom pt-md-40 pb-md-40 ">
 		<div class="container wide">
@@ -55,7 +55,8 @@
 						</div> -->
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
-								<span><img   class="ion-android-person" *ngIf="(userid!==0)" src="../../../assets/images/icons/user1.png" style="height:20px;width:20px;margin-bottom: -3px;
+								<span><img   class="ion-android-person" *ngIf="(userid!==0)" src="../../../assets/images/icons/user1.png" 
+								style="height:25px;width:25px;margin-bottom: -3px;
 									margin-right: 5px;" alt=""></span>
 								
 							</a>
@@ -65,7 +66,8 @@
 						</div>
 						<div class="single-icon wishlist">
 							<a href="javascript:void(0)" id="offcanvas-wishlist-icon">		
-								<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/heart.png" style="height:20px;width:20px;margin-bottom: -3px;
+								<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/heart.png" 
+								style="height:25px;width:25px;margin-bottom: -3px;
 									margin-right: 5px;" alt=""></span>			
 								
 								<span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
@@ -86,7 +88,8 @@
 						</div>
 						<div class="single-icon cart">
 							<a href="javascript:void(0)" id="offcanvas-cart-icon">
-								<span><img class="ion-ios-cart" *ngIf="(userid!==0)" src="../../../assets/images/icons/trolley.png" style="height:20px;width:20px;margin-bottom: -3px;
+								<span><img class="ion-ios-cart" *ngIf="(userid!==0)" src="../../../assets/images/icons/trolley.png" 
+								style="height:28px;width:28px;margin-bottom: -3px;
 									margin-right: 5px;" alt=""></span>
 								<span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
 							</a>
@@ -401,14 +404,14 @@
 
 					<div class="single-cart-product" *ngFor="let img of Wishlist">
 						<span class="cart-close-icon">
-							<a (click)="deleteRecord(img.id)"><i class="ion-close" style="font-size: 11px;"></i></a>
+							<a (click)="deleteRecord(img.product.id)"><i class="ion-close" style="font-size: 11px;"></i></a>
 						</span>
 						<div class="image">
 							<a>
 								<img src="https://neophroncrm.com/spiceclubnew/public/{{img.product.thumbnail_image}}">
 							</a>
 						</div>
-						<div class="content"  (click)="gotoproduct(img.id)">
+						<div class="content"  (click)="gotoproduct(img.product.id)">
 							<p style="height: 15px;"></p>
 							<h5 style="width: 200px;"><a>{{img.product.name}}</a></h5>
 							<p>
@@ -480,7 +483,7 @@
 										src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}">
 								</a>
 							</div>
-							<div class="content"  (click)="gotoproduct(img.id)">
+							<div class="content"  (click)="gotoproduct(b.id)">
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{b.product_name}}</a></h5>
 								<p>

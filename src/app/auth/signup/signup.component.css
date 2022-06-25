@@ -4,8 +4,11 @@ div{
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0;
 }
-input, select, textarea{
+input, textarea{
   color: rgb(49, 49, 49) !important;
+}
+select{
+  color: rgb(223, 39, 39)
 }
 
 #loginformrow p{
