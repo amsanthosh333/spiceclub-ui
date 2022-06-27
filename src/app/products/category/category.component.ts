@@ -1015,6 +1015,14 @@ export class CategoryComponent implements OnInit {
         this.pageload = true;
         this.prodloader = false;
         this.sidepoploader = false;
+
+        for (var i = 0; i <= this.Product.length; i++) {
+          this.likeddd.push(true); 
+        } 
+        for (var i = 0; i <= this.Product.length; i++) {
+          this.likedd.push(false); 
+        }
+        
         console.log("this.Product", this.Product);
 
         setTimeout(() => {

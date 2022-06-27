@@ -7,10 +7,15 @@
 input{
     color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
+  height: 1.5rem;
+  font-size: 0.9rem;
 }
 select{ 
-    color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
+  color: #585858;
+  font-size: 0.9rem;
+  height: 1.5rem;
+  padding: 0px;
 }
 
 label{
@@ -18,16 +23,38 @@ label{
   font-family: Arial, Helvetica, sans-serif;
 }
 option{
-    color: #140f0f ;
+    color: #585858;
+    font-size: 0.9rem;
     font-family: Arial, Helvetica, sans-serif;
 }
 h5{
     color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
 }
+.form-text {
+    font-size: 0.9rem;
+    padding: 0px;
+}
+.form-group{
+    margin-bottom: 0.7rem;
+}
 /* .col-2{
     background-color: rgb(251, 251, 250);
 } */
+
+#fform label{
+    font-size: 0.8rem;
+    margin-bottom: 0px;
+
+}
+input[type="radio"] {
+    margin-top: -3px;
+    vertical-align: middle;
+  }
+#useaddress{
+    color: #ce2127;
+
+}
 .addresss{
     background-color: white;
     /* border: 1px solid rgb(161, 156, 156); */
@@ -42,7 +69,7 @@ p{
     border-bottom: none;
 }
 span{
-    color: #140f0f ;
+    color:#4c4b4b;
   font-family: Arial, Helvetica, sans-serif;
 }
 strong{
@@ -50,13 +77,14 @@ strong{
  
 }
 p strong{
-    color: #140f0f ;
+    color: #606060 ;
   font-family: Arial, Helvetica, sans-serif;
 }
 .lezada-button{
-    padding-top: 1px;
-    padding-bottom: 1px;
+    padding-top: 0px;
+    padding-bottom: 0px;
     margin-right: 10px;
+    border-radius: 5px;
 }
 .nice-select.ng-option{
     color: red;
@@ -119,7 +147,8 @@ strong{
         padding: 30px;
     }
     #fform{
-        margin-left: 30px;margin-right: 40px
+        margin-left: 15px;
+        margin-right: 15px;
     }
     }
 

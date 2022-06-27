@@ -1577,8 +1577,8 @@ export class HeaderComponent implements OnInit {
   }
   viewwishlist() {
     this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
+      console.log("this.Wishlist", response);
       this.Wishlist = response.data;
-      console.log("this.Wishlist", this.Wishlist);
       this.Wlength = this.Wishlist.length;
       this.loader = false;
     });
@@ -1624,7 +1624,9 @@ export class HeaderComponent implements OnInit {
   }
   deleteRecord(id: any) {
     this.request.deletewishproud(id).subscribe((response: any) => {
-      if (response.message == "Product is successfully removed from your wishlist") {
+      console.log("response",response);
+      
+      if (response.result == true) {
         this.viewwishlist();
         this.deleteRecordSuccess();
       }
@@ -1637,7 +1639,7 @@ export class HeaderComponent implements OnInit {
   }
   deleteRecord2(id: any) {
     this.request.deleteproud(id).subscribe((response: any) => {
-      if (response.message == "Product is successfully removed from your cart") {
+      if (response.result == true) {
         this.viewcart();
         this.viewcart3();
         this.viewcartcount();

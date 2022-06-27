@@ -5,7 +5,9 @@
 .single-widget-product {
   padding-bottom:24px !important
 }
+.price{
 
+}
 .discounted-price {
   color: #44bf44;
   font-weight: 200;
@@ -154,10 +156,22 @@ input[type=number] {
   text-align: center;
   margin-top: 15px;
 }
+.price{
+  font-weight: 600;
+ color: rgb(66, 66, 66); 
+  
+}
+.strokprice{
+  font-weight: 200;
+  color: rgb(233 101 101);
+  font-size: 0.9rem;
+  text-decoration: line-through;
+  padding-right: 5px;
+}
 
 #subsave span {
   background-color: rgb(199, 15, 15);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   padding: 3px 8px;
   color: rgb(255, 255, 255);
   border-radius: 5px;

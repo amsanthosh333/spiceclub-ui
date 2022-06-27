@@ -334,6 +334,14 @@ export class ShopbyproductComponent implements OnInit {
       this.categoryy_id = ''
       this.subItem = ''
       this.categoryItem=''
+
+    for (var i = 0; i <= this.Product.length; i++) {
+      this.likeddd.push(true); 
+    } 
+    for (var i = 0; i <= this.Product.length; i++) {
+      this.likedd.push(false); 
+    }
+    console.log("sub_array",this.likeddd)
       // console.log("brnd,category", this.brand_id, this.categoryy_id);
       setTimeout(() => {
         this.imgloader = true;
@@ -1257,6 +1265,13 @@ export class ShopbyproductComponent implements OnInit {
       this.prodloader = false;
       this.sidepoploader=false;
       console.log("this.Product",this.Product);
+      
+      for (var i = 0; i <= this.Product.length; i++) {
+        this.likeddd.push(true); 
+      } 
+      for (var i = 0; i <= this.Product.length; i++) {
+        this.likedd.push(false); 
+      }
       
       setTimeout(() => {
         this.imgloader = true;

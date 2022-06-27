@@ -368,7 +368,9 @@ export class ProductdetailComponent implements OnInit {
       this.subcat_id1=this.Peoduct.breadcrumbs[1]?.id;
       this.subcat_id2=this.Peoduct.breadcrumbs[2]?.id
       this.quantityyy = 1;
-      this.totalprice = this.Peoduct.main_price;
+      // this.totalprice = this.Peoduct.main_price;
+      this.totalprice = this.Peoduct.calculable_price
+   
       this.offers=this.Peoduct.offers.length;
       console.log("this.offers",this.offers);
       

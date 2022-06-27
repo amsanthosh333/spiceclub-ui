@@ -1,7 +1,60 @@
+div {
+    font-family: Arial, Helvetica, sans-serif !important;
+    letter-spacing: 0;
+}
+#closeabout{
+	font-size: 0.9rem;
+	margin-bottom: 15px;
+	margin-left: 10px;
+}
+#closeabout .col-2{
+	text-align: center;
+	color: #ce2127;
+}
+#closeabout:hover{
+	background-color: #dbdbdb;
+}
+.eml{
+	color: #63a93f;
+	font-size: 0.8rem;
+}
+
 #headerbar{
 	color: rgb(255, 255, 255);
 	font-size: 0.6rem;
     font-weight: 400;
+}
+.cart-buttons .closewishlist{
+	font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 15px;
+    padding: 3px 10px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid #333333;
+    border-radius: 0;
+    background-color: #333333;
+    border-radius: 25px;
+    text-transform: none;
+}
+.cart-buttons .closeoverlay{
+	font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 15px;
+    padding: 3px 10px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid #333333;
+    border-radius: 0;
+    background-color: #333333;
+    border-radius: 25px;
+    text-transform: none;
 }
 
 input::placeholder{
@@ -208,17 +261,9 @@ nav.site-nav>ul>li {
 	/* display: contents; */
 }
 
-/* #loogo {
-	margin-top: 38px;
-} */
-
-/* .main {
-    width: 40%;
-    margin: 40px 150px;
-} */
 .inputroup {
 	width: 100%;
-	margin-left: 30px;
+	/* margin-left: 30px; */
 }
 
 #searchbar {
@@ -373,7 +418,7 @@ a {
 	font-size: 0.8rem;
 	font-weight: 500;
 	font-family: inherit;
-	text-transform: capitalize;
+	text-transform: none;
 	letter-spacing: 0;
 }
 
@@ -597,22 +642,29 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 	}
 
 	.main {
-		width: 30%;
-		margin: 40px 150px;
-		margin-right: 178px;
+	    width: 39%;
+    /* margin: 40px 150px; */
+    margin-right: 178px;
+    margin-left: -73px;
 		
 	}
 
 	.header-bottom-container .logo-with-offcanvas {
-		margin-top: 20px;
+		/* margin-top: 20px;
 		flex-basis: 19%;
 		margin-right: -263px;
 		padding: 20px;
+		padding-left: 0px; */
+		margin-top: 15px;
+		flex-basis: 24%;
 		padding-left: 0px;
+
+		
 	}
 
+
 	#loogo {
-		margin-top: 38px;
+		margin-top: 48px;
 	}
 
 	.single-icon search {
@@ -621,7 +673,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 
 	.header-bottom-container {
 		height: 60px;
-		width: 130%;
+		width: 100%;
 
 	}
 
@@ -661,7 +713,7 @@ a {
 }
 
 .username {
-	color: #140f0f;
+	color:  #ce2127;
 	font-family: Arial, Helvetica, sans-serif;
 }
 

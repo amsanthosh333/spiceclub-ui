@@ -189,7 +189,7 @@
 						id="buttonsubscribe">Subscription</a></span>
 				<ul style="margin-left: 10px;">
 					<li class="menu-item"><a routerLink="/shopbyproduct">Shop by Products</a> </li>
-					<li class="menu-item-has-children"><i class="bi bi-list" style="font-weight:500;"></i>&nbsp;<a>Shop by Categories</a>
+					<li class="menu-item-has-children"><i class="bi bi-list" style="font-weight:500;"></i>&nbsp;<a style="font-weight:600;">Shop by Categories</a>
 						<ul class="sub-menu mega-menu mega-menu-column-4 center-menu">
 							<li class="lii" style="padding-left: 15px;">
 								<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
@@ -250,7 +250,6 @@
 								</ul>
 							</li>
 						</ul>
-					</li>
 
 					<li class="menu-item"><a routerLink="/blog">Blogs</a> </li>
 
@@ -292,7 +291,7 @@
 				<hr>
 				<!--=======  single widget  =======-->
 
-				<div class="single-widget mt-4">
+				<div class="single-widget mt-1">
 					<div class="single-comment">
 						<div class="single-comment__image" *ngIf="(profiledetail?.profileimg=='')">
 							<img src="assets/images/user-profile.png" class="img-fluid" style="height: 55px;" alt="mm">
@@ -303,60 +302,60 @@
 						</div>
 						<div class="single-comment__content  mt-2 pl-2">
 							<!--=======  username and date  =======-->
-							<strong class="username">{{profiledetail?.name}}</strong>
-							<p class="eml" style="color: blue;">{{profiledetail?.email}}</p>
+							<strong class="username">Hi  {{profiledetail?.name}}...</strong>
+							<p class="eml">{{profiledetail?.email}}</p>
 							<!--=======  End of username and date  =======-->
 							<!--=======  End of message  =======-->
 						</div>
 					</div>
 					<hr>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/home">
+				<div class="row " id="closeabout" routerLink="/home">
 					<h6 class="col-2"><i class="ion-ios-home"></i></h6>
-					<h6 class="col-8"> <a>Home</a> </h6>
+					<h6 class="col-10"> <a>Home</a> </h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/profile">
+				<div class="row " id="closeabout" routerLink="/profile">
 					<h6 class="col-2"><i class="ion-android-person"></i> </h6>
-					<h6 class="col-8"> <a>Profile</a></h6>
+					<h6 class="col-10"> <a>Profile</a></h6>
 				</div>
 
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/wishlist">
+				<div class="row" id="closeabout" routerLink="/wishlist">
 					<h6 class="col-2"><i class="ion-android-favorite"></i> </h6>
-					<h6 class="col-8"><a>Wishlist</a></h6>
+					<h6 class="col-10"><a>Wishlist</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/cart">
+				<div class="row" id="closeabout" routerLink="/cart">
 					<h6 class="col-2"><i class="ion-android-cart"></i> </h6>
-					<h6 class="col-8"><a>Cart</a></h6>
+					<h6 class="col-10"><a>Cart</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/orders">
+				<div class="row " id="closeabout" routerLink="/orders">
 					<h6 class="col-2"><i class="ion-android-list"></i> </h6>
-					<h6 class="col-8"><a>Orders</a></h6>
+					<h6 class="col-10"><a>Orders</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/wallet">
+				<div class="row " id="closeabout" routerLink="/wallet">
 					<h6 class="col-2"><i class="ion-android-folder"></i> </h6>
-					<h6 class="col-8"><a>Wallet</a></h6>
+					<h6 class="col-10"><a>Wallet</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/address">
+				<div class="row " id="closeabout" routerLink="/address">
 					<h6 class="col-2"><i class="ion-android-pin"></i> </h6>
-					<h6 class="col-8"><a>Address</a></h6>
+					<h6 class="col-10"><a>Address</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" routerLink="/message">
+				<div class="row " id="closeabout" routerLink="/message">
 					<h6 class="col-2"><i class="ion-android-chat"></i> </h6>
-					<h6 class="col-8"><a>My Chats</a></h6>
+					<h6 class="col-10"><a>My Chats</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" (click)="openkyc()"
+				<div class="row " id="closeabout" (click)="openkyc()"
 					*ngIf="buyertypereal===2 && kyc_verify_status==0">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
-					<h6 class="col-8"><a>Kyc</a></h6>
+					<h6 class="col-10"><a>Kyc</a></h6>
 				</div>
-				<div class="row mb-3 ml-4" id="closeabout" (click)="openenquery()" *ngIf="buyertypeid==2">
+				<div class="row " id="closeabout" (click)="openenquery()" *ngIf="buyertypeid==2">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
-					<h6 class="col-8"><a>Enquiry</a></h6>
+					<h6 class="col-10"><a>Enquiry</a></h6>
 				</div>
 				<hr>
-				<div class="row mb-2 ml-4" id="closeabout">
+				<div class="row " id="closeabout">
 					<h6 class="col-2"><i class="ion-android-exit 180deg"></i> </h6>
-					<h6 class="col-8" (click)="logout1()"><a>Logout</a></h6>
+					<h6 class="col-10" (click)="logout1()"><a>Logout</a></h6>
 
 				</div>
 				<!-- <div class="row mb-2 ml-4" id="closeabout">
@@ -388,7 +387,7 @@
 		<!--=======  close icon  =======-->
 		<span class="close-icon" id="wishlist-close-icon">
 			<a href="javascript:void(0)">
-				<i class="ion-android-close"></i>
+				<i class="bi bi-x-circle-fill" style="color: #ce2127; font-size: 1.2rem;"></i>
 			</a>
 		</span>
 		<!--=======  End of close icon  =======-->
@@ -396,7 +395,10 @@
 		<!--=======  offcanvas wishlist content container  =======-->
 
 		<div class="offcanvas-cart-content-container">
-			<h3 class="cart-title">Wishlist</h3>
+			<h3 class="cart-title">
+				<span><img  class="ion-android-favorite-outline"  src="../../../assets/images/icons/heart.png" 
+					style="height:20px;width:20px;margin-top: -6px;
+						margin-right: 5px;" alt=""></span><span> Wishlist</span></h3>
 
 			<div class="cart-product-wrapper" *ngIf="Wlength!==0">
 				<div class="cart-product-container  ps-scroll">
@@ -404,7 +406,8 @@
 
 					<div class="single-cart-product" *ngFor="let img of Wishlist">
 						<span class="cart-close-icon">
-							<a (click)="deleteRecord(img.product.id)"><i class="ion-close" style="font-size: 11px;"></i></a>
+							<a (click)="deleteRecord(img.id)">
+								<i class="bi bi-trash-fill"  style="font-size: 13px;color: #e53c3c;"></i></a>
 						</span>
 						<div class="image">
 							<a>
@@ -415,7 +418,7 @@
 							<p style="height: 15px;"></p>
 							<h5 style="width: 200px;"><a>{{img.product.name}}</a></h5>
 							<p>
-								<span *ngIf="img.product.stroked_price!=img.product.base_price"
+								<span *ngIf="img.product.stroked_price!==img.product.base_price"
 									class="main-price discounted">{{img.product?.stroked_price}}</span>
 								<span class="discounted-price" style="color: red;">{{img.product.base_price}}</span>
 							</p>
@@ -428,7 +431,7 @@
 				<!--=======  cart buttons  =======-->
 
 				<div class="cart-buttons">
-					<a class="closewishlist" (click)="gotowishlist()">view wishlist </a>
+					<a class="closewishlist" (click)="gotowishlist()">View Wishlist </a>
 				</div>
 
 				<!--=======  End of cart buttons  =======-->
@@ -458,7 +461,7 @@
 
 		<span class="close-icon" id="cart-close-icon">
 			<a href="javascript:void(0)">
-				<i class="ion-android-close"></i>
+				<i class="bi bi-x-circle-fill" style="color: #ce2127;font-size: 1.2rem;"></i>
 			</a>
 		</span>
 
@@ -467,7 +470,9 @@
 		<!--=======  offcanvas cart content container  =======-->
 
 		<div class="offcanvas-cart-content-container">
-			<h3 class="cart-title">Cart</h3>
+			<h3 class="cart-title"><span><img  class="ion-android-favorite-outline"  src="../../../assets/images/icons/trolley.png" 
+					style="height:20px;width:20px;margin-top: -6px;
+						margin-right: 5px;" alt=""></span> Cart</h3>
 
 			<div class="cart-product-wrapper" *ngIf="cartlength!==0">
 				<div class="cart-product-container  ps-scroll">
@@ -475,7 +480,8 @@
 					<div class="sdd" *ngFor="let img of Cart">
 						<div class="single-cart-product" *ngFor="let b of img.cart_items">
 							<span class="cart-close-icon">
-								<a (click)="deleteRecord2(b.id)"><i class="ion-close" style="font-size: 11px;"></i></a>
+								<a (click)="deleteRecord2(b.id)">
+									<i class="bi bi-trash-fill"  style="font-size: 13px;color: #e53c3c;"></i></a>
 							</span>
 							<div class="image">
 								<a>
@@ -492,7 +498,7 @@
 									<span class="discounted-price" style="color: red;">Rs {{b.price}}</span>
 								</p>
 								<span>
-									<p style="font-size:small;">quantity: {{b.quantity}}</p>
+									<p style="font-size:small;">Quantity: {{b.quantity}}</p>
 								</span>
 							</div>
 						</div>
@@ -513,8 +519,8 @@
 				<!--=======  cart buttons  =======-->
 
 				<div class="cart-buttons">
-					<a (click)="gotocart()" class="closeoverlay">view cart</a>
-					<a (click)="gotocheckout()" class="closeoverlay">checkout</a>
+					<a (click)="gotocart()" class="closeoverlay">View Cart</a>
+					<a (click)="gotocheckout()" class="closeoverlay">Checkout</a>
 				</div>
 
 
@@ -524,7 +530,7 @@
 			<div class="cart-product-wrapper" *ngIf="cartlength==0" style=" padding: 70px 0;
 				text-align: center; height: 450px;">
 
-				<h6 style=" padding-top: 180px;"> cart is empty</h6>
+				<h6 style=" padding-top: 180px;"> Cart is empty</h6>
 
 			</div>
 		</div>

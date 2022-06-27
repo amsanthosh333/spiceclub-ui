@@ -8,10 +8,10 @@
 			<div class="col-lg-9 mb-10" style="background-color: white;">
 				<div class="col-lg-12" style="  border-bottom: 1px solid #ededed;" >
 					<div class="section-title section-title--one  mb-0">
-						<h6 style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
+						<h5 style="font-weight: 600; color: #4c4a4a;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
 							<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/trolley.png" 
-								style="height:20px;width:20px;
-									margin-right: 5px;" alt=""></span>	Cart</h6>
+								style="height:20px;width:20px;margin-top: -6px;
+									margin-right: 5px;" alt=""></span>	Cart</h5>
 					</div>
 				</div>
 				<!--=======  cart table  =======-->
@@ -105,7 +105,7 @@
 					<div id="pggg" *ngIf="(Cart.length==0)" >
 						<div>
 							<h5>
-								Cart is empty
+								Cart is Empty
 							</h5>
 						</div>
 					</div>
@@ -125,17 +125,18 @@
 			<div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" 
 			style="margin-left:10px;width: 24%;">
 
-				<div class="row mb-10" style="padding:6px;background-color: white;border: 1px solid #ededed;">
+				<div  *ngIf="(Cart?.length!==0)" class="row mb-10" style="padding:6px;background-color: white;border: 1px solid #ededed;">
 								<div style="padding: 0px; border: 1px solid #ededed">
 								
 					<div *ngIf="!Summeryload">
+					
 						<div class="cart-calculation-area" *ngIf="(Cart?.length!==0)" style="background-color: white;">
-							<p class="mb-0" style="font-size: 0.9rem;font-weight: 600;color:rgb(199, 15, 15)">Available coupons for you</p>
-							<span *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan"
+							<p class="mb-0 pb-10" style="font-size: 0.9rem;font-weight: 600;color:rgb(199, 15, 15)">Available Coupons for you</p>
+							<span id="coupondiv" *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan"
 									value="{{a.code}}" (change)="changecoupan($event)">
 								<p style="font-size: 0.8rem;display: contents;"> {{a.code}}</p>
 							</span>
-							<div class="lezada-form coupon-form mt-10"  >
+							<div class="lezada-form coupon-form mt-10" id="coupondiv" >
 								<form [formGroup]="comment" (ngSubmit)="applycoupan(comment)">
 									<div class="row">
 										<div class="col-md-8 mb-sm-10" >
@@ -146,11 +147,11 @@
 										<div class="col-md-4">
 											<button id="apply" class="btn btn-danger sm" type="submit" *ngIf="applycou" style="padding-top: 1px;
 													padding-bottom: 1px;
-													font-size: 0.8rem;margin-top:0px;background-color: #ce2127;border-color: #ce2127;">Apply</button>
+													font-size: 0.7rem;margin-top:0px;background-color: #ce2127;border-color: #ce2127;">Apply</button>
 											<button id="apply" class="btn btn-danger sm" *ngIf="removecou" (click)="removecoupon()"
 												type="button" style="padding-top: 0px;
 													padding-bottom: 3px;
-													font-size: 0.8rem;margin-top: 12px;">Remove</button>
+													font-size: 0.7rem;margin-top: 12px;">Remove</button>
 										</div>
 									</div>
 								</form>
@@ -173,7 +174,7 @@
 							<p class="mb-10" style="font-size: 0.9rem;font-weight: 600;color:rgb(199, 15, 15) ">Shopping Cart</p>
 							<table class="cart-calculation-table" id="summerydiv">
 								<tr *ngIf="couponn==true">
-									<th>Coupon applied</th>
+									<th>Coupon Applied</th>
 									<td class="subtotal">yes</td>
 								</tr>
 								<tr>
@@ -219,7 +220,7 @@
 				<div class="row mb-10">
 					<div *ngIf="!Summeryload" style="padding: 0px;">
 						<div class="cart-calculation-area" style="background-color: white;">
-							<h6 class="single-sidebar-widget--title mb-10">Featured Products for you..</h6>
+							<h6 class="single-sidebar-widget--title mb-10" style="font-size:18px;">Featured Products for you..</h6>
 							<div class="widget-product-wrapper" id="featureddiv">
 								<!--=======  single widget product  =======-->
 								<div class="single-widget-product-wrapper">

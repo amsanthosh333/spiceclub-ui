@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { PaymentService } from 'src/app/services/payment.service';
 import { SharedService } from 'src/app/services/shared.service'
 import { NgxSpinnerService } from "ngx-spinner";
+import { AppComponent } from 'src/app/app.component';
 @Component({
   selector: 'app-checkout',
   templateUrl: './checkout.component.html',
@@ -19,7 +20,6 @@ import { NgxSpinnerService } from "ngx-spinner";
 
 })
 export class CheckoutComponent implements OnInit {
-
   review: boolean = false;
   @ViewChild('form') form!: ElementRef;
   accessCode: any;
@@ -112,9 +112,10 @@ export class CheckoutComponent implements OnInit {
   cartloader: boolean=true;
   loadaddress: boolean=true;
   paymentload: boolean=true;
+  paymentmethod: any;
   // responseText: string;
 
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,private appcomp:AppComponent,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService, private activatedRoute: ActivatedRoute,
     private sharedService: SharedService, private payservice: PaymentService, private spinner: NgxSpinnerService) {
@@ -191,6 +192,12 @@ export class CheckoutComponent implements OnInit {
 
   onItemChange(item: any) {
     this.payytype = item;
+    if (this.payytype == "billdesk") {
+      this.paymentmethod= "Billdesk"}
+      else if (this.payytype == "razorpay") {
+        this.paymentmethod= "Razorpay"}
+        else  {
+          this.paymentmethod= "Cash On Delivery"}
     this.getSelecteditem();
   }
   viewcart() {
@@ -383,7 +390,9 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     else {
-     this.review=true
+     this.review=true;
+     this.appcomp.hideheader();
+
     }
   }
 
@@ -399,6 +408,7 @@ export class CheckoutComponent implements OnInit {
     console.log("finallyplaceorder",edata);
     
     if (this.payytype == "billdesk") {
+      this.paymentmethod= "Billdesk"
       this.request.placeorder(edata).subscribe((response: any) => {
         this.combined_orderid = response.combined_order_id;
         if (response.result = true) {
@@ -418,6 +428,7 @@ export class CheckoutComponent implements OnInit {
       });
     }
     else if (this.payytype == "razorpay") {
+      this.paymentmethod= "Razorpay"
       console.log("elseif razorpay");
       this.request.placeorder(edata).subscribe((response: any) => {
         console.log("placeorder response", response);
@@ -441,6 +452,7 @@ export class CheckoutComponent implements OnInit {
     }
     else {
       console.log("else cashondelivery");
+      this.paymentmethod= "Cash On Delivery"
       this.request.placeorder(edata).subscribe((response: any) => {
         console.log("cod response", response);
 
@@ -461,6 +473,9 @@ export class CheckoutComponent implements OnInit {
 
   backtocheckpage(){
     this.review=false
+    this.appcomp.showheader();
+     
+    // this.header.emit(this.userName);
   }
   applycoupan(form: FormGroup) {
     let edata2 = {

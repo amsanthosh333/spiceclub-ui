@@ -267,7 +267,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="single-info" style="padding-bottom:7px;"
+                                            <div class="single-info mt-10" style="padding-bottom:7px;"
                                                 *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
                                                 <span class="quickview-title" style="color: #727272">MRP :</span>
                                                 <span class="main-price discounted"
@@ -278,7 +278,7 @@
                                                     style="color: #727272;font-weight: 600">Price : </span>
                                                 <a
                                                     style="font-size: 1rem;color:brown;font-weight: 600;">{{Peoduct?.main_price}}</a>
-                                                <span style="font-size: 0.6rem;font-weight: 500;color: gray;"> &nbsp;(
+                                                <span style="font-size: 0.6rem;font-weight: 500;color: gray;" *ngIf="(choice.length!==0)"> &nbsp;(
                                                     {{Peoduct?.stroked_price }} / {{pervarient}} )</span>
                                             </div>
                                             <div class="single-info" style="font-size: 0.8rem;padding-bottom:7px;">
@@ -484,7 +484,7 @@
                         <div class="shop-product__block shop-product__block--size " style="justify-content: center;">
                             <span class="shop-product__block__value ">
                                 <span style="font-size:0.8rem ;"> You Pay </span><strong><span
-                                        style="color: red;">{{totalprice}} </span></strong>
+                                        style="color: red;"> Rs.{{totalprice}} </span></strong>
                                 <!-- <p > (Including all taxes) </p> -->
                             </span>
                         </div>

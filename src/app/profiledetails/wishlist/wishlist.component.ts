@@ -86,11 +86,6 @@ export class WishlistComponent implements OnInit {
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
           this.Wishlist=response.data; 
           this.loader=false ;
- 
-          // setTimeout(() => {
-          //   this.loader=false ;
-          // }, 1000);
-          
         });
       
       }
@@ -106,11 +101,8 @@ export class WishlistComponent implements OnInit {
       }
 
       deleteRecord(id:any) {
-
         this.request.deletewishproud(id).subscribe((response: any) => {
-
           if(response.message=="Product is successfully removed from your wishlist"){
-
             this.deleteRecordSuccess();
             this.viewwishlist();
             this.sharedService.sendClickEvent();

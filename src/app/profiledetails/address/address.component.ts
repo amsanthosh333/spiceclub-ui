@@ -147,12 +147,12 @@ export class AddressComponent implements OnInit {
     this.register.reset();
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'lg',
+      size: 'md',
     });
-    this.modalService.open(content2, {
-      ariaLabelledBy: 'modal-basic-title',
-      size: 'lg',
-    });
+    // this.modalService.open(content2, {
+    //   ariaLabelledBy: 'modal-basic-title',
+    //   size: 'lg',
+    // });
      
   }
 
@@ -227,7 +227,7 @@ export class AddressComponent implements OnInit {
 
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'lg',
+      size: 'md',
     });
     this.rowiid=row.id;
 
