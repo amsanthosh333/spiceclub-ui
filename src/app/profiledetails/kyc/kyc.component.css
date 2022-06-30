@@ -11,3 +11,61 @@ div {
     font-family: Arial, Helvetica, sans-serif !important;
     letter-spacing: 0;
 }
+textarea{
+    color: #585858;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+  border: 1px solid #9d9d9d;
+    border-radius: 3px;
+
+}
+input{
+    color: #585858;
+  font-family: Arial, Helvetica, sans-serif;
+  height: 1.6rem;
+  font-size: 0.8rem;
+
+
+}
+select{ 
+  font-family: Arial, Helvetica, sans-serif;
+  color: #585858;
+  font-size: 0.8rem;
+  height: 1.5rem;
+  padding: 0px;
+}
+
+label{
+    color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.9rem;
+}
+option{
+    color: #585858;
+    font-size: 0.9rem;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h5{
+    color: #140f0f ;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.form-text {
+    font-size: 0.9rem;
+    padding: 0px;
+}
+.form-group{
+    margin-bottom: 0.7rem;
+}
+/* .col-2{
+    background-color: rgb(251, 251, 250);
+} */
+
+#fform label{
+    font-size: 0.8rem;
+    margin-bottom: 0px;
+
+}
+input[type="radio"] {
+    margin-top: -3px;
+    vertical-align: middle;
+  }

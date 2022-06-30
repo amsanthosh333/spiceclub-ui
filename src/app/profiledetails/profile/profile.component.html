@@ -32,9 +32,9 @@
                                 <div class="single-comment__image" *ngIf="(profiledetail?.profileimg!=='')">
                                     <ngx-skeleton-loader *ngIf="loaderimage" count="1" [theme]="{ 
                                         'border-radius': '75px',
-                                        height: '85px',
+                                        height: '83px',
                                         width: '100PX',
-                                        'background-color': '#ffffff',
+                                        'background-color': 'whitesmoke',
                                         border: '1px solid white'
                                       }" animation="pulse"></ngx-skeleton-loader>
 
@@ -48,8 +48,8 @@
 
                                 </div>
                                 <div class="single-comment__content pl-2 mt-2 mb-4">
-                                    <strong class="usernamee">{{profiledetail?.name}}</strong>
-                                    <p class="email" style="color: blue;">{{profiledetail?.email}}</p>
+                                    <strong class="usernamee" style="color:#ce2127;" >{{profiledetail?.name}}</strong>
+                                    <p class="email" style="color:#858789;">{{profiledetail?.email}}</p>
                                 </div>
                             </div>
 
@@ -136,8 +136,8 @@
                             <h6> <strong class="username">{{orderlength}} </strong>your total orders</h6>
                         </div>
                     </div>
-                    <div class="col-12" id="list2" >
-                        <div class="single-comment__content pl-2 mt-2">
+                    <!-- <div class="col-12" id="list2" (click)="openenquery()" *ngIf="buyertypeid==2">
+                        <div class="single-comment__content pl-2 mt-2 " style="padding: 2px;">
                             <ngx-skeleton-loader count="1" *ngIf="loader3" [theme]="{ 
                             'border-radius': '5px',
                             height: '20px',
@@ -146,9 +146,9 @@
                             border: '1px solid white',
                             ' margin-bottom':'0px' 
                           }" animation="pulse"></ngx-skeleton-loader>
-                            <h6> <strong class="username">Enquiry a product</strong></h6>
+                            <h6  >Enquiry a product</h6>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-5">
@@ -369,9 +369,57 @@
                 </div>
             </div> -->
             </div> 
-            <div class="col-3" id="profilediv">
+            <div class="col-3" id="">
                     <div class="row">
+                        <div class="ya-card-row">
+                            <!--  -->
+                            <div class="ya-card-cell" (click)="openkyc()"
+                            *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0" >
+                                <a  class="ya-card__whole-card-link">
+                                    <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
+                                        <div class="a-box-inner" >
+                                            <div class="a-row">
+                                                <div class="a-column a-span3">
+                                                    <span><img class="ion-ios-cart"  src="../../../assets/images/icons/find-my-friend.png" 
+                                                        style="height:40px;width:40px;margin-bottom: -3px;
+                                                            margin-right: 5px;" alt=""></span>
+                                                </div>
+                                                <div class="a-column a-span9 a-span-last mt-20">
+                                                    <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                        Verify KYC
+                                                    </h2>
+                                                    <div><span class="a-color-secondary">Verify Your Kyc to become a B2B Customer</span></div>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
 
+                            <div class="ya-card-cell" (click)="openenquery()" *ngIf="buyertypeid==2">
+                                <a  class="ya-card__whole-card-link">
+                                    <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
+                                        <div class="a-box-inner" >
+                                            <div class="a-row">
+                                                <div class="a-column a-span3">
+                                                    <span><img class="ion-ios-cart"  src="../../../assets/images/icons/information.png" 
+                                                        style="height:40px;width:40px;margin-bottom: -3px;
+                                                            margin-right: 5px;" alt=""></span>
+                                                </div>
+                                                <div class="a-column a-span9 a-span-last mt-20">
+                                                    <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                        Enquiry a product
+                                                    </h2>
+                                                    <div><span class="a-color-secondary" >Know More About Products and Deals</span></div>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
             </div>
         </div>

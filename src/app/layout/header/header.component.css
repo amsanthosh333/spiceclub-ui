@@ -130,7 +130,7 @@ input::placeholder{
 	font-family: Arial, Helvetica, sans-serif ;
 	
 	font-size: 12px;
-	padding: 10px 30px;
+	padding: 1px 30px;
 	text-align: center;
 	text-decoration: none;
 	margin-left: 0px;
@@ -138,7 +138,7 @@ input::placeholder{
 	-moz-animation: glowing 1300ms infinite;
 	-o-animation: glowing 1300ms infinite;
 	animation: glowing 1300ms infinite;
-	width: 120px;
+	/* width: 120px; */
 }
 
 #buttonkyc1 {

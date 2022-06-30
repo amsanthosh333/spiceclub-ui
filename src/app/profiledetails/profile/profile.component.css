@@ -1,4 +1,7 @@
-
+div{
+	font-family: Arial, Helvetica, sans-serif !important;
+	letter-spacing: 0;
+  }
 .ya-card-row{
   -webkit-text-size-adjust: 100%;
   font-size: 14px;
@@ -67,6 +70,7 @@
 }
 .a-color-secondary, .a-color-tertiary {
   color: #565959!important;
+  font-size: 0.8rem;
 }
 
 #profilediv .row{
@@ -99,11 +103,22 @@
 }
 #list2{
   border-top: 1px solid rgb(224, 224, 224);
-  background-color: #ce2127;
-  color: white;
+    background-color: #86dbf5;  
+    border-radius: 0px 1px 8px 8px;
+}
+#list2:hover{
+  border-top: 1px solid rgb(224, 224, 224);
+    background-color: #c7321e;  
+    border-radius: 0px 1px 8px 8px;
+}
+#list2:hover .single-comment__content h6{
+  color: rgb(231, 231, 231);font-weight: 600;
+}
+#list2.single-comment__content h6{
+  color: rgb(231, 231, 231);font-weight: 600;
 }
 #list{
-  padding: 0.15rem;
+  padding: 0.55rem;
  }
 h6{
   padding: 0px;
@@ -168,14 +183,14 @@ label{
     position: absolute;
     top: 20px;
    
-    background:#a1a0a0;
-    border-radius:100%;
-    width:30px;
-    height:30px;
-    line-height:30px;
-    vertical-align:middle;
-    text-align:center;
-    color:#0000ff;
+    background: #ebebeb;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    vertical-align: middle;
+    text-align: center;
+    color: #15a126;
     font-size:14px;
     cursor:pointer;
     margin-top:80px;

@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { windows } from 'ngx-bootstrap-icons';
 import { ConfirmedValidator } from 'src/app/auth/confirmedValidator';
 import { SharedService } from 'src/app/services/shared.service'
+import { EnquiryComponent } from 'src/app/profiledetails/enquiry/enquiry.component';
+import { KycComponent } from 'src/app/profiledetails/kyc/kyc.component';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -46,6 +48,10 @@ export class ProfileComponent implements OnInit {
   loader1: boolean=true;
   loader3: boolean=true;
   loaderimage: boolean=true;
+  buyertypereal: any;
+  kyc_verify_status: any;
+  iskycupload: any;
+  buyertypeid: any;
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService,
      private request: RequestService,private sharedService: SharedService,
     private modalService: NgbModal,) {
@@ -58,6 +64,10 @@ export class ProfileComponent implements OnInit {
     this.userid = this.currentdetail.user?.id;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
+    this.buyertypereal = this.currentdetail.user?.buyertypereal;
+    this.kyc_verify_status=this.currentdetail.user?.kyc_verify_status;
+    this.iskycupload=this.currentdetail.user?.iskycupload;
+    this.buyertypeid = this.currentdetail.user?.buyertypeid;
 
     this.editForm = this.fb.group({
       name:['',[Validators.required]],
@@ -140,6 +150,7 @@ export class ProfileComponent implements OnInit {
       });
   }
 
+
   gotocart(){
     window.scroll(0,0);
     this.router.navigate(['/cart']);   
@@ -147,6 +158,19 @@ export class ProfileComponent implements OnInit {
   gotowishlist(){
     window.scroll(0,0);
     this.router.navigate(['/wishlist']);   
+  }
+  openenquery(){
+    this.modalService.open(EnquiryComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
+  }
+  openkyc(){
+
+    this.modalService.open(KycComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
   onEditSave(form: FormGroup) {   
     this.error3=''

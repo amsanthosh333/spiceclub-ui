@@ -30,6 +30,7 @@
 				</div>
 
 				<div>
+					
 					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
 						(click)="openkyc()">
 						<a class="btn btn-info" id="buttonkyc">Verify Kyc</a>
@@ -256,8 +257,24 @@
 					<li class="menu-item"><a routerLink="/recipe">Recipes</a></li>
 
 					<li class="menu-item"><a routerLink="/orders">Quick Order</a></li>
+
+					
+					
 				</ul>
 
+				<span *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0" class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
+					><a class="btn btn-info" id="buttonkyc">Verify Kyc</a></a></span>
+				
+					<span  *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1" class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
+						><a class="btn btn-info" id="buttonkyc">Kyc verification inprogress</a></a></span>
+				<!--  -->
+				<!-- <div   *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
+				(click)="openkyc()" >
+				<a class="btn btn-info" id="buttonkyc">Verify Kyc</a>
+			</div> -->
+			<!-- <div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1">
+				<a class="btn btn-info" id="buttonkyc1">Kyc verification inprogress</a>
+			</div> -->
 			</nav>
 		</div>
 	</div>
@@ -357,8 +374,8 @@
 						 alt=""></span> </h6>
 					<h6 class="col-10"><a>My Chats</a></h6>
 				</div>
-				
-				<div class="row " id="closeabout" (click)="openkyc()"
+
+				<!-- <div class="row " id="closeabout" (click)="openkyc()"
 					*ngIf="buyertypereal===2 && kyc_verify_status==0">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
 					<h6 class="col-10"><a>Kyc</a></h6>
@@ -366,7 +383,7 @@
 				<div class="row " id="closeabout" (click)="openenquery()" *ngIf="buyertypeid==2">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
 					<h6 class="col-10"><a>Enquiry</a></h6>
-				</div>
+				</div> -->
 				<div class="row " id="closeabout">
 					<h6 class="col-2"><span><img  class="ion-android-person" 
 						src="../../../assets/images/icons/arrow.png" 
