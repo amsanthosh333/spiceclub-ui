@@ -3,9 +3,9 @@
         <div class="container" style="margin: 0px;">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">My Account</h4>
+                    <!-- <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">My Account</h4> -->
                     <!--=======  breadcrumb list  =======-->
-                    <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+                    <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
                         <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
                         <li class="breadcrumb-list__item breadcrumb-list__item--active">Address</li>
                     </ul>
@@ -22,15 +22,18 @@
     <div class="checkout-cart-total   mt-1" style="background-color:white;"
         *ngIf="!loader">
 
-        <div class="addres1 mb-4" style="padding: 10px; background-color: white;" (click)="addaddresss(addRecord,map)">
+        <!-- <div class="addres1 mb-4" style="padding: 10px; background-color: white;" (click)="addaddresss(addRecord,map)">
             <span style="color: #2874f0;;"><strong style="padding-left: 20px;">+ Add a New Address</strong> </span>
+        </div> -->
+        <div id="addaddressdiv">
+            <button id="newaddbtn" class="btn btn-info" (click)="addaddresss(addRecord,map)">Create a new address</button>
         </div>
 
         <div class="addres1">
             <form [formGroup]="address">
                 <div class="addresss" *ngFor="let Connectdtls of Address; let i=index">
                     <p> <strong>{{username}} </strong></p>
-                    <span> {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
+                    <span > {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
                         {{Connectdtls.country_name}} - {{Connectdtls.set_default}}{{radioSelected}}</span>
                     <p> {{Connectdtls.postal_code}}</p>
                     <p> <strong> {{Connectdtls.phone}}</strong></p>
@@ -41,23 +44,25 @@
                         name="radiio"
                         value= "{{Connectdtls.id}} "data-shipping 
                         [checked]="Connectdtls.set_default== 1"
-                        (click)="changeshippingaddress(Connectdtls.id)" > <label style="color: #ce2127;">&nbsp; Use as Shipping Address</label>
+                        (click)="changeshippingaddress(Connectdtls.id)" > <label style="color: #ce2127;">&nbsp; Use this as shipping address</label>
 
                         
                         <span class="add-to-cart" style="margin-left: auto;">
-                            <button style="background-color: rgb(201, 31, 8);border: 1px solid rgb(201, 31, 8);
-                            text-transform: none;"
-                                class="lezada-button lezada-button--small lezada-button--icon--left"
-                                (click)="deleteRow(Connectdtls)">
-                                <i class="bi bi-trash-fill"></i> <span style="color: white;letter-spacing: 0px;">Delete</span></button>
-                        </span>
+                           
+                                <button id="editbtn"   class="btn btn-danger sm" (click)="deleteRow(Connectdtls)">
+                                    <i class="bi bi-trash-fill"></i> <span>&nbsp; Delete</span>
+                                 </button>
+                            </span>
                         <span class="add-to-cart" style="margin-left: auto;">
-                            <button class="lezada-button lezada-button--small lezada-button--icon--left"
+                            <!-- <button class="lezada-button lezada-button--small lezada-button--icon--left"
                                 (click)="editRow(Connectdtls ,editRecord )"
                                 style="background-color: rgb(30, 121, 206);border: 1px solid rgb(30, 121, 206);
                                 text-transform: none;">
-                                <i class="bi bi-pencil-fill"></i> <span style="color: white;letter-spacing: 0px;">Edit</span> </button>
-                        </span>
+                                <i class="bi bi-pencil-fill"></i> <span style="color: white;letter-spacing: 0px;">Edit</span> </button> -->
+                     <button id="editbtn" style="padding-left:20px;padding-right:20px;margin-right: 10px;" class="btn btn-primary sm" (click)="editRow(Connectdtls ,editRecord )">
+                        <i class="bi bi-pencil-fill"></i> <span>&nbsp; Edit</span>
+                     </button>
+                            </span>
                     </p>
                 </div>
             </form>
@@ -109,13 +114,14 @@
             <div class="table-modal-header">
 
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-10 font-13" style="color:gray">
+                    <div class="font-weight-bold p-t-10 font-13" style="font-size: 17px;color:gray">
                         Add Address</div>
                 </div>
+                
             </div>
         </h5>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true"><i class="ion-close"></i></span>
+            <span aria-hidden="true" style="font-size: 1.2rem;"><i class="ion-close"></i></span>
         </button>
     </div>
 
@@ -214,11 +220,9 @@
 
                 <!-- row end -->
             </div>
-            <div class="col-md-12" style="text-align: center;"><br>
+            <div class="col-md-12" id="savebtndiv" >
                 <span class="add-to-cart" style="margin-left: auto;">
-                    <button
-                        style="background-color: rgb(201, 31, 8);border: 1px solid rgb(201, 31, 8);text-transform: none; padding-top: 2px; padding-bottom: 2px;"
-                        class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
+                    <button  class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
                         Save</button>
                 </span>
             </div>
@@ -230,17 +234,17 @@
 <!-- edit -->
 <ng-template #editRecord let-modal>
     <div class="modal-header editRowModal">
-        <h4 class="modal-title" id="modal-basic-title" style="padding-bottom: 0px;">
+        <h4 class="modal-title" id="modal-basic-title" style="padding-bottom: 0px;color:gray">
             <div class="table-modal-header">
 
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-10 font-13">
-                        Edit address</div>
+                    <div class="font-weight-bold p-t-10 "  style="font-size: 17px;">
+                        Edit Address</div>
                 </div>
             </div>
         </h4>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-            <span aria-hidden="true"><i class="ion-close"></i></span>
+            <span aria-hidden="true" style="font-size: 1.2rem;"><i class="ion-close"></i></span>
         </button>
     </div>
 
@@ -251,7 +255,7 @@
 
                 <div class="col-md-12 ">
                     <div class="form-group position-relative">
-                        <label>Address</label>
+                        <label>Address<span class="text-danger">*</span></label>
                         <textarea name="" class="form-control pl-2" formControlName="address" cols="30"
                             rows="2"></textarea>
                     </div>
@@ -259,7 +263,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group position-relative">
-                        <label>Country</label>
+                        <label>Country<span class="text-danger">*</span></label>
                         <select class="form-control pl-5" formControlName="country">
                             <option *ngFor="let tab of Country" [value]="tab.id">
                                 {{tab.name}}
@@ -271,7 +275,7 @@
 
                 <div class="col-md-6">
                     <div class="form-group position-relative">
-                        <label>state<span class="text-danger">*</span></label>
+                        <label>State<span class="text-danger">*</span></label>
                         <select class="form-control pl-5" formControlName="state">
                             <option *ngFor="let tab of State" [value]="tab.id">
                                 {{tab.name}}
@@ -283,7 +287,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group position-relative">
-                        <label>city<span class="text-danger">*</span></label>
+                        <label>City<span class="text-danger">*</span></label>
 
 
                         <select class="form-control pl-5" formControlName="city" required>
@@ -296,7 +300,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group position-relative">
-                        <label>Postal code</label>
+                        <label>Pin code<span class="text-danger">*</span></label>
                         <input type="text" class="form-control pl-5" formControlName="postal_code">
                         <!-- (change)="onPinChange($event.target.value)" -->
                     </div>
@@ -308,11 +312,9 @@
                         <input type="text" class="form-control pl-5" formControlName="phone">
                     </div>
                 </div>
-                <div class="col-md-12" style="text-align: center;"><br>
+                <div class="col-md-12" id="savebtndiv">
                     <span class="add-to-cart" style="margin-left: auto;">
-                        <button
-                        style="background-color: rgb(201, 31, 8);border: 1px solid rgb(201, 31, 8);text-transform: none; padding-top: 2px; padding-bottom: 2px;"
-                            class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
+                        <button class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
                             Save</button>
                     </span>
                 </div>

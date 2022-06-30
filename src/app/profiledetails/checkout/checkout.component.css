@@ -2,7 +2,32 @@ div {
     font-family: Arial, Helvetica, sans-serif !important;
     letter-spacing: 0;
 }
+#paymethoddiv{
+    padding-top:20px !important;
+}
+#addaddressdiv{
+    border-bottom: 1px solid#e7e7e7;
+    padding-bottom: 16px;
+    padding-left: 20px;
+}
+#paymethoddiv .form-text{
+    height: 12px;padding-right: 30px;font-weight: 200;
+}
+.form-text span{
+    color: red;
+    /* padding-left: 10px; */
+    /* margin-left: 20px; */
+    background-color: #eaf7ff;
+    box-shadow: 0px 1px 7px #e14848;
+    font-size: 0.8rem;
+    padding: 5px;
+    position: relative;
+    bottom: 20px;
+    right: -14px;
+    font-weight: 700;
+    border-radius: 15px;
 
+}
 .product-name span {
     color: #5c5c5c;
     font-weight: 600;
@@ -57,10 +82,10 @@ input[type="checkbox"] {
 }
 
 #producttable td {
-    padding-top: 25px;
+    padding-top: 20px;
     color: #140f0f;
     font-family: Arial, Helvetica, sans-serif;
-    padding-bottom: 25px;
+    padding-bottom: 20px;
     vertical-align: top;
 
 }
@@ -80,10 +105,12 @@ td {
 #title{
     
     padding-top:10px ;
+    padding-bottom: 10px;
 }
 .titlevalue{
    
     padding-top:10px ;
+    padding-bottom: 10px;
 }
 
 .cart-calculation-table th {
@@ -371,6 +398,8 @@ input.radio {
 
 .checkout-payment-method {
     padding: 7px;
+    padding-top: 2px;
+    padding-bottom: 10px;
 }
 
 input[type='radio']:checked:after {

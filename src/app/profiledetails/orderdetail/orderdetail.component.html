@@ -1,14 +1,13 @@
-
 <div class="breadcrumb-area breadcrumb-bg-2">
     <div class="container" style="margin: 0px;">
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">My Account</h4>
+
                 <!--=======  breadcrumb list  =======-->
-                <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+                <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
                     <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
                     <li class="breadcrumb-list__item ">Orders</li>
-                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Detail</li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Order Details</li>
                 </ul>
                 <!--=======  End of breadcrumb list  =======-->
             </div>
@@ -23,49 +22,82 @@
 </ngx-spinner>
 
 
+<div class="col-lg-8  p-0" id="firstdiv"  *ngIf="!loader">
+    <div class="a-row a-spacing-base" *ngFor="let img of Detail; let i=index">
+        <div class="a-column a-span9 a-spacing-top-mini">
+            <div class="a-row a-spacing-none">
+                <span class="order-date-invoice-item">
+                    Ordered on <span style="font-weight: 600; color:darkslategray">{{img.date}}</span> 
+                    <i class="a-icon a-icon-text-separator" role="img"></i>
+                </span>
+    
+                <span class="order-date-invoice-item">
+                    Order#
+                    <bdi dir="ltr" id="code">{{img.code}}</bdi>
+                </span>
+            </div> 
+        </div> 
+        <div class="a-column a-span3 a-text-right a-spacing-top-none hide-if-no-js a-span-last">
+            <div class="a-row a-spacing-none">
+                
 
-<div class="col-lg-12 mb-45 ">
-    <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Order Details</h4>
-    <div class="checkout-cart-total mt-1" style="margin-left: 8%; margin-right: 8%;" *ngFor="let img of Detail">
-        <div class="row">
-            <div class="col-6">
-                <strong>Order Code:</strong>
-                <p style="margin-bottom: 10px; color: rgb(45, 89, 223);">{{img.code}}</p>
-
-                <strong>Order Date:</strong>
-                <p style="margin-bottom: 10px;">{{img.date}}</p>
-
-                <strong>Shipping Address:</strong>
-                <p><strong> Name:</strong> {{img.shipping_address.name}}</p>
-                <p><strong>Email:</strong> {{img.shipping_address.email}}</p>
-                <p><strong>Address:</strong> {{img.shipping_address.address}}</p>
-                <p><strong>Country:</strong> {{img.shipping_address.country}}</p>
-                <p><strong>State:</strong> {{img.shipping_address.state}}</p>
-                <p><strong>City:</strong> {{img.shipping_address.city}}</p>
-                <p><strong>Postal Code:</strong> {{img.shipping_address.postal_code}}</p>
-                <p><strong>Phone:</strong> {{img.shipping_address.phone}}</p>
-
+    <span class="a-declarative" data-action="a-popover" data-a-popover="{&quot;name&quot;:&quot;invoiceLinks&quot;,&quot;position&quot;:&quot;triggerBottom&quot;,&quot;activate&quot;:&quot;onclick&quot;}">
+        <a href="{{img.invoice_pdf_link}}" target="_blank" class="a-popover-trigger a-declarative" style="color: #007185;">
+            <span class="a-size-medium" style="color: #007185;
+            font-weight: 600;" >Invoice</span>
+        <i class="a-icon a-icon-popover"></i></a> 
+    </span> 
+    
             </div>
-            <div class="col-6">
-                <strong>Shipping Type:</strong>
-                <p style="margin-bottom: 10px;">{{img?.shipping_type}}</p>
+        </div> 
+    </div>
 
-                <strong>Payment Method:</strong>
-                <p style="margin-bottom: 10px;">{{img.payment_type}}
+    <div id="firstdiv-subdiv" class="col-lg-12 pl-0" *ngFor="let img of Detail; let i=index">
+        <div class="col-4" id="addressreview">
+            <div class="">
+                <p class="headline" style="margin-bottom:8px;">Shipping Address<span
+                        style="color:rgb(12, 171, 245);">&nbsp;</span>
+                </p>
+                <div class="addresss mb-2" id="addresss" style="border: 0px;">
+                    <a id="addressdiv">
+                        <p style="margin-top: 0px;"> <strong> {{img.shipping_address.name}}
+                            </strong> </p>
+                        <span id="sssp">{{img.shipping_address.email}}</span>
+                        <span id="sssp"> {{img.shipping_address.address}} ,
+                            {{img.shipping_address.city}}, {{img.shipping_address.state}},
+                            {{img.shipping_address.country}} -</span>
+                        <p style="font-size:0.8rem;"> {{img.shipping_address.postal_code}} </p>
+                        <p><strong> {{img.shipping_address.phone}}</strong> </p>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <p class="headline">Order Detail
+            </p>
+            <span id="paymentdiv">
+                <p class="headline2">Payment Method:&nbsp;</p>
+                <p style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;"> {{img.payment_type}}
                     <i *ngIf="img.payment_type=='Cash On Delivery'" class="bi bi-cash"
                         style="color: rgb(5, 146, 16);"></i>
                     <i *ngIf="img.payment_type!=='Cash On Delivery'" class="bi bi-credit-card-2-back-fill"
                         style="color: rgb(252, 166, 8);;"></i>
                 </p>
+            </span>
 
-                <strong>Payment Status:</strong>
-                <p *ngIf="img.payment_status_string=='Unpaid'" style="margin-bottom: 10px;">
+            <span id="paymentdiv">
+                <p class="headline2">Payment Status:&nbsp;</p>
+                <p *ngIf="img.payment_status_string=='Unpaid'"
+                    style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;">
                     {{img.payment_status_string}} <i class="bi bi-x-circle-fill" style="color: red;"></i></p>
-                <p *ngIf="img.payment_status_string!=='Unpaid'" style="margin-bottom: 10px;">
+                <p *ngIf="img.payment_status_string!=='Unpaid'"
+                    style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;">
                     {{img.payment_status_string}} <i class="bi bi-check-circle-fill"
                         style="color: rgb(11, 192, 11);"></i></p>
-                <strong>Order Status:</strong>
-                <p style="margin-bottom: 10px;">{{img.delivery_status_string}}
+            </span>
+            <span id="paymentdiv">
+                <p class="headline2">Order Status:&nbsp;</p>
+                <p style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;"> {{img.delivery_status_string}}
                     <i *ngIf="img.delivery_status_string=='Cancelled'" class="bi bi-x-circle-fill"
                         style="color: rgb(231, 21, 32);"></i>
                     <i *ngIf="img.delivery_status_string=='Order Placed'" class="bi bi-hand-thumbs-up-fill"
@@ -82,8 +114,10 @@
                         style="color: rgb(209, 98, 7);;"></i>
                 </p>
 
-                <strong>Delivery Status:</strong>
-                <p style="margin-bottom: 10px;">{{img.delivery_status}}
+            </span>
+            <span id="paymentdiv">
+                <p class="headline2">Delivery Status:&nbsp;</p>
+                <p style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;"> {{img.delivery_status}}
                     <i *ngIf="img.delivery_status=='cancelled'" class="bi bi-x-circle-fill"
                         style="color: rgb(231, 21, 32);"></i>
                     <i *ngIf="img.delivery_status=='order_placed'" class="bi bi-hand-thumbs-up-fill"
@@ -99,38 +133,39 @@
                     <i *ngIf="img.delivery_status=='picked_up'" class="bi bi-bag-check-fill"
                         style="color: rgb(209, 98, 7);;"></i>
                 </p>
-
-
-                <strong>Total:</strong>
-                <p style="margin-bottom: 10px; color: red;">{{img.grand_total}}</p>
-
-              
-         
-              
-                <!-- <span class="add-to-cart" style="margin-left: auto;"
-                    *ngIf="img.payment_type=='Razorpay' && img.payment_status=='unpaid'">
-                    <button id="ppaynoww" class="lezada-button lezada-button--small lezada-button--icon--left"
-                        (click)=paynow1()>
-                        <span style="color: white;"> PAY NOW </span></button>
-                </span> -->
+            </span>
+        </div>
+        <div class="col-4" id="summarydiv" >
+            <p class="headline">Order Summary</p>
+            <p style="margin-bottom: 10px;">{{img?.shipping_type}}</p>
+            <div class="col-12 mb-1" style="padding: 0px;" id="col88">
+                <div class="check" id="carttotl" *ngFor="let a of Detail"
+                    style="padding: 0%;">
+                    <p class="headline2">Discount <a *ngIf="a.coupan_code!=null">(Coupan used: {{a.coupon_code}})</a> <span
+                            style="font-weight: bold;float: right;">{{a.coupon_discount}}</span></p>
+                    <p class="headline2">Shipping Fee <span style="font-weight: bold;float: right;">{{a.shipping_cost}}</span></p>
+                    <p class="headline2">Tax <span style="font-weight: bold;float: right;">{{a.tax}}</span></p>
+                    <p class="headline2">Sub Total <span style="font-weight: bold;float: right;">{{a.subtotal}}</span></p>
+                    <h6 class="headline">Grand Total <span style="font-weight: bold;float: right;color: #126e10;font-weight: 800;">{{a.grand_total}}</span></h6>
+                </div>
             </div>
+
 
         </div>
     </div>
-    <div class="art-total   mt-1 " style="margin-left: 8%; margin-right: 8%;">
-        <ngx-skeleton-loader count="1" [theme]="{ 
-            'border-radius': '5px',
-            height: '350px',
-            'background-color': '##b9b8b8',
-            border: '1px solid white'
-          }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
-    </div>
+
 </div>
 
+<div class="cart-table-container mb-2 ml-100 mr-100 mt-10" *ngIf="loader">
+    <div id="tit" style="width: 100%;margin-left: 100px;">
+        <ngx-skeleton-loader count="4"
+            [theme]="{  'border-radius': '4px',  height: '200px',  width:'85%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+        </ngx-skeleton-loader>
+    </div>
 
+</div>
 
-
-<div class="col-lg-12 mb-25" id="statusss" style="height: 80px; margin-right: 8%;">
+<div class="col-lg-12" id="statusss" style="height: 50px; margin-right: 8%;">
     <div class="containerr" id="status">
         <span *ngFor="let item of counts;let i = index">
             <span class="circle-desc" [class.circle-desc-active]="orderStatus == item">{{ item }}</span>
@@ -141,114 +176,115 @@
 </div>
 
 <!-- order items -->
-<div class="col-lg-12 mb-2">
-    <div class="cart-table-container" style="margin-left: 8%; margin-right: 8%;">
-        <h4 class="checkout-title mt-10 mb-10">Order Items</h4>
-        <div class="checkout-cart-total" style="padding: 20px;">
-            <table class="cart-table" style="background-color: rgb(255, 255, 255);">
-                <thead>
-                    <tr>
-                        <th class="product-name">
-                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Product</strong></h6>
-                        </th>
-                        <th class="product-price">
-                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Price</strong></h6>
-                        </th>
-                        <th class="product-price">
-                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Order status</strong></h6>
-                        </th>
-                        <th class="product-price">
-                            <h6 style="padding: 0px;margin-bottom: 0px;"> <strong>Payment status</strong></h6>
-                        </th>
-                        <th class="product-price">
-                            <h6 style="padding: 0px; margin-bottom: 0px;"> <strong>Delivery status</strong></h6>
-                        </th>
-                        <th class="product-price">&nbsp;</th>
+<div id="firstdiv" class="col-lg-8 mb-20 p-0">
+    <div id="firstdiv-subdiv"style="display:inherit" >
 
-                    </tr>
-                </thead>
+    
+    <div class="a-box shipment" id="aboxproducts" ><div class="a-box-inner">
+        <div  class="a-fixed-right-grid a-spacing-top-medium"  *ngFor="let pro of Items;let i=index">
+            <div id="prodmain" class="a-fixed-right-grid-inner a-grid-vertical-align a-grid-top" [ngClass]="{'active': Items.length > 1 && i < Items.length - 1}" >
+            <div id="proddiv" class="a-fixed-right-grid-col a-col-left" style="padding-right:3.2%;float:left;">
+        
+        <div class="a-row">
+            <div class="a-fixed-left-grid a-spacing-none"><div class="a-fixed-left-grid-inner" style="padding-left:100px">
+            <div class="a-text-center a-fixed-left-grid-col a-col-left" style="width:100px;margin-left:-100px;float:left;">
+                    
+    <div class="item-view-left-col-inner">             
+    <img alt="" src="https://neophroncrm.com/spiceclubnew/public/{{pro.thumbnail_image}}" aria-hidden="true"  
+    class="yo-critical-feature" height="90" width="90" title="I KALL Z3 Smartphone (4GB, 32GB) (Purple)"
+      data-already-flushed-csm="true">      
 
-                <tbody *ngFor="let b of Items">
-                    <tr>
-
-                        <td class="product-name" id="proname" style="width: 400px;" (click)="proddetail(b.product_id)">
-                            <a
-                                style="text-decoration: none; margin-top: 5px; margin-bottom: 5px;">{{b.product_name}}</a>
-                            <span class="product-variation pb-" *ngIf="b.variation!==null">{{b.quantity}} x
-                                {{b.variation}}
-                            </span>
-                            <span class="product-variation pb-" *ngIf="b.variation==null">Quantity:
-                                {{b.quantity}}</span>
-                        </td>
-
-                        <td class="product-price" style="padding-left: 13px;"><span class="price" style="color: red;"
-                                (click)="proddetail(b.product_id)">{{b.price}}</span></td>
-
-                        <td class="product-name" style="padding-left: 13px;"><span class="price"
-                                (click)="proddetail(b.product_id)">{{b.delivery_status_string}}</span></td>
-
-                        <td class="product-name" style="padding-left: 13px;"><span class="price"
-                                (click)="proddetail(b.product_id)">{{b.payment_status_string}}</span></td>
-
-                        <td class="product-name ">
-                            <a
-                                style="text-decoration: none; margin-top: 5px; margin-bottom: 5px;">{{b.delivery_status}}</a>
-                            <span class="product-variation pb-3" *ngIf="b.delivery_status=='delivered'"
-                                (click)="addreview(addRecord,b.product_id)"
-                                style="color: rgb(45, 89, 223); display:block ;">
-                                <a> <i class="ion-android-star"></i> Review
-                                    this product </a></span>
-                        </td>
-
-                    </tr>
-
-                </tbody>
-            </table>
-
-            <ngx-skeleton-loader count="4"
-                [theme]="{  'border-radius': '4px',  height: '80px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"
-                *ngIf="loader"></ngx-skeleton-loader>
-            <div class="col-12" style="text-align: end;padding-right: 0px;">
-                <span class="add-to-cart" style="margin-left: auto;">
-                    <button class="lezada-button lezada-button--small lezada-button--icon--left"  *ngIf="!loadingg" style="margin-top: 5px;" (click)=quickorder()>
-                        <span style="color: white;"> Quick order</span></button>
-                        <button class="lezada-button lezada-button--small lezada-button--icon--left" *ngIf="loadingg" style="margin-top: 5px;" >
-                            <span style="color: white;" >&nbsp;&nbsp;<i class="fa fa-spinner fa-spin" style="font-size: 1.1em;"></i>&nbsp;&nbsp;</span></button>
-
-                </span>
-            </div>
-        </div>
     </div>
-    <!--=======  End of cart table  =======-->
+            </div>
+            <div class="a-fixed-left-grid-col yohtmlc-item a-col-right" style="padding-left:1.5%;float:left;">
+                                    
+        <div class="a-row" (click)="proddetail(pro.product_id)">
+        <a class="a-link-normal" style="font-size: 0.9rem;max-width: 400px;">
+            {{pro.product_name}}
+        </a>              
+        </div>
+        <div class="a-row">
+            
+        <span class="a-size-small">
+            <div class="a-row a-size-small" style="color: #ce2127;font-size:0.7rem;">
+                 <span style="color: #565959" >Price </span>{{pro.price}}</div>
+            <div class="a-row a-size-small" style="color: #3b3b3b;font-size:0.7rem;"> 
+                <span style="color: #565959">Quantity </span>{{pro.quantity}}</div>
+                <div class="a-row a-size-small" style="color: #3b3b3b;font-size:0.7rem;"> 
+                    <span style="color: #565959"> </span>{{pro.payment_status_string}} <i *ngIf="pro.payment_status_string!=='Paid'" class="bi bi-x-circle-fill" style="color: red;"></i>
+                    <i *ngIf="pro.payment_status_string=='Paid'" class="bi bi-check-circle-fill" style="color: rgb(11, 192, 11);"></i></div>
+                    <div class="a-row a-size-small" style="color: #3b3b3b;font-size:0.7rem;"> 
+                        <span style="color: #565959"> </span>{{pro.delivery_status_string}}  
+                    <i *ngIf="pro.delivery_status=='cancelled'" class="bi bi-x-circle-fill"
+                        style="color: rgb(231, 21, 32);"></i>
+                    <i *ngIf="pro.delivery_status=='order_placed'" class="bi bi-hand-thumbs-up-fill"
+                        style="color: rgb(21, 231, 21);"></i>
+                    <i *ngIf="pro.delivery_status=='confirmed'" class="bi bi-hand-thumbs-up-fill"
+                        style="color: rgb(45, 89, 223);"></i>
+                    <i *ngIf="pro.delivery_status=='pending'" class="bi bi-exclamation-circle-fill"
+                        style="color: rgb(45, 89, 223);"></i>
+                    <i *ngIf="pro.delivery_status=='on_the_way'" class="bi bi-truck"
+                        style="color: rgb(252, 166, 8);"></i>
+                    <i *ngIf="pro.delivery_status=='delivered'" class="bi bi-check-circle-fill"
+                        style="color: rgb(11, 192, 11);"></i>
+                    <i *ngIf="pro.delivery_status=='picked_up'" class="bi bi-bag-check-fill"
+                        style="color: rgb(209, 98, 7);"></i></div>
+        </span>            
+        </div>
+        <div class="a-row" style="position:absolute;top:0px;right: 55px;">
+           
+        <span class="a-color-secondary a-text-bold">
+            <div  style="text-align: -webkit-center;">
+                <div id="sts">
+                    <!-- <img src="assets/images/icons/cod.png" alt="" *ngIf="img.payment_type=='Cash On Delivery'"> -->
+                    <img src="assets/images/icons/paid.png" alt="" *ngIf="pro.payment_status_string!=='Unpaid'">
+                    <img src="assets/images/icons/unpaid.png" alt="" *ngIf="pro.payment_status_string=='Unpaid'">
+                </div>
+            </div>
+        </span> 
+        <span class="a-color-secondary">
+            
+        </span> 
+    
+        </div>
+    
+    
+            </div>
+        </div></div>
+        </div>
+    
+    </div>
+    <div id="proddiv" class="a-fixed-right-grid-col a-col-right" style="width:230px;margin-right:-230px;">
+        
+        <div class="a-row">
+            <div class="a-button-stack yohtmlc-shipment-level-connections">
+    
+            <span (click)="addreview(addRecord,pro.product_id)" *ngIf="pro.delivery_status=='delivered'" class="a-button a-button-normal a-spacing-mini a-button-base" id="a-autoid-3"><span class="a-button-inner">
+                <a id="Write-a-product-review_1"  class="a-button-text" role="button" >
+                Write a product review
+            </a></span></span>
+<br>
+            <span id="quickordbtn" (click)=quickorder() style="background-color: #fdd71f;padding-left: 40px;padding-right: 40px;" 
+            *ngIf="!loadingg" class="a-button a-button-normal a-spacing-mini a-button-base" id="a-autoid-3">
+                <span class="a-button-inner" >
+                <a id="Write-a-product-review_1"   class="a-button-text" role="button" >
+                Quick Order
+               
+            </a></span></span>
+
+            <span id="quickordbtn" style="background-color: #fdd71f;padding-left: 40px;padding-right: 40px" *ngIf="loadingg" class="a-button a-button-normal a-spacing-mini a-button-base" id="a-autoid-3">
+                <span class="a-button-inner" >
+                <a id="Write-a-product-review_1"   class="a-button-text" role="button" >    
+                <i class="fa fa-spinner fa-spin" *ngIf="loadingg" style="font-size: 1.1em;"></i>
+            </a></span></span>
+            <!--  -->
+    </div>
+        </div>
+    
+    </div>
+        </div></div>
+    </div></div> 
 </div>
-
-<!-- price details -->
-<div class="col-lg-12 ">
-    <h4 class="checkout-title ml-100 mr-100 mt-40 mb-0 ">Price Details</h4>
-    <div class="row mt-10 mb-0" *ngFor="let img of Detail" style="margin-left: 8%; margin-right: 8%;">
-        <!-- Cart Total -->
-        <div class="col-8 mb-1" style="padding: 0px;" id="col88">
-            <div class="checkout-cart-total" id="carttotl" *ngFor="let a of Detail" style="padding: 3%;">
-                <p>Discount <a *ngIf="a.coupan_code!=null">(Coupan used: {{a.coupon_code}})</a> <span
-                        style="font-weight: bold;">{{a.coupon_discount}}</span></p>
-                <p>Shipping Fee <span style="font-weight: bold;">{{a.shipping_cost}}</span></p>
-                <p>Tax <span style="font-weight: bold;">{{a.tax}}</span></p>
-                <p>Sub Total <span style="font-weight: bold;">{{a.subtotal}}</span></p>
-                <h4>Grand Total <span style="font-weight: bold;">{{a.grand_total}}</span></h4>
-            </div>
-        </div>
-
-        <div class="col-4 mb-1" style="text-align: -webkit-center;">
-            <div id="sts"  >
-                <!-- <img src="assets/images/icons/cod.png" alt="" *ngIf="img.payment_type=='Cash On Delivery'"> -->
-                <img src="assets/images/icons/paid.png" alt="" *ngIf="img.payment_status_string!=='Unpaid'" >
-                <img src="assets/images/icons/unpaid.png" alt="" *ngIf="img.payment_status_string=='Unpaid'">
-            </div>
-        </div>
-
-
-    </div>
-
 </div>
 
 <div class="art-total  mr-110 ml-110 mt-1">
@@ -259,6 +295,7 @@
             border: '1px solid white'
           }" animation="pulse" *ngIf="loader"></ngx-skeleton-loader>
 </div>
+
 <!-- sort poup -->
 <ng-template #addRecord let-modal>
     <div class="modal-about mt-4 ml-4">
@@ -266,19 +303,19 @@
             <h5>Leave your thoughts here</h5>
         </div>
     </div>
-    <div class="modal-body" style="background-color: rgb(248, 250, 251);">
+    <div class="modal-body" style="background-color: rgb(255, 255, 255);border-top: 1px solid #bbbbbb;;">
         <form class="register-form" [formGroup]="register" (ngSubmit)="submitreview(register)">
             <div class="row">
-                <div class="col-lg-12  mb-20">
-                    <span class="rating-title mr-30" style="opacity: 0.72;">YOUR RATING</span>
+                <div class="col-lg-12  mb-10 ">
+                    <span class="rating-title mr-30" style="color: #5f5f5f ;font-size: 0.8rem;">YOUR RATING</span>
                     <span class="product-rating">
                         <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false" formControlName="rating"
-                            style="size: 10px; color: rgb(248, 141, 19); font-size: 1.9rem;">
+                            style="size: 10px; color: rgb(248, 141, 19); font-size: 1.5rem;">
                         </ngb-rating>
                     </span>
                 </div>
-                <div class="col-lg-12 text-center mb-20">
-                    <textarea cols="57" rows="9" formControlName="comment" placeholder="YOUR MESSAGE"></textarea>
+                <div class="col-lg-12 text-center mb-10">
+                    <textarea cols="57" rows="4" formControlName="comment" placeholder="YOUR MESSAGE"></textarea>
                 </div>
                 <div class="col-lg-12 text-center">
                     <h6><span *ngIf="error1" style="color: red;">{{error1}}</span>

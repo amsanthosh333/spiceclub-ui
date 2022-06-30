@@ -70,6 +70,10 @@
   box-sizing: border-box;
 }
 
+:host ::ng-deep .modal-content {
+  border-radius: 1rem;
+}
+
 html,
 body {
   height: 100%;
@@ -843,7 +847,7 @@ a.scroll-top:hover {
   visibility: hidden;
   overflow: auto;
 
-  width: 350px;
+  width: 310px;
   height: 100vh;
   padding: 0px 20px;
 
@@ -1197,8 +1201,8 @@ font {
   display: -ms-flexbox;
   display: flex;
 
-  margin-bottom: 25px;
-  padding-bottom: 25px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
 
   border-bottom: 1px solid #eeeeee;
 }
@@ -1275,7 +1279,7 @@ font {
 
   text-decoration: line-through;
 
-  color: #7e7e7e;
+  color:#ff9f9f;
 }
 
 .offcanvas-cart-content-container .cart-product-wrapper .cart-product-container .single-cart-product .content p .discounted-price {

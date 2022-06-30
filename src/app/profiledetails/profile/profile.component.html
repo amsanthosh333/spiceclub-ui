@@ -1,4 +1,3 @@
-
 <div class="breadcrumb-area breadcrumb-bg-2">
     <div class="container" style="margin: 0px;">
         <div class="row">
@@ -15,205 +14,373 @@
     </div>
 </div>
 
+<div class="maindiv">
+
+    <div class="row">
+        <div class="col-lg-12" style="display: contents;">
+            <div class="col-4" id="profilediv">
+                <div class="row" style="text-align: center;border-bottom: 1px solid #e8e8e8;border-radius:8px">
+                    <div class="col-12 mb-" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
+                        <div class="single-widget mt-4" style="border: none;" *ngIf="!loader">
+                            <div class="singlomment">
+                                <div class="single-comment__image" *ngIf="(profiledetail?.profileimg=='')">
+                                    <img src="assets/images/user-profile.png" class="img-fluid" style="height: 100px;"
+                                        alt="">
+                                    <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
+                                            class="bi bi-pen-fill"></i></span>
+                                </div>
+                                <div class="single-comment__image" *ngIf="(profiledetail?.profileimg!=='')">
+                                    <ngx-skeleton-loader *ngIf="loaderimage" count="1" [theme]="{ 
+                                        'border-radius': '75px',
+                                        height: '85px',
+                                        width: '100PX',
+                                        'background-color': '#ffffff',
+                                        border: '1px solid white'
+                                      }" animation="pulse"></ngx-skeleton-loader>
 
 
-<div class="col-lg-12 mb-15 mt-2" >
+                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{profiledetail?.profileimg}}"
+                                        class="img-fluid" style="height: 100px;width: 100px; object-fit: cover;" alt=""
+                                        *ngIf="!loaderimage">
+                                    <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
+                                            class="bi bi-pen-fill"></i></span>
+                                    <!-- (click)="editprofileimg(profileimageRecord)" -->
 
-    <div class="checkout-cart-total  mt-1">
-        <div class="row" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
-            <div class="col-12 mb-" style="text-align: center;border-bottom: 1px solid #e8e8e8;">
-                <div class="single-widget mt-4" style="border: none;" *ngIf="!loader">
-                    <div class="singlomment">
-                        <div class="single-comment__image" *ngIf="(profiledetail?.profileimg=='')" >
-                            <img src="assets/images/user-profile.png"
-                                class="img-fluid" style="height: 100px;" alt="">
-                                <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
-                                    class="bi bi-pen-fill"></i></span>
+                                </div>
+                                <div class="single-comment__content pl-2 mt-2 mb-4">
+                                    <strong class="usernamee">{{profiledetail?.name}}</strong>
+                                    <p class="email" style="color: blue;">{{profiledetail?.email}}</p>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="single-comment__image" *ngIf="(profiledetail?.profileimg!=='')" >
-                                <ngx-skeleton-loader *ngIf="loaderimage" count="1" [theme]="{ 
+                        <!-- lazyloading -->
+                        <div class="single-widget mt-4" style="border: none;" *ngIf="loader">
+                            <div class="singlomment">
+                                <div class="single-comment__image">
+                                    <ngx-skeleton-loader count="1" [theme]="{ 
                                     'border-radius': '75px',
                                     height: '100px',
                                     width: '100PX',
                                     'background-color': '#ffffff',
                                     border: '1px solid white'
-                                  }" animation="pulse" ></ngx-skeleton-loader>
-                                        
-                           
-                            <img src="https://neophroncrm.com/spiceclubnew/public/{{profiledetail?.profileimg}}"
-                                class="img-fluid" style="height: 100px;width: 100px; object-fit: cover;" alt="" *ngIf="!loaderimage">
-                            <span id="circle" (click)="editprofileimg(profileimageRecord)"><i
-                                    class="bi bi-pen-fill"></i></span>
-                            <!-- (click)="editprofileimg(profileimageRecord)" -->
+                                  }" animation="pulse"></ngx-skeleton-loader>
+
+                                </div>
+
+                                <div class="single-comment__content pl-2">
+                                    <ngx-skeleton-loader count="1" [theme]="{ 
+                                    'border-radius': '5px',
+                                    height: '25px',
+                                    width: '170PX',
+                                    'background-color': '#ffffff',
+                                    border: '1px solid white'
+                                  }" animation="pulse"></ngx-skeleton-loader>
+                                </div>
+                                <div class="single-comment__content pl-2">
+                                    <ngx-skeleton-loader count="1" [theme]="{ 
+                                    'border-radius': '5px',
+                                    height: '25px',
+                                    width: '150PX',
+                                    'background-color': '#ffffff',
+                                    border: '1px solid white'
+                                  }" animation="pulse"></ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="singlomment">
+                            <div class="single-comment__content pl-2  mb-3">
+                                <button id="checkbalance" class="btn btn-success" routerLink="/wallet">Check
+                                    Balance</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12" id="list" (click)="gotocart()">
+                        <div class="single-comment__content pl-2 mt-2">
+                            <ngx-skeleton-loader *ngIf="loader1" count="1" [theme]="{ 
+                            'border-radius': '5px',
+                            height: '20px',
+                            width: '20px',
+                            'background-color': '#ffffff',
+                            border: '1px solid white',
+                            ' margin-bottom':'0px' 
+                          }" animation="pulse"></ngx-skeleton-loader>
+                            <h6><strong class="username">{{cartlength}} </strong>In your cart</h6>
+                            <!-- <h6 class="eml">In your cart</h6> -->
+
+                        </div>
+                    </div>
+                    <div class="col-12" id="list" (click)="gotowishlist()">
+                        <div class="single-comment__content pl-2 mt-2">
+                            <ngx-skeleton-loader count="1" *ngIf="loader2" [theme]="{ 
+                        'border-radius': '5px',
+                        height: '20px',
+                        width: '20px',
+                        'background-color': '#ffffff',
+                        border: '1px solid white',
+                        ' margin-bottom':'0px' }" animation="pulse"></ngx-skeleton-loader>
+                            <h6> <strong class="username">{{Wlength}} </strong>In your wishlist</h6>
+                        </div>
+                    </div>
+                    <div class="col-12" id="list" (click)="gotoorder()">
+                        <div class="single-comment__content pl-2 mt-2">
+                            <ngx-skeleton-loader count="1" *ngIf="loader3" [theme]="{ 
+                            'border-radius': '5px',
+                            height: '20px',
+                            width: '20px',
+                            'background-color': '#ffffff',
+                            border: '1px solid white',
+                            ' margin-bottom':'0px' 
+                          }" animation="pulse"></ngx-skeleton-loader>
+                            <h6> <strong class="username">{{orderlength}} </strong>your total orders</h6>
+                        </div>
+                    </div>
+                    <div class="col-12" id="list2" >
+                        <div class="single-comment__content pl-2 mt-2">
+                            <ngx-skeleton-loader count="1" *ngIf="loader3" [theme]="{ 
+                            'border-radius': '5px',
+                            height: '20px',
+                            width: '20px',
+                            'background-color': '#ffffff',
+                            border: '1px solid white',
+                            ' margin-bottom':'0px' 
+                          }" animation="pulse"></ngx-skeleton-loader>
+                            <h6> <strong class="username">Enquiry a product</strong></h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="row">
+                    <div class="ya-card-row">
+
+                        <div class="ya-card-cell">
+
+                            <a
+                                class="ya-card__whole-card-link">
+                                <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
+                                    <div class="a-box-inner" (click)="gotoorder1()">
+                                        <div class="a-row">
+                                            <div class="a-column a-span3">
+                                                <span><img class="ion-ios-cart"  src="../../../assets/images/icons/received.png" 
+                                                    style="height:40px;width:40px;margin-bottom: -3px;
+                                                        margin-right: 5px;" alt=""></span>
+                                            </div>
+                                            <div class="a-column a-span9 a-span-last">
+                                                <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                    Your Orders
+                                                </h2>
+                                                <div><span class="a-color-secondary">Track, return, or buy things again</span></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="ya-card-cell">
+
+                            <a href="https://www.amazon.in/ap/cnep?openid.return_to=https%3A%2F%2Fwww.amazon.in%2Fyour-account&amp;openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.assoc_handle=inflex&amp;openid.mode=checkid_setup&amp;openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&amp;openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
+                                class="ya-card__whole-card-link">
+                                <div data-card-identifier="SignInAndSecurity" class="a-box ya-card--rich">
+                                    <div class="a-box-inner" (click)="editprofile(changeRecord)">
+                                        <div class="a-row">
+                                            <div class="a-column a-span3">
+                                                <span><img class="ion-ios-cart"  src="../../../assets/images/icons/padlock.png" 
+                                                    style="height:45px;width:45px;margin-bottom: -3px;
+                                                        margin-right: 5px;" alt=""></span>
+                                            </div>
+                                            <div class="a-column a-span9 a-span-last">
+                                                <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                    Login &amp; security
+                                                </h2>
+                                                <div><span class="a-color-secondary">Edit name, and password </span></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+
+
+                        </div>
+
+                        <div class="ya-card-cell">
+
+                            <a href="https://www.amazon.in/gp/primecentral?ref_=ya_d_c_prime"
+                                class="ya-card__whole-card-link">
+                                <div data-card-identifier="Prime" class="a-box ya-card--rich">
+                                    <div class="a-box-inner"  (click)="gotowallet()">
+                                        <div class="a-row">
+                                            <div class="a-column a-span3">
+                                                <span><img class="ion-ios-cart"  src="../../../assets/images/icons/wallet1.png" 
+                                                    style="height:35px;width:35px;margin-bottom: -3px;    margin-left: 7px;
+                                                        margin-right: 5px;" alt=""></span>
+                                            </div>
+                                            <div class="a-column a-span9 a-span-last">
+                                                <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                   Wallet
+                                                </h2>
+                                                <div><span class="a-color-secondary">View Wallet and Recharge </span></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+
+
+                        </div>
                         
+                        <div class="ya-card-cell">
+
+                            <a href="https://www.amazon.in/gp/your-account/order-history?ref_=ya_d_c_yo"
+                                class="ya-card__whole-card-link">
+                                <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
+                                    <div class="a-box-inner" (click)="gotoaddress()">
+                                        <div class="a-row">
+                                            <div class="a-column a-span3">
+                                                <span><img class="ion-ios-cart"  src="../../../assets/images/icons/map.png" 
+                                                    style="height:40px;width:40px;margin-bottom: -3px;
+                                                        margin-right: 5px;" alt=""></span>
+                                            </div>
+                                            <div class="a-column a-span9 a-span-last">
+                                                <h6 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                   Address
+                                                </h6>
+                                                <div><span class="a-color-secondary">Add, Edit and Select your Shipping Address</span></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+
+
                         </div>
-                        <div class="single-comment__content pl-2 mt-2 mb-4">
-                            <strong  class="usernamee">{{profiledetail?.name}}</strong>
-                            <p class="email" style="color: blue;">{{profiledetail?.email}}</p>
+
+                        <div class="ya-card-cell">
+
+                            <a href="https://www.amazon.in/ap/cnep?openid.return_to=https%3A%2F%2Fwww.amazon.in%2Fyour-account&amp;openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.assoc_handle=inflex&amp;openid.mode=checkid_setup&amp;openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&amp;openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
+                                class="ya-card__whole-card-link">
+                                <div data-card-identifier="SignInAndSecurity" class="a-box ya-card--rich">
+                                    <div class="a-box-inner" (click)="gotochats()">
+                                        <div class="a-row">
+                                            <div class="a-column a-span3">
+                                                <span><img class="ion-ios-cart"  src="../../../assets/images/icons/chat1.png" 
+                                                    style="height:40px;width:40px;margin-bottom: -3px;
+                                                        margin-right: 5px;" alt=""></span>
+                                            </div>
+                                            <div class="a-column a-span9 a-span-last">
+                                                <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                    Chat &amp;
+                                                </h2>
+                                                <div><span class="a-color-secondary">Chat with Seller</span></div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+
+
+
                         </div>
+
                     </div>
-                   
+
                 </div>
-                <!-- lazyloading -->
-                <div class="single-widget mt-4" style="border: none;" *ngIf="loader">
-                    <div class="singlomment" >
-                        <div class="single-comment__image" >
-                            <ngx-skeleton-loader count="1" [theme]="{ 
-                                'border-radius': '75px',
-                                height: '100px',
-                                width: '100PX',
-                                'background-color': '#ffffff',
-                                border: '1px solid white'
-                              }" animation="pulse"></ngx-skeleton-loader>
-                                    
-                        </div>
+             
+
+                <!-- <div class="row">
+                <div class="col-6" id="sub-div">
+                    <div class="single-comment__content pl-2 mt-2">
+                        <strong class="username">
+                            <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
+                                <i class="bi bi-file-earmark-medical-fill" style="color: green;"></i>
+                            </h2>
+                        </strong>
+                        <strong class="username">Orders</strong>
+                       
+                    </div>
+                </div>
+                <div class="col-6" id="sub-div">
+                    <div class="single-comment__content pl-2 mt-2">
+                        <strong class="username">
+                            <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
+                                <i class="bi bi-person-circle" style="color: rgb(17, 50, 243);"></i>
+                            </h2>
+                        </strong>
+                     
+                        <strong class="username">Profile</strong>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6" id="sub-div">
+                    <div class="single-comment__content pl-2 mt-2">
+                        <strong class="username">
+                            <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
+                                <i class="bi bi-handbag-fill" style="color: rgb(250, 116, 39);" ></i>
+                            </h2>
+                        </strong>
+                        <strong class="username">Purchase History</strong>
+                     
+                    </div>
+                </div>
+                <div class="col-6" id="sub-div">
+                    <div class="single-comment__content pl-2 mt-2">
+                        <strong class="username">
+                            <h2 style="padding: 0px; margin: 0px; margin-bottom: 10px;">
+                                <i class="bi bi-geo-alt-fill"style="color: rgb(240, 20, 31);" ></i>
+                            </h2>
+                        </strong>
                       
-                        <div class="single-comment__content pl-2" >
-                            <ngx-skeleton-loader count="1" [theme]="{ 
-                                'border-radius': '5px',
-                                height: '25px',
-                                width: '170PX',
-                                'background-color': '#ffffff',
-                                border: '1px solid white'
-                              }" animation="pulse"></ngx-skeleton-loader>
-                        </div>
-                        <div class="single-comment__content pl-2" >
-                            <ngx-skeleton-loader count="1" [theme]="{ 
-                                'border-radius': '5px',
-                                height: '25px',
-                                width: '150PX',
-                                'background-color': '#ffffff',
-                                border: '1px solid white'
-                              }" animation="pulse"></ngx-skeleton-loader>
-                        </div>
-                    </div>
-                    </div>
-                <div class="singlomment">
-                    <div class="single-comment__content pl-2 mt-2 mb-3">
-                        <button class="btn btn-success" style="border-radius: 30px;" routerLink="/wallet">Check Balance</button>
+                        <strong class="username mt-1">Address</strong>
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-6" id="sub-div">
+                    <div class="single-comment__content pl-2 mt-2">
+                        <strong class="username">
+                            <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
+                                <i class="bi bi-chat-text-fill" style="color: rgb(15, 183, 224);"></i>
+                            </h2>
+                        </strong>
+                        <strong class="username">Chats</strong>
+                    
+                    </div>
+                </div>
+                <div class="col-6" id="sub-div">
+                    <div class="single-comment__content pl-2 mt-2">
+                        <strong class="username">
+                            <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
+                                <i class="bi bi-wallet-fill" style="color: rgb(114, 45, 5);"></i>
+                            </h2>
+                        </strong>
+                        <strong class="username">Wallet</strong>
+                      
+                    </div>
+                </div>
+            </div> -->
+            </div> 
+            <div class="col-3" id="profilediv">
+                    <div class="row">
 
-            <div class="col-4">
-                <div class="single-comment__content pl-2 mt-2">
-                    <ngx-skeleton-loader *ngIf="loader1" count="1" [theme]="{ 
-                        'border-radius': '5px',
-                        height: '20px',
-                        width: '20px',
-                        'background-color': '#ffffff',
-                        border: '1px solid white',
-                        ' margin-bottom':'0px' 
-                      }" animation="pulse"></ngx-skeleton-loader>
-                   <h6><strong class="username">{{cartlength}}</strong></h6> 
-                    <!-- <h6 class="eml">In your cart</h6> -->
-                    <strong class="username">In your cart</strong>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="single-comment__content pl-2 mt-2">
-                    <ngx-skeleton-loader count="1" *ngIf="loader2"[theme]="{ 
-                    'border-radius': '5px',
-                    height: '20px',
-                    width: '20px',
-                    'background-color': '#ffffff',
-                    border: '1px solid white',
-                    ' margin-bottom':'0px' }" animation="pulse"></ngx-skeleton-loader>
-                  <h6>  <strong class="username">{{Wlength}}</strong></h6>
-                    <strong class="username">In your wishlist</strong>
-                </div>
-            </div>
-            <div class="col-4">
-                <div class="single-comment__content pl-2 mt-2">
-                    <ngx-skeleton-loader count="1" *ngIf="loader3" [theme]="{ 
-                        'border-radius': '5px',
-                        height: '20px',
-                        width: '20px',
-                        'background-color': '#ffffff',
-                        border: '1px solid white',
-                        ' margin-bottom':'0px' 
-                      }" animation="pulse"></ngx-skeleton-loader>
-                  <h6>  <strong class="username">{{orderlength}}</strong></h6>
-                    <strong class="username">your total orders</strong>
-                </div>
+                    </div>
             </div>
         </div>
 
-        <div class="row mt-3" style="text-align: center;">
-            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder()">
-                <div class="single-comment__content pl-2 mt-2">
-                    <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
-                            <i class="bi bi-file-earmark-medical-fill" style="color: green;"></i>
-                        </h2>
-                    </strong>
-                    <strong class="username">Orders</strong>
-                    <!-- <p class="eml">Orders</p> -->
-                </div>
-            </div>
-            <div class="col-4" style="border: 1px solid #eceaea;" (click)="editprofile(changeRecord)">
-                <div class="single-comment__content pl-2 mt-2">
-                    <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
-                            <i class="bi bi-person-circle" style="color: rgb(17, 50, 243);"></i>
-                        </h2>
-                    </strong>
-                    <!-- <p class="eml">Profile</p> -->
-                    <strong class="username">Profile</strong>
-                </div>
-            </div>
-            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoaddress()">
-                <div class="single-comment__content pl-2 mt-2">
-                    <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px; margin-bottom: 10px;">
-                            <i class="bi bi-geo-alt-fill"style="color: rgb(240, 20, 31);" ></i>
-                        </h2>
-                    </strong>
-                    <!-- <p class="eml">Address</p> -->
-                    <strong class="username mt-1">Address</strong>
-                </div>
-            </div>
-        </div>
-
-        <div class="row mt-3" style="text-align: center;">
-            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotoorder1()">
-                <div class="single-comment__content pl-2 mt-2">
-                    <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
-                            <i class="bi bi-handbag-fill" style="color: rgb(250, 116, 39);" ></i>
-                        </h2>
-                    </strong>
-                    <strong class="username">Purchase History</strong>
-                    <!-- <p class="eml">Purchase History</p> -->
-                </div>
-            </div>
-            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotowallet()">
-                <div class="single-comment__content pl-2 mt-2">
-                    <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
-                            <i class="bi bi-wallet-fill" style="color: rgb(114, 45, 5);"></i>
-                        </h2>
-                    </strong>
-                    <strong class="username">Wallet</strong>
-                    <!-- <p class="eml">Wallet</p> -->
-                </div>
-            </div>
-            <div class="col-4" style="border: 1px solid #eceaea;" (click)="gotochats()">
-                <div class="single-comment__content pl-2 mt-2">
-                    <strong class="username">
-                        <h2 style="padding: 0px; margin: 0px;margin-bottom: 10px;">
-                            <i class="bi bi-chat-text-fill" style="color: rgb(15, 183, 224);"></i>
-                        </h2>
-                    </strong>
-                    <strong class="username">Chats</strong>
-                    <!-- <p class="eml">Chats</p> -->
-                </div>
-            </div>
-           
-
-        </div>
     </div>
+
 </div>
+
+
 <!-- <div class="art-total  mr-110 ml-110 mt-1">
     <ngx-skeleton-loader count="1" [theme]="{ 
         'border-radius': '5px',
@@ -247,7 +414,7 @@
 
     <div class="modal-body">
 
-        <div class="card-body" >
+        <div class="card-body">
             <p class="text-muted">Basic Information</p>
             <form class="edit-form" [formGroup]="editForm" (ngSubmit)="onEditSave(editForm)">
 

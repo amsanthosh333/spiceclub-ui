@@ -13,6 +13,8 @@ import { windows } from 'ngx-bootstrap-icons';
 import { HostListener } from '@angular/core';
 import { Location } from "@angular/common";
 import { PlatformLocation } from '@angular/common'
+import { SharedService } from 'src/app/services/shared.service';
+
 @Component({
   selector: 'app-orders',
   templateUrl: './orders.component.html',
@@ -21,7 +23,7 @@ import { PlatformLocation } from '@angular/common'
 })
 
 export class OrdersComponent implements OnInit {
-
+  currentRate = 0;
   loader: boolean = true;
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
@@ -68,9 +70,12 @@ export class OrdersComponent implements OnInit {
   label2: any = "Delivery status";
   currentpage: any;
   pagee: any;
+  error1: any;
+  loadingg: boolean=false;
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService, private route: ActivatedRoute,
+    private sharedService: SharedService
    ) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -195,8 +200,6 @@ export class OrdersComponent implements OnInit {
   }
 
 
-
-
   viewitem() {
 
     this.request.vieworderitems(this.prdid).subscribe((response: any) => {
@@ -205,30 +208,74 @@ export class OrdersComponent implements OnInit {
     }
     );
   }
+  quickorder(id:any){
+    // this.spinner.show();
+    this.loadingg=true
+    this.request.quickorder(id).subscribe((res:any)=>{
+      if(res.result==true){
+        // this.spinner.hide();
+        
+        this.toastr.success('Added to cart', '');
+        this.sharedService.sendClickEvent();
+        this.loadingg=false
+        this.router.navigate(['cart']);
+      }
+      else{
+        // this.spinner.hide();
+        this.toastr.info('', res.message);
+      }
+    });
+  }
+  
+  proddetail(id:any){
+    window.scroll(0,0);
+    this.router.navigate(['productdetail', id]);
+  }
   addreview(content: any, _id: any) {
     this.product_iddd = _id;
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'lg',
+      size: 'md',
     });
 
   }
-  submitreview(form: FormGroup) {
-    let edata2 = {
-      product_id: this.product_iddd,
-      user_id: this.userid,
-      rating: "" + this.register.controls['rating'].value,
-      comment: "" + this.register.controls['comment'].value,
+  submitreview(form: FormGroup){
+    this.error1 = '';
+    
+    if (this.register.invalid) {
+  
+      if(!this.register.get('rating')?.valid){
+        this.error1 = '*give star';
+      }
+      else if ( !this.register.get('comment')?.valid) {
+        this.error1 = '*type some comment';
+      }  
+      return;
     }
+    else{
+        let edata2={
+          product_id:this.product_iddd,
+          user_id: this.userid,
+          rating:form.value.rating,
+          comment:form.value.comment,
+        }
     this.request.addreview(edata2).subscribe((res: any) => {
-
+      console.log("addreview",res);
+      
+      if (res.result == true) { 
+        this.toastr.success('Review  Submitted', '');    
+        this.modalService.dismissAll();   
+      }
+      else  {
+        this.toastr.info(res.message);
+        this.modalService.dismissAll(); 
+  
+      }
     }, (error: any) => {
-      console.log("error", error);
-
+      console.log("error",error);  
     });
-
+   }
   }
-
 
 
 }

@@ -1,3 +1,114 @@
+
+.ya-card-row{
+  -webkit-text-size-adjust: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0F1111;
+  font-family: "Amazon Ember",Arial,sans-serif;
+  box-sizing: border-box;
+  display: table;
+  height: 100%;
+  margin-bottom: 20px;
+  width: 100%;
+}
+.ya-card-cell{
+  display: inline-grid;
+  height: 100%;
+  padding-left: 0;
+  width: 100%;
+}
+.ya-card__whole-card-link {
+  height: 100%;
+  display: block;
+}
+.ya-card, .ya-card--rich {
+  height: 100%;
+}
+.a-column img{
+  width: 75%;
+}
+.a-column h2{
+  padding: 0px;
+}
+.a-box {
+  display: block;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px #D5D9D9 solid;
+}
+.a-box:hover {
+  background-color:whitesmoke;
+}
+.a-box .a-box-inner {
+  border-radius: 8px;
+  position: relative;
+  padding: 14px 18px;
+  display: flow-root;
+  
+}
+.a-ws div.a-column, div.a-column {
+  margin-right: 2%;
+  float: left;
+  min-height: 1px;
+  overflow: visible;
+}
+.a-ws .a-ws-span12, div.a-column.a-span-last {
+  margin-right: 0;
+  
+}
+.a-ws div.a-column, div.a-column {
+ 
+  min-height: 1px;
+  overflow: visible;
+}
+.ya-card__heading--rich {
+  color: #111;
+  font-size: 15px;
+}
+.a-color-secondary, .a-color-tertiary {
+  color: #565959!important;
+}
+
+#profilediv .row{
+  background-color: white;
+  border: 1px solid #dddddd;
+ 
+}
+#sub-div{
+  background-color: white;
+  border: 1px solid #dddddd;
+}
+#checkbalance{
+  border-radius: 0px 30px;
+  padding: 0px 20px;
+  color: white;
+  font-size: 0.9rem;
+}
+.email{
+  color: blue;
+  font-size: 0.7rem;
+}
+.maindiv{
+   margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 2%;
+   border-radius: 10px;
+}
+#list:hover{
+ background-color:whitesmoke;
+}
+#list2{
+  border-top: 1px solid rgb(224, 224, 224);
+  background-color: #ce2127;
+  color: white;
+}
+#list{
+  padding: 0.15rem;
+ }
+h6{
+  padding: 0px;
+  font-size: 0.9rem;
+}
 .breadcrumb-list__item{
   color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;

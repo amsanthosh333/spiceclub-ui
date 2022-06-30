@@ -272,27 +272,26 @@
 
 <div class="header-offcanvas about-overlay" id="about-overlay">
 	<div class="overlay-close inactive"></div>
-	<div class="overlay-content" style="padding: 0px 20px;">
+	<div class="overlay-content" style="padding: 0px 0px;">
 		<div class="overlay-content-container d-flex flex-column justify-content-between h-10">
 			<!--=======  widget wrapper  =======-->
 
 			<div class="widget-wrapper">
 				<div class="logo-with-offcanvas d-flex">
 					<!--=======  logo   =======-->
-					<div class="logo">
+					<div class="logo"  style="width: 100%;height: 100%;">
 
-						<img src="assets/images/LOGOWHITE.jpg" class="img-fluid sitelogo" alt="" style=" display: block;
+						<img src="assets/images/spicelogo.jpeg" class="img-fluid sitelogo" alt="" style=" display: block;
 								 margin-left: auto;
 								 margin-right: auto;
-								 width:50%;">
+								 width: 70%; height: 80%;">
 					</div>
 					<!--=======  End of logo   =======-->
 				</div>
-				<hr>
 				<!--=======  single widget  =======-->
 
-				<div class="single-widget mt-1">
-					<div class="single-comment">
+				<div class="single-widget mt-10" >
+					<div class="single-comment" >
 						<div class="single-comment__image" *ngIf="(profiledetail?.profileimg=='')">
 							<img src="assets/images/user-profile.png" class="img-fluid" style="height: 55px;" alt="mm">
 						</div>
@@ -300,49 +299,65 @@
 							<img src="https://neophroncrm.com/spiceclubnew/public/{{profiledetail?.profileimg}}"
 								class="img-fluid" style="height: 60px;object-fit: cover;width: 60px;" alt="profile">
 						</div>
-						<div class="single-comment__content  mt-2 pl-2">
+						<div class="single-comment__content  mt-2 pl-2 pt-10">
 							<!--=======  username and date  =======-->
 							<strong class="username">Hi  {{profiledetail?.name}}...</strong>
-							<p class="eml">{{profiledetail?.email}}</p>
-							<!--=======  End of username and date  =======-->
-							<!--=======  End of message  =======-->
+							<!-- <p class="eml">{{profiledetail?.email}}</p> -->
+							
 						</div>
 					</div>
-					<hr>
+					
 				</div>
 				<div class="row " id="closeabout" routerLink="/home">
-					<h6 class="col-2"><i class="ion-ios-home"></i></h6>
+					<h6 class="col-2"><span><img id="slidericon"  class="ion-android-person" 
+						src="../../../assets/images/icons/home.png" 
+						 alt=""></span></h6>
 					<h6 class="col-10"> <a>Home</a> </h6>
 				</div>
 				<div class="row " id="closeabout" routerLink="/profile">
-					<h6 class="col-2"><i class="ion-android-person"></i> </h6>
+					<h6 class="col-2"><span><img id="slidericon" class="ion-android-person" 
+						src="../../../assets/images/icons/user1.png" 
+						 alt=""></span> </h6>
 					<h6 class="col-10"> <a>Profile</a></h6>
 				</div>
 
 				<div class="row" id="closeabout" routerLink="/wishlist">
-					<h6 class="col-2"><i class="ion-android-favorite"></i> </h6>
+					<h6 class="col-2"><span><img id="slidericon" class="ion-android-person" 
+						src="../../../assets/images/icons/heart.png" 
+						 alt=""></span> </h6>
 					<h6 class="col-10"><a>Wishlist</a></h6>
 				</div>
 				<div class="row" id="closeabout" routerLink="/cart">
-					<h6 class="col-2"><i class="ion-android-cart"></i> </h6>
+					<h6 class="col-2"><span><img id="slidericon" class="ion-android-person" 
+						src="../../../assets/images/icons/trolley.png" 
+					  alt=""></span></h6>
 					<h6 class="col-10"><a>Cart</a></h6>
 				</div>
 				<div class="row " id="closeabout" routerLink="/orders">
-					<h6 class="col-2"><i class="ion-android-list"></i> </h6>
+					<h6 class="col-2"><span><img id="slidericon" class="ion-android-person" 
+						src="../../../assets/images/icons/shopping-bag.png" 
+						 alt=""></span> </h6>
 					<h6 class="col-10"><a>Orders</a></h6>
 				</div>
 				<div class="row " id="closeabout" routerLink="/wallet">
-					<h6 class="col-2"><i class="ion-android-folder"></i> </h6>
+					<h6 class="col-2"><span><img id="slidericon" class="ion-android-person" 
+						src="../../../assets/images/icons/wallet.png" 
+						 alt=""></span></h6>
 					<h6 class="col-10"><a>Wallet</a></h6>
 				</div>
 				<div class="row " id="closeabout" routerLink="/address">
-					<h6 class="col-2"><i class="ion-android-pin"></i> </h6>
+					<h6 class="col-2"><span><img id="slidericon" class="ion-android-person" 
+						src="../../../assets/images/icons/placeholder.png" 
+						alt=""></span></h6>
 					<h6 class="col-10"><a>Address</a></h6>
 				</div>
 				<div class="row " id="closeabout" routerLink="/message">
-					<h6 class="col-2"><i class="ion-android-chat"></i> </h6>
+					<h6 class="col-2"><span><img id="slidericon" class="ion-android-person" 
+						src="../../../assets/images/icons/chat.png" 
+						 alt=""></span> </h6>
 					<h6 class="col-10"><a>My Chats</a></h6>
 				</div>
+				
 				<div class="row " id="closeabout" (click)="openkyc()"
 					*ngIf="buyertypereal===2 && kyc_verify_status==0">
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
@@ -352,9 +367,11 @@
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
 					<h6 class="col-10"><a>Enquiry</a></h6>
 				</div>
-				<hr>
 				<div class="row " id="closeabout">
-					<h6 class="col-2"><i class="ion-android-exit 180deg"></i> </h6>
+					<h6 class="col-2"><span><img  class="ion-android-person" 
+						src="../../../assets/images/icons/arrow.png" 
+						style="height:15px;width:15px;margin-bottom: 1px;
+							margin-right: 5px;" alt=""></span> </h6>
 					<h6 class="col-10" (click)="logout1()"><a>Logout</a></h6>
 
 				</div>
@@ -495,7 +512,7 @@
 								<p>
 									<span *ngIf="b?.stroked_price!==b?.pricestring"
 										class="main-price discounted">{{b?.stroked_price}}</span>
-									<span class="discounted-price" style="color: red;">Rs {{b.price}}</span>
+									<span class="discounted-price" style="color: red;">  Rs.{{b.price}}</span>
 								</p>
 								<span>
 									<p style="font-size:small;">Quantity: {{b.quantity}}</p>
@@ -510,7 +527,7 @@
 				<!--=======  subtotal calculation  =======-->
 
 				<p class="cart-subtotal">
-					<span class="subtotal-title">Subtotal:</span>
+					<span class="subtotal-title">Sub Total</span>
 					<span class="subtotal-amount">{{subtot}}</span>
 				</p>
 

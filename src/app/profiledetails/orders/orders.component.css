@@ -1,3 +1,276 @@
+div{
+	font-family: Arial, Helvetica, sans-serif !important;
+	letter-spacing: 0;
+  }
+  #orderstatusbtn{
+	padding: 0px 3px;
+    /* background-color: #eaf7ff; */
+    border-color: #e1f1fb;
+    box-shadow: 0px 1px 7px #a3a3a3;
+	border-radius: 3px;
+}
+  :host ::ng-deep .page-item.active .page-link {
+    z-index: 3;
+    color: #fff;
+    background-color: #ce2127;
+    border-color: #ce2127;
+}
+
+  nav.site-nav>ul>li ul.single-column-menu {
+    min-width: 180px;
+    max-width: 350px;
+    padding: 10px;
+}
+nav.site-nav>ul>li ul.single-column-menu li a {
+    font-size: 13px;
+    line-height: 22px;
+    position: relative;
+    margin-bottom: 5px;
+    color: #7e7e7e;
+}
+
+#list:hover{
+	background-color: #f0f0f0;
+}
+#list.active{
+	background-color: #f0f0f0;
+}
+input::placeholder{
+	color: #c5c5c5 ;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input{
+	color: #c5c5c5 ;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea::placeholder{
+	color: #5f5f5f ;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea{
+	border: 1px solid #bbbbbb;
+	color: #5f5f5f  ;
+	width: 100%;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#prodmain.active{
+	padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #d5d9d9;
+}
+#quickordbtn{
+	background-color: #fdd71f !important;
+	padding: 0px 40px;
+}
+a, a:link, a:visited {
+    text-decoration: none;
+    color: #007185;
+}
+.a-link-normal:hover{
+text-decoration: none;
+color: #ce2127 ;
+}
+
+.a-size-base {
+    font-size: 13px!important;
+    line-height: 20px!important;
+	color: #565959!important;
+}
+.a-size-mini {
+    font-size: 14px!important;
+    line-height: 16px!important;
+	color: #ce2127!important;
+	text-transform: none;
+	font-weight: 600;
+}
+.a-button:not(.a-button-toggle) {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+}
+.a-button{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    margin-bottom: 4px!important;
+    background: #FFF;
+    border-color: #D5D9D9;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    padding: 0;
+    text-align: center;
+    text-decoration: none!important;
+    vertical-align: middle;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+    display: block;
+}
+#Write-a-product-review_1{
+	
+    border: 0;
+    display: block;
+    font-size: 13px;
+    line-height: 29px;
+    margin: 0;
+    outline: 0;
+    padding: 0 10px 0 11px;
+    text-align: center;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    text-decoration: none!important;
+    color: #0F1111;
+}
+#proddiv{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible;
+    min-height: 1px;
+    width: 100%;
+    float: none!important;
+    display: table-cell!important;
+    zoom: 1;
+    vertical-align: top;
+    
+}
+.a-box-group{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    margin-bottom: 12px!important;
+}
+.a-box{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    display: block;
+    background-color: #F0F2F2;
+    border: 1px #D5D9D9 solid;
+    border-radius: 8px 8px 0 0;
+    margin-top: 0;
+}
+.a.box .a-fixed-right-grid {
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.a-fixed-right-grid .a-fixed-right-grid-inner {
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    padding: 0;
+    /* padding-right: 290px; */
+}
+.a-fixed-right-grid .a-fixed-right-grid-col {
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible;
+    zoom: 1;
+    min-height: 1px;
+    width: 100%;
+    padding-right: 0%;
+    float: left;
+}
+.a-box-inner{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    padding: 14px 18px;
+    border-radius: 8px 8px 0 0;
+}
+#aboxproducts .a-box-inner{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+	/* border-bottom: 1px solid #d5d9d9; */
+    position: relative;
+    padding: 25px 18px;
+}
+#aboxproducts{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    border: 1px #D5D9D9 solid;
+    display: block;
+    background-color: #fff;
+    margin-top: -1px;
+	border-radius: 0px 0px 10px 10px;
+	padding: 0px 10px 10px 10px;
+}
+
+.a-column{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    width: 23.448%;
+    margin-right: 2%;
+    float: left;
+    min-height: 1px;
+    overflow: visible;
+}
+a.row{
+	-webkit-text-size-adjust: 100%;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    font-size: 12px!important;
+    line-height: 16px!important;
+    width: 100%;
+}
+.filter-icons {
+	margin-right: 55px;
+}
+
 li{
 	color: #140f0f ;
     font-family: Arial, Helvetica, sans-serif;
@@ -9,6 +282,7 @@ li{
 	font-size: 0.7rem;
 	text-transform: none;
 }
+
 @media (max-width :900px) {
 	h6{
 		font-size:0.8rem;
@@ -23,7 +297,12 @@ li{
 		font-size:0.8rem;
 	}
 	.orderss{
-		margin-left: 5%; margin-right: 5%;
+		
+		/* border:1px solid rgb(212, 210, 210);  */
+		background-color: white;
+		 margin-left: 15%;
+		  margin-right: 15%;
+		 border-radius: 10px;
 	}
 
   }

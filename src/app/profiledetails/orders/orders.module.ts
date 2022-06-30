@@ -10,6 +10,7 @@ import {IvyCarouselModule} from 'angular-responsive-carousel';
 import { NgxSkeletonLoaderModule } from 'ngx-skeleton-loader';
 import { FormsModule } from '@angular/forms';
 import {ToastrModule} from 'ngx-toastr'; 
+import { TooltipModule } from 'ng2-tooltip-directive';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import {ToastrModule} from 'ngx-toastr';
   imports: [
     CommonModule,
     OrdersRoutingModule,ReactiveFormsModule,NgbModule,FormsModule,
-    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,ToastrModule.forRoot()
+    CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,ToastrModule.forRoot(),TooltipModule,
   ]
 })
 export class OrdersModule { }

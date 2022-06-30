@@ -1,17 +1,16 @@
-@import '~font-awesome/css/font-awesome.css';
-@import '~ngx-toastr/toastr.css';
+
+
+
 
 
 .single-widget-product {
   padding-bottom:24px !important
 }
-.price{
 
-}
 .discounted-price {
   color: #44bf44;
   font-weight: 200;
-  font-size: 0.8rem;
+  font-size: 0.8rem; 
   font-family: Arial, Helvetica, sans-serif;
 }
 

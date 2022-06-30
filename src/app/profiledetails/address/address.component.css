@@ -1,19 +1,75 @@
+:host ::ng-deep .modal-content {
+    border-radius: 1rem;
+  }
+#addaddressdiv{
+    border-bottom: 1px solid#e7e7e7;
+    padding-bottom: 16px;
+    /* padding-left: 20px; */
+}
+#savebtndiv{
+    text-align: center;
+    margin-top: 10px;
+     margin-bottom: 10px;
+}
+#savebtndiv button{
+    background-color: rgb(201, 31, 8);
+    border: 1px solid rgb(201, 31, 8);
+    text-transform: none; 
+    padding-top: 1px; 
+    padding-bottom: 1px;
+}
+#editbtn{
+    padding-top: 0px;
+    padding-bottom: 0px;
+    font-size: 0.9rem;
+}
+#editbtn span{
+    color: white;
+    font-size: 0.8rem;
+}
+#editbtn i{
+   
+    font-size: 0.7rem;
+}
+#addaddressdiv{
+    border-bottom: 1px solid#e7e7e7;
+    padding-bottom: 16px;
+    /* padding-left: 20px; */
+}
+.addresss span,p{
+    font-size: 0.9rem;
+}
+#newaddbtn {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    font-size: 0.9rem;
+    background-color: #e7f6ff;
+    border-color: #e1f1fb;
+    box-shadow: 0px 1px 7px #afafaf;
+    font-weight: 600;
+    color: #505050;
+}
 .breadcrumb-list__item{
 	color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 0.7rem;
   text-transform: none;
 }
+textarea{
+    color: #585858;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 0.8rem;
+}
 input{
-    color: #140f0f ;
+    color: #585858;
   font-family: Arial, Helvetica, sans-serif;
   height: 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
 }
 select{ 
   font-family: Arial, Helvetica, sans-serif;
   color: #585858;
-  font-size: 0.9rem;
+  font-size: 0.8rem;
   height: 1.5rem;
   padding: 0px;
 }
@@ -76,9 +132,10 @@ strong{
     font-family: Arial, Helvetica, sans-serif ;
  
 }
-p strong{
-    color: #606060 ;
-  font-family: Arial, Helvetica, sans-serif;
+p strong {
+    color: #686868;
+    font-family: Arial, Helvetica, sans-serif;
+   
 }
 .lezada-button{
     padding-top: 0px;

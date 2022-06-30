@@ -118,7 +118,8 @@ export class ProfileComponent implements OnInit {
   }
   gotoorder1(){
     window.scroll(0,0);
-    this.router.navigate(['/purchased']);   
+    // this.router.navigate(['/purchased']);  
+    this.router.navigate(['/orders', 1], {queryParams:{delivery_status:"delivered"}}); 
   }
   gotoaddress(){
     window.scroll(0,0);
@@ -137,6 +138,15 @@ export class ProfileComponent implements OnInit {
         ariaLabelledBy: 'modal-basic-title',
         size: 'lg',
       });
+  }
+
+  gotocart(){
+    window.scroll(0,0);
+    this.router.navigate(['/cart']);   
+  }
+  gotowishlist(){
+    window.scroll(0,0);
+    this.router.navigate(['/wishlist']);   
   }
   onEditSave(form: FormGroup) {   
     this.error3=''

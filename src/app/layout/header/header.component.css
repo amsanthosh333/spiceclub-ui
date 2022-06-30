@@ -2,17 +2,31 @@ div {
     font-family: Arial, Helvetica, sans-serif !important;
     letter-spacing: 0;
 }
+.single-widget{
+	padding-left: 10px;
+	border-bottom: 1px solid #e3e3e3;
+    margin-bottom: 15px;
+}
+#slidericon{
+	height:15px;
+	width:15px;
+	margin-bottom: 0px;
+    margin-right: 5px;
+}
 #closeabout{
 	font-size: 0.9rem;
 	margin-bottom: 15px;
-	margin-left: 10px;
+	padding-left: 10px;
+	padding-top: 2px;
 }
 #closeabout .col-2{
 	text-align: center;
 	color: #ce2127;
+	font-size: 1rem;
 }
 #closeabout:hover{
-	background-color: #dbdbdb;
+	background-color: #ebe6e6;
+	box-shadow: 0px 1px 7px #e14848;
 }
 .eml{
 	color: #63a93f;

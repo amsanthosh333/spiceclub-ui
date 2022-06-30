@@ -36,7 +36,7 @@
 									style="text-decoration:line-through"
 									*ngIf="b.stroked_price!==b.pricestring">{{b.stroked_price}}</span>          
 									<span class="price" style="font-weight: 600;
-										color: rgb(66, 66, 66);">{{b.pricestring}}&nbsp;<span style="font-size: 0.7rem;font-weight: 100;" *ngIf="b.variation!==null">({{b.attribute[0]?.title}}: {{b.variation}} (pack of 1)) </span></span>
+										color: rgb(66, 66, 66);">  {{b.pricestring}}&nbsp;<span style="font-size: 0.7rem;font-weight: 100;" *ngIf="b.variation!==null">({{b.attribute[0]?.title}}: {{b.variation}} (pack of 1)) </span></span>
 								<br>
 
 									<div class="pro-qty d-inline-block mx-0 " id="qty">
@@ -86,7 +86,7 @@
 										style="color: rgb(41, 41, 41);font-size: 1.2rem;padding-bottom: 4px;">Rs.{{b.total}}</span>
 									<a  id="subsave">
 										<span>Save</span>
-										<p style="font-size:0.8rem ;">
+										<p style="font-size:0.7rem ;">
 											Subscribe now & Save
 										</p>
 									</a>

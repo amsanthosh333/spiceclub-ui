@@ -36,6 +36,7 @@
     "ng-bootstrap-icons": "^13.1.2-canary.1",
     "ng-image-fullscreen-view": "^2.0.0",
     "ng-image-slider": "^2.8.0",
+    "ng2-tooltip-directive": "^2.10.3",
     "ng5-slider": "^1.2.6",
     "ngx-bootstrap": "^8.0.0",
     "ngx-bootstrap-icons": "^1.7.2",

@@ -377,12 +377,12 @@ export class CheckoutComponent implements OnInit {
   placeorder(form: FormGroup) {
     this.error2 = '';
     if (this.address_id == undefined) {
-      this.error2 = '*please add address';
+      this.error2 = '*Please Add Address';
     }
 
     else if (this.terms.invalid) {
       if (!this.terms.get('type')?.valid) {
-        this.error2 = '*please select paymenttype';
+        this.error2 = '*Please Select Payment Option';
       }
       // else if (!this.terms.get('terms')?.valid) {
       //   this.error2 = '*please accept terms & conditions';

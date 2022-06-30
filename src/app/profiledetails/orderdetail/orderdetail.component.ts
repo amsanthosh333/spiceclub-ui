@@ -94,7 +94,7 @@ export class OrderdetailComponent implements OnInit {
 
   viewdetail(){
     this.request.vieworderdetail(this.ord_id).subscribe((response: any) => {
-      console.log("response",response);
+      console.log("response deatail",response);
       
       this.Detail=response.data;
       this.orderStatus=this.Detail[0].delivery_status_string;

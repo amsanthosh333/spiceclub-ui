@@ -1,3 +1,276 @@
+div {
+  font-family: Arial, Helvetica, sans-serif !important;
+  letter-spacing: 0;
+}
+input::placeholder{
+	color: #c5c5c5 ;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+input{
+	color: #c5c5c5 ;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea::placeholder{
+	color: #5f5f5f ;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+textarea{
+	border: 1px solid #bbbbbb;
+	color: #5f5f5f  ;
+	width: 100%;
+  font-size: 0.8rem;
+  font-family: Arial, Helvetica, sans-serif;
+}
+#prodmain.active{
+  padding: 10px;
+	padding-bottom: 18px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid #d5d9d9;
+}
+#prodmain{
+  padding: 10px;
+}
+#quickordbtn{
+	background-color: #fdd71f !important;
+	padding: 0px 40px;
+}
+a, a:link, a:visited {
+    text-decoration: none;
+    color: #007185;
+}
+.a-link-normal:hover{
+text-decoration: none;
+color: #ce2127 ;
+}
+
+.a-size-base {
+    font-size: 13px!important;
+    line-height: 20px!important;
+	color: #565959!important;
+}
+.a-size-mini {
+    font-size: 14px!important;
+    line-height: 16px!important;
+	color: #ce2127!important;
+	text-transform: none;
+	font-weight: 600;
+}
+.a-button:not(.a-button-toggle) {
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgb(213 217 217 / 50%);
+}
+.a-button{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    margin-bottom: 4px!important;
+    background: #FFF;
+    border-color: #D5D9D9;
+    border-style: solid;
+    border-width: 1px;
+    cursor: pointer;
+    padding: 0;
+    text-align: center;
+    text-decoration: none!important;
+    vertical-align: middle;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px 0 rgba(213,217,217,.5);
+    display: block;
+}
+#Write-a-product-review_1{
+	
+    border: 0;
+    display: block;
+    font-size: 13px;
+    line-height: 29px;
+    margin: 0;
+    outline: 0;
+    padding: 0 10px 0 11px;
+    text-align: center;
+    white-space: nowrap;
+    width: 100%;
+    height: 100%;
+    text-decoration: none!important;
+    color: #0F1111;
+}
+#proddiv{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    position: relative;
+    overflow: visible;
+    min-height: 1px;
+    width: 100%;
+    float: none!important;
+    display: table-cell!important;
+    zoom: 1;
+    vertical-align: top;
+    
+}
+/* #aboxproducts{
+	-webkit-text-size-adjust: 100%;
+    font-size: 14px;
+    line-height: 20px;
+    color: #0F1111;
+    font-family: "Amazon Ember",Arial,sans-serif;
+    box-sizing: border-box;
+    border: 1px #D5D9D9 solid;
+    display: block;
+    background-color: #fff;
+    margin-top: -1px;
+	border-radius: 0px 0px 10px 10px;
+	padding: 0px 10px 10px 10px;
+} */
+#code{
+  font-weight: 600;
+  color: #ce2127;
+}
+.a.row{
+  -webkit-text-size-adjust: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0F1111;
+  font-family: "Amazon Ember",Arial,sans-serif;
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 12px!important;
+}
+.a-column{
+  /* width: 74.448%; */
+  margin-right: 2%;
+  float: left;
+  min-height: 1px;
+  overflow: visible;
+}
+.order-date-invoice-item {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: middle;
+  white-space: nowrap;
+  -webkit-text-size-adjust: 100%;
+  font-size: 14px;
+  line-height: 20px;
+  color: #0F1111;
+  font-family: "Amazon Ember",Arial,sans-serif;
+  box-sizing: border-box;
+
+}
+.a-icon-text-separator, .a-text-separator {
+  display: inline-block;
+  margin: -2px 0.67375em 0;
+  width: 1px;
+  background-color: #ddd;
+  line-height: 0;
+  height: 14px;
+  vertical-align: middle;
+}
+ div.a-column.a-span-last {
+  margin-right: 0;
+  float: right;
+}
+.a-ws .a-ws-span12, div.a-column.a-span-last {
+  margin-right: 0;
+  float: right;
+}
+.a-ws div.a-column, div.a-column {
+  margin-right: 2%;
+  margin-bottom: 1%;
+  float: left;
+  min-height: 1px;
+  overflow: visible;
+}
+#firstdiv {
+  margin: 20px;
+  background-color: white;
+  margin-left: 15%;
+    margin-right: 15%;
+}
+#firstdiv-subdiv{
+  display: flex;
+   padding: 15px;
+   border: 1px solid rgb(214, 214, 214);
+   border-radius: 10px;
+}
+.headline2 span{
+  color: #575757;
+}
+#summarydiv{
+ padding: 0px 40px;
+ padding-right: 15px;
+}
+#paymentdiv{
+  display: flex;
+}
+p strong {
+  color: #3a3636;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
+
+#sssp {
+  color: #140f0f;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
+#addresss {
+  padding: 0px;
+  padding-left: 0px;
+}
+#addressdiv {
+  height: 130px;
+  max-height: 130px;
+  overflow: auto;
+}
+
+#addressdiv p {
+  color: #363434;
+}
+
+#addressdiv::-webkit-scrollbar {
+  display: none;
+}
+
+.addresss {
+  border: 1px solid #e7e7e7;
+  padding: 15px;
+  padding-left: 20px;
+}
+
+.addresss.active {
+  border: 1px solid #df0e07;
+  padding: 15px;
+  padding-left: 20px;
+  box-shadow: 0px 1px 7px #e14848;
+}
+.headline{
+  font-size:0.8rem; 
+  font-weight:600;
+   margin-bottom: 8px;
+   color: #ce2127
+}
+.headline2{
+  font-size:0.75rem; 
+  font-weight:600;
+   margin-bottom: 8px;
+   color: #464646
+}
+#addressreview p {
+  margin-bottom: 0px;
+}
 .breadcrumb-list__item{
   color: #140f0f ;
   font-family: Arial, Helvetica, sans-serif;
@@ -14,7 +287,7 @@ h6 strong{
   font-size: 0.8em;
 }
 span{
-  color: #140f0f ;
+  color: #686868;
     font-family: Arial, Helvetica, sans-serif;
 }
 th{
@@ -49,12 +322,12 @@ body{
   .circles{
     height: 0.938em;
     width: 0.938em;
-    border: 0.188em solid #000;
+    border: 0.188em solid #ce2127;
     border-radius: 50%;
     display: inline-block;
   }
   
-  .active{
+  .containerr .active{
       background-color:#3df80f;
   }
   
@@ -66,7 +339,7 @@ body{
   .bar{
     width: 16%;
     height: 0.063em;
-    margin-bottom:0.469em;
+    margin-bottom:0.350em;;
     border: 0.031em solid #000;
     color:#000;
     background-color:#000;
@@ -79,12 +352,13 @@ body{
     min-width:320px;
     margin: "0px auto";
     text-align: center;
+    margin-right: 4%;
   }
   
   .circle-desc{
    position: absolute;
    top:2.000em;
-   font-size: 1.125em;
+   font-size: 0.9em;
    width: auto;
    max-width:9.375em;
    margin-left:-2rem;
@@ -108,7 +382,8 @@ body{
     width: 100%;
   }
   #sts{
-    height: 200px;width: 200px;
+    height: 20px;
+    width: 80px;
     margin-left: 100px;
   }
   } 
@@ -119,7 +394,7 @@ body{
        font-size:60%
     }
     #sts{
-      height: 200px;width: 200px;
+      height: 20px;width:80px;
       margin-left: 0px;
     }
   } 
