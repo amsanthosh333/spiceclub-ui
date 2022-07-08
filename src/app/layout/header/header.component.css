@@ -78,15 +78,26 @@ input::placeholder{
 }
 
 .wrapper1 {
-	background-color: #ffc801;
+	/* background-color: #ffc801; */
 	padding: -4px;
 	font-size: 0.8rem;
 	padding: 0px 2px;
 	border-radius: 6px;
-	margin-bottom: 26px;
-	animation: wrapper1 1300ms infinite;
+	height: fit-content;
+	/* margin-bottom: 26px; */
+	animation: glowing 1300ms infinite;
 	font-family: inherit;
 	margin-top: 7px;
+}
+#buttonsubscribe {
+	animation: blinker 1.5s linear infinite;
+	color: red;
+	font-family: sans-serif;
+}
+@keyframes blinker {
+	50% {
+		opacity: 0;
+	}
 }
 
 #buttonsubscribe {
@@ -114,10 +125,31 @@ input::placeholder{
 
 .wrapper {
 	display: flex;
-	height: 20vh;
+	/* height: 20vh; */
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+}
+
+#buttonsub {
+	border: 1px transparent;
+	/* -webkit-border-radius: 40px; */
+	/* border-radius: 40px; */
+	color: #eeeeee;
+	cursor: pointer;
+	display: inline-block;
+	font-family: Arial, Helvetica, sans-serif ;
+	
+	font-size: 12px;
+	padding: 1px 10px;
+	text-align: center;
+	text-decoration: none;
+	margin-left: 0px;
+	-webkit-animation: subscription 1300ms infinite;
+	-moz-animation: subscription 1300ms infinite;
+	-o-animation: subscription 1300ms infinite;
+	animation: subscription 1300ms infinite;
+	/* width: 120px; */
 }
 
 #buttonkyc {
@@ -193,6 +225,34 @@ input::placeholder{
 	100% {
 		background-color: #0091b2;
 		box-shadow: 0 0 3px #0091b2;
+	}
+}
+@keyframes subscription {
+	0% {
+		background-color:  #40ec1e;
+		box-shadow: 0 0 3px #fd3a09;
+		color: rgb(58, 58, 58);
+	}
+	25% {
+		background-color:   #4edd31;
+		box-shadow: 0 0 15px #d7fcbf;
+		color: rgb(58, 58, 58);
+
+	}
+	
+	50% {
+		background-color:   #1eb200;
+		box-shadow: 0 0 15px #fd3a09;
+		color: rgb(58, 58, 58);
+
+	}
+
+	100% {
+		background-color: #6dff2a;
+		box-shadow: 0 0 3px #e2140d;
+		color: rgb(58, 58, 58);
+
+		
 	}
 }
 
@@ -678,7 +738,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 
 
 	#loogo {
-		margin-top: 48px;
+		margin-top: 38px;
 	}
 
 	.single-icon search {

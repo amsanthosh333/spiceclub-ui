@@ -13,101 +13,116 @@
   </div>
 </div>
 
-<div class="container" id="windowconv">
-  <div class="messaging mt-4">
-    <div class="inbox_msg">
-      <div class="inbox_people">
-        <div class="headind_srch">
-          <div class="recent_heading">
-            <h6 style="padding-bottom: 0px; color: #05728f;">All Conversation</h6>
-          </div>
-          <!-- <div class="srch_bar">
-                <div class="stylish-input-group">
-                  <input type="text" class="search-bar"  placeholder="Search" >
-                  <span class="input-group-addon">
-                  <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
-                  </span> </div>
-              </div> -->
-        </div>
-        <div class="inbox_chat">
-
-          <div id="pggg" *ngIf="(Convertations?.length==0)" style=" display: flex;
-justify-content: center;
-align-items: center;
-height: 200px;
-margin-top: 180px;
-margin-right: 100px;
-margin-left: 100px;">
-            <div>
-              <h5>
-                No conversation yet
-              </h5>
+<div class="row">
+<div class="col-8">
+  <div class="container" id="windowconv">
+    <div class="messaging mt-4">
+      <div class="inbox_msg">
+        <div class="inbox_people">
+          <div class="headind_srch">
+            <div class="recent_heading">
+              <h6 style="padding-bottom: 0px; color: #05728f;">All Enquires</h6>
             </div>
+            <!-- <div class="srch_bar">
+                  <div class="stylish-input-group">
+                    <input type="text" class="search-bar"  placeholder="Search" >
+                    <span class="input-group-addon">
+                    <button type="button"> <i class="fa fa-search" aria-hidden="true"></i> </button>
+                    </span> </div>
+                </div> -->
           </div>
-          <div class="chat_list active_chat" *ngFor="let Connectdtls of Convertations;let i=index"
-            [ngClass]="{'active': subItemm === i}">
-
-            <div class="chat_people" (click)="viewrow(Connectdtls,i)">
-              <div class="chat_img" *ngIf="(Connectdtls.shop_logo=='')"> <img
-                  style="height: 48px; width: 50px;border-radius: 50px;" src="assets/images/user-profile.png" alt="">
+          <div class="inbox_chat">
+  
+            <div id="pggg" *ngIf="(Convertations?.length==0)" style=" display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+  margin-top: 180px;
+  margin-right: 100px;
+  margin-left: 100px;">
+              <div>
+                <h5>
+                  No conversation yet
+                </h5>
               </div>
-              <div class="chat_img" *ngIf="(Connectdtls.shop_logo!=='')"> <img
+            </div>
+            <div class="chat_list active_chat" *ngFor="let Connectdtls of Convertations;let i=index"
+              [ngClass]="{'active': subItemm === i}">
+  
+              <div class="chat_people" (click)="viewrow(Connectdtls,i)">
+                <div class="chat_img" *ngIf="(Connectdtls.shop_logo=='')"> <img
+                    style="height: 38px; width: 50px;border-radius: 50px;" src="assets/images/user-profile.png" alt="">
+                </div>
+                <div class="chat_img" *ngIf="(Connectdtls.shop_logo!=='')"> <img
+                    style="height: 38px; width: 50px;border-radius: 50px;"
+                    src="https://neophroncrm.com/spiceclubnew/public/{{Connectdtls.shop_logo}}" alt=""> </div>
+                <div class="chat_ib">
+                  <h5 style="line-height: 1.2rem;
+                  overflow: hidden;
+                  display: -webkit-box; 
+                  -webkit-line-clamp: 2;
+                  -webkit-box-orient: vertical;
+                  max-height: 3.2rem;
+                   margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{Connectdtls.shop_name}} </h5>
+                  <!-- <h5>{{Connectdtls.shop_name}} <span class="chat_date">{{Connectdtls.date}}</span></h5> -->
+                  <p style="line-height: 1.2rem;
+                  overflow: hidden;
+                  display: -webkit-box; 
+                  -webkit-line-clamp: 1;
+                  -webkit-box-orient: vertical;
+                  max-height: 3.2rem;
+                   margin-bottom: 2px;font-weight: 200;color: #9b9b9b;">{{Connectdtls.title}}</p>
+                </div>
+              </div>
+            </div>
+  
+          </div>
+        </div>
+  
+        <div>
+          <div class="mesgs pt-1" style="background-color: #f8f8f8;padding-left: 0px; padding-right: 20px;">
+            <div style="padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4 ;">
+  
+              <div class="chat_img" *ngIf="(currentlogo=='')" style="margin-right: 10px;"> <img style="height: 35px; width: 50px;border-radius: 50px;"
+                  src="assets/images/user-profile.png" alt=""> </div>
+              <div class="chat_img" *ngIf="(currentlogo!=='' && Convertations?.length !==0 )" style="margin-right: 10px;"> <img
                   style="height: 50px; width: 50px;border-radius: 50px;"
-                  src="https://neophroncrm.com/spiceclubnew/public/{{Connectdtls.shop_logo}}" alt=""> </div>
-              <div class="chat_ib">
-                <h5>{{Connectdtls.shop_name}} </h5>
-                <!-- <h5>{{Connectdtls.shop_name}} <span class="chat_date">{{Connectdtls.date}}</span></h5> -->
-                <p>{{Connectdtls.title}}</p>
-              </div>
+                  src="https://neophroncrm.com/spiceclubnew/public/{{currentlogo}}" alt=""> </div>
+              <h6 style="padding-top: 12px;">{{tittlee}} <span style="font-size: x-small;    float: right;
+                margin-top: 10px;">{{convdatee}}</span></h6>
             </div>
           </div>
-
-        </div>
-      </div>
-
-      <div>
-        <div class="mesgs pt-1" style="background-color: #f8f8f8;padding-left: 0px; padding-right: 20px;">
-          <div style="padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4 ;">
-
-            <div class="chat_img" *ngIf="(currentlogo=='')"> <img style="height: 50px; width: 50px;border-radius: 50px;"
-                src="assets/images/user-profile.png" alt=""> </div>
-            <div class="chat_img" *ngIf="(currentlogo!=='' && Convertations?.length !==0 )"> <img
-                style="height: 50px; width: 50px;border-radius: 50px;"
-                src="https://neophroncrm.com/spiceclubnew/public/{{currentlogo}}" alt=""> </div>
-            <h5 style="padding-top: 12px;">{{currentname}} <span style="font-size: x-small;    float: right;
-              margin-top: 10px;">{{convdatee}}</span></h5>
-          </div>
-        </div>
-        <div class="mesgs pt-1" style="padding-right: 20px;">
-          <div class="msg_history">
-
-            <div *ngFor="let m of Messages">
-              <div class="incoming_msg" *ngIf="(m.user_id!==userid)">
-                <div class="incoming_msg_img"> <img src="assets/images/user-profile.png" alt="sunil"> </div>
-                <div class="received_msg">
-                  <div class="received_withd_msg">
+          <div class="mesgs pt-1" style="padding-right: 20px;">
+            <div class="msg_history">
+  
+              <div *ngFor="let m of Messages">
+                <div class="incoming_msg" *ngIf="(m.user_id!==userid)">
+                  <div class="incoming_msg_img"> <img src="assets/images/user-profile.png" alt="sunil"> </div>
+                  <div class="received_msg">
+                    <div class="received_withd_msg">
+                      <p>{{m.message}}</p>
+                      <span class="time_date">{{m.time}}</span>
+                    </div>
+                  </div>
+                </div>
+  
+                <div class="outgoing_msg" *ngIf="(m.user_id==userid)">
+                  <div class="sent_msg">
                     <p>{{m.message}}</p>
                     <span class="time_date">{{m.time}}</span>
                   </div>
                 </div>
               </div>
-
-              <div class="outgoing_msg" *ngIf="(m.user_id==userid)">
-                <div class="sent_msg">
-                  <p>{{m.message}}</p>
-                  <span class="time_date">{{m.time}}</span>
-                </div>
-              </div>
+  
             </div>
-
-          </div>
-          <div class="type_msg">
-            <div class="input_msg_write">
-              <form class="re" [formGroup]="message" (ngSubmit)="sendmsg(message)">
-                <input type="text" class="write_msg " formControlName="message" placeholder="Type a message" required>
-
-                <button class="msg_send_btn" type="submit"><i class="bi bi-send"></i></button>
-              </form>
+            <div class="type_msg">
+              <div class="input_msg_write">
+                <form class="re" [formGroup]="message" (ngSubmit)="sendmsg(message)">
+                  <input type="text" class="write_msg " formControlName="message" placeholder="Type a message" required>
+  
+                  <button class="msg_send_btn" type="submit"><i class="bi bi-send"></i></button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -115,6 +130,8 @@ margin-left: 100px;">
     </div>
   </div>
 </div>
+</div>
+
 
 <!-- mobile view -->
 
@@ -122,7 +139,7 @@ margin-left: 100px;">
   <div class="inboxople">
     <div class="headind_srch">
       <div class="recent_heading">
-        <h4 style="padding-bottom: 0px;font-size: 0.9em;">All Covertation</h4>
+        <h4 style="padding-bottom: 0px;font-size: 0.9em;">All Enquires</h4>
       </div>
       <!-- <div class="srch_bar">
             <div class="stylish-input-group">

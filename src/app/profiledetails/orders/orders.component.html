@@ -154,8 +154,8 @@
                     Order #
                 </span>
                             
-                <span class="a-color-secondary value">
-                    <bdi dir="ltr">{{img.code}}</bdi>
+                <span class="a-color-secondary value" >
+                    <bdi dir="ltr" style="color: #2c2c2c;">{{img.code}}</bdi>
                 </span>             
                             </div>
                             <div class="a-row a-size-base yohtmlc-order-level-connections">
@@ -195,7 +195,7 @@
                         <div class="a-fixed-left-grid-col yohtmlc-item a-col-right" style="padding-left:1.5%;float:left;">
                                                 
                     <div class="a-row" (click)="proddetail(pro.product_id)">
-                    <a class="a-link-normal" style="font-size: 0.9rem;max-width: 400px;">
+                    <a class="a-link-normal" style="font-size: 0.9rem;max-width: 400px;font-weight: 600;">
                         {{pro.product_name}}
                     </a>              
                     </div>
@@ -344,11 +344,12 @@ height: 200px;
 margin-right: 100px;
 margin-left: 100px;
 margin-top: 35px;
-border: 3px solid rgb(139, 139, 139);">
+margin-top: 25px;
+border: 1px solid #d7d6d6;">
         <div>
-            <h5>
-                There is no order
-            </h5>
+            <h6>
+               There is no Order &nbsp; <a style="text-decoration: underline; color: blue;" routerLink="/home">Buy Now</a>
+            </h6>
         </div>
     </div>
 </div>

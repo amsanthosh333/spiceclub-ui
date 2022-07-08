@@ -2,6 +2,9 @@ div {
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0;
 }
+#paymentdiv .headline2{
+  width: 130px !important;
+}
 input::placeholder{
 	color: #c5c5c5 ;
   font-size: 0.8rem;
@@ -137,7 +140,7 @@ color: #ce2127 ;
 } */
 #code{
   font-weight: 600;
-  color: #ce2127;
+  color:#424242;;
 }
 .a.row{
   -webkit-text-size-adjust: 100%;
@@ -162,9 +165,10 @@ color: #ce2127 ;
   vertical-align: middle;
   white-space: nowrap;
   -webkit-text-size-adjust: 100%;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 20px;
-  color: #0F1111;
+  color: #ce2127;
+  font-weight: 600;
   font-family: "Amazon Ember",Arial,sans-serif;
   box-sizing: border-box;
 
@@ -322,27 +326,27 @@ body{
   .circles{
     height: 0.938em;
     width: 0.938em;
-    border: 0.188em solid #ce2127;
+    border: 0.188em solid #3c3c3c;
     border-radius: 50%;
     display: inline-block;
   }
   
   .containerr .active{
-      background-color:#3df80f;
+      background-color: #ce2127;
   }
   
   .circle-desc-active{
   font-weight: bold;
-  color: #22a302;
+  color:  #ce2127;
   }
   
   .bar{
-    width: 16%;
+    width: 12%;
     height: 0.063em;
-    margin-bottom:0.350em;;
-    border: 0.031em solid #000;
-    color:#000;
-    background-color:#000;
+    margin-bottom:0.370em;;
+    border: 0.031em solid #3c3c3c;
+    color: #3c3c3c;
+    background-color: #3c3c3c;
     display: inline-block;
     text-align:center;
     margin:"0 auto";
@@ -357,11 +361,12 @@ body{
   
   .circle-desc{
    position: absolute;
+   font-weight: 600;
    top:2.000em;
-   font-size: 0.9em;
+   font-size: 0.8em;
    width: auto;
    max-width:9.375em;
-   margin-left:-2rem;
+   margin-left:-1.6rem;
    height:100px;
   }
  

@@ -1,6 +1,6 @@
 
 .chat_list.active_chat.active {
-  background-color: #cdcdcd;
+  background-color: #fddbdb;
   color: rgb(228, 13, 13);
   }
 input{
@@ -109,11 +109,11 @@ img{ max-width:100%;}
 .chat_list {
   border-bottom: 1px solid #c4c4c4;
   margin: 0;
-  padding: 18px 16px 10px;
+  padding: 10px 16px 10px;
 }
 .inbox_chat { height: 600px; overflow-y: scroll;}
 
-.active_chat{ background:#ebebeb;}
+.active_chat{ background:#ffffff;}
 
 .incoming_msg_img {
   display: inline-block;

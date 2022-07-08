@@ -2,11 +2,10 @@
     <div class="container" style="margin: 0px;">
         <div class="row">
             <div class="col-lg-12">
-                <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">My Account</h4>
                 <!--=======  breadcrumb list  =======-->
-                <ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+                <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
                     <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
-                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Profile</li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">My Account</li>
                 </ul>
                 <!--=======  End of breadcrumb list  =======-->
             </div>
@@ -181,7 +180,7 @@
                         </div>
                         <div class="ya-card-cell">
 
-                            <a href="https://www.amazon.in/ap/cnep?openid.return_to=https%3A%2F%2Fwww.amazon.in%2Fyour-account&amp;openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.assoc_handle=inflex&amp;openid.mode=checkid_setup&amp;openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&amp;openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
+                            <a 
                                 class="ya-card__whole-card-link">
                                 <div data-card-identifier="SignInAndSecurity" class="a-box ya-card--rich">
                                     <div class="a-box-inner" (click)="editprofile(changeRecord)">
@@ -193,7 +192,7 @@
                                             </div>
                                             <div class="a-column a-span9 a-span-last">
                                                 <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
-                                                    Login &amp; security
+                                                    Login &amp; Security
                                                 </h2>
                                                 <div><span class="a-color-secondary">Edit name, and password </span></div>
 
@@ -209,7 +208,7 @@
 
                         <div class="ya-card-cell">
 
-                            <a href="https://www.amazon.in/gp/primecentral?ref_=ya_d_c_prime"
+                            <a 
                                 class="ya-card__whole-card-link">
                                 <div data-card-identifier="Prime" class="a-box ya-card--rich">
                                     <div class="a-box-inner"  (click)="gotowallet()">
@@ -237,7 +236,7 @@
                         
                         <div class="ya-card-cell">
 
-                            <a href="https://www.amazon.in/gp/your-account/order-history?ref_=ya_d_c_yo"
+                            <a 
                                 class="ya-card__whole-card-link">
                                 <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
                                     <div class="a-box-inner" (click)="gotoaddress()">
@@ -265,7 +264,7 @@
 
                         <div class="ya-card-cell">
 
-                            <a href="https://www.amazon.in/ap/cnep?openid.return_to=https%3A%2F%2Fwww.amazon.in%2Fyour-account&amp;openid.identity=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.assoc_handle=inflex&amp;openid.mode=checkid_setup&amp;openid.ns.pape=http%3A%2F%2Fspecs.openid.net%2Fextensions%2Fpape%2F1.0&amp;openid.claimed_id=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0%2Fidentifier_select&amp;openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0"
+                            <a 
                                 class="ya-card__whole-card-link">
                                 <div data-card-identifier="SignInAndSecurity" class="a-box ya-card--rich">
                                     <div class="a-box-inner" (click)="gotochats()">
@@ -277,7 +276,7 @@
                                             </div>
                                             <div class="a-column a-span9 a-span-last">
                                                 <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
-                                                    Chat &amp;
+                                                    Get Support & Enquiry
                                                 </h2>
                                                 <div><span class="a-color-secondary">Chat with Seller</span></div>
 
@@ -388,7 +387,29 @@
                                                     <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
                                                         Verify KYC
                                                     </h2>
-                                                    <div><span class="a-color-secondary">Verify Your Kyc to become a B2B Customer</span></div>
+                                                    <div><span class="a-color-secondary">Verify your Kyc to become a B2B Customer</span></div>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="ya-card-cell" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1" >
+                                <a  class="ya-card__whole-card-link">
+                                    <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
+                                        <div class="a-box-inner" >
+                                            <div class="a-row">
+                                                <div class="a-column a-span3">
+                                                    <span><img class="ion-ios-cart"  src="../../../assets/images/icons/find-my-friend.png" 
+                                                        style="height:40px;width:40px;margin-bottom: -3px;
+                                                            margin-right: 5px;" alt=""></span>
+                                                </div>
+                                                <div class="a-column a-span9 a-span-last mt-20">
+                                                    <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
+                                                         KYC Status
+                                                    </h2>
+                                                    <div><span class="a-color-secondary">KYC verification is in progress...</span></div>
     
                                                 </div>
                                             </div>
@@ -409,9 +430,9 @@
                                                 </div>
                                                 <div class="a-column a-span9 a-span-last mt-20">
                                                     <h2 class="a-spacing-none ya-card__heading--rich a-text-normal">
-                                                        Enquiry a product
+                                                        Enquiry a Product
                                                     </h2>
-                                                    <div><span class="a-color-secondary" >Know More About Products and Deals</span></div>
+                                                    <div><span class="a-color-secondary" >Know more about Products and Deals</span></div>
     
                                                 </div>
                                             </div>

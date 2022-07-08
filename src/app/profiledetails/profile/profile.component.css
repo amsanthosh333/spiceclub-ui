@@ -2,6 +2,13 @@ div{
 	font-family: Arial, Helvetica, sans-serif !important;
 	letter-spacing: 0;
   }
+
+  :host ::ng-deep.modal-content {
+ 
+    border-radius: 1.3rem !important;
+ 
+}
+
 .ya-card-row{
   -webkit-text-size-adjust: 100%;
   font-size: 14px;
@@ -40,7 +47,7 @@ div{
   border: 1px #D5D9D9 solid;
 }
 .a-box:hover {
-  background-color:whitesmoke;
+  background-color: #fddbdb;
 }
 .a-box .a-box-inner {
   border-radius: 8px;
@@ -70,7 +77,7 @@ div{
 }
 .a-color-secondary, .a-color-tertiary {
   color: #565959!important;
-  font-size: 0.8rem;
+  font-size: 0.7rem;
 }
 
 #profilediv .row{
@@ -83,6 +90,7 @@ div{
   border: 1px solid #dddddd;
 }
 #checkbalance{
+  box-shadow: 0px 1px 7px #686868;
   border-radius: 0px 30px;
   padding: 0px 20px;
   color: white;
@@ -99,7 +107,7 @@ div{
    border-radius: 10px;
 }
 #list:hover{
- background-color:whitesmoke;
+  background-color: #fddbdb;
 }
 #list2{
   border-top: 1px solid rgb(224, 224, 224);
