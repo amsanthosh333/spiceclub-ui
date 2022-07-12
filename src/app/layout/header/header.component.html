@@ -18,14 +18,19 @@
 				<div class="main">
 					<div class="inputroup">
 						<form class="input-group" [formGroup]="search" (ngSubmit)="search1(search)" style="width:100%;">
-							<input type="text" class="form-control" placeholder="Search for a product"
-								formControlName="key" style="height: 30px;">
+							<input type="text" list="codes" class="form-control" placeholder="Search for a product"
+								formControlName="key" style="height: 30px;" (input)="inputHandle($event)">
+								<datalist id="codes" style="background-color:white;">
+									<option  *ngFor="let c of searchList" [value]="c.name" >{{c.name}}</option>
+								  </datalist>
 							<div class="input-group-append" style="height: 30px;">
 								<button class="btn btn-dark" type="submit" id="searchbar" style="display:inline;">
 									<i class="ion-ios-search-strong"></i><span></span>
 								</button>
 							</div>
 						</form>
+
+					
 					</div>
 				</div>
 

@@ -11,16 +11,17 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
-import { SharedService } from 'src/app/services/shared.service'
+import { SharedService } from 'src/app/services/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 import { SignupComponent } from 'src/app/auth/signup/signup.component';
+
 
 declare var jQuery: any;
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css'],
+  styleUrls: ['./home.component.css', '../../../assets/revolution/css/settings.css','../../../assets/revolution/css/navigation.css','../../../assets/revolution/custom-setting.css'],
   providers: [ToastrService],
 })
 export class HomeComponent implements OnInit {
@@ -248,6 +249,10 @@ export class HomeComponent implements OnInit {
       comment: [''],
 
     });
+
+    (($) => {
+    
+    })(jQuery);
 
   }
   onSubmit() {

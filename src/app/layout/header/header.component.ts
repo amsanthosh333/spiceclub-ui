@@ -71,6 +71,19 @@ export class HeaderComponent implements OnInit {
   buyertypeid: any;
   iskycupload: any;
 
+  public codeList = [
+    { id: 1, name: 'Angular 2+' },
+    { id: 2, name: 'Angular 4' },
+    { id: 3, name: 'Angular 5' },
+    { id: 4, name: 'Angular 6' },
+    { id: 5, name: 'Angular 7' },
+    { id: 5, name: 'Angular 8' },
+    { id: 5, name: 'Angular 9' },
+    { id: 5, name: 'Angular 11' },
+    { id: 5, name: 'Angular 12' },
+  ];
+  searchList: any;
+
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
 
@@ -1564,6 +1577,23 @@ export class HeaderComponent implements OnInit {
 
     })(jQuery);
   }
+
+  inputHandle(event:any){
+    console.log("ComponentDefnHeadComponent2",event.target.value);
+    setTimeout(() => {
+     
+        this.request.getsearchlist(event.target.value).subscribe((response: any) => {
+          this.searchList = response.data;
+          console.log("alllcat", this.searchList);
+        },
+          (error: any) => {
+            console.log("error", error);
+          });
+      
+    }, 500);
+
+  }
+
 
   getprofile() {
     this.request.fetchuserprofile(this.userid).subscribe((response: any) => {

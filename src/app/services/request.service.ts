@@ -645,6 +645,14 @@ public filtersearchdataa(name:any) {
   this.url = `${this.endPoint1}/products/search?name=`  +name+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
   return this.http.get(this.url);
 }
+
+//search list
+getsearchlist(search:any)
+{
+  this.url = `${this.endPoint1}/products/searchproductlist?name=`  +search+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
+  return this.http.get(this.url);
+}
+
 //flashdeal
  public getprodbyflash(id: any,page:any) {
   this.url = `${this.endPoint1}/flash-deal-products/`+id +'?page='+ page+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;

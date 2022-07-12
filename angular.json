@@ -48,7 +48,16 @@
               "src/assets/js/main.js",
               "src/assets/js/vendor/jquery.min.js",
               "src/assets/js/plugins.js",
-              "node_modules/slick-carousel/slick/slick.min.js"
+              "node_modules/slick-carousel/slick/slick.min.js",
+              "src/assets/revolution/js/jquery.themepunch.revolution.min.js",
+              "src/assets/revolution/js/jquery.themepunch.tools.min.js",
+              "src/assets/revolution/revolution-active.js",
+              "src/assets/revolution/js/extensions/revolution.extension.kenburn.min.js",
+               "src/assets/revolution/js/extensions/revolution.extension.slideanims.min.js",
+               "src/assets/revolution/js/extensions/revolution.extension.actions.min.js",
+               "src/assets/revolution/js/extensions/revolution.extension.layeranimation.min.js",
+               "src/assets/revolution/js/extensions/revolution.extension.navigation.min.js",
+               "src/assets/revolution/js/extensions/revolution.extension.parallax.min.js"
             ]
           },
           "configurations": {
