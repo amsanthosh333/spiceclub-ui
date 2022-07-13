@@ -54,7 +54,7 @@ export class BlogComponent implements OnInit {
   error1: any;
   loader: boolean = true;
   loader1: boolean = true;
-  prodcount = [1, 2, 3, 4, 5, 6];
+  prodcount = [1, 2, 3, 4, 5, 6,7,8];
   sideloader2: boolean = true;
   allloader1: boolean = true;
   recipeloader: boolean = true;

@@ -18,16 +18,16 @@
 	<!--=============================================
 	=           blog page content         =
 	=============================================-->
-	<div class="blog-page-wrapper mb-10">
-		<div class="container" style="margin: 10px 20px;">
+	<div class="blog-page-wrapper mb-10 mt-15">
+		<div class="container" >
 			<div class="row">
 				<div class="col-lg-3 order-2 order-lg-1">
 					<!--=======  page sidebar  =======-->
 					<div class="page-sidebar">
-						<div class="single-sidebar-widget mb-20" *ngIf="!loader">
+						<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
 							<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Category </h5>
 							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-								style="padding-left: 0px;max-height: 250px;overflow-y: auto;">
+								style="padding-left: 0px;max-height: 250px;overflow-y: auto;margin-bottom: 5px;">
 								<li *ngFor="let cat of Allcat;let i=index">
 									<label style="display: flex;"> <a (click)="getblogbycatg2(cat.id,i)"
 											style="padding-top: 3px;"><input [checked]="topItem === i"
@@ -39,12 +39,12 @@
 
 						</div>
 						<div class="single-sidebar-widget mb-20" *ngIf="loader">
-							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
+							<h2 class="single-sidebar-widget--title" style="margin-bottom: 10px;">Categories</h2>
 							<ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
 						</div>
 
 						<div class="single-sidebar-widget mb-0">
-							<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">All Blogs</h2>
+							<h2 class="single-sidebar-widget--title" style="margin-bottom: 10px;">All Blogs</h2>
 							<div class="widget-post-wrapper" *ngIf="!loader1"
 								style="max-height: 650px;overflow-y: auto;">
 								<div class="single-widget-post" *ngFor="let img of Blogs"
@@ -78,9 +78,61 @@
 				</div>
 
 				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!loader1">
+					<!-- <div>
+						<span>view all</span>
+					</div>                                          (click)="getblogbycatg2(cat.id,i)"-->
+					<div class="column-post-view">
+
+						<div class="post-list-wrapper" *ngFor="let cat of Allcat;let i=index" >
+							<div class="col-lg-12">
+								<div class="section-title section-title--one  mb-0 ">
+									<h6
+										style="font-weight: 600; color: rgb(34, 34, 34);margin-top: 10px;margin-bottom: 0px;">
+										Best of  {{cat.name}} <span (click)="getblogbycatg2(cat.id,i)" style="margin-left: 20px;color:rgb(25, 141, 1); font-size: 0.9rem;font-weight: 100;">view all</span> </h6>
+										
+								</div>
+							</div>
+							<div class="col-lg-12" id="bloglist">
+							<div class="single-post col-4 " *ngFor="let img of cat.bestof.data;let i=index">
+								<a style="margin-left:7px">
+									<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}">
+								</a>
+								<a>
+									<h2 style="line-height: 1.2rem;
+								overflow: hidden;
+								display: -webkit-box;
+								-webkit-line-clamp: 2;
+								-webkit-box-orient: vertical;
+								max-height: 5.2rem;">{{img.name}} </h2>
+								</a>
+								<p style="line-height: 1.3rem;
+							overflow: hidden;
+							display: -webkit-box;
+							-webkit-line-clamp: 3;
+							-webkit-box-orient: vertical;
+							max-height: 5.2rem;">{{img.short_description}} dc sadv asdcd</p>
+							</div>
+						</div>
+
+
+							<!-- <div class="pages">
+								<ul class="pages-items">
+									<li class="next"><a
+											href="https://www.netmeds.com/health-library/category/food/page/2"
+											data-ci-pagination-page="2" rel="next">OLDER →</a></li>
+								</ul>
+							</div> -->
+
+						</div>
+						<!-- <div class="clearfix"></div> -->
+					</div>
+				</div>
+
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!loader1">
 					<div *ngIf="!catblogs">
 						<div *ngFor="let cat of Allcat;let i=index">
-							<div class="row mb-10 pb-10" style="background-color:rgb(218 255 246);" *ngIf="cat.bestof.data.length!==0">
+							<div class="row mb-10 pb-10" style="background-color:rgb(218 255 246);"
+								*ngIf="cat.bestof.data.length!==0">
 								<div class="col-lg-12">
 									<div class="section-title section-title--one  mb-0 ">
 										<h6
@@ -88,7 +140,7 @@
 											Best of {{cat.name}} </h6>
 									</div>
 								</div>
-								<div class="col-lg-12" style="display: flex;" >
+								<div class="col-lg-12" style="display: flex;">
 									<div class="col-6 " style="padding-right:3px;">
 										<div class="col-12" style="padding:5px;"
 											*ngFor="let img of cat.bestof.data;let i=index">
@@ -124,7 +176,7 @@
 														<a class="blog-readmore-btn" (click)="getblogdetail(img.id)">
 															<button style="padding-top: 2px;padding-bottom: 2px;"
 																class="btn btn-success btn-sm">Read more</button></a>
-													</div>
+													</div> 
 
 													<!-- <p class="post-excerpt" style=" height: 50px; width: 100%;
 											overflow: hidden;margin-bottom: 0px">{{Firstblog.short_description}}
@@ -136,7 +188,7 @@
 										</div>
 
 										<span id="viewmore"><button class="btn btn-outline-info"
-												(click)="getblogbycatg2(cat.id,i)">View more...</button></span>
+												 >View more...</button></span>
 									</div>
 
 									<div class="col-6" style="padding-left:3px;">
@@ -247,7 +299,7 @@
 
 				<!-- blogs -->
 
-				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 " *ngIf="loader2">
+				<!-- <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 " *ngIf="loader2">
 					<div class="row product-isotope shop-product-wrap four-column">
 						<div class="col-12 col-lg-6 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
 							<div class="single-product mb-20" style="height: 280px; width: 460px;">
@@ -259,12 +311,12 @@
 							<ngx-skeleton-loader count="2" animation="pulse"></ngx-skeleton-loader>
 						</div>
 					</div>
-				</div>
+				</div> -->
 
 				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 " *ngIf="loader1">
 					<div class="row product-isotope shop-product-wrap four-column">
-						<div class="col-12 col-lg-4 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-							<div class="single-product mb-20" style="height: 280px; width: 260px;">
+						<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
+							<div class="single-product mb-20" style="height: 280px; width: 200px;">
 								<ngx-skeleton-loader count="1"
 									[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
 								</ngx-skeleton-loader>

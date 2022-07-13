@@ -1,68 +1,66 @@
-
-	<div class="breadcrumb-area breadcrumb-bg-2">
-        <div class="container" style="margin: 0px;">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">My Account</h4> -->
-                    <!--=======  breadcrumb list  =======-->
-                    <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
-                        <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
-                        <li class="breadcrumb-list__item breadcrumb-list__item--active">Address</li>
-                    </ul>
-                    <!--=======  End of breadcrumb list  =======-->
-                </div>
+<div class="breadcrumb-area breadcrumb-bg-2">
+    <div class="container" style="margin: 0px;">
+        <div class="row">
+            <div class="col-lg-12">
+                <!-- <h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">My Account</h4> -->
+                <!--=======  breadcrumb list  =======-->
+                <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
+                    <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Address</li>
+                </ul>
+                <!--=======  End of breadcrumb list  =======-->
             </div>
         </div>
     </div>
+</div>
 
 
 
 
-<div class="col-lg-12 mb-15 mt-2" >
-    <div class="checkout-cart-total   mt-1" style="background-color:white;"
-        *ngIf="!loader">
+<div class="col-lg-12 mb-15 mt-2">
+    <div class="checkout-cart-total   mt-1" style="background-color:white;" *ngIf="!loader">
 
         <!-- <div class="addres1 mb-4" style="padding: 10px; background-color: white;" (click)="addaddresss(addRecord,map)">
             <span style="color: #2874f0;;"><strong style="padding-left: 20px;">+ Add a New Address</strong> </span>
         </div> -->
         <div id="addaddressdiv">
-            <button id="newaddbtn" class="btn btn-info" (click)="addaddresss(addRecord,map)">Create a new address</button>
+            <button id="newaddbtn" class="btn btn-info" (click)="addaddresss(addRecord,map)">Create a new
+                address</button>
         </div>
 
         <div class="addres1">
             <form [formGroup]="address">
                 <div class="addresss" *ngFor="let Connectdtls of Address; let i=index">
                     <p> <strong>{{username}} </strong></p>
-                    <span > {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
+                    <span> {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
                         {{Connectdtls.country_name}} - {{Connectdtls.set_default}}{{radioSelected}}</span>
                     <p> {{Connectdtls.postal_code}}</p>
                     <p> <strong> {{Connectdtls.phone}}</strong></p>
                     <!-- *ngIf="((Connectdtls.set_default === '1') ? 'checked':'true')"   [checked]="(Connectdtls.set_default === 1)"   [(ngModel)]="radioSelected" id="shiping_address{{i}}"  *ngIf="(Connectdtls.set_default === 1 ? 'checked':'true')" -->
-                    
-                    <p id="useaddress"> 
-                        <input type="radio" 
-                        name="radiio"
-                        value= "{{Connectdtls.id}} "data-shipping 
-                        [checked]="Connectdtls.set_default== 1"
-                        (click)="changeshippingaddress(Connectdtls.id)" > <label style="color: #ce2127;">&nbsp; Use this as shipping address</label>
 
-                        
+                    <p id="useaddress">
+                        <input type="radio" name="radiio" value="{{Connectdtls.id}} " data-shipping
+                            [checked]="Connectdtls.set_default== 1" (click)="changeshippingaddress(Connectdtls.id)">
+                        <label style="color: #ce2127;">&nbsp; Use this as shipping address</label>
+
+
                         <span class="add-to-cart" style="margin-left: auto;">
-                           
-                                <button id="editbtn"   class="btn btn-danger sm" (click)="deleteRow(Connectdtls)">
-                                    <i class="bi bi-trash-fill"></i> <span>&nbsp; Delete</span>
-                                 </button>
-                            </span>
+
+                            <button id="editbtn" class="btn btn-danger sm" (click)="deleteRow(Connectdtls)">
+                                <i class="bi bi-trash-fill"></i> <span>&nbsp; Delete</span>
+                            </button>
+                        </span>
                         <span class="add-to-cart" style="margin-left: auto;">
                             <!-- <button class="lezada-button lezada-button--small lezada-button--icon--left"
                                 (click)="editRow(Connectdtls ,editRecord )"
                                 style="background-color: rgb(30, 121, 206);border: 1px solid rgb(30, 121, 206);
                                 text-transform: none;">
                                 <i class="bi bi-pencil-fill"></i> <span style="color: white;letter-spacing: 0px;">Edit</span> </button> -->
-                     <button id="editbtn" style="padding-left:20px;padding-right:20px;margin-right: 10px;" class="btn btn-primary sm" (click)="editRow(Connectdtls ,editRecord )">
-                        <i class="bi bi-pencil-fill"></i> <span>&nbsp; Edit</span>
-                     </button>
-                            </span>
+                            <button id="editbtn" style="padding-left:20px;padding-right:20px;margin-right: 10px;"
+                                class="btn btn-primary sm" (click)="editRow(Connectdtls ,editRecord )">
+                                <i class="bi bi-pencil-fill"></i> <span>&nbsp; Edit</span>
+                            </button>
+                        </span>
                     </p>
                 </div>
             </form>
@@ -100,10 +98,10 @@
                 [theme]="{  'border-radius': '4px',  height: '150px',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white', 'margin-bottom':'0px'  }"
                 *ngIf="loader"></ngx-skeleton-loader>
         </div>
-        
+
 
     </div>
-    
+
 </div>
 
 
@@ -117,7 +115,7 @@
                     <div class="font-weight-bold p-t-10 font-13" style="font-size: 17px;color:gray">
                         Add Address</div>
                 </div>
-                
+
             </div>
         </h5>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
@@ -220,9 +218,9 @@
 
                 <!-- row end -->
             </div>
-            <div class="col-md-12" id="savebtndiv" >
+            <div class="col-md-12" id="savebtndiv">
                 <span class="add-to-cart" style="margin-left: auto;">
-                    <button  class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
+                    <button class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
                         Save</button>
                 </span>
             </div>
@@ -238,7 +236,7 @@
             <div class="table-modal-header">
 
                 <div class="modal-about">
-                    <div class="font-weight-bold p-t-10 "  style="font-size: 17px;">
+                    <div class="font-weight-bold p-t-10 " style="font-size: 17px;">
                         Edit Address</div>
                 </div>
             </div>
