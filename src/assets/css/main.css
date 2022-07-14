@@ -89,9 +89,9 @@ body {
   position: relative;
 
   visibility: visible;
-  background-image: url(../images/back.jpeg);
-  color: #777777;
-  background-color: #ffffff;
+  /* background-image: url(../images/back.jpeg); */
+  color: #ff0000;
+  background-color: rgb(202, 202, 202);
 }
 
 body.newsletter-overlay-active {
@@ -2277,7 +2277,7 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li .mega-sub-menu li:last-child a {
 
   color: #ffffff;
   border-radius: 50%;
-  background-color: #76c045;
+  background-color: #4845e3;
 }
 
 /* overlay close */

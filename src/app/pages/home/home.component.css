@@ -5,7 +5,9 @@
 .title h3{
   padding-bottom: 0px;
 }
+.ng-image-slider .ng-image-slider-container .main .main-inner .img-div {
 
+}
 input, select, textarea{
   color: rgb(49, 49, 49) !important;
 }
@@ -330,7 +332,7 @@ input[type=number]::-webkit-inner-spin-button {
   margin-left: 2.8%;
   margin-right: 3.7%;
   margin-left: 1.5%;
-  width: 97.9%;
+  width: 99.8%;
   padding: 0px;
   margin-left: 22px;
 }
@@ -1100,14 +1102,30 @@ input[type=number] {
     display: inline;
   }
   .carousall6 {
-    background-color: rgb(255, 255, 255);
+    background-color: rgba(255, 255, 255, 0);
     padding: 0px;
-    /* border: 1px solid rgb(206, 202, 202); */
     height: 217px;
     margin: 10px;
-    margin-left: 22px;
-    /* margin-right: 6px; */
-    width: 97%;
+    margin-left: 40px;
+    width: 93%;
+    position: absolute;
+    top: 54%;
+    
+  }
+  
+  :host ::ng-deep .carousel-control-prev-icon,.carousel-control-next-icon {
+      /* display: inline-block; */
+      width: 2.5rem;
+      height: 2.5rem;
+      background-repeat: no-repeat;
+      background-position: 50%;
+      background-size: 100% 100%;
+      top: 27%;
+      position: absolute;
+  }
+
+  :host ::ng-deep  .ng-image-slider .ng-image-slider-container .main .main-inner .img-div {
+    /* width: 200px !important; */
   }
   #sliderrow1 {
     background-color: white;

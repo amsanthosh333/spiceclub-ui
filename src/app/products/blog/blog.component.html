@@ -3,10 +3,9 @@
 		<div class="container" style="margin: 0px;">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Spice club's
-						Blogs</h4>
+
 					<!--=======  breadcrumb list  =======-->
-					<ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+					<ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
 						<li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
 						<li class="breadcrumb-list__item breadcrumb-list__item--active" (click)="goback()">Blog</li>
 					</ul>
@@ -19,7 +18,7 @@
 	=           blog page content         =
 	=============================================-->
 	<div class="blog-page-wrapper mb-10 mt-15">
-		<div class="container" >
+		<div class="container">
 			<div class="row">
 				<div class="col-lg-3 order-2 order-lg-1">
 					<!--=======  page sidebar  =======-->
@@ -77,59 +76,49 @@
 					<!--=======  End of page sidebar  =======-->
 				</div>
 
-				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!loader1">
-					<!-- <div>
-						<span>view all</span>
-					</div>                                          (click)="getblogbycatg2(cat.id,i)"-->
-					<div class="column-post-view">
 
-						<div class="post-list-wrapper" *ngFor="let cat of Allcat;let i=index" >
-							<div class="col-lg-12">
-								<div class="section-title section-title--one  mb-0 ">
-									<h6
-										style="font-weight: 600; color: rgb(34, 34, 34);margin-top: 10px;margin-bottom: 0px;">
-										Best of  {{cat.name}} <span (click)="getblogbycatg2(cat.id,i)" style="margin-left: 20px;color:rgb(25, 141, 1); font-size: 0.9rem;font-weight: 100;">view all</span> </h6>
-										
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!loader1">
+					<div class="row" *ngIf="!catblogs">
+						<div class="col-12">
+
+							<div class="post-list-wrapper" *ngFor="let cat of Allcat;let i=index">
+								<div class="col-lg-12">
+									<div class="section-title section-title--one  mb-0 ">
+										<h6
+											style="font-weight: 600; color: rgb(34, 34, 34);margin-top: 10px;margin-bottom: 0px;">
+											Best of {{cat.name}}
+											<span id="viewallbtn" (click)="getblogbycatg2(cat.id,i)" ><button class="btn btn-success sm">View all</button></span>
+										</h6>
+									</div>
 								</div>
-							</div>
-							<div class="col-lg-12" id="bloglist">
-							<div class="single-post col-4 " *ngFor="let img of cat.bestof.data;let i=index">
-								<a style="margin-left:7px">
-									<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}">
-								</a>
-								<a>
-									<h2 style="line-height: 1.2rem;
+								<div class="col-lg-12" id="bloglist">
+									<div class="single-post col-4 " *ngFor="let img of cat.bestof.data;let i=index">
+										<a style="margin-left:7px">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}">
+										</a>
+										<a>
+											<h2 style="line-height: 1.2rem;
 								overflow: hidden;
 								display: -webkit-box;
 								-webkit-line-clamp: 2;
 								-webkit-box-orient: vertical;
 								max-height: 5.2rem;">{{img.name}} </h2>
-								</a>
-								<p style="line-height: 1.3rem;
+										</a>
+										<p style="line-height: 1.3rem;
 							overflow: hidden;
 							display: -webkit-box;
 							-webkit-line-clamp: 3;
 							-webkit-box-orient: vertical;
 							max-height: 5.2rem;">{{img.short_description}} dc sadv asdcd</p>
+									</div>
+								</div>
+
 							</div>
 						</div>
-
-
-							<!-- <div class="pages">
-								<ul class="pages-items">
-									<li class="next"><a
-											href="https://www.netmeds.com/health-library/category/food/page/2"
-											data-ci-pagination-page="2" rel="next">OLDER →</a></li>
-								</ul>
-							</div> -->
-
-						</div>
-						<!-- <div class="clearfix"></div> -->
 					</div>
-				</div>
 
-				<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!loader1">
-					<div *ngIf="!catblogs">
+					<!-- old blog ui -->
+					<!-- <div *ngIf="!catblogs">
 						<div *ngFor="let cat of Allcat;let i=index">
 							<div class="row mb-10 pb-10" style="background-color:rgb(218 255 246);"
 								*ngIf="cat.bestof.data.length!==0">
@@ -177,12 +166,6 @@
 															<button style="padding-top: 2px;padding-bottom: 2px;"
 																class="btn btn-success btn-sm">Read more</button></a>
 													</div> 
-
-													<!-- <p class="post-excerpt" style=" height: 50px; width: 100%;
-											overflow: hidden;margin-bottom: 0px">{{Firstblog.short_description}}
-											</p> -->
-													<!-- <a class="blog-readmore-btn" (click)="getblogdetail(Firstblog.id)">
-												<button style="padding-top: 2px;padding-bottom: 2px;" class="btn btn-success btn-sm" >Read more</button></a> -->
 												</div>
 											</div>
 										</div>
@@ -230,10 +213,38 @@
 							</div>
 
 						</div>
-					</div>
+					</div> -->
 					<div *ngIf="catblogs">
 						<div class="row">
-							<div class="col-md-4 mb-60" *ngFor="let img of Blogs">
+							<div class="col-12">
+
+								<div class="post-list-wrapper">
+
+									<div class="col-lg-12" id="bloglist">
+										<div class="single-post col-4 " *ngFor="let img of Blogs;let i=index">
+											<a style="margin-left:7px">
+												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}">
+											</a>
+											<a>
+												<h2 style="line-height: 1.2rem;
+										overflow: hidden;
+										display: -webkit-box;
+										-webkit-line-clamp: 2;
+										-webkit-box-orient: vertical;
+										max-height: 5.2rem;">{{img.name}} </h2>
+											</a>
+											<p style="line-height: 1.3rem;
+									overflow: hidden;
+									display: -webkit-box;
+									-webkit-line-clamp: 3;
+									-webkit-box-orient: vertical;
+									max-height: 5.2rem;">{{img.short_description}}</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!-- <div class="col-md-4 mb-60" *ngFor="let img of Blogs">
 								<div class="single-slider-post" *ngIf="Blogs?.length!==0">
 									<div class="single-slider-post__image mb-10" style="height: 200px;   display: block;
 								margin-left: auto;
@@ -265,7 +276,7 @@
 										<a class="blog-readmore-btn" (click)="getblogdetail(img.id)">read more</a>
 									</div>
 								</div>
-							</div>
+							</div> -->
 
 						</div>
 

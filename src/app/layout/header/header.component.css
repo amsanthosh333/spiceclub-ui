@@ -6,7 +6,16 @@
 	border: none;
 	cursor: pointer;
   }
-  
+  .header-bottom{
+	background-color: #ce2127; 
+  }
+ #marquetag {
+	background: #000000;
+    text-align: end;
+    height: 16px;
+    display: flex;
+    justify-content: end;
+  }
   .dropbtn:hover, .dropbtn:focus {
 	background-color: #3e8e41;
   }
@@ -143,14 +152,25 @@ input{
 	border-radius: 6px;
 	height: fit-content;
 	/* margin-bottom: 26px; */
-	animation: glowing 1300ms infinite;
+	/* animation: glowing 1300ms infinite; */
 	font-family: inherit;
 	margin-top: 7px;
 }
 #buttonsubscribe {
 	animation: blinker 1.5s linear infinite;
-	color: red;
-	font-family: sans-serif;
+    /* color: red; */
+    font-family: sans-serif;
+    border: 1px solid #620000;
+    background-color: #ce2127;
+    border-radius: 10px;
+}
+#buttonsubscribe:hover {
+	animation:none;
+    /* color: red; */
+    font-family: sans-serif;
+    border: 1px solid #620000;
+    background-color: #ce2127;
+    border-radius: 10px;
 }
 @keyframes blinker {
 	50% {
@@ -177,7 +197,7 @@ input{
 }
 
 .sitelogo {
-	width: 60%;
+	width: 34%;
 
 }
 
@@ -203,10 +223,10 @@ input{
 	text-align: center;
 	text-decoration: none;
 	margin-left: 0px;
-	-webkit-animation: subscription 1300ms infinite;
-	-moz-animation: subscription 1300ms infinite;
-	-o-animation: subscription 1300ms infinite;
-	animation: subscription 1300ms infinite;
+	-webkit-animation: subscription 1100ms infinite;
+	-moz-animation: subscription 1100ms infinite;
+	-o-animation: subscription 1100ms infinite;
+	animation: subscription 1100ms infinite;
 	/* width: 120px; */
 }
 
@@ -214,21 +234,23 @@ input{
 	border: 1px transparent;
 	/* -webkit-border-radius: 40px; */
 	/* border-radius: 40px; */
-	color: #eeeeee;
+	color: #ffffff;
 	cursor: pointer;
 	display: inline-block;
 	font-family: Arial, Helvetica, sans-serif ;
 	
 	font-size: 12px;
-	padding: 1px 30px;
+	padding: 1px 10px;
 	text-align: center;
 	text-decoration: none;
 	margin-left: 0px;
-	-webkit-animation: glowing 1300ms infinite;
+	background-color:#ce2127;
+	border-radius: 9px;
+	/* -webkit-animation: glowing 1300ms infinite;
 	-moz-animation: glowing 1300ms infinite;
 	-o-animation: glowing 1300ms infinite;
-	animation: glowing 1300ms infinite;
-	/* width: 120px; */
+	animation: glowing 1300ms infinite; */
+	
 }
 
 #buttonkyc1 {
@@ -286,7 +308,7 @@ input{
 	}
 }
 @keyframes subscription {
-	0% {
+	/* 0% {
 		background-color:  #40ec1e;
 		box-shadow: 0 0 3px #fd3a09;
 		color: rgb(58, 58, 58);
@@ -311,7 +333,7 @@ input{
 		color: rgb(58, 58, 58);
 
 		
-	}
+	} */
 }
 
 .svg-btn {
@@ -511,17 +533,13 @@ a {
 }
 
 .menu-item a {
-	color: #474747;
-	/* font-family: 'Poppins', sans-serif; */
+	color: #111111;
+	font-family: "Amazon Ember",Arial, sans-serif !important;	
 	margin-top: 1rem;
-	/* color: rgb(152, 152, 152); */
 	font-size: 0.8rem;
 	font-weight: 600;
-
 	font-family: inherit;
-	/* font-family: Lato;  */
 	text-transform: none;
-	/* font-family: 'Roboto',Arial,sans-serif; */
 	letter-spacing: 0;
 
 }
@@ -535,21 +553,22 @@ a {
 }
 
 .menu-item-has-children {
-	color: #474747;
+	color: #141414;
 	font-size: 0.8rem;
 	font-weight: 200;
-
-	font-family:inherit;
+	font-family: "Amazon Ember",Arial, sans-serif !important;
+/* 
+	font-family:inherit; */
 	text-transform: none;
 	letter-spacing: 0;
 
 }
 
 .menu-item-has-children a {
-	color: #474747;
+	color: #141414;
 	font-size: 0.8rem;
 	font-weight: 500;
-	font-family: inherit;
+	font-family: "Amazon Ember",Arial, sans-serif !important;
 	text-transform: none;
 	letter-spacing: 0;
 }
@@ -762,7 +781,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 	}
 
 	.header-bottom-navigation {
-		display: inline;
+		display: flex;
 	}
 
 	.loggin1 {
@@ -796,7 +815,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 
 
 	#loogo {
-		margin-top: 38px;
+		margin-top: -8px;
 	}
 
 	.single-icon search {

@@ -1,9 +1,12 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
-	<span  style="background:#ce2127; text-align: end;">
-		<!-- <marquee behavior="scrol" direction="left"><h3 style="color: white;">Spice Club</h3></marquee> -->
-		<marquee behavior="scrol" direction="left" scrollamount=1>	<p id="headerbar">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p></marquee>
-	</span>
-	<div class="header-bottom pt-md-40 pb-md-40 ">
+	<div id="marquetag" style="background:#000000; text-align: end;">
+		<span  style="background:#000000; text-align: end;color: white; font-size: 0.6rem;">
+			Do you have Questions? Fell free to call us on ********.We will help you immediately.
+			<!-- <marquee behavior="scrol" direction="left" scrollamount=1>	<p id="headerbar">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p></marquee> -->
+		</span>
+	</div>
+	
+	<div class="header-bottom pt-md-40 pb-md-40 " style="">
 		<div class="container wide">
 			<!--=======  header bottom container  =======-->
 			<div class="header-bottom-container">
@@ -29,36 +32,22 @@
 								</button>
 							</div>
 						</form>
-
-					
 					</div>
 				</div>
 
-				<div>
-					
-					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
+				<!-- <div>			
+					<div class="wrapper"  *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
 						(click)="openkyc()">
 						<a class="btn btn-info" id="buttonkyc">Verify Kyc</a>
 					</div>
 					<div class="wrapper" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1">
 						<a class="btn btn-info" id="buttonkyc1">Kyc verification inprogress</a>
 					</div>
-				</div>
-				<div class="header-right-container">
-					<!-- <div style="margin-top:10px;" *ngIf="(userid==0)">
-						<button type="button" class="btn btn-outline-light" (click)="openlogin()"
-							style="width: 115px;border: 1px solid #c5c5c5;color: deepskyblue;font-size: 1rem;">
-							<i class="ion-android-person" style="font-size: 15px;
-						color: #749ca3;padding-right: 10px;"></i>Login</button>
-					</div> -->
+				</div> -->
 
-					<!--=======  header right icons  =======-->
-					<div class="header-right-icons d-flex justify-content-end align-items-center h-100 mt-10">
-						<!-- <div class="single-icon search">
-							<a href="javascript:void(0)" id="search-icon">
-								<i class="ion-ios-search-strong"></i>
-							</a>
-						</div> -->
+				<div class="header-right-container">
+
+					<div class="header-right-icons d-flex justify-content-end align-items-center h-100 ">
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
 								<span><img   class="ion-android-person" *ngIf="(userid!==0)" src="../../../assets/images/icons/user1.png" 
@@ -66,27 +55,26 @@
 									margin-right: 5px;" alt=""></span>
 								
 							</a>
-							<!-- <a id="offcanvaout-icon" (click)="openlogin()">
-								<i class="ion-android-person" *ngIf="(userid==0)"></i>
-							</a> -->
 						</div>
 						<div class="single-icon wishlist">
 							<a href="javascript:void(0)" id="offcanvas-wishlist-icon">		
-								<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/heart.png" 
+								<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/green-love.png" 
 								style="height:25px;width:25px;margin-bottom: -3px;
 									margin-right: 5px;" alt=""></span>			
 								
 								<span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
 							</a>
-							<!-- <a id="offcanvashlist-icon" class="loggin1" routerLink="/login" *ngIf="(userid==0)">
-								<i class="ion-android-favorite-outline"></i>
-							</a> -->
+
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
 								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
-									style="width: 115px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 2px;color:#ce2127;font-size: 1rem;">
-									<!-- <i class="ion-android-person" style="font-size: 15px;
-						           color: #749ca3;padding-right: 10px;"></i> -->
-							<span><img src="../../../assets/images/icons/login.png" style="height:20px;width:20px;margin-bottom: -3px;
+									style="    width: 80px;
+									border: 1px solid#f1efef;
+									background-color: whitesmoke;
+									padding: 0px;
+									color: #ce2127;
+									font-size: 0.8rem;">
+
+							<span><img src="../../../assets/images/icons/login.png" style="height:16px; width:16px; margin-bottom: -3px;
 								margin-right: 5px;" alt=""></span>
 								  <p style="display:contents;">Login</p></button>
 							</a>
@@ -94,15 +82,20 @@
 						</div>
 						<div class="single-icon cart">
 							<a href="javascript:void(0)" id="offcanvas-cart-icon">
-								<span><img class="ion-ios-cart" *ngIf="(userid!==0)" src="../../../assets/images/icons/trolley.png" 
-								style="height:28px;width:28px;margin-bottom: -3px;
+								<span><img class="ion-ios-cart" *ngIf="(userid!==0)" src="../../../assets/images/icons/shopping-cart (2).png" 
+								style="height:28px;width:29px;margin-bottom: -3px;
 									margin-right: 5px;" alt=""></span>
 								<span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
 							</a>
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
 								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
-								style="width: 115px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 2px;color:#ce2127;font-size: 1rem;">
-									<span><img src="../../../assets/images/icons/trolley.png" style="height:20px;width:20px;margin-bottom: -3px;
+								style=" width: 80px;
+								border: 1px solid#f1efef;
+								background-color: whitesmoke;
+								padding: 0px;
+								color: #ce2127;
+								font-size: 0.8rem;">
+									<span><img src="../../../assets/images/icons/trolley.png" style="height:16px;width:16px;margin-bottom: -3px;
 										margin-right: 5px;" alt=""></span>
 									 <p style="display:contents;">Cart</p></button>
 							</a>
@@ -187,7 +180,10 @@
 	</div>
 
 	<div class="header-bottom-navigation">
-		<div class="site-main-nav d-none d-lg-block" style="padding-left: 250px;">
+		<div class="site-main-nav d-none d-lg-block" style="padding-left: 10px;
+		background-color: whitesmoke;
+		height: 35px;
+		opacity: 0.8;display: flex">
 			<nav class="site-nav" style="display: flex;">
 				<!-- <span *ngIf="(userid!==0)" class="wrapper1"><a id="buttonsubscribe"
 						routerLink="/subscribedprod">Subscription</a></span>
@@ -196,7 +192,7 @@
 						<div class="wrapper" style="flex-direction: row;
 						justify-content: center;
 						align-items: center;display: block;margin-top: 3px;">
-						<a class="btn btn-success" id="buttonsub">Subscription</a>
+						<a class="btn" id="buttonsub" style="border: 1px solid rgb(199 199 199);;color: #000000;border-radius: 10px;">Subscription</a>
 					</div>
 				<ul style="margin-left: 10px;">
 					<li class="menu-item"><a routerLink="/shopbyproduct">Shop by Products</a> </li>
@@ -272,16 +268,22 @@
 					
 				</ul>
 
-				<span *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"  class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
-					><a class="btn btn-info" id="buttonkyc">Verify Kyc</a></a></span>
-				
-					<!-- <span  *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1" class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
-						><a class="btn btn-info" id="buttonkyc">Kyc verification inprogress</a></a></span> -->
-
+				<!-- *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0" -->
+				<!-- <span   class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
+					><a class="btn btn-info" id="buttonkyc">Verify Kyc</a></a></span> -->
+					<div class="wrapper" style="flex-direction: row; 
+					justify-content: center;
+					align-items: center;display: block;margin-top: 3px;" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0">
+					<span   class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
+						><a class="btn btn-info" id="buttonkyc">Verify Kyc</a></a></span>
+				</div>
 			</nav>
+			<!-- <span   class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
+				><a class="btn btn-info" id="buttonkyc">Verify Kyc</a></a></span> -->
+				
 		</div>
+	
 	</div>
-
 
 	<!--=======  End of header bottom  =======-->
 </header>
