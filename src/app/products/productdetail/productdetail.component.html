@@ -39,7 +39,8 @@
     <div id="fromm" style="border-top:1px solid #ededed">
         <ul id="subcatdiv">
             <li style="padding-right:7px" *ngFor="let f of Peoduct?.breadcrumbs ;let i = index"
-                (click)="gotocategory(f.id,i)">{{f.name}}&nbsp;&nbsp; <span style="font-family: monospace !important;">></span></li>
+                (click)="gotocategory(f.id,i)">{{f.name}}&nbsp;&nbsp; <span
+                    style="font-family: monospace !important;">></span></li>
         </ul>
     </div>
     <div class="shop-page-wrapper  mb-20">
@@ -68,31 +69,29 @@
                                         <span class="hot" style=" background-color: #76c045; border: 1px solid #ce2127;"
                                             *ngIf="Peoduct?.has_discount==true">{{Peoduct.discount_percentage}}%</span>
                                     </div>
-                                       <div class="shop-product-rightside-icons" style="top:5px;">
-                                    <span class="wishlist-icon" 
-                                    *ngIf="(iswishlistt?.is_in_wishlist==false)">
-                                        <a (click)="addtowishlistmain(Peoduct?.id,addwishlistRecord)" data-tippy="Add to wishlist"
-                                            data-tippy-placement="left" data-tippy-inertia="true"
-                                            data-tippy-animation="shift-away" data-tippy-delay="50"
-                                            data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
-                                            class="bi bi-heart"></i></a>
-                                    </span>
-                                    <span class="wishlist-icon" 
-                                    *ngIf="userid==0">
-                                        <a (click)="addtowishlist(Peoduct?.id)" data-tippy="Add to wishlist"
-                                            data-tippy-placement="left" data-tippy-inertia="true"
-                                            data-tippy-animation="shift-away" data-tippy-delay="50"
-                                            data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
-                                            class="bi bi-heart"></i></a>
-                                    </span>
-                                    <span class="wishlist-icon" *ngIf="(iswishlistt?.is_in_wishlist==true)">
-                                        <a (click)="deleteRecord(Peoduct?.id)" data-tippy="Add to wishlist"
-                                            data-tippy-placement="left" data-tippy-inertia="true"
-                                            data-tippy-animation="shift-away" data-tippy-delay="50"
-                                            data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
-                                            class="bi bi-heart-fill" style="color: red;"></i></a>
-                                    </span>              
-                                </div>
+                                    <div class="shop-product-rightside-icons" style="top:5px;">
+                                        <span class="wishlist-icon" *ngIf="(iswishlistt?.is_in_wishlist==false)">
+                                            <a (click)="addtowishlistmain(Peoduct?.id,addwishlistRecord)"
+                                                data-tippy="Add to wishlist" data-tippy-placement="left"
+                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                data-tippy-delay="50" data-tippy-arrow="true"
+                                                data-tippy-theme="sharpborder"><i class="bi bi-heart"></i></a>
+                                        </span>
+                                        <span class="wishlist-icon" *ngIf="userid==0">
+                                            <a (click)="addtowishlist(Peoduct?.id)" data-tippy="Add to wishlist"
+                                                data-tippy-placement="left" data-tippy-inertia="true"
+                                                data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
+                                                    class="bi bi-heart"></i></a>
+                                        </span>
+                                        <span class="wishlist-icon" *ngIf="(iswishlistt?.is_in_wishlist==true)">
+                                            <a (click)="deleteRecord(Peoduct?.id)" data-tippy="Add to wishlist"
+                                                data-tippy-placement="left" data-tippy-inertia="true"
+                                                data-tippy-animation="shift-away" data-tippy-delay="50"
+                                                data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
+                                                    class="bi bi-heart-fill" style="color: red;"></i></a>
+                                        </span>
+                                    </div>
                                     <div class="shop-product__big-image-gallery-slider" *ngIf=!photoloader>
                                         <div class="single-image" (click)="showLightbox(selectedimg)">
                                             <img src="{{selectedimage}}" id="mainimg" class="img-fluid" alt="">
@@ -103,7 +102,7 @@
                                         [imageIndex]="selectedImageIndex" [show]="showFlag"
                                         (close)="closeEventHandler()">
                                     </ng-image-fullscreen-view>
-   
+
                                 </div>
                                 <!--photo lazyloading  -->
                                 <div class="shop-product__big-image-gallery-sliderr mb-80" *ngIf=photoloader>
@@ -170,8 +169,8 @@
                                     <div class="shop-product__rating ">
                                         <a (click)="viewbrand(Peoduct?.brand.id)"
                                             style="text-decoration:none;color:rgb(18, 134, 243);font-size: 0.8rem;">{{Peoduct?.brand.name}}</a>
-                                     
-                                            <div style="margin-bottom:10px;">
+
+                                        <div style="margin-bottom:10px;">
                                             <ngb-rating
                                                 style="font-size: 1.4rem; color:rgb(245, 153, 14);margin-left: -3px;"
                                                 [rate]="Peoduct?.rating"></ngb-rating>
@@ -241,11 +240,10 @@
 
                                         <!-- <hr style="color:#a19a9a ;"> -->
                                         <div class="shop-product__short-desc " *ngIf="Bulckdis?.length!==0">
-                                            <h6 class="blink_me"
-                                                style="color: rgb(14, 68, 243);padding: 0px;
+                                            <h6 class="blink_me" style="color: rgb(14, 68, 243);padding: 0px;
                                                 font-size: 0.8rem;
-                                                margin-bottom: 10px;"
-                                                *ngFor="let a of Bulckdis">Order minimum {{a.min_qty}}
+                                                margin-bottom: 10px;" *ngFor="let a of Bulckdis">Order minimum
+                                                {{a.min_qty}}
                                                 to {{a.max_qty}} quantity to get {{a.discount_percentage}}% Discount
                                             </h6>
                                         </div>
@@ -278,12 +276,14 @@
                                                     style="color: #727272;font-weight: 600">Price : </span>
                                                 <a
                                                     style="font-size: 1rem;color:brown;font-weight: 600;">{{Peoduct?.main_price}}</a>
-                                                <span style="font-size: 0.6rem;font-weight: 500;color: gray;" *ngIf="(choice.length!==0)"> &nbsp;(
+                                                <span style="font-size: 0.6rem;font-weight: 500;color: gray;"
+                                                    *ngIf="(choice.length!==0)"> &nbsp;(
                                                     {{Peoduct?.stroked_price }} / {{pervarient}} )</span>
                                             </div>
                                             <div class="single-info" style="font-size: 0.8rem;padding-bottom:7px;">
                                                 <span class="quickview" style="color: #727272">Excluding GST : </span>
-                                                <a style="font-weight: 600;color: #727272;">Rs {{Peoduct?.excl_gst}} </a>
+                                                <a style="font-weight: 600;color: #727272;">Rs {{Peoduct?.excl_gst}}
+                                                </a>
                                             </div>
 
                                             <!-- <table>
@@ -449,7 +449,7 @@
                                 </tr>
                                 <tr *ngFor="let o of Peoduct?.offers">
                                     <td>
-                                        <p><span>{{o.name}}:  </span>Get {{o.value}} Discount </p>
+                                        <p><span>{{o.name}}: </span>Get {{o.value}} Discount </p>
                                     </td>
                                 </tr>
                             </table>
@@ -459,8 +459,9 @@
 
                         <div id="formdiv" class="shop-product__block shop-product__block--quantity mb-10 "
                             style="justify-content:center;">
-                            <div id="formdiv" class="shop-product__block__title" style="padding-right: 10px;">Quantity   </div>
-                            <form >
+                            <div id="formdiv" class="shop-product__block__title" style="padding-right: 10px;">Quantity
+                            </div>
+                            <form>
                                 <div class="shop-product__block__value">
                                     <div class="pro-qty d-inline-block mx-0 pt-0"
                                         style="border-bottom: none !important;padding-bottom:1px;">
@@ -483,8 +484,8 @@
 
                         <div class="shop-product__block shop-product__block--size " style="justify-content: center;">
                             <span class="shop-product__block__value ">
-                                <span style="font-size:0.8rem ;"> You Pay </span><strong><span
-                                        style="color: red;"> Rs.{{totalprice}} </span></strong>
+                                <span style="font-size:0.8rem ;"> You Pay </span><strong><span style="color: red;">
+                                        Rs.{{totalprice}} </span></strong>
                                 <!-- <p > (Including all taxes) </p> -->
                             </span>
                         </div>
@@ -557,9 +558,9 @@
                                     <!-- subscribe -->
                                     <span *ngIf="(issubscribed== false)"
                                         style="float:left; color:#6d726d;font-size: 0.8rem;font-weight: 200;"
-                                        (click)="addtosubscribe(Peoduct?.id)"> 
+                                        (click)="addtosubscribe(Peoduct?.id)">
                                         <span><img src="../../../assets/images/icons/thumb-up.png" style="height:20px;width:20px;margin-bottom: 0px;
-                                            margin-right: 1px;" alt=""></span>  Subscribe & Save</span>
+                                            margin-right: 1px;" alt=""></span> Subscribe & Save</span>
 
                                     <span *ngIf="(issubscribed== true)" (click)="removefromsubscribe(Peoduct?.id)"
                                         style="float:left; color:#6d726d;font-size: 0.8rem;font-weight: 200;">
@@ -568,8 +569,8 @@
                                         Remove from Subscribe</span>
                                     <span *ngIf="userid==0"
                                         style="float:left; color:#6d726d;font-size: 0.8rem;font-weight: 200;"
-                                        (click)="addtosubscribe(Peoduct?.id)"> <span><img src="../../../assets/images/icons/thumb-up.png"
-                                         style="height:20px;width:20px;margin-bottom: 0px;
+                                        (click)="addtosubscribe(Peoduct?.id)"> <span><img
+                                                src="../../../assets/images/icons/thumb-up.png" style="height:20px;width:20px;margin-bottom: 0px;
                                             margin-right: 1px;" alt=""></span> Subscribe & Save</span>
                                 </a>
                             </span>
@@ -792,12 +793,17 @@
 
             <!-- videos and image -->
             <div class="questions row pt-0">
-                <h5 >How to use?</h5>
+                <h5>How to use?</h5>
                 <div class="videoo " style="text-align: start;padding-left: 33px;">
-                    <iframe width="300" height="200" src="https://www.youtube.com/embed/z1aLMpbdoTA"
-                        title="YouTube video player" frameborder="0"
+                    <iframe width="300" height="200" [src]='videoURL' title="YouTube video player"
+                        frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
+
+                    <!-- <video controls width="400" #videoPlayer>
+                        <source src=Peoduct.video_link
+                            type="video/mp4">
+                    </video> -->
                 </div>
 
             </div>
@@ -805,7 +811,7 @@
             <!-- related -->
 
             <div class="questions row">
-                <h5 >Products Related to this</h5>
+                <h5>Products Related to this</h5>
                 <div class="carousall" *ngIf="!loader6">
                     <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
                         <div class="carousel-cell" *ngFor="let img of Relatedprod ;let i = index">
@@ -1062,7 +1068,7 @@
 
             <!-- questions -->
             <div class="questions row">
-                <h5 >
+                <h5>
                     Questions?</h5>
 
                 <div class="shop-product__long-desc" [innerHTML]="Peoduct?.question_answer" *ngIf="!discriptloader">
@@ -1205,7 +1211,7 @@
 
             <!-- customer also likes -->
             <div class="questions row">
-                <h5 >Customers
+                <h5>Customers
                     also bought</h5>
 
                 <div class="carousall">

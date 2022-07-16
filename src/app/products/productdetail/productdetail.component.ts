@@ -12,6 +12,7 @@ import { SharedService } from 'src/app/services/shared.service'
 import { ViewportScroller } from "@angular/common";
 import { windowDock } from 'ngx-bootstrap-icons';
 import { PlatformLocation } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 @Component({
   selector: 'app-productdetail',
   templateUrl: './productdetail.component.html',
@@ -129,11 +130,13 @@ export class ProductdetailComponent implements OnInit {
   subcat_id2: any;
   imgItem: any=0;
   offers: any;
+  videoURL:any;
+ 
 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private modalService: NgbModal, config: NgbRatingConfig, private _location: PlatformLocation, private scroller: ViewportScroller,
-    private toastr: ToastrService, private sharedService: SharedService, private activatedRoute: ActivatedRoute,) {
+    private toastr: ToastrService,private _sanitizer: DomSanitizer, private sharedService: SharedService, private activatedRoute: ActivatedRoute,) {
     config.max = 5;
     config.readonly = true;
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -368,11 +371,13 @@ export class ProductdetailComponent implements OnInit {
       this.subcat_id1=this.Peoduct.breadcrumbs[1]?.id;
       this.subcat_id2=this.Peoduct.breadcrumbs[2]?.id
       this.quantityyy = 1;
+      this.videoURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.Peoduct.video_link)
+
       // this.totalprice = this.Peoduct.main_price;
       this.totalprice = this.Peoduct.calculable_price
    
       this.offers=this.Peoduct.offers.length;
-      console.log("this.offers",this.offers);
+      console.log("this.offers",this.videoURL);
       
 
       // array push photo

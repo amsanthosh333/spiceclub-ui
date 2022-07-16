@@ -1947,7 +1947,7 @@ nav.site-nav>ul>li ul.mega-menu>li ul li {
   display: block;
 }
 
-nav.site-nav>ul>li ul.mega-menu-column-4 {
+/* nav.site-nav>ul>li ul.mega-menu-column-4 {
   right: 125px;
 
   display: -webkit-box;
@@ -1956,7 +1956,7 @@ nav.site-nav>ul>li ul.mega-menu-column-4 {
 
   width: 100%;
   max-width: 1100px;
-}
+} */
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
   nav.site-nav>ul>li ul.mega-menu-column-4 {
@@ -2063,6 +2063,16 @@ nav.site-nav>ul>li ul.mega-menu-column-5 {
 
   width: 100%;
   max-width: 1170px;
+}
+nav.site-nav>ul>li ul.mega-menu-column-4 {
+  right: 125px;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+
+  width: 100%;
+  max-width: 1100px;
 }
 
 @media only screen and (min-width: 992px) and (max-width: 1199px) {
@@ -2256,9 +2266,9 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li .mega-sub-menu li:last-child a {
 }
 
 .header-right-icons .single-icon a i {
-  font-size: 20px;
+  font-size: 25px;
 
-  color: #333;
+  color: #f9f9f9;
 }
 
 .header-right-icons .single-icon a span.count {
@@ -2267,8 +2277,8 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li .mega-sub-menu li:last-child a {
   line-height: 16px;
 
   position: absolute;
-  top: -5px;
-  right: -10px;
+  top: -2px;
+  right: -12px;
 
   width: 16px;
   height: 16px;
@@ -2277,7 +2287,7 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li .mega-sub-menu li:last-child a {
 
   color: #ffffff;
   border-radius: 50%;
-  background-color: #4845e3;
+  background-color: #76c045;
 }
 
 /* overlay close */
@@ -5530,9 +5540,9 @@ only screen and (max-width: 767px) {
 }
 
 /*----------  short single product slider  ----------*/
-.product-carousel {
-  /*----------  smart home separate style  ----------*/
-}
+/* .product-carousel {
+ 
+} */
 
 .product-carousel .slick-list {
   margin-right: -15px;
@@ -7356,7 +7366,7 @@ only screen and (max-width: 767px) {
 =            07. Short single product            =
 =============================================*/
 /*----------  default style  ----------*/
-.single-product {
+/* .single-product { */
   /*----------  product image  ----------*/
   /*----------  floating badge style  ----------*/
   /*----------  floating icon style  ----------*/
@@ -7364,7 +7374,7 @@ only screen and (max-width: 767px) {
   /*----------  product content  ----------*/
   /*----------  hover style  ----------*/
   /*----------  smart home style  ----------*/
-}
+/* } */
 
 .single-product__image {
   position: relative;
@@ -7465,8 +7475,8 @@ only screen and (max-width: 767px) {
 .single-product__floating-icons {
   position: absolute;
   z-index: 9;
-  top: 20px;
-  right: 20px;
+  top: 0px;
+  right: 5px;
 
   display: -webkit-box;
   display: -ms-flexbox;
@@ -8198,10 +8208,9 @@ only screen and (max-width: 767px) {
   padding: 20px 35px;
 }
 
-.lezada-button--icon {
-  /*----------  icon left style  ----------*/
-  /*----------  icon right style  ----------*/
-}
+/* .lezada-button--icon {
+  
+} */
 
 .lezada-button--icon--left i {
   margin-right: 5px;

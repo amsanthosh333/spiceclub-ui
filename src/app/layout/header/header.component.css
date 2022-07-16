@@ -6,16 +6,7 @@
 	border: none;
 	cursor: pointer;
   }
-  .header-bottom{
-	background-color: #ce2127; 
-  }
- #marquetag {
-	background: #000000;
-    text-align: end;
-    height: 16px;
-    display: flex;
-    justify-content: end;
-  }
+  
   .dropbtn:hover, .dropbtn:focus {
 	background-color: #3e8e41;
   }
@@ -157,20 +148,9 @@ input{
 	margin-top: 7px;
 }
 #buttonsubscribe {
-	animation: blinker 1.5s linear infinite;
-    /* color: red; */
-    font-family: sans-serif;
-    border: 1px solid #620000;
-    background-color: #ce2127;
-    border-radius: 10px;
-}
-#buttonsubscribe:hover {
-	animation:none;
-    /* color: red; */
-    font-family: sans-serif;
-    border: 1px solid #620000;
-    background-color: #ce2127;
-    border-radius: 10px;
+	/* animation: blinker 1.5s linear infinite; */
+	color: red;
+	font-family: sans-serif;
 }
 @keyframes blinker {
 	50% {
@@ -178,8 +158,8 @@ input{
 	}
 }
 
-#buttonsubscribe {
-	/* border: 1px transparent;
+/* #buttonsubscribe {
+	border: 1px transparent;
 	color: #141414;
 	cursor: pointer;
 	display: inline-block;
@@ -193,12 +173,12 @@ input{
 	-moz-animation: wrapper1 1300ms infinite;
 	-o-animation: wrapper1 1300ms infinite;
 	animation: wrapper1 1300ms infinite;
-	width: 120px; */
-}
+	width: 120px;
+} */
 
-.sitelogo {
-	width: 34%;
-
+.sitelogo {	
+    width: 61%;
+    margin-top: 3%;
 }
 
 .wrapper {
@@ -211,46 +191,38 @@ input{
 
 #buttonsub {
 	border: 1px transparent;
-	/* -webkit-border-radius: 40px; */
-	/* border-radius: 40px; */
 	color: #eeeeee;
 	cursor: pointer;
 	display: inline-block;
 	font-family: Arial, Helvetica, sans-serif ;
-	
-	font-size: 12px;
-	padding: 1px 10px;
+	font-size: 15px;
+	padding: 0px 10px;
 	text-align: center;
 	text-decoration: none;
 	margin-left: 0px;
-	-webkit-animation: subscription 1100ms infinite;
-	-moz-animation: subscription 1100ms infinite;
-	-o-animation: subscription 1100ms infinite;
-	animation: subscription 1100ms infinite;
-	/* width: 120px; */
+
+	
 }
 
 #buttonkyc {
 	border: 1px transparent;
 	/* -webkit-border-radius: 40px; */
 	/* border-radius: 40px; */
-	color: #ffffff;
+	color: #eeeeee;
 	cursor: pointer;
 	display: inline-block;
 	font-family: Arial, Helvetica, sans-serif ;
-	
+	background-color: #67ad39;
 	font-size: 12px;
 	padding: 1px 10px;
 	text-align: center;
 	text-decoration: none;
 	margin-left: 0px;
-	background-color:#ce2127;
-	border-radius: 9px;
-	/* -webkit-animation: glowing 1300ms infinite;
+	-webkit-animation: glowing 1300ms infinite;
 	-moz-animation: glowing 1300ms infinite;
 	-o-animation: glowing 1300ms infinite;
-	animation: glowing 1300ms infinite; */
-	
+	animation: glowing 1300ms infinite;
+	/* width: 120px; */
 }
 
 #buttonkyc1 {
@@ -267,14 +239,14 @@ input{
 	text-align: center;
 	text-decoration: none;
 	margin-left: 0px;
-	-webkit-animation: glowing 1300ms infinite;
+	/* -webkit-animation: glowing 1300ms infinite;
 	-moz-animation: glowing 1300ms infinite;
 	-o-animation: glowing 1300ms infinite;
-	animation: glowing 1300ms infinite;
+	animation: glowing 1300ms infinite; */
 	width: 120px;
 }
 
-@-webkit-keyframes glowing {
+/* @-webkit-keyframes glowing {
 	0% {
 		background-color: #0091b2;
 		-webkit-box-shadow: 0 0 3px #0091b2;
@@ -289,26 +261,11 @@ input{
 		background-color: #0091b2;
 		-webkit-box-shadow: 0 0 3px #0091b2;
 	}
-}
+} */
 
-@keyframes glowing {
-	0% {
-		background-color: #0091b2;
-		box-shadow: 0 0 3px #0091b2;
-	}
 
-	50% {
-		background-color: #21c7ed;
-		box-shadow: 0 0 15px #21c7ed;
-	}
-
-	100% {
-		background-color: #0091b2;
-		box-shadow: 0 0 3px #0091b2;
-	}
-}
 @keyframes subscription {
-	/* 0% {
+	0% {
 		background-color:  #40ec1e;
 		box-shadow: 0 0 3px #fd3a09;
 		color: rgb(58, 58, 58);
@@ -333,7 +290,7 @@ input{
 		color: rgb(58, 58, 58);
 
 		
-	} */
+	}
 }
 
 .svg-btn {
@@ -351,7 +308,7 @@ svg {
 	animation: glowing-polygon 1300ms infinite;
 }
 
-@-webkit-keyframes glowing-polygon {
+/* @-webkit-keyframes glowing-polygon {
 	0% {
 		fill: #0091b2;
 		-webkit-filter: drop-shadow(0 0 3px #0091b2);
@@ -366,7 +323,7 @@ svg {
 		fill: #0091b2;
 		-webkit-filter: drop-shadow(0 0 3px #0091b2);
 	}
-}
+} */
 
 @keyframes glowingPolygon {
 	0% {
@@ -533,14 +490,14 @@ a {
 }
 
 .menu-item a {
-	color: #111111;
-	font-family: "Amazon Ember",Arial, sans-serif !important;	
-	margin-top: 1rem;
-	font-size: 0.8rem;
-	font-weight: 600;
-	font-family: inherit;
-	text-transform: none;
-	letter-spacing: 0;
+	
+	color: #141414;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-transform: none;
+    letter-spacing: 0;
 
 }
 
@@ -553,22 +510,20 @@ a {
 }
 
 .menu-item-has-children {
+
 	color: #141414;
-	font-size: 0.8rem;
-	font-weight: 200;
-	font-family: "Amazon Ember",Arial, sans-serif !important;
-/* 
-	font-family:inherit; */
-	text-transform: none;
-	letter-spacing: 0;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: inherit;
+    text-transform: none;
+    letter-spacing: 0;
 
 }
-
 .menu-item-has-children a {
 	color: #141414;
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	font-weight: 500;
-	font-family: "Amazon Ember",Arial, sans-serif !important;
+	font-family: inherit;
 	text-transform: none;
 	letter-spacing: 0;
 }
@@ -744,7 +699,14 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 	}
 
 	#loogo {
-		margin-top: 7px;
+		/* margin-top: 7px; */
+		text-align: end;
+    right: 9%;
+    position: relative;
+		
+	}
+	#loogo a {
+		text-align: center;
 		
 	}
 
@@ -781,7 +743,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 	}
 
 	.header-bottom-navigation {
-		display: flex;
+		display: inline;
 	}
 
 	.loggin1 {
@@ -796,7 +758,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 	    width: 39%;
     /* margin: 40px 150px; */
     margin-right: 178px;
-    margin-left: -73px;
+    /* margin-left: -73px; */
 		
 	}
 
@@ -806,16 +768,19 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 		margin-right: -263px;
 		padding: 20px;
 		padding-left: 0px; */
-		margin-top: 15px;
+		/* margin-top: 15px;
 		flex-basis: 24%;
-		padding-left: 0px;
-
+		padding-left: 0px; */
+		flex-basis: 18%;
 		
 	}
 
 
 	#loogo {
-		margin-top: -8px;
+		/* margin-top: 38px; */
+		text-align: end;
+		right: 9%;
+		position: relative;
 	}
 
 	.single-icon search {
@@ -823,7 +788,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 	}
 
 	.header-bottom-container {
-		height: 60px;
+		height: 80px;
 		width: 100%;
 
 	}

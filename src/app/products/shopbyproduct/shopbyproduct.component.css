@@ -245,7 +245,7 @@ a:not([href]):not([class]):hover {
 }
 
 .single-product__content {
-  height: 130px;
+  height: 100px;
 }
 
 .title h3 a {

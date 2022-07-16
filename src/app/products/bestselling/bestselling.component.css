@@ -5,6 +5,7 @@
   /* border: 0.8px solid #e9e7e7; */
   margin-right: 10px;
   margin-left: 10px;
+
 background-color:#f3f3f3;
 border-radius: 3px;
 }
@@ -115,7 +116,7 @@ a:not([href]):not([class]), a:not([href]):not([class]):hover {
   letter-spacing: 0;
 }
 .single-product__content {
-  height: 130px;
+  height: 100px;
   text-align: center;
 }
 

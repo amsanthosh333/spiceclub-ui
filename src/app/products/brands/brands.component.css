@@ -147,7 +147,7 @@ a:not([href]):not([class]):hover {
   letter-spacing: 0;
 }
 .single-product__content {
-  height: 130px;
+  height: 100px;
   text-align: center;
 }
 
