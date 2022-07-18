@@ -486,7 +486,7 @@ export class HomeComponent implements OnInit {
   }
   viewtodayoffer() {
     this.request.gettodaysoffer().subscribe((response: any) => {
-      this.Todaysoffer = response.data;
+      this.Todaysoffer = response.data.slice(0, 4);
       this.loader4 = false;
 
     });
@@ -536,7 +536,7 @@ export class HomeComponent implements OnInit {
   }
   viewdaydeal() {
     this.request.getdaydealpro('').subscribe((response: any) => {
-      this.Daydealpro = response.data;
+      this.Daydealpro = response.data.slice(0, 5);
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);

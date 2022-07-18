@@ -51,8 +51,9 @@
 						</div> -->
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
-								<span>
-									<i class="bi bi-person-fill" class="ion-android-person" *ngIf="(userid!==0)" ></i></span>
+								<span><img   class="ion-android-person" *ngIf="(userid!==0)" src="../../../assets/images/icons/user2.png" 
+									style="height:23px;width:25px;margin-bottom: -3px;
+										margin-right: 5px;" alt=""></span>
 
 							</a>
 							<!-- <a id="offcanvaout-icon" (click)="openlogin()">
@@ -61,10 +62,9 @@
 						</div>
 						<div class="single-icon wishlist">
 							<a href="javascript:void(0)" id="offcanvas-wishlist-icon">
-								<span>
-									<i class="bi bi-heart-fill" class="ion-android-favorite" *ngIf="(userid!==0)"
-									></i>
-								</span>
+								<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/heart3.png" 
+									style="height:25px;width:25px;margin-bottom: -3px;
+										margin-right: 5px;" alt=""></span>	
 
 								<span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
 							</a>
@@ -85,8 +85,9 @@
 						</div>
 						<div class="single-icon cart">
 							<a href="javascript:void(0)" id="offcanvas-cart-icon">
-								<span>
-									<i class="bi bi-cart-fill" class="ion-ios-cart" *ngIf="(userid!==0)"></i></span>
+								<span><img class="ion-ios-cart" *ngIf="(userid!==0)" src="../../../assets/images/icons/cart2.png" 
+									style="height:28px;width:29px;margin-bottom: -3px;
+										margin-right: 5px;" alt=""></span>
 								<span class="count" *ngIf="(userid!==0)" >{{cartlength}}</span>
 							</a>
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
@@ -189,7 +190,7 @@
 								<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
 									<li style="margin-top: 10px;padding-left: 4px;">
 										<span class="lispan" [ngClass]="{'active': subItem === i}"
-											(click)="gotocategory(img.id)" (click)="viewsubcat(img.id,i)" >
+											(click)="gotocategory(img.id)" (click)="viewsubcat(img.id,i)" (mouseover)="viewsubcat(img.id,i)">
 											<a style="display:inline;" [ngClass]="{'active': subItem === i}"> 
 												<span
 													(click)="gotocategory(img.id)">{{img.name}}</span>
@@ -198,7 +199,7 @@
 												style="float: right;margin-top: 6px;color:#ce2127;"
 												(click)="viewsubcat(img.id,i)" class="bi bi-caret-right-fill"
 												[ngClass]="{'active': subItem === i}"
-												(mouseover)="viewsubcat(img.id,i)"></i>
+												></i>
 										</span>
 									</li>
 								</ul>
@@ -207,7 +208,7 @@
 								<ul class="mega-sub-menu" *ngFor="let img of Subcat;let i=index">
 									<li style="margin-top: 10px;padding-left: 4px;">
 										<span class="lispan" [ngClass]="{'active': subItem1 === i}"
-											(click)="gotocategory2(img.id)" (click)="viewsubcat2(img.id,i)">
+											(click)="gotocategory2(img.id)" (click)="viewsubcat2(img.id,i)" (mouseover)="viewsubcat2(img.id,i)">
 											<a style="width:190px;" [ngClass]="{'active': subItem1 === i}">
 												<span (click)="gotocategory2(img.id)">{{img.name}}</span>
 											</a>
@@ -216,7 +217,7 @@
 												style="float: right;margin-top: 7px; color:#ce2127;"
 												(click)="viewsubcat2(img.id,i)" class="bi bi-caret-right-fill"
 												[ngClass]="{'active': subItem1 === i}"
-												(mouseover)="viewsubcat2(img.id,i)"></i>
+												></i>
 										</span>
 									</li>
 								</ul>
@@ -226,7 +227,7 @@
 								<ul class="mega-sub-menu" *ngFor="let img of Subcat2;let i=index">
 									<li style="margin-top: 10px;padding-left: 4px;">
 										<span class="lispan" [ngClass]="{'active': subItem2 === i}"
-											(click)="gotocategory3(img.id)" (click)="viewsubcat3(img.id,i)">
+											(click)="gotocategory3(img.id)" (click)="viewsubcat3(img.id,i)" (mouseover)="viewsubcat3(img.id,i)">
 											<a style="width:190px;" [ngClass]="{'active': subItem2 === i}">
 												<span (click)="gotocategory3(img.id)">{{img.name}}</span>
 											</a>
@@ -234,7 +235,7 @@
 												style="float: right;margin-top:7px;color:#ce2127;"
 												(click)="viewsubcat3(img.id,i)" class="bi bi-caret-right-fill"
 												[ngClass]="{'active': subItem2 === i}"
-												(mouseover)="viewsubcat3(img.id,i)"></i>
+												></i>
 										</span>
 									</li>
 								</ul>

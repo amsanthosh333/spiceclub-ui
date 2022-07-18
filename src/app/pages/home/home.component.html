@@ -7,7 +7,7 @@
         </ngx-skeleton-loader>
     </div>
 
-    <div class="row" id="sliderrow1" *ngIf="!loader1">
+    <div class="row mb-10" id="sliderrow1" *ngIf="!loader1">
         <div class="col-lg-12" id="slidermain">
             <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel"
                 data-interval="3000"
@@ -36,13 +36,23 @@
             </div>
             <!-- todays offer slider   (imageClick)="imageClick($event)" [autoSlide]="{interval:3, stopOnHover: true}" [animationSpeed]="0"-->
             <div class="carousall6">
-                <div class="sli mb-3" *ngIf="!loader4">
+                <!-- <div class="sli mb-3" *ngIf="!loader4">
                     <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px;"
-                        [images]="Todaysoffer" [imageSize]="{width: 300, height: 250, space: 13}" [infinite]="true"
+                        [images]="Todaysoffer" [imageSize]="{width: 400, height: 250, space: 10}" [infinite]="true"
                         [imagePopup]="false" (imageClick)="imageClick($event)" [autoSlide]="false" [animationSpeed]="0"
                         #nav>
                     </ng-image-slider>
+                </div> -->
+                <div class="row">
+                    <div class="col-3"  *ngFor="let a of Todaysoffer">
+                        <div class="todaybanner"> 
+                            <img src="{{a.thumbImage}}" >
+                        </div>
+                       
+                    </div>
+
                 </div>
+              
                 <div class="hover-banner-area mb-10 mb-md-50 mb-sm-50 pt-15  " *ngIf="loader4">
                     <div class="container wide">
                         <div class="row">
@@ -241,7 +251,7 @@
     <!-- category end -->
 
     <!-- bestsellers -->
-    <div class="col-lg-12 mb-10 pb-0" class="listcard">
+    <div class="col-lg-12 mb-10 pb-0 " class="listcard">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
@@ -253,7 +263,7 @@
             <carousel style="height: 320px; z-index: unset;" *ngIf="!loader6">
                 <div class="carousel-cell" *ngFor="let img of Bestsellpro ;let i = index">
 
-                    <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
+                    <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
 
                         <div class="single-product__image">
                             <div class="imglaz" style="position: relative;overflow: hidden;">
@@ -339,33 +349,36 @@
                             -webkit-box-orient: vertical;
                             max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
                             </div>
+
+             
+
                         </div>
 
                         <!--=======  End of single product content   =======-->
                         <div class="row"
-                            *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
-                            <div class="col-6 " style="padding-left:5px ; padding-right: 5px;">
-                                <input (change)="qtyChange($event,i,img)" type="number" id="quantity" name="quantity"
-                                    value="1" style="width:100%;text-align: center;">
-                            </div>
-                            <div class="col-6 p-0">
-                                <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                    (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
-                            </div>
+                        *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn == i">
+                        <div class="col-6 " style="padding-left:5px ; padding-right: 5px;">
+                            <input (change)="qtyChange($event,i,img)" type="number" id="quantity" name="quantity"
+                                value="1" style="width:100%;text-align: center;">
                         </div>
+                        <div class="col-6 p-0">
+                            <button type="button" id="addcarrtbtn" class="btn btn-primary"
+                                (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
+                        </div>
+                    </div>
 
-                        <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
-                            <div class="col-12 ">
-                                <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
-                                    <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2" ngbDropdownToggle
-                                        (click)="selectbestsell()">Select Options&nbsp;</button>
-                                    <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
-                                        <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="bestsellingselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
-                                    </div>
+                    <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
+                        <div class="col-12 ">
+                            <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
+                                <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2" ngbDropdownToggle
+                                    (click)="selectbestsell()">Select Options&nbsp;</button>
+                                <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
+                                    <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
+                                        (click)="bestsellingselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
                     </div>
                 </div>
@@ -518,15 +531,15 @@
     <!-- Explore category end -->
 
     <!-- Deal of the day   routerLink="/daydeal"-->
-    <div class="row mt-10 mb-10" id="sliderrow5">
+    <div class="row " id="sliderrow5">
         <div class="countdown-timer-area mb-10 countdown-background countdown-bg-2 pt-20 pb-20">
             <div class="container wide" style="margin-left:7px;">
                 <div class="row">
                     <div class="col-9" style="background-color:white ;">
-                        <div class="row" *ngIf="!loader3" style="padding: 0px;margin-left: 2px; margin-right: -125px;">
-                            <div class="col-12 col-lg-2 col-md-6 col-sm-12 mb-10 pt-10 pb-10 "
+                        <div class="row" *ngIf="!loader3" style="padding: 0px;justify-content: center;">
+                            <div class="col-12 col-lg-2 col-md-6 col-sm-12 mb-10  "
                                 *ngFor="let img of Daydealpro; let i = index " style="border: 0.8px solid #e9e7e7; margin-right: 10px;margin-left: 10px;
-                            margin-top: 10px;">
+                            margin-top: 10px;padding:0px">
                                 <div class="single-product">
                                     <div class="single-product__image" style="overflow: hidden;">
 
@@ -627,7 +640,7 @@
         <div class="carousall">
             <carousel style="height: 320px; z-index: unset;" *ngIf="!loader6">
                 <div class="carousel-cell" *ngFor="let img of Futuredpro ;let i = index">
-                    <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
+                    <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
                         <div class="single-product__image">
                             <div class="imglaz" style="position: relative;overflow: hidden;">
                                 <ngx-skeleton-loader count="1" *ngIf="imgloader2"
@@ -726,7 +739,7 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                        <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn== i )">
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
@@ -824,7 +837,7 @@
         <div class="carousall">
             <carousel style="height: 320px; z-index: unset;" *ngIf="!loader6">
                 <div class="carousel-cell" *ngFor="let img of topfirstcat ;let i = index">
-                    <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
+                    <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
                         <div class="single-product__image">
                             <div class="imglaz" style="position: relative;overflow: hidden;">
                                 <ngx-skeleton-loader count="1" *ngIf="imgloader2"
@@ -923,7 +936,7 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                        <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
@@ -1118,7 +1131,7 @@
         <div class="carousall">
             <carousel style="height: 320px; z-index: unset;" *ngIf="!loader6">
                 <div class="carousel-cell" *ngFor="let img of topsecondcat ;let i = index">
-                    <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
+                    <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
                         <div class="single-product__image">
                             <div class="imglaz" style="position: relative;overflow: hidden;">
                                 <ngx-skeleton-loader count="1" *ngIf="imgloader2"
@@ -1213,7 +1226,7 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                        <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"

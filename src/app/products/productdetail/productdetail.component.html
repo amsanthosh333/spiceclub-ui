@@ -816,7 +816,7 @@
                     <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
                         <div class="carousel-cell" *ngFor="let img of Relatedprod ;let i = index">
                             <div class="single-product"
-                                style="padding-left: 25px; overflow: hidden; padding-right: 25px;background-color: whitesmoke;padding-bottom: 3px;">
+                                style="padding-left: 20px; overflow: hidden; padding-right: 20px;background-color: whitesmoke;padding-bottom: 3px;">
                                 <div class="single-product__image pt-10">
                                     <div class="imglaz" style="position: relative;overflow: hidden;">
                                         <ngx-skeleton-loader count="1" *ngIf="imgloader2"
@@ -882,7 +882,7 @@
                                             Details</a>
                                     </div>
 
-
+<!-- 
 
                                     <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                         overflow: hidden;
@@ -894,7 +894,7 @@
                                         <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
                                             {{imgggg}}|
                                         </span>
-                                    </div>
+                                    </div> -->
                                     <div class="price" style="margin-top: -4px;">
                                         <span *ngIf="img?.stroked_price!==img?.main_price"
                                             class="main-price discounted">{{img.stroked_price}}</span>
@@ -923,7 +923,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                                <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                                     <div class="col-12 ">
                                         <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                             <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
@@ -1218,7 +1218,7 @@
                     <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
                         <div class="carousel-cell" *ngFor="let img of Relatedprod ;let i = index">
                             <div class="single-product"
-                                style="padding-left: 25px; overflow: hidden; padding-right: 25px;background-color: whitesmoke;padding-bottom:3px;">
+                                style="padding-left: 20px; overflow: hidden; padding-right: 20px;background-color: whitesmoke;padding-bottom:3px;">
                                 <div class="single-product__image pt-10">
                                     <div class="imglaz" style="position: relative;overflow: hidden;">
                                         <ngx-skeleton-loader count="1" *ngIf="imgloader2"
@@ -1285,7 +1285,7 @@
 
 
 
-                                    <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                                    <!-- <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                         overflow: hidden;
                         display: -webkit-box; 
                         -webkit-line-clamp: 1;
@@ -1295,7 +1295,7 @@
                                         <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
                                             {{imgggg}}|
                                         </span>
-                                    </div>
+                                    </div> -->
                                     <div class="price" style="margin-top: -4px;">
                                         <span *ngIf="img?.stroked_price!==img?.main_price"
                                             class="main-price discounted">{{img.stroked_price}}</span>
@@ -1324,7 +1324,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                                <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                                     <div class="col-12 ">
                                         <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                             <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
@@ -1718,7 +1718,7 @@
 
 
 
-                            <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                            <!-- <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                 overflow: hidden;
                 display: -webkit-box; 
                 -webkit-line-clamp: 1;
@@ -1728,7 +1728,7 @@
                                 <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
                                     {{imgggg}}|
                                 </span>
-                            </div>
+                            </div> -->
                             <div class="price" style="margin-top: -4px;">
                                 <span *ngIf="img?.stroked_price!==img?.main_price"
                                     class="main-price discounted">{{img.stroked_price}}</span>
@@ -1757,7 +1757,7 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                        <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
@@ -1875,7 +1875,7 @@
 
 
 
-                            <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
+                            <!-- <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                 overflow: hidden;
                 display: -webkit-box; 
                 -webkit-line-clamp: 1;
@@ -1885,7 +1885,7 @@
                                 <span class="discounted-price" *ngFor="let imgggg of imggg.options;">
                                     {{imgggg}}|
                                 </span>
-                            </div>
+                            </div> -->
                             <div class="price" style="margin-top: -4px;">
                                 <span *ngIf="img?.stroked_price!==img?.main_price"
                                     class="main-price discounted">{{img.stroked_price}}</span>
@@ -1914,7 +1914,7 @@
                             </div>
                         </div>
 
-                        <div class="row" *ngIf="!(img.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                        <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                             <div class="col-12 ">
                                 <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                     <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"

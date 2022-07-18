@@ -149,7 +149,7 @@
                                 </div>
                             </div>
 
-                            <div class="row" *ngIf="!(img.product.variants[0]?.options?.length < 1 || showaddbtn == i)">
+                            <div class="row" *ngIf="!(img.product.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                                 <div class="col-12 ">
                                     <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
                                         <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"

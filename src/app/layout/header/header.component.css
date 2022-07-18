@@ -176,10 +176,10 @@ input{
 	width: 120px;
 } */
 
-.sitelogo {	
+/* .sitelogo {	
     width: 61%;
     margin-top: 3%;
-}
+} */
 
 .wrapper {
 	display: flex;
@@ -729,7 +729,14 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 		font-weight: 400;
 	}
 }
+@media (min-width : 1100px) {
+	
+	.sitelogo {	
+		width: 50%;
+		margin-top: 3%;
+	} 
 
+}
 @media (min-width : 995px) {
 	#headerbar{
 		color: rgb(255, 255, 255);
@@ -792,14 +799,77 @@ nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 		width: 100%;
 
 	}
+	.sitelogo {	
+		width: 61%;
+		margin-top: 3%;
+	} 
 
 }
 @media (min-width: 1200px){
 .container.wide {
     max-width: 100%;
+
+	
 }
+.sitelogo {
+    width: 54% ;
+    margin-top: 2% ;
 }
 
+#loogo {
+	/* margin-top: 38px; */
+	text-align: end;
+	right: 9%;
+	position: relative;
+}
+
+}
+
+@media (min-width: 1350px){
+	
+	.sitelogo {
+		width: 55% ;
+		margin-top: 2% ;
+	}
+	
+	#loogo {
+		/* margin-top: 38px; */
+		text-align: end;
+		right: 9%;
+		position: relative;
+	}
+	
+	}
+	@media (min-width: 1500px){
+	
+		.sitelogo {
+			width: 50% ;
+			margin-top: 2% ;
+		}
+		
+		#loogo {
+			/* margin-top: 38px; */
+			text-align: end;
+			right: 9%;
+			position: relative;
+		}
+		
+		}
+		@media (min-width: 1650px){
+	
+			.sitelogo {
+				width: 47% ;
+				margin-top: 2% ;
+			}
+			
+			#loogo {
+				/* margin-top: 38px; */
+				text-align: end;
+				right: 9%;
+				position: relative;
+			}
+			
+			}
 .header-right-icons .single-icon.user-login {
 	display: inline;
 }
