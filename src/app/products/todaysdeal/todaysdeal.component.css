@@ -1,5 +1,9 @@
 
 /* productlist css */
+#productdiv:hover{
+  box-shadow: 1px 1px 8px #5a5a5a;
+  /* border: 1px solid #b9b9b9; */
+}
 
 #productdiv{
   /* border: 0.8px solid #e9e7e7; */
@@ -103,7 +107,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 .single-product__content {
   height: 100px;
-  text-align: center;
+  text-align: start;
 }
 
 .titttle {

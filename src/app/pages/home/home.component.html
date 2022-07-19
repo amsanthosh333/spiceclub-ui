@@ -467,7 +467,7 @@
                     <div style="height:75px; width:75px;  display:block; margin:auto;">
                         <img src="https://neophroncrm.com/spiceclubnew/public/{{img.icon}}" style="height: 100%;width: 100%; object-fit: cover; display: block;
                     margin-left: auto;
-                    margin-right: auto;" class="img-fluid" alt="">
+                    margin-right: auto;border-radius: 50%;" class="img-fluid" alt="">
                     </div>
                     <p>{{img.name}}</p>
                 </div>
@@ -478,7 +478,7 @@
             <div style="background-color:white; padding: 0px;">
                 <div class="section-title section-title--one  mb-0" style="border-bottom: 1px solid #d3d3d3;">
                     <h6 style="font-weight: 600; color: black;margin-left: 22px;margin-top: 10px;margin-bottom: 0px;">
-                        Tell us what you need - RFQ</h6>
+                        Tell us what you need</h6>
                 </div>
                 <div class="enqueryform">
                     <form [formGroup]="enquiryForm" (ngSubmit)="enqueryonSubmit()" style="border-top:0px">
@@ -507,7 +507,7 @@
                                 <textarea name="" cols="38" rows="4" placeholder="RFQ Description"
                                     formControlName="comments"></textarea>
                             </div>
-                            <div class="col-lg-4 text-center mb-10 mt-20 pl-0">
+                            <div class="col-lg-4 text-center mb-10 mt-30 pl-0">
                                 <button id="requirment" class="btn btn-warning" *ngIf="!btnloading1">Submit</button>
                                 <button class="btn btn-warning" *ngIf="btnloading1">
                                     <i class="fa fa-spinner fa-spin"
@@ -533,14 +533,15 @@
     <!-- Deal of the day   routerLink="/daydeal"-->
     <div class="row " id="sliderrow5">
         <div class="countdown-timer-area mb-10 countdown-background countdown-bg-2 pt-20 pb-20">
-            <div class="container wide" style="margin-left:7px;">
+            <div class="container wide" style="margin-left:3px;">
                 <div class="row">
-                    <div class="col-9" style="background-color:white ;">
+                    <div class="col-9" >
                         <div class="row" *ngIf="!loader3" style="padding: 0px;justify-content: center;">
                             <div class="col-12 col-lg-2 col-md-6 col-sm-12 mb-10  "
-                                *ngFor="let img of Daydealpro; let i = index " style="border: 0.8px solid #e9e7e7; margin-right: 10px;margin-left: 10px;
-                            margin-top: 10px;padding:0px">
-                                <div class="single-product">
+                                *ngFor="let img of Daydealpro; let i = index " style="border: 0.8px solid #e9e7e7; margin-right: 15px;margin-left: 15px;
+                            margin-top: 10px;padding:0px;border-radius:10px">
+                                <div class="single-product" style="background-color: white;
+                                border: 1px solid lightgrey;border-radius:10px">
                                     <div class="single-product__image" style="overflow: hidden;">
 
                                         <div class="imglazy" id="dealimg">
@@ -605,7 +606,7 @@
                                             <span *ngIf="img?.stroked_price!==img?.main_price"
                                                 class="main-price discounted">{{img.stroked_price}}</span>
                                             <span class="discounted-price">{{img.main_price}} </span>
-                                            <p style="font-size:0.7rem">you save Rs.{{img.discount_amount}}</p>
+                                            <p style="font-size:0.7rem">You save Rs.{{img.discount_amount}}</p>
                                         </div>
                                     </div>
                                     <!--=======  End of single product content  =======-->

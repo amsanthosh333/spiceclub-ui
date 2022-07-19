@@ -1,3 +1,8 @@
+#productdiv:hover{
+  box-shadow: 1px 1px 8px #5a5a5a;
+  /* border: 1px solid #b9b9b9; */
+}
+
 #popularproname{
   color: red;
 }
@@ -43,7 +48,7 @@ input[type=number]::-webkit-inner-spin-button {
   border-color:#e61717;
   font-size: 0.8rem;
   width: -webkit-fill-available;
-  height: 28px;
+  height: 24px;
   padding: 0.1rem 0.75rem;
 }
 .addcarrtbtn {
@@ -52,9 +57,13 @@ input[type=number]::-webkit-inner-spin-button {
   border-color: #e61717;
   font-size: 0.8rem;
   width: -webkit-fill-available;
-  height: 28px;
+  height: 24px;
   padding: 0.1rem 0.75rem;
 }
+.single-product input{
+  height: 26px;
+}
+
 /* productlist css end */
 
 #productdiv{
@@ -215,9 +224,7 @@ a:not([href]):not([class]):hover {
 }
 
 
-.single-product__content {
-  text-align: center;
-}
+
 
 .discounted-price {
   color:#44bf44;
@@ -246,6 +253,7 @@ a:not([href]):not([class]):hover {
 
 .single-product__content {
   height: 100px;
+  text-align: start;
 }
 
 .title h3 a {

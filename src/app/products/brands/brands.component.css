@@ -1,3 +1,8 @@
+#productdiv:hover{
+  box-shadow: 1px 1px 8px #5a5a5a;
+  /* border: 1px solid #b9b9b9; */
+}
+
 .search-widget {
   text-transform: none;
   border-radius: 3px;
@@ -148,7 +153,7 @@ a:not([href]):not([class]):hover {
 }
 .single-product__content {
   height: 100px;
-  text-align: center;
+  text-align: start;
 }
 
 .titttle {
