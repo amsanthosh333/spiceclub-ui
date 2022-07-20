@@ -3,6 +3,32 @@ div {
   letter-spacing: 0;
 }
 
+.content h3 {
+  line-height: 1.2rem;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  max-height: 5.5rem;
+  margin-bottom: 2px;
+  font-weight: 500;
+  color: #4a4a4a !important;
+}
+.content h3 a{
+
+  color: #4a4a4a !important;
+}
+
+.image img {
+  height: 100%;
+  object-fit: cover;
+}
+
+.single-widget-post .image {
+  -ms-flex-preferred-size: 100px;
+  flex-basis: 150px;
+}
+
 .page-item.active .page-link {
   z-index: 3;
   color: #fff;
@@ -17,12 +43,14 @@ div {
   float: right;
   margin-right: 30px;
 }
-#viewallbtn button{
+
+#viewallbtn button {
   font-size: 0.8rem;
-    padding: 1px 11px;
-    background-color: #76c045;
-    border-color: #76c045;
+  padding: 1px 11px;
+  background-color: #76c045;
+  border-color: #76c045;
 }
+
 .single-widget-post {
 
   margin-bottom: 10px;
@@ -174,11 +202,22 @@ div {
   background: #fff;
   border-radius: 8px;
   background-color: whitesmoke;
+
 }
 
-.post-list-wrapper .single-post img {
+.single-post #imgdiv {
+  height: 200px;
+  width: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.post-list-wrapper .single-post #imgdiv img {
   width: 100%;
   border-radius: 8px;
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 
 /* .post-list-wrapper #bloglist{

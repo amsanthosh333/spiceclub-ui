@@ -233,6 +233,8 @@ export class BlogComponent implements OnInit {
     this.getcommentsss();
   }
   getblogdetail(id: any) {
+    console.log("blogid",id);
+    
     window.scroll(0, 0);
     this.router.navigate(['blogdetails', id]);
 
@@ -339,5 +341,7 @@ export class BlogComponent implements OnInit {
   }
   goback() {
     this.catblogs = false;
+    this.topItem=-1
+
   }
 }

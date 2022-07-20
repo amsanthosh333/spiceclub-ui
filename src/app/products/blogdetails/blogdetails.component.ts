@@ -52,7 +52,9 @@ export class BlogdetailsComponent implements OnInit {
   id: any;
   productname: any;
   currenturl: any;
-
+  topItem:any;
+  CatBlogs: any;
+  loader2: boolean=true;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private route: ActivatedRoute,
     private toastr: ToastrService, config: NgbRatingConfig, private _location: Location) {
@@ -82,7 +84,7 @@ export class BlogdetailsComponent implements OnInit {
     this.getblogdetail(this.id)
     this.viewallblog(1);
     this.viewblogcat();
-
+this.getblogbycatg2(this.id)
     this.comment = this.fb.group({
       rating: ['', [Validators.required]],
       comment: ['', [Validators.required]],
@@ -96,7 +98,8 @@ export class BlogdetailsComponent implements OnInit {
     this.request.getallblog(page).subscribe((res: any) => {
       this.Blogs = res.data;
       this.loader1 = false;
-      this.pagenation = res.meta
+      this.pagenation = res.meta;
+     
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -109,6 +112,20 @@ export class BlogdetailsComponent implements OnInit {
     this.request.getallblogcat().subscribe((response: any) => {
       this.Allcat = response.data;
       this.loader = false;
+      let index = this.Allcat?.findIndex((x: any) => x.id == this.id);
+      this.topItem = index
+    },
+      (error: any) => {
+        console.log("error", error);
+      });
+  }
+  getblogbycatg2(id: any) {
+    this.loader2 = true;
+    
+    this.request.getblogbycat(id, 1).subscribe((response: any) => {
+      this.CatBlogs = response.data;
+      console.log("CatBlogs", this.CatBlogs);
+      this.loader2 = false;
     },
       (error: any) => {
         console.log("error", error);
@@ -148,7 +165,9 @@ export class BlogdetailsComponent implements OnInit {
     this.router.navigate(['blogdetails', id]);
     this.getblogdetail(id)
   }
-
+  backtoblog(){
+    this._location.back();
+  }
   getcommentsss() {
     this.request.getblogcomments(this.blog_id).subscribe((response: any) => {
       this.Comments = response.data;

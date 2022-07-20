@@ -3,10 +3,7 @@
 		<div class="container" style="margin: 0px;">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Spice club's
-						Blogs</h4>
-					<!--=======  breadcrumb list  =======-->
-					<ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+					<ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
 						<li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
 						<li class="breadcrumb-list__item breadcrumb-list__item--active" >Blog Details</li>
 					</ul>
@@ -16,21 +13,14 @@
 		</div>
 	</div>
 	<div>
-		<div class="blog-page-wrapper mb-100">
+		<div class="blog-page-wrapper mb-10">
 			<div class="container">
 				<div class="row">
 					<div class="col-lg-3 order-2 order-lg-1">
-
-						<!--=======  page sidebar  =======-->
-
 						<div class="page-sidebar mt-30">
-							<!--=======  single sidebar widget  =======-->
-
-							<!--=======  single sidebar widget  =======-->
-
-							<div class="single-sidebar-widget mb-40 " *ngIf="!sideloader2">
-								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-								<ul style="padding-left: 0px;max-height: 250px;overflow-y: auto;"
+							<div class="single-sidebar-widget mb-20 " *ngIf="!sideloader2">
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 10px;" (click)="backtoblog()">Categories</h2>
+								<!-- <ul style="padding-left: 0px;max-height: 250px;overflow-y: auto;"
 									class="single-sidebar-widget--list single-sidebar-widget--list--category"
 									*ngFor="let cat of Allcat">
 
@@ -38,8 +28,17 @@
 										<span class="quantity"></span>
 									</li>
 
-								</ul>
-
+								</ul> -->
+								<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+								style="padding-left: 0px;max-height: 250px;overflow-y: auto;margin-bottom: 5px;">
+								<li *ngFor="let cat of Allcat;let i=index">
+									<label style="display: flex;"> <a (click)="getblogbycatg(cat.id)"
+											style="padding-top: 3px;"><input [checked]="topItem === i"
+												type="checkbox"></a>
+										<div class="catname"> <span>{{cat.name}}</span></div>
+									</label>
+								</li>
+							</ul>
 							</div>
 							<div class="single-sidebar-widget mb-40" *ngIf="sideloader2">
 								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
@@ -47,13 +46,13 @@
 							</div>
 
 							<div class="single-sidebar-widget mb-40">
-								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">All Blog</h2>
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Related Blogs</h2>
 
 								<!--=======  widget post wrapper  =======-->
 
-								<div class="widget-post-wrapper" *ngIf="!allloader1"
+								<div class="widget-post-wrapper" *ngIf="!loader2"
 									style="max-height: 450px;overflow-y: auto;">
-									<div class="single-widget-post" *ngFor="let img of Blogs"
+									<div class="single-widget-post" *ngFor="let img of CatBlogs"
 										(click)="getblogdetail2(img.id)">
 										<div class="image">
 											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
@@ -69,7 +68,7 @@
 									<!--=======  End of single widget post  =======-->
 								</div>
 								<!-- lazyloading  -->
-								<div class="widget-post-wrapper" *ngIf="allloader1">
+								<div class="widget-post-wrapper" *ngIf="loader2">
 									<div class="single-widgost">
 										<div class="imag" style="height: 120px; width: 160px;">
 											<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
@@ -88,47 +87,15 @@
 						<!--=======  End of page sidebar  =======-->
 					</div>
 
-					<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="!recipeloader">
-						<div class="row">
-							<div class="col-lg-12" id="bacck">
-								<div class="shop-product__navigation " style="margin-bottom: 10px;">
-									<a><i class="ion-ios-arrow-thin-left" (click)="backk()" style="size: 0px;"></i></a>
-									<!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> (click)="backk()" -->
-								</div>
-								<br>
-								<br><br>
-							</div>
-							<div class="col-md-12 mb-40">
+					<div class="col-lg-6 order-1 order-lg-2 mb-md-70 mb-sm-70" >
+						<div class="row mt-30" *ngIf="!recipeloader">
+							
+							<div class="col-md-12 mb-10">
 								<div class="single-slider-post single-slider-post--sticky pb-20">
 									<!--=======  image  =======-->
 
 
-									<div class="single-slider-post__image single-slider-post--sticky__image mb-30"
-										style="display: block;
-								margin-left: auto;
-								margin-right: auto;"  *ngIf="!imgloader">
-										<div id="rev_slider_4_1_wrapper" 
-											class="rev_slider_wrapper fullwidthbanner-container" data-alias="homepage-6"
-											data-source="gallery">
-											<ngx-skeleton-loader count="1"
-												[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-											</ngx-skeleton-loader>
-										</div>
-
-									</div>
-
-									<div class="single-slider-post__image single-slider-post--sticky__image mb-30"
-										style="display: block;
-								margin-left: auto;
-								margin-right: auto;" *ngIf="imgloader">
-
-
-										<a id="iimg">
-											<img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.banner}}"
-												style="width:100%; height: -webkit-fill-available;object-fit: cover;"
-												class="img-fluid" alt="">
-										</a>
-									</div>
+								
 
 									<!--=======  End of image  =======-->
 
@@ -136,6 +103,10 @@
 
 									<div class="single-slider-post__content single-slider-post--sticky__content">
 										<!--=======  post category  =======-->
+
+										
+
+										<h6 class="post-title"><a>{{Peoduct.name}}</a></h6>
 
 										<div class="post-category mb-10">
 											<a>{{Peoduct.slug}}</a>
@@ -159,11 +130,36 @@
 												<a class="textopacity"> {{commtotal}} Comments</a>
 											</div>
 
+											<div class="single-slider-post__image single-slider-post--sticky__image mb-30 mt-30"
+											style="display: block;
+									margin-left: auto;
+									margin-right: auto;"  *ngIf="!imgloader">
+											<div id="rev_slider_4_1_wrapper" 
+												class="rev_slider_wrapper fullwidthbanner-container" data-alias="homepage-6"
+												data-source="gallery">
+												<ngx-skeleton-loader count="1"
+													[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+												</ngx-skeleton-loader>
+											</div>
+	
+										</div>
+	
+										<div class="single-slider-post__image single-slider-post--sticky__image mb-30 mt-30"
+											style="display: block;
+									margin-left: auto;
+									margin-right: auto;" *ngIf="imgloader">
+	
+	
+											<a id="iimg">
+												<img src="https://neophroncrm.com/spiceclubnew/public/{{Peoduct.banner}}"
+													style="width:100%; height: -webkit-fill-available;object-fit: cover;"
+													class="img-fluid" alt="">
+											</a>
 										</div>
 
-										<h2 class="post-title"><a>{{Peoduct.name}}</a></h2>
-
-										<p class="mb-30"  style="font-size:large" [innerHTML]="Peoduct.description">{{Peoduct.description}}</p>
+										</div>
+										
+										<p id="description" class="mb-30"  style="font-size: 15px;" [innerHTML]="Peoduct.description">{{Peoduct.description}}</p>
 										<!--=======  End of post category  =======-->
 
 										<div class="row mt-30 align-items-center">
@@ -199,7 +195,7 @@
 							</div>
 
 
-							<div class="col-lg-12 mb-20">
+							<div class="col-lg-12">
 
 								<!--=======  commenter info  =======-->
 								<ng-template #t let-fill="fill">
@@ -209,11 +205,11 @@
 											class="fa fa-star-o text-warning cursor"></em>
 									</span>
 								</ng-template>
-								<h2 class="comment-title mb-10">Ratings <span>
+								<h2 class="comment-title">Ratings <span>
 										<ngb-rating [(rate)]="currentRatess" [starTemplate]="t" [readonly]="true"
 											style="color: rgb(245, 153, 14);"></ngb-rating>
 									</span></h2>
-								<h2 class="comment-title mb-10">Comments <span>{{commtotal}} </span></h2>
+								<h2 class="comment-title">Comments <span>{{commtotal}} </span></h2>
 
 
 
@@ -258,7 +254,7 @@
 
 							<div class="col-lg-12">
 
-								<h5 class="comment-title mb-10">Leave your thought here</h5>
+								<h5 class="comment-title ">Leave your thought here</h5>
 								<!--=======  comment form  =======-->
 
 								<div class="lezada-form comment-gorm">
@@ -266,7 +262,7 @@
 										<div class="row">
 
 											<div class="col-lg-12 mb-10">
-												<span class="rating-title mr-30" style="opacity: 0.72;">YOUR
+												<span class="rating-title mr-30" style="opacity: 0.72;font-size: 0.9rem;">YOUR
 													RATING</span>
 												<span class="product-rating">
 													<ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false"
@@ -290,11 +286,8 @@
 								<!--=======  End of comment form  =======-->
 							</div>
 						</div>
-					</div>
-
-					<!-- bloglazyloading -->
-					<div class="col-lg-9 order-1 order-lg-2 mb-md-70 mb-sm-70" *ngIf="recipeloader">
-						<div class="row">
+						<!-- bloglazyloading -->
+						<div class="row"  *ngIf="recipeloader">
 							<div class="col-lg-12">
 								<div class="shop-product__navigation " style="margin-bottom: 10px;">
 									<a><i class="ion-ios-arrow-thin-left" (click)="backk()" style="size: 0px;"></i></a>
@@ -584,8 +577,58 @@
 							</div>
 
 						</div>
+						<!--  bloglazyloading  end-->
 					</div>
-					<!--  bloglazyloading  end-->
+
+					<div class="col-lg-3 order-3 order-lg-3">
+
+						<!--=======  page sidebar  =======-->
+
+						<div class="page-sidebar mt-30">
+							<!--=======  single sidebar widget  =======-->
+
+							<!--=======  single sidebar widget  =======-->
+							<div class="single-sidebar-widget mb-40">
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">All Blog</h2>
+
+								<!--=======  widget post wrapper  =======-->
+
+								<div class="widget-post-wrapper" *ngIf="!allloader1"
+									style="max-height: 450px;overflow-y: auto;">
+									<div class="single-widget-post" *ngFor="let img of Blogs"
+										(click)="getblogdetail2(img.id)">
+										<div class="image">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+												class="img-fluid" alt="">
+										</div>
+										<div class="content">
+											<h3 class="widget-post-title"><a>{{img.name}}</a></h3>
+											<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+											</ngb-rating>
+											<p class="widget-post-date"></p>
+										</div>
+									</div>
+									<!--=======  End of single widget post  =======-->
+								</div>
+								<!-- lazyloading  -->
+								<div class="widget-post-wrapper" *ngIf="allloader1">
+									<div class="single-widgost">
+										<div class="imag" style="height: 120px; width: 160px;">
+											<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
+												 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"> </ngx-skeleton-loader>
+										</div>
+									</div>
+								</div>
+
+								<!--=======  End of widget post wrapper  =======-->
+							</div>
+
+
+							<!--=======  End of single sidebar widget  =======-->
+						</div>
+
+						<!--=======  End of page sidebar  =======-->
+					</div>
 				</div>
 			</div>
 		</div>

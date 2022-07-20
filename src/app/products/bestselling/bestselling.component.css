@@ -1,9 +1,12 @@
 
 /* productlist css */
 #productdiv:hover{
-  box-shadow: 1px 1px 8px #5a5a5a;
-  /* border: 1px solid #b9b9b9; */
+  box-shadow: 0px 1px 8px #a1a1a1;
 }
+.img-fluid{
+  object-fit: cover;
+}
+
 #productdiv{
   /* border: 0.8px solid #e9e7e7; */
   margin-right: 10px;
