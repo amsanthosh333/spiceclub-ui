@@ -111,7 +111,31 @@ li a {
   padding-bottom: 0px;
   margin-bottom: 0px;
 }
+#reviewcomment::-webkit-scrollbar {
+  display: none;
+}
+#reviewdiv::-webkit-scrollbar{
+  display: none;
+}
 
+input {
+  border: 1px solid #d3d3d3;
+  border-radius: 2px;
+  font: sans-serif;
+  font-size: 0.8rem;
+  color:#4e4e4e;
+}
+ #textarea input[type=textarea] {
+  border: 1px solid #d3d3d3;
+  border-radius: 2px;
+  font: sans-serif;
+}
+textarea{
+  color:#4e4e4e;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 1px solid #d3d3d3;
+  font-size: 0.8rem;
+}
 .review-title {
   color: #140f0f;
   font-family: Arial, Helvetica, sans-serif;

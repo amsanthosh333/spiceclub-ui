@@ -55,6 +55,7 @@ export class BlogdetailsComponent implements OnInit {
   topItem:any;
   CatBlogs: any;
   loader2: boolean=true;
+  prdcomment: boolean=true;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private route: ActivatedRoute,
     private toastr: ToastrService, config: NgbRatingConfig, private _location: Location) {
@@ -172,6 +173,8 @@ this.getblogbycatg2(this.id)
     this.request.getblogcomments(this.blog_id).subscribe((response: any) => {
       this.Comments = response.data;
       this.commtotal = this.Comments.length
+      this.prdcomment=false
+
     },
       (error: any) => {
         console.log("error", error);
@@ -189,10 +192,10 @@ this.getblogbycatg2(this.id)
         console.log("invalid")
         if (!this.comment.get('rating')?.valid) {
           console.log("give")
-          this.error1 = '*give star';
+          this.error1 = '*Give star';
         }
         else if (!this.comment.get('comment')?.valid) {
-          this.error1 = '*type some comment';
+          this.error1 = '*Type some comment';
         }
         return;
       }
