@@ -168,9 +168,9 @@
                 </div>
 
                  <!--  productslazyloading -->          
-                <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -250px;" *ngIf="prodloader" >
+                <div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloader">
                     <div class="col-12 col-lg-2 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-                        <div class="single-product" style="height: 250px; width: 200px;">
+                        <div class="single-product" style="height: 255px; width: 220px;margin-left: 20px;">
                             <ngx-skeleton-loader count="1"
                                 [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                             </ngx-skeleton-loader>

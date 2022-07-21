@@ -180,9 +180,11 @@
 }
 
 #offer{
-  padding: 3px;
+  padding: 3px 6px;
   padding-top: 0px;
-border-radius: 4px;
+border-radius: 3px;
+background-color: #d7d7d7;
+margin-right: 5px;
 }
 #offer  a{
   font-size: 0.7rem;

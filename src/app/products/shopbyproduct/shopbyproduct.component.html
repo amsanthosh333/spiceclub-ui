@@ -18,7 +18,8 @@
 
 <div class="shop-page-wrapper">
     <!--=======  shop page header  =======-->
-    <div class="shop-page-header" style="padding: 0px;">
+    <div class="shop-page-header" style="padding: 0px;background-color: white;
+    border-bottom: 0px;">
         <div class="container " style="margin: 0px;">
             <div class="row align-items-center" style="height:50px ;">
 
@@ -27,10 +28,10 @@
                     <!--=======  fitler titles  =======-->
                     <div class="filter-title filter-title--type-two">
                         <ul class="product-filter-menu mb-0 pl-0">
-                            <li style="border: 0px; box-shadow:0px 0px 0px white;background-color: whitesmoke;">
+                            <li style="border: 0px; box-shadow:0px 0px 0px white;">
                                 <div class="search-widget" style="border-bottom: 0px;">
                                     <form [formGroup]="search" (ngSubmit)="search1(search)">
-                                        <input type="search" formControlName="key" style="border-bottom: 0px;border:0px"
+                                        <input class="red" type="search" formControlName="key" style="border:0px;border-bottom: 1px solid #e5e5e5 !important;"
                                             placeholder="Search products ...">
                                         <button type="submit"><i class="ion-android-search"></i></button>
                                     </form>
@@ -96,19 +97,19 @@
 
 
 
-    <div class="shop-page-content mt-15 mb-15">
-        <div class="container mt-15">
+    <div class="shop-page-content mt-10 mb-15">
+        <div class="container mb-10">
             <div class="row" style="margin-right: -100px;">
                 <div id="sidenavg" class="col-lg-2 order-2 order-lg-1">
                     <!--=======  page sidebar  =======-->
                     <div class="page-sidebar">
-                        <div class="single-sidebar-widget mb-10">
+                        <div class="single-sidebar-widget mb-10 mt-10" >
                             <h2 class="single-sidebar-widget--title">Categories</h2>
                             <ul class="single-sidebar-widget--list single-sidebar-widget--list--category "
-                                style="padding-left: 0px;max-height: 275px;overflow-y: auto;">
+                                >
                                 <li class="has-children" *ngFor="let img of Allcat;let i=index">
-                                            <label style="display: flex;" (click)="getprodofcategory(img.id,1)"> 
-                                                <a style="padding-top: 1px;">
+                                            <label style="display: flex;text-decoration: none;" (click)="getprodofcategory(img.id,1)"> 
+                                                <a style="padding-top: 1px;text-decoration: none;">
                                                 <input [checked]="categoryItem === i" type="checkbox"></a> 
                                                 <div class="catname"> <span>{{img.name}}</span></div> </label>
                                     <!-- <span class="quantity">{{img.number_of_children}}</span>  -->
@@ -137,7 +138,7 @@
                             <h2 class="single-sidebar-widget--title">Brands</h2>
                             <ul *ngIf="!sideloader1"
                                 class="single-sidebar-widget--list single-sidebar-widget--list--category "
-                                style="padding-left: 0px;max-height: 275px;overflow-y: auto;">
+                               >
                                 <li class="has-children" *ngFor="let img of Allbrands;let i=index"
                                     [ngClass]="{'active': subItem === i}">
 
@@ -275,7 +276,7 @@
                 </div>
                 <!-- sidebarlazyloading  end-->
 
-                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 "  infinite-scroll
+                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10"  infinite-scroll
                     [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
                     <div class="row product-isotope shop-product-wrap four-column"  *ngIf="prodloadermain">
                         <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"

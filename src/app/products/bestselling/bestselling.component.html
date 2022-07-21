@@ -13,15 +13,15 @@
         </div>
     </div>
 
-<div class="shop-page-wrapper">
-    <div class="shop-page-content mt-15 mb-15">
-        <div class="container">
+<div class="shop-page-wrapper ">
+    <div class="shop-page-content" >
+        <div class="container mt-10 mb-10">
             <div class="row">
                 <div id="sidenavg" class="col-lg-2 order-2 order-lg-1">
-                    <div class="single-sidebar-widget mb-40">
+                    <div class="single-sidebar-widget mb-10 pt-10">
                         <h2 class="single-sidebar-widget--title"
-                                    style="padding-bottom: 0px; margin-bottom: 10px;">Today's deal</h2>
-                        <div class="widget-product-wrapper" style="max-height: 550px; overflow-y: auto;"
+                                    style=" margin-bottom: 0px;">Today's deal</h2>
+                        <div class="widget-product-wrapper" style="max-height: 950px; overflow-y: auto;"
                             *ngIf="!prodloader">
                             <div class="single-widget-product-wrapper">
                                 <div class="single-widget-product" *ngFor="let img of Product"
@@ -150,7 +150,7 @@
                     </div>
                     <!--=======  End of page sidebar  =======-->
                 </div>
-                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10"  infinite-scroll
+                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10 "  infinite-scroll
                 [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
                 <div class="row product-isotope shop-product-wrap four-column"  *ngIf="prodloadermain">
                     <!--=======  single product   =======-->

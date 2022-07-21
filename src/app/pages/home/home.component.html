@@ -10,7 +10,7 @@
     <div class="row mb-10" id="sliderrow1" *ngIf="!loader1">
         <div class="col-lg-12" id="slidermain">
             <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel"
-                data-interval="3000"
+                data-interval="4000"
                 style="background-image:url('../../../assets/images/backgrounds/bg-testimonials.png') ">
                 <!-- <ol class="carousel-indicators">
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -455,12 +455,10 @@
                     Explore Categories</h6>
             </div>
             <div class="explore row">
-                <div class="col-2 " *ngFor="let img of Topcat" style="text-align:center;padding-top: 5px;"
+                <div class="col-2 " id="exp-col" *ngFor="let img of Topcat" style="text-align:center;padding-top: 5px;"
                     (click)="gotocategoryproduct(img.id)">
-                    <div style="height:75px; width:75px;  display:block; margin:auto;">
-                        <img src="https://neophroncrm.com/spiceclubnew/public/{{img.icon}}" style="height: 100%;width: 100%; object-fit: cover; display: block;
-                    margin-left: auto;
-                    margin-right: auto;border-radius: 50%;" class="img-fluid" alt="">
+                    <div class="exploreimgdiv" >
+                        <img src="https://neophroncrm.com/spiceclubnew/public/{{img.icon}}" class="img-fluid" alt="">
                     </div>
                     <p>{{img.name}}</p>
                 </div>
@@ -584,7 +582,7 @@
                                     <div class="single-product__content" (click)=" proddetail(img.id)"
                                         style="height:90px ;">
                                         <div class="title">
-                                            <h3> <a style="line-height: 1.2rem;
+                                            <h3 style="padding-bottom: 10px;"> <a style="line-height: 1.2rem;
                                             overflow: hidden;
                                             display: -webkit-box; 
                                             -webkit-line-clamp: 2;

@@ -1,6 +1,6 @@
 <div class="col-lg-12 mb-10 pb-0" class="listcard">
     <div>
-        <ul id="subcatdiv">
+        <ul id="subcatdiv" style="font-weight: 600;color: #3e3e3e;">
             <li style="padding-right:20px" *ngFor="let s of Peoduct?.subcategories" (click)="gotosubcategory(s.id)">
                 {{s.name}}</li>
         </ul>
@@ -336,17 +336,17 @@
                                         </div>
                                         <div>
                                             <span class="review-link " id="offer"
-                                                style="background-color:rgb(108, 165, 42);">
-                                                <a>Plant food</a>
+                                                *ngFor="let t of Peoduct?.tags;let i = index" >
+                                                <a style="color: rgb(83, 83, 83);">{{t}}</a>
                                             </span>
-                                            <span class="review-link ml-20" id="offer"
+                                            <!-- <span class="review-link ml-20" id="offer"
                                                 style="background-color:rgb(121, 121, 121);">
                                                 <a>No Taxin</a>
                                             </span>
                                             <span class="review-link ml-20" id="offer"
                                                 style="background-color:rgb(112, 214, 245);">
                                                 <a>Nutrients</a>
-                                            </span>
+                                            </span> -->
                                         </div>
 
 
@@ -1170,7 +1170,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="6" style="padding-left:50px;margin-top: 4px;">
                         <!-- <h5 class="comment-title">Leave your thought here</h5> -->
                         <p style="font-weight:600;font-size:1rem ;margin-bottom: 5px;color: #626262;">Add a review</p>

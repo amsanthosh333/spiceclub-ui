@@ -1,4 +1,4 @@
-<div>
+<div >
     <div class="breadcrumb-area breadcrumb-bg-2">
         <div class="container" style="margin: 0px;">
             <div class="row">
@@ -14,22 +14,22 @@
     </div>
 
     <div class="shop-page-wrapper mt-20" *ngIf="page2">
-        <div class="shop-page-header" style="padding: 0px;">
+        <div class="shop-page-header" style="padding: 0px;background-color: white;border-bottom: 0px;">
             <div class="container " style="margin: 0px;">
                 <div class="row align-items-center" style="height:30px ;">
                     <div class="col-12 col-lg-10 col-md-10 d-none d-md-block" id="offerdiv">
                         <div class="filter-title filter-title--type-two">
                             <ul class="product-filter-menu mb-0 pl-0">
-                                <li style="border: 0px; box-shadow:0px 0px 0px white;background-color: whitesmoke;">
+                                <li style="border: 0px; box-shadow:0px 0px 0px white;">
                                     <div class="search-widget">
                                         <form [formGroup]="search" (ngSubmit)="search1(search)" *ngIf="searchh1">
                                             <input type="search" formControlName="key" placeholder="Search products ..."
-                                                style="border: 0px;">
+                                                style="border: 0px;border-bottom: 1px solid #dddada;">
                                             <button type="submit"><i class="ion-android-search"></i></button>
                                         </form>
                                         <form [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
                                             <input type="search" formControlName="key" placeholder="Search sub products ..."
-                                                style="border: 0px;">
+                                                style="border: 0px;border-bottom: 1px solid #dddada;">
                                             <button type="submit"><i class="ion-android-search"></i></button>
                                         </form>
                                     </div>
@@ -52,13 +52,13 @@
         </div>
 
 
-        <div class="shop-page-content mt-15 mb-15">
-            <div class="container">
+        <div class="shop-page-content mt-10">
+            <div class="container mb-10">
                 <div class="row">
                     <div id="sidenavg" class="col-lg-2 order-2 order-lg-1" *ngIf="!sideloader">
                         <!--=======  page sidebar  =======-->
                         <div class="page-sidebar">
-                            <div class="single-sidebar-widget mb-10" id="pricefilter">
+                            <div class="single-sidebar-widget mb-10" id="pricefilter" >
                                 <h2 class="single-sidebar-widget--title">Price Filter</h2>
                                 <p><a (click)="under200()">Under Rs.200 </a></p>
                                 <p><a (click)="uptoto500()">Rs.200 to Rs.500</a></p>
@@ -72,12 +72,12 @@
                                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"></span>
                                 </p>
                             </div>
-                            <div class="single-filter-widget">
+                            <div class="single-filter-widget" >
                                 <h5 class="single-sidebar-widget--title mb-0" (click)="viewproducts()">{{catName}}</h5>
                             </div>
-                            <div class="single-filter-widget  mb-10" *ngIf="(Subcat?.length!==0)">
+                            <div class="single-filter-widget  mb-10" *ngIf="(Subcat?.length!==0)" style="border-bottom: 1px solid #ededed;">
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;max-height: 475px;overflow-y: auto;">
+                                    >
                                     <li class="has-children" *ngFor="let cat of Subcat;let i = index"
                                         (click)="viewsubcatprod2(cat.id,i)" [ngClass]="{'active': subItem === i}">
                                         <label style="display: flex;"> <a style="padding-top: 3px;"><input
@@ -87,11 +87,11 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat?.length!==0)">
+                            <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat?.length!==0)" style="border-bottom: 1px solid #ededed;">
                                 <!-- <h5 class="single-sidebar-widget--title mb-2">Sub Category</h5> -->
                                 <h5 class="single-sidebar-widget--title mb-0">Sub Category </h5>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;max-height: 400px;overflow-y: auto;">
+                                    >
                                     <li class="has-children" *ngFor="let cat of SubofSubcat;let i = index"
                                         [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod3sub(cat.id,i)">
                                         <label style="display: flex;"> <a style="padding-top: 3px;"><input
@@ -101,11 +101,11 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat1?.length!==0)">
+                            <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat1?.length!==0)" style="border-bottom: 1px solid #ededed;">
                                 <!-- <h5 class="single-sidebar-widget--title mb-2">Sub Category</h5> -->
                                 <h5 class="single-sidebar-widget--title mb-0">Sub Category2 </h5>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;max-height: 475px;overflow-y: auto;">
+                                    >
                                     <li class="has-children" *ngFor="let cat of SubofSubcat1;let i = index"
                                         [ngClass]="{'active': topItem1 === i}" >
                                         <label style="display: flex;"> <a style="padding-top: 3px;"><input
@@ -119,7 +119,7 @@
                                 <!-- <h5 class="single-sidebar-widget--title mb-2">Sub Category</h5> -->
                                 <h5 class="single-sidebar-widget--title mb-0">Brands</h5>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;max-height: 475px;overflow-y: auto;">
+                                    >
                                     <li class="has-children" *ngFor="let cat of Catbrand;let i = index"  >
                                         <label style="display: flex;"> <a style="padding-top: 3px;">
                                             <input (change)="viewcatbrandprod(cat.id,i,$event)" [checked]="brandItem === i" type="checkbox"></a>
@@ -187,14 +187,14 @@
                     </div>
 
                     <!-- sidebarlazyloading -->
-                    <div class="col-lg-2 order-2 order-lg-1" *ngIf="sideloader">
+                    <div class="col-lg-2 order-2 order-lg-1" *ngIf="sideloader" style="background-color:white;">
                         <div class="page-sidebar">
                            
-                            <div class="single-filter-widget  mb-40">
+                            <div class="single-filter-widget mt-20 mb-40">
                                 <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
                                 <h5 class="single-title mb-2">Sub Category</h5>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;">
+                                    >
                                     <li>
                                         <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
                                     </li>
@@ -218,7 +218,7 @@
                     </div>
                     <!-- sidebarlazyloading  end-->
 
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" infinite-scroll
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10" infinite-scroll
                     [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
                         <div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloadermain">
                             <!--=======  single product  =======-->
@@ -404,7 +404,12 @@
     </div>
 
     <!-- featuredcat -->
-    <div class="col-lg-12 mb-10 pb-0" class="listcard">
+    <div class="shop-page-wrapper">
+    <div class="col-lg-12 mb-10 pb-0" class="listcard" style="background-color: white;
+    margin-left: 10px;
+    width: 98.5%;
+    padding: 0px;
+    border: 0px solid #e5e5e5;">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
@@ -426,7 +431,7 @@
 
     </div>
     </div>
-   
+</div>
     <!-- <div class="product-category-container mb-100 mb-md-80 mb-sm-70">
         <div class="container wide">
             <div class="row">

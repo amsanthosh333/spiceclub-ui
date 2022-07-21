@@ -4,7 +4,7 @@
   opacity: 1;
   animation: blink step-start infinite;
   transition: 0s 0s animation;
-  -webkit-animation: blink 1s;
+  -webkit-animation: blink 2s;
 
 }
 
@@ -28,12 +28,34 @@
   font-weight: 600;
   color: #4a4a4a;
 }
- .single-product:hover>.single-product__image .imglaz .image-wrap{
- 
- width: 102%;
+
+.single-product:hover>.single-product__image .imglaz .image-wrap {
+
+  width: 103%;
 
 }
+.exploreimgdiv{
+  height:75px; width:75px;  display:block; margin:auto;
+ }
+.explore p:hover{
+  font-size: 0.7rem;
+  color: rgb(50, 98, 255);
+} 
+  
 
+.exploreimgdiv img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50%;
+}
+/* .exploreimgdiv:hover>#exp-col .exploreimgdiv {
+  height: 80px;
+  width: 80px;
+} */
 .explore p {
   font-size: 0.7rem;
 }
@@ -1183,6 +1205,7 @@ input[type=number] {
   .todaybanner img {
     height: 100%;
     object-fit: cover;
+    width: 100%;
   }
 
   .img-fluid {

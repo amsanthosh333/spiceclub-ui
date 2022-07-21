@@ -16,9 +16,9 @@
     <!--=============================================
     =            shop page content         =
     =============================================-->
-    <div class="shop-page-wrapper mt-20">
-        <div class="shop-page-content mt-15 mb-15">
-            <div class="container">
+    <div class="shop-page-wrapper ">
+        <div class="shop-page-content ">
+            <div class="container mt-10 mb-10">
                 <div class="row">
                     <div id="sidenavg" class="col-lg-2 order-2 order-lg-1" *ngIf="!sideloader">
                         <div class="page-sidebar">
@@ -143,12 +143,12 @@
                         <!--=======  End of page sidebar  =======-->
                     </div>
                     <!-- sidebarlazyloading -->
-                    <div class="col-lg-3 order-2 order-lg-1" *ngIf="sideloader">
+                    <div class="col-lg-2 order-2 order-lg-1" *ngIf="sideloader" style="background-color:white ;">
                         <div class="page-sidebar">
                             <div class="single-sidebar-widget mb-20">
                                 <div class="search-widget">
                                     <form [formGroup]="search" (ngSubmit)="search1(search)">
-                                        <input type="search" formControlName="key" placeholder="Search products ...">
+                                        <input style="border: 0px;" type="search" formControlName="key" placeholder="Search products ...">
                                         <button type="submit"><i class="ion-android-search"></i></button>
                                     </form>
                                 </div>
@@ -158,7 +158,7 @@
                             <div class="single-sidebar-widget mb-20">
                                 <h2 class="single-sidebar-widget--title mb-2">All Brands</h2>
                                 <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    style="padding-left: 0px;">
+                                    style="padding-left: 10px;">
                                     <li>
                                         <ngx-skeleton-loader count="7" animation="pulse"></ngx-skeleton-loader>
                                     </li>
@@ -171,10 +171,10 @@
                         </div>
                     </div>
                     <!-- sidebarlazyloading  end-->
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80" infinite-scroll
+                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10" infinite-scroll
                         [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)"
                         (scrolledUp)="onScrollUp($event)">
-                        <div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloadermain">
+                        <div class="row product-isotope shop-product-wrap four-column" *ngIf="!prodloader">
                             <!--=======  single product  =======-->
                             <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
                                 *ngFor="let img of Product;let i = index">
@@ -315,7 +315,7 @@
 
                         </div>
 
-                        <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;"
+                        <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -50px;"
                             *ngIf="prodloader">
                             <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
                                 <div class="single-product" style="height: 250px; width: 200px;">
