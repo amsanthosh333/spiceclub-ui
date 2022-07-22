@@ -152,7 +152,7 @@
                 </div>
                 <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10 "  infinite-scroll
                 [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
-                <div class="row product-isotope shop-product-wrap four-column"  *ngIf="prodloadermain">
+                <div class="row product-isotope shop-product-wrap four-column"  *ngIf="!prodloader">
                     <!--=======  single product   =======-->
                     <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
                         *ngFor="let img of Bestsellpro;let i=index">
@@ -328,18 +328,6 @@
                 </div>
             </div>
            
-                <!--  productslazyloading -->
-                <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
-                    <div id="prodload" class="row product-isotope shop-product-wrap four-column"> 
-                        <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-                            <div class="single-product" id style="height: 250px; width: 200px;">
-                                <ngx-skeleton-loader count="1"
-                                    [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                </ngx-skeleton-loader>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
         </div>

@@ -1,4 +1,28 @@
 
+.shop-page-wrapper{
+  background-color: #f1f3f6;
+}
+#sidenavg{
+  background-color: white;
+}
+.product-isotope{
+  background-color: white;
+  padding-top: 10px;
+}
+.single-sidebar-widget{
+  border-bottom: 1px solid #ededed;
+}
+#pricefilter{
+  border-bottom: 1px solid #ededed;
+  padding-bottom: 10px;
+}
+.single-sidebar-widget--list{
+  padding-left: 15px;max-height: 475px;overflow-y: auto;
+}
+.has-children a {
+  text-decoration: none;
+}
+/* divisions in card adov */
 /* productlist css */
 #productdiv:hover{
   box-shadow: 0px 1px 8px #a1a1a1;
@@ -11,8 +35,8 @@
   /* border: 0.8px solid #e9e7e7; */
   margin-right: 10px;
   margin-left: 10px;
-background-color:#f3f3f3;
-border-radius: 3px;
+  background-color: #f8f9fa;
+  border-radius: 3px;
 }
 .dropdown-item{
   font-size: 0.6rem;
@@ -67,7 +91,7 @@ input[type=number]::-webkit-inner-spin-button {
 }
 @media (min-width: 1200px){
   .container, .container-lg, .container-md, .container-sm, .container-xl {
-      max-width: 1300px;
+      max-width: 1330px;
   }
 }
 #sidenavg{
@@ -139,11 +163,11 @@ a:not([href]):not([class]):hover {
 @media (min-width: 992px){
   .col-lg-9 {
       flex: 0 0 auto;
-      width: 77%;
+      width: 80.5%;
   }
-  .product-isotope{
+  /* .product-isotope{
     margin-right: -100px;
-  }
+  } */
   }
   @media (min-width: 992px){
     .col-lg-3 {

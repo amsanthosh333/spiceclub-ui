@@ -20,8 +20,8 @@
         =            shop advance filter area         =
         =============================================-->
 
-	<div class="shop-page-content mt-15 mb-15">
-		<div class="container">
+	<div class="shop-page-content ">
+		<div class="container mt-10 mb-10">
 			<div class="row">
 				<div id="sidenavg" class="col-lg-2 order-2 order-lg-1">
 
@@ -120,12 +120,12 @@
 							justify-content: center;
 							align-items: center;
 							height: 200px;
-							border: 3px solid rgb(139, 139, 139);">
-								<div>
-									<h5>
-										There is no product
-									</h5>
-								</div>
+							border: 1px solid rgb(243 243 243);">
+							<div>
+								<h6>
+									There is no product
+								</h6>
+							</div>
 							</div>
                         </div>
                     </div>
@@ -233,11 +233,11 @@
 						justify-content: center;
 						align-items: center;
 						height: 200px;
-						border: 3px solid rgb(139, 139, 139);">
+						border: 1px solid rgb(243 243 243);">
 							<div>
-								<h5>
+								<h6>
 									There is no product
-								</h5>
+								</h6>
 							</div>
 						</div>
 							<!--=======  End of widget product wrapper  =======-->
@@ -250,9 +250,9 @@
 					
 					<!--=======  End of page sidebar  =======-->
 				</div>
-				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" infinite-scroll
+				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10" infinite-scroll
 				[infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
-					<div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloadermain">
+					<div class="row product-isotope shop-product-wrap four-column" *ngIf="!prodloader">
 						<!--=======  single product  =======-->
 						<div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
 							*ngFor="let img of Product;let i = index">
@@ -393,28 +393,15 @@
 					justify-content: center;
 					align-items: center;
 					height: 200px;
-					border: 3px solid rgb(139, 139, 139);">
-						<div>
-							<h5>
-								There is no product
-							</h5>
-						</div>
-					</div>
-
-				</div>
-				<!--  productslazyloading -->
-				<div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
-					<div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;">
-						<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
-							<div class="single-product" style="height: 250px; width: 200px;">
-								<ngx-skeleton-loader count="1"
-									[theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-								</ngx-skeleton-loader>
+					border: 1px solid rgb(243 243 243);">
+							<div>
+								<h6>
+									There is no product
+								</h6>
 							</div>
-						</div>
 					</div>
-				</div>
 
+				</div>
 			</div>
 		</div>
 	</div>
