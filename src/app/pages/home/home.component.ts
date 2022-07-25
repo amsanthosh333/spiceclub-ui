@@ -454,10 +454,10 @@ export class HomeComponent implements OnInit {
   viewtopcategory() {
     this.request.gettopcat().subscribe((response: any) => {
       this.Topcat = response.data;
-      this.top1id = this.Topcat[0].id
-      this.top2id = this.Topcat[1].id
-      this.top1name = this.Topcat[0].name;
-      this.top2name = this.Topcat[1].name;
+      this.top1id = this.Topcat[10].id
+      this.top2id = this.Topcat[5].id
+      this.top1name = this.Topcat[10].name;
+      this.top2name = this.Topcat[5].name;
       console.log("this.Topcat", this.Topcat, this.top1id, this.top2id);
       this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
         this.topfirstcat = response.data
@@ -503,6 +503,11 @@ export class HomeComponent implements OnInit {
   imageClick(i: any) {
     this.prd_id = this.Todaysoffer[i].product_id,
       this.proddetail(this.prd_id)
+
+  }
+  bannerClick(id: any) {
+   
+      this.proddetail(id)
 
   }
   blogClick(i: any) {

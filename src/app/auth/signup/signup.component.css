@@ -10,7 +10,10 @@ input, textarea{
 select{
   color: rgb(223, 39, 39)
 }
-
+#verifybtn{
+  padding: 1px 5px;
+    font-size: 0.9rem;
+}
 #loginformrow p{
   margin-bottom: 0px;
   color: black;

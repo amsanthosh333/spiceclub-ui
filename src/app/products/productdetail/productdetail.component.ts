@@ -703,7 +703,7 @@ export class ProductdetailComponent implements OnInit {
       console.log(res);
       this.varprise = res?.price_string;
       this.varstrokedprice= res?.stroked_price;
-      console.log("error", this.varprise);
+      console.log("varprise", this.varprise);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -847,6 +847,8 @@ export class ProductdetailComponent implements OnInit {
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       this.Peoduct = response.data[0];
+      console.log("Peoduct",this.Peoduct);
+      
       this.prod_price = this.Peoduct.main_price;
       this.choice = this.Peoduct.choice_options;
       this.stk = this.Peoduct.current_stock;

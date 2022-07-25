@@ -201,6 +201,8 @@ export class CheckoutComponent implements OnInit {
     this.getSelecteditem();
   }
   viewcart() {
+    console.log("buynowvalue",this.buynowvalue);
+    
     this.request.fetchusercart(this.userid, this.buynowvalue).subscribe((response: any) => {
       console.log("Cart", response);
       this.Cart = response;
@@ -289,6 +291,16 @@ export class CheckoutComponent implements OnInit {
           console.log("else",);
           console.log("shipping address id", this.address_id);
           // this.shippingcost(this.curshipaddress)
+          let edata2 = {
+            user_id: this.userid,
+            address_id:this.address_id
+          }
+
+          this.request.updateshippingaddress(edata2).subscribe((response: any) => {
+            if (response.result == true) {
+              console.log("shipping address updated")
+            }
+          });
         }
       }
     });
@@ -325,7 +337,8 @@ export class CheckoutComponent implements OnInit {
 
     this.request.makeshipingaddress(edata5).subscribe((res: any) => {
       if (res.result == true) {
-
+        console.log("make_default shipping address")
+        
         this.request.fetchaddress(this.userid).subscribe((response: any) => {
           this.Address = response.data;
           this.toastr.success('Address Updated Successfully', '');
@@ -333,6 +346,7 @@ export class CheckoutComponent implements OnInit {
         // this.getaddress();
         this.request.updateshippingaddress(edata2).subscribe((response: any) => {
           if (response.result == true) {
+            console.log("shipping address updated")
           }
         });
 
@@ -403,7 +417,7 @@ export class CheckoutComponent implements OnInit {
       owner_id: this.owneriid,
       user_id: this.userid,
       payment_type: this.payytype,
-      // is_buynow=
+      is_buynow:this.buynowvalue
     }
     console.log("finallyplaceorder",edata);
     
@@ -611,6 +625,8 @@ export class CheckoutComponent implements OnInit {
         postal_code: form.value.postal_code,
         phone: form.value.phone,
       }
+      console.log("edata",edata);
+      
       this.request.addaddress(edata).subscribe((res: any) => {
         if (res.message == 'Shipping information has been added successfully') {
           form.reset()

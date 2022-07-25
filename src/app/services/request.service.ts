@@ -589,7 +589,8 @@ public getbrandsearchprod(id:string,page:any,key:any) {
 
 //prod detail
 public getproddetail(id: string) {
-  this.url = `${this.endPoint1}/products/` + id +`&buyertype=` +this.buyertypeid;
+  this.url = `${this.endPoint1}/products/` + id +`?buyertype=` +this.buyertypeid;
+  console.log("product call url",this.url);
   return this.http.get(this.url);
 }
 public getcatprodbyid(id: string) {

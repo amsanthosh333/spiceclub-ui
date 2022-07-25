@@ -71,7 +71,7 @@ export class SignupComponent implements OnInit {
     this.getbyertype();
     this.otpform = this.fb.group({
       otp: ['', [Validators.required]],
-    });
+    }); 
   }
   get f1() {
     return this.otpform.controls;
@@ -84,6 +84,13 @@ export class SignupComponent implements OnInit {
       this.buyer = res.data
     },
     )
+  }
+  openverify(content: any){
+    this.modalService.dismissAll()
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
   onSubmit(content: any) {
     this.submitted = true;
@@ -127,11 +134,13 @@ export class SignupComponent implements OnInit {
           this.userid = res.user_id
           if (res.result == true) {
             this.toastr.success('Registered Successfully', '');
+            this.modalService.dismissAll()
             this.modalService.open(content, {
               ariaLabelledBy: 'modal-basic-title',
               size: 'md',
             });
             this.btnloading = false;
+            
           } else if (res.result == false) {
             this.error2 = res.message
             this.btnloading = false;
@@ -166,7 +175,7 @@ export class SignupComponent implements OnInit {
             console.log("iffff");
             this.toastr.success('Your account is verified', '');
             this.modalService.dismissAll();
-            this.router.navigate(['/login']);
+            this.openlogin();
           } else {
             console.log("elseee");
             this.error3 = '*Code does not match,you can request for resending the code';
@@ -181,6 +190,12 @@ export class SignupComponent implements OnInit {
         }
       );
     }
+  }
+  openlogin(){
+    this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
   resend() {
     this.resendloading = true

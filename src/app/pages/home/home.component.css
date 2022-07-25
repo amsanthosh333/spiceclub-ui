@@ -1199,12 +1199,12 @@ input[type=number] {
 @media (min-width: 992px) {
 
   .todaybanner {
-    height: 250px;
+    /* height: 250px; */
   }
 
   .todaybanner img {
     height: 100%;
-    object-fit: cover;
+    /* object-fit: cover; */
     width: 100%;
   }
 
@@ -1259,7 +1259,7 @@ input[type=number] {
     margin-left: 40px;
     width: 93%;
     position: absolute;
-    top: 54%;
+    top: 42%;
 
   }
 

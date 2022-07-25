@@ -45,7 +45,7 @@
                 </div> -->
                 <div class="row">
                     <div class="col-3"  *ngFor="let a of Todaysoffer">
-                        <div class="todaybanner"> 
+                        <div class="todaybanner" (click)="bannerClick(a.product_id)"> 
                             <img src="{{a.thumbImage}}" >
                         </div>
                        
@@ -340,7 +340,7 @@
                             display: -webkit-box; 
                             -webkit-line-clamp: 12;
                             -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
                             </div>
 
              
@@ -715,7 +715,7 @@
                             display: -webkit-box; 
                             -webkit-line-clamp: 12;
                             -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
                             </div>
                         </div>
                         <!--=======  End of single product content   =======-->
@@ -911,7 +911,7 @@
                             display: -webkit-box; 
                             -webkit-line-clamp: 12;
                             -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
                             </div>
                         </div>
 
@@ -1201,7 +1201,7 @@
                             display: -webkit-box; 
                             -webkit-line-clamp: 12;
                             -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
                             </div>
                         </div>
 
