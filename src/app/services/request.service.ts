@@ -616,7 +616,7 @@ public getrelatedprod(id: string) {
   return this.http.get(this.url);
 }
 public addvarient(id: string,varient:any) {
-  this.url = `${this.endPoint1}/products/variant/price?id=` + id +`&color=` +`&variants=` + varient+`&user_id=`+ this.userid ;
+  this.url = `${this.endPoint1}/products/variant/price?id=` + id +`&color=` +`&variants=` + varient+`&user_id=`+ this.userid +`&buyertype=` +this.buyertypeid ;
   console.log("varient url",this.url);
   return this.http.get(this.url);
 }

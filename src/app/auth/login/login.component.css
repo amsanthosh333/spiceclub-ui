@@ -229,6 +229,67 @@ select {
  
 }
 
+ /* web */
+ @media (min-width : 995px) {
+  #reqOTPdiv{
+    margin-top:19px ;
+    padding-left: 0px;
+    font-size: 0.8rem;
+  }
+  #reqOTPbtn{
+    font-size:0.8rem;
+    padding: 3px 17px;
+      float: right;
+  }
+  #reqOTPbtnload{
+    float: right;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size:0.7rem;
+    padding-top: 2px;
+    height:26px ;
+  }
+
+  .lezada-button--medium {
+    font-size: 14px;
+    padding: 3px 85px;
+    width: 100%;
+    border-radius: 3px;
+    text-transform: none;
+   
+  }
+ }
+  /*mob*/
+  @media (max-width : 995px) {
+    #reqOTPdiv{
+      margin-top:19px ;
+      padding-left: 0px;
+      font-size: 0.8rem;
+      text-align: center;
+    }
+    #reqOTPbtn{
+      font-size:0.8rem;
+      padding: 3px 17px;
+       margin-left: 10px; 
+       float:none;
+    }
+    #reqOTPbtnload{
+      float: none;
+      padding-left: 30px;
+      padding-right: 30px;
+      font-size:0.7rem;
+      padding-top: 2px;
+      height:26px ;
+    }
+    .lezada-button--medium {
+      font-size: 12px;
+      padding: 3px 15px;
+      width: 100%;
+      border-radius: 3px;
+      text-transform: none;
+     
+    }
+   }
 /* 
 new google button */
 /* .google-btn {

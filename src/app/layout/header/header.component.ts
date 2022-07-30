@@ -1820,7 +1820,10 @@ export class HeaderComponent implements OnInit {
       size: 'md',
     });
   }
-  
+  gotosubscribe(){
+    console.log("sdfxdgs");
+    
+  }
   openkyc(){
     $("#about-overlay").toggleClass("active-about-overlay");
         $(".overlay-close").addClass("inactive").removeClass("active");

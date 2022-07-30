@@ -319,14 +319,10 @@
 												class="main-price discounted">{{img.stroked_price}}</span>
 											<span class="discounted-price">{{img.main_price}} </span>
 										</div>
-										<div class="pri" >
-											<span class="discounted-price" style="line-height: 1.6rem;
-										overflow: hidden;
-										display: -webkit-box; 
-										-webkit-line-clamp: 12;
-										-webkit-box-orient: vertical;
-										max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
-										</div>
+                                        <div class="pri">
+                                            <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                             style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<3">{{b.name}}</span></span>
+                                        </div>
 									</div>
                                     <div class="row"
                                         *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">

@@ -190,7 +190,7 @@
 
                                             <span class="review-link" style="display: grid;margin-top: 5px;"
                                                 *ngIf="Peoduct.current_stock > 0">
-                                                <a style="color:green; font-size: 0.8rem;">In Stock
+                                                <a style="color:green; font-size: 0.8rem;"><span *ngIf="Peoduct.stock_visibility_state !=='hide'">{{Peoduct.current_stock}}&nbsp;</span>In Stock
                                                     <!-- <span (click)="addtowishlistmain(Peoduct?.id,addwishlistRecord)"
                                                         *ngIf="(iswishlistt?.is_in_wishlist==false)"
                                                         style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
@@ -282,7 +282,7 @@
                                             </div>
                                             <div class="single-info" style="font-size: 0.8rem;padding-bottom:7px;">
                                                 <span class="quickview" style="color: #727272">Excluding GST : </span>
-                                                <a style="font-weight: 600;color: #727272;">Rs. {{Peoduct?.excl_gst}}
+                                                <a style="font-weight: 600;color: #727272;">Rs {{Peoduct?.excl_gst}}
                                                 </a>
                                             </div>
 
@@ -318,25 +318,30 @@
 
                                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
                                                 *ngIf="Peoduct?.discount_percentage!= 0">You save <span
-                                                    style="color:rgb(168, 0, 0);">Rs.{{Peoduct?.discount_amount}}
+                                                    style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
                                                     ({{Peoduct?.discount_percentage}}%)</span>. Inclusive all taxes </p>
                                         </div>
 
 
-                                        <div class="shop-product__block__title"
+                                        <!-- <div class="shop-product__block__title"
                                             style="font-weight: 600;color: green; text-align: start;font-size: 0.8rem;">
-                                            {{Peoduct?.usp_text}}
-                                        </div>
+                                          <span *ngFor="let b of Peoduct?.usp" >{{b?.name}}</span>  
+                                        </div> -->
                                         <div style="text-align: start;"> <span>
-                                                <a *ngFor="let b of Peoduct?.usp_icon">
+                                                <a *ngFor="let b of Peoduct?.usp" style="text-align: center; margin-right:15px;">
+                                                    <div class="shop-product__block__title"
+                                                    style="font-weight: 600;color: green; text-align: start;font-size: 0.8rem;">
+                                                  <span  >{{b?.name}}</span>  
+                                                </div>
+
                                                     <img src="https://neophroncrm.com/spiceclubnew/public/{{b?.icon}}"
-                                                        style="height:47px; width:47px; margin-bottom: 3px;margin-left:15px;margin: right 15px; ; "></a>
+                                                        style="height:47px; width:47px; margin-bottom: 3px;margin-left:0px;margin: right 15px; ; "></a>
                                                 &nbsp; </span>
 
                                         </div>
                                         <div>
                                             <span class="review-link " id="offer"
-                                                *ngFor="let t of Peoduct?.tags;let i = index" >
+                                                *ngFor="let t of Peoduct?.tags;let i = index">
                                                 <a style="color: rgb(83, 83, 83);">{{t}}</a>
                                             </span>
                                             <!-- <span class="review-link ml-20" id="offer"
@@ -485,7 +490,7 @@
                         <div class="shop-product__block shop-product__block--size " style="justify-content: center;">
                             <span class="shop-product__block__value ">
                                 <span style="font-size:0.8rem ;"> You Pay </span><strong><span style="color: red;">
-                                        Rs.{{totalprice}} </span></strong>
+                                        Rs {{totalprice}} </span></strong>
                                 <!-- <p > (Including all taxes) </p> -->
                             </span>
                         </div>
@@ -795,17 +800,32 @@
             <div class="questions row pt-0">
                 <h5>How to use?</h5>
                 <div class="videoo " style="text-align: start;padding-left: 33px;">
-                    <iframe width="300" height="200" [src]='videoURL' title="YouTube video player"
-                        frameborder="0"
+                    <iframe width="300" height="200" [src]="videoURL" title="YouTube video player" frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
 
-                    <!-- <video controls width="400" #videoPlayer>
-                        <source src=Peoduct.video_link
-                            type="video/mp4">
-                    </video> -->
-                </div>
+                        <!-- <video muted autoplay  *ngIf="videoURL" id="video1"  
+                        width="350px" height="195px" class="img" controls
+                        >
+                         <source src="https://www.w3schools.com/html/mov_bbb.mp4" type='video/mp4' />
+                       </video> -->
 
+                    <!-- <video controls width="400" #videoPlayer>
+                        <source src="https://www.youtube.com/watch?v=OMLj5pw1KtI" type="video/mp4">
+                    </video> -->
+
+                    <!-- <video #media     
+                    [src]="videoURL"
+                    id="singleVideo"
+                    preload="auto"
+                    crossorigin>
+              </video> -->
+
+              <!-- <video controls (click)="toggleVideo()" #videoPlayer>
+                <source src="https://www.youtube.com/watch?v=OMLj5pw1KtI" type="video/mp4" />
+                Browser not supported
+            </video> -->
+                </div>
             </div>
 
             <!-- related -->
@@ -882,7 +902,7 @@
                                             Details</a>
                                     </div>
 
-<!-- 
+                                    <!-- 
 
                                     <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                         overflow: hidden;
@@ -900,13 +920,9 @@
                                             class="main-price discounted">{{img.stroked_price}}</span>
                                         <span class="discounted-price">{{img.main_price}} </span>
                                     </div>
-                                    <div class="pri" style="text-align: center;">
-                                        <span class="discounted-price" style="line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 12;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                                    <div class="pri" style="text-align: center;" >
+                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                         style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
                                     </div>
                                 </div>
 
@@ -1302,13 +1318,9 @@
                                             class="main-price discounted">{{img.stroked_price}}</span>
                                         <span class="discounted-price">{{img.main_price}} </span>
                                     </div>
-                                    <div class="pri" style="text-align: center;">
-                                        <span class="discounted-price" style="line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 12;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                                    <div class="pri" style="text-align: center;" >
+                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                         style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
                                     </div>
                                 </div>
 
@@ -1735,13 +1747,9 @@
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
                             </div>
-                            <div class="pri" style="text-align: center;">
-                                <span class="discounted-price" style="line-height: 1.6rem;
-                    overflow: hidden;
-                    display: -webkit-box; 
-                    -webkit-line-clamp: 12;
-                    -webkit-box-orient: vertical;
-                    max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            <div class="pri" style="text-align: center;" >
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
                             </div>
                         </div>
 
@@ -1892,13 +1900,9 @@
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
                             </div>
-                            <div class="pri" style="text-align: center;">
-                                <span class="discounted-price" style="line-height: 1.6rem;
-                    overflow: hidden;
-                    display: -webkit-box; 
-                    -webkit-line-clamp: 12;
-                    -webkit-box-orient: vertical;
-                    max-height: 1.7rem; color:#363636;font-size: 0.7rem;">{{img.usp_text}}</span>
+                            <div class="pri" style="text-align: center;" >
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
                             </div>
                         </div>
 

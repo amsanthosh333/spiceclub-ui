@@ -34,13 +34,8 @@
   width: 103%;
 
 }
-.exploreimgdiv{
-  height:75px; width:75px;  display:block; margin:auto;
- }
-.explore p:hover{
-  font-size: 0.7rem;
-  color: rgb(50, 98, 255);
-} 
+
+
   
 
 .exploreimgdiv img {
@@ -56,9 +51,7 @@
   height: 80px;
   width: 80px;
 } */
-.explore p {
-  font-size: 0.7rem;
-}
+
 
 @keyframes blink {
 
@@ -123,10 +116,6 @@ div {
   margin-top: 10px;
 }
 
-.recipebanner {
-  margin-bottom: -130px;
-  height: 300px;
-}
 
 #icondiv1 {
   padding: 10px;
@@ -227,13 +216,7 @@ input {
   color: rgb(190, 190, 190);
 }
 
-#subsc input,
-input::placeholder {
-  font: sans-serif;
-  padding-left: 10px;
-  font-family: Arial, Helvetica, sans-serif;
-  letter-spacing: 0;
-}
+
 
 #greenbtn:hover {
   color: #69f01b;
@@ -253,39 +236,12 @@ input::placeholder {
   border-radius: 25px;
 }
 
-#deliverydivcol {
-  display: flex;
-  padding-left: 35px;
-}
-
-#deliverydiv {
-  padding: 10px;
-  /* width: 14%; */
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
-#brandsdiv {
-  padding: 10px;
-  width: 14%;
-  padding-top: 25px;
-  padding-bottom: 25px;
-}
-
 #brandslogocol {
   display: flex;
   justify-content: center;
 }
 
-.brandslogo {
-  height: 100px;
-  width: 150px;
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
-}
 
 .enqueryform label {
   font-size: 0.7rem;
@@ -344,11 +300,7 @@ input::placeholder {
   padding-top: 10px;
 }
 
-.col-lg-8 {
-  width: 65.88786777%;
-  margin-right: 10px;
-  padding: 0px;
-}
+
 
 :host ::ng-deep .carousel-arrow-prev {
   left: 0px;
@@ -382,12 +334,7 @@ input::placeholder {
   justify-content: space-between;
 }
 
-.listcard {
-  background-color: white;
-  margin-left: 22px;
-  width: 97%;
-  padding: 0px;
-}
+
 
 #viewall:hover {
   color: #1b54f0;
@@ -455,15 +402,6 @@ input::placeholder {
   margin-left: 22px;
 }
 
-#sliderrow4 {
-  margin-right: 2.4%;
-  margin-left: 2.8%;
-  margin-right: 3.7%;
-  margin-left: 1.5%;
-  width: 97%;
-  padding: 0px;
-  margin-left: 22px;
-}
 
 #sliderrow5 {
   margin-right: 2.4%;
@@ -591,6 +529,7 @@ input::placeholder {
   height: 100px;
 }
 
+/* web */
 @media (min-width: 992px) {
   .img-fluid {
     max-width: 100%;
@@ -625,13 +564,245 @@ input::placeholder {
     display: inline;
   }
 
+  #sliderrow4 {
+    margin-right: 2.4%;
+    margin-left: 2.8%;
+    margin-right: 3.7%;
+    margin-left: 1.5%;
+    width: 97%;
+    padding: 0px;
+    margin-left: 22px;
+  }
+  .col-lg-8 {
+    width: 65.88786777%;
+    margin-right: 10px;
+    padding: 0px;
+  }
+  .exploreimgdiv{
+    height:75px; width:75px;  display:block; margin:auto;
+   }
+   .explore p {
+    font-size: 0.7rem;
+  }
+   .explore p:hover{
+    font-size: 0.7rem;
+    color: #3262ff;
+  } 
+  .listcard {
+    background-color: white;
+    margin-left: 22px;
+    width: 97%;
+    padding: 0px;
+  }
+  .brandslogo {
+    height: 100px;
+    width: 150px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  }
+  
+#brandsdiv {
+  padding: 10px;
+  width: 14%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+#tellussubmit{
+  margin-top: 30px;
 }
 
+#deliverydivcol {
+  display: flex;
+  padding-left: 35px;
+}
+#deliverydiv {
+  padding: 10px;
+  /* width: 14%; */
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+#stickericon{
+  height:50px; 
+  width:50px
+}
+.recipebanner {
+  margin-bottom: -130px;
+  height: 300px;
+}
+#recipevideo{
+  display:flex;
+  padding-top: 10px;
+  margin-right: auto;
+  margin-left: auto;
+   padding-bottom: 10px;
+   background-color: white;
+}
+#mainannouncediv{
+  background-color:#ce2127; 
+  display: flex;
+}
+#Announcementheader{
+  display: flex; 
+  justify-content: end;
+}
+#subsc input,
+input::placeholder {
+  font: sans-serif;
+  padding-left: 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+}
+#subsc{
+  padding-top: 40px;
+}
+#Anocheader{
+  display: flex;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+#Anoccontent{
+  width:160px;
+   padding: 25px;
+}
+}
+.section-title h6{
+  font-weight: 600; 
+  color: black;
+  margin-left: 10px;
+  margin-top: 10px;
+  margin-bottom: 0px;
+}
+
+/* mob */
 @media (max-width: 992px) {
+
+  #subsc{
+    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  #subsc form{
+    display: flex;
+   
+  }
+  #subsc 
+input::placeholder {
+  font: sans-serif;
+  padding-left: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  letter-spacing: 0;
+}
+
+  #Anocheader{
+    margin-top: 15px; display:flex
+  }
+
+  #Anoccontent{
+    width:160px;
+     /* padding: 5px; */
+  }
+
+  #recipevideo{
+    display: flex;
+    padding-top: 3px;
+    margin-right: auto;
+    margin-left: auto;
+    padding-bottom: 3px;
+    background-color: white;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .recipebanner {
+    margin-bottom: -70px;
+    height: 190px;
+  }
+#recipelistcard
+{
+  height: 190px;
+}
+  
+  #stickericon{
+    height:50px; 
+    width:50px !important
+  }
+  #deliverydiv {
+    padding: 10px;
+    margin-left: 0px !important;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  
+#deliverydivcol {
+  display: block;
+ 
+}
+
+  .section-title h6{
+    font-weight: 600; 
+    color: black;
+    margin-left: 0px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+  }
+
+#brandslogocol{
+  padding: 0px;
+}
+
+  
+#brandsdiv {
+  margin-right: 10px;
+  /* padding: 10px; */
+  width: 16%;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  padding-left: 5px;
+}
+  .brandslogo {
+    height: 40px;
+    width: 55px;
+    border-radius: 5px; 
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  
+  }
+  .listcard {
+    background-color: white;
+    margin-left: 22px;
+    width: 88%;
+    padding: 0px;
+  }
+  .explore p {
+    font-size: 0.6rem;
+  }
+
+  .explore p:hover{
+    font-size: 0.6rem;
+    color: rgb(50, 98, 255);
+  } 
+  .exploreimgdiv{
+    height:60px; width:60px;  display:block; margin:auto;
+   }
   .img-fluid {
     max-width: 100%;
     height: 200px;
   }
+  #sliderrow4 {
+    margin-right: 2.4%;
+    margin-left: 2.8%;
+    margin-right: 3.7%;
+    margin-left: 1.5%;
+    width: 88%;
+    padding: 0px;
+    margin-left: 22px;
+  }
+  
 
   /* .col-lg-2 {
     flex: 0 0 auto;
@@ -659,6 +830,9 @@ input::placeholder {
     color: black;
     margin-left: 0px;
     display: inline;
+  }
+  #tellussubmit{
+    margin-top: 10px;
   }
 }
 

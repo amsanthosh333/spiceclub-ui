@@ -17,7 +17,7 @@ import { ShareModule } from 'ngx-sharebuttons';
 import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
-    ProductdetailComponent
+    ProductdetailComponent,
   ],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA],
   imports: [

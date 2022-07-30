@@ -33,11 +33,11 @@
 								font-size: 0.7rem;">Forgot Password?</a>
 							</div>
 
-							<div class="col-lg-5 " id="reqOTPdiv" style="margin-top:19px ;padding-left: 0px;">
-								<span>or</span>  <button id="reqOTPbtn" *ngIf="!otpbtnloading" type="button" class="btn btn-danger"
+							<div class="col-lg-5 " id="reqOTPdiv" >
+								<span>or</span>  <button id="reqOTPbtn" *ngIf="!otpbtnloading" 
+								type="button" class="btn btn-danger"
 									(click)="requestloginotpnew()">Request OTP</button>
-								<button class="btn btn-danger" type="button"
-									style="padding-left: 22px;padding-right: 22px;font-size:0.8rem;padding-top: 2px;"
+								<button id="reqOTPbtnload" class="btn btn-danger" type="button"
 									*ngIf="otpbtnloading"><i class="fa fa-spinner fa-spin"></i>&nbsp;</button>
 							</div>
 							<!-- <div class="col-lg-5 " style="margin-top:19px ; margin-left: 15px;" *ngIf="resendotp">

@@ -254,7 +254,7 @@
     <div class="col-lg-12 mb-10 pb-0 " class="listcard">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
-                <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
+                <h6 >
                     Best Selling Products</h6>
                 <button class="btn btn-primary" id="viewall" [routerLink]="'/bestselling'">View all</button>
             </div>
@@ -334,17 +334,10 @@
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
                             </div>
-                            <div class="pri" style="text-align: center;">
-                                <span class="discounted-price" style="line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 12;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
-                            </div>
-
-             
-
+                            <div class="pri" style="text-align: center;" >
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
+                            </div>         
                         </div>
 
                         <!--=======  End of single product content   =======-->
@@ -450,10 +443,11 @@
     <!-- Explore category -->
     <div class="row mt-10 mb-10" id="sliderrow4">
         <div class="col-lg-8 pl-0 pr-0" style="background-color:white;">
-            <div class="section-title section-title--one  mb-0" style="border-bottom: 1px solid #d3d3d3;">
-                <h6 style="font-weight: 600; color: black;margin-left: 25px;margin-top: 10px;margin-bottom: 0px;">
-                    Explore Categories</h6>
-            </div>
+            <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
+                <div class="section-title section-title--one  mb-0">
+                    <h6>Explore Categories</h6>  
+                </div>
+            </div>     
             <div class="explore row">
                 <div class="col-2 " id="exp-col" *ngFor="let img of Topcat" style="text-align:center;padding-top: 5px;"
                     (click)="gotocategoryproduct(img.id)">
@@ -463,7 +457,6 @@
                     <p>{{img.name}}</p>
                 </div>
             </div>
-
         </div>
         <div class="col-lg-4 p-0">
             <div style="background-color:white; padding: 0px;">
@@ -498,7 +491,7 @@
                                 <textarea name="" cols="38" rows="4" placeholder="RFQ Description"
                                     formControlName="comments"></textarea>
                             </div>
-                            <div class="col-lg-4 text-center mb-10 mt-30 pl-0">
+                            <div class="col-lg-4 text-center mb-10 pl-0" id="tellussubmit">
                                 <button id="requirment" class="btn btn-warning" *ngIf="!btnloading1">Submit</button>
                                 <button class="btn btn-warning" *ngIf="btnloading1">
                                     <i class="fa fa-spinner fa-spin"
@@ -624,7 +617,7 @@
     <div class="col-lg-12 mb-10 pb-0" class="listcard">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
-                <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
+                <h6 >
                     Featured Products</h6>
                 <!-- <button class="btn btn-primary" id="viewall" [routerLink]="'/bestselling'">View all</button> -->
             </div>
@@ -709,13 +702,9 @@
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
                             </div>
-                            <div class="pri" style="text-align: center;">
-                                <span class="discounted-price" style="line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 12;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
+                            <div class="pri" style="text-align: center;" >
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
                             </div>
                         </div>
                         <!--=======  End of single product content   =======-->
@@ -821,7 +810,7 @@
     <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
-                <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
+                <h6 >
                     {{top1name}}</h6>
                 <button class="btn btn-primary" id="viewall" (click)="gotocategory()">View all</button>
             </div>
@@ -905,13 +894,9 @@
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
                             </div>
-                            <div class="pri" style="text-align: center;">
-                                <span class="discounted-price" style="line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 12;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
+                            <div class="pri" style="text-align: center;" >
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
                             </div>
                         </div>
 
@@ -1019,7 +1004,7 @@
     <div class="col-lg-12 mb-10 pb-0" class="listcard" style="margin-top: 10px;">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
-                <h6 style="font-weight: 600; color: black;margin-left: 30px;margin-top: 10px;margin-bottom: 0px;">
+                <h6 >
                     Brands</h6>
             </div>
         </div>
@@ -1115,7 +1100,7 @@
     <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
-                <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
+                <h6 >
                     {{top2name}}</h6>
                 <button class="btn btn-primary" id="viewall" (click)="gotocategory2()">View all</button>
             </div>
@@ -1195,13 +1180,9 @@
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
                             </div>
-                            <div class="pri" style="text-align: center;">
-                                <span class="discounted-price" style="line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 12;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem; color:#363636;font-size: 0.65rem;">{{img.usp_text}}</span>
+                            <div class="pri" style="text-align: center;" >
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
+                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
                             </div>
                         </div>
 
@@ -1309,57 +1290,60 @@
     <!-- shipping, returns, testimoniyal -->
 
     <div class="col-lg-12 mb-10 pb-0" class="listcard" style="margin-top: 10px;padding: 2px;">
-        <div class="col-lg-12" id="deliverydivcol">
-            <div class="col-3" id="deliverydiv" style="display:flex;margin-left: 28px;">
-                <div class="col-4 p-0" style="height:50px; width:80px">
-                    <img src="assets/images/icons/truck1.png" style="height: 100%;width: 100%; object-fit: cover;"
-                        class="img-fluid" alt="">
+        <div class="row">
+            <div class="col-lg-12" id="deliverydivcol">
+                <div class="col-lg-3 col-sm-6" id="deliverydiv" style="display:flex;margin-left: 28px;">
+                    <div class="col-4 p-0" style="height:50px; width:80px" id="stickericon">
+                        <img src="assets/images/icons/truck1.png" style="height: 100%;width: 100%; object-fit: cover;"
+                            class="img-fluid" alt="">
+                    </div>
+                    <div class="col-8 pl-10">
+                        <a routerLink="/contact" style="text-decoration: none;color: black;">
+                            <p style="font-weight: 600;; margin: 0px;">Free Shipping</p>
+                            <p style="font-size: 0.8rem;">On all orders over Rs.40</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-8 pl-10">
-                    <a routerLink="/contact" style="text-decoration: none;color: black;">
-                        <p style="font-weight: 600;; margin: 0px;">Free Shipping</p>
-                        <p style="font-size: 0.8rem;">On all orders over Rs.40</p>
-                    </a>
+                <div class="col-lg-3 col-sm-6" id="deliverydiv" style="display:flex;">
+                    <div class="col-4 p-0" id="stickericon">
+                        <img src="assets/images/icons/return.png" style="height: 100%;width: 100%; object-fit: cover;"
+                            class="img-fluid" alt="">
+                    </div>
+                    <div class="col-8 pl-10">
+                        <a routerLink="/contact" style="text-decoration: none;color: black;">
+                            <p style="font-weight: 600;; margin: 0px;">Free Returns</p>
+                            <p style="font-size: 0.8rem;">Returns are free within 9days</p>
+                        </a>
+                    </div>
                 </div>
-            </div>
-            <div class="col-3" id="deliverydiv" style="display:flex;">
-                <div class="col-4 p-0" style="height:50px; width:50px">
-                    <img src="assets/images/icons/return.png" style="height: 100%;width: 100%; object-fit: cover;"
-                        class="img-fluid" alt="">
+                <div class="col-lg-3 col-sm-6" id="deliverydiv" style="display:flex;">
+                    <div class="col-4 p-0" id="stickericon">
+                        <img src="assets/images/icons/card.png" style="height: 100%;width: 100%; object-fit: cover;"
+                            class="img-fluid" alt="">
+                    </div>
+                    <div class="col-8 pl-10 pr-0">
+                        <a routerLink="/contact" style="text-decoration: none;color: black;">
+                            <p style="font-weight: 600; margin: 0px;">100% Payment Secure</p>
+                            <p style="font-size: 0.8rem;">Your payments are safe with us</p>
+                        </a>
+                    </div>
                 </div>
-                <div class="col-8 pl-10">
-                    <a routerLink="/contact" style="text-decoration: none;color: black;">
-                        <p style="font-weight: 600;; margin: 0px;">Free Returns</p>
-                        <p style="font-size: 0.8rem;">Returns are free within 9days</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3" id="deliverydiv" style="display:flex;">
-                <div class="col-4 p-0" style="height:50px; width:50px">
-                    <img src="assets/images/icons/card.png" style="height: 100%;width: 100%; object-fit: cover;"
-                        class="img-fluid" alt="">
-                </div>
-                <div class="col-8 pl-10 pr-0">
-                    <a routerLink="/contact" style="text-decoration: none;color: black;">
-                        <p style="font-weight: 600; margin: 0px;">100% Payment Secure</p>
-                        <p style="font-size: 0.8rem;">Your payments are safe with us</p>
-                    </a>
-                </div>
-            </div>
-            <div class="col-3" id="deliverydiv" style="display:flex;">
-                <div class="col-4 p-0" style="height:50px; width:50px">
-                    <img src="assets/images/icons/c-service.png" style="height: 100%;width: 100%; object-fit: cover;"
-                        class="img-fluid" alt="">
-                </div>
-                <div class="col-8 pl-10">
-                    <a routerLink="/contact" style="text-decoration: none;color: black;">
-                        <p style="font-weight: 600;; margin: 0px;">Support 24/7</p>
-                        <p style="font-size: 0.8rem;">Contact us 24 hours a day</p>
-                    </a>
-
+                <div class="col-lg-3 col-sm-6" id="deliverydiv" style="display:flex;">
+                    <div class="col-4 p-0" id="stickericon">
+                        <img src="assets/images/icons/c-service.png" style="height: 100%;width: 100%; object-fit: cover;"
+                            class="img-fluid" alt="">
+                    </div>
+                    <div class="col-8 pl-10">
+                        <a routerLink="/contact" style="text-decoration: none;color: black;">
+                            <p style="font-weight: 600;; margin: 0px;">Support 24/7</p>
+                            <p style="font-size: 0.8rem;">Contact us 24 hours a day</p>
+                        </a>
+    
+                    </div>
                 </div>
             </div>
         </div>
+       
     </div>
 
 
@@ -1370,13 +1354,12 @@
 
 
     <!-- recipe -->
-    <div class="col-lg-12 mb-10 pb-0" class="listcard" style="margin-top: 10px;">
+    <div class="col-lg-12 mb-10 pb-0" class="listcard" id="recipelistcard" style="margin-top: 10px;">
         <div class="recipebanner">
             <img src="assets/images/spicebanner/banner2.jpeg" alt=""
                 style='height: 100%; width: 100%; object-fit: cover'>
         </div>
-        <div class="col-8"
-            style="display:flex;padding-top: 10px; margin-left: 200px; padding-bottom: 10px;background-color: white;">
+        <div class="col-8" id="recipevideo" >
 
             <div class="col-6" style="padding-left:5px; padding-right: 10px;">
                 <div class="embed-responsive embed-responsive-16by9">
@@ -1459,20 +1442,20 @@
     <!-- Anouncements -->
     <div class="col-lg-12 mb-10 pb-0" class="listcard"
         style="margin-top: 10px;padding: 0px;background-color:#ce2127; display: flex;">
-        <div class="col-lg-12" style="background-color:#ce2127; display: flex;">
-            <div class="col-6" style=" display: flex; justify-content: end;">
+        <div class="col-lg-12" id="mainannouncediv" >
+            <div class="col-6" id="Announcementheader" >
 
-                <span style="padding-right: 30px; padding-top: 40px; display:flex">
+                <span  id="Anocheader" style=" display:flex">
                     <i class="bi bi-envelope-fill" style="color:white; font-size: 1.5rem;
                   margin-top: -7px;"></i>&nbsp;<h5 style="color: white;">
                         Announcements
                     </h5></span>
-                <span style="width:160px; padding: 25px;">
+                <span  id="Anoccontent" >
                     <p style="color: white;font-size: 0.7rem;"> Signup for Monthly Discounts,
                         Combo Offers and Many More... </p>
                 </span>
             </div>
-            <div class="col-6" id="subsc" style=" display: flex;  padding-top: 40px;">
+            <div class="col-6" id="subsc" style=" display:flex; ">
                 <form [formGroup]="subscribe" (ngSubmit)="mailsubscribe(subscribe)">
                     <span>
                         <input type="text" name="" id="" placeholder="Your email address" formControlName="mail"

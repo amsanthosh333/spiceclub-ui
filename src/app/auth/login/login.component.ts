@@ -302,6 +302,7 @@ export class LoginComponent implements OnInit {
 
 
   requestloginotpnew() {
+    this.otpbtnloading = false;
     this.error1 = ''
     if (!this.loginForm.get('username')?.valid) {
       this.error1 = '*Enter phone number';

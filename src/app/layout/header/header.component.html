@@ -1,9 +1,6 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<div id="marquetag" style="background:#000000; height: 15px;">
-		<span style="background:#000000; color: white;
-		font-size: 0.6rem;
-		position: absolute;
-		right: 16%;">
+		<span >
 			Do you have questions? Feel free to call us on +91 94427 33601. We are happy to help you.
 			<!-- <marquee behavior="scrol" direction="left" scrollamount=1>	<p id="headerbar">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p></marquee> -->
 		</span>
@@ -40,52 +37,41 @@
 
 				<div class="header-right-container">
 					<!--=======  header right icons  =======-->
+					
 					<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
-						<!-- <div class="single-icon search">
-							<a href="javascript:void(0)" id="search-icon">
-								<i class="ion-ios-search-strong"></i>
-							</a>
-						</div> -->
+						
 						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
 								<span><img   class="ion-android-person" *ngIf="(userid!==0)" src="../../../assets/images/icons/user1.png" 
-									style="height:23px;width:25px;margin-bottom: -3px;
-										margin-right: 5px;" alt=""></span>
+									alt=""></span>
 
 							</a>
-							<!-- <a id="offcanvaout-icon" (click)="openlogin()">
-								<i class="ion-android-person" *ngIf="(userid==0)"></i>
-							</a> -->
 						</div>
+
 						<div class="single-icon wishlist">
 							<a href="javascript:void(0)" id="offcanvas-wishlist-icon">
 								<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/heart3.png" 
-									style="height:25px;width:25px;margin-bottom: -3px;
-										margin-right: 5px;" alt=""></span>	
+									 alt=""></span>	
 
 								<span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
 							</a>
-							<!-- <a id="offcanvashlist-icon" class="loggin1" routerLink="/login" *ngIf="(userid==0)">
-								<i class="ion-android-favorite-outline"></i>
-							</a> -->
+		
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
 								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
-									<!-- <i class="ion-android-person" style="font-size: 15px;
-						           color: #749ca3;padding-right: 10px;"></i> -->
 									<span><img src="../../../assets/images/icons/login.png" style="height:18px;width:18px;margin-bottom: -3px;
 								margin-right: 5px;" alt=""></span>
 									<p style="display:contents;">Login</p>
 								</button>
 							</a>
-
 						</div>
+
 						<div class="single-icon cart">
 							<a href="javascript:void(0)" id="offcanvas-cart-icon">
 								<span><img class="ion-ios-cart" *ngIf="(userid!==0)" src="../../../assets/images/icons/shopping-cart (2).png" 
 									style="height:28px;width:29px;margin-bottom: -3px;
 										margin-right: 5px;" alt=""></span>
-								<span class="count" *ngIf="(userid!==0)" >{{cartlength}}</span>
+								<span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
 							</a>
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
 								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
@@ -110,7 +96,7 @@
 										<a *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
 											(click)="openkyc()">Kyc</a>
 										<hr>
-										<a id="loginside" routerLink="/login" *ngIf="(userid==0)">Login</a>
+										<a id="loginside" (click)="openlogin()" *ngIf="(userid==0)">Login</a>
 										<hr>
 										<a id="regside" routerLink="/signup" *ngIf="(userid==0)">Signup</a>
 										<a id="logoutside" (click)="logout1()" *ngIf="(userid!==0)">Logout</a>
@@ -122,8 +108,6 @@
 						</div>
 
 					</div>
-					<!--=======  End of header right icons  =======-->
-
 				</div>
 
 
@@ -175,7 +159,7 @@
 				<div class="wrapper" style="flex-direction: row; 
 						justify-content: center;
 						align-items: center;display: block;margin-top: 5px;">
-					<a class="btn" id="buttonsub"  routerLink="/subscribedprod"
+					<a class="btn" id="buttonsub"  routerLink="/subscribedprod" 
 					style="border: 1px solid rgb(199 199 199);color: #000000;border-radius: 10px;">Subscription</a>
 				</div>
 				<ul style="margin-left: 10px;">

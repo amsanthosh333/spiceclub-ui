@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
 import { HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,13 +13,17 @@ import { ViewportScroller } from "@angular/common";
 import { windowDock } from 'ngx-bootstrap-icons';
 import { PlatformLocation } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+
 @Component({
   selector: 'app-productdetail',
   templateUrl: './productdetail.component.html',
   styleUrls: ['./productdetail.component.css'],
   providers: [NgbRatingConfig, ToastrService],
 })
+
 export class ProductdetailComponent implements OnInit {
+
   p: number = 1;
   Sort = [
     { id: 'price_low_to_high', value: 'price_low_to_high' },
@@ -130,13 +134,16 @@ export class ProductdetailComponent implements OnInit {
   subcat_id2: any;
   imgItem: any=0;
   offers: any;
-  videoURL:any;
- 
+  videoURL!:SafeResourceUrl;
+  @ViewChild('videoPlayer') videoplayer!: ElementRef;
+  newarray:any = [];
 
+  
+ 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private modalService: NgbModal, config: NgbRatingConfig, private _location: PlatformLocation, private scroller: ViewportScroller,
-    private toastr: ToastrService,private _sanitizer: DomSanitizer, private sharedService: SharedService, private activatedRoute: ActivatedRoute,) {
+    private toastr: ToastrService, private _sanitizer: DomSanitizer, private sharedService: SharedService, private activatedRoute: ActivatedRoute,) {
     config.max = 5;
     config.readonly = true;
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -152,7 +159,7 @@ export class ProductdetailComponent implements OnInit {
     if (this.userid == undefined) {
       this.userid = 0;
     }
-
+   
   }
 
 
@@ -175,6 +182,9 @@ export class ProductdetailComponent implements OnInit {
     this.currenturl = this.router.url
   }
 
+  toggleVideo() {
+    this.videoplayer.nativeElement.play();
+}
   numberOnly(event: any): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -261,7 +271,10 @@ export class ProductdetailComponent implements OnInit {
       this.deleteRecord(img.id);
     }
   }
-
+  video() {
+    console.log('im Play!');
+    this.videoplayer?.nativeElement.play();
+  }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
       this.toastr.info('You need to login', '');
@@ -381,16 +394,16 @@ export class ProductdetailComponent implements OnInit {
       
 
       // array push photo
-      this.newphotos = this.photoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path)
-      this.newphotos.forEach((item: any) => {
-        this.galleryphotos.push({ image: item });
-        // this.allgalleryphotos.push({ thumbImage: item });
+
+      this.newphotos = this.photoos.forEach((item: any) => {     
+       item.path.forEach((items: any) => {
+          console.log("items", items);
+          this.allgalleryphotos.push({ image:'https://neophroncrm.com/spiceclubnew/public/' + items , 
+          thumbImage:'https://neophroncrm.com/spiceclubnew/public/' + items , variant:item.variant})      
+        })  
       })
-      this.newphotos.forEach((item: any) => {
-        // this.galleryphotos.push({ image: item });
-        this.allgalleryphotos.push({ thumbImage: item, image: item });
-      })
-      
+
+      console.log("this.this.allgalleryphotos", this.allgalleryphotos);
       this.selectedimage = this.allgalleryphotos[0].image;
       console.log("this.selectedimage", this.selectedimage);
 
@@ -541,18 +554,15 @@ export class ProductdetailComponent implements OnInit {
   }
   addtoocarttmain(edata: any,content:any) {
     this.request.addtocart(edata).subscribe((res: any) => {
-      if (res.message == 'Product added to cart successfully') {
+      if (res.result == true) {
         this.modalService.open(content, {
           ariaLabelledBy: 'modal-basic-title',
           size: 'lg',
         });
         this.sharedService.sendClickEvent();
       }
-      else if (res.message == 'Minimum 1 item(s) should be ordered') {
+      else if (res.result == false) {
         this.toastr.info(res.message);
-      }
-      else if (res.message == 'Stock out') {
-        this.toastr.error(res.message);
       }
       else {
         console.log("error", res);
@@ -637,9 +647,14 @@ export class ProductdetailComponent implements OnInit {
 
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
       console.log(res);
-
-      this.totalprice = res.price.toFixed(2);
-      // this.totalprice = this.dec.toFixed(2) 
+if(res.result==true){
+  this.totalprice = res.price.toFixed(2);
+  // this.totalprice = this.dec.toFixed(2) 
+}
+else{
+  this.toastr.info('',res.message);
+}
+     
 
     })
   }
@@ -649,10 +664,14 @@ export class ProductdetailComponent implements OnInit {
     // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
       console.log(res);
-
-      this.totalprice = res.price.toFixed(2);
-
-      // this.totalprice = this.dec.toFixed(2) 
+      if(res.result==true){
+        this.totalprice = res.price.toFixed(2);
+        // this.totalprice = this.dec.toFixed(2) 
+      }
+      else{
+        this.toastr.info('',res.message);
+      }
+         
 
     })
   }
@@ -660,6 +679,14 @@ export class ProductdetailComponent implements OnInit {
   selectvar(weight: any, i: any) {
     this.varient_value = weight.replace(/\s/g, "")
     this.subItem = i
+    const index = this.allgalleryphotos.findIndex((object:any) => {
+      console.log("object", object);
+      console.log("object", this.varient_value);
+      return object.variant == this.varient_value;
+
+    });
+    this.selectedimage = this.allgalleryphotos[index].image;
+    this.imgItem=index
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
       console.log("selectvar",res);
       this.Peoduct.main_price= res?.price_string;
@@ -676,22 +703,24 @@ export class ProductdetailComponent implements OnInit {
       this.stocck = (res?.stock);
       this.stocckkk = (res?.stock);
       this.quantityyy = 1;
-      this.totalprice = this.Peoduct.main_price;
+      this.totalprice = res?.price;
       this.varphotoos=res.image    
+
+      
             // array push photo
-            this.newvarphotos=[];
-            this.newvarphotos = this.varphotoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item)
-            console.log("this.newvarphotos", this.newvarphotos);
-            this.vargalleryphotos=[]
-            this.newvarphotos.forEach((item: any) => {
-              this.vargalleryphotos.push({ thumbImage: item, image: item });
-            })
-            // pushing main images in varient images
-            this.galleryphotos.forEach((item: any) => {
-              this.vargalleryphotos.push({ thumbImage: item.image, image: item.image });
-            })
-            this.allgalleryphotos=this.vargalleryphotos;
-            this.selectedimage = this.vargalleryphotos[0].image;
+            // this.newvarphotos=[];
+            // this.newvarphotos = this.varphotoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item)
+            // console.log("this.newvarphotos", this.newvarphotos);
+            // this.vargalleryphotos=[]
+            // this.newvarphotos.forEach((item: any) => {
+            //   this.vargalleryphotos.push({ thumbImage: item, image: item });
+            // })
+            // // pushing main images in varient images
+            // this.galleryphotos.forEach((item: any) => {
+            //   this.vargalleryphotos.push({ thumbImage: item.image, image: item.image });
+            // })
+            // this.allgalleryphotos=this.vargalleryphotos;
+            // this.selectedimage = this.vargalleryphotos[0].image;
     }, (error: any) => {
       console.log("error", error);
 
