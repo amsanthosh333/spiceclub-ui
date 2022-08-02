@@ -19,8 +19,8 @@
                   </ol> -->
                 <div class="carousel-inner" style=" width:100%;object-fit:cover ; ">
                     <div class="carousel-item" *ngFor="let img of photoo; let i = index" [ngClass]="{'active': i == 0 }"
-                        style=" width:100%; ">
-                        <img src="{{img}}" class="d-block" style=" width: 100%;  height: 620px;object-fit:cover">
+                       >
+                        <img src="{{img}}" class="d-block" style=" width: 100%;  height:100%;object-fit:cover">
                         <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
                             data-slide="prev">
                             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -519,7 +519,7 @@
         <div class="countdown-timer-area mb-10 countdown-background countdown-bg-2 pt-20 pb-20">
             <div class="container wide" style="margin-left:3px;">
                 <div class="row">
-                    <div class="col-9" >
+                    <div class="col-9" id="daydealprod_div" >
                         <div class="row" *ngIf="!loader3" style="padding: 0px;justify-content: center;">
                             <div class="col-12 col-lg-2 col-md-6 col-sm-12 mb-10  "
                                 *ngFor="let img of Daydealpro; let i = index " style="border: 0.8px solid #e9e7e7; margin-right: 15px;margin-left: 15px;
@@ -540,11 +540,13 @@
                                             class="img-fluid" alt=""> -->
                                             </a>
                                         </div>
+
                                         <div class="single-product__floating-badges">
                                             <span class="hot"
                                                 *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
                                             <!-- <span class="hot"  *ngIf="likeddd[i]" ><i class="bi bi-heart-fill"></i></span>  -->
                                         </div>
+                                        
                                         <div class="single-product__floating-icons">
                                             <span class="wishlist" *ngIf="(img.wishlist==1)"><a
                                                     data-tippy="Add to wishlist" data-tippy-inertia="true"
@@ -599,7 +601,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class=" col-3">
+                    <div class=" col-3" id="daydealprod_div" >
                         <div class="countdown-wrapper text-center">
                             <h3>Deal of the day</h3>
                             <div class="deal-countdown" data-countdown="2021/12/31"></div>
@@ -1461,7 +1463,7 @@
                         <input type="text" name="" id="" placeholder="Your email address" formControlName="mail"
                             required style=" border: 0.5px solid #d3d3d3;border-radius: 25px;height:35px;">
                     </span>
-                    <span style="padding-left:20px;"><button class="btn btn-success" id="greenbtn"
+                    <span style="padding-left:10px;"><button class="btn btn-success" id="greenbtn"
                             type="submit">Signup</button></span>
                 </form>
             </div>
@@ -1469,7 +1471,6 @@
 
         </div>
     </div>
-
 
     <!-- slide testimonial -->
 
@@ -1531,7 +1532,7 @@
     <div class="col-lg-12 mb-10 pb-0" class="listcard"
         style="margin-top: 10px;padding: 2px;background-image:url('../../../assets/images/spicebanner/banner1.jpeg');margin-bottom: 10px; ">
         <div class="row">
-            <div class="col-5 " style="padding:40px ; padding-left: 60px;">
+            <div class="col-5" id="ourstory">
                 <h1 style="padding:0px;margin: 0px;font-weight:600; ">Our</h1>
                 <h1 style="padding:0px;margin: 0px; color: red; font-weight:600;">STORY</h1>
                 <p style="font-size: 0.9rem;">By shopping with us you save a lot of time in search of the products and
@@ -1544,9 +1545,9 @@
                 <button class="btn btn-danger" id="knowmore" routerLink="/aboutus"
                     style="border-radius: 25px; background-color: #e61717;">Know More</button>
             </div>
-            <div class="col-7">
+            <div class="col-lg-7 col-sm-12 col-md-12" id="ourstoryicon">
                 <div class="row">
-                    <div class="col-3 " id="icondiv1">
+                    <div class="col-lg-3 col-sm-3 col-md-6 " id="icondiv1">
                         <div class="iconDiv">
                             <img src="assets/images/icons/chef.png" style="height: 100%;width: 100%; object-fit: cover;"
                                 class="img-fluid" alt="">
@@ -1555,7 +1556,7 @@
                             <p>One of the leading 'spices' brand in India</p>
                         </span>
                     </div>
-                    <div class="col-3 " id="icondiv1">
+                    <div class="col-lg-3 col-sm-3 col-md-6" id="icondiv1">
                         <div class="iconDiv">
                             <img src="assets/images/icons/eco-food.png"
                                 style="height: 100%;width: 100%; object-fit: cover;" class="img-fluid" alt="">
@@ -1566,7 +1567,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 " id="icondiv1">
+                    <div class="col-lg-3 col-sm-3 col-md-6" id="icondiv1">
                         <div class="iconDiv">
                             <img src="assets/images/icons/hot.png" style="height: 100%;width: 100%; object-fit: cover;"
                                 class="img-fluid" alt="">
@@ -1575,7 +1576,7 @@
                             <p> Spice with taste is our aim</p>
                         </span>
                     </div>
-                    <div class="col-3 " id="icondiv1">
+                    <div class="col-lg-3 col-sm-3 col-md-6" id="icondiv1">
                         <div class="iconDiv">
                             <img src="assets/images/icons/basket.png"
                                 style="height: 100%;width: 100%; object-fit: cover;" class="img-fluid" alt="">
@@ -1586,7 +1587,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-3 " id="icondiv1">
+                    <div class="col-lg-3 col-sm-3 col-md-6" id="icondiv1">
                         <div class="iconDiv">
                             <img src="assets/images/icons/shield.png"
                                 style="height: 100%;width: 100%; object-fit: cover;" class="img-fluid" alt="">
@@ -1595,7 +1596,7 @@
                             <p>All products meet quality standards</p>
                         </span>
                     </div>
-                    <div class="col-3 " id="icondiv1">
+                    <div class="col-lg-3 col-sm-3 col-md-6" id="icondiv1">
                         <div class="iconDiv">
                             <img src="assets/images/icons/fast-delivery.png"
                                 style="height: 100%;width: 100%; object-fit: cover;" class="img-fluid" alt="">

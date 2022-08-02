@@ -391,7 +391,7 @@ export class ProductdetailComponent implements OnInit {
    
       this.offers=this.Peoduct.offers.length;
       console.log("this.offers",this.videoURL);
-      
+       
 
       // array push photo
 

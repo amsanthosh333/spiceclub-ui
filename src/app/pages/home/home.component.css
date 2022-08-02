@@ -531,6 +531,12 @@ input::placeholder {
 
 /* web */
 @media (min-width: 992px) {
+  :host ::ng-deep .active.carousel-item
+{
+  width:100%; height: 620px;
+
+}
+
   .img-fluid {
     max-width: 100%;
     height: auto;
@@ -668,6 +674,18 @@ input::placeholder {
   width:160px;
    padding: 25px;
 }
+#ourstory{
+  padding:40px ; 
+  padding-left: 60px;
+}
+#dealimg {
+  height: 144px;
+  width: auto;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px
+}
+
 }
 .section-title h6{
   font-weight: 600; 
@@ -679,6 +697,137 @@ input::placeholder {
 
 /* mob */
 @media (max-width: 992px) {
+  #sliderrow3 {
+    margin-left: -10px;
+    margin-top: 7px;
+  }
+
+  #sliderrow3 a {
+    padding: 0px;
+  }
+
+  #sliderrow2 {
+    margin-left: -10px;
+  }
+
+  #sliderrow1 {
+    background-color: white;
+    margin-right: 2.4%;
+    margin-left: 2.8%;
+    margin-right: 3.7%;
+    margin-left: 1.5%;
+    width: 97%;
+    padding: 0px;
+    margin-left: 10px;
+  }
+
+  /* .carousall6 {
+    background-color: rgb(255, 255, 255);
+    padding: 0px;
+    height: 231px;
+    margin: 10px;
+    margin-left: 22px;
+    width: 97%;
+  } */
+
+  .explore .col-2 {
+    width: 24.66%;
+  }
+
+  .img-fluid {
+    max-width: 100%;
+    height: 200px;
+  }
+
+  /* .col-lg-2 {
+    flex: 0 0 auto;
+    width: 87.666667%;
+  } */
+
+  .caroussellll {
+    /* height: 300px; */
+    z-index: unset;
+    padding-left: 0px;
+    padding-right: 0px;
+  }
+
+  .header-bottom-container .header-right-container {
+    -ms-flex-preferred-size: 40%;
+    flex-basis: 0%;
+  }
+
+  .logo-with-offcanvas {
+    margin-right: -10px;
+  }
+
+  #besthead {
+    font-weight: 500;
+    color: black;
+    margin-left: 0px;
+    display: inline;
+  }
+
+  .carousall6 {
+    top: 111px;
+    position: absolute;
+    background-color: rgb(255 255 255 / 0%);
+    padding: 0px;
+    height: auto;
+    margin: 10px;
+    margin-left: 22px;
+    width: 88%;
+}
+
+  #viewall{
+    color: #fff;
+    background-color: #1b54f0;
+    border-color: #1b54f0;
+    font-weight: 400;
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 0.8rem;
+    padding: 0rem 1.5rem;
+    width: 33%;
+    height: fit-content;
+}
+
+  .countdown-wrapper h3{
+    font-size: 39px;
+    line-height: 58px;
+    margin-top:5px;
+    margin-bottom: -4px;
+    color: rgb(255, 255, 255);
+}
+  #dealimg {
+    height: 200px !important;
+    width: auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px
+  }
+  #daydealprod_div{
+    width: 100%;
+  }
+  #sliderrow5 {
+    margin-right: 2.4%;
+    margin-left: 2.8%;
+    margin-right: 3.7%;
+    margin-left: 1.5%;
+    width: 88%;
+    padding: 0px;
+    margin-left: 22px;
+  }
+#icondiv1 {
+  width: 50%;
+}
+
+  #ourstory{
+width: 100%;
+padding-left: 20px;
+  }
+  #ourstoryicon{
+    padding-left: 20px;
+  }
 
   #subsc{
     display: flex;
@@ -1480,7 +1629,7 @@ input[type=number] {
 
 @media (max-width: 992px) {
 
-  #sliderrow3 {
+  /* #sliderrow3 {
     margin-left: -10px;
     margin-top: 7px;
   }
@@ -1522,13 +1671,10 @@ input[type=number] {
     height: 200px;
   }
 
-  /* .col-lg-2 {
-    flex: 0 0 auto;
-    width: 87.666667%;
-  } */
+ 
 
   .caroussellll {
-    /* height: 300px; */
+   
     z-index: unset;
     padding-left: 0px;
     padding-right: 0px;
@@ -1548,7 +1694,7 @@ input[type=number] {
     color: black;
     margin-left: 0px;
     display: inline;
-  }
+  } */
 }
 
 /* normalize */
