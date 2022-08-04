@@ -69,6 +69,19 @@ export class BlogComponent implements OnInit {
   Bestblog = [];
   catblogs: boolean = false;
   loader2!: boolean;
+  firstblog: any;
+
+  Years=[
+    {name: 2022 },
+    {name: 2021 },
+    {name: 2020 },
+    {name: 2019 },
+    {name: 2018 },
+    {name: 2017 },
+    {name: 2016 }
+   
+
+  ]
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private route: ActivatedRoute,
     private toastr: ToastrService, config: NgbRatingConfig, private _location: Location, private activatedRoute: ActivatedRoute) {
@@ -149,6 +162,8 @@ export class BlogComponent implements OnInit {
     console.log("viewblogcat");
     this.request.getallblogcat().subscribe((response: any) => {
       this.Allcat = response.data;
+      this.firstblog= this.Allcat[0].bestof.data[0]
+      console.log(" this.firstblog",  this.firstblog);
       this.imgloader = true
       this.loader2 = false
       this.loader = false;
