@@ -663,6 +663,11 @@ public getallflashdeal() {
   this.url = `${this.endPoint1}/flash-deals`+`&buyertype=` +this.buyertypeid;
   return this.http.get(this.url);
 }
+
+public getallflashdealproducts() {
+  this.url = `${this.endPoint1}/products/flashdeal`+`&buyertype=` +this.buyertypeid;
+  return this.http.get(this.url);
+}
 public gettodaysoffer() {
   this.url = `${this.endPoint1}/todayoffer?user_id=`+this.userid +`&buyertype=` +this.buyertypeid;
   return this.http.get(this.url);

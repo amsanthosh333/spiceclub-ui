@@ -82,7 +82,8 @@ export class SubscribedprodComponent implements OnInit {
   pagee: any= 1;
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
-    ,private toastr: ToastrService,private modalService: NgbModal,private  config: NgbRatingConfig,private sharedService: SharedService) {
+    ,private toastr: ToastrService,private modalService: NgbModal,
+    private  config: NgbRatingConfig,private sharedService: SharedService) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser')||'{}')
       
