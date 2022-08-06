@@ -410,7 +410,8 @@ export class HomeComponent implements OnInit {
     }
   }
   toggle1(img: any, index: any): void {
-    console.log(this.userid);
+
+    console.log("toggle1",this.userid);
 
     this.likesss[index] = !this.likesss[index];
     if (this.likesss[index] == true) {
@@ -422,7 +423,7 @@ export class HomeComponent implements OnInit {
 
   }
   toggledelete1(img: any, index: any): void {
-
+   
     if (this.userid !== 0) {
       this.likess[index] = !this.likess[index];
 
@@ -434,7 +435,7 @@ export class HomeComponent implements OnInit {
       }
     }
     else {
-      this.toastr.info('', 'you need to login');
+      this. openlogin()
     }
   }
   clickme() {
@@ -687,7 +688,8 @@ export class HomeComponent implements OnInit {
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      // this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
 
@@ -756,7 +758,8 @@ export class HomeComponent implements OnInit {
   addtocart(_id: any) {
 
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      // this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       let edata = {
@@ -793,8 +796,11 @@ export class HomeComponent implements OnInit {
     }
   }
   addtowishlist(prd_id: any) {
+    console.log("addtowishlist called");
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      console.log("addtowishlist called");
+      
+      this. openlogin()
     }
     else {
       let edata4 = {
@@ -1019,7 +1025,7 @@ export class HomeComponent implements OnInit {
 
   addtocart2() {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       let edata = {

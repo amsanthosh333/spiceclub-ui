@@ -13,6 +13,7 @@ import { ViewportScroller } from "@angular/common";
 import { windowDock } from 'ngx-bootstrap-icons';
 import { PlatformLocation } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { LoginComponent } from 'src/app/auth/login/login.component';
 
 
 @Component({
@@ -198,6 +199,8 @@ export class ProductdetailComponent implements OnInit {
   }
 
   getValue(val: any) {
+    console.log("getValue");
+    
     if (val <= 0) {
       val = 1
     }
@@ -263,13 +266,25 @@ export class ProductdetailComponent implements OnInit {
 
   }
   toggledelete(img: any, index: any): void {
-    this.likedd[index] = !this.likedd[index];
+    if (this.userid !== 0) {
+      this.likedd[index] = !this.likedd[index];
     if (this.likedd[index] == true) {
-      this.addtowishlist(img.id,);
+      this.addtowishlist(img.id);
     }
     else if (this.likedd[index] == false) {
       this.deleteRecord(img.id);
     }
+    }
+    else {
+      this. openlogin()
+    }
+    
+  }
+  openlogin() {
+    this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
   video() {
     console.log('im Play!');
@@ -277,7 +292,7 @@ export class ProductdetailComponent implements OnInit {
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       let edata4 = {
@@ -301,7 +316,7 @@ export class ProductdetailComponent implements OnInit {
   }
   addtowishlistmain(prd_id: any,content:any) {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       let edata4 = {
@@ -366,8 +381,8 @@ export class ProductdetailComponent implements OnInit {
       this.allgalleryphotos=[];
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
-      this.stocck = (this.Peoduct.current_stock); 1
-      this.stocckkk = (this.Peoduct.current_stock); 1
+      this.stocck = (this.Peoduct.current_stock); 
+      this.stocckkk = (this.Peoduct.current_stock); 
       this.stk = this.Peoduct.current_stock;
       this.photoos = this.Peoduct.photos;  
       this.colors = this.Peoduct.colors;
@@ -404,7 +419,7 @@ export class ProductdetailComponent implements OnInit {
       })
 
       console.log("this.this.allgalleryphotos", this.allgalleryphotos);
-      this.selectedimage = this.allgalleryphotos[0].image;
+      this.selectedimage = this.allgalleryphotos[0]?.image;
       console.log("this.selectedimage", this.selectedimage);
 
       this.getcommentsss()
@@ -478,7 +493,7 @@ export class ProductdetailComponent implements OnInit {
   }
   addtocart(_id: any) {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       if (this.quantityyy == 0) {
@@ -526,7 +541,7 @@ export class ProductdetailComponent implements OnInit {
   }
   addtocartmain(_id: any,content:any) {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       if (this.quantityyy == 0) {
@@ -579,7 +594,7 @@ export class ProductdetailComponent implements OnInit {
 
   addtocartbuy(_id: any) {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       if (this.quantityyy == 0) {
@@ -635,6 +650,7 @@ export class ProductdetailComponent implements OnInit {
   }
 
   increaseqty() {
+    console.log("dataa",this.varient_value);
     this.quantityyy++;
     this.stocck--;
 
@@ -644,6 +660,8 @@ export class ProductdetailComponent implements OnInit {
       c: this.varient_value.replace(/\s/g, ""),
       d: this.quantityyy
     }
+    console.log("dataa",dataa);
+    
 
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
       console.log(res);
@@ -654,8 +672,7 @@ if(res.result==true){
 else{
   this.toastr.info('',res.message);
 }
-     
-
+    
     })
   }
   decreaseqty() {
@@ -685,7 +702,7 @@ else{
       return object.variant == this.varient_value;
 
     });
-    this.selectedimage = this.allgalleryphotos[index].image;
+    this.selectedimage = this.allgalleryphotos[index]?.image;
     this.imgItem=index
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
       console.log("selectvar",res);
@@ -767,7 +784,7 @@ else{
   addtosubscribe(id:any){
     console.log("addtosubscribe");
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else { 
       this.request.addtosubscribe(this.userid,id).subscribe((res: any) => {
@@ -789,7 +806,7 @@ else{
   removefromsubscribe(id:any){
     console.log("addtosubscribe",id);
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else { 
       this.request.removefromsubscribe(this.userid,id).subscribe((res: any) => {
@@ -822,7 +839,7 @@ else{
   }
   addcomment(form: FormGroup) {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       this.error1 = '';
@@ -896,6 +913,8 @@ else{
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
+        console.log("varient_value",this.varient_value);
+        
       }
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -940,7 +959,7 @@ else{
   }
   addtocart2() {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       let edata = {
@@ -1112,7 +1131,7 @@ else{
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       
@@ -1196,7 +1215,7 @@ else{
    }
  }
  else{
-   this.toastr.info('','you need to login');
+  this. openlogin()
  }
  }
 

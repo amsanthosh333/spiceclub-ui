@@ -19,6 +19,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from '../../auth/login/login.component';
 import { KycComponent } from 'src/app/profiledetails/kyc/kyc.component';
 import { EnquiryComponent } from 'src/app/profiledetails/enquiry/enquiry.component';
+import { SignupComponent } from 'src/app/auth/signup/signup.component';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -1816,6 +1817,12 @@ export class HeaderComponent implements OnInit {
 
   openlogin(){
     this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
+  }
+  opensignup(){
+    this.modalService.open(SignupComponent, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
     });

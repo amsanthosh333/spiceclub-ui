@@ -74,11 +74,11 @@
 								<span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
 							</a>
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
-								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
+								<button type="button" class="btn btn-outline-light" (click)="opensignup()"
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
-									<span><img src="../../../assets/images/icons/trolley.png" style="height:18px;width:18px;margin-bottom: -3px;
+									<span><img src="../../../assets/images/icons/add-user.png" style="height:18px;width:18px;margin-bottom: -4px;
 										margin-right: 7px;" alt=""></span>
-									<p style="display:contents;">Cart</p>
+									<p style="display:contents;">Signup</p>
 								</button>
 							</a>
 						</div>
@@ -242,7 +242,7 @@
 
 					<li class="menu-item"><a routerLink="/recipe">Recipes</a></li>
 
-					<li class="menu-item"><a routerLink="/orders">Quick Order</a></li>
+					<li class="menu-item"><a (click)="openlogin()">Quick Order</a></li>
 
 
 

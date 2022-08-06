@@ -9,6 +9,7 @@ import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service'
 import { PlatformLocation } from '@angular/common';
+import { LoginComponent } from 'src/app/auth/login/login.component';
 
 
 @Component({
@@ -165,13 +166,25 @@ export class BrandsComponent implements OnInit {
 
   }
   toggledelete(img: any, index: any): void {
-    this.likedd[index] = !this.likedd[index];
+    if (this.userid !== 0) {
+      this.likedd[index] = !this.likedd[index];
     if (this.likedd[index] == true) {
       this.addtowishlist(img.id);
     }
     else if (this.likedd[index] == false) {
       this.deleteRecord(img.id);
     }
+    }
+    else {
+      this. openlogin()
+    }
+    
+  }
+  openlogin() {
+    this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
   viewdata(id: any, page: any) {
     this.prodloadermain = false;
@@ -236,7 +249,9 @@ export class BrandsComponent implements OnInit {
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      // this.toastr.info('You need to login', '');
+      this. openlogin()
+      
     }
     else {
       let edata4 = {
@@ -424,7 +439,7 @@ export class BrandsComponent implements OnInit {
       }
   addtocart2() {
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       let edata = {
@@ -492,7 +507,7 @@ export class BrandsComponent implements OnInit {
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {

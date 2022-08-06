@@ -8,6 +8,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service';
+import { LoginComponent } from 'src/app/auth/login/login.component';
 @Component({
   selector: 'app-flash',
   templateUrl: './flash.component.html',
@@ -171,23 +172,31 @@ export class FlashComponent implements OnInit {
       }
     
     }
-    toggledelete(img:any,index:any): void {
-      this.likedd[index] = !this.likedd[index];   
-      if(this.likedd[index]==true){
+    toggledelete(img: any, index: any): void {
+      if (this.userid !== 0) {
+        this.likedd[index] = !this.likedd[index];
+      if (this.likedd[index] == true) {
         this.addtowishlist(img.id);
       }
-      else if( this.likedd[index]==false){
+      else if (this.likedd[index] == false) {
         this.deleteRecord(img.id);
       }
+      }
+      else {
+        this. openlogin()
+      }
+      
+    }
+    openlogin() {
+      this.modalService.open(LoginComponent, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'md',
+      });
     }
        
-
-
-  
- 
   addtowishlist(prd_id:any){
     if(this.userid==0){
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else{
 
@@ -346,7 +355,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
       }
   addtocart2(){
     if(this.userid==0){
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else{
     let edata={
@@ -416,7 +425,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {

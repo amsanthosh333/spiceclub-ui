@@ -434,7 +434,7 @@ export class CheckoutComponent implements OnInit {
             user_id: this.userid,
           }
           console.log("billdesk edata",edata1);       
-          this.billdesk()
+          // this.billdesk()
         }
         else {
           this.toastr.error(response.message);
@@ -762,9 +762,10 @@ export class CheckoutComponent implements OnInit {
 
 //  testing billdesk
   billdesk2() {
-    window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=378&amount=324.00&user_id=59')
-    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=378&amount=324.00&user_id=59').subscribe(
+    window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78')
+    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78').subscribe(
       data => {
+        console.log("billdesk2 data", data);
       },
       (err: HttpErrorResponse) => {
         console.log("err", err);
@@ -776,10 +777,39 @@ export class CheckoutComponent implements OnInit {
         }
       });
   }
+
+  
+  // (response: any) => { 
+  //   this.encRequest = response.encRequest;
+  //   console.log("desktype",this.encRequest);  
+  //   response.json(results);      
+  //   var object = JSON.parse(response);
+  //   var results = JSON.parse(object); 
+  //   console.log("ressss",results);   
+  //   console.log("ressss",object); 
+  //   console.log("billdesktype",response);        
+  // },
+
+  // (   data: { [x: string]: any; }) => {
+  //   console.log('------', data)
+  //     console.log('-------', data['response'])
+  //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
+  //     console.log('formmmm',payhere_checkout_form)
+  //     console.log('-----------', data)
+  //     this.encRequestRes = data['response']; 
+  //         // setTimeout(()=>{
+  //         //     this.form.nativeElement.submit();
+  //         // },1000)
+  //     },
+
   billdesk() {
     console.log("billdest called");
-    this.request.billdeskpay(378, 324.00, 59).subscribe(
+    this.request.billdeskpay(2,135.69, 78).subscribe(
       (response: any) => {
+
+        
+        console.log("billresponse response");
+
         response.json()
         console.log("billdesktype", response.json());
         console.log("billresponse", response);

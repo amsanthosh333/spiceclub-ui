@@ -8,6 +8,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { ToastrService } from 'ngx-toastr';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import{ SharedService} from 'src/app/services/shared.service'
+import { LoginComponent } from 'src/app/auth/login/login.component';
 
 @Component({
   selector: 'app-todaysdeal',
@@ -124,14 +125,26 @@ export class TodaysdealComponent implements OnInit {
     }
   
   }
-  toggledelete(img:any,index:any): void {
-    this.likedd[index] = !this.likedd[index];   
-    if(this.likedd[index]==true){
+  toggledelete(img: any, index: any): void {
+    if (this.userid !== 0) {
+      this.likedd[index] = !this.likedd[index];
+    if (this.likedd[index] == true) {
       this.addtowishlist(img.id);
     }
-    else if( this.likedd[index]==false){
+    else if (this.likedd[index] == false) {
       this.deleteRecord(img.id);
     }
+    }
+    else {
+      this. openlogin()
+    }
+    
+  }
+  openlogin() {
+    this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
   }
   viewdaydeal(){
     // this.prodloader=true;
@@ -180,7 +193,7 @@ export class TodaysdealComponent implements OnInit {
   }
   addtowishlist(prd_id:any){
     if(this.userid==0){
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else{
     let edata4={
@@ -217,7 +230,7 @@ export class TodaysdealComponent implements OnInit {
   }
   addtocart(_id:any){
     if(this.userid==0){
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else{
     let edata={
@@ -361,7 +374,7 @@ export class TodaysdealComponent implements OnInit {
       }
   addtocart2(){
     if(this.userid==0){
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else{
     let edata={
@@ -427,7 +440,7 @@ export class TodaysdealComponent implements OnInit {
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
-      this.toastr.info('You need to login', '');
+      this. openlogin()
     }
     else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
