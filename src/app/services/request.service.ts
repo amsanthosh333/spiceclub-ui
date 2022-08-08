@@ -244,6 +244,10 @@ export class RequestService {
     this.url = `${this.endPoint1}/flash-deal-products/1?category=` + categoryid + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     return this.http.get(this.url);
   }
+  public getflashdeals() {
+    this.url = `${this.endPoint1}/flash-deals`;
+    return this.http.get(this.url);
+  }
   public fetchuserwishlist(id: any,) {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
@@ -888,7 +892,7 @@ export class RequestService {
     .set('content-type', 'application/json')
     .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=` + combined_order_id + `&amount=` + amount + `&user_id=` + user_id;
-     window.open(this.url,"_self");
+     window.open(this.url,'_self');
     console.log("billdeskpay service file,",this.url);
     return this.http.get(this.url, { headers: headers });
 

@@ -152,16 +152,12 @@
 	<div class="header-bottom-navigation">
 		<div class="site-main-nav d-none d-lg-block"  style="padding-left: 6%;height: 34px;background-color: #eee;">
 			<nav class="site-nav" style="display: flex;">
-				<!-- <span *ngIf="(userid!==0)" class="wrapper1"><a id="buttonsubscribe"
-						routerLink="/subscribedprod">Subscription</a></span>
-				<span *ngIf="(userid==0)" (click)="openlogin()" class="wrapper1"><a
-						id="buttonsubscribe">Subscription</a></span> -->
-				<div class="wrapper" style="flex-direction: row; 
+				<!-- <div class="wrapper" style="flex-direction: row; 
 						justify-content: center;
 						align-items: center;display: block;margin-top: 5px;">
 					<a class="btn" id="buttonsub"  routerLink="/subscribedprod" 
 					style="border: 1px solid rgb(199 199 199);color: #000000;border-radius: 10px;">Subscription</a>
-				</div>
+				</div> -->
 				<ul style="margin-left: 10px;">
 					<li class="menu-item"><a routerLink="/shopbyproduct">Shop by Products</a> </li>
 					<li class="menu-item-has-children"><i class="bi bi-list" style="font-weight:500;"></i>&nbsp;<a
@@ -239,12 +235,9 @@
 						</ul>
 
 					<li class="menu-item"><a routerLink="/blog">Blogs</a> </li>
-
 					<li class="menu-item"><a routerLink="/recipe">Recipes</a></li>
-
-					<li class="menu-item"><a (click)="openlogin()">Quick Order</a></li>
-
-
+					<li class="menu-item" *ngIf="(userid==0)"><a (click)="openlogin()">Quick Order</a></li>
+					<li class="menu-item" *ngIf="(userid!==0)"><a routerLink="/orders">Quick Order</a></li>
 
 				</ul>
 

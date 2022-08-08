@@ -131,6 +131,7 @@ export class FlashComponent implements OnInit {
   getflashdealproducts(){
     this.request.getallflashdealproducts().subscribe((response: any) => {
       this.Allproducts=response.data;
+      this.prodloader=false
       console.log("Allproducts",this.Allproducts);
     });
   }

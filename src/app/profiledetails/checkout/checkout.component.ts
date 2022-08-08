@@ -194,6 +194,7 @@ export class CheckoutComponent implements OnInit {
     this.payytype = item;
     if (this.payytype == "billdesk") {
       this.paymentmethod= "Billdesk"}
+
       else if (this.payytype == "razorpay") {
         this.paymentmethod= "Razorpay"}
         else  {
@@ -410,6 +411,18 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
+  billdesk(edata1:any) {
+    console.log("billdest called");
+    this.request.billdeskpay(edata1.combined_order_id, edata1.amount,edata1.user_id).subscribe(
+      (response: any) => {      
+        console.log("billresponse response");
+        response.json()
+        console.log("billdesktype", response.json());
+        console.log("billresponse", response);
+      },
+    );
+  }
+
   finallyplaceorder(){
     console.log(" finallyplaceorder");
     this.loadingg = true
@@ -434,7 +447,7 @@ export class CheckoutComponent implements OnInit {
             user_id: this.userid,
           }
           console.log("billdesk edata",edata1);       
-          // this.billdesk()
+          this.billdesk(edata1)
         }
         else {
           this.toastr.error(response.message);
@@ -802,20 +815,7 @@ export class CheckoutComponent implements OnInit {
   //         // },1000)
   //     },
 
-  billdesk() {
-    console.log("billdest called");
-    this.request.billdeskpay(2,135.69, 78).subscribe(
-      (response: any) => {
 
-        
-        console.log("billresponse response");
-
-        response.json()
-        console.log("billdesktype", response.json());
-        console.log("billresponse", response);
-      },
-    );
-  }
 }
 
 

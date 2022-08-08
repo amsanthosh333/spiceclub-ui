@@ -767,7 +767,7 @@ input::placeholder {
     display: inline;
   }
 
-  .carousall6 {
+  .carousall6 { 
     top: 111px;
     position: absolute;
     background-color: rgb(255 255 255 / 0%);
@@ -776,6 +776,15 @@ input::placeholder {
     margin: 10px;
     margin-left: 22px;
     width: 88%;
+}
+.carousall9 { 
+  
+  background-color: rgb(255 255 255 / 0%);
+  padding: 0px;
+  height: auto;
+  /* margin: 10px;
+  margin-left: 22px; */
+  width: 100%;
 }
 
   #viewall{
@@ -1289,6 +1298,10 @@ a.next.icons.next-icon {
   .container.wide {
     max-width: 98%;
   }
+  .todaybanner {
+   height: 320px;
+  }
+
 }
 
 @media (max-width : 650px) {
@@ -1584,6 +1597,15 @@ input[type=number] {
     position: absolute;
     top: 42%;
 
+  }
+  .carousall9 {
+    background-color: rgba(255, 255, 255, 0);
+    padding: 0px;
+    height: 217px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width:84%;
   }
 
   :host ::ng-deep .carousel-control-prev-icon,

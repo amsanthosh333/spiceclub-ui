@@ -205,7 +205,8 @@ export class ProductdetailComponent implements OnInit {
       val = 1
     }
     else if (val > this.stocckkk) {
-      val = this.stocckkk
+      val = this.stocckkk;
+      this.stocck=1
     }
     this.quantityyy = val
     this.stocck = this.stocckkk - val
@@ -712,18 +713,16 @@ else{
       this.Peoduct.discount_amount=res?.discount_amount; 
       this.Peoduct.discount_percentage=res?.discount_percentage;
       this.Peoduct.current_stock=res?.stock;
-
       this.pervarient =  res?.variant;
       this.varprise = res?.price_string;
       this.varstrokedprice=res?.stroked_price;
       // this.totalprice=(res?.price_string).replace('Rs','');
-      this.stocck = (res?.stock);
-      this.stocckkk = (res?.stock);
+      this.stocck = res?.stock;
+      this.stocckkk = res?.stock;
       this.quantityyy = 1;
       this.totalprice = res?.price;
       this.varphotoos=res.image    
 
-      
             // array push photo
             // this.newvarphotos=[];
             // this.newvarphotos = this.varphotoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item)

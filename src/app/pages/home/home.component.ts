@@ -8,23 +8,42 @@ import { Location } from '@angular/common';
 import { ThisReceiver } from '@angular/compiler';
 import { ToastrService } from 'ngx-toastr';
 
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription, timer } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { SharedService } from 'src/app/services/shared.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 import { SignupComponent } from 'src/app/auth/signup/signup.component';
-
+import { Pipe, PipeTransform } from "@angular/core";
 
 declare var jQuery: any;
+@Pipe({
+  name: "formatTime"
+})
+export class FormatTimePipe implements PipeTransform {
+  transform(value: number): string {
+    const minutes: number = Math.floor(value / 60);
+    return (
+      ("00" + minutes).slice(-2) +
+      ":" +
+      ("00" + Math.floor(value - minutes * 60)).slice(-2)
+    );
+  }
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css', '../../../assets/revolution/css/settings.css','../../../assets/revolution/css/navigation.css','../../../assets/revolution/custom-setting.css'],
   providers: [ToastrService],
+  
 })
 export class HomeComponent implements OnInit {
+  countDown: any;
+  counter = 1800;
+  tick = 1000;
+  
   registerForm!: FormGroup;
   mainloader: boolean = true;
   Slider: any;
@@ -178,6 +197,8 @@ export class HomeComponent implements OnInit {
   oldBestsellpro: any;
   parentbesrsellpro: Array<any>=[];
   parentbesrsell: any;
+  Flashdeal: any;
+  Flashphotos: any=[];
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -189,7 +210,6 @@ export class HomeComponent implements OnInit {
 
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
-
     );
     // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
@@ -228,6 +248,8 @@ export class HomeComponent implements OnInit {
   }
   ngOnInit(): void {
 
+    this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
+
     setTimeout(() => {
       this.loadingg = false;
     }, 2000);
@@ -241,6 +263,7 @@ export class HomeComponent implements OnInit {
     this.viewcategorydata();
     this.gethomeecat();
     this.viewfuturedpro();
+    this.viewflashdeal();
     this.viewbrands();
     this.viewdata4();
 
@@ -254,6 +277,9 @@ export class HomeComponent implements OnInit {
     
     })(jQuery);
 
+  }
+  ngOnDestroy(){
+    this.countDown= null;
   }
   onSubmit() {
     this.btnloading = true;
@@ -489,6 +515,23 @@ export class HomeComponent implements OnInit {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data.slice(0, 4);
       this.loader4 = false;
+
+    });
+  }
+  viewflashdeal() {
+    this.request.getflashdeals().subscribe((response: any) => {
+
+      this.Flashdeal = response.data;
+      console.log("Flashdeal", this.Flashdeal);
+      this.loader4 = false;
+       this.Flashdeal.forEach((item: any) => {       
+           console.log("items", item);
+           this.Flashphotos.push({ imageFull:'https://neophroncrm.com/spiceclubnew/public/' + item.banner , 
+           thumbImage:'https://neophroncrm.com/spiceclubnew/public/' + item.banner,name:item.title, date:item.date, id:item.id})      
+        
+       })
+
+console.log("this.Flashphotos ", this.Flashphotos );
 
     });
   }
@@ -1074,4 +1117,6 @@ export class HomeComponent implements OnInit {
 function animateQuickView(id: any, selectedImage: any, finalWidth: number, maxQuickWidth: number, arg4: string) {
   throw new Error('Function not implemented.');
 }
+
+
 

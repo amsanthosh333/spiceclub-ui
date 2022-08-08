@@ -696,12 +696,13 @@ font { font-family: 'Poppins', sans-serif; }
     }
  
     /* to remove arroys form input box */
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
+
+   #mainqty input::-webkit-outer-spin-button,
+   #mainqty  input::-webkit-inner-spin-button {
       -webkit-appearance: none;
       margin: 0;
     }
-    input[type=number] {
+    #mainqty input[type=number] {
       -moz-appearance: textfield;
     }
     .blink_me {

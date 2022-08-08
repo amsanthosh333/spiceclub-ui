@@ -41,6 +41,7 @@
     "ngx-bootstrap": "^8.0.0",
     "ngx-bootstrap-icons": "^1.7.2",
     "ngx-bootstrap-navbar": "^1.0.0",
+    "ngx-countdown": "^14.0.0",
     "ngx-infinite-scroll": "^13.0.2",
     "ngx-owl-carousel-o": "^7.0.1",
     "ngx-pagination": "^5.1.1",

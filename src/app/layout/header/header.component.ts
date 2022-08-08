@@ -1816,6 +1816,7 @@ export class HeaderComponent implements OnInit {
   }
 
   openlogin(){
+    
     this.modalService.open(LoginComponent, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
