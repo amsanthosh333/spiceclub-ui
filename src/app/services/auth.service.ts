@@ -136,15 +136,13 @@ export class AuthService {
   registerotpverification(body: any) {  
     this.url = `${this.endPoint1}/auth/confirm_code`;
     return this.http.post<any>(this.url, body)
-      .pipe(
-        map((user) => {
-          // store user details and jwt token in local storage to keep user logged in between page refreshes
-          // console.log(JSON.stringify(user));
-          // localStorage.setItem('currentUser', JSON.stringify(user));
-          // this.currentUserSubject.next(user);
-          return user;
-        })
-      );
+    // .pipe(    
+    //   map((user) => { 
+    //     localStorage.setItem('currentUser', JSON.stringify(user));
+    //     this.currentUserSubject.next(user);   
+    //     return user;
+    //   })
+    // );
   }
   resendotp(body: any) { 
     this.url = `${this.endPoint1}/auth/resend_code`;

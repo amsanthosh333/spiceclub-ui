@@ -93,6 +93,10 @@ export class SignupComponent implements OnInit {
     });
   }
   onSubmit(content: any) {
+    // this.modalService.open(content, {
+    //             ariaLabelledBy: 'modal-basic-title',
+    //             size: 'md',
+    //           });
     this.submitted = true;
     this.btnloading = true;
     this.error2 = '';

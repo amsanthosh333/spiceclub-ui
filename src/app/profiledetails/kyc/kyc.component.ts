@@ -54,49 +54,87 @@ export class KycComponent implements OnInit {
   onSubmit(form: FormGroup){
     this.error2 = '';
 if (this.registerForm.invalid) {
-  // this.error2 = '* Enter all details';
-  if (!this.registerForm.get('gst')?.valid) {
-    this.error2 = '* Enter correct gst number';
-  }
-  else if (!this.registerForm.get('gstimg')?.valid) {
-    this.error2 = '* Select gst image';
-  }
-  else if (!this.registerForm.get('pan')?.valid) {
-    this.error2 = '* Enter correct pan number';
-  }
-  else if (!this.registerForm.get('panimg')?.valid) {
-    this.error2 = '* Select pan image';
-  }
+  // if (!this.registerForm.get('gst')?.valid ) {
+  //   this.error2 = '* Enter correct gst number';
+  // }
+  // else if (!this.registerForm.get('gstimg')?.valid) {
+  //   this.error2 = '* Select gst image';
+  // }
+  // else if (!this.registerForm.get('pan')?.valid) {
+  //   this.error2 = '* Enter correct pan number';
+  // }
+  // else if (!this.registerForm.get('panimg')?.valid ) {
+  //   this.error2 = '* Select pan image';
+  // }
+  if (this.registerForm.get('gst')?.valid || this.registerForm.get('pan')?.valid) {
+    if(this.registerForm.get('gstimg')?.valid || this.registerForm.get('panimg')?.valid){
+      const edata = { 
+        user_id: this.userid,
+        gst_number:form.value.gst,
+        gst_image:this.gstImageBase64,
+        pan_number:form.value.pan,
+        pan_image:this.panImageBase64,
+      }
+      console.log("form valuessss",edata);
+      this.request.addkyc(edata).subscribe((res: any) => {
+        console.log("kyc response", res);
+        
+        if (res.result == true) {       
+          form.reset() 
+          this.toastr.success('Submited Successfully','');
+        this.modalService.dismissAll();  
+        }
+        else  {
+      this.toastr.info('Something went wrong','');
+        }
+      }, (error: any) => {
+        console.log("error",error);
+        this.toastr.info('Something went wrong','');  
+      });
+     
+        }
+
+      else {
+          this.error2 = '* Upload image';
+        }
+    }
+  else{
+      this.error2 = '* Enter correct gst or pan number';
+    }
+
+  //   if(this.registerForm.get('gstimg')?.valid || this.registerForm.get('panimg')?.valid){
+  //     this.error2 = '* valid image';
+  //   }
+  // else {
+  //     this.error2 = '* Upload image';
+  //   }
   return;
-} else {
-  const edata = { 
-    user_id: this.userid,
-    gst_number:form.value.gst,
-    gst_image:this.gstImageBase64,
-    pan_number:form.value.pan,
-    pan_image:this.panImageBase64,
-  }
-  console.log("form valuessss",edata);
-  this.request.addkyc(edata).subscribe((res: any) => {
-    console.log("kyc response", res);
+} 
+// else {
+//   const edata = { 
+//     user_id: this.userid,
+//     gst_number:form.value.gst,
+//     gst_image:this.gstImageBase64,
+//     pan_number:form.value.pan,
+//     pan_image:this.panImageBase64,
+//   }
+//   console.log("form valuessss",edata);
+//   this.request.addkyc(edata).subscribe((res: any) => {
+//     console.log("kyc response", res);
     
-    if (res.result == true) {       
-      form.reset() 
-      this.toastr.success('Submited Successfully','');
-    this.modalService.dismissAll();  
-    }
-    else  {
-  //     form.reset();
-  // this.modalService.dismissAll();
-  this.toastr.info('Something went wrong','');
-    }
-  }, (error: any) => {
-    console.log("error",error);
-    this.toastr.info('Something went wrong','');
-    // form.reset();
-    // this.modalService.dismissAll();
-  });
-   }
+//     if (res.result == true) {       
+//       form.reset() 
+//       this.toastr.success('Submited Successfully','');
+//     this.modalService.dismissAll();  
+//     }
+//     else  {
+//   this.toastr.info('Something went wrong','');
+//     }
+//   }, (error: any) => {
+//     console.log("error",error);
+//     this.toastr.info('Something went wrong','');  
+//   });
+//    }
 
 
   }

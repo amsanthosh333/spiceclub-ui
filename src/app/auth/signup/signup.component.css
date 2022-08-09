@@ -11,8 +11,8 @@ select{
   color: rgb(223, 39, 39)
 }
 #verifybtn{
-  padding: 1px 5px;
-    font-size: 0.9rem;
+  padding: 1px 20px;
+  font-size: 0.8rem;
 }
 #loginformrow p{
   margin-bottom: 0px;

@@ -14,7 +14,7 @@
     <div class="card-body" style="margin-left: 30px;margin-right: 30px;">
         <form [formGroup]="registerForm" (ngSubmit)="onSubmit(registerForm)">
             <div class="col-lg-12 ">
-                <label >Gst number <span class="text-danger">*</span> </label>
+                <label >Gst Number </label>
                 <input type="text"   formControlName="gst"  required style="border: 1px solid #9d9d9d;
                 border-radius: 3px;">
                 <h6 class="form-text text-danger"
@@ -22,7 +22,7 @@
               *Enter the name</h6>
             </div>
             <div class="col-lg-12 mt-10" style="display: grid;">
-                <label >Gst image <span class="text-danger">*</span> </label>
+                <label >Gst Image </label>
                 <fieldset class="form-group" style="display: inline;">
                     <!-- {{imageError}}  (change)="fileChangeEvent($event)"-->               
                     <div class="custom-file fileInputProfileWrap">
@@ -39,15 +39,15 @@
                 </fieldset>
             </div>
             <div class="col-lg-12 ">
-                <label for="regPassword">Pan number <span class="text-danger">*</span> </label>
-                <input type="text" formControlName="pan"   required style="  border: 1px solid #9d9d9d;
+                <label for="regPassword">Pan Number </label>
+                <input type="text" formControlName="pan"   required style="text-transform:uppercase;  border: 1px solid #9d9d9d;
                 border-radius: 3px;">
                 <h6 class="form-text text-danger"
                 *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
               *Enter the correct email</h6>
             </div>
             <div class="col-lg-12 mt-10"  style="display: grid;">
-                <label >Pan image <span class="text-danger">*</span> </label>
+                <label >Pan Image </label>
                 <fieldset class="form-group" style="display: inline;">
                     <!-- {{imageError}}  (change)="fileChangeEvent($event)"-->
                     <div class="custom-file fileInputProfileWrap">

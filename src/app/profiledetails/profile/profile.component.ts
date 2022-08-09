@@ -166,7 +166,6 @@ export class ProfileComponent implements OnInit {
     });
   }
   openkyc(){
-
     this.modalService.open(KycComponent, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
