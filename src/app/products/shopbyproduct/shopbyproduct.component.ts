@@ -334,6 +334,7 @@ export class ShopbyproductComponent implements OnInit {
     this.prodloader = true;
     console.log("viewdataaaaaaaaaaaaa");
     this.request.getallproducts(page).subscribe((response: any) => {
+      console.log("getallproducts response",response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links

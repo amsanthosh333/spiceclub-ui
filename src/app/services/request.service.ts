@@ -659,7 +659,8 @@ export class RequestService {
 
   //flashdeal
   public getprodbyflash(id: any, page: any) {
-    this.url = `${this.endPoint1}/flash-deal-products/` + id + '?page=' + page + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    this.url = `${this.endPoint1}/flash-deal-products/` + id ;
+    console.log(this.url);
     return this.http.get(this.url);
   }
   public getallflashdeal() {
@@ -668,7 +669,8 @@ export class RequestService {
   }
 
   public getallflashdealproducts() {
-    this.url = `${this.endPoint1}/products/flashdeal` + `&buyertype=` + this.buyertypeid;
+    this.url = `${this.endPoint1}/products/flashdeal`;
+    console.log(this.url);
     return this.http.get(this.url);
   }
   public gettodaysoffer() {

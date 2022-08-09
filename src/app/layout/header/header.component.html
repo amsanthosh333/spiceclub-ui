@@ -150,7 +150,7 @@
 	</div>
 
 	<div class="header-bottom-navigation">
-		<div class="site-main-nav d-none d-lg-block"  style="padding-left: 6%;height: 34px;background-color: #eee;">
+		<div class="site-main-nav d-none d-lg-block"  style="padding-left: 0%;height: 34px;background-color: #eee;">
 			<nav class="site-nav" style="display: flex;">
 				<!-- <div class="wrapper" style="flex-direction: row; 
 						justify-content: center;
@@ -248,8 +248,8 @@
 							<div class="wrapper" style="flex-direction: row; 
 							justify-content: center;
 							align-items: center;display: block;margin-top: 3px;" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0">
-							<span   class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
-								><a class="btn btn-danger" id="buttonkyc">Verify Kyc</a></a></span>
+							<span   class="wrapper1" style=" margin-left: 45px;" (click)="openkyc()"><a id="buttonsubscribe"
+								><a class="btn btn-danger" id="buttonkyc" >Verify KYC</a></a></span>
 						</div>
 				<!-- <span  *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1" class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
 						><a class="btn btn-info" id="buttonkyc">Kyc verification inprogress</a></a></span> -->

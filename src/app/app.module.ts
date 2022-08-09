@@ -23,13 +23,15 @@ import { SlickCarouselModule } from 'ngx-slick-carousel';
 import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { CountdownComponent } from './pages/countdown/countdown.component';
 
 @NgModule({
   declarations: [
     AppComponent, 
     HeaderComponent,
     FooterComponent,
-    HomeComponent, 
+    HomeComponent,
+    CountdownComponent, 
   ],
   imports: [
     BrowserModule,BrowserAnimationsModule,

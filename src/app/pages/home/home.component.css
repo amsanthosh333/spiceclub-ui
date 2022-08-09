@@ -1,3 +1,15 @@
+:host ::ng-deep .ng-image-slider .ng-image-slider-container .main .main-inner {
+  /* margin-left: 0px;
+  margin-left: -652px;
+  transition: all 1s ease-in-out 0s; */
+
+  /* margin-left: -70px !important;
+  width: 1236px  !important;
+  transition: none 0s ease 0s ; */
+
+}
+
+
 :host ::ng-deep .active.carousel-item,
 .carousel-fade .active.carousel-item-right {
   z-index: 0;
@@ -1299,7 +1311,7 @@ a.next.icons.next-icon {
     max-width: 98%;
   }
   .todaybanner {
-   height: 320px;
+   height: 300px;
   }
 
 }
@@ -1534,8 +1546,17 @@ input[type=number] {
 
 @media (min-width: 992px) {
 
+  .flashbanner{
+    height: 215px;
+    width: 350px;
+  }
+  .flashbanner img {
+    height: 100%;
+    /* object-fit: cover; */
+    width: 100%;
+  }
   .todaybanner {
-    /* height: 250px; */
+    height: 280px;
   }
 
   .todaybanner img {
@@ -1590,18 +1611,18 @@ input[type=number] {
   .carousall6 {
     background-color: rgba(255, 255, 255, 0);
     padding: 0px;
-    height: 217px;
+    height: auto;
     margin: 10px;
     margin-left: 40px;
     width: 93%;
     position: absolute;
-    top: 42%;
+    top: 51%;
 
   }
   .carousall9 {
     background-color: rgba(255, 255, 255, 0);
     padding: 0px;
-    height: 217px;
+    height: auto;
     margin: 10px;
     margin-left: auto;
     margin-right: auto;

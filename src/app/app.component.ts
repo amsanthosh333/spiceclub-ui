@@ -23,7 +23,6 @@ export class AppComponent {
     constructor(private router: Router) {
       // on route change to '/login', set the variable showHead to false
         router.events.forEach((event) => {
-          console.log("route");
           if (event instanceof NavigationStart) {
             this.showHead=true;
             this.showFooter=true ;

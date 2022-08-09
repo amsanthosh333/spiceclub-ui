@@ -1793,7 +1793,13 @@ export class HeaderComponent implements OnInit {
     this.subItem3 = i;
     this.subcategory1 = id
   }
+  openkyc(){
 
+    this.modalService.open(KycComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
+  }
   gotoproduct(id:any){
     this.router.navigate(['/productdetail', id]);
   }
@@ -1832,15 +1838,15 @@ export class HeaderComponent implements OnInit {
     console.log("sdfxdgs");
     
   }
-  openkyc(){
-    $("#about-overlay").toggleClass("active-about-overlay");
-        $(".overlay-close").addClass("inactive").removeClass("active");
-        $("body").removeClass("active-body-search-overlay");
-    this.modalService.open(KycComponent, {
-      ariaLabelledBy: 'modal-basic-title',
-      size: 'md',
-    });
-  }
+  // openkyc(){
+  //   $("#about-overlay").toggleClass("active-about-overlay");
+  //       $(".overlay-close").addClass("inactive").removeClass("active");
+  //       $("body").removeClass("active-body-search-overlay");
+  //   this.modalService.open(KycComponent, {
+  //     ariaLabelledBy: 'modal-basic-title',
+  //     size: 'md',
+  //   });
+  // }
   openenquery(){
     $("#about-overlay").toggleClass("active-about-overlay");
     $(".overlay-close").addClass("inactive").removeClass("active");

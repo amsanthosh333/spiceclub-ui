@@ -35,15 +35,15 @@ export class FormatTimePipe implements PipeTransform {
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css', '../../../assets/revolution/css/settings.css','../../../assets/revolution/css/navigation.css','../../../assets/revolution/custom-setting.css'],
+  styleUrls: ['./home.component.css', '../../../assets/revolution/css/settings.css', '../../../assets/revolution/css/navigation.css', '../../../assets/revolution/custom-setting.css'],
   providers: [ToastrService],
-  
+
 })
 export class HomeComponent implements OnInit {
   countDown: any;
   counter = 1800;
   tick = 1000;
-  
+
   registerForm!: FormGroup;
   mainloader: boolean = true;
   Slider: any;
@@ -195,10 +195,10 @@ export class HomeComponent implements OnInit {
   top2name: any;
   topsecondcat: any;
   oldBestsellpro: any;
-  parentbesrsellpro: Array<any>=[];
+  parentbesrsellpro: Array<any> = [];
   parentbesrsell: any;
   Flashdeal: any;
-  Flashphotos: any=[];
+  Flashphotos: any = [];
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -274,12 +274,12 @@ export class HomeComponent implements OnInit {
     });
 
     (($) => {
-    
+
     })(jQuery);
 
   }
-  ngOnDestroy(){
-    this.countDown= null;
+  ngOnDestroy() {
+    this.countDown = null;
   }
   onSubmit() {
     this.btnloading = true;
@@ -437,7 +437,7 @@ export class HomeComponent implements OnInit {
   }
   toggle1(img: any, index: any): void {
 
-    console.log("toggle1",this.userid);
+    console.log("toggle1", this.userid);
 
     this.likesss[index] = !this.likesss[index];
     if (this.likesss[index] == true) {
@@ -449,7 +449,7 @@ export class HomeComponent implements OnInit {
 
   }
   toggledelete1(img: any, index: any): void {
-   
+
     if (this.userid !== 0) {
       this.likess[index] = !this.likess[index];
 
@@ -461,7 +461,7 @@ export class HomeComponent implements OnInit {
       }
     }
     else {
-      this. openlogin()
+      this.openlogin()
     }
   }
   clickme() {
@@ -492,7 +492,7 @@ export class HomeComponent implements OnInit {
       });
       this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
         this.topsecondcat = response.data
-    
+
       });
     },
       (error: any) => {
@@ -507,7 +507,7 @@ export class HomeComponent implements OnInit {
     console.log("goto");
     this.router.navigate(['category', this.top2id]);
   }
-  gotocategoryproduct(id:any) {
+  gotocategoryproduct(id: any) {
     console.log("goto");
     this.router.navigate(['category', id]);
   }
@@ -515,25 +515,23 @@ export class HomeComponent implements OnInit {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data.slice(0, 4);
       this.loader4 = false;
-
+      console.log("Todaysoffer", this.Todaysoffer);
     });
   }
   viewflashdeal() {
     this.request.getflashdeals().subscribe((response: any) => {
-
-      this.Flashdeal = response.data;
+      this.Flashdeal = response.data.slice(0, 4);
       console.log("Flashdeal", this.Flashdeal);
-      this.loader4 = false;
-       this.Flashdeal.forEach((item: any) => {       
-           console.log("items", item);
-           this.Flashphotos.push({ imageFull:'https://neophroncrm.com/spiceclubnew/public/' + item.banner , 
-           thumbImage:'https://neophroncrm.com/spiceclubnew/public/' + item.banner,name:item.title, date:item.date, id:item.id})      
-        
-       })
-
-console.log("this.Flashphotos ", this.Flashphotos );
-
+      this.loader4 = false;  
     });
+  }
+
+  FlashClick(id:any,i:any){
+    this.router.navigate(['flash', id]);
+
+  }
+  completed() {
+    console.log('teste');
   }
   viewsubscribebanner() {
     this.request.getsubscribebanner().subscribe((response: any) => {
@@ -549,10 +547,13 @@ console.log("this.Flashphotos ", this.Flashphotos );
       this.proddetail(this.prd_id)
 
   }
-  bannerClick(id: any) {
-   
+  bannerClick(id: any, i: any) {
+    if (i == 3) {
+      this.router.navigate(['flash']);
+    }
+    else {
       this.proddetail(id)
-
+    }
   }
   blogClick(i: any) {
     this.brnd_id = this.Allbrands[i].id
@@ -575,7 +576,7 @@ console.log("this.Flashphotos ", this.Flashphotos );
   }
   viewfuturedpro() {
     this.request.getfuturedpro().subscribe((response: any) => {
-      console.log("Futuredpro",response);  
+      console.log("Futuredpro", response);
       this.Futuredpro = response.data;
       this.loader6 = false;
       setTimeout(() => {
@@ -677,24 +678,24 @@ console.log("this.Flashphotos ", this.Flashphotos );
     console.log("this.quantityarray", this.quantityarray);
   }
 
-  selectbestsell(){
-    console.log("this.parentbesrsellpro",this.parentbesrsellpro);
+  selectbestsell() {
+    console.log("this.parentbesrsellpro", this.parentbesrsellpro);
   }
-  bestsellingselectvar(weight: any, i: any, id: any) {  
+  bestsellingselectvar(weight: any, i: any, id: any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, weight).subscribe((res: any) => {
       console.log("selectvar res", res);
-      
-       this.Bestsellpro[i].stroked_price = res.stroked_price;
-       this.Bestsellpro[i].main_price = res.price_string;
+
+      this.Bestsellpro[i].stroked_price = res.stroked_price;
+      this.Bestsellpro[i].main_price = res.price_string;
       // this.Bestsellpro[i].stroked_price = res.stroked_price;
       // this.Bestsellpro[i].main_price = res.price_string;
     }, (error: any) => {
       console.log("error", error);
     });
   }
-  featuuresselectvar(weight: any, i: any, id: any) {  
+  featuuresselectvar(weight: any, i: any, id: any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, this.selectedvar).subscribe((res: any) => {
@@ -705,7 +706,7 @@ console.log("this.Flashphotos ", this.Flashphotos );
       console.log("error", error);
     });
   }
-  topcat1selectvar(weight: any, i: any, id: any) {  
+  topcat1selectvar(weight: any, i: any, id: any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, weight).subscribe((res: any) => {
@@ -716,7 +717,7 @@ console.log("this.Flashphotos ", this.Flashphotos );
       console.log("error", error);
     });
   }
-  topcat2selectvar(weight: any, i: any, id: any) {  
+  topcat2selectvar(weight: any, i: any, id: any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, weight).subscribe((res: any) => {
@@ -727,12 +728,12 @@ console.log("this.Flashphotos ", this.Flashphotos );
       console.log("error", error);
     });
   }
-  
+
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
       // this.toastr.info('You need to login', '');
-      this. openlogin()
+      this.openlogin()
     }
     else {
 
@@ -802,7 +803,7 @@ console.log("this.Flashphotos ", this.Flashphotos );
 
     if (this.userid == 0) {
       // this.toastr.info('You need to login', '');
-      this. openlogin()
+      this.openlogin()
     }
     else {
       let edata = {
@@ -842,8 +843,8 @@ console.log("this.Flashphotos ", this.Flashphotos );
     console.log("addtowishlist called");
     if (this.userid == 0) {
       console.log("addtowishlist called");
-      
-      this. openlogin()
+
+      this.openlogin()
     }
     else {
       let edata4 = {
@@ -1068,7 +1069,7 @@ console.log("this.Flashphotos ", this.Flashphotos );
 
   addtocart2() {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       let edata = {

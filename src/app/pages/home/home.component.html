@@ -44,8 +44,8 @@
                     </ng-image-slider>
                 </div> -->
                 <div class="row">
-                    <div class="col-3"  *ngFor="let a of Todaysoffer">
-                        <div class="todaybanner" (click)="bannerClick(a.product_id)"> 
+                    <div class="col-3"  *ngFor="let a of Todaysoffer;let i=index" >
+                        <div class="todaybanner" (click)="bannerClick(a.product_id,i)"> 
                             <img src="{{a.thumbImage}}" >
                         </div>
                        
@@ -813,18 +813,33 @@
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
-                   Flash Deals</h6>
+                   Flash Deals </h6>
+                    <h6 style="margin-right: auto;
+                    padding-left: 20px;color: green;">
+                        <!-- <app-countdown [interval]="1662834540" (onComplete)="completed()"></app-countdown> -->
+                    </h6>
                 <button class="btn btn-primary" id="viewall" [routerLink]="'/flash'">View all</button>
             </div>
         </div>
       <div class="carousall9">
-        <div class="sli mb-3" >
-            <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px;"
-                [images]="Todaysoffer" [imageSize]="{width: 350, height: 200, space: 10}" [infinite]="true"
+        <!-- <div class="sli mb-3" >       -->
+            <!-- <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px;"
+                [images]="Flashdeal" [imageSize]="{width: 350, height: 200, space: 10}" [infinite]="true"
                 [imagePopup]="false" (imageClick)="imageClick($event)" [autoSlide]="false" [animationSpeed]="0"
                 #nav>
-            </ng-image-slider>
-        </div>
+            </ng-image-slider> 
+          </div>-->
+            <div class="row">
+                <div class="col-4"  *ngFor="let a of Flashdeal;let i=index" >
+                    <app-countdown [interval]="a.date" (onComplete)="completed()"></app-countdown>
+                    <div class="flashbanner" (click)="FlashClick(a.id,i)"> 
+                        <img src="{{a.thumbImage}}" >
+                    </div>            
+                </div>
+
+            </div>
+
+      
 
       
         <div class="hover-banner-area mb-10 mb-md-50 mb-sm-50 pt-15  " *ngIf="loader4">

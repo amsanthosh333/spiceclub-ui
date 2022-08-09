@@ -110,8 +110,17 @@ export class FlashComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
     console.log("FLASH id",this.id);
+    if(this.id){
+      console.log("iffffffffffffff");
+      
+      this.viewprodbyflash(this.id,1);
+    }
+    else{
+      console.log("else");
+      this. getflashdealproducts();
+    }
     // this.viewprodbyflash(this.id,1); 
-    this. getflashdealproducts();
+   
   }
   getallflashdeal(){
     this.request.getallflashdeal().subscribe((response: any) => {
@@ -121,11 +130,15 @@ export class FlashComponent implements OnInit {
   }
   viewprodbyflash(id:any,page:any,){
     this.request.getprodbyflash(id,page).subscribe((response: any) => {
-      this.Product=response.data;
+      this.Allproducts=response.data;
       this.pagenation=response.meta   
-      this.pagess=this.pagenation.links
+      this.pagess=this.pagenation?.links
+      this.prodloader=false
       console.log("response",response);
-      console.log("allbrandproduct",this.Product);
+      console.log("allbrandproduct",this.Allproducts);
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
     });
   }
   getflashdealproducts(){
@@ -133,6 +146,9 @@ export class FlashComponent implements OnInit {
       this.Allproducts=response.data;
       this.prodloader=false
       console.log("Allproducts",this.Allproducts);
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
     });
   }
   getpage(url:any){
@@ -140,6 +156,7 @@ export class FlashComponent implements OnInit {
       this.Product=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
+      this.prodloader=false
       console.log("response",response);
       console.log("allproduct",this.Product);
     })
