@@ -87,12 +87,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="singlomment">
+                        <!-- <div class="singlomment">
                             <div class="single-comment__content pl-2  mb-3">
                                 <button id="checkbalance" class="btn btn-success" routerLink="/wallet">Check
                                     Balance</button>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <div class="col-12" id="list" (click)="gotocart()">
@@ -368,7 +368,7 @@
                         <div class="ya-card-row">
                             <!--  -->
                             <div class="ya-card-cell" (click)="openkyc()"
-                            *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0" >
+                            *ngIf="profiledetail?.buyertypereal===2 && profiledetail?.kyc_verify_status==0 && profiledetail?.iskycupload ==0" >
                                 <a  class="ya-card__whole-card-link">
                                     <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
                                         <div class="a-box-inner" >
@@ -390,7 +390,7 @@
                                     </div>
                                 </a>
                             </div>
-                            <div class="ya-card-cell" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1" >
+                            <div class="ya-card-cell" *ngIf="profiledetail?.buyertypereal===2 && profiledetail?.kyc_verify_status==0 && profiledetail?.iskycupload ==1" >
                                 <a  class="ya-card__whole-card-link">
                                     <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
                                         <div class="a-box-inner" >
@@ -413,7 +413,8 @@
                                 </a>
                             </div>
 
-                            <div class="ya-card-cell" (click)="openenquery()" *ngIf="buyertypeid==2">
+                            <!-- *ngIf="profiledetail.buyertypeid==2" -->
+                            <div class="ya-card-cell" (click)="openenquery()" *ngIf="profiledetail?.buyertypeid==2">
                                 <a  class="ya-card__whole-card-link">
                                     <div data-card-identifier="YourOrders" class="a-box ya-card--rich">
                                         <div class="a-box-inner" >
@@ -513,7 +514,7 @@
 
 <ng-template #profileimageRecord let-modal>
     <div class="modal-header editRowModal">
-        <h4 class="modal-title" id="modal-basic-title">
+        <h5 class="modal-title" id="modal-basic-title">
             <div class="table-modal-header">
                 <div class="table-modal-header">
                     <div class="modal-about">
@@ -522,7 +523,7 @@
                     </div>
                 </div>
             </div>
-        </h4>
+        </h5>
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
             <span aria-hidden="true"><i class="ion-android-close"></i></span>
         </button>
@@ -536,7 +537,7 @@
                         <!-- {{imageError}} -->
                         <div class="custom-file fileInputProfileWrap">
                             <input type="file" (change)="fileChangeEvent($event)" class="fileInputProfile">
-                            <div class="img-space">
+                            <div class="img-space" style="text-align: center;" >
 
                                 <!-- <ng-container *ngIf="isImageSaved; else elseTemplate">
                                 <img [src]="cardImageBase64" />
@@ -546,7 +547,9 @@
                                     <!-- <img src="./../../assets/placeholder.png" class="img-responsive"> -->
                                 </ng-template>
                                 <br>
-                                <button class="btn btn-danger btn-md btn-block" (click)="changeproimg()">
+                                <button  style="background-color: rgb(201, 31, 8);border: 1px solid rgb(201, 31, 8); padding-top: 1px; padding-bottom: 1px;"
+                                class="lezada-button lezada-button--medium lezada-button--icon--left"
+                                (click)="changeproimg()">
                                     Save
                                 </button>
 

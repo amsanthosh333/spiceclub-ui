@@ -709,6 +709,17 @@ input::placeholder {
 
 /* mob */
 @media (max-width: 992px) {
+
+  .flashbanner{
+    height: 215px;
+    width: 336px;
+  }
+  .flashbanner img {
+    height: 100%;
+    /* object-fit: cover; */
+    width: 100%;
+  }
+  
   #sliderrow3 {
     margin-left: -10px;
     margin-top: 7px;

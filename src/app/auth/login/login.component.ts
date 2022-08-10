@@ -177,6 +177,7 @@ export class LoginComponent implements OnInit {
               return;
             }
             else if (res.message == "Unauthorized") {
+              console.log("res Unauthorized in onsubmit",res.message);
               this.error1 = '* Invalid credentials';
             }
             else if (res.message == "Please verify your account") {
@@ -201,6 +202,7 @@ export class LoginComponent implements OnInit {
             if (error.error.message == "User not found") {
               this.error1 = '* User not found';
             } else if (error.error.message == "Unauthorized") {
+              console.log("res Unauthorized in onsubmit",error.error.message);
               this.error1 = '* Invalid credentials';
             }
             else if (error.error.message == "Please verify your account") {
@@ -363,13 +365,16 @@ export class LoginComponent implements OnInit {
 
         if (res) {
           if (res.message == "User not found") {
+            console.log("res User not found", res);
             this.error1 = '* User not found';
             return;
           }
           else if (res.message == "Unauthorized") {
+            console.log("res Unauthorized", res);
             this.error1 = '* Invalid credentials';
           }
           else if (res.message == "Please verify your account") {
+            console.log("res Please verify your account", res);
             this.toastr.info('verify your account', '');
             this.resend();
             this.otpSubmit(content)
@@ -377,10 +382,11 @@ export class LoginComponent implements OnInit {
           else if (res.result == true) {
             this.sharedService.sendClickEvent();
             this.toastr.success('logged in Successfully', '');
-            this.router.navigate(['/home'])
-              .then(() => {
-                window.location.reload();
-              });
+            
+            // this.router.navigate(['/home'])
+            //   .then(() => {
+            //     window.location.reload();
+            //   });
           }
         } else {
           this.error1 = 'Invalid Login';

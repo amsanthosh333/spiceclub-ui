@@ -53,7 +53,7 @@
                         <div class="row pb-10">
                             <div class="col-lg-6 mb-md-70 mb-sm-70 pl-0" style="display:flex;">
                                 <!-- side images  -->
-                                <div class="col-lg-2 " id="sideslider">
+                                <div class="col-lg-2" id="sideslider">
                                     <ul style="padding:0px">
                                         <li *ngFor="let p of allgalleryphotos;let i=index" style="padding-bottom:10px ;"
                                             (click)="blogClick(i)">
@@ -241,7 +241,7 @@
                                         </div>
 
                                         <!-- <hr style="color:#a19a9a ;"> -->
-                                        <div class="shop-product__short-desc " *ngIf="Bulckdis?.length!==0">
+                                        <div class="shop-product__short-desc " *ngIf="!showbulkoffer">
                                             <h6 class="blink_me" style="color: rgb(14, 68, 243);padding: 0px;
                                                 font-size: 0.8rem;
                                                 margin-bottom: 10px;" *ngFor="let a of Bulckdis">Order minimum
@@ -608,7 +608,7 @@
 
                                         <div class="card" id="dropdowncard">
                                             <div class="row">
-                                                <div class="col-3">
+                                                <div class="col-lg-3 col-md-12 col-sm-12">
                                                     <div class="card-header" id="headingOne">
                                                         <h5 class="mb-0" (click)="collapsebtn2()">
                                                             <button id="btndiv" class="btn btn-link"
@@ -623,7 +623,7 @@
                                                         </h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-lg-3 col-md-12 col-sm-12">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn()">
                                                             <button id="btndiv" class="btn btn-link"
@@ -638,7 +638,7 @@
                                                         </h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-3">
+                                                <div class="col-lg-3 col-md-12 col-sm-12">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn1()">
                                                             <button id="btndiv" class="btn btn-link collapsed"
@@ -654,7 +654,7 @@
                                                         </h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-3" *ngIf="choice?.length!==0">
+                                                <div class="col-lg-3 col-md-12 col-sm-12" *ngIf="choice?.length!==0">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn3()">
                                                             <button id="btndiv" class="btn btn-link collapsed"
@@ -765,7 +765,7 @@
                                                         <div class="v-expansion-panel-content__wrap">
                                                             <div class="shop-product__additional-info"
                                                                 *ngIf="choice?.length!==0">
-                                                                <table class="overview" style="width: 50%;">
+                                                                <table id="addinfoOverview" class="overview">
 
                                                                     <tr *ngFor="let a of choice">
                                                                         <th id="he" style="background-color: #f2f2f2;vertical-align: middle;

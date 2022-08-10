@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { AuthService } from 'src/app/services/auth.service';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
@@ -82,7 +82,7 @@ export class CartComponent implements OnInit {
   cartitems: any;
   availcoupan: any;
   Futuredpro: any;
- 
+  ClickEventSubscription!: Subscription;
   poploader: boolean =true;
   // responseText: string;
 
@@ -106,6 +106,13 @@ export class CartComponent implements OnInit {
     this.username = this.currentdetail.user.name;
     this.userphone = this.currentdetail.user.phone;
     this.useremail = this.currentdetail.user.email;
+
+    if (this.userid !== 0) {
+      this.ClickEventSubscription = this.sharedService.getcartClickEvent().subscribe(() => {
+        this.viewcart();
+      })
+    }
+    
   }
 
   ngOnInit(): void {

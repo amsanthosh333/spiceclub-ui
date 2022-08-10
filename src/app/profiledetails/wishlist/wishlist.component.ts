@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of, Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -55,6 +55,8 @@ export class WishlistComponent implements OnInit {
   poploader: boolean=true;
   Summeryload: boolean=true;
   buynowbtn: boolean=false;
+  ClickEventSubscription!: Subscription;
+  
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService, 
     private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,
     config: NgbRatingConfig,
@@ -73,6 +75,13 @@ export class WishlistComponent implements OnInit {
      
     config.max = 5;
     config.readonly = true;
+
+    if (this.userid !== 0) {
+      this.ClickEventSubscription = this.sharedService.getwishlistClickEvent().subscribe(() => {
+        this.viewwishlist();
+      })
+    }
+
     
    }
 

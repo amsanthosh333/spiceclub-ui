@@ -499,7 +499,7 @@
 								<p>
 									<span *ngIf="b?.stroked_price!==b?.pricestring"
 										class="main-price discounted">{{b?.stroked_price}}</span>
-									<span class="discounted-price" style="color: red;"> Rs.{{b.price}}</span>
+									<span class="discounted-price" style="color: red;"> {{b.pricestring}}</span>
 								</p>
 								<span>
 									<p style="font-size:small;">Quantity: {{b.quantity}}</p>

@@ -1660,6 +1660,7 @@ export class HeaderComponent implements OnInit {
       if (response.result == true) {
         this.viewwishlist();
         this.deleteRecordSuccess();
+        this.sharedService.senddeletewishlistEvent();
       }
       else {
         this.toastr.error(response.message);
@@ -1675,6 +1676,15 @@ export class HeaderComponent implements OnInit {
         this.viewcart3();
         this.viewcartcount();
         this.deleteRecordSuccess();
+
+        this.sharedService.senddeletecartEvent();
+
+        // var href = this.router.url;
+        // console.log(this.router.url);
+        // if(href == "/cart"){
+        //   window.location.reload();
+        // }
+
       }
       else {
         this.toastr.error(response.message);

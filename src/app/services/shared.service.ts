@@ -6,6 +6,11 @@ import { Observable,Subject } from 'rxjs';
 export class SharedService {
   private subject = new Subject<any>();
   private logoutsubject = new Subject<any>();
+  private cartdata = new Subject<any>();
+
+
+  // header cart,wishlist,profile auto update
+
   sendClickEvent(){
     this.subject.next(value)
   }
@@ -14,6 +19,23 @@ export class SharedService {
   
 }
 
+  //  cart page update
+senddeletecartEvent(){
+  this.cartdata.next(value)
+}
+getcartClickEvent():Observable<any>{
+return this.cartdata.asObservable()
+
+}
+
+  // wishlist page update
+  senddeletewishlistEvent(){
+    this.cartdata.next(value)
+  }
+  getwishlistClickEvent():Observable<any>{
+  return this.cartdata.asObservable()
+  
+  }
 sendlogout(){
  
   

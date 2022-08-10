@@ -816,9 +816,9 @@
                    Flash Deals </h6>
                     <h6 style="margin-right: auto;
                     padding-left: 20px;color: green;">
-                        <!-- <app-countdown [interval]="1662834540" (onComplete)="completed()"></app-countdown> -->
+                      
                     </h6>
-                <button class="btn btn-primary" id="viewall" [routerLink]="'/flash'">View all</button>
+                <!-- <button class="btn btn-primary" id="viewall" [routerLink]="'/flash'">View all</button> -->
             </div>
         </div>
       <div class="carousall9">
@@ -830,9 +830,9 @@
             </ng-image-slider> 
           </div>-->
             <div class="row">
-                <div class="col-4"  *ngFor="let a of Flashdeal;let i=index" >
+                <div class="col-lg-4 col-md-6 col-sm-12 "  *ngFor="let a of Flashdeal;let i=index" >
                     <app-countdown [interval]="a.date" (onComplete)="completed()"></app-countdown>
-                    <div class="flashbanner" (click)="FlashClick(a.id,i)"> 
+                    <div class="flashbanner mb-10" (click)="FlashClick(a.id,i)"> 
                         <img src="{{a.thumbImage}}" >
                     </div>            
                 </div>

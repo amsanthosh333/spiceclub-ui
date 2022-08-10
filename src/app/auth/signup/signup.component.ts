@@ -179,7 +179,10 @@ export class SignupComponent implements OnInit {
             console.log("iffff");
             this.toastr.success('Your account is verified', '');
             this.modalService.dismissAll();
-            this.openlogin();
+            // this.openlogin();
+            this.router.navigate(['/home']).then(() => {
+              window.location.reload();
+            });
           } else {
             console.log("elseee");
             this.error3 = '*Code does not match,you can request for resending the code';
@@ -332,6 +335,7 @@ export class SignupComponent implements OnInit {
           console.log("social response if ");
           if (res.count == 0) {
             this.spinner.hide();
+            this.modalService.dismissAll();
             this.modalService.open(content, {
               ariaLabelledBy: 'modal-basic-title',
               size: 'sm',
@@ -376,7 +380,7 @@ export class SignupComponent implements OnInit {
       }
     );
   }
-  
+
   closemodel() {
     this.modalService.dismissAll();
     this.modalService.open(LoginComponent, {

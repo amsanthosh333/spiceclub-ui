@@ -138,6 +138,7 @@ export class ProductdetailComponent implements OnInit {
   videoURL!:SafeResourceUrl;
   @ViewChild('videoPlayer') videoplayer!: ElementRef;
   newarray:any = [];
+  showbulkoffer: boolean=true;
 
   
  
@@ -471,6 +472,15 @@ export class ProductdetailComponent implements OnInit {
       console.log("getbulckdiscresponse",response);
       
       this.Bulckdis = response.data;
+      console.log("this.Bulckdis",this.Bulckdis);
+ if(this.Bulckdis[0].discount_percentage == 0){
+  console.log("this.Bulckdis",this.Bulckdis[0].discount_percentage);
+   this.showbulkoffer=true
+ }
+ else{
+  this.showbulkoffer=false
+ }
+      
       // console.log(" this.Bulckdis", this.Bulckdis);
 
     },

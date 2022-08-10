@@ -143,7 +143,7 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/carts/` + id + `?is_buynow=` + buynowid;
+    this.url = `${this.endPoint1}/carts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid;
     return this.http.post(this.url, null, { headers: headers });
   }
   public fetchcartprocess(body: any) {

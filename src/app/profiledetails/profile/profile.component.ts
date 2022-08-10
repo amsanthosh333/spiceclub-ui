@@ -87,9 +87,12 @@ export class ProfileComponent implements OnInit {
     this. viewcartcount();
     this.getorders();
   }
+  
   getprofile(){
     this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
       this.profiledetail = response;
+      console.log("this.profiledetail",this.profiledetail);
+      
       this.loader=false;
       setTimeout(() => {
         this.loaderimage=false;
@@ -267,11 +270,13 @@ removeImage() {
     this.isImageSaved = false;
 }
 changeproimg(){
+
   let edata ={
     id:this.userid,
     filename:this.filename,
     image:this.cardImageBase64
   }
+  console.log("edata",edata);
   this.request.changeimg(edata).subscribe((response: any) => {
     this.profilee=response.path;
     if(response.result==true){

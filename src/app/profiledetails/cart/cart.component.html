@@ -69,20 +69,26 @@
 									
 								</td>
 
-                              <!-- subscription important-->
+                            
 
-								<!-- <td class="total-price" id="price"><span class="price"
+								<td class="total-price" id="price">
+									<span class="price"
 										style="color: rgb(41, 41, 41);font-size: 1.2rem;padding-bottom: 4px;">Rs.{{b.total}}</span>
-									<a  id="subsave">
+									
+									  <!-- subscription important-->
+
+										<!-- <a  id="subsave">
 										<span>Save</span>
 										<p style="font-size:0.7rem ;">
 											Subscribe now & Save
 										</p>
-									</a>
-									<span style="margin-top:17px ;">
+									</a> -->
+
+									<!-- style="margin-top:17px  ;" -->
+									<span style="margin-top:85%  ;">
 										<button class="btn btn-light sm"  id="deletebtn" (click)="deleteRecord(b.id)">Delete</button>
 									</span>
-								</td> -->
+								</td>
 
 								<td class="product-remove">
 									
@@ -159,7 +165,7 @@
 									  }" animation="pulse"></ngx-skeleton-loader>
 					</div>
 					<div *ngIf="!Summeryload" style="border-top: 1px solid #ededed;">
-						<div class="cart-calculation-area " *ngIf="(Cart.length!==0)" style="background-color: white;">
+						<div class="cart-calculation-area " *ngIf="(Cart?.length!==0)" style="background-color: white;">
 							<p class="mb-10" style="font-size: 0.9rem;font-weight: 600;color:rgb(199, 15, 15) ">Shopping Cart</p>
 							<table class="cart-calculation-table" id="summerydiv">
 								<tr *ngIf="couponn==true">
