@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
   otpinput: boolean = false;
   otpbtnloading: boolean = false;
   verifibyn: boolean = false;
-  resendotp: boolean= false;
+  resendotp: boolean = false;
   // @ViewChild('myModal') myModal : any;
 
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
@@ -168,8 +168,8 @@ export class LoginComponent implements OnInit {
       this.logbtnloading = true;
       this.authService
         .login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value,).subscribe((res) => {
-        console.log("res",res);
-        
+          console.log("res", res);
+
           if (res) {
             this.logbtnloading = false;
             if (res.message == "User not found") {
@@ -177,7 +177,7 @@ export class LoginComponent implements OnInit {
               return;
             }
             else if (res.message == "Unauthorized") {
-              console.log("res Unauthorized in onsubmit",res.message);
+              console.log("res Unauthorized in onsubmit", res.message);
               this.error1 = '* Invalid credentials';
             }
             else if (res.message == "Please verify your account") {
@@ -188,7 +188,9 @@ export class LoginComponent implements OnInit {
             else if (res.message == "Successfully logged in") {
               this.toastr.success('logged in Successfully', '');
               this.sharedService.sendClickEvent();
-              this.router.navigate(['/home']).then(() => {
+
+              var href = this.router.url;
+              this.router.navigate([href]).then(() => {
                 window.location.reload();
               });
             }
@@ -202,7 +204,7 @@ export class LoginComponent implements OnInit {
             if (error.error.message == "User not found") {
               this.error1 = '* User not found';
             } else if (error.error.message == "Unauthorized") {
-              console.log("res Unauthorized in onsubmit",error.error.message);
+              console.log("res Unauthorized in onsubmit", error.error.message);
               this.error1 = '* Invalid credentials';
             }
             else if (error.error.message == "Please verify your account") {
@@ -274,10 +276,12 @@ export class LoginComponent implements OnInit {
           else if (res.result == true) {
             this.sharedService.sendClickEvent();
             this.toastr.success('logged in Successfully', '');
-            this.router.navigate(['/home'])
-              .then(() => {
-                window.location.reload();
-              });
+
+            var href = this.router.url;
+            this.router.navigate([href]).then(() => {
+              window.location.reload();
+            });
+
           }
           else {
             this.error2 = 'something went wrong try again';
@@ -382,11 +386,11 @@ export class LoginComponent implements OnInit {
           else if (res.result == true) {
             this.sharedService.sendClickEvent();
             this.toastr.success('logged in Successfully', '');
-            
-            // this.router.navigate(['/home'])
-            //   .then(() => {
-            //     window.location.reload();
-            //   });
+
+            var href = this.router.url;
+            this.router.navigate([href]).then(() => {
+              window.location.reload();
+            });
           }
         } else {
           this.error1 = 'Invalid Login';
@@ -458,10 +462,10 @@ export class LoginComponent implements OnInit {
           if (res.result == true) {
             this.sharedService.sendClickEvent();
             this.toastr.success('logged in Successfully', '');
-            this.router.navigate(['/home'])
-              .then(() => {
-                window.location.reload();
-              });
+            var href = this.router.url;
+            this.router.navigate([href]).then(() => {
+              window.location.reload();
+            });
           }
         } else {
           this.error1 = 'Invalid Login';
@@ -561,10 +565,10 @@ export class LoginComponent implements OnInit {
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
           this.toastr.success('logged in Successfully', '');
-          this.router.navigate(['/home'])
-            .then(() => {
-              window.location.reload();
-            });
+          var href = this.router.url;
+          this.router.navigate([href]).then(() => {
+            window.location.reload();
+          });
         } else {
           console.log("social response else");
           this.toastr.error('', res.message);
@@ -614,10 +618,10 @@ export class LoginComponent implements OnInit {
                 if (res.result = true) {
                   this.sharedService.sendClickEvent();
                   this.toastr.success('logged in Successfully', '');
-                  this.router.navigate(['/home'])
-                    .then(() => {
-                      window.location.reload();
-                    });
+                  var href = this.router.url;
+                  this.router.navigate([href]).then(() => {
+                    window.location.reload();
+                  });
                 } else {
                   console.log("social response else");
                   this.toastr.error('', res.message);
@@ -658,6 +662,7 @@ export class LoginComponent implements OnInit {
   // forgot password
 
   forgotpass(content: any) {
+    this.modalService.dismissAll();
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
@@ -730,21 +735,27 @@ export class LoginComponent implements OnInit {
       // current user by login is stored in local storage -see authservice
       this.authService.resetpassword(edata3).subscribe(
         (res) => {
+          console.log("reset response",res);
+          
           this.fpassotploading = false
           if (res) {
-            if (res.message == "Your password is reset.Please login") {
+            if (res.result == true) {
               this.toastr.success('Reset Successfully', '');
               this.modalService.dismissAll();
-              this.router.navigate(['/login']);
+              this.modalService.open(LoginComponent, {
+                ariaLabelledBy: 'modal-basic-title',
+                size: 'md',
+              });
               window.scroll(0, 0)
             }
             else if (res.message == "No user found") {
               this.error7 = '* Invalid code';
             }
+            else {
+              this.error7 = res.message;
+            }
           }
-          else {
-            this.error7 = '* Invalid code or mobile';
-          }
+          
         },
         (error: string) => {
           console.log("test", "" + error);

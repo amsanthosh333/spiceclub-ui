@@ -549,7 +549,7 @@ export class HomeComponent implements OnInit {
   }
   bannerClick(id: any, i: any) {
     if (i == 3) {
-      this.router.navigate(['flash']);
+      this.router.navigate(['flash',1]);
     }
     else {
       this.proddetail(id)

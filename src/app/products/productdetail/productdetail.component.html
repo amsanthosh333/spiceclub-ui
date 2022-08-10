@@ -51,9 +51,9 @@
                 <div class="col-lg-9">
                     <div class="shop-product">
                         <div class="row pb-10">
-                            <div class="col-lg-6 mb-md-70 mb-sm-70 pl-0" style="display:flex;">
+                            <div id="imagesdivision" class="col-lg-6 mb-md-70 mb-sm-70 pl-0">
                                 <!-- side images  -->
-                                <div class="col-lg-2" id="sideslider">
+                                <div class="col-lg-2" id="sideslider" id="slideimageshow1">
                                     <ul style="padding:0px">
                                         <li *ngFor="let p of allgalleryphotos;let i=index" style="padding-bottom:10px ;"
                                             (click)="blogClick(i)">
@@ -64,7 +64,7 @@
                                     </ul>
                                 </div>
                                 <!-- main image -->
-                                <div class="shop-product__big-image-gallery-wrapper mb-30 col-10 p-0"
+                                <div class="shop-product__big-image-gallery-wrapper mb-30 col-lg-10 col-md-10 col-sm-12 p-0"
                                     *ngIf=!photoloader>
                                     <div
                                         class="single-product__floating-badges single-product__floating-badges--shop-product">
@@ -106,6 +106,19 @@
                                     </ng-image-fullscreen-view>
 
                                 </div>
+
+                                <div class="col-lg-2 slideimageshow2" id="sideslider" >
+                                    <ul style="padding:0px">
+                                        <li *ngFor="let p of allgalleryphotos;let i=index" style="padding-bottom:10px ;"
+                                            (click)="blogClick(i)">
+                                            <a [ngClass]="{'active': imgItem === i}">
+                                                <img src="{{p?.image}}" class="img-fluid" alt="">
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+
                                 <!--photo lazyloading  -->
                                 <div class="shop-product__big-image-gallery-sliderr mb-80" *ngIf=photoloader>
                                     <div class="single-image" style="height: 350px; width: 369px;">

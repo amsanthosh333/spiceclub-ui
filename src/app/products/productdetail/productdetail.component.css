@@ -389,6 +389,19 @@ input {
 
 /* mob */
 @media (max-width:992px){
+  .shop-product__block__title{
+    flex-basis: 22%;
+}
+
+  #slideimageshow1{
+    display: none;
+  }
+ .slideimageshow2{
+    display: initial;
+  }
+  #imagesdivision{
+ display: contents;
+  }
   #addinfoOverview{
     width: 100%;
   }
@@ -400,6 +413,15 @@ input {
 
 /* web */
 @media (min-width:992px){
+  .slideimageshow2{
+    display: none;
+  }
+  #slideimageshow1{
+    display: initial;
+  }
+  #imagesdivision{
+    display: flex;
+  }
   #addinfoOverview{
     width: 50%;
   }

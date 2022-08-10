@@ -87,7 +87,7 @@ export class ProfileComponent implements OnInit {
     this. viewcartcount();
     this.getorders();
   }
-  
+
   getprofile(){
     this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
       this.profiledetail = response;
@@ -147,9 +147,15 @@ export class ProfileComponent implements OnInit {
     this.router.navigate(['/message'])
   }
   editprofile(content: any){
+    this.editForm.reset();
+    this.editForm.setValue({  
+      name: this.profiledetail.name,
+      password:'',
+      confirm_password: '',
+    });
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
-        size: 'lg',
+        size: 'md',
       });
   }
 
@@ -189,7 +195,6 @@ export class ProfileComponent implements OnInit {
       else if(this.editForm.invalid){
         this.error3="* Password and Confirm Password must be match."
       }
- 
       // form.reset();
       return;
     }
