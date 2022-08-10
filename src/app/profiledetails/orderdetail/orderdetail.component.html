@@ -42,7 +42,7 @@
                 
 
     <span class="a-declarative" data-action="a-popover" data-a-popover="{&quot;name&quot;:&quot;invoiceLinks&quot;,&quot;position&quot;:&quot;triggerBottom&quot;,&quot;activate&quot;:&quot;onclick&quot;}">
-        <a href="{{img.invoice_pdf_link}}" target="_blank" class="a-popover-trigger a-declarative" style="color: #007185;">
+        <a href="{{img.invoice_pdf_link}}" target="_blank" class="a-popover-trigger a-declarative" style="color: #007185;" *ngIf="img.tax_invoice_number !== null">
             <span class="a-size-medium" style="color: #007185;
             font-weight: 600;" >Download Invoice</span>
         <i class="a-icon a-icon-popover"></i></a> 

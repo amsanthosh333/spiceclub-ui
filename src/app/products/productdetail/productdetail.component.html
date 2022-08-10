@@ -516,66 +516,24 @@
                                 <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
                                     class="icon-left ion-ios-cart"></i> Add to Cart</button>
 
-                            <button *ngIf="stk==0" type="button" class="btn btn-danger" id="addcart1"
-                                style="margin-bottom: 3px;">Out of
-                                stock</button>
+                                    <button *ngIf="stk==0" type="button" class="btn btn-primary" id="addcart1"
+                                   >
+                                    <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
+                                        class="icon-left ion-ios-cart"></i> Out Of Stock</button>
 
                             <button *ngIf="stk!==0" type="button" class="btn btn-primary" id="addcart2"
                                 (click)="addtocartbuy(Peoduct.id)">
                                 <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
                                     class="bi bi-lightning-fill"></i> Buy Now</button>
 
-                            <!-- 
-                        <button *ngIf="(iswishlistt?.is_in_wishlist==false)" type="button" class="btn btn-primary"
-                            style=" width: -webkit-fill-available; margin-bottom: 3px;"
-                            (click)="addtowishlist(Peoduct?.id)"><i class="ion-android-favorite-outline"></i> Add to
-                            Wishlist</button>
-                        <button type="button" class="btn btn-primary" *ngIf="(iswishlistt?.is_in_wishlist==true)"
-                            style=" width: -webkit-fill-available;margin-bottom: 3px;"
-                            (click)="deleteRecord(Peoduct?.id)"> <i class="ion-android-favorite"
-                                style="color: rgb(255, 255, 255);"></i> Remove from Wishlist</button>
-                        <button *ngIf="userid==0" type="button" class="btn btn-primary"
-                            style=" width: -webkit-fill-available;" (click)="addtowishlist(Peoduct?.id)"><i
-                                class="ion-android-favorite-outline"></i> Add to Wishlist</button> -->
-
-
-
-                            <!-- <button type="button" class="btn btn-primary" *ngIf="(issubscribed== false)"
-                            style=" width: -webkit-fill-available;margin-top: 3px;"
-                            (click)="addtosubscribe(Peoduct?.id)"> <i class="bi bi-hand-thumbs-up-fill"
-                                style="color: rgb(255, 255, 255);"></i> Subscribe & Save</button>
-                        <button type="button" class="btn btn-primary" *ngIf="(issubscribed== true)"
-                            style=" width: -webkit-fill-available;margin-top: 3px;"
-                            (click)="removefromsubscribe(Peoduct?.id)"> <i class="bi bi-hand-thumbs-down-fill"
-                                style="color: rgb(255, 255, 255);"></i> Remove from Subscribe</button>
-
-                        <button type="button" class="btn btn-primary" *ngIf="userid==0"
-                            style=" width: -webkit-fill-available;margin-top: 3px;"
-                            (click)="addtosubscribe(Peoduct?.id)"> <i class="bi bi-hand-thumbs-up-fill"
-                                style="color: rgb(255, 255, 255);"></i> Subscribe & Save</button> -->
-
-
-                            <span class="review-link " style="display: grid; justify-content:center"
+                   
+      <!-- subscribe important-->
+                            <!-- <span class="review-link " style="display: grid; justify-content:center"
                                 *ngIf="Peoduct?.current_stock > 0">
                                 <a style="font-size: 0.8rem;">
-                                    <!-- wishlist -->
-                                    <!-- <span (click)="addtowishlist(Peoduct?.id)" *ngIf="(iswishlistt?.is_in_wishlist==false)"
-                                    style="float:left; color: rgb(253 57 50);font-size: 0.7rem;font-weight: 600;">
-                                    <i class="ion-android-favorite-outline"
-                                        style="color: rgb(253 57 50);font-size: 1rem;"></i> Add to   Wishlist</span>
+                                
+                              
 
-                                <span (click)="deleteRecord(Peoduct?.id)" *ngIf="(iswishlistt?.is_in_wishlist==true)"
-                                    style="float:left; color: rgb(253 57 50);font-size: 0.7rem;font-weight: 600;">
-                                    <i class="ion-android-favorite" style="color: rgb(253 57 50);font-size: 1rem"></i>
-                                    Remove from Wishlist</span>
-
-                                <span (click)="addtowishlist(Peoduct?.id)" *ngIf="userid==0"
-                                                        style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
-                                                        <i class="ion-android-favorite-outline"
-                                                            style="color: rgb(253 57 50);font-size: 1.1rem"></i> Add to
-                                                        Wishlist</span> -->
-
-                                    <!-- subscribe -->
                                     <span *ngIf="(issubscribed== false)"
                                         style="float:left; color:#6d726d;font-size: 0.8rem;font-weight: 200;"
                                         (click)="addtosubscribe(Peoduct?.id)">
@@ -593,7 +551,7 @@
                                                 src="../../../assets/images/icons/thumb-up.png" style="height:20px;width:20px;margin-bottom: 0px;
                                             margin-right: 1px;" alt=""></span> Subscribe & Save</span>
                                 </a>
-                            </span>
+                            </span> -->
                         </div>
 
                         <p style="font-size: 0.7rem;

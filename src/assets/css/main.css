@@ -1638,7 +1638,7 @@ font {
   }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) { 
   .header-bottom-container .logo-with-offcanvas {
     -ms-flex-preferred-size: 60%;
     flex-basis: 60%;
@@ -1752,8 +1752,12 @@ nav.site-nav>ul>li:hover>a:after {
 
   width: 100%;
 }
-
+/* nav.site-nav>ul>li.menu-item-has-children .sub-menu {
+  display: none;
+  
+} */
 nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
+
   visibility: visible;
 
   margin-top: 0;
@@ -1796,9 +1800,9 @@ nav.site-nav>ul>li>a:after {
   height: 1px;
 
   content: "";
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition: 0s;
+  -o-transition: 0s;
+  transition: 0s;
 
   background-color: #333;
 }
@@ -1809,11 +1813,11 @@ nav.site-nav>ul>li ul.sub-menu {
 
   visibility: hidden;
 
-  margin-top: 45px;
+  margin-top:45px;
 
-  -webkit-transition: 0.6s;
-  -o-transition: 0.6s;
-  transition: 0.6s;
+  -webkit-transition: 0s;
+  -o-transition: 0s;
+  transition: 0s;
 
   opacity: 0;
   background-color: #ffffff;
@@ -1863,9 +1867,9 @@ nav.site-nav>ul>li ul.single-column-menu.single-column-has-children>li .multilev
   margin-top: 15px;
   padding: 30px;
 
-  -webkit-transition: 0.6s;
-  -o-transition: 0.6s;
-  transition: 0.6s;
+  -webkit-transition: 0s;
+  -o-transition: 0s;
+  transition: 0s;
 
   opacity: 0;
   background-color: #ffffff;
@@ -2144,9 +2148,9 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li a.mega-column-title:after {
 nav.site-nav>ul>li ul.mega-menu-column-5>li>.mega-sub-menu li {
   position: relative;
 
-  -webkit-transition: 0.3s;
-  -o-transition: 0.3s;
-  transition: 0.3s;
+  -webkit-transition:0s;
+  -o-transition: 0s;
+  transition: 0s;
 }
 
 nav.site-nav>ul>li ul.mega-menu-column-5>li>.mega-sub-menu li img {
@@ -2154,9 +2158,7 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li>.mega-sub-menu li img {
   z-index: 99;
   bottom: -20px;
   left: 50%;
-
   visibility: hidden;
-
   width: 250px;
   height: auto;
 
@@ -2207,14 +2209,10 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li .mega-sub-menu li a:before {
   z-index: 99;
   top: 0;
   right: 0;
-
   visibility: visible;
-
   width: 250px;
   height: auto;
-
   content: "";
-
   opacity: 1;
   border-radius: 5px;
   background-image: "attr(data-homeimage)";

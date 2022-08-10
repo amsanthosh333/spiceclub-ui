@@ -9,6 +9,20 @@
 
 }
 
+.toast-container .ngx-toastr {
+  position: relative;
+  overflow: hidden;
+  margin: 0 0 6px;
+  padding: 5px 5px 5px 10px;
+  width: 300px;
+  border-radius: 3px 3px 3px 3px;
+  background-position: 15px center;
+  background-repeat: no-repeat;
+  background-size: 24px;
+  box-shadow: 0 0 12px #999999;
+  color: #FFFFFF;
+}
+
 
 :host ::ng-deep .active.carousel-item,
 .carousel-fade .active.carousel-item-right {

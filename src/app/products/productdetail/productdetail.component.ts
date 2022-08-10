@@ -473,8 +473,8 @@ export class ProductdetailComponent implements OnInit {
       
       this.Bulckdis = response.data;
       console.log("this.Bulckdis",this.Bulckdis);
- if(this.Bulckdis[0].discount_percentage == 0){
-  console.log("this.Bulckdis",this.Bulckdis[0].discount_percentage);
+ if(this.Bulckdis[0]?.discount_percentage == 0){
+ 
    this.showbulkoffer=true
  }
  else{
