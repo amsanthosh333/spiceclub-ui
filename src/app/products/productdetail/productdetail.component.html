@@ -342,7 +342,9 @@
                                             style="font-weight: 600;color: green; text-align: start;font-size: 0.8rem;">
                                           <span *ngFor="let b of Peoduct?.usp" >{{b?.name}}</span>  
                                         </div> -->
-                                        <div style="text-align: start;"> <span>
+
+                                        <!-- usp important -->
+                                        <!-- <div style="text-align: start;"> <span>
                                                 <a *ngFor="let b of Peoduct?.usp" style="text-align: center; margin-right:15px;">
                                                     <div class="shop-product__block__title"
                                                     style="font-weight: 600;color: green; text-align: start;font-size: 0.8rem;">
@@ -353,8 +355,9 @@
                                                         style="height:47px; width:47px; margin-bottom: 3px;margin-left:0px;margin: right 15px; ; "></a>
                                                 &nbsp; </span>
 
-                                        </div>
-                                        <div>
+                                        </div> -->
+
+                                        <div *ngIf="Peoduct?.tags.length!==0">
                                             <span class="review-link " id="offer"
                                                 *ngFor="let t of Peoduct?.tags;let i = index">
                                                 <a style="color: rgb(83, 83, 83);">{{t}}</a>

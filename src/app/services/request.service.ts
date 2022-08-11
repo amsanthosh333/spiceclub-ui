@@ -758,6 +758,8 @@ export class RequestService {
   //blog
   public getallblog(page: any) {
     this.url = `${this.endPoint1}/blog` + `?page=` + page;
+    console.log("this.url",this.url);
+    
     return this.http.get(this.url);
   }
   public getbestblog(id: any) {

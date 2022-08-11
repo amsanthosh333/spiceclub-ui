@@ -360,17 +360,19 @@ export class HomeComponent implements OnInit {
       this.request.sendenquiry(edata).subscribe((res: any) => {
         console.log("sendenquiry response", res);
         if (res.result == true) {
+          this.btnloading1 = false;
           this.enquiryForm.reset()
           this.toastr.success('Submited Successfully', '');
           this.modalService.dismissAll();
         }
         else {
           this.toastr.info('Something went wrong', '');
+          this.btnloading1 = false;
         }
       }, (error: any) => {
         console.log("error", error);
+        this.btnloading1 = false;
         this.toastr.info('Something went wrong', '');
-
       });
     }
   }
@@ -402,6 +404,17 @@ export class HomeComponent implements OnInit {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
     });
+  }
+  openloginshopnow(){  
+    if (this.userid == 0) {
+      this.modalService.open(LoginComponent, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'md',
+      });
+     }
+    else{
+      this.router.navigate(['profile']);
+    }   
   }
   openSignup() {
     this.modalService.open(SignupComponent, {

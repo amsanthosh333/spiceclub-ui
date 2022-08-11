@@ -169,7 +169,7 @@
 										<span class="lispan" [ngClass]="{'active': subItem === i}"
 											(click)="gotocategory(img.id)" (click)="viewsubcat(img.id,i)" (mouseover)="viewsubcat(img.id,i)">
 											<a style="display:inline;" [ngClass]="{'active': subItem === i}"> 
-												<span
+												<span style="text-decoration: none;"
 													(click)="gotocategory(img.id)">{{img.name}}</span>
 											</a>
 											<i *ngIf="img.number_of_children!=0"
@@ -493,7 +493,7 @@
 										src="https://neophroncrm.com/spiceclubnew/public/{{b.product_thumbnail_image}}">
 								</a>
 							</div>
-							<div class="content" (click)="gotoproduct(b.id)">
+							<div class="content" (click)="gotoproduct(b.product_id)">
 								<p style="height: 15px;"></p>
 								<h5 style="width: 200px;"><a>{{b.product_name}}</a></h5>
 								<p>

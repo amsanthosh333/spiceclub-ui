@@ -436,6 +436,7 @@ nav.site-nav>ul>li {
 	font-weight: 500;
 	text-transform: capitalize;
 	text-decoration: none;
+	padding-left: 10px;
 }
 .lispan a span:hover {
 		text-decoration: none;
@@ -542,33 +543,40 @@ nav.site-nav>ul>li>a:after {
 	background-color: #cd3838;
 }
 
+nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
+	margin-top: 10px;
+}
+
+/* nav.site-nav>ul>li ul.sub-menu {
+	display: none;
+  }
+
 nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
-	
+	display: initial;
 	position: absolute;
 	margin-top: 10px;
 	z-index: 9999;
-	top: 20%;
+	top: 45px;
+  } */
 
-  }
- nav.site-nav>ul>li.menu-item-has-children .sub-menu {
-  display: none;
-  
-}
-nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
- display: initial;
+ 
+
+
+  /* nav.site-nav>ul>li ul.sub-menu {
+  display: none ;
+} */
+
+/* nav.site-nav>ul>li.menu-item-has-children:hover::after .sub-menu {
+	display: none !important;
+  } */
+
+/* nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
 	visibility: visible;
-  
 	margin-top: 0;
-  
 	opacity: 1;
-  }
+  } */
   
 
-nav.site-nav>ul>li ul.sub-menu li {
-  line-height: 1;
-}
-
-  
 
 .dropdown-content a {
 	padding: 12px 16px;

@@ -135,6 +135,7 @@ export class BlogComponent implements OnInit {
     this.loader1 = true;
     this.imgloader = false;
     this.request.getallblog(page).subscribe((res: any) => {
+      console.log("Blogs", this.Blogs);
       this.Blogs = res.data;
       this.Firstblog = this.Blogs[0];
       this.loader1 = false;
