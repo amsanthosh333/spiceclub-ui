@@ -160,7 +160,7 @@
                             </div>
                         </div>
 
-                        <div id="pggg" *ngIf="Allproducts?.length==0 && id !==0" style=" display: flex;
+                        <div id="pggg" *ngIf="Allproducts?.length==0 && !noorder" style=" display: flex;
                     justify-content: center;
                     align-items: center;
                     height: 200px;
@@ -172,7 +172,7 @@
                             </div>
                         </div>
 
-                        <div id="pggg" *ngIf="Allproducts?.length==0 && id ==0" style=" display: flex;
+                        <div id="pggg" *ngIf="Allproducts?.length==0 && noorder" style=" display: flex;
                             justify-content: center;
                             align-items: center;
                             height: 200px;

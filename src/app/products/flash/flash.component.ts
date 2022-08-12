@@ -83,6 +83,7 @@ export class FlashComponent implements OnInit {
   id: any;
   Alldeal: any;
   Allproducts: any;
+  noorder: boolean=false;
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,private modalService: NgbModal,private route: ActivatedRoute,private  config: NgbRatingConfig,private sharedService: SharedService){
@@ -115,10 +116,13 @@ export class FlashComponent implements OnInit {
       console.log("iffffffffffffff");
       if(this.id==0){
            console.log("quickorderproducts");
+
            this.viewQuickOrderPrd();     
+           this.noorder=true
       }
       else{
         this.viewprodbyflash(this.id,1);
+        this.noorder=false
       }
       
     
