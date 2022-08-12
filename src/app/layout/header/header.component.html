@@ -237,7 +237,7 @@
 					<li class="menu-item"><a routerLink="/blog">Blogs</a> </li>
 					<!-- <li class="menu-item"><a routerLink="/recipe">Recipes</a></li> -->
 					<li class="menu-item" *ngIf="(userid==0)"><a (click)="openlogin()">Quick Order</a></li>
-					<li class="menu-item" *ngIf="(userid!==0)"><a routerLink="/orders">Quick Order</a></li>
+					<li class="menu-item" *ngIf="(userid!==0)"><a routerLink="/quickorderproducts/0">Quick Order</a></li>
 
 				</ul>
 
@@ -355,12 +355,11 @@
 					<h6 class="col-2"><i class="ionicons ion-ios-information"></i> </h6>
 					<h6 class="col-10"><a>Enquiry</a></h6>
 				</div> -->
-				<div class="row " id="closeabout">
+				<div class="row " id="closeabout" (click)="logout1()">
 					<h6 class="col-2"><span><img class="ion-android-person" src="../../../assets/images/icons/arrow.png"
 								style="height:15px;width:15px;margin-bottom: 1px;
 							margin-right: 5px;" alt=""></span> </h6>
-					<h6 class="col-10" (click)="logout1()"><a>Logout</a></h6>
-
+					<h6 class="col-10" ><a>Logout</a></h6>
 				</div>
 				<!-- <div class="row mb-2 ml-4" id="closeabout">
 						<h6 class="col-2"><i class="ion-android-exit 180deg"></i> </h6>

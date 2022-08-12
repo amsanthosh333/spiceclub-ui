@@ -1733,6 +1733,8 @@ export class HeaderComponent implements OnInit {
   }
 
   logout1() {
+    console.log("logout1");
+    
     this.authService.logout().subscribe(res => {
       this.toastr.success('Logout Successfully', '');
       this.router.navigate(['/home'])

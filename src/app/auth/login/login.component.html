@@ -334,16 +334,19 @@
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
 										<label>Verification Code<span class="text-danger">*</span></label>
 										<input type="text" class="form-control" formControlName="otp" required>
-										<!-- <small class="form-text text-danger"
-										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
-										  required</small>  -->
+									
 									</div>
 									<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-1">
 										<label>New password<span class="text-danger">*</span></label>
-										<input type="text" class="form-control" formControlName="newpassword" required>
-										<!-- <small class="form-text text-danger"
-										  *ngIf="!otpform.get('phone').valid && otpform.get('otp').touched"> Otp is
-										  required</small>  -->
+										<input [type]="show ? 'text' : 'password'" class="form-control" formControlName="newpassword" required>
+										<i  style=" float: right;left: -15px;margin-top: -25px;position: relative;
+										z-index: 2;" *ngIf="show" (click)="password()" class="bi bi-eye-slash" 
+										id="togglePassword"></i>
+										<i style=" float: right;left: -15px;margin-top: -25px;position: relative;
+										z-index: 2;"  *ngIf="!show" (click)="password()" class="bi bi-eye" 
+										id="togglePassword"></i>
+										<!-- <button type="button" (click)="password()">{{show ? 'Show' : 'Hide'}}</button> -->
+									
 									</div>
 								</div>
 								<h6 class="form-text text-danger"

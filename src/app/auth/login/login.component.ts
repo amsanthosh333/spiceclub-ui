@@ -19,6 +19,7 @@ import { NgxSpinnerService } from "ngx-spinner";
 import { Content } from '@angular/compiler/src/render3/r3_ast';
 import { ViewChild } from '@angular/core';
 import { SignupComponent } from '../signup/signup.component';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -77,6 +78,8 @@ export class LoginComponent implements OnInit {
   otpbtnloading: boolean = false;
   verifibyn: boolean = false;
   resendotp: boolean = false;
+  show: boolean = false;
+  show2: boolean = false;
   // @ViewChild('myModal') myModal : any;
 
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
@@ -154,6 +157,10 @@ export class LoginComponent implements OnInit {
         console.log(error);
       })
   }
+  password() {
+    this.show = !this.show;
+}
+
   onSubmit(content: any) {
     this.error1 = ''
     if (this.loginForm.invalid) {

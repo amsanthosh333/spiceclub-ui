@@ -299,7 +299,6 @@ export class HomeComponent implements OnInit {
       }
       this.authService.Quickregister(edata).subscribe(
         (res: any) => {
-          console.log("res", res);
           if (res.result == true) {
             this.toastr.success('You can login with OTP ', 'Registered Successfully');
             this.btnloading = false;
@@ -356,9 +355,7 @@ export class HomeComponent implements OnInit {
         image3: null,
         imagename3: null
       }
-      console.log("edata", edata);
       this.request.sendenquiry(edata).subscribe((res: any) => {
-        console.log("sendenquiry response", res);
         if (res.result == true) {
           this.btnloading1 = false;
           this.enquiryForm.reset()
@@ -370,7 +367,6 @@ export class HomeComponent implements OnInit {
           this.btnloading1 = false;
         }
       }, (error: any) => {
-        console.log("error", error);
         this.btnloading1 = false;
         this.toastr.info('Something went wrong', '');
       });
@@ -387,7 +383,6 @@ export class HomeComponent implements OnInit {
         email: form.value.mail
       };
       this.request.emailsubscribe(edata).subscribe((res: any) => {
-        console.log(res);
         if (res.result == true) {
           this.toastr.success(res.message);
           this.subscribe.reset();
@@ -429,7 +424,6 @@ export class HomeComponent implements OnInit {
     // category/33?subcategory=34&category1=35&subcategory1=36
   }
   toggle(img: any, index: any): void {
-    console.log("toggle1", this.userid);
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
       this.addtowishlist(img.id);
@@ -449,9 +443,6 @@ export class HomeComponent implements OnInit {
     }
   }
   toggle1(img: any, index: any): void {
-
-    console.log("toggle1", this.userid);
-
     this.likesss[index] = !this.likesss[index];
     if (this.likesss[index] == true) {
       this.addtowishlist(img.id);
@@ -498,7 +489,6 @@ export class HomeComponent implements OnInit {
       this.top2id = this.Topcat[5].id
       this.top1name = this.Topcat[10].name;
       this.top2name = this.Topcat[5].name;
-      console.log("this.Topcat", this.Topcat, this.top1id, this.top2id);
       this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
         this.topfirstcat = response.data
 
@@ -513,28 +503,23 @@ export class HomeComponent implements OnInit {
       });
   }
   gotocategory() {
-    console.log("goto");
     this.router.navigate(['category', this.top1id]);
   }
   gotocategory2() {
-    console.log("goto");
     this.router.navigate(['category', this.top2id]);
   }
   gotocategoryproduct(id: any) {
-    console.log("goto");
     this.router.navigate(['category', id]);
   }
   viewtodayoffer() {
     this.request.gettodaysoffer().subscribe((response: any) => {
       this.Todaysoffer = response.data.slice(0, 4);
       this.loader4 = false;
-      console.log("Todaysoffer", this.Todaysoffer);
     });
   }
   viewflashdeal() {
     this.request.getflashdeals().subscribe((response: any) => {
       this.Flashdeal = response.data.slice(0, 4);
-      console.log("Flashdeal", this.Flashdeal);
       this.loader4 = false;  
     });
   }
@@ -550,9 +535,6 @@ export class HomeComponent implements OnInit {
     this.request.getsubscribebanner().subscribe((response: any) => {
       this.subscribebanner = response.data[0];
       this.loader4 = false;
-      console.log("this.subscribebanner", this.subscribebanner);
-
-
     });
   }
   imageClick(i: any) {
@@ -562,7 +544,7 @@ export class HomeComponent implements OnInit {
   }
   bannerClick(id: any, i: any) {
     if (i == 0) {
-      this.router.navigate(['flash',1]);
+      this.router.navigate(['flash']);
     }
     else if (i == 1) {
       this.router.navigate(['category',97]);
@@ -581,7 +563,6 @@ export class HomeComponent implements OnInit {
 
   viewbestsellpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
-      console.log("best selling pro", response)
       // this. oldBestsellpro = response.data;
       // this.parentbesrsell = response;
       // this.parentbesrsellpro= this.parentbesrsell.data
@@ -595,7 +576,6 @@ export class HomeComponent implements OnInit {
   }
   viewfuturedpro() {
     this.request.getfuturedpro().subscribe((response: any) => {
-      console.log("Futuredpro", response);
       this.Futuredpro = response.data;
       this.loader6 = false;
       setTimeout(() => {
@@ -635,7 +615,6 @@ export class HomeComponent implements OnInit {
   viewdata4() {
     this.request.gettestimonial().subscribe((response: any) => {
       this.Testimonial = response.data;
-      console.log(this.Testimonial);
       // this.loader4 = false;
       // setTimeout(() => {
       //   this.loadingIndicator = false;
@@ -679,32 +658,25 @@ export class HomeComponent implements OnInit {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
     else {
-      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
 
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
 
     }
-
-    console.log("this.quantityarray", this.quantityarray);
   }
 
   selectbestsell() {
-    console.log("this.parentbesrsellpro", this.parentbesrsellpro);
   }
   bestsellingselectvar(weight: any, i: any, id: any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, weight).subscribe((res: any) => {
-      console.log("selectvar res", res);
+
 
       this.Bestsellpro[i].stroked_price = res.stroked_price;
       this.Bestsellpro[i].main_price = res.price_string;
@@ -718,7 +690,7 @@ export class HomeComponent implements OnInit {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, this.selectedvar).subscribe((res: any) => {
-      console.log("selectvar res", res);
+
       this.Futuredpro[i].stroked_price = res.stroked_price
       this.Futuredpro[i].main_price = res.price_string
     }, (error: any) => {
@@ -729,7 +701,6 @@ export class HomeComponent implements OnInit {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, weight).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.topfirstcat[i].stroked_price = res.stroked_price
       this.topfirstcat[i].main_price = res.price_string
     }, (error: any) => {
@@ -740,7 +711,6 @@ export class HomeComponent implements OnInit {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, weight).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.topsecondcat[i].stroked_price = res.stroked_price
       this.topsecondcat[i].main_price = res.price_string
     }, (error: any) => {
@@ -749,7 +719,6 @@ export class HomeComponent implements OnInit {
   }
 
   prodaddtocart(img: any) {
-    console.log("img", img);
     if (this.userid == 0) {
       // this.toastr.info('You need to login', '');
       this.openlogin()
@@ -757,7 +726,6 @@ export class HomeComponent implements OnInit {
     else {
 
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else if (img.variants[0]?.options?.length == 1) {
@@ -783,11 +751,8 @@ export class HomeComponent implements OnInit {
         quantity: this.totalqty,
         buyertype: this.buyertypeid,
       }
-      console.log(edata);
       this.request.addtocart(edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
         if (res.message == 'Product added to cart successfully') {
-          console.log("Product added to cart successfully");
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
@@ -832,12 +797,10 @@ export class HomeComponent implements OnInit {
         quantity: this.quantityyy,
         buyertype: this.buyertypeid,
       }
-      console.log(edata);
+
 
       this.request.addtocart(edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
         if (res.message == 'Product added to cart successfully') {
-          console.log("Product added to cart successfully");
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
@@ -848,21 +811,16 @@ export class HomeComponent implements OnInit {
         }
         else if (res.message == 'Stock out') {
           this.toastr.error(res.message);
-          console.log("Stock out");
         }
       },
         (error: any) => {
           this.toastr.error(error);
-          console.log("error", error);
 
         });
     }
   }
   addtowishlist(prd_id: any) {
-    console.log("addtowishlist called");
     if (this.userid == 0) {
-      console.log("addtowishlist called");
-
       this.openlogin()
     }
     else {
@@ -907,7 +865,6 @@ export class HomeComponent implements OnInit {
   viewbrands() {
     this.request.getallbrands().subscribe((response: any) => {
       this.Allbrands = response.data;
-      console.log(this.Allbrands);
 
       this.page1 = true,
         this.page2 = false,
@@ -963,8 +920,6 @@ export class HomeComponent implements OnInit {
     this.quantityyy = 0
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-
-      console.log("proddetaill", response);
       this.Peoduct = response.data[0];
 
       this.prod_price = this.Peoduct.main_price;
@@ -979,11 +934,7 @@ export class HomeComponent implements OnInit {
       this.tags = this.Peoduct.tags;
       this.varprise = this.Peoduct.main_price;
       this.totalprice = this.Peoduct.main_price.replace('Rs', '');
-      console.log("res", this.Peoduct);
-      console.log("choise option", this.Peoduct.choice_options);
       this.subItem = 0
-      //  console.log("stocck",this.stocck); 
-      console.log("stk", this.stk);
       if (this.Peoduct.current_stock == 0) {
         this.stocck = 0
 
@@ -993,13 +944,11 @@ export class HomeComponent implements OnInit {
       }
       //  window.scroll(0,0);             
       if (this.Peoduct.choice_options.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
       }
-      console.log("optiooooons", this.choice[0]?.options[0]);
 
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -1026,8 +975,6 @@ export class HomeComponent implements OnInit {
     this.stocck = this.stocckkk - val
 
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-
       this.totalprice = res.price.toFixed(2);
 
       // this.totalprice = this.dec.toFixed(2) 
@@ -1039,8 +986,6 @@ export class HomeComponent implements OnInit {
     this.quantityyy++;
     this.stocck--;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-
       this.totalprice = res.price.toFixed(2);
 
       // this.totalprice = this.dec.toFixed(2) 
@@ -1052,8 +997,6 @@ export class HomeComponent implements OnInit {
     this.quantityyy--;
     this.stocck++;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-
       this.totalprice = res.price.toFixed(2);
 
       // this.totalprice = this.dec.toFixed(2) 
@@ -1098,12 +1041,10 @@ export class HomeComponent implements OnInit {
         quantity: this.quantityyy,
         buyertype: this.buyertypeid,
       }
-      console.log(edata);
-
       this.request.addtocart(edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
+
         if (res.message == 'Product added to cart successfully') {
-          console.log("Product added to cart successfully");
+ 
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
@@ -1114,12 +1055,12 @@ export class HomeComponent implements OnInit {
         }
         else if (res.message == 'Stock out') {
           this.toastr.error(res.message);
-          console.log("Stock out");
+
         }
       },
         (error: any) => {
           this.toastr.error(error);
-          console.log("error", error);
+
 
         });
     }

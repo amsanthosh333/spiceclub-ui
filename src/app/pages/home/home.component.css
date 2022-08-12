@@ -726,7 +726,7 @@ input::placeholder {
 
   .flashbanner{
     height: 215px;
-    width: 336px;
+    /* width: 336px; */
   }
   .flashbanner img {
     height: 100%;
@@ -753,9 +753,9 @@ input::placeholder {
     margin-left: 2.8%;
     margin-right: 3.7%;
     margin-left: 1.5%;
-    width: 97%;
+    width: 88%;
     padding: 0px;
-    margin-left: 10px;
+    margin-left: 22px;
   }
 
   /* .carousall6 {

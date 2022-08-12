@@ -109,11 +109,19 @@ export class FlashComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = this.route.snapshot.params['id'];
+    
     console.log("FLASH id",this.id);
     if(this.id){
       console.log("iffffffffffffff");
+      if(this.id==0){
+           console.log("quickorderproducts");
+           this.viewQuickOrderPrd();     
+      }
+      else{
+        this.viewprodbyflash(this.id,1);
+      }
       
-      this.viewprodbyflash(this.id,1);
+    
     }
     else{
       console.log("else");
@@ -153,15 +161,24 @@ export class FlashComponent implements OnInit {
   }
   getpage(url:any){
     this.request.getpage(url).subscribe((response:any)=>{
-      this.Product=response.data;
+      this.Allproducts=response.data;
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
       this.prodloader=false
       console.log("response",response);
-      console.log("allproduct",this.Product);
+      console.log("allproduct",this.Allproducts);
     })
   }
-
+  viewQuickOrderPrd(){
+    this.request.getallQuickorderproducts().subscribe((response: any) => {
+      this.Allproducts=response.data;
+      this.prodloader=false
+      console.log("Allproducts",this.Allproducts);
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    });
+  }
  
   // search1(form:FormGroup,page=1){
     

@@ -181,7 +181,6 @@
 					</div> -->
 					<div class="col-12 p-0" id="paymethoddiv">
 						<h6 style="font-size: 0.9rem;">Payment Methods</h6>
-
 						<form [formGroup]="terms" (ngSubmit)="placeorder(terms)" *ngIf="!paymentload">
 							<div class="checkout-payment-method" *ngFor="let b of Paymenttype"
 								style="background-color:white;">
@@ -310,15 +309,16 @@
 												style="color: red;">  Rs.{{b.price}}</span>
 											&nbsp;&nbsp;
 										</a>
-										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray;"
-											*ngIf="b.discount!==0">
-											you save Rs.{{b.discount}} ({{b.discount_percentage}}%) </a>
+										
 										<a style="font-size: 0.7rem;font-weight: 100;color: rgb(53, 53, 53);">
 											<span>Quantity </span>{{b.quantity}} </a>
 										<a style="font-weight: 600;
 											color: rgb(53, 53, 53);font-size: 0.7rem ">Total Price <span style="color: red;">Rs.{{b.total}}</span>
 											&nbsp;&nbsp;
 										</a>
+										<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray;"
+											*ngIf="b.discount!==0">
+											you save Rs.{{b.discount}} ({{b.discount_percentage}}%) </a>
 										
 										 <!-- subscription important-->
 

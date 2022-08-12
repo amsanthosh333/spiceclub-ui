@@ -52,6 +52,8 @@ export class ProfileComponent implements OnInit {
   kyc_verify_status: any;
   iskycupload: any;
   buyertypeid: any;
+  show: boolean=false;
+  show2: boolean=false;
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService,
      private request: RequestService,private sharedService: SharedService,
     private modalService: NgbModal,) {
@@ -87,7 +89,12 @@ export class ProfileComponent implements OnInit {
     this. viewcartcount();
     this.getorders();
   }
-
+  password() {
+    this.show = !this.show;
+}
+password2() {
+  this.show2 = !this.show2;
+}
   getprofile(){
     this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
       this.profiledetail = response;

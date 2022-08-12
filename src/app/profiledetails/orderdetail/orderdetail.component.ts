@@ -213,11 +213,10 @@ quickorder(){
   this.loadingg=true
   this.request.quickorder(this.orderid).subscribe((res:any)=>{
     if(res.result==true){
-      // this.spinner.hide();
-      
+      // this.spinner.hide();     
       this.toastr.success('Added to cart', '');
       this.sharedService.sendClickEvent();
-      this.loadingg=false
+      this.loadingg=false;
       this.router.navigate(['cart']);
     }
     else{

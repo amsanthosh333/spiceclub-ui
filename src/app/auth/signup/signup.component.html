@@ -36,14 +36,26 @@
 							
 							<div class="col-lg-12 mb-10">
 								<p>Password <span class="text-danger">*</span></p>
-								<input type="password" formControlName="password" required>
+								<input [type]="show ? 'text' : 'password'" formControlName="password" required>
+								<i  style=" float: right;left: -15px;margin-top: -25px;position: relative;
+										z-index: 2;" *ngIf="show" (click)="password()" class="bi bi-eye-slash" 
+										id="togglePassword"></i>
+										<i style=" float: right;left: -15px;margin-top: -25px;position: relative;
+										z-index: 2;"  *ngIf="!show" (click)="password()" class="bi bi-eye" 
+										id="togglePassword"></i>
 								<!-- <h6 class="form-text text-danger"
 									*ngIf="!registerForm.get('password')?.valid && registerForm.get('password')?.touched">
 								  *Enter the password</h6> -->
 							</div>
 							<div class="col-lg-12 mb-10">
 								<p>Re-enter Password <span class="text-danger">*</span></p>
-								<input type="password" formControlName="confirmpassword" required>
+								<input [type]="show2 ? 'text' : 'password'" formControlName="confirmpassword" required>
+								<i  style=" float: right;left: -15px;margin-top: -25px;position: relative;
+										z-index: 2;" *ngIf="show2" (click)="password2()" class="bi bi-eye-slash" 
+										id="togglePassword"></i>
+										<i style=" float: right;left: -15px;margin-top: -25px;position: relative;
+										z-index: 2;"  *ngIf="!show2" (click)="password2()" class="bi bi-eye" 
+										id="togglePassword"></i>
 								<!-- <h6 class="form-text text-danger"
 									*ngIf="!registerForm.get('confirmpassword')?.valid && registerForm.get('confirmpassword')?.touched">
 								  *Enter the same password</h6> -->

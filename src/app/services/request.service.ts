@@ -669,7 +669,7 @@ export class RequestService {
   }
 
   public getallflashdealproducts() {
-    this.url = `${this.endPoint1}/products/flashdeal`;
+    this.url = `${this.endPoint1}/flash-deal-productslist`;
     console.log(this.url);
     return this.http.get(this.url);
   }
@@ -884,6 +884,15 @@ export class RequestService {
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/quickorder/` + id;
+    return this.http.get(this.url, { headers: headers });
+  }
+
+  
+  public getallQuickorderproducts() {
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', 'Bearer' + ' ' + this.accesstoken) 
+    this.url = `${this.endPoint1}/quickorder/getproducts?user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     return this.http.get(this.url, { headers: headers });
   }
 

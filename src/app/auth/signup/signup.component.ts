@@ -46,6 +46,8 @@ export class SignupComponent implements OnInit {
   errorb: any;
   byertypeform: FormGroup;
   buer_type: any;
+  show: boolean=false;
+  show2: boolean=false;
   constructor(private router: Router, private fb: FormBuilder, private request: RequestService,
     private authService: AuthService,private spinner: NgxSpinnerService, private sharedService: SharedService, private toastr: ToastrService, private formBuilder: FormBuilder, private modalService: NgbModal,) {
     this.registerForm = this.formBuilder.group({
@@ -73,6 +75,12 @@ export class SignupComponent implements OnInit {
       otp: ['', [Validators.required]],
     }); 
   }
+  password() {
+    this.show = !this.show;
+}
+password2() {
+  this.show2 = !this.show2;
+}
   get f1() {
     return this.otpform.controls;
   }
