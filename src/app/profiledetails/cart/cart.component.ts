@@ -292,7 +292,7 @@ export class CartComponent implements OnInit {
     });
   }
   viewcart3() {
-    this.request.fetchsummery(this.userid,0).subscribe((response: any) => {
+    this.request.fetchsummery(this.userid,0,null).subscribe((response: any) => {
       console.log("summery",response); 
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
@@ -324,19 +324,7 @@ export class CartComponent implements OnInit {
     this.viewcartcount();
     // this.toastr.success('Cart updated', '');
   }
-  proshipping() {
-    this.caart = false
-    this.cosst = true;
-    this.getaddress();
-  }
-
-  getaddress() {
-    this.request.fetchaddress(this.userid).subscribe((response: any) => {
-      this.Address = response.data;
-      // this. processdata()    
-    });
-    this.paymettype();
-  }
+ 
   shippingcost(row: any) {
     this.city = row.city_name;
     this.pincode = row.postal_code;
@@ -365,11 +353,7 @@ export class CartComponent implements OnInit {
     });
 
   }
-  paymettype() {
-    this.request.fetchpaytype().subscribe((response: any) => {
-      this.Paymenttype = response;   
-    });
-  }
+ 
   selectpaytype(row: any) {
     this.payytype = row.payment_type
   }

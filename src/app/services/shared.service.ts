@@ -7,6 +7,8 @@ export class SharedService {
   private subject = new Subject<any>();
   private logoutsubject = new Subject<any>();
   private cartdata = new Subject<any>();
+  private wishlistData = new Subject<any>();
+  
 
 
   // header cart,wishlist,profile auto update
@@ -15,8 +17,19 @@ export class SharedService {
     this.subject.next(value)
   }
   getClickEvent():Observable<any>{
+    console.log("qty click");
+    
   return this.subject.asObservable()
   
+}
+
+// wishlist
+sendWishlistEvent(){
+  this.wishlistData.next(value)
+}
+getWishlistEvent():Observable<any>{  
+return this.wishlistData.asObservable()
+
 }
 
   //  cart page update

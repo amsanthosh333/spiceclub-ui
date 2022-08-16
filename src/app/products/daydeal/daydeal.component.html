@@ -315,6 +315,8 @@
 											<span *ngIf="img?.stroked_price!==img?.main_price"
 												class="main-price discounted">{{img.stroked_price}}</span>
 											<span class="discounted-price">{{img.main_price}} </span>
+											<a class="yousave" *ngIf="img.has_discount==true" >
+                                                You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
 										</div>
 										<div class="pri"  >
 											<span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 

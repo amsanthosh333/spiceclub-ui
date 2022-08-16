@@ -169,11 +169,13 @@ export class RequestService {
     this.url = `${this.endPoint1}/carts/change-quantity`;
     return this.http.post(this.url, body, { headers: headers });
   }
-  fetchsummery(id: any, buynowid: any) {
+  fetchsummery(id: any, buynowid: any, paymenttype:any) {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/cart-summary/` + id + `?is_buynow=` + buynowid;
+    this.url = `${this.endPoint1}/cart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype;
+   console.log(this.url);
+   
     return this.http.get(this.url, { headers: headers });
   }
 
@@ -435,8 +437,9 @@ export class RequestService {
     return this.http.get(this.url, { headers: headers });
   }
   // paymenttype
-  public fetchpaytype() {
-    this.url = `${this.endPoint1}/payment-types`;
+  public fetchpaytype(is_buynow:any) {
+    this.url = `${this.endPoint1}/payment-types?is_buynow=`+ is_buynow + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    console.log(this.url);
     return this.http.get(this.url);
   }
   // placeorder

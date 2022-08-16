@@ -37,7 +37,12 @@
 									*ngIf="b.stroked_price!==b.pricestring">{{b.stroked_price}}</span>          
 									<span class="price" style="font-weight: 600;
 										color: rgb(66, 66, 66);">  {{b.pricestring}}&nbsp;<span style="font-size: 0.7rem;font-weight: 100;" *ngIf="b.variation!==null">({{b.attribute[0]?.title}}: {{b.variation}} (pack of 1)) </span></span>
-								<br>
+							     <!-- <a class="yousave" *ngIf="b.has_discount==true" >
+									You save <span style="color:green">Rs {{b.discount_amount}}</span></a> -->
+									<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray; margin-top: 8px;"
+											*ngIf="b.discount!==0">
+											you save Rs.{{b.discount}} ({{b.discount_percentage}}%) </a>
+						
 
 									<div class="pro-qty d-inline-block mx-0 " id="qty">
 										<span style="font-size: 0.8rem;" >Qty: </span>

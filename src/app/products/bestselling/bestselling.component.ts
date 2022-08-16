@@ -173,7 +173,7 @@ export class BestsellingComponent implements OnInit {
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         if (res.message == 'Product is successfully added to your wishlist') {
           this.addRecordSuccess() ;     
-          this.sharedService.sendClickEvent();
+          this.sharedService.sendWishlistEvent();
         }
         else  {
           this.toastr.error(res.message);
@@ -187,7 +187,7 @@ export class BestsellingComponent implements OnInit {
       this.request.deletewishproud2(id).subscribe((response: any) => {
         if(response.message=="Product is removed from wishlist"){
           this.deleteRecordSuccess();
-          this.sharedService.sendClickEvent();
+          this.sharedService.sendWishlistEvent();
         }
         else{
           this.toastr.error( response.message);        
@@ -509,6 +509,8 @@ export class BestsellingComponent implements OnInit {
         console.log("selectvar res", res);
         this.Bestsellpro[i].stroked_price = res.stroked_price
         this.Bestsellpro[i].main_price = res.price_string;
+        this.Bestsellpro[i].discount_amount = res.discount_amount;
+        this.Bestsellpro[i].discount_percentage = res.discount_percentage;
       }, (error: any) => {
         console.log("error", error);
       });

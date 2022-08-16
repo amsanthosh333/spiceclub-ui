@@ -114,7 +114,7 @@ export class WishlistComponent implements OnInit {
           if(response.message=="Product is successfully removed from your wishlist"){
             this.deleteRecordSuccess();
             this.viewwishlist();
-            this.sharedService.sendClickEvent();
+            this.sharedService.sendWishlistEvent();
           }
           else{
             this.toastr.error( response.message);

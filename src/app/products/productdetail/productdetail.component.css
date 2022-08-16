@@ -389,6 +389,7 @@ input {
 
 /* mob */
 @media (max-width:992px){
+  
   .shop-product__block__title{
     flex-basis: 22%;
 }
@@ -413,6 +414,28 @@ input {
 
 /* web */
 @media (min-width:992px){
+  
+  #slideimageshow1::-webkit-scrollbar {
+    display: none;
+  }
+  #slideimageshow1{
+   max-height: 403px;
+   overflow: auto;
+   padding-top: 5px;
+  }
+  #slideimageshow1 a{
+   height:50px;
+    width: 50px;
+    padding: 3px;
+    border: 1px solid #e0e0e0
+  }
+  #slideimageshow1 a.active{
+    height:50px;
+     width: 50px;
+     padding: 3px;
+     box-shadow: 0px 0px 8px #ff0009;
+   }
+
   .slideimageshow2{
     display: none;
   }

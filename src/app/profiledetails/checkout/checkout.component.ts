@@ -107,15 +107,17 @@ export class CheckoutComponent implements OnInit {
   buynowvalue: any;
   buyvalue: any;
   couponn: any;
-  Summeryload: boolean= true;
+  Summeryload: boolean = true;
   availcoupan: any;
-  cartloader: boolean=true;
-  loadaddress: boolean=true;
-  paymentload: boolean=true;
+  cartloader: boolean = true;
+  loadaddress: boolean = true;
+  paymentload: boolean = true;
   paymentmethod: any;
+  codcharge: any;
+  showCod: boolean =false;
   // responseText: string;
 
-  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal,private appcomp:AppComponent,
+  constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, private appcomp: AppComponent,
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService, private activatedRoute: ActivatedRoute,
     private sharedService: SharedService, private payservice: PaymentService, private spinner: NgxSpinnerService) {
@@ -161,7 +163,7 @@ export class CheckoutComponent implements OnInit {
     if (this.buyvalue == undefined || this.buyvalue == null) {
       console.log("rec!undefined", this.buyvalue);
       this.buynowvalue = 0;
-      this.viewsummery();
+      // this.viewsummery();
       this.viewcart();
       this.paymettype();
       this.viewcountry();
@@ -174,7 +176,7 @@ export class CheckoutComponent implements OnInit {
     else {
       console.log("rec!else", this.buyvalue);
       this.buynowvalue = this.buyvalue;
-      this.viewsummery();
+      // this.viewsummery();
       this.viewcart();
       this.paymettype();
       this.viewcountry();
@@ -193,21 +195,30 @@ export class CheckoutComponent implements OnInit {
   onItemChange(item: any) {
     this.payytype = item;
     if (this.payytype == "billdesk") {
-      this.paymentmethod= "Billdesk"}
+      this.paymentmethod = "Billdesk"
+      this.showCod=false;
+      this.viewsummery();
+    }
+    // else if (this.payytype == "razorpay") {
+    //   this.paymentmethod= "Razorpay"}
+    else if (this.payytype == "cash_on_delivery") {
+      this.paymentmethod = "Cash On Delivery"
+      this.showCod=true;
+      this.viewsummery();
 
-      else if (this.payytype == "razorpay") {
-        this.paymentmethod= "Razorpay"}
-        else  {
-          this.paymentmethod= "Cash On Delivery"}
+    }
+    else {
+      this.paymentmethod = "Cash On Delivery"
+    }
     this.getSelecteditem();
   }
   viewcart() {
-    console.log("buynowvalue",this.buynowvalue);
-    
+    console.log("buynowvalue", this.buynowvalue);
+
     this.request.fetchusercart(this.userid, this.buynowvalue).subscribe((response: any) => {
       console.log("Cart", response);
       this.Cart = response;
-      this.cartloader=false;
+      this.cartloader = false;
       console.log(this.Cart);
 
       this.owneriid = this.Cart[0]?.owner_id;
@@ -218,7 +229,7 @@ export class CheckoutComponent implements OnInit {
 
   }
   viewsummery() {
-    this.request.fetchsummery(this.userid, this.buynowvalue).subscribe((response: any) => {
+    this.request.fetchsummery(this.userid, this.buynowvalue,this.payytype).subscribe((response: any) => {
       console.log("fetchsummery", response);
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total;
@@ -228,45 +239,46 @@ export class CheckoutComponent implements OnInit {
       this.tax = this.Summery.tax;
       this.grandtotal = this.Summery.grand_total;
       this.grandtotal_value = this.Summery.grand_total_value;
-      this.couponn=this.Summery.coupon_applied;
-      this.Summeryload=false;
-      if( this.couponn==true){
+      this.codcharge=this.Summery.codcharges
+      this.couponn = this.Summery.coupon_applied;
+      this.Summeryload = false;
+      if (this.couponn == true) {
         this.removecou = true;
         this.applycou = false;
       }
     });
   }
-  availabecoupan(){
-    this.request.availablecoupan().subscribe((response: any) => {    
+  availabecoupan() {
+    this.request.availablecoupan().subscribe((response: any) => {
       this.availcoupan = response.data;
-     
+
     });
 
   }
-  changecoupan(e:any) {
-    if(e.target.checked){ 
+  changecoupan(e: any) {
+    if (e.target.checked) {
       console.log(e.target.value);
-      this.comment.value.coupan= e.target.value
+      this.comment.value.coupan = e.target.value
       this.comment.setValue({
-        coupan: e.target.value,    
-      });         
-    }
-
-    else{
-      console.log("no");
-      this.comment.value.coupan= ''
-      this.comment.setValue({
-        coupan:'',    
+        coupan: e.target.value,
       });
     }
- }
+
+    else {
+      console.log("no");
+      this.comment.value.coupan = ''
+      this.comment.setValue({
+        coupan: '',
+      });
+    }
+  }
 
   getaddress() {
     this.loader = true
-   this.loadaddress=true
+    this.loadaddress = true
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
       this.Address = response.data;
-      this.loadaddress=false
+      this.loadaddress = false
       console.log("address", this.Address);
       this.loader = false;
       if (this.Address.length === 0) {
@@ -284,7 +296,7 @@ export class CheckoutComponent implements OnInit {
           console.log("if undefined");
           this.address_id = this.Address[0]?.id
           this.curshipaddress = this.Address[0]
-          console.log("curshipaddress",this.curshipaddress);
+          console.log("curshipaddress", this.curshipaddress);
           this.shippingcost(this.curshipaddress)
           this.getaddress();
         }
@@ -294,7 +306,7 @@ export class CheckoutComponent implements OnInit {
           // this.shippingcost(this.curshipaddress)
           let edata2 = {
             user_id: this.userid,
-            address_id:this.address_id
+            address_id: this.address_id
           }
 
           this.request.updateshippingaddress(edata2).subscribe((response: any) => {
@@ -307,9 +319,9 @@ export class CheckoutComponent implements OnInit {
     });
   }
   paymettype() {
-    this.request.fetchpaytype().subscribe((response: any) => {
+    this.request.fetchpaytype(this.buynowvalue).subscribe((response: any) => {
       this.Paymenttype = response;
-      this.paymentload=false;
+      this.paymentload = false;
       // this. processdata()    
     });
   }
@@ -339,7 +351,7 @@ export class CheckoutComponent implements OnInit {
     this.request.makeshipingaddress(edata5).subscribe((res: any) => {
       if (res.result == true) {
         console.log("make_default shipping address")
-        
+
         this.request.fetchaddress(this.userid).subscribe((response: any) => {
           this.Address = response.data;
           this.toastr.success('Address Updated Successfully', '');
@@ -405,16 +417,16 @@ export class CheckoutComponent implements OnInit {
       return;
     }
     else {
-     this.review=true;
-     this.appcomp.hideheader();
+      this.review = true;
+      this.appcomp.hideheader();
 
     }
   }
 
-  billdesk(edata1:any) {
+  billdesk(edata1: any) {
     console.log("billdest called");
-    this.request.billdeskpay(edata1.combined_order_id, edata1.amount,edata1.user_id).subscribe(
-      (response: any) => {      
+    this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id).subscribe(
+      (response: any) => {
         console.log("billresponse response");
         response.json()
         console.log("billdesktype", response.json());
@@ -423,30 +435,30 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-  finallyplaceorder(){
+  finallyplaceorder() {
     console.log(" finallyplaceorder");
     this.loadingg = true
     let edata = {
       owner_id: this.owneriid,
       user_id: this.userid,
       payment_type: this.payytype,
-      is_buynow:this.buynowvalue
+      is_buynow: this.buynowvalue
     }
-    console.log("finallyplaceorder",edata);
-    
+    console.log("finallyplaceorder", edata);
+
     if (this.payytype == "billdesk") {
-      this.paymentmethod= "Billdesk"
+      this.paymentmethod = "Billdesk"
       this.request.placeorder(edata).subscribe((response: any) => {
         this.combined_orderid = response.combined_order_id;
         if (response.result = true) {
-          this.sharedService.sendClickEvent(); 
+          this.sharedService.sendClickEvent();
           let edata1 = {
             payment_type: "cart_payment",
             combined_order_id: this.combined_orderid,
             amount: this.grandtotal_value,
             user_id: this.userid,
           }
-          console.log("billdesk edata",edata1);       
+          console.log("billdesk edata", edata1);
           this.billdesk(edata1)
         }
         else {
@@ -455,13 +467,13 @@ export class CheckoutComponent implements OnInit {
       });
     }
     else if (this.payytype == "razorpay") {
-      this.paymentmethod= "Razorpay"
+      this.paymentmethod = "Razorpay"
       console.log("elseif razorpay");
       this.request.placeorder(edata).subscribe((response: any) => {
         console.log("placeorder response", response);
         this.combined_orderid = response.combined_order_id
         if (response.result == true) {
-          this.sharedService.sendClickEvent(); 
+          this.sharedService.sendClickEvent();
           let edata1 = {
             payment_type: "cart_payment",
             combined_order_id: this.combined_orderid,
@@ -479,7 +491,7 @@ export class CheckoutComponent implements OnInit {
     }
     else {
       console.log("else cashondelivery");
-      this.paymentmethod= "Cash On Delivery"
+      this.paymentmethod = "Cash On Delivery"
       this.request.placeorder(edata).subscribe((response: any) => {
         console.log("cod response", response);
 
@@ -498,10 +510,10 @@ export class CheckoutComponent implements OnInit {
     }
   }
 
-  backtocheckpage(){
-    this.review=false
+  backtocheckpage() {
+    this.review = false
     this.appcomp.showheader();
-     
+
     // this.header.emit(this.userName);
   }
   applycoupan(form: FormGroup) {
@@ -518,7 +530,7 @@ export class CheckoutComponent implements OnInit {
         this.applycou = false;
         this.viewsummery();
         this.toastr.success('Coupon Applied', '');
-        
+
         // this.updatecart();
       }
       else if (res.message == 'Invalid coupon code!') {
@@ -541,7 +553,7 @@ export class CheckoutComponent implements OnInit {
       owner_id: this.owneriid,
     }
     this.request.removecoupan(edata2).subscribe((res: any) => {
-      console.log("res",res);  
+      console.log("res", res);
       if (res.result == true) {
         this.removecou = false;
         this.applycou = true;
@@ -549,7 +561,7 @@ export class CheckoutComponent implements OnInit {
         this.viewsummery();
         this.availabecoupan();
         this.comment.setValue({
-          coupan:'',    
+          coupan: '',
         });
       }
       else if (res.message == 'Invalid coupon code!') {
@@ -638,8 +650,8 @@ export class CheckoutComponent implements OnInit {
         postal_code: form.value.postal_code,
         phone: form.value.phone,
       }
-      console.log("edata",edata);
-      
+      console.log("edata", edata);
+
       this.request.addaddress(edata).subscribe((res: any) => {
         if (res.message == 'Shipping information has been added successfully') {
           form.reset()
@@ -773,7 +785,7 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-//  testing billdesk
+  //  testing billdesk
   billdesk2() {
     window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78')
     this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78').subscribe(
@@ -791,7 +803,7 @@ export class CheckoutComponent implements OnInit {
       });
   }
 
-  
+
   // (response: any) => { 
   //   this.encRequest = response.encRequest;
   //   console.log("desktype",this.encRequest);  

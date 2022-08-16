@@ -390,6 +390,11 @@
 									<th>Delivery charges</th>
 									<td class="subtotal" >{{Summery?.shipping_cost}}</td>
 								</tr>
+								<tr *ngIf="showCod">
+									<th>COD charges</th>
+									<td class="subtotal" >{{Summery?.codcharges}}</td>
+								</tr>
+
 								<tr>
 									<th>Tax </th>
 									<td class="subtotal">{{Summery?.tax}}</td>

@@ -1,7 +1,7 @@
 <div class="col-lg-12 mb-10 pb-0" class="listcard">
     <div>
         <ul id="subcatdiv" style="font-weight: 600;color: #3e3e3e;">
-            <li style="padding-right:20px" *ngFor="let s of Peoduct?.subcategories" (click)="gotosubcategory(s.id)">
+            <li style="padding-right:20px" *ngFor="let s of Peoduct?.subcategories.slice(1,12)" (click)="gotosubcategory(s.id)">
                 {{s.name}}</li>
         </ul>
 
@@ -29,8 +29,8 @@
             </p>
         </a>
 
-         <!-- subscription important-->
-         
+        <!-- subscription important-->
+
         <!-- <a style="vertical-align: middle;" id="subsave">
             <span>Save</span>
             <p>
@@ -87,7 +87,7 @@
                                                     class="bi bi-heart"></i></a>
                                         </span>
                                         <span class="wishlist-icon" *ngIf="(iswishlistt?.is_in_wishlist==true)">
-                                            <a (click)="deleteRecord(Peoduct?.id)" data-tippy="Add to wishlist"
+                                            <a (click)="deleteRecordmain(Peoduct?.id)" data-tippy="Add to wishlist"
                                                 data-tippy-placement="left" data-tippy-inertia="true"
                                                 data-tippy-animation="shift-away" data-tippy-delay="50"
                                                 data-tippy-arrow="true" data-tippy-theme="sharpborder"><i
@@ -107,7 +107,7 @@
 
                                 </div>
 
-                                <div class="col-lg-2 slideimageshow2" id="sideslider" >
+                                <div class="col-lg-2 slideimageshow2" id="sideslider">
                                     <ul style="padding:0px">
                                         <li *ngFor="let p of allgalleryphotos;let i=index" style="padding-bottom:10px ;"
                                             (click)="blogClick(i)">
@@ -205,51 +205,16 @@
 
                                             <span class="review-link" style="display: grid;margin-top: 5px;"
                                                 *ngIf="Peoduct.current_stock > 0">
-                                                <a style="color:green; font-size: 0.8rem;"><span *ngIf="Peoduct.stock_visibility_state !=='hide'">{{Peoduct.current_stock}}&nbsp;</span>In Stock
-                                                    <!-- <span (click)="addtowishlistmain(Peoduct?.id,addwishlistRecord)"
-                                                        *ngIf="(iswishlistt?.is_in_wishlist==false)"
-                                                        style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
-                                                        <i class="ion-android-favorite-outline"
-                                                            style="color: rgb(253 57 50);font-size: 1.1rem;"></i> Add to
-                                                        Wishlist</span>
-
-                                                    <span (click)="deleteRecord(Peoduct?.id)"
-                                                        *ngIf="(iswishlistt?.is_in_wishlist==true)"
-                                                        style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
-                                                        <i class="ion-android-favorite"
-                                                            style="color: rgb(253 57 50);font-size: 1.1rem"></i> Remove
-                                                        from Wishlist</span>
-
-                                                    <span (click)="addtowishlist(Peoduct?.id)" *ngIf="userid==0"
-                                                        style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
-                                                        <i class="ion-android-favorite-outline"
-                                                            style="color: rgb(253 57 50);font-size: 1.1rem"></i> Add to
-                                                        Wishlist</span> -->
+                                                <a style="color:green; font-size: 0.8rem;">
+                                                    <span
+                                                        *ngIf="Peoduct.stock_visibility_state !=='hide'">{{Peoduct.current_stock}}&nbsp;</span>In
+                                                    Stock
                                                 </a>
                                             </span>
 
-                                            <span class="review-link " style="display: grid;"
-                                                *ngIf="Peoduct.current_stock < 0">
-                                                <a style="color:rgb(238, 5, 5);font-size: 0.8rem;">Out of Stock
-                                                    <span (click)="addtowishlistmain(Peoduct?.id,addwishlistRecord)"
-                                                        *ngIf="(iswishlistt?.is_in_wishlist==false)"
-                                                        style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
-                                                        <i class="ion-android-favorite-outline"
-                                                            style="color: rgb(253 57 50);font-size: 1.1rem;"></i> Add to
-                                                        Wishlist</span>
-
-                                                    <span (click)="deleteRecord(Peoduct?.id)"
-                                                        *ngIf="(iswishlistt?.is_in_wishlist==true)"
-                                                        style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
-                                                        <i class="ion-android-favorite"
-                                                            style="color: rgb(253 57 50);font-size: 1.1rem"></i> Remove
-                                                        from Wishlist</span>
-
-                                                    <span (click)="addtowishlist(Peoduct?.id)" *ngIf="userid==0"
-                                                        style="float:right; color: rgb(253 57 50);font-size: 1rem;font-weight: 600;">
-                                                        <i class="ion-android-favorite-outline"
-                                                            style="color: rgb(253 57 50);font-size: 1.1rem"></i> Add to
-                                                        Wishlist</span></a>
+                                            <span class="review-link " style="display: grid;margin-top: 5px;"
+                                                *ngIf="Peoduct.current_stock <= 0">
+                                                <a style="color:rgb(238, 5, 5);font-size: 0.8rem;">Out of Stock </a>
                                             </span>
                                         </div>
 
@@ -514,23 +479,23 @@
                         </div>
 
                         <div style="text-align:center ;">
-                            <button *ngIf="stk!==0" type="button" class="btn btn-primary" id="addcart1"
+                            <button *ngIf="stk > 0" type="button" class="btn btn-primary" id="addcart1"
                                 (click)="addtocartmain(Peoduct.id,addcartRecord)">
                                 <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
                                     class="icon-left ion-ios-cart"></i> Add to Cart</button>
 
-                                    <button *ngIf="stk==0" type="button" class="btn btn-primary" id="addcart1"
-                                   >
-                                    <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
-                                        class="icon-left ion-ios-cart"></i> Out Of Stock</button>
+                            <button *ngIf="stk== 0" type="button" class="btn btn-primary" id="addcart1">
+                                <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
+                                    class="icon-left ion-ios-cart"></i> Out Of Stock</button>
 
-                            <button *ngIf="stk!==0" type="button" class="btn btn-primary" id="addcart2"
+
+                            <button *ngIf="stk > 0" type="button" class="btn btn-primary" id="addcart2"
                                 (click)="addtocartbuy(Peoduct.id)">
                                 <i style="background-color: transparent;color: rgb(250, 248, 248) !important;"
                                     class="bi bi-lightning-fill"></i> Buy Now</button>
 
-                   
-      <!-- subscribe important-->
+
+                            <!-- subscribe important-->
                             <!-- <span class="review-link " style="display: grid; justify-content:center"
                                 *ngIf="Peoduct?.current_stock > 0">
                                 <a style="font-size: 0.8rem;">
@@ -780,7 +745,7 @@
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen></iframe>
 
-                        <!-- <video muted autoplay  *ngIf="videoURL" id="video1"  
+                    <!-- <video muted autoplay  *ngIf="videoURL" id="video1"  
                         width="350px" height="195px" class="img" controls
                         >
                          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type='video/mp4' />
@@ -797,7 +762,7 @@
                     crossorigin>
               </video> -->
 
-              <!-- <video controls (click)="toggleVideo()" #videoPlayer>
+                    <!-- <video controls (click)="toggleVideo()" #videoPlayer>
                 <source src="https://www.youtube.com/watch?v=OMLj5pw1KtI" type="video/mp4" />
                 Browser not supported
             </video> -->
@@ -895,10 +860,13 @@
                                         <span *ngIf="img?.stroked_price!==img?.main_price"
                                             class="main-price discounted">{{img.stroked_price}}</span>
                                         <span class="discounted-price">{{img.main_price}} </span>
+                                        <a class="yousave" *ngIf="img.has_discount==true">
+                                            You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                                     </div>
-                                    <div class="pri" style="text-align: center;" >
-                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
-                                         style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
+                                    <div class="pri" style="text-align: center;">
+                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
+                                            style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
+                                                *ngIf="i<2">{{b.name}}</span></span>
                                     </div>
                                 </div>
 
@@ -1265,7 +1233,7 @@
 
                                 <div class="single-product__content" (click)=" proddetail(img.id)">
                                     <div class="title">
-                                        <h3> <a style="line-height: 1.6rem;
+                                        <h3 style="padding: 0px;"> <a style="line-height: 1.6rem;
                                 overflow: hidden;
                                 display: -webkit-box; 
                                 -webkit-line-clamp: 2;
@@ -1293,10 +1261,13 @@
                                         <span *ngIf="img?.stroked_price!==img?.main_price"
                                             class="main-price discounted">{{img.stroked_price}}</span>
                                         <span class="discounted-price">{{img.main_price}} </span>
+                                        <a class="yousave" *ngIf="img.has_discount==true">
+                                            You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                                     </div>
-                                    <div class="pri" style="text-align: center;" >
-                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
-                                         style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
+                                    <div class="pri" style="text-align: center;">
+                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
+                                            style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
+                                                *ngIf="i<2">{{b.name}}</span></span>
                                     </div>
                                 </div>
 
@@ -1694,7 +1665,7 @@
 
                         <div class="single-product__content" (click)=" proddetail(img.id)">
                             <div class="title">
-                                <h3> <a style="line-height: 1.6rem;
+                                <h3 style="padding: 0px;"> <a style="line-height: 1.6rem;
                         overflow: hidden;
                         display: -webkit-box; 
                         -webkit-line-clamp: 2;
@@ -1722,10 +1693,13 @@
                                 <span *ngIf="img?.stroked_price!==img?.main_price"
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
+                                <a class="yousave" *ngIf="img.has_discount==true">
+                                    You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                             </div>
-                            <div class="pri" style="text-align: center;" >
-                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
-                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
+                            <div class="pri" style="text-align: center;">
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
+                                    style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
+                                        *ngIf="i<2">{{b.name}}</span></span>
                             </div>
                         </div>
 
@@ -1847,7 +1821,7 @@
 
                         <div class="single-product__content" (click)=" proddetail(img.id)">
                             <div class="title">
-                                <h3> <a style="line-height: 1.6rem;
+                                <h3 style="padding: 0px;"> <a style="line-height: 1.6rem;
                         overflow: hidden;
                         display: -webkit-box; 
                         -webkit-line-clamp: 2;
@@ -1875,10 +1849,14 @@
                                 <span *ngIf="img?.stroked_price!==img?.main_price"
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
+                                <a class="yousave" *ngIf="img.has_discount==true">
+                                    You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
+
                             </div>
-                            <div class="pri" style="text-align: center;" >
-                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
-                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
+                            <div class="pri" style="text-align: center;">
+                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
+                                    style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
+                                        *ngIf="i<2">{{b.name}}</span></span>
                             </div>
                         </div>
 

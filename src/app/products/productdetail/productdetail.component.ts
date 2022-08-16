@@ -303,9 +303,9 @@ export class ProductdetailComponent implements OnInit {
       }
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         if (res.message == 'Product is successfully added to your wishlist') {
-          this.iswishlist(prd_id)
+          // this.iswishlist(prd_id)
           this.addRecordSuccess();
-          this.sharedService.sendClickEvent();
+          this.sharedService.sendWishlistEvent();
         }
         else {
           this.toastr.error(res.message);
@@ -317,16 +317,16 @@ export class ProductdetailComponent implements OnInit {
     }
   }
   addtowishlistmain(prd_id: any,content:any) {
+    
     if (this.userid == 0) {
       this. openlogin()
     }
     else {
+      // this.iswishlistt?.is_in_wishlist==true
       let edata4 = {
         user_id: this.userid,
         product_id: prd_id
-      }
-      console.log("wish");
-      
+      }    
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         if (res.message == 'Product is successfully added to your wishlist') {
           this.iswishlist(prd_id)
@@ -335,7 +335,7 @@ export class ProductdetailComponent implements OnInit {
             size: 'lg',
           });
           // this.addRecordSuccess();
-          this.sharedService.sendClickEvent();
+          this.sharedService.sendWishlistEvent();
         }
         else {
           this.toastr.error(res.message);
@@ -353,12 +353,27 @@ export class ProductdetailComponent implements OnInit {
   closemodal(){
     this.modalService.dismissAll()
   }
-  deleteRecord(id: any) {
+  deleteRecordmain(id: any) {
+    this.iswishlistt?.is_in_wishlist==false
     this.request.deletewishproud2(id).subscribe((response: any) => {
       if (response.message == "Product is removed from wishlist") {
         this.iswishlist(id)
         this.deleteRecordSuccess();
-        this.sharedService.sendClickEvent();
+        this.sharedService.sendWishlistEvent();
+      }
+      else {
+        this.toastr.error(response.message);
+      }
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+  deleteRecord(id: any) {
+    this.request.deletewishproud2(id).subscribe((response: any) => {
+      if (response.message == "Product is removed from wishlist") {
+      
+        this.deleteRecordSuccess();
+        this.sharedService.sendWishlistEvent();
       }
       else {
         this.toastr.error(response.message);
@@ -711,9 +726,9 @@ else{
       console.log("object", object);
       console.log("object", this.varient_value);
       return object.variant == this.varient_value;
-
     });
     this.selectedimage = this.allgalleryphotos[index]?.image;
+    this.selectedimg = index;
     this.imgItem=index
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
       console.log("selectvar",res);
@@ -729,10 +744,11 @@ else{
       // this.totalprice=(res?.price_string).replace('Rs','');
       this.stocck = res?.stock;
       this.stocckkk = res?.stock;
+      this.stk = res?.stock;
+      console.log("this.stk",this.stk);
       this.quantityyy = 1;
       this.totalprice = res?.price;
       this.varphotoos=res.image    
-
             // array push photo
             // this.newvarphotos=[];
             // this.newvarphotos = this.varphotoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item)
@@ -1133,6 +1149,8 @@ else{
       console.log("selectvar res", res);
       this.Relatedprod[i].stroked_price = res.stroked_price
       this.Relatedprod[i].main_price = res.price_string
+      this.Relatedprod[i].discount_amount = res.discount_amount;
+      this.Relatedprod[i].discount_percentage = res.discount_percentage;
     }, (error: any) => {
       console.log("error", error);
     });

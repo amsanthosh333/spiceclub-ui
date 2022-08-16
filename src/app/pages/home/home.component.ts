@@ -676,10 +676,12 @@ export class HomeComponent implements OnInit {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     this.request.addvarient(id, weight).subscribe((res: any) => {
-
+      console.log("res", res);
 
       this.Bestsellpro[i].stroked_price = res.stroked_price;
-      this.Bestsellpro[i].main_price = res.price_string;
+      this.Bestsellpro[i].main_price = res.price_string;   
+      this.Bestsellpro[i].discount_amount = res.discount_amount;
+      this.Bestsellpro[i].discount_percentage = res.discount_percentage;
       // this.Bestsellpro[i].stroked_price = res.stroked_price;
       // this.Bestsellpro[i].main_price = res.price_string;
     }, (error: any) => {
@@ -693,6 +695,8 @@ export class HomeComponent implements OnInit {
 
       this.Futuredpro[i].stroked_price = res.stroked_price
       this.Futuredpro[i].main_price = res.price_string
+      this.Futuredpro[i].discount_amount = res.discount_amount;
+      this.Futuredpro[i].discount_percentage = res.discount_percentage;
     }, (error: any) => {
       console.log("error", error);
     });
@@ -703,6 +707,8 @@ export class HomeComponent implements OnInit {
     this.request.addvarient(id, weight).subscribe((res: any) => {
       this.topfirstcat[i].stroked_price = res.stroked_price
       this.topfirstcat[i].main_price = res.price_string
+      this.topfirstcat[i].discount_amount = res.discount_amount;
+      this.topfirstcat[i].discount_percentage = res.discount_percentage;
     }, (error: any) => {
       console.log("error", error);
     });
@@ -713,6 +719,8 @@ export class HomeComponent implements OnInit {
     this.request.addvarient(id, weight).subscribe((res: any) => {
       this.topsecondcat[i].stroked_price = res.stroked_price
       this.topsecondcat[i].main_price = res.price_string
+      this.topsecondcat[i].discount_amount = res.discount_amount;
+      this.topsecondcat[i].discount_percentage = res.discount_percentage;
     }, (error: any) => {
       console.log("error", error);
     });
@@ -720,7 +728,6 @@ export class HomeComponent implements OnInit {
 
   prodaddtocart(img: any) {
     if (this.userid == 0) {
-      // this.toastr.info('You need to login', '');
       this.openlogin()
     }
     else {
@@ -832,8 +839,8 @@ export class HomeComponent implements OnInit {
         if (res.message == 'Product is successfully added to your wishlist') {
 
           this.addRecordSuccess();
-          this.sharedService.sendClickEvent();
-
+          // this.sharedService.sendClickEvent();
+          this.sharedService.sendWishlistEvent();
         }
         else {
           this.toastr.success('', res.message);
@@ -849,7 +856,7 @@ export class HomeComponent implements OnInit {
     this.request.deletewishproud2(id).subscribe((response: any) => {
       if (response.message == "Product is removed from wishlist") {
         this.deleteRecordSuccess();
-        this.sharedService.sendClickEvent();
+        this.sharedService.sendWishlistEvent();
       }
       else {
         this.toastr.error(response.message);

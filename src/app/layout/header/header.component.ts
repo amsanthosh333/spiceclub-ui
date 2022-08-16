@@ -90,12 +90,18 @@ export class HeaderComponent implements OnInit {
 
     if (this.userid !== 0) {
       this.ClickEventSubscription = this.sharedService.getClickEvent().subscribe(() => {
-        this.viewwishlist();
+        // this.viewwishlist();
         this.viewcartcount();
         this.viewcart();
         this.viewcart3();
         this.getprofile();
       })
+
+      this.ClickEventSubscription = this.sharedService.getWishlistEvent().subscribe(() => {
+        console.log("getWishlistEvent");     
+        this.viewwishlist();   
+      })
+
     }
     else {
       this.currentUserSubject = new BehaviorSubject<User>(
@@ -1694,7 +1700,7 @@ export class HeaderComponent implements OnInit {
     });
   }
   viewcart3() {
-    this.request.fetchsummery(this.userid,0).subscribe((response: any) => {
+    this.request.fetchsummery(this.userid,0,null).subscribe((response: any) => {
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
       this.subtot = this.Summery.sub_total
