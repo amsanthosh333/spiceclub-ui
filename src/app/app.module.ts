@@ -24,7 +24,7 @@ import { NgxNavbarModule } from 'ngx-bootstrap-navbar';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CountdownComponent } from './pages/countdown/countdown.component';
-
+import { InfiniteScrollModule } from "ngx-infinite-scroll";
 @NgModule({
   declarations: [
     AppComponent, 
@@ -34,7 +34,7 @@ import { CountdownComponent } from './pages/countdown/countdown.component';
     CountdownComponent, 
   ],
   imports: [
-    BrowserModule,BrowserAnimationsModule,
+    BrowserModule,BrowserAnimationsModule,InfiniteScrollModule,
     AppRoutingModule,AuthModule,
     ReactiveFormsModule,NgbModule,
     FormsModule,IvyCarouselModule,

@@ -24,13 +24,17 @@ export class FooterComponent implements OnInit {
     this.subscribe = this.fb.group({
       mail: ['', [Validators.required, Validators.email]],
     });
-    this.getfacebookurl();
-    this.getinstagramurl();
-    this.gettwitterurl();
-    this.getyoutubeurl();
-    // this.getpayment();
-    this.getlinkedurl();
 
+    setTimeout(() => {
+      this.getfacebookurl();
+      this.getinstagramurl();
+      this.gettwitterurl();
+      this.getyoutubeurl();
+      // this.getpayment();
+      this.getlinkedurl();
+  
+    }, 5000);
+   
   }
   mailsubscribe(form: FormGroup) {
     this.error = '';

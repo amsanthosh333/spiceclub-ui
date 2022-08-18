@@ -79,6 +79,7 @@ export class BestsellingComponent implements OnInit {
   newpageProduct: any;
   prodloadermain: boolean=true;
   pagee: any= 1;
+  prodloader1: boolean=true;
 
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
@@ -151,7 +152,7 @@ export class BestsellingComponent implements OnInit {
         this.prodloader=false;  
         setTimeout(() => {
           this.imgloader = true;
-        }, 2000);
+        }, 1000);
       });
     }
     
@@ -239,22 +240,22 @@ export class BestsellingComponent implements OnInit {
     this.Bestsellpro=response.data; 
      setTimeout(() => {
       this.imgloader = true;
-    }, 2000);
+    }, 1000);
  
   });
 
     }
     viewtodaysdeal(){
-      this.prodloader=true;
+      this.prodloader1=true;
       this.imgloader = false;
       this.request. gettodaysdeal('').subscribe((response: any) => {
         this.Product=response.data;
           this.pagenation=response?.meta   ;
           this.pagess=this.pagenation?.links;
-          this.prodloader=false;
+          this.prodloader1=false;
           setTimeout(() => {
             this.imgloader = true;
-          }, 2000);
+          }, 1000);
       },
       (error: any) => {
         console.log("error",error);
@@ -480,20 +481,15 @@ export class BestsellingComponent implements OnInit {
         console.log(edata);
         this.request.addtocart(edata).subscribe((res: any) => {
           console.log("resssssssssssssss", res);
-          if (res.message == 'Product added to cart successfully') {
-            console.log("Product added to cart successfully");
-            this.addRecordSuccess();
+          if (res.result == true) { 
+            this.addRecordSuccess()
             this.modalService.dismissAll();
             this.sharedService.sendClickEvent();
           }
-          else if (res.message == 'Minimum 1 item(s) should be ordered') {
-            this.toastr.success(res.message);
-  
+          else  {
+            this.toastr.info(res.message);
           }
-          else if (res.message == 'Stock out') {
-            this.toastr.error(res.message);
-            console.log("Stock out");
-          }
+         
         },
           (error: any) => {
             this.toastr.error(error);

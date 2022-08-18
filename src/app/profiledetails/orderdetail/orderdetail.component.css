@@ -2,6 +2,17 @@ div {
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0;
 }
+#addcart2{
+  border-radius: 25px;
+  margin-bottom: 12px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  background-color: #fb641b;
+  border-color: #fb641b;
+  font-size: 0.8rem;
+}
 #paymentdiv .headline2{
   width: 130px !important;
 }
@@ -235,8 +246,8 @@ p strong {
   padding-left: 0px;
 }
 #addressdiv {
-  height: 130px;
-  max-height: 130px;
+  height: 135px;
+  max-height: 135px;
   overflow: auto;
 }
 

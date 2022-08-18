@@ -144,7 +144,7 @@ export class BlogComponent implements OnInit {
       this.topItem = -1
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -188,7 +188,7 @@ export class BlogComponent implements OnInit {
       // this.router.navigate(['/blog'],{ queryParams:{ category:this.blogid, page: page} });
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     },
       (error: any) => {
         console.log("error", error);
@@ -217,7 +217,7 @@ export class BlogComponent implements OnInit {
         this.router.navigate(['/blog'], { queryParams: { category: this.blogid, page: this.currentpage } });
         setTimeout(() => {
           this.imgloader = true;
-        }, 2000);
+        }, 1000);
       })
     }
 
@@ -241,7 +241,7 @@ export class BlogComponent implements OnInit {
       this.recipeloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 3000);
+      }, 2000);
     },
       (error: any) => {
         console.log("error", error);
@@ -316,7 +316,7 @@ export class BlogComponent implements OnInit {
       this.loader1 = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -335,7 +335,7 @@ export class BlogComponent implements OnInit {
       this.loader1 = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     }, (error: any) => {
       console.log("error", error);
     });

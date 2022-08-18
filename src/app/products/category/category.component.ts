@@ -351,6 +351,7 @@ export class CategoryComponent implements OnInit {
   getsubcategory(id: any) {
     console.log("getsubcategory");
     this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+      
       this.Subcat = res.data;
       this.sideloader = false;
       let index = this.Subcat?.findIndex((x: any) => x.id == this.subcatedoryid);
@@ -385,7 +386,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     },
       (error: any) => {
         console.log("error", error);
@@ -412,7 +413,7 @@ export class CategoryComponent implements OnInit {
         this.prodloader = false;
         setTimeout(() => {
           this.imgloader = true;
-        }, 2000);
+        }, 1000);
       })
     }
   }
@@ -473,7 +474,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -502,7 +503,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -533,7 +534,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -550,6 +551,7 @@ export class CategoryComponent implements OnInit {
     // this.topItem1 = i;
 
     this.request.getcatprod(id, page).subscribe((response: any) => {
+
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
@@ -557,7 +559,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -595,7 +597,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -630,7 +632,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
 
     });
   }
@@ -699,7 +701,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -719,7 +721,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -949,20 +951,15 @@ export class CategoryComponent implements OnInit {
       console.log(edata);
       this.request.addtocart(edata).subscribe((res: any) => {
         console.log("resssssssssssssss", res);
-        if (res.message == 'Product added to cart successfully') {
-          console.log("Product added to cart successfully");
+        if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
         }
-        else if (res.message == 'Minimum 1 item(s) should be ordered') {
-          this.toastr.success(res.message);
-
+        else  {
+          this.toastr.info(res.message);
         }
-        else if (res.message == 'Stock out') {
-          this.toastr.error(res.message);
-          console.log("Stock out");
-        }
+       
       },
         (error: any) => {
           this.toastr.error(error);
@@ -1001,7 +998,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
 
     });
   }
@@ -1042,7 +1039,7 @@ export class CategoryComponent implements OnInit {
 
         setTimeout(() => {
           this.imgloader = true;
-        }, 2000);
+        }, 1000);
       })
     }
   }
@@ -1068,7 +1065,7 @@ export class CategoryComponent implements OnInit {
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     },
       (error: any) => {
         console.log("error", error);
@@ -1092,7 +1089,7 @@ export class CategoryComponent implements OnInit {
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     },
       (error: any) => {
         console.log("error", error);
@@ -1116,7 +1113,7 @@ export class CategoryComponent implements OnInit {
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     },
       (error: any) => {
         console.log("error", error);
@@ -1139,7 +1136,7 @@ export class CategoryComponent implements OnInit {
       this.brandd_id='';
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     },
       (error: any) => {
         console.log("error", error);
@@ -1193,7 +1190,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     });
   }
   under200(){

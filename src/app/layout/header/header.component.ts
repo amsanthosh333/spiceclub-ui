@@ -128,12 +128,17 @@ export class HeaderComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.userid !== 0) {
-      this.viewwishlist();
       this.viewcartcount();
-      this.viewcart();
-      this.viewcart3();
-      this.getprofile();
+      this.viewwishlist();
       this.viewallcategory();
+      setTimeout(() => {   
+        this.viewcart();
+        this.viewcart3();
+        this.getprofile();
+      }, 3000); 
+
+     
+   
     }
     else {
       this.viewallcategory();

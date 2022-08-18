@@ -38,7 +38,7 @@ export class RequestService {
     this.userid = this.currentdetail?.user?.id;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-    this.buyertypeid = this.currentdetail.user?.buyertypeid;;
+    this.buyertypeid = this.currentdetail.user?.buyertypeid;
     if (this.userid == undefined) {
 
       this.userid = 0
@@ -510,8 +510,11 @@ export class RequestService {
 
   }
   retrypayment(body: any) {
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/order/repayment`;
-    return this.http.post(this.url, body);
+    return this.http.post(this.url, body, { headers: headers });
   }
 
   //category
@@ -549,6 +552,8 @@ export class RequestService {
   }
   public getsubcatprod(id: any, page: any) {
     this.url = `${this.endPoint1}/products/sub-category/` + id + '?page=' + page;
+    console.log(this.url );
+    
     return this.http.get(this.url);
   }
   public getsubcatsearchprod(id: any, page: any, key: any) {
@@ -903,11 +908,11 @@ export class RequestService {
   // billdesk
   // https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=74&amount=188.00&user_id=8
 
-  public billdeskpay(combined_order_id: any, amount: any, user_id: any) {
+  public billdeskpay(combined_order_id: any, amount: any, user_id: any,repayment:any) {
     const headers = new HttpHeaders()
     .set('content-type', 'application/json')
     .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=` + combined_order_id + `&amount=` + amount + `&user_id=` + user_id;
+    this.url = `${this.endPoint1}/billdesk/pay-with-billdesk?requestfrom=`+ repayment +`&payment_type=cart_payment&combined_order_id=` + combined_order_id + `&amount=` + amount + `&user_id=` + user_id;
      window.open(this.url,'_self');
     console.log("billdeskpay service file,",this.url);
     return this.http.get(this.url, { headers: headers });

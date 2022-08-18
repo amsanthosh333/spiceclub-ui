@@ -73,7 +73,7 @@ input[type=number]::-webkit-inner-spin-button {
   border-color:#e61717;
   font-size: 0.8rem;
   width: -webkit-fill-available;
-  height: 28px;
+  height: 24px;
   padding: 0.1rem 0.75rem;
 }
 .addcarrtbtn {
@@ -82,8 +82,11 @@ input[type=number]::-webkit-inner-spin-button {
   border-color: #e61717;
   font-size: 0.8rem;
   width: -webkit-fill-available;
-  height: 28px;
+  height: 24px;
   padding: 0.1rem 0.75rem;
+}
+.single-product input{
+  height: 26px;
 }
 /* productlist css end */
 .catname{
@@ -133,7 +136,7 @@ input[type=number]::-webkit-inner-spin-button {
   letter-spacing: 0;
 }
 .single-product__content {
-  height: 118px;
+  height: 100px;
   text-align: start;
 }
 

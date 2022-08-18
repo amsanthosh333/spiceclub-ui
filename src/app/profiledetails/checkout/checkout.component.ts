@@ -425,12 +425,9 @@ export class CheckoutComponent implements OnInit {
 
   billdesk(edata1: any) {
     console.log("billdest called");
-    this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id).subscribe(
-      (response: any) => {
-        console.log("billresponse response");
-        response.json()
-        console.log("billdesktype", response.json());
-        console.log("billresponse", response);
+    this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,null).subscribe(
+      (response: any) => {    
+        response.json()      
       },
     );
   }

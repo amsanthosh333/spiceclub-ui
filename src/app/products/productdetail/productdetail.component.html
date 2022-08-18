@@ -231,12 +231,12 @@
                                             <div class="shop-product__block shop-product__block--size  mt-10"
                                                 *ngIf="(choice.length!==0)" style="padding-bottom:4px;">
 
-                                                <div class="shop-product__block__title " *ngFor="let a of choice"
-                                                    style="font-weight: 600;color: #727272;">{{a.title}} :
+                                                <div class="shop-product__block  " *ngFor="let a of choice.slice(0,1)"
+                                                    style="font-weight: 600;color: #727272;margin-right: 5px;">{{a.title}} :
                                                 </div>
                                                 <!-- <span class="quickview-title" style="color: #727272" *ngFor="let a of choice">{{a.title}} :</span> -->
 
-                                                <div class="shop-product__block__value" *ngFor="let a of choice">
+                                                <div class="shop-product__block__value" *ngFor="let a of choice.slice(0,1)">
                                                     <div class="shop-product-size-list">
                                                         <span class="single-size"
                                                             *ngFor="let b of a.options;let i = index"
@@ -260,46 +260,16 @@
                                                     *ngIf="(choice.length!==0)"> &nbsp;(
                                                     {{Peoduct?.stroked_price }} / {{pervarient}} )</span>
                                             </div>
-                                            <div class="single-info" style="font-size: 0.8rem;padding-bottom:7px;">
+                                            <!-- <div class="single-info" style="font-size: 0.8rem;padding-bottom:7px;">
                                                 <span class="quickview" style="color: #727272">Excluding GST : </span>
                                                 <a style="font-weight: 600;color: #727272;">Rs {{Peoduct?.excl_gst}}
                                                 </a>
-                                            </div>
-
-                                            <!-- <table>
-                                                <tr class="single-info"
-                                                    *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
-                                                    <td class="quickview-title" style="color: #727272">MRP : </td>
-                                                    <td class="quickview-value">
-
-                                                        <span class="main-price discounted"
-                                                            style="font-size:0.9rem;">{{Peoduct?.stroked_price}}</span>
-
-                                                    </td>
-                                                </tr>
-                                                <tr class="single-info ">
-                                                    <td class="quickview-title" style="color: #727272; ">Price : </td>
-                                                    <td class="quickview-value">
-                                                        <a
-                                                            style="font-size: 1rem;color:brown;font-weight: 600;">{{Peoduct?.main_price}}</a>
-                                                        <span style="font-size: 0.8rem;font-weight: 500;"> (Including
-                                                            all taxes)</span>
-
-                                                    </td>
-                                                </tr>
-                                                <tr class="single-info ">
-                                                    <td class="quickview-title" style="color: #727272;">Excluding GST :
-                                                    </td>
-                                                    <td class="quickview-value">
-                                                        <a>Rs {{Peoduct?.excl_gst}} </a>
-                                                    </td>
-                                                </tr>
-                                            </table> -->
+                                            </div> -->                              
 
                                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
                                                 *ngIf="Peoduct?.discount_percentage!= 0">You save <span
                                                     style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
-                                                    ({{Peoduct?.discount_percentage}}%)</span>. Inclusive all taxes </p>
+                                                    ({{Peoduct?.discount_percentage}}%)</span>. Inclusive of all taxes (GST {{Peoduct?.gst_percentage}}%)</p>
                                         </div>
 
 
@@ -618,13 +588,13 @@
                                                             <table class="overview">
                                                                 <tr>
                                                                     <th id="he" style="background-color: #f2f2f2;">
-                                                                        Product Id:</th>
+                                                                        Product Id</th>
                                                                     <td style="padding-left: 30px;">
                                                                         {{Peoduct?.product_id}}
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th style="background-color: #f2f2f2;"> Description:
+                                                                    <th style="background-color: #f2f2f2;"> Description
                                                                     </th>
                                                                     <td>
                                                                         <div class="shop-product__long-desc"
@@ -637,7 +607,7 @@
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th style="background-color: #f2f2f2;">Attributes:
+                                                                    <th style="background-color: #f2f2f2;">Attributes
                                                                     </th>
                                                                     <td style="padding-left: 30px;"><span
                                                                             *ngFor="let attr of Peoduct?.attributes">{{attr.title}}</span>
@@ -831,12 +801,12 @@
 
                                 <div class="single-product__content" (click)=" proddetail(img.id)">
                                     <div class="title">
-                                        <h3> <a style="line-height: 1.6rem;
+                                        <h3 style="padding: 0px;"> <a style="line-height: 1.6rem;
                                 overflow: hidden;
                                 display: -webkit-box; 
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
-                                max-height: 3.2rem; 
+                                max-height: 3.2rem; height:3.2rem;
                                  margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>
                                         <a id="vieww"
                                             style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
@@ -863,11 +833,11 @@
                                         <a class="yousave" *ngIf="img.has_discount==true">
                                             You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                                     </div>
-                                    <div class="pri" style="text-align: center;">
+                                    <!-- <div class="pri" style="text-align: center;">
                                         <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
                                             style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
                                                 *ngIf="i<2">{{b.name}}</span></span>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <!--=======  End of single product content   =======-->
@@ -1238,7 +1208,7 @@
                                 display: -webkit-box; 
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
-                                max-height: 3.2rem;">{{img.name}}</a> </h3>
+                                max-height: 3.2rem;height:3.2rem;">{{img.name}}</a> </h3>
                                         <a id="vieww"
                                             style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
                                             Details</a>
@@ -1264,11 +1234,11 @@
                                         <a class="yousave" *ngIf="img.has_discount==true">
                                             You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                                     </div>
-                                    <div class="pri" style="text-align: center;">
+                                    <!-- <div class="pri" style="text-align: center;">
                                         <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
                                             style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
                                                 *ngIf="i<2">{{b.name}}</span></span>
-                                    </div>
+                                    </div> -->
                                 </div>
 
                                 <!--=======  End of single product content   =======-->
@@ -1665,12 +1635,13 @@
 
                         <div class="single-product__content" (click)=" proddetail(img.id)">
                             <div class="title">
-                                <h3 style="padding: 0px;"> <a style="line-height: 1.6rem;
+                                <h3 style="padding:0px;"> <a style="line-height: 1.6rem;
                         overflow: hidden;
                         display: -webkit-box; 
                         -webkit-line-clamp: 2;
                         -webkit-box-orient: vertical;
-                        max-height: 3.2rem;">{{img.name}}</a> </h3>
+                        max-height: 3.2rem;
+                       height:3.2rem;margin-bottom:2px;">{{img.name}}</a> </h3>
                                 <a id="vieww"
                                     style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
                                     Details</a>
@@ -1696,11 +1667,11 @@
                                 <a class="yousave" *ngIf="img.has_discount==true">
                                     You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                             </div>
-                            <div class="pri" style="text-align: center;">
+                            <!-- <div class="pri" style="text-align: center;">
                                 <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
                                     style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
                                         *ngIf="i<2">{{b.name}}</span></span>
-                            </div>
+                            </div> -->
                         </div>
 
                         <!--=======  End of single product content   =======-->
@@ -1826,7 +1797,8 @@
                         display: -webkit-box; 
                         -webkit-line-clamp: 2;
                         -webkit-box-orient: vertical;
-                        max-height: 3.2rem;">{{img.name}}</a> </h3>
+                        max-height: 3.2rem;height:3.2rem;
+                        margin-bottom: 2px;">{{img.name}}</a> </h3>
                                 <a id="vieww"
                                     style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
                                     Details</a>
@@ -1853,11 +1825,11 @@
                                     You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
 
                             </div>
-                            <div class="pri" style="text-align: center;">
+                            <!-- <div class="pri" style="text-align: center;">
                                 <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
                                     style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
                                         *ngIf="i<2">{{b.name}}</span></span>
-                            </div>
+                            </div> -->
                         </div>
 
                         <!--=======  End of single product content   =======-->

@@ -91,7 +91,7 @@ input {
   border-color: #e61717;
   font-size: 0.8rem;
   width: -webkit-fill-available;
-  height: 28px;
+  height: 24px;
   padding: 0.1rem 0.75rem;
 }
 
@@ -101,8 +101,11 @@ input {
   border-color: #e61717;
   font-size: 0.8rem;
   width: -webkit-fill-available;
-  height: 28px;
+  height: 24px;
   padding: 0.1rem 0.75rem;
+}
+.single-product input{
+  height: 26px;
 }
 
 /* productlist css end */
@@ -182,7 +185,7 @@ a:not([href]):not([class]):hover {
   letter-spacing: 0;
 }
 .single-product__content {
-  height: 118px;
+  height: 100px;
   text-align: start;
 }
 
@@ -195,9 +198,9 @@ a:not([href]):not([class]):hover {
   max-height: 3.2rem;
 }
 
-.single-product__content {
+/* .single-product__content {
   height: 130px;
-}
+} */
 
 .title h3 a {
   font-size: 13px;

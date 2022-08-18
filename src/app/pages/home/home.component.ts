@@ -83,7 +83,7 @@ export class HomeComponent implements OnInit {
   quantityy: any;
   Allbrands: any;
   Allcat: any;
-  Homecat: any;
+  Homecat: any=[];
   // mainloader:boolean=true;
   loader1: boolean = true;
   loader2: boolean = true;
@@ -91,7 +91,10 @@ export class HomeComponent implements OnInit {
   loader4: boolean = true;
   loader5: boolean = true;
   loader6: boolean = true;
-
+  loader7: boolean=true;
+  loader8: boolean=true;
+  loader9: boolean=true;
+  loader10: boolean=true;
   checkedColumns = {};
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
@@ -165,6 +168,8 @@ export class HomeComponent implements OnInit {
   brnd_id: any;
   imgloader: boolean = true;
   imgloader2: boolean = true;
+  imgloader3: boolean=true;
+  imgloader4: boolean=true;
   stocckkk!: number;
   subItem: any = 0;
   storked_pricee: any;
@@ -199,6 +204,11 @@ export class HomeComponent implements OnInit {
   parentbesrsell: any;
   Flashdeal: any;
   Flashphotos: any = [];
+  tophomecat: any;
+  top3id: any;
+  top3name: any;
+  topthirdcat: any;
+  
 
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -249,28 +259,25 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
 
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
-
+    this.viewdata();
+    // this.viewsubscribebanner();
+    this.viewtodayoffer();
+    // this.viewdata3();
+    this.viewbestsellpro();
+    // this.viewtopcategory();
+    // this.viewdaydeal();
+    // this.viewcategorydata();   
+    // this.gethomeecat();        
+    // this.viewfuturedpro();
+    // this.viewflashdeal();
+    // this.viewbrands();
+    // this.viewdata4();
     setTimeout(() => {
       this.loadingg = false;
     }, 2000);
-    this.viewdata();
-    this.viewsubscribebanner();
-    this.viewtodayoffer();
-    this.viewdata3();
-    this.viewbestsellpro();
-    this.viewtopcategory();
-    this.viewdaydeal();
-    this.viewcategorydata();
-    this.gethomeecat();
-    this.viewfuturedpro();
-    this.viewflashdeal();
-    this.viewbrands();
-    this.viewdata4();
-
     this.register = this.fb.group({
       rating: [''],
       comment: [''],
-
     });
 
     (($) => {
@@ -280,6 +287,53 @@ export class HomeComponent implements OnInit {
   }
   ngOnDestroy() {
     this.countDown = null;
+  }
+
+  banneronScrollDown(event: any) {
+    console.log("bannerscrolled");
+    this.viewtopcategory();
+  }
+  banneronScrollUp(event: any) {
+    console.log("bannerscrolled up");
+  }
+  bestsellScrollDown(event: any) {
+    console.log("bestsellScrolldown");
+    this.viewdaydeal();
+    this.gethomeecat();
+  }
+  bestsellScrollUp(event: any) {
+    console.log("bestsellScrollUp up");
+  }
+  ExploreScrollDown(event: any) {
+    console.log("ExploreScrollDown");
+    this.viewfuturedpro();
+    this.viewflashdeal();
+  }
+  ExploreScrollUp(event: any) {
+    console.log("ExploreScrollUp up");
+  }
+
+  daydealScrollDown(event: any) {
+    console.log("daydealScrollDown");
+    this.viewhomeFScategory();
+  }
+  daydealScrollUp(event: any) {
+    console.log("daydealScrollUp up");
+  }
+  flashScrollDown(event: any) {
+    console.log("flashScrollDown");
+    this.viewbrands();
+    this.viewdata4();
+  }
+  flashScrollUp(event: any) {
+    console.log("flashScrollUp up");
+  }
+  top1ScrollDown(event: any) {
+    console.log("flashScrollDown");
+    this.viewhome34category();
+  }
+  top1ScrollUp(event: any) {
+    console.log("flashScrollUp up");
   }
   onSubmit() {
     this.btnloading = true;
@@ -400,16 +454,16 @@ export class HomeComponent implements OnInit {
       size: 'md',
     });
   }
-  openloginshopnow(){  
+  openloginshopnow() {
     if (this.userid == 0) {
       this.modalService.open(LoginComponent, {
         ariaLabelledBy: 'modal-basic-title',
         size: 'md',
       });
-     }
-    else{
+    }
+    else {
       this.router.navigate(['profile']);
-    }   
+    }
   }
   openSignup() {
     this.modalService.open(SignupComponent, {
@@ -485,28 +539,80 @@ export class HomeComponent implements OnInit {
   viewtopcategory() {
     this.request.gettopcat().subscribe((response: any) => {
       this.Topcat = response.data;
-      this.top1id = this.Topcat[10].id
-      this.top2id = this.Topcat[5].id
-      this.top1name = this.Topcat[10].name;
-      this.top2name = this.Topcat[5].name;
-      this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
-        this.topfirstcat = response.data
+      // this.top1id = this.Topcat[10].id
+      // this.top2id = this.Topcat[5].id
+      // this.top1name = this.Topcat[10].name;
+      // this.top2name = this.Topcat[5].name;
+      // this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
+      //   this.topfirstcat = response.data
 
-      });
-      this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
-        this.topsecondcat = response.data
-
-      });
+      // });
+      // this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
+      //   this.topsecondcat = response.data
+      // });
     },
       (error: any) => {
         console.log("error", error);
       });
+  }
+  gethomeecat() {
+    this.request.gethomecat().subscribe((response: any) => {
+      this.Homecat = response.data;
+      this.top1id = this.Homecat[0].id
+      this.top2id = this.Homecat[1].id
+      this.top3id = this.Homecat[2].id
+      this.top1name = this.Homecat[0].name;
+      this.top2name = this.Homecat[1].name;
+      this.top3name = this.Homecat[2].name;
+     
+    });
+  }
+  
+  viewhomeFScategory(){
+    console.log ("this.tophomecat[i]");
+    this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
+      this.topfirstcat = response.data
+      this.loader8= false;
+      setTimeout(() => {
+        this.imgloader3 = false;
+      }, 1000);
+
+    });
+    this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
+      this.topsecondcat = response.data
+      this.loader9= false;
+      setTimeout(() => {
+        this.imgloader4 = false;
+      }, 1000);
+
+    });
+   
+    // for (let i = 0; i <this.Homecat?.length; i++) {
+    //   console.log ("execution no." + i, this.Homecat[i]);
+    //   this.request.getcatprod(this.Homecat[i]?.id, 1).subscribe((response: any) => {
+    //     this.Homecat[i]?.homecatProducts.push(  response.data);
+    //     console.log ("this.tophomecat" +  this.Homecat);
+    //   });
+    // }
+  }
+  viewhome34category(){
+    this.request.getcatprod(this.top3id, 1).subscribe((response: any) => {
+      this.topthirdcat = response.data
+      this.loader10= false;
+      setTimeout(() => {
+        this.imgloader4 = false;
+      }, 1000);
+
+    });
   }
   gotocategory() {
     this.router.navigate(['category', this.top1id]);
   }
   gotocategory2() {
     this.router.navigate(['category', this.top2id]);
+  }
+  gotocategory3() {
+    this.router.navigate(['category', this.top3id]);
   }
   gotocategoryproduct(id: any) {
     this.router.navigate(['category', id]);
@@ -519,14 +625,14 @@ export class HomeComponent implements OnInit {
   }
   viewflashdeal() {
     this.request.getflashdeals().subscribe((response: any) => {
+      console.log("Flashdeal",response);    
       this.Flashdeal = response.data.slice(0, 4);
-      this.loader4 = false;  
+      this.loader4 = false;
     });
   }
 
-  FlashClick(id:any,i:any){
-    this.router.navigate(['flash', id]);
-
+  FlashClick(id: any, i: any) {
+    this.router.navigate(['flash',id]);
   }
   completed() {
     console.log('teste');
@@ -542,15 +648,15 @@ export class HomeComponent implements OnInit {
       this.proddetail(this.prd_id)
 
   }
-  bannerClick(id: any, i: any) {
+  bannerClick(id: any, i: any,category_id:any) {
     if (i == 0) {
       this.router.navigate(['flash']);
     }
     else if (i == 1) {
-      this.router.navigate(['category',97]);
+      this.router.navigate(['category', category_id]);
     }
     else if (i == 2) {
-      this.router.navigate(['category',99]);
+      this.router.navigate(['category', category_id]);
     }
     else {
       this.proddetail(id)
@@ -562,25 +668,25 @@ export class HomeComponent implements OnInit {
   }
 
   viewbestsellpro() {
+    console.log("viewbestsellpro triggered");
     this.request.getbestsellpro().subscribe((response: any) => {
-      // this. oldBestsellpro = response.data;
-      // this.parentbesrsell = response;
-      // this.parentbesrsellpro= this.parentbesrsell.data
-
+      console.log("viewbestsellpro",response);
       this.Bestsellpro = response.data;
-      this.loader3 = false;
+      this.loader6 = false;
       setTimeout(() => {
-        this.imgloader = false;
-      }, 3000);
+        this.imgloader2 = false;
+      }, 1000);
     });
   }
   viewfuturedpro() {
     this.request.getfuturedpro().subscribe((response: any) => {
+      console.log("getfuturedpro",response);
+      
       this.Futuredpro = response.data;
-      this.loader6 = false;
+      this.loader7 = false;
       setTimeout(() => {
         this.imgloader2 = false;
-      }, 3000);
+      }, 1000);
     });
   }
   viewdaydeal() {
@@ -588,15 +694,10 @@ export class HomeComponent implements OnInit {
       this.Daydealpro = response.data.slice(0, 5);
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 1000);
     });
   }
-  gethomeecat() {
-    this.request.gethomecat().subscribe((response: any) => {
-      this.Homecat = response.data;
-      this.loader2 = false;
-    });
-  }
+
   openquick(content: any) {
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
@@ -679,7 +780,7 @@ export class HomeComponent implements OnInit {
       console.log("res", res);
 
       this.Bestsellpro[i].stroked_price = res.stroked_price;
-      this.Bestsellpro[i].main_price = res.price_string;   
+      this.Bestsellpro[i].main_price = res.price_string;
       this.Bestsellpro[i].discount_amount = res.discount_amount;
       this.Bestsellpro[i].discount_percentage = res.discount_percentage;
       // this.Bestsellpro[i].stroked_price = res.stroked_price;
@@ -1051,7 +1152,7 @@ export class HomeComponent implements OnInit {
       this.request.addtocart(edata).subscribe((res: any) => {
 
         if (res.message == 'Product added to cart successfully') {
- 
+
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();

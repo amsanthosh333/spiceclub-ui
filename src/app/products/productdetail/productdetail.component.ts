@@ -453,7 +453,7 @@ export class ProductdetailComponent implements OnInit {
       }
       setTimeout(() => {
         this.imgloader2 = false;
-      }, 3000);
+      }, 2000);
     },
       (error: any) => {
         console.log("error",error.message);
@@ -1191,21 +1191,16 @@ else{
       }
       console.log(edata);
       this.request.addtocart(edata).subscribe((res: any) => {
-        console.log("res", res);
-        if (res.message == 'Product added to cart successfully') {
-          console.log("Product added to cart successfully");
+        console.log("resssssssssssssss", res);
+        if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
         }
-        else if (res.message == 'Minimum 1 item(s) should be ordered') {
-          this.toastr.success(res.message);
-
+        else  {
+          this.toastr.info(res.message);
         }
-        else if (res.message == 'Stock out') {
-          this.toastr.error(res.message);
-          console.log("Stock out");
-        }
+       
       },
         (error: any) => {
           this.toastr.error(error);

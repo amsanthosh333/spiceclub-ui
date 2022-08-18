@@ -236,14 +236,32 @@ paynow1(){
   this.request.retrypayment(edata1).subscribe((response: any) => {
     console.log("razorpay1 response", response);
     if (response.result == true) {
-
       this.toastr.success('',response.message);
-      this.paynow();
+      let edata1 = {
+        payment_type: "cart_payment",
+        combined_order_id: this.combined_orderid,
+        amount: this.grandtotal_value,
+        user_id: this.userid,
+      }
+      this.billdesk(edata1)
+      // this.paynow();
     }
     else{
       this.toastr.success('',response.message);
     }
   });
+}
+
+billdesk(edata1: any) {
+  console.log("billdest called");
+  this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,"repayment").subscribe(
+    (response: any) => {
+      
+      response.json()
+      console.log("billdesktype", response.json());
+      console.log("billresponse", response);
+    },
+  );
 }
 
 paynow(){

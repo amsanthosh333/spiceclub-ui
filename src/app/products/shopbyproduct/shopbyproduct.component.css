@@ -281,7 +281,7 @@ a:not([href]):not([class]):hover {
 }
 
 .single-product__content {
-  height: 118px;
+  height: 100px;
   text-align: start;
 }
 

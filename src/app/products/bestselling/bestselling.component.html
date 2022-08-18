@@ -22,7 +22,7 @@
                         <h2 class="single-sidebar-widget--title"
                                     style=" margin-bottom: 0px;">Today's deal</h2>
                         <div class="widget-product-wrapper" style="max-height: 950px; overflow-y: auto;"
-                            *ngIf="!prodloader">
+                            *ngIf="!prodloader1">
                             <div class="single-widget-product-wrapper">
                                 <div class="single-widget-product" *ngFor="let img of Product"
                                     style="padding-bottom: 17px;" (click)="proddetail(img.id)">
@@ -58,7 +58,7 @@
 
                             <!--=======  End of single widget product  =======-->
                         </div>
-                        <div class="widget-product-wrapper" *ngIf="prodloader">
+                        <div class="widget-product-wrapper" *ngIf="prodloader1">
                             <!--=======  single widget product  =======-->
                             <div class="single-widget-product-wrapper">
                                 <div class="single-widget-product" style="padding-bottom: 17px;">
@@ -244,10 +244,10 @@
                                     <a class="yousave" *ngIf="img.has_discount==true" >
                                         You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                                 </div>
-                                <div class="pri">
+                                <!-- <div class="pri">
                                     <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
                                      style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<3">{{b.name}}</span></span>
-                                </div>
+                                </div> -->
                             </div>
 
                             <!--=======  End of single product content  =======-->

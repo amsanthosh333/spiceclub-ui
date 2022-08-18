@@ -321,10 +321,10 @@
                                             <a class="yousave" *ngIf="img.has_discount==true" >
                                                 You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
 										</div>
-                                        <div class="pri">
+                                        <!-- <div class="pri">
                                             <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
                                              style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<3">{{b.name}}</span></span>
-                                        </div>
+                                        </div> -->
 									</div>
                                     <div class="row"
                                         *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
