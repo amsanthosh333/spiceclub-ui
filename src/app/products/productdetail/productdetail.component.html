@@ -266,10 +266,13 @@
                                                 </a>
                                             </div> -->                              
 
-                                            <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
+                                            <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px; margin-bottom: 0px;"
                                                 *ngIf="Peoduct?.discount_percentage!= 0">You save <span
                                                     style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
-                                                    ({{Peoduct?.discount_percentage}}%)</span>. Inclusive of all taxes (GST {{Peoduct?.gst_percentage}}%)</p>
+                                                    ({{Peoduct?.discount_percentage}}%)</span></p>
+                                                    <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
+                                                    *ngIf="Peoduct?.discount_percentage!= 0"> (Inclusive of all taxes - GST {{Peoduct?.gst_percentage}}%)
+                                                   </p>
                                         </div>
 
 
@@ -679,9 +682,18 @@
                                                                     <tr *ngFor="let a of choice">
                                                                         <th id="he" style="background-color: #f2f2f2;vertical-align: middle;
                                                                         text-align: center;">
-                                                                            {{a.title}}:</th>
+                                                                            {{a.title}}</th>
                                                                         <td style="padding-left: 30px;">
                                                                             <p *ngFor="let b of a.options">{{b}}</p>
+                                                                        </td>
+                                                                    </tr>
+
+                                                                    <tr  *ngIf="Peoduct.package !==null">
+                                                                        <th id="he" style="background-color: #f2f2f2;vertical-align: middle;
+                                                                        text-align: center;">
+                                                                            Package</th>
+                                                                        <td style="padding-left: 30px;">
+                                                                            <p>{{Peoduct.package}}</p>
                                                                         </td>
                                                                     </tr>
 

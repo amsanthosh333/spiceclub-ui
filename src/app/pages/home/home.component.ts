@@ -95,6 +95,8 @@ export class HomeComponent implements OnInit {
   loader8: boolean=true;
   loader9: boolean=true;
   loader10: boolean=true;
+  loader11: boolean=true;
+  loader12: boolean=true;
   checkedColumns = {};
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
@@ -170,6 +172,9 @@ export class HomeComponent implements OnInit {
   imgloader2: boolean = true;
   imgloader3: boolean=true;
   imgloader4: boolean=true;
+  imgloader5: boolean=true;
+  imgloader6: boolean=true;
+  imgloader7: boolean=true;
   stocckkk!: number;
   subItem: any = 0;
   storked_pricee: any;
@@ -208,6 +213,12 @@ export class HomeComponent implements OnInit {
   top3id: any;
   top3name: any;
   topthirdcat: any;
+  top4id: any;
+  top5id: any;
+  top4name: any;
+  top5name: any;
+  topfourthcat: any;
+  topfifthcat: any;
   
 
 
@@ -329,12 +340,20 @@ export class HomeComponent implements OnInit {
     console.log("flashScrollUp up");
   }
   top1ScrollDown(event: any) {
-    console.log("flashScrollDown");
+    console.log("top1ScrollDown");
     this.viewhome34category();
   }
   top1ScrollUp(event: any) {
-    console.log("flashScrollUp up");
+    console.log("top1ScrollUp up");
   }
+  top2ScrollUp(event: any) {
+    console.log("top2ScrollDown up");
+  }
+  top2ScrollDown(event: any) {
+    console.log("top2ScrollDown");
+    this.viewhome5category();
+  }
+  
   onSubmit() {
     this.btnloading = true;
     this.error2 = '';
@@ -471,12 +490,12 @@ export class HomeComponent implements OnInit {
       size: 'md',
     });
   }
-  gotocategory4() {
+  // gotocategory4() {
 
-    this.router.navigate(['category', 33], { queryParams: { subcategory: 34, category1: 35, subcategory1: 36 } });
+  //   this.router.navigate(['category', 33], { queryParams: { subcategory: 34, category1: 35, subcategory1: 36 } });
 
-    // category/33?subcategory=34&category1=35&subcategory1=36
-  }
+    
+  // }
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
@@ -561,9 +580,14 @@ export class HomeComponent implements OnInit {
       this.top1id = this.Homecat[0].id
       this.top2id = this.Homecat[1].id
       this.top3id = this.Homecat[2].id
+      this.top4id = this.Homecat[3].id
+      this.top5id = this.Homecat[4].id
+
       this.top1name = this.Homecat[0].name;
       this.top2name = this.Homecat[1].name;
       this.top3name = this.Homecat[2].name;
+      this.top4name = this.Homecat[3].name;
+      this.top5name = this.Homecat[4].name;
      
     });
   }
@@ -600,7 +624,27 @@ export class HomeComponent implements OnInit {
       this.topthirdcat = response.data
       this.loader10= false;
       setTimeout(() => {
-        this.imgloader4 = false;
+        this.imgloader5 = false;
+      }, 1000);
+    });
+
+    this.request.getcatprod(this.top4id, 1).subscribe((response: any) => {
+      this.topfourthcat = response.data
+      this.loader11= false;
+      setTimeout(() => {
+        this.imgloader6 = false;
+      }, 1000);
+
+    });
+  
+  }
+
+  viewhome5category(){
+    this.request.getcatprod(this.top5id, 1).subscribe((response: any) => {
+      this.topfifthcat = response.data
+      this.loader12= false;
+      setTimeout(() => {
+        this.imgloader7 = false;
       }, 1000);
 
     });
@@ -613,6 +657,12 @@ export class HomeComponent implements OnInit {
   }
   gotocategory3() {
     this.router.navigate(['category', this.top3id]);
+  }
+  gotocategory4() {
+    this.router.navigate(['category', this.top4id]);
+  }
+  gotocategory5() {
+    this.router.navigate(['category', this.top5id]);
   }
   gotocategoryproduct(id: any) {
     this.router.navigate(['category', id]);
