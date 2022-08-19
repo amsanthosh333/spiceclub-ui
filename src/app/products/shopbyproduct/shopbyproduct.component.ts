@@ -222,8 +222,12 @@ export class ShopbyproductComponent implements OnInit {
     }
     this.viewbrand();
     this.viewcat();
-    this.viewbestpro();
+   
     this.maximunprice();
+
+    setTimeout(() => {
+      this.viewbestpro();
+    }, 3000);
 
     this.register = this.fb.group({
       rating: [''],
@@ -359,7 +363,7 @@ export class ShopbyproductComponent implements OnInit {
       // console.log("brnd,category", this.brand_id, this.categoryy_id);
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
 
   }
@@ -403,7 +407,7 @@ export class ShopbyproductComponent implements OnInit {
       this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -433,7 +437,7 @@ export class ShopbyproductComponent implements OnInit {
       this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -456,7 +460,7 @@ export class ShopbyproductComponent implements OnInit {
       this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -479,7 +483,7 @@ export class ShopbyproductComponent implements OnInit {
       this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -547,7 +551,7 @@ export class ShopbyproductComponent implements OnInit {
       this.maxValue = this.maximumprize
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
     );
   }
@@ -598,7 +602,7 @@ export class ShopbyproductComponent implements OnInit {
      
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     })
   }
   }
@@ -620,7 +624,7 @@ export class ShopbyproductComponent implements OnInit {
      
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     })
   }
   }
@@ -716,7 +720,7 @@ export class ShopbyproductComponent implements OnInit {
       this.prodloadermain=true
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      },500);
     },
       (error: any) => {
         console.log(error);
@@ -876,7 +880,7 @@ export class ShopbyproductComponent implements OnInit {
       this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 2000);
+      }, 500);
     });
   }
   //  search in page
@@ -892,7 +896,7 @@ export class ShopbyproductComponent implements OnInit {
      
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
   }
 
@@ -910,7 +914,7 @@ export class ShopbyproductComponent implements OnInit {
      
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
   }
 
@@ -936,7 +940,7 @@ export class ShopbyproductComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
     // this.sortForm.setValue({
     //   category:this.categoryy_id ,
@@ -1287,7 +1291,7 @@ export class ShopbyproductComponent implements OnInit {
       
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     })
   }
 

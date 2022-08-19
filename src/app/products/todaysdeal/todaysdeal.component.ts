@@ -154,7 +154,7 @@ export class TodaysdealComponent implements OnInit {
       this.prodloader=false;  
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
   }
   viewmonthdeal(){
@@ -165,7 +165,7 @@ export class TodaysdealComponent implements OnInit {
       this.poploader=false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
       
     });
   }
@@ -179,7 +179,7 @@ export class TodaysdealComponent implements OnInit {
       this.prodloader = false;  
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);

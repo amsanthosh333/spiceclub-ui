@@ -1,7 +1,7 @@
 <div class="col-lg-12 mb-10 pb-0" class="listcard">
     <div>
         <ul id="subcatdiv" style="font-weight: 600;color: #3e3e3e;">
-            <li style="padding-right:20px" *ngFor="let s of Peoduct?.subcategories.slice(1,12)" (click)="gotosubcategory(s.id)">
+            <li style="padding-right:20px" *ngFor="let s of Peoduct?.subcategories.slice(0,10)" (click)="gotosubcategory(s.id)">
                 {{s.name}}</li>
         </ul>
 

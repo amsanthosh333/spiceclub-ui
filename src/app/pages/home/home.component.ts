@@ -703,10 +703,20 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['flash']);
     }
     else if (i == 1) {
-      this.router.navigate(['category', category_id]);
+      if(category_id!==null){
+        this.router.navigate(['category', category_id]);
+      }
+      else{
+        this.proddetail(id)
+      }  
     }
     else if (i == 2) {
-      this.router.navigate(['category', category_id]);
+      if(category_id!==null){
+        this.router.navigate(['category', category_id]);
+      }
+      else{
+        this.proddetail(id)
+      }
     }
     else {
       this.proddetail(id)

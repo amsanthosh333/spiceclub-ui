@@ -152,7 +152,7 @@ export class BestsellingComponent implements OnInit {
         this.prodloader=false;  
         setTimeout(() => {
           this.imgloader = true;
-        }, 1000);
+        }, 500);
       });
     }
     
@@ -240,7 +240,7 @@ export class BestsellingComponent implements OnInit {
     this.Bestsellpro=response.data; 
      setTimeout(() => {
       this.imgloader = true;
-    }, 1000);
+    }, 500);
  
   });
 
@@ -255,7 +255,7 @@ export class BestsellingComponent implements OnInit {
           this.prodloader1=false;
           setTimeout(() => {
             this.imgloader = true;
-          }, 1000);
+          }, 500);
       },
       (error: any) => {
         console.log("error",error);

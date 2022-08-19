@@ -150,7 +150,7 @@ export class FlashComponent implements OnInit {
       console.log("allbrandproduct",this.Allproducts);
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
   }
   getflashdealproducts(){
@@ -160,7 +160,7 @@ export class FlashComponent implements OnInit {
       console.log("Allproducts",this.Allproducts);
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
   }
   getpage(url:any){
@@ -180,7 +180,7 @@ export class FlashComponent implements OnInit {
       console.log("Allproducts",this.Allproducts);
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      },500);
     });
   }
  
@@ -311,7 +311,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   this.Allproducts=response.data; 
    setTimeout(() => {
     this.imgloader = true;
-  }, 1000);
+  },500);
 
 });
 

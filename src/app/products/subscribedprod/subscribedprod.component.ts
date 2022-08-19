@@ -154,7 +154,7 @@ export class SubscribedprodComponent implements OnInit {
         this.prodloader=false;  
         setTimeout(() => {
           this.imgloader = true;
-        }, 1000);
+        }, 500);
       });
     }
   
@@ -242,7 +242,7 @@ export class SubscribedprodComponent implements OnInit {
     this.Bestsellpro=response.data; 
      setTimeout(() => {
       this.imgloader = true;
-    }, 1000);
+    }, 500);
  
   });
 
@@ -257,7 +257,7 @@ export class SubscribedprodComponent implements OnInit {
           this.prodloader=false;
           setTimeout(() => {
             this.imgloader = true;
-          }, 2000);
+          }, 500);
       },
       (error: any) => {
         console.log("error",error);

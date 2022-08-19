@@ -532,6 +532,8 @@ export class LoginComponent implements OnInit {
     signInWithPopup(auth, provider)
       .then((result) => {
         const credential = FacebookAuthProvider.credentialFromResult(result);
+        console.log("facebook",result);
+        
         const token = credential?.accessToken;
         const user = result.user;
         this.s_username = user.displayName;

@@ -84,6 +84,9 @@ export class HeaderComponent implements OnInit {
     { id: 5, name: 'Angular 12' },
   ];
   searchList: any;
+  viewsubcat1var: any;
+  viewsubcat2var: any;
+  viewsubcat3var: any;
 
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
@@ -1770,23 +1773,32 @@ export class HeaderComponent implements OnInit {
       });
   }
   viewsubcat(id: any, i: any) {
-    this.cat_id = id
-    this.subItem = i
-    this.subItem1 = -1;
-    this.subItem2 = -1;
-    this.subItem3 = -1;
-    this.Subcat = this.Allcat[i].children;
-    this.Subcat2 = []
-    this.Subcat3 = []
-    this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-      this.Subcat = res.data;
-      console.log("this.Subcat", this.Subcat);
-    }, (error: any) => {
-      console.log("error", error);
-    });
+    console.log("viewsubcat");
+    this.viewsubcat1var =setTimeout(() => {   
+      this.cat_id = id
+      this.subItem = i
+      this.subItem1 = -1;
+      this.subItem2 = -1;
+      this.subItem3 = -1;
+      this.Subcat = this.Allcat[i].children;
+      this.Subcat2 = []
+      this.Subcat3 = []
+      this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+        this.Subcat = res.data;
+        console.log("this.Subcat", this.Subcat);
+      }, (error: any) => {
+        console.log("error", error);
+      });
+    }, 700); 
+  }
+  viewsubcatmoustout(){
+    console.log("viewsubcatmoustout");
+    
+    clearTimeout(this.viewsubcat1var);
   }
 
   viewsubcat2(id: any, i: any) {
+    this.viewsubcat2var =setTimeout(() => {
     this.subcat_id = id
     this.subItem1 = i;
     this.subItem2 = -1;
@@ -1797,10 +1809,16 @@ export class HeaderComponent implements OnInit {
       this.Subcat2 = res.data;
     }, (error: any) => {
       console.log("error", error);
-    });
+    }); 
+  },700);
+  }
+
+  viewsubcat2moustout(){
+    clearTimeout(this.viewsubcat2var);
   }
 
   viewsubcat3(id: any, i: any) {
+    this.viewsubcat3var =setTimeout(() => {
     this.catid1_id = id
     this.subItem2 = i;
     this.subItem3 = -1;
@@ -1810,6 +1828,11 @@ export class HeaderComponent implements OnInit {
     }, (error: any) => {
       console.log("error", error);
     });
+  },700);
+  }
+
+  viewsubcat3moustout(){
+    clearTimeout(this.viewsubcat3var);
   }
 
   viewsubcat4(id: any, i: any) {

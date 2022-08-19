@@ -194,7 +194,7 @@ export class CategoryComponent implements OnInit {
       if (this.id === undefined) {
         this.viewallcategory();
         this.viewtopcategory();
-        this.viewfeatured();
+        // this.viewfeatured();
         this.page2 = false;
       }
       else {
@@ -208,7 +208,7 @@ export class CategoryComponent implements OnInit {
           this.viewallcategory();
           this.categorydetail(this.id);
           this.viewtopcategory();
-          this.viewfeatured();
+          // this.viewfeatured();
           this.categorybrand(this.subcategory1id);
         }
         else if (this.catedory1id !== undefined) {
@@ -222,7 +222,7 @@ export class CategoryComponent implements OnInit {
           this.viewallcategory();
           this.categorydetail(this.id);
           this.viewtopcategory();
-          this.viewfeatured();
+          // this.viewfeatured();
           this.categorybrand(this.catedory1id);
         }
         else if (this.subcatedoryid !== undefined) {
@@ -236,7 +236,7 @@ export class CategoryComponent implements OnInit {
           this.viewallcategory();
           this.categorydetail(this.id);
           this.viewtopcategory();
-          this.viewfeatured();
+          // this.viewfeatured();
           this.categorybrand(this.subcatedoryid);
         }
 
@@ -248,7 +248,7 @@ export class CategoryComponent implements OnInit {
           this.SubofSubcat = []
           this.SubofSubcat1 = []
           this.viewtopcategory();
-          this.viewfeatured();
+          // this.viewfeatured();
           this.categorybrand(this.id);
           this.page2 = true;
           this.selectedItem = this.id;
@@ -257,6 +257,7 @@ export class CategoryComponent implements OnInit {
         }
         
       }
+
     }),
 
     this.activatedRoute.params.subscribe((data2: Params) => {
@@ -268,8 +269,7 @@ export class CategoryComponent implements OnInit {
           this.getsubcategory(this.id);
           this.SubofSubcat = []
           this.SubofSubcat1 = []
-          this.viewtopcategory();
-          this.viewfeatured();
+          this.viewtopcategory(); 
           this.categorybrand(this.id);
           this.page2 = true;
           this.selectedItem = this.id;
@@ -284,6 +284,7 @@ export class CategoryComponent implements OnInit {
       key: [''],
     });
 
+    this.viewfeatured();
   }
 
   toggle(img: any, index: any): void {
@@ -386,7 +387,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -413,7 +414,7 @@ export class CategoryComponent implements OnInit {
         this.prodloader = false;
         setTimeout(() => {
           this.imgloader = true;
-        }, 1000);
+        }, 500);
       })
     }
   }
@@ -474,7 +475,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      },500);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -503,7 +504,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -534,7 +535,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -559,7 +560,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -597,7 +598,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      },500);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -632,7 +633,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
 
     });
   }
@@ -701,7 +702,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -721,7 +722,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -998,7 +999,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
 
     });
   }
@@ -1039,7 +1040,7 @@ export class CategoryComponent implements OnInit {
 
         setTimeout(() => {
           this.imgloader = true;
-        }, 1000);
+        },500);
       })
     }
   }
@@ -1065,7 +1066,7 @@ export class CategoryComponent implements OnInit {
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -1089,7 +1090,7 @@ export class CategoryComponent implements OnInit {
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -1113,7 +1114,7 @@ export class CategoryComponent implements OnInit {
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      },500);
     },
       (error: any) => {
         console.log("error", error);
@@ -1136,7 +1137,7 @@ export class CategoryComponent implements OnInit {
       this.brandd_id='';
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
@@ -1190,7 +1191,7 @@ export class CategoryComponent implements OnInit {
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
   }
   under200(){

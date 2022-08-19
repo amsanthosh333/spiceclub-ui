@@ -453,7 +453,7 @@ export class ProductdetailComponent implements OnInit {
       }
       setTimeout(() => {
         this.imgloader2 = false;
-      }, 2000);
+      }, 1000);
     },
       (error: any) => {
         console.log("error",error.message);

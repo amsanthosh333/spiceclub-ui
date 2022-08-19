@@ -202,7 +202,7 @@ export class BrandsComponent implements OnInit {
       this.prodloadermain = true
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     });
   }
   viewdata2(id: any, i: any) {
@@ -243,7 +243,7 @@ export class BrandsComponent implements OnInit {
 
         setTimeout(() => {
           this.imgloader = true;
-        }, 1000);
+        }, 500);
       })
     }
   }
@@ -309,7 +309,7 @@ export class BrandsComponent implements OnInit {
 
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      }, 500);
     }, (error: any) => {
       console.log("error", error);
     }
@@ -602,7 +602,7 @@ export class BrandsComponent implements OnInit {
 
         setTimeout(() => {
           this.imgloader = true;
-        }, 1000);
+        }, 500);
       })
     }
   }
