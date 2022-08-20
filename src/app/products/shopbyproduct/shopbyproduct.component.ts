@@ -1193,7 +1193,7 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   prodaddtocart(img: any) {
-    console.log("img", img);
+
     if (this.userid == 0) {
       this. openlogin()
     }

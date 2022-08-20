@@ -93,7 +93,21 @@ p{
         color: #333;
     }
 }
+/* mob */
 @media (max-width : 995px) {
+  #socialmedia{
+    width: 31%;
+  }
+  #about{
+    width: 18%;
+  }
+  #forcustomer{
+    width: 25%;
+  }
+  #logocol{
+    display: none;
+
+  }
    .social-icon {
 		padding-right: 0px;
     margin-right: 3px;
@@ -118,6 +132,7 @@ p{
 
 
 }
+/* web */
 @media (min-width : 995px) {
   .social-icon {
 		padding-right: 10px;   

@@ -892,7 +892,6 @@ export class HomeComponent implements OnInit {
       this.openlogin()
     }
     else {
-
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         this.varient_value = ''
       }
@@ -902,8 +901,6 @@ export class HomeComponent implements OnInit {
       else {
         this.varient_value = this.selectedvar;
       }
-
-
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
       if (index > -1) {
         this.totalqty = this.quantityarray[index].value;
@@ -911,7 +908,6 @@ export class HomeComponent implements OnInit {
       else {
         this.totalqty = 1
       }
-
       let edata = {
         id: img.id,
         variant: this.varient_value?.replace(/\s/g, ""),
@@ -920,18 +916,14 @@ export class HomeComponent implements OnInit {
         buyertype: this.buyertypeid,
       }
       this.request.addtocart(edata).subscribe((res: any) => {
-        if (res.message == 'Product added to cart successfully') {
+        console.log("addtocart response",res);       
+         if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
         }
-        else if (res.message == 'Minimum 1 item(s) should be ordered') {
-          this.toastr.success(res.message);
-
-        }
-        else if (res.message == 'Stock out') {
-          this.toastr.error(res.message);
-          console.log("Stock out");
+        else  {
+          this.toastr.info(res.message);
         }
       },
         (error: any) => {
