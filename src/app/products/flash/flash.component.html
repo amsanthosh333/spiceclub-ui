@@ -4,7 +4,7 @@
             <div class="col-lg-12">
                 <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
                     <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
-                    <li class="breadcrumb-list__item breadcrumb-list__item--active">Flash deal products</li>
+                    <li class="breadcrumb-list__item breadcrumb-list__item--active">{{subtitle}}</li>
                 </ul>
 
                 <!--=======  End of breadcrumb list  =======-->
@@ -19,13 +19,13 @@
     =============================================-->
 
 <div class="shop-page-wrapper">
-    <div class="shop-page-content  mb-15">
+    <div class="shop-page-content ml-10 mr-10">
         <div class="container">
             <div class="row">
 
                 <div class="col-lg-12 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-10" infinite-scroll
                     [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
-                    <div class="row product-isotope shop-product-wrap four-column" *ngIf="!prodloader">
+                    <div class="row product-isotope shop-product-wrap four-column" style="" *ngIf="!prodloader">
                         <!--=======  single product   =======-->
                         <div id="productdiv" class="col-12 col-lg-2 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
                             *ngFor="let img of Allproducts;let i=index">
@@ -154,7 +154,7 @@
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
                                                 style="margin-left:-5px;">
                                                 <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                    (click)="bestsellingselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                                    (click)="bestsellingselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                             </div>
                                         </div>
                                     </div>

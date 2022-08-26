@@ -50,7 +50,7 @@ export class ProductdetailComponent implements OnInit {
   stocck: any;
   id: any;
   dec: any;
-  totalprice!:number;
+  totalprice!: number;
   varprise: any;
   quantityyy!: number;
   cat_id: any;
@@ -83,11 +83,11 @@ export class ProductdetailComponent implements OnInit {
   iswishlistt: any;
   likedd = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   likeddd = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
- iindex: any;
+  iindex: any;
   img: any;
   likesss = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
   likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
- 
+
   showFlag: boolean = false;
   selectedImageIndex: number = -1;
   currentIndex: any;
@@ -110,38 +110,44 @@ export class ProductdetailComponent implements OnInit {
   error3: any;
   stocckkk: any;
   subItem: any = 0;
+  subItempackage: any = 0;
   varprise0: any;
   varienttt: any;
   selectedimg: any = 0;
   selectedimage: any;
-  prdcomment: boolean=true;
-  btnItemm: boolean=false;
-  desbtnItemm: boolean=false;
+  prdcomment: boolean = true;
+  btnItemm: boolean = false;
+  desbtnItemm: boolean = false;
   varphotoos: Array<object> = [];
   newvarphotos: any;
   vargalleryphotos: any = [];
   varstrokedprice: any;
-  ingItemm: boolean=true;
+  ingItemm: boolean = true;
   issubscribed: any;
   product_idd: any;
   totalqty: any;
   public quantityarray: any[] = [];
   selectedvar: any;
   showaddbtn: any;
-  imgloader2: boolean=true;
-  addinfobtnItemm: boolean=false;
+  imgloader2: boolean = true;
+  addinfobtnItemm: boolean = false;
   pervarient: any;
   subcat_id1: any;
   subcat_id2: any;
-  imgItem: any=0;
+  imgItem: any = 0;
   offers: any;
-  videoURL!:SafeResourceUrl;
+  videoURL!: SafeResourceUrl;
   @ViewChild('videoPlayer') videoplayer!: ElementRef;
-  newarray:any = [];
-  showbulkoffer: boolean=true;
+  newarray: any = [];
+  showbulkoffer: boolean = true;
+  currentvarient: any;
+  currentpackage: any = null;
+  havepackage: boolean = false;
+  currentpackagevalue: any;
+  edata: any;
 
-  
- 
+
+
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private modalService: NgbModal, config: NgbRatingConfig, private _location: PlatformLocation, private scroller: ViewportScroller,
@@ -161,7 +167,7 @@ export class ProductdetailComponent implements OnInit {
     if (this.userid == undefined) {
       this.userid = 0;
     }
-   
+
   }
 
 
@@ -186,7 +192,7 @@ export class ProductdetailComponent implements OnInit {
 
   toggleVideo() {
     this.videoplayer.nativeElement.play();
-}
+  }
   numberOnly(event: any): boolean {
     const charCode = (event.which) ? event.which : event.keyCode;
     if (charCode > 31 && (charCode < 48 || charCode > 57)) {
@@ -199,28 +205,7 @@ export class ProductdetailComponent implements OnInit {
     return (event.charCode == 8 || event.charCode == 0) ? null : event.charCode >= 48 && event.charCode <= 57;
   }
 
-  getValue(val: any) {
-    console.log("getValue");
-    
-    if (val <= 0) {
-      val = 1
-    }
-    else if (val > this.stocckkk) {
-      val = this.stocckkk;
-      this.stocck=1
-    }
-    this.quantityyy = val
-    this.stocck = this.stocckkk - val
-    let dataa = {
-      a: this.buyertypeid,
-      b: this.product_id,
-      c: this.varient_value.replace(/\s/g, ""),
-      d: this.quantityyy
-    }
-    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      this.totalprice = res.price.toFixed(2);
-    })
-  }
+
 
   filterDatatable(qty: any) {
     this.error3 = ''
@@ -252,7 +237,7 @@ export class ProductdetailComponent implements OnInit {
   }
   blogClick(event: any) {
     console.log(event);
-    this.imgItem=event
+    this.imgItem = event
     this.selectedimg = event;
     this.selectedimage = this.allgalleryphotos[event].image;
 
@@ -270,17 +255,17 @@ export class ProductdetailComponent implements OnInit {
   toggledelete(img: any, index: any): void {
     if (this.userid !== 0) {
       this.likedd[index] = !this.likedd[index];
-    if (this.likedd[index] == true) {
-      this.addtowishlist(img.id);
-    }
-    else if (this.likedd[index] == false) {
-      this.deleteRecord(img.id);
-    }
+      if (this.likedd[index] == true) {
+        this.addtowishlist(img.id);
+      }
+      else if (this.likedd[index] == false) {
+        this.deleteRecord(img.id);
+      }
     }
     else {
-      this. openlogin()
+      this.openlogin()
     }
-    
+
   }
   openlogin() {
     this.modalService.open(LoginComponent, {
@@ -294,7 +279,7 @@ export class ProductdetailComponent implements OnInit {
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       let edata4 = {
@@ -316,17 +301,17 @@ export class ProductdetailComponent implements OnInit {
       });
     }
   }
-  addtowishlistmain(prd_id: any,content:any) {
-    
+  addtowishlistmain(prd_id: any, content: any) {
+
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       // this.iswishlistt?.is_in_wishlist==true
       let edata4 = {
         user_id: this.userid,
         product_id: prd_id
-      }    
+      }
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         if (res.message == 'Product is successfully added to your wishlist') {
           this.iswishlist(prd_id)
@@ -346,15 +331,15 @@ export class ProductdetailComponent implements OnInit {
       });
     }
   }
-  gotowishlist(){
+  gotowishlist() {
     this.modalService.dismissAll()
     this.router.navigate(['/wishlist']);
   }
-  closemodal(){
+  closemodal() {
     this.modalService.dismissAll()
   }
   deleteRecordmain(id: any) {
-    this.iswishlistt?.is_in_wishlist==false
+    this.iswishlistt?.is_in_wishlist == false
     this.request.deletewishproud2(id).subscribe((response: any) => {
       if (response.message == "Product is removed from wishlist") {
         this.iswishlist(id)
@@ -371,7 +356,7 @@ export class ProductdetailComponent implements OnInit {
   deleteRecord(id: any) {
     this.request.deletewishproud2(id).subscribe((response: any) => {
       if (response.message == "Product is removed from wishlist") {
-      
+
         this.deleteRecordSuccess();
         this.sharedService.sendWishlistEvent();
       }
@@ -395,44 +380,49 @@ export class ProductdetailComponent implements OnInit {
 
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       console.log("proddetail", response);
-      this.allgalleryphotos=[];
+      this.allgalleryphotos = [];
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
-      this.stocck = (this.Peoduct.current_stock); 
-      this.stocckkk = (this.Peoduct.current_stock); 
+      this.stocck = (this.Peoduct.current_stock);
+      this.stocckkk = (this.Peoduct.current_stock);
       this.stk = this.Peoduct.current_stock;
-      this.photoos = this.Peoduct.photos;  
+      this.photoos = this.Peoduct.photos;
       this.colors = this.Peoduct.colors;
       this.tags = this.Peoduct.tags;
       this.varprise0 = this.choice
       this.varienttt = this.varprise0[0]?.options[0]
+      this.currentvarient = this.varienttt
+      // this.currentpackage = varpackage
       this.pervarient = this.varienttt;
       this.currentRatess = this.Peoduct.rating;
       this.photoloader = false;
       this.contentloader = false;
       this.discriptloader = false;
       this.productname = this.Peoduct.name;
-      this.cat_id= this.Peoduct.breadcrumbs[0].id;
-      this.subcat_id1=this.Peoduct.breadcrumbs[1]?.id;
-      this.subcat_id2=this.Peoduct.breadcrumbs[2]?.id
+      this.cat_id = this.Peoduct.breadcrumbs[0].id;
+      this.subcat_id1 = this.Peoduct.breadcrumbs[1]?.id;
+      this.subcat_id2 = this.Peoduct.breadcrumbs[2]?.id
       this.quantityyy = 1;
       this.videoURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.Peoduct.video_link)
-
-      // this.totalprice = this.Peoduct.main_price;
       this.totalprice = this.Peoduct.calculable_price
-   
-      this.offers=this.Peoduct.offers.length;
-      console.log("this.offers",this.videoURL);
-       
+      this.offers = this.Peoduct.offers.length;
+
+      if (this.Peoduct.choice_options.length > 1) {
+        this.currentpackage = this.varprise0[1]?.options[0]
+
+        console.log("this.currentpackage", this.currentpackage);
+      }
 
       // array push photo
 
-      this.newphotos = this.photoos.forEach((item: any) => {     
-       item.path.forEach((items: any) => {
+      this.newphotos = this.photoos.forEach((item: any) => {
+        item.path.forEach((items: any) => {
           console.log("items", items);
-          this.allgalleryphotos.push({ image:'https://neophroncrm.com/spiceclubnew/public/' + items , 
-          thumbImage:'https://neophroncrm.com/spiceclubnew/public/' + items , variant:item.variant})      
-        })  
+          this.allgalleryphotos.push({
+            image: 'https://neophroncrm.com/spiceclubnew/public/' + items,
+            thumbImage: 'https://neophroncrm.com/spiceclubnew/public/' + items, variant: item.variant
+          })
+        })
       })
 
       console.log("this.this.allgalleryphotos", this.allgalleryphotos);
@@ -440,11 +430,11 @@ export class ProductdetailComponent implements OnInit {
       console.log("this.selectedimage", this.selectedimage);
 
       this.getcommentsss()
-      console.log( " this.Peoduct.main_price", this.Peoduct.main_price);
+      console.log(" this.Peoduct.main_price", this.Peoduct.main_price);
       if (this.Peoduct.choice_options.length == 0) {
         this.varient_value = ''
         this.varprise = this.Peoduct.main_price;
-        this.varstrokedprice= this.Peoduct.stroked_price;
+        this.varstrokedprice = this.Peoduct.stroked_price;
       }
       else {
         console.log("elllllllse");
@@ -456,7 +446,7 @@ export class ProductdetailComponent implements OnInit {
       }, 1000);
     },
       (error: any) => {
-        console.log("error",error.message);
+        console.log("error", error.message);
       });
     this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
       console.log("getrelatedprod", response);
@@ -484,18 +474,18 @@ export class ProductdetailComponent implements OnInit {
   }
   viewbulkdiscount(id: any) {
     this.request.getbulckdisc(this.buyertypeid, id).subscribe((response: any) => {
-      console.log("getbulckdiscresponse",response);
-      
+      console.log("getbulckdiscresponse", response);
+
       this.Bulckdis = response.data;
-      console.log("this.Bulckdis",this.Bulckdis);
- if(this.Bulckdis[0]?.discount_percentage == 0){
- 
-   this.showbulkoffer=true
- }
- else{
-  this.showbulkoffer=false
- }
-      
+      console.log("this.Bulckdis", this.Bulckdis);
+      if (this.Bulckdis[0]?.discount_percentage == 0) {
+
+        this.showbulkoffer = true
+      }
+      else {
+        this.showbulkoffer = false
+      }
+
       // console.log(" this.Bulckdis", this.Bulckdis);
 
     },
@@ -506,8 +496,8 @@ export class ProductdetailComponent implements OnInit {
   viewdiscount(id: any) {
     this.request.getdisc(this.buyertypeid, id).subscribe((response: any) => {
       this.discount = response.data;
-      console.log("this.discount",this.discount);
-      
+      console.log("this.discount", this.discount);
+
     },
       (error: any) => {
         console.log(error);
@@ -517,57 +507,11 @@ export class ProductdetailComponent implements OnInit {
     this.quantityy = data.target.value;
     return this.quantityy = this.quantityy;
   }
-  addtocart(_id: any) {
-    if (this.userid == 0) {
-      this. openlogin()
-    }
-    else {
-      if (this.quantityyy == 0) {
-        let edata = {
-          id: _id,
-          variant: this?.varient_value.replace(/\s/g, ""),
-          user_id: this.userid,
-          quantity: 1,
-          buyertype: this.buyertypeid,
-        }
-        this.toastr.info('minimun 1 product should be selected', '');
-      }
-      else {
-        this.quantityy = this.quantityyy
-        let edata = {
-          id: _id,
-          variant: this?.varient_value.replace(/\s/g, ""),
-          user_id: this.userid,
-          quantity: this.quantityy,
-          buyertype: this.buyertypeid,
-        }
-        this.addtoocartt(edata);
-      }
-    }
-  }
-  addtoocartt(edata: any) {
-    this.request.addtocart(edata).subscribe((res: any) => {
-      if (res.message == 'Product added to cart successfully') {
-        this.addRecordSuccess();
-        this.sharedService.sendClickEvent();
-      }
-      else if (res.message == 'Minimum 1 item(s) should be ordered') {
-        this.toastr.info(res.message);
-      }
-      else if (res.message == 'Stock out') {
-        this.toastr.error(res.message);
-      }
-      else {
-        console.log("error", res);
-      }
-    }, (error: any) => {
-      console.log("error", error);
 
-    });
-  }
-  addtocartmain(_id: any,content:any) {
+  // addtocart main
+  addtocartmain(_id: any, content: any) {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       if (this.quantityyy == 0) {
@@ -589,12 +533,18 @@ export class ProductdetailComponent implements OnInit {
           quantity: this.quantityy,
           buyertype: this.buyertypeid,
         }
-        this.addtoocarttmain(edata,content);
+        this.addtoocarttmain(edata, content);
       }
     }
   }
-  addtoocarttmain(edata: any,content:any) {
+  addtoocarttmain(edata: any, content: any) {
+    if (this.Peoduct.choice_options.length > 1) {
+      edata.variant = edata.variant + "-" + this.currentpackage.replace(/\s/g, "")
+    }
+
+    console.log("edata addtoocarttmain", edata);
     this.request.addtocart(edata).subscribe((res: any) => {
+      console.log("addtoocarttmain res", res);
       if (res.result == true) {
         this.modalService.open(content, {
           ariaLabelledBy: 'modal-basic-title',
@@ -613,14 +563,17 @@ export class ProductdetailComponent implements OnInit {
 
     });
   }
-  gotoCartlist(){
+  // addtocart main end
+
+  gotoCartlist() {
     this.modalService.dismissAll()
     this.router.navigate(['/cart']);
   }
 
+  // for buynow
   addtocartbuy(_id: any) {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       if (this.quantityyy == 0) {
@@ -630,7 +583,7 @@ export class ProductdetailComponent implements OnInit {
           user_id: this.userid,
           quantity: 1,
           buyertype: this.buyertypeid,
-          is_buynow:1
+          is_buynow: 1
         }
         this.toastr.info('minimun 1 product should be selected', '');
       }
@@ -642,23 +595,27 @@ export class ProductdetailComponent implements OnInit {
           user_id: this.userid,
           quantity: this.quantityy,
           buyertype: this.buyertypeid,
-          is_buynow:1
+          is_buynow: 1
         }
         this.addtoocartt2(edata);
       }
     }
   }
   addtoocartt2(edata: any) {
+    if (this.Peoduct.choice_options.length > 1) {
+      edata.variant = edata.variant + "-" + this.currentpackage.replace(/\s/g, "")
+    }
+    console.log("edata", edata);
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log("buyres",res);
-      
+      console.log("buyres", res);
+
       if (res.result == true) {
         this.addRecordSuccess();
         this.sharedService.sendClickEvent();
-        if( res.is_buynow!==0){
-          const buynowId =res.is_buynow
-          this.router.navigate(['/checkout',buynowId]);
-        }     
+        if (res.is_buynow !== 0) {
+          const buynowId = res.is_buynow
+          this.router.navigate(['/checkout', buynowId]);
+        }
       }
       else if (res.message == 'Minimum 1 item(s) should be ordered') {
         this.toastr.info(res.message);
@@ -674,9 +631,12 @@ export class ProductdetailComponent implements OnInit {
 
     });
   }
+  // buynow add cart end
 
+
+  // main quantity selection
   increaseqty() {
-    console.log("dataa",this.varient_value);
+    console.log("dataa", this.varient_value);
     this.quantityyy++;
     this.stocck--;
 
@@ -686,83 +646,113 @@ export class ProductdetailComponent implements OnInit {
       c: this.varient_value.replace(/\s/g, ""),
       d: this.quantityyy
     }
-    console.log("dataa",dataa);
-    
-
-    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+    console.log("dataa", dataa);
+    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage.replace(/\s/g, "")).subscribe((res: any) => {
       console.log(res);
-if(res.result==true){
-  this.totalprice = res.price.toFixed(2);
-  // this.totalprice = this.dec.toFixed(2) 
-}
-else{
-  this.toastr.info('',res.message);
-}
-    
+      if (res.result == true) {
+        this.totalprice = res.price.toFixed(2);
+        // this.totalprice = this.dec.toFixed(2) 
+      }
+      else {
+        this.toastr.info('', res.message);
+      }
+
     })
   }
   decreaseqty() {
     this.quantityyy--;
     this.stocck++;
-    // this.dec = this.varprise.replace(/[^0-9\.]+/g, "") * this.quantityyy;
-    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage.replace(/\s/g, "")).subscribe((res: any) => {
       console.log(res);
-      if(res.result==true){
+      if (res.result == true) {
         this.totalprice = res.price.toFixed(2);
         // this.totalprice = this.dec.toFixed(2) 
       }
-      else{
-        this.toastr.info('',res.message);
+      else {
+        this.toastr.info('', res.message);
       }
-         
+
 
     })
   }
+  getValue(val: any) {
+    console.log("getValue");
 
+    if (val <= 0) {
+      val = 1
+    }
+    else if (val > this.stocckkk) {
+      val = this.stocckkk;
+      this.stocck = 1
+    }
+    this.quantityyy = val
+    this.stocck = this.stocckkk - val
+    let dataa = {
+      a: this.buyertypeid,
+      b: this.product_id,
+      c: this.varient_value.replace(/\s/g, ""),
+      d: this.quantityyy
+    }
+    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage.replace(/\s/g, "")).subscribe((res: any) => {
+      this.totalprice = res.price.toFixed(2);
+    })
+  }
   selectvar(weight: any, i: any) {
     this.varient_value = weight.replace(/\s/g, "")
+    this.currentvarient = weight
     this.subItem = i
-    const index = this.allgalleryphotos.findIndex((object:any) => {
+    const index = this.allgalleryphotos.findIndex((object: any) => {
       console.log("object", object);
       console.log("object", this.varient_value);
       return object.variant == this.varient_value;
     });
     this.selectedimage = this.allgalleryphotos[index]?.image;
     this.selectedimg = index;
-    this.imgItem=index
-    this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
-      console.log("selectvar",res);
-      this.Peoduct.main_price= res?.price_string;
-      this.Peoduct.stroked_price= res?.stroked_price;
-      this.Peoduct.excl_gst= res?.excl_gst;
-      this.Peoduct.discount_amount=res?.discount_amount; 
-      this.Peoduct.discount_percentage=res?.discount_percentage;
-      this.Peoduct.current_stock=res?.stock;
-      this.pervarient =  res?.variant;
+    this.imgItem = index
+    this.request.addvarientfromdetail(this.product_id, weight, this.currentpackage).subscribe((res: any) => {
+      console.log("selectvar", res);
+      this.Peoduct.main_price = res?.price_string;
+      this.Peoduct.stroked_price = res?.stroked_price;
+      this.Peoduct.excl_gst = res?.excl_gst;
+      this.Peoduct.discount_amount = res?.discount_amount;
+      this.Peoduct.discount_percentage = res?.discount_percentage;
+      this.Peoduct.current_stock = res?.stock;
+      this.pervarient = res?.variant;
       this.varprise = res?.price_string;
-      this.varstrokedprice=res?.stroked_price;
-      // this.totalprice=(res?.price_string).replace('Rs','');
+      this.varstrokedprice = res?.stroked_price;
       this.stocck = res?.stock;
       this.stocckkk = res?.stock;
       this.stk = res?.stock;
-      console.log("this.stk",this.stk);
+      console.log("this.stk", this.stk);
       this.quantityyy = 1;
       this.totalprice = res?.price;
-      this.varphotoos=res.image    
-            // array push photo
-            // this.newvarphotos=[];
-            // this.newvarphotos = this.varphotoos.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item)
-            // console.log("this.newvarphotos", this.newvarphotos);
-            // this.vargalleryphotos=[]
-            // this.newvarphotos.forEach((item: any) => {
-            //   this.vargalleryphotos.push({ thumbImage: item, image: item });
-            // })
-            // // pushing main images in varient images
-            // this.galleryphotos.forEach((item: any) => {
-            //   this.vargalleryphotos.push({ thumbImage: item.image, image: item.image });
-            // })
-            // this.allgalleryphotos=this.vargalleryphotos;
-            // this.selectedimage = this.vargalleryphotos[0].image;
+      this.varphotoos = res.image
+    }, (error: any) => {
+      console.log("error", error);
+
+    });
+  }
+  selectvarpackage(varpackage: any, i: any) {
+    this.currentpackage = varpackage
+    this.subItempackage = i
+    this.request.addvarientfromdetail(this.product_id, this.currentvarient, varpackage,).subscribe((res: any) => {
+      console.log("selectvar", res);
+      this.Peoduct.main_price = res?.price_string;
+      this.Peoduct.stroked_price = res?.stroked_price;
+      this.Peoduct.excl_gst = res?.excl_gst;
+      this.Peoduct.discount_amount = res?.discount_amount;
+      this.Peoduct.discount_percentage = res?.discount_percentage;
+      this.Peoduct.current_stock = res?.stock;
+      this.pervarient = res?.variant;
+      this.varprise = res?.price_string;
+      this.varstrokedprice = res?.stroked_price;
+      this.stocck = res?.stock;
+      this.stocckkk = res?.stock;
+      this.stk = res?.stock;
+      console.log("this.stk", this.stk);
+      this.quantityyy = 1;
+      this.totalprice = res?.price;
+      this.varphotoos = res.image
     }, (error: any) => {
       console.log("error", error);
 
@@ -770,16 +760,16 @@ else{
   }
   checkvarientprice() {
     console.log("varienttt", this.varienttt);
-    this.request.addvarient(this.product_id, this.varienttt).subscribe((res: any) => {
+    this.request.addvarientfromdetail(this.product_id, this.varienttt, this.currentpackage).subscribe((res: any) => {
       console.log(res);
       this.varprise = res?.price_string;
-      this.varstrokedprice= res?.stroked_price;
+      this.varstrokedprice = res?.stroked_price;
       console.log("varprise", this.varprise);
     }, (error: any) => {
       console.log("error", error);
     });
   }
-
+  // main quantity selection end
   addreview(content: any, _id: any) {
     this.product_iddd = _id;
     this.modalService.open(content, {
@@ -806,18 +796,18 @@ else{
       console.log("error", error);
     });
   }
-  addtosubscribe(id:any){
+  addtosubscribe(id: any) {
     console.log("addtosubscribe");
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
-    else { 
-      this.request.addtosubscribe(this.userid,id).subscribe((res: any) => {
-        console.log("res",res);
-        if (res.message == 'Product added to subscribe') {         
+    else {
+      this.request.addtosubscribe(this.userid, id).subscribe((res: any) => {
+        console.log("res", res);
+        if (res.message == 'Product added to subscribe') {
           this.toastr.success('Subscribed Successfully', '');
           // this.sharedService.sendClickEvent();
-          this.issubscribed=res.is_in_subscribe
+          this.issubscribed = res.is_in_subscribe
         }
         else {
           this.toastr.error(res.message);
@@ -828,17 +818,17 @@ else{
       });
     }
   }
-  removefromsubscribe(id:any){
-    console.log("addtosubscribe",id);
+  removefromsubscribe(id: any) {
+    console.log("addtosubscribe", id);
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
-    else { 
-      this.request.removefromsubscribe(this.userid,id).subscribe((res: any) => {
-        console.log("res",res);
-        if (res.message == 'Product is removed from subscribe') {         
-          this.toastr.error('Removed Successfully','');
-          this.issubscribed=res.is_in_subscribe
+    else {
+      this.request.removefromsubscribe(this.userid, id).subscribe((res: any) => {
+        console.log("res", res);
+        if (res.message == 'Product is removed from subscribe') {
+          this.toastr.error('Removed Successfully', '');
+          this.issubscribed = res.is_in_subscribe
           // this.sharedService.sendClickEvent();
         }
         else {
@@ -856,7 +846,7 @@ else{
     this.request.getproductcomments(this.id).subscribe((response: any) => {
       this.Comments = response.data;
       this.commtotal = this.Comments.length
-      this.prdcomment=false
+      this.prdcomment = false
     },
       (error: any) => {
         console.log("error", error);
@@ -864,7 +854,7 @@ else{
   }
   addcomment(form: FormGroup) {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       this.error1 = '';
@@ -918,8 +908,8 @@ else{
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       this.Peoduct = response.data[0];
-      console.log("Peoduct",this.Peoduct);
-      
+      console.log("Peoduct", this.Peoduct);
+
       this.prod_price = this.Peoduct.main_price;
       this.choice = this.Peoduct.choice_options;
       this.stk = this.Peoduct.current_stock;
@@ -932,14 +922,14 @@ else{
       }
       else {
         this.stocck = (this.Peoduct.current_stock) - 1;
-      }             
+      }
       if (this.Peoduct.choice_options.length == 0) {
         this.varient_value = ''
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
-        console.log("varient_value",this.varient_value);
-        
+        console.log("varient_value", this.varient_value);
+
       }
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -982,9 +972,11 @@ else{
 
     });
   }
+
+  // for quickview
   addtocart2() {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       let edata = {
@@ -1015,6 +1007,7 @@ else{
         });
     }
   }
+  // for quickview end
   addconv(content: any, _id: any) {
     this.product_id = _id;
     this.modalService.open(content, {
@@ -1060,7 +1053,7 @@ else{
 
   iswishlist(prodid: any) {
     this.request.checkwishlist(prodid, this.userid).subscribe((response: any) => {
-      console.log("this.iswishlistt",this.iswishlistt);
+      console.log("this.iswishlistt", this.iswishlistt);
       this.iswishlistt = response;
     },
       (error: any) => {
@@ -1069,83 +1062,84 @@ else{
   }
   issubscriber(prodid: any) {
     this.request.checksubscribe(prodid, this.userid).subscribe((response: any) => {
-      this.issubscribed = response?.is_in_subscribe;   
+      this.issubscribed = response?.is_in_subscribe;
     },
       (error: any) => {
         console.log(error);
       });
   }
 
-  viewbrand(id:any){
+  viewbrand(id: any) {
     this.router.navigate(['brands', id]);
   }
-  collapsebtn(){
+  collapsebtn() {
     // console.log("collapsebtn");
-    this.btnItemm=!this.btnItemm
-    this.desbtnItemm=false
-    this.ingItemm=false
-    this.addinfobtnItemm=false
+    this.btnItemm = !this.btnItemm
+    this.desbtnItemm = false
+    this.ingItemm = false
+    this.addinfobtnItemm = false
     // console.log("collapsebtn",this.btnItemm);
-    
+
   }
-  collapsebtn1(){
+  collapsebtn1() {
     // console.log("collapsebtn1");
-    this.desbtnItemm=!this.desbtnItemm
-    this.btnItemm=false
-    this.ingItemm=false
-    this.addinfobtnItemm=false
+    this.desbtnItemm = !this.desbtnItemm
+    this.btnItemm = false
+    this.ingItemm = false
+    this.addinfobtnItemm = false
     // console.log("collapsebtn1",this.desbtnItemm);
   }
-  collapsebtn2(){
-    this.ingItemm=!this.ingItemm
-    this.btnItemm=false
-    this.desbtnItemm=false
-    this.addinfobtnItemm=false
+  collapsebtn2() {
+    this.ingItemm = !this.ingItemm
+    this.btnItemm = false
+    this.desbtnItemm = false
+    this.addinfobtnItemm = false
     // console.log("collapsebtn1",this.desbtnItemm);
   }
-  collapsebtn3(){
-    this.addinfobtnItemm=!this.addinfobtnItemm
-    this.btnItemm=false
-    this.desbtnItemm=false
-    this.ingItemm=false
-    
+  collapsebtn3() {
+    this.addinfobtnItemm = !this.addinfobtnItemm
+    this.btnItemm = false
+    this.desbtnItemm = false
+    this.ingItemm = false
+
     // console.log("collapsebtn1",this.desbtnItemm);
   }
-  shareinstaUrl(foodid:any) {
+  shareinstaUrl(foodid: any) {
     window.open('https://instagram.com/accounts/login/?text=%20Check%20up%20this%20awesome%20content' + encodeURIComponent(document.title) + ':%20 ' +
-     encodeURIComponent('https://spiceclub-a8420.web.app/' + foodid));
+      encodeURIComponent('https://spiceclub-a8420.web.app/' + foodid));
     return false;
   }
 
   qtyChange(event: any, i: any, img: any) {
 
-    if(this.quantityarray.length == 0){
+    if (this.quantityarray.length == 0) {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
-    else{
-      console.log(" this.quantityarray",  this.quantityarray);
+    else {
+      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-          console.log("obj", index);  
-          if(index>-1){
-            console.log("if",index);
-            
-            this.quantityarray[index].value = event.target.value;
-          }
-          else{
-            console.log("else",index);
-            this.quantityarray.push({ "id": img.id, "value": event.target.value });
-          }
-          
+      console.log("obj", index);
+      if (index > -1) {
+        console.log("if", index);
+
+        this.quantityarray[index].value = event.target.value;
+      }
+      else {
+        console.log("else", index);
+        this.quantityarray.push({ "id": img.id, "value": event.target.value });
+      }
+
     }
-  
+
     console.log("this.quantityarray", this.quantityarray);
   }
-
-  prodselectvar(weight: any, i: any,id:any) {
-    console.log("weight", weight, i);
+  prodselectvar(weight: any, i: any, id: any, varient: any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    this.request.addvarient(id, this.selectedvar).subscribe((res: any) => {
+    if (varient.length > 1) {
+      this.currentpackagevalue = varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight, this.currentpackagevalue).subscribe((res: any) => {
       console.log("selectvar res", res);
       this.Relatedprod[i].stroked_price = res.stroked_price
       this.Relatedprod[i].main_price = res.price_string
@@ -1158,10 +1152,10 @@ else{
   prodaddtocart(img: any) {
     console.log("img", img);
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
-      
+
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         console.log("empty");
         this.varient_value = ''
@@ -1173,34 +1167,45 @@ else{
         this.varient_value = this.selectedvar;
       }
 
-     
+
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      if( index>-1){
+      if (index > -1) {
         this.totalqty = this.quantityarray[index].value;
       }
-      else{
-        this.totalqty =1
+      else {
+        this.totalqty = 1
       }
-    
-      let edata = {
-        id: img.id,
-        variant: this.varient_value?.replace(/\s/g, ""),
-        user_id: this.userid,
-        quantity:this.totalqty,
-        buyertype: this.buyertypeid,
+
+      if (img.variants?.length > 1) {
+        this.currentpackagevalue = img?.variants[1]?.options[0]
+        this.edata = {
+          id: img.id,
+          variant: (this.varient_value?.replace(/\s/g, "") + "-" + this.currentpackagevalue.replace(/\s/g, "")),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
       }
-      console.log(edata);
-      this.request.addtocart(edata).subscribe((res: any) => {
+      else {
+        this.edata = {
+          id: img.id,
+          variant: this.varient_value?.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+      }
+      this.request.addtocart(this.edata).subscribe((res: any) => {
         console.log("resssssssssssssss", res);
-        if (res.result == true) { 
+        if (res.result == true) {
           this.addRecordSuccess();
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
         }
-        else  {
+        else {
           this.toastr.info(res.message);
         }
-       
+
       },
         (error: any) => {
           this.toastr.error(error);
@@ -1213,49 +1218,61 @@ else{
     window.scroll(0, 0);
     this.router.navigate(['productdetail', id]);
   }
-  toggle1(img: any, index: any): void {  
+  toggle1(img: any, index: any): void {
     console.log(this.userid);
-     
-     this.likesss[index] = !this.likesss[index];
-     if (this.likesss[index] == true) {
-       this.addtowishlist(img.id);
-     }
-     else if (this.likesss[index] == false) {
-       this.deleteRecord(img.id);
-     }
- }
- toggledelete1(img: any, index: any): void {
-  
-   if(this.userid!==0){
-   this.likess[index] = !this.likess[index];
 
-   if (this.likess[index] == true) {
-     this.addtowishlist(img.id);
-   }
-   else if (this.likedd[index] == false) {
-     this.deleteRecord(img.id);
-   }
- }
- else{
-  this. openlogin()
- }
- }
+    this.likesss[index] = !this.likesss[index];
+    if (this.likesss[index] == true) {
+      this.addtowishlist(img.id);
+    }
+    else if (this.likesss[index] == false) {
+      this.deleteRecord(img.id);
+    }
+  }
+  toggledelete1(img: any, index: any): void {
 
- gotosubcategory(id:any){
-  this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: id } });
- }
- gotocategory(id:any,i:any){
-   if(i==0){
-    this.router.navigate(['category', id]);
-   }
-   else if(i==1){
-    this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: id } });
-   }
-   else if(i==2){
-    this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: id, } });
-   }
-   else if(i==3){
-    this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: this.subcat_id2, subcategory1: id } });
-   }
- }
+    if (this.userid !== 0) {
+      this.likess[index] = !this.likess[index];
+
+      if (this.likess[index] == true) {
+        this.addtowishlist(img.id);
+      }
+      else if (this.likedd[index] == false) {
+        this.deleteRecord(img.id);
+      }
+    }
+    else {
+      this.openlogin()
+    }
+  }
+
+  gotosubcategory(id: any) {
+    if(this.Peoduct?.breadcrumbs.length == 3){
+      this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: id, } });
+    }
+    else if(this.Peoduct?.breadcrumbs.length == 2){
+      this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: id } });
+    }
+   else if(this.Peoduct?.breadcrumbs.length == 4){
+      this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: this.subcat_id2, subcategory1: id } });
+    }
+    else{
+      this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: id } });
+    }
+
+  }
+  gotocategory(id: any, i: any) {
+    if (i == 0) {
+      this.router.navigate(['category', id]);
+    }
+    else if (i == 1) {
+      this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: id } });
+    }
+    else if (i == 2) {
+      this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: id, } });
+    }
+    else if (i == 3) {
+      this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id1, category1: this.subcat_id2, subcategory1: id } });
+    }
+  }
 }

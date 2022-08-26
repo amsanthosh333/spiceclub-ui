@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, NavigationStart, Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { RequestService } from 'src/app/services/request.service';
 import { Location } from '@angular/common';
@@ -151,6 +151,8 @@ export class CategoryComponent implements OnInit {
   headItem: any;
   brandd_id: any;
   brandItem: any;
+  currentpackagevalue: any;
+  edata: any;
 
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private toastr: ToastrService,
@@ -174,31 +176,28 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     const queryParams = this.activatedRoute.snapshot.queryParams
-        const routeParams = this.activatedRoute.snapshot.params;
+        const routeParams = this.activatedRoute.snapshot.params;  
         console.log("queryParams",queryParams);
         console.log("routeParams",routeParams);   
         // do something with the parameters       
     this.activatedRoute.queryParams.subscribe((data2: Params) => {
-      console.log("activatedRoute");
+      console.log("activatedRoute",data2);
       this.id = this.route.snapshot.params['id'];
       this.subcatedoryid = this.route.snapshot.queryParams['subcategory']
       this.catedory1id = this.route.snapshot.queryParams['category1']
-      this.subcategory1id = this.route.snapshot.queryParams['subcategory1']
-      console.log("category1id", this.catedory1id);
+      this.subcategory1id = this.route.snapshot.queryParams['subcategory1']  
       let locationPath = this.location.path();
       this.headItem =0;
       if (locationPath.length) {
         this.locationSegments = locationPath.split('/');
       }
-      console.log(this.locationSegments[1])
       if (this.id === undefined) {
         this.viewallcategory();
         this.viewtopcategory();
-        // this.viewfeatured();
         this.page2 = false;
       }
       else {
-        if (this.subcategory1id !== undefined) {
+        if (this.subcategory1id !== undefined) { 
           this.page2 = true;
           this.categoryy_id = this.subcategory1id
           this.viewctopcatprodsub1(this.subcategory1id, 1, 0)
@@ -225,7 +224,7 @@ export class CategoryComponent implements OnInit {
           // this.viewfeatured();
           this.categorybrand(this.catedory1id);
         }
-        else if (this.subcatedoryid !== undefined) {
+        else if (this.subcatedoryid !== undefined) {      
           this.page2 = true;
           this.categoryy_id = this.subcatedoryid
           this.viewsubcatprod(this.subcatedoryid, 1, 0)
@@ -255,26 +254,31 @@ export class CategoryComponent implements OnInit {
           this.categoryy_id = this.id;
         
         }
-        
       }
-
     }),
 
-    this.activatedRoute.params.subscribe((data2: Params) => {
-      this.id = this.route.snapshot.params['id']; 
-      this.headItem =0;
-      this.viewallcategory();
-          this.categorydetail(this.id);
-          this.getprodofcategory(this.id, 1);
-          this.getsubcategory(this.id);
-          this.SubofSubcat = []
-          this.SubofSubcat1 = []
-          this.viewtopcategory(); 
-          this.categorybrand(this.id);
-          this.page2 = true;
-          this.selectedItem = this.id;
-          this.categoryy_id = this.id; 
-    });
+  //   this.router.events.subscribe(event =>{
+  //     if (event instanceof NavigationStart){
+  //        console.log(event.url)
+        
+  //     }
+  //  })
+    // this.activatedRoute.params.subscribe((data2: Params) => {
+    //   this.id = this.route.snapshot.params['id']; 
+    //   this.headItem =0;
+    //   this.viewallcategory();
+    //       this.categorydetail(this.id);
+    //       this.getprodofcategory(this.id, 1);
+    //       this.getsubcategory(this.id);
+    //       this.SubofSubcat = []
+    //       this.SubofSubcat1 = []
+    //       this.viewtopcategory(); 
+    //       this.categorybrand(this.id);
+    //       this.page2 = true;
+    //       this.selectedItem = this.id;
+    //       this.categoryy_id = this.id; 
+    // });
+
     this.maximunprice();
       this.search = this.fb.group({
         key: [''],
@@ -625,7 +629,7 @@ export class CategoryComponent implements OnInit {
     this.topItem = '';
     this.brandItem = '';
     this.request.getsubcatprod(id, page).subscribe((response: any) => {
-      console.log("subcatprod", response, this.subItem);
+      console.log("subcatprod response", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
@@ -941,17 +945,27 @@ export class CategoryComponent implements OnInit {
       else {
         this.totalqty = 1
       }
-
-      let edata = {
-        id: img.id,
-        variant: this.varient_value?.replace(/\s/g, ""),
-        user_id: this.userid,
-        quantity: this.totalqty,
-        buyertype: this.buyertypeid,
+      
+      if( img.variants?.length > 1){
+        this.currentpackagevalue= img?.variants[1]?.options[0]
+        this.edata = {
+          id: img.id,
+          variant: (this.varient_value?.replace(/\s/g, "")+"-"+ this.currentpackagevalue.replace(/\s/g, "")),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
       }
-      console.log(edata);
-      this.request.addtocart(edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
+      else{
+        this.edata = {
+          id: img.id,
+          variant: this.varient_value?.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+      }
+      this.request.addtocart(this.edata).subscribe((res: any) => {
         if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
@@ -969,10 +983,13 @@ export class CategoryComponent implements OnInit {
         });
     }
   }
-  bestsellingselectvar(weight: any, i: any, id: any) {
+  bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    this.request.addvarient(id, weight).subscribe((res: any) => {
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       console.log("selectvar res", res);
       this.Product[i].stroked_price = res.stroked_price
       this.Product[i].main_price = res.price_string;

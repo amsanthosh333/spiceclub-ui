@@ -56,6 +56,15 @@ export class WishlistComponent implements OnInit {
   Summeryload: boolean=true;
   buynowbtn: boolean=false;
   ClickEventSubscription!: Subscription;
+  currentpackagevalue: any;
+  currentpackage: any;
+  subItempackage: any=0;
+  currentvarient: any;
+  pervarient: any;
+  varstrokedprice: any;
+  discount_price: any;
+  discount_percentage: any;
+  gst_percentage: any;
   
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService, 
     private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,
@@ -133,8 +142,11 @@ export class WishlistComponent implements OnInit {
       addtocart1(_id:any,content:any){    
         this.totalprice=''
         this.quantityyy=1
-        this.product_id=_id
+        this.product_id=_id,
+        this.subItempackage = 0  
         this.request.getproddetail(this.product_id).subscribe((response: any) => {
+          console.log("response",response);
+          
                this.Peoduct=response.data[0];
               
                this.prod_price = this.Peoduct.main_price;
@@ -148,6 +160,9 @@ export class WishlistComponent implements OnInit {
                this.colors=this.Peoduct.colors;
                this.tags=this.Peoduct.tags;
                this.varprise=this.Peoduct.main_price;
+               this.discount_price=this.Peoduct.discount_amount;
+               this.discount_percentage=this.Peoduct.discount_percentage;
+               this.gst_percentage=this.Peoduct.gst_percentage
                this.totalprice=this.Peoduct.main_price.replace('Rs','');
                if(this.Peoduct.current_stock==0){
                 this.stocck=0
@@ -162,6 +177,10 @@ export class WishlistComponent implements OnInit {
               }
               else{
                 this.varient_value=this.choice[0]?.options[0];
+                this.currentvarient=this.varient_value
+              }
+              if(this.Peoduct.choice_options.length>1){
+                     this.currentpackagevalue=this.choice[1]?.options[0]
               }
               this.subItem=0
                 this.modalService.open(content, {
@@ -196,7 +215,7 @@ this.buynowbtn=false
         this.quantityyy = val
         this.stocck = this.stocckkk - val
       
-        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue.replace(/\s/g, "")).subscribe((res: any) => {
           console.log(res);
           
           this.totalprice = res.price.toFixed(2);
@@ -209,7 +228,7 @@ this.buynowbtn=false
       increaseqty(){
         this.quantityyy++;
         this.stocck--;
-        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue.replace(/\s/g, "")).subscribe((res: any) => {
           console.log(res);
           
           this.totalprice = res.price.toFixed(2);
@@ -219,14 +238,11 @@ this.buynowbtn=false
         })
           }
           decreaseqty(){
-
             this.quantityyy--;
             this.stocck++;    
-            this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+            this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue.replace(/\s/g, "")).subscribe((res: any) => {
               console.log(res);
-              
-              this.totalprice = res.price.toFixed(2);
-              
+              this.totalprice = res.price.toFixed(2);      
             // this.totalprice = this.dec.toFixed(2) 
            
             })   
@@ -234,15 +250,18 @@ this.buynowbtn=false
           selectvar(weight:any,i:any){
             this.varient_value=weight.replace(/\s/g, "")
             this.subItem=i
-            this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-              
+            this.request.addvarientfromdetail(this.product_id,weight,this.currentpackagevalue).subscribe((res: any) => {     
+            console.log("responnnnn",res);
+            
               this.prod_price = res?.price_string;
-              this.storked_pricee=res?.stroked_price;
-              
+              this.storked_pricee=res?.stroked_price;      
               this.totalprice=(res?.price_string).replace('Rs','');
               this.varprise=res?.price_string;
               this.stk=res?.stock;
               this.stocckkk=res?.stock;
+              this.discount_price=res?.discount_amount;
+               this.discount_percentage=res?.discount_percentage;
+               this.gst_percentage=res?.gst_percentage
               if(res?.stock==0){
                 this.stocck=0
                 this.quantityyy=0;
@@ -256,17 +275,57 @@ this.buynowbtn=false
             
             });
           }
+
+          selectvarpackage(varpackage:any, i: any) {
+            this.currentpackage = varpackage;
+            this.currentpackagevalue=this.currentpackage
+            this.subItempackage = i  
+            this.request.addvarientfromdetail(this.product_id,this.currentvarient, varpackage,).subscribe((res: any) => {
+              console.log("selectvar",res);
+              
+              this.prod_price = res?.price_string;
+              this.storked_pricee=res?.stroked_price;      
+              this.totalprice=(res?.price_string).replace('Rs','');
+              this.varprise=res?.price_string;
+              this.stk=res?.stock;
+              this.stocckkk=res?.stock;
+              this.discount_price=res?.discount_amount;
+               this.discount_percentage=res?.discount_percentage;
+               this.gst_percentage=res?.gst_percentage;
+              if(res?.stock==0){
+                this.stocck=0
+                this.quantityyy=0;
+               }
+               else {
+                this.stocck=(res?.stock);
+                this.quantityyy=1;
+               } 
+            }, (error: any) => {
+              console.log("error", error);
+        
+            });
+          }
+          
           
       addtocart2(){
+        console.log("addtocart2");
+        
         let edata={
           id : this.product_id,
           variant:this.varient_value.replace(/\s/g, ""),
           user_id: this.userid,
           quantity: this.quantityyy,
           buyertype:this.buyertypeid,  
-        }         
+          is_buynow:0
+        }           
+        if (this.Peoduct.choice_options.length > 1) {
+          edata.variant = edata.variant + "-" + this.currentpackagevalue.replace(/\s/g, "")
+        }  
+        console.log("edata-addtocart2",edata);
+        
         this.request.addtocart(edata).subscribe((res: any) => {
-      
+
+       console.log("edatares",res);
           if (res.message == 'Product added to cart successfully') {    
             this.addRecordSuccess();
                this.modalService.dismissAll();
@@ -292,6 +351,9 @@ this.buynowbtn=false
           buyertype:this.buyertypeid, 
           is_buynow:1
         } 
+        if(this.Peoduct.choice_options.length>1){
+          edata.variant= edata.variant + "-" + this.currentpackagevalue.replace(/\s/g, "")
+        }
         this.request.addtocart(edata).subscribe((res: any) => {
           console.log("buyres",res);
           

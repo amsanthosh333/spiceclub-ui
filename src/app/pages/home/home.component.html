@@ -197,7 +197,7 @@
                                     (click)="selectbestsell()">Select Options&nbsp;</button>
                                 <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                     <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                        (click)="bestsellingselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                        (click)="bestsellingselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                 </div>
                             </div>
                         </div>
@@ -568,7 +568,7 @@
                                         ngbDropdownToggle>Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="featuuresselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                            (click)="featuuresselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -830,7 +830,7 @@
                                         ngbDropdownToggle>Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="topcat1selectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                            (click)="topcat1selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -1116,7 +1116,7 @@
                                         ngbDropdownToggle>Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="topcat2selectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                            (click)="topcat2selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -1374,7 +1374,7 @@
                                             ngbDropdownToggle>Select Options&nbsp;</button>
                                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                             <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                (click)="topcat2selectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                                (click)="topcat3selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1565,7 +1565,7 @@
                                             ngbDropdownToggle>Select Options&nbsp;</button>
                                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                             <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                (click)="topcat2selectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                                (click)="topcat4selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1755,7 +1755,7 @@
                                                 ngbDropdownToggle>Select Options&nbsp;</button>
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                                 <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                    (click)="topcat2selectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                                    (click)="topcat5selectvar(imgggg ,i,img.id,img.varients)">{{imgggg}}</button>
                                             </div>
                                         </div>
                                     </div>

@@ -101,7 +101,7 @@ export class HeaderComponent implements OnInit {
       })
 
       this.ClickEventSubscription = this.sharedService.getWishlistEvent().subscribe(() => {
-        console.log("getWishlistEvent");     
+            
         this.viewwishlist();   
       })
 
@@ -123,6 +123,7 @@ export class HeaderComponent implements OnInit {
     this.kyc_verify_status=this.currentdetail.user?.kyc_verify_status;
     this.iskycupload=this.currentdetail.user?.iskycupload;
     this.buyertypeid = this.currentdetail.user?.buyertypeid;
+    
     // this.buyertypereal = this.currentdetail.buyertypereal;
      console.log("buyertypereal",this.buyertypereal)
     if (this.userid == undefined) {

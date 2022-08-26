@@ -219,6 +219,8 @@ export class HomeComponent implements OnInit {
   top5name: any;
   topfourthcat: any;
   topfifthcat: any;
+  currentpackagevalue: any;
+  edata: any;
   
 
 
@@ -833,10 +835,14 @@ export class HomeComponent implements OnInit {
 
   selectbestsell() {
   }
-  bestsellingselectvar(weight: any, i: any, id: any) {
+  bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    this.request.addvarient(id, weight).subscribe((res: any) => {
+   
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       console.log("res", res);
 
       this.Bestsellpro[i].stroked_price = res.stroked_price;
@@ -849,10 +855,13 @@ export class HomeComponent implements OnInit {
       console.log("error", error);
     });
   }
-  featuuresselectvar(weight: any, i: any, id: any) {
-    this.selectedvar = weight.replace(/\s/g, "");
-    this.showaddbtn = i
-    this.request.addvarient(id, this.selectedvar).subscribe((res: any) => {
+    featuuresselectvar(weight: any, i: any, id: any,varient:any) {  
+      this.selectedvar = weight.replace(/\s/g, "");
+      this.showaddbtn = i
+      if(varient.length>1){
+    this.currentpackagevalue= varient[1].options[0]
+      }
+      this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
 
       this.Futuredpro[i].stroked_price = res.stroked_price
       this.Futuredpro[i].main_price = res.price_string
@@ -862,10 +871,13 @@ export class HomeComponent implements OnInit {
       console.log("error", error);
     });
   }
-  topcat1selectvar(weight: any, i: any, id: any) {
+  topcat1selectvar(weight: any, i: any, id: any,varient:any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    this.request.addvarient(id, weight).subscribe((res: any) => {
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       this.topfirstcat[i].stroked_price = res.stroked_price
       this.topfirstcat[i].main_price = res.price_string
       this.topfirstcat[i].discount_amount = res.discount_amount;
@@ -874,14 +886,65 @@ export class HomeComponent implements OnInit {
       console.log("error", error);
     });
   }
-  topcat2selectvar(weight: any, i: any, id: any) {
+  topcat2selectvar(weight: any, i: any, id: any,varient:any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    this.request.addvarient(id, weight).subscribe((res: any) => {
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       this.topsecondcat[i].stroked_price = res.stroked_price
       this.topsecondcat[i].main_price = res.price_string
       this.topsecondcat[i].discount_amount = res.discount_amount;
       this.topsecondcat[i].discount_percentage = res.discount_percentage;
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  topcat3selectvar(weight: any, i: any, id: any,varient:any) {
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
+      this.topthirdcat[i].stroked_price = res.stroked_price
+      this.topthirdcat[i].main_price = res.price_string
+      this.topthirdcat[i].discount_amount = res.discount_amount;
+      this.topthirdcat[i].discount_percentage = res.discount_percentage;
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  topcat4selectvar(weight: any, i: any, id: any,varient:any) {
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    console.log("this.selectedvar",this.selectedvar);
+    if(varient?.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, this.selectedvar,this.currentpackagevalue).subscribe((res: any) => {
+      this.topfourthcat[i].stroked_price = res.stroked_price
+      this.topfourthcat[i].main_price = res.price_string
+      this.topfourthcat[i].discount_amount = res.discount_amount;
+      this.topfourthcat[i].discount_percentage = res.discount_percentage;
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+
+  topcat5selectvar(weight: any, i: any, id: any,varient:any) {
+    console.log("weight",weight);
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    if(varient?.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
+      this.topfifthcat[i].stroked_price = res.stroked_price
+      this.topfifthcat[i].main_price = res.price_string
+      this.topfifthcat[i].discount_amount = res.discount_amount;
+      this.topfifthcat[i].discount_percentage = res.discount_percentage;
     }, (error: any) => {
       console.log("error", error);
     });
@@ -908,14 +971,29 @@ export class HomeComponent implements OnInit {
       else {
         this.totalqty = 1
       }
-      let edata = {
-        id: img.id,
-        variant: this.varient_value?.replace(/\s/g, ""),
-        user_id: this.userid,
-        quantity: this.totalqty,
-        buyertype: this.buyertypeid,
+      if( img.variants?.length > 1){
+        this.currentpackagevalue= img?.variants[1]?.options[0]
+        this.edata = {
+          id: img.id,
+          variant: (this.varient_value?.replace(/\s/g, "")+"-"+ this.currentpackagevalue.replace(/\s/g, "")),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+        console.log("edata",this.edata);
       }
-      this.request.addtocart(edata).subscribe((res: any) => {
+      else{
+        this.edata = {
+          id: img.id,
+          variant: this.varient_value?.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+        console.log("edata else",this.edata);
+      }
+
+      this.request.addtocart(this.edata).subscribe((res: any) => {
         console.log("addtocart response",res);       
          if (res.result == true) { 
           this.addRecordSuccess();

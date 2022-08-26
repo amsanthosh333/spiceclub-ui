@@ -206,6 +206,9 @@ export class RequestService {
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
 
     this.url = `${this.endPoint1}/wishlists`;
+    
+    body.buyertypeid =this.buyertypeid
+    console.log("wishlists body",body);
     return this.http.post(this.url, body, { headers: headers });
 
   }
@@ -622,13 +625,31 @@ export class RequestService {
     this.url = `${this.endPoint1}/products/discountprice?id=` + P_id + `&variant=` + var_value + `&quantity=` + qty + `&buyertype=` + b_id;
     return this.http.get(this.url);
   }
+  public getdiscountpricefromdetail(b_id: any, P_id: any, var_value: any, qty: any,varpackage:any) {
+    this.url = `${this.endPoint1}/products/discountprice?id=` + P_id + `&variant=` + var_value +`-`+varpackage + `&quantity=` + qty + `&buyertype=` + b_id;
+    return this.http.get(this.url);
+  }
   //related product
   public getrelatedprod(id: string) {
     this.url = `${this.endPoint1}/products/related/` + id + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     return this.http.get(this.url);
   }
-  public addvarient(id: string, varient: any) {
+  public addvarient(id: string, varient: any,) {
     this.url = `${this.endPoint1}/products/variant/price?id=` + id + `&color=` + `&variants=` + varient + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    console.log("varient url", this.url);
+    return this.http.get(this.url);
+  }
+  public addvarientfromdetail(id: string, varient: any,varpackage:any) {
+    console.log("varpackage url", varpackage);
+    if(varpackage!==undefined && varpackage!==null ){
+      console.log("varient url if",varpackage);
+      this.url = `${this.endPoint1}/products/variant/price?id=` + id + `&color=` + `&variants=` + varient +`,`+varpackage + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    } 
+    else{
+      console.log("varient url else",varpackage);
+      this.url = `${this.endPoint1}/products/variant/price?id=` + id + `&color=` + `&variants=` + varient + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    }
+   
     console.log("varient url", this.url);
     return this.http.get(this.url);
   }

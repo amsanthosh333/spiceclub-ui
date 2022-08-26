@@ -1,6 +1,9 @@
 .card-header {
   padding: 0.5rem 0.3rem;
 }
+.variants{
+  display: flex;
+}
 #formdiv form{
   border: 1px solid #cbdae3;
     padding-left: 10px;
@@ -125,6 +128,9 @@
   background-color:#f2f2f2;text-align: center;
 }
 
+#subcatdiv li{
+  cursor: pointer;
+}
 
 #subcatdiv{
   display:flex;

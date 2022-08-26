@@ -84,12 +84,14 @@ export class FlashComponent implements OnInit {
   Alldeal: any;
   Allproducts: any;
   noorder: boolean=false;
+  subtitle: string="Flash deal products";
+  currentpackagevalue: any;
+  edata:any;
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,private modalService: NgbModal,private route: ActivatedRoute,private  config: NgbRatingConfig,private sharedService: SharedService){
       this.currentUserSubject = new BehaviorSubject<User>(
-        JSON.parse(localStorage.getItem('currentUser')||'{}')
-        
+        JSON.parse(localStorage.getItem('currentUser')||'{}')       
       );
   
       config.max = 5;
@@ -109,20 +111,20 @@ export class FlashComponent implements OnInit {
      }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    
+    this.id = this.route.snapshot.params['id']; 
     console.log("FLASH id",this.id);
     if(this.id){
       console.log("iffffffffffffff");
       if(this.id==0){
            console.log("quickorderproducts");
-
            this.viewQuickOrderPrd();     
            this.noorder=true
+           this.subtitle="Ordered Products"
       }
       else{
         this.viewprodbyflash(this.id,1);
         this.noorder=false
+        this.subtitle="Flash deal products"
       }
       
     
@@ -484,16 +486,26 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
       else {
         this.totalqty = 1
       }
-
-      let edata = {
-        id: img.id,
-        variant: this.varient_value?.replace(/\s/g, ""),
-        user_id: this.userid,
-        quantity: this.totalqty,
-        buyertype: this.buyertypeid,
+      if( img.variants?.length > 1){
+        this.currentpackagevalue= img?.variants[1]?.options[0]
+        this.edata = {
+          id: img.id,
+          variant: (this.varient_value?.replace(/\s/g, "")+"-"+ this.currentpackagevalue.replace(/\s/g, "")),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
       }
-      console.log(edata);
-      this.request.addtocart(edata).subscribe((res: any) => {
+      else{
+        this.edata = {
+          id: img.id,
+          variant: this.varient_value?.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+      }
+      this.request.addtocart(this.edata).subscribe((res: any) => {
         console.log("resssssssssssssss", res);
         if (res.result == true) { 
           this.addRecordSuccess();
@@ -512,10 +524,13 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
         });
     }
   }
-  bestsellingselectvar(weight: any, i: any, id: any) {
+  bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    this.request.addvarient(id, weight).subscribe((res: any) => {
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       console.log("selectvar res", res);
       this.Allproducts[i].product.stroked_price = res.stroked_price
       this.Allproducts[i].product.main_price = res.price_string;

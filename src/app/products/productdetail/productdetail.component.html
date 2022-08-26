@@ -1,7 +1,7 @@
 <div class="col-lg-12 mb-10 pb-0" class="listcard">
     <div>
         <ul id="subcatdiv" style="font-weight: 600;color: #3e3e3e;">
-            <li style="padding-right:20px" *ngFor="let s of Peoduct?.subcategories.slice(0,10)" (click)="gotosubcategory(s.id)">
+            <li style="padding-right:20px" *ngFor="let s of Peoduct?.subcategories.slice(0,9)" (click)="gotosubcategory(s.id)">
                 {{s.name}}</li>
         </ul>
 
@@ -229,13 +229,12 @@
                                         </div>
                                         <div class="quick-view-other-info pb-0 pt-0" #target>
                                             <div class="shop-product__block shop-product__block--size  mt-10"
-                                                *ngIf="(choice.length!==0)" style="padding-bottom:4px;">
-
-                                                <div class="shop-product__block  " *ngFor="let a of choice.slice(0,1)"
+                                                *ngIf="(choice.length!==0)" style="padding-bottom:4px;display: contents;">
+                                               <!-- varient -->
+                                                <div style="display:flex;margin-top: 10px;">
+                                                    <div class="shop-product__block  " *ngFor="let a of choice.slice(0,1)"
                                                     style="font-weight: 600;color: #727272;margin-right: 5px;">{{a.title}} :
                                                 </div>
-                                                <!-- <span class="quickview-title" style="color: #727272" *ngFor="let a of choice">{{a.title}} :</span> -->
-
                                                 <div class="shop-product__block__value" *ngFor="let a of choice.slice(0,1)">
                                                     <div class="shop-product-size-list">
                                                         <span class="single-size"
@@ -244,6 +243,25 @@
                                                             (click)="selectvar(b,i)">{{b}}</span>
                                                     </div>
                                                 </div>
+                                                </div>
+                                                <!-- package -->
+                                                <div [ngStyle]="{'display':choice.length > 1 ? 'flex' : 'none'}" >
+                                                    <div style="margin-top: 10px;display: flex;">
+                                                        <div class="shop-product__block " *ngFor="let a of choice.slice(1,2)"
+                                                        style="font-weight: 600;color: #727272;margin-right: 5px;">{{a.title}} :
+                                                    </div>
+                                                    <div class="shop-product__block__value" *ngFor="let a of choice.slice(1,2)">
+                                                        <div class="shop-product-size-list">
+                                                            <span class="single-size"
+                                                                *ngFor="let b of a.options;let i = index"
+                                                                [ngClass]="{'active': subItempackage === i}"
+                                                                (click)="selectvarpackage(b,i)">{{b}}</span>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                               
                                             </div>
                                             <div class="single-info mt-10" style="padding-bottom:7px;"
                                                 *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
@@ -688,12 +706,12 @@
                                                                         </td>
                                                                     </tr>
 
-                                                                    <tr  *ngIf="Peoduct.package !==null">
+                                                                    <tr  *ngIf="Peoduct?.package !==null">
                                                                         <th id="he" style="background-color: #f2f2f2;vertical-align: middle;
                                                                         text-align: center;">
                                                                             Package</th>
                                                                         <td style="padding-left: 30px;">
-                                                                            <p>{{Peoduct.package}}</p>
+                                                                            <p>{{Peoduct?.package}}</p>
                                                                         </td>
                                                                     </tr>
 
@@ -873,7 +891,7 @@
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
                                                 style="margin-left:-5px;">
                                                 <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                    (click)="prodselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                                    (click)="prodselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1274,7 +1292,7 @@
                                             <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
                                                 style="margin-left:-5px;">
                                                 <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                    (click)="prodselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                                    (click)="prodselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                             </div>
                                         </div>
                                     </div>
@@ -1706,7 +1724,7 @@
                                         ngbDropdownToggle>Select Options</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="prodselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                            (click)="prodselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -1864,7 +1882,7 @@
                                         ngbDropdownToggle>Select Options</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="prodselectvar(imgggg ,i,img.id)">{{imgggg}}</button>
+                                            (click)="prodselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                     </div>
                                 </div>
                             </div>

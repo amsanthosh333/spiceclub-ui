@@ -81,6 +81,8 @@ export class SubscribedprodComponent implements OnInit {
   newpageProduct: any;
   prodloadermain: boolean=true;
   pagee: any= 1;
+  currentpackagevalue: any;
+  edata:any;
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
     ,private toastr: ToastrService,private modalService: NgbModal,
@@ -473,15 +475,26 @@ export class SubscribedprodComponent implements OnInit {
           this.totalqty = 1
         }
   
-        let edata = {
-          id: img.id,
-          variant: this.varient_value?.replace(/\s/g, ""),
-          user_id: this.userid,
-          quantity: this.totalqty,
-          buyertype: this.buyertypeid,
+        if( img.variants?.length > 1){
+          this.currentpackagevalue= img?.variants[1]?.options[0]
+          this.edata = {
+            id: img.id,
+            variant: (this.varient_value?.replace(/\s/g, "")+"-"+ this.currentpackagevalue.replace(/\s/g, "")),
+            user_id: this.userid,
+            quantity: this.totalqty,
+            buyertype: this.buyertypeid,
+          }
         }
-        console.log(edata);
-        this.request.addtocart(edata).subscribe((res: any) => {
+        else{
+          this.edata = {
+            id: img.id,
+            variant: this.varient_value?.replace(/\s/g, ""),
+            user_id: this.userid,
+            quantity: this.totalqty,
+            buyertype: this.buyertypeid,
+          }
+        }
+        this.request.addtocart(this.edata).subscribe((res: any) => {
           console.log("resssssssssssssss", res);
           if (res.result == true) { 
             this.addRecordSuccess();
@@ -500,10 +513,13 @@ export class SubscribedprodComponent implements OnInit {
           });
       }
     }
-    bestsellingselectvar(weight: any, i: any, id: any) {
+    bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
       this.selectedvar = weight.replace(/\s/g, "");
       this.showaddbtn = i
-      this.request.addvarient(id, weight).subscribe((res: any) => {
+      if(varient.length>1){
+    this.currentpackagevalue= varient[1].options[0]
+      }
+      this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
         console.log("selectvar res", res);
         this.Bestsellpro[i].product.stroked_price = res.stroked_price
         this.Bestsellpro[i].product.main_price = res.price_string;

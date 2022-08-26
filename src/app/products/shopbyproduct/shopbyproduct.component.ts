@@ -135,6 +135,8 @@ export class ShopbyproductComponent implements OnInit {
   pagenum: number=1;
   pageload: boolean=true;
   sidepoploader: boolean=false;
+  currentpackagevalue: any;
+  edata:any;
 
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, config: NgbRatingConfig,
@@ -1058,7 +1060,7 @@ export class ShopbyproductComponent implements OnInit {
     }
     this.quantityyy = val
     this.stocck = this.stocckkk - val
-    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
+    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,).subscribe((res: any) => {
       console.log(res);   
       this.totalprice = res.price.toFixed(2);
    // this.totalprice = this.dec.toFixed(2) 
@@ -1193,7 +1195,8 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   prodaddtocart(img: any) {
-
+    console.log("img.varientlength",img.variants.length);
+    
     if (this.userid == 0) {
       this. openlogin()
     }
@@ -1216,15 +1219,29 @@ export class ShopbyproductComponent implements OnInit {
         this.totalqty = 1
       }
 
-      let edata = {
-        id: img.id,
-        variant: this.varient_value?.replace(/\s/g, ""),
-        user_id: this.userid,
-        quantity: this.totalqty,
-        buyertype: this.buyertypeid,
+      if( img.variants?.length > 1){
+        this.currentpackagevalue= img?.variants[1]?.options[0]
+        this.edata = {
+          id: img.id,
+          variant: (this.varient_value?.replace(/\s/g, "")+"-"+ this.currentpackagevalue.replace(/\s/g, "")),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+        console.log("edata",this.edata);
       }
-      console.log(edata);
-      this.request.addtocart(edata).subscribe((res: any) => {
+      else{
+        this.edata = {
+          id: img.id,
+          variant: this.varient_value?.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+        console.log("edata else",this.edata);
+      }
+
+      this.request.addtocart(this.edata).subscribe((res: any) => {
         console.log("resssssssssssssss", res);
         if (res.result == true) { 
           this.addRecordSuccess();
@@ -1243,10 +1260,13 @@ export class ShopbyproductComponent implements OnInit {
         });
     }
   }
-  bestsellingselectvar(weight: any, i: any, id: any) {  
+  bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    this.request.addvarient(id, weight).subscribe((res: any) => {
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       console.log("selectvar res", res);
       this.Product[i].stroked_price= res.stroked_price
        this.Product[i].main_price = res.price_string;
