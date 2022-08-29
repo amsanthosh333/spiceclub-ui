@@ -539,9 +539,16 @@
 
 
 				<!--=======  subtotal calculation  =======-->
-
 				<p class="cart-subtotal">
 					<span class="subtotal-title">Sub Total</span>
+					<span class="subtotal-amount">{{without_discount}}</span>
+				</p>
+				<p class="cart-subtotal" >
+					<span class="subtotal-title">Discount</span>
+					<span class="subtotal-amount">Rs -{{discount}}</span>
+				</p>
+				<p class="cart-subtotal">
+					<span class="subtotal-title">Total</span>
 					<span class="subtotal-amount">{{subtot}}</span>
 				</p>
 

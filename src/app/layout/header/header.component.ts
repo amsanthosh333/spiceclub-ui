@@ -87,6 +87,8 @@ export class HeaderComponent implements OnInit {
   viewsubcat1var: any;
   viewsubcat2var: any;
   viewsubcat3var: any;
+  discount: any;
+  without_discount: any;
 
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
@@ -1713,6 +1715,8 @@ export class HeaderComponent implements OnInit {
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
       this.subtot = this.Summery.sub_total
+      this.without_discount=this.Summery.subtotal_withoutdiscount
+      this.discount= this.Summery.discount
       this.grandtotal = this.Summery.grand_total
     });
   }

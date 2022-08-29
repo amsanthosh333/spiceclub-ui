@@ -277,6 +277,7 @@ export class HomeComponent implements OnInit {
     this.viewtodayoffer();
     // this.viewdata3();
     this.viewbestsellpro();
+    this.gethomeecat();
     // this.viewtopcategory();
     // this.viewdaydeal();
     // this.viewcategorydata();   
@@ -339,20 +340,20 @@ export class HomeComponent implements OnInit {
     this.viewdata4();
   }
   flashScrollUp(event: any) {
-    console.log("flashScrollUp up");
+   
   }
   top1ScrollDown(event: any) {
-    console.log("top1ScrollDown");
+    
     this.viewhome34category();
   }
   top1ScrollUp(event: any) {
-    console.log("top1ScrollUp up");
+    
   }
   top2ScrollUp(event: any) {
-    console.log("top2ScrollDown up");
+   
   }
   top2ScrollDown(event: any) {
-    console.log("top2ScrollDown");
+    
     this.viewhome5category();
   }
   
@@ -595,8 +596,9 @@ export class HomeComponent implements OnInit {
   }
   
   viewhomeFScategory(){
-    console.log ("this.tophomecat[i]");
+   
     this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
+      console.log("topfirstcat response",response.data)
       this.topfirstcat = response.data
       this.loader8= false;
       setTimeout(() => {
@@ -605,6 +607,7 @@ export class HomeComponent implements OnInit {
 
     });
     this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
+    console.log("topsecondcat response",response.data)
       this.topsecondcat = response.data
       this.loader9= false;
       setTimeout(() => {
@@ -623,6 +626,7 @@ export class HomeComponent implements OnInit {
   }
   viewhome34category(){
     this.request.getcatprod(this.top3id, 1).subscribe((response: any) => {
+      console.log("topthirdcat response",response.data)
       this.topthirdcat = response.data
       this.loader10= false;
       setTimeout(() => {
@@ -631,6 +635,7 @@ export class HomeComponent implements OnInit {
     });
 
     this.request.getcatprod(this.top4id, 1).subscribe((response: any) => {
+      console.log("top4id response",response.data)
       this.topfourthcat = response.data
       this.loader11= false;
       setTimeout(() => {
@@ -643,6 +648,7 @@ export class HomeComponent implements OnInit {
 
   viewhome5category(){
     this.request.getcatprod(this.top5id, 1).subscribe((response: any) => {
+      console.log("topfifthcat response",response.data)
       this.topfifthcat = response.data
       this.loader12= false;
       setTimeout(() => {

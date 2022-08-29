@@ -162,6 +162,7 @@ export class OrdersComponent implements OnInit {
 
     })
   }
+
   onsortChange(val: any, label1: any) {
     this.loader = true;
     this.paymentt = val
@@ -199,6 +200,39 @@ export class OrdersComponent implements OnInit {
     this.router.navigate(['orderdetail', id]);
   }
 
+  paynow1(order_detail:any){
+    let edata1 = {
+      combined_order_id: order_detail.combined_order_id,
+      payment_type:"cart_payment"
+    }
+    console.log(edata1);
+    
+    this.request.retrypayment(edata1).subscribe((response: any) => {
+      console.log("razorpay1 retry response", response);
+      if (response.result == true) {
+        this.toastr.success('',response.message);
+        let edata1 = {
+          payment_type: "cart_payment",
+          combined_order_id: order_detail.combined_order_id,
+          amount: order_detail.grand_total,
+          user_id: this.userid,
+        }
+        this.billdesk(edata1)
+      }
+      else{
+        this.toastr.info('',response.message);
+        this. quickorder(order_detail.id)
+      }
+    });
+  }
+  
+  billdesk(edata1: any) {
+    this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,"repayment").subscribe(
+      (response: any) => {   
+        response.json()
+      },
+    );
+  }
 
   viewitem() {
 

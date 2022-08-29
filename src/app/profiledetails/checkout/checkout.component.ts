@@ -114,7 +114,9 @@ export class CheckoutComponent implements OnInit {
   paymentload: boolean = true;
   paymentmethod: any;
   codcharge: any;
-  showCod: boolean =false;
+  showCod: boolean = false;
+  totalprodprice!: any;
+  without_dis: any;
   // responseText: string;
 
   constructor(private http: HttpClient, private router: Router, private modalService: NgbModal, private appcomp: AppComponent,
@@ -196,14 +198,14 @@ export class CheckoutComponent implements OnInit {
     this.payytype = item;
     if (this.payytype == "billdesk") {
       this.paymentmethod = "Billdesk"
-      this.showCod=false;
+      this.showCod = false;
       this.viewsummery();
     }
     // else if (this.payytype == "razorpay") {
     //   this.paymentmethod= "Razorpay"}
     else if (this.payytype == "cash_on_delivery") {
       this.paymentmethod = "Cash On Delivery"
-      this.showCod=true;
+      this.showCod = true;
       this.viewsummery();
 
     }
@@ -229,17 +231,22 @@ export class CheckoutComponent implements OnInit {
 
   }
   viewsummery() {
-    this.request.fetchsummery(this.userid, this.buynowvalue,this.payytype).subscribe((response: any) => {
+    this.request.fetchsummery(this.userid, this.buynowvalue, this.payytype).subscribe((response: any) => {
       console.log("fetchsummery", response);
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total;
       this.dis = this.Summery.discount;
       this.subtot = this.Summery.sub_total;
+      this.without_dis = this.Summery?.subtotal_withoutdiscount
+      // var without_dis = Number(this.Summery.sub_total.replace(/[^0-9\.-]+/g,""));
+      // var disc =  Number(this.Summery.discount.replace(/[^0-9\.-]+/g,""));
+      // this.totalprodprice = (without_dis + disc).toFixed(2)   
+      // console.log("number",this.totalprodprice);
       this.shippingfee = this.Summery.shipping_cost;
       this.tax = this.Summery.tax;
       this.grandtotal = this.Summery.grand_total;
       this.grandtotal_value = this.Summery.grand_total_value;
-      this.codcharge=this.Summery.codcharges
+      this.codcharge = this.Summery.codcharges
       this.couponn = this.Summery.coupon_applied;
       this.Summeryload = false;
       if (this.couponn == true) {
@@ -425,9 +432,9 @@ export class CheckoutComponent implements OnInit {
 
   billdesk(edata1: any) {
     console.log("billdest called");
-    this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,null).subscribe(
-      (response: any) => {    
-        response.json()      
+    this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id, null).subscribe(
+      (response: any) => {
+        response.json()
       },
     );
   }

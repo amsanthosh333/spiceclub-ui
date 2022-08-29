@@ -182,6 +182,9 @@ export class WishlistComponent implements OnInit {
               if(this.Peoduct.choice_options.length>1){
                      this.currentpackagevalue=this.choice[1]?.options[0]
               }
+              else{
+                this.currentpackagevalue=null
+              }
               this.subItem=0
                 this.modalService.open(content, {
                   ariaLabelledBy: 'modal-basic-title',
@@ -215,7 +218,7 @@ this.buynowbtn=false
         this.quantityyy = val
         this.stocck = this.stocckkk - val
       
-        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue.replace(/\s/g, "")).subscribe((res: any) => {
+        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue).subscribe((res: any) => {
           console.log(res);
           
           this.totalprice = res.price.toFixed(2);
@@ -227,20 +230,17 @@ this.buynowbtn=false
       }
       increaseqty(){
         this.quantityyy++;
-        this.stocck--;
-        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue.replace(/\s/g, "")).subscribe((res: any) => {
-          console.log(res);
-          
-          this.totalprice = res.price.toFixed(2);
-          
-        // this.totalprice = this.dec.toFixed(2) 
-       
+        this.stocck--;   
+        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue).subscribe((res: any) => {
+          console.log(res);         
+          this.totalprice = res.price?.toFixed(2);         
+        // this.totalprice = this.dec.toFixed(2)      
         })
           }
           decreaseqty(){
             this.quantityyy--;
             this.stocck++;    
-            this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue.replace(/\s/g, "")).subscribe((res: any) => {
+            this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue).subscribe((res: any) => {
               console.log(res);
               this.totalprice = res.price.toFixed(2);      
             // this.totalprice = this.dec.toFixed(2) 
@@ -320,19 +320,23 @@ this.buynowbtn=false
         }           
         if (this.Peoduct.choice_options.length > 1) {
           edata.variant = edata.variant + "-" + this.currentpackagevalue.replace(/\s/g, "")
+          
         }  
+        else{
+          this.currentpackagevalue =null
+        }
         console.log("edata-addtocart2",edata);
         
         this.request.addtocart(edata).subscribe((res: any) => {
 
        console.log("edatares",res);
-          if (res.message == 'Product added to cart successfully') {    
+          if (res.result == true) {    
             this.addRecordSuccess();
                this.modalService.dismissAll();
                this.sharedService.sendClickEvent();
           }
-          else if (res.message=='Minimum 1 item(s) should be ordered'){
-            this.toastr.success( res.message);
+          else if (res.result == false){
+            this.toastr.info( res.message);
            
           }
         }, (error: any) => {

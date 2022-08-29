@@ -413,6 +413,7 @@ export class ProductdetailComponent implements OnInit {
         console.log("this.currentpackage", this.currentpackage);
       }
 
+
       // array push photo
 
       this.newphotos = this.photoos.forEach((item: any) => {
@@ -647,7 +648,7 @@ export class ProductdetailComponent implements OnInit {
       d: this.quantityyy
     }
     console.log("dataa", dataa);
-    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage.replace(/\s/g, "")).subscribe((res: any) => {
+    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage).subscribe((res: any) => {
       console.log(res);
       if (res.result == true) {
         this.totalprice = res.price.toFixed(2);
@@ -662,7 +663,7 @@ export class ProductdetailComponent implements OnInit {
   decreaseqty() {
     this.quantityyy--;
     this.stocck++;
-    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage.replace(/\s/g, "")).subscribe((res: any) => {
+    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage).subscribe((res: any) => {
       console.log(res);
       if (res.result == true) {
         this.totalprice = res.price.toFixed(2);
@@ -693,7 +694,7 @@ export class ProductdetailComponent implements OnInit {
       c: this.varient_value.replace(/\s/g, ""),
       d: this.quantityyy
     }
-    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage.replace(/\s/g, "")).subscribe((res: any) => {
+    this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage).subscribe((res: any) => {
       this.totalprice = res.price.toFixed(2);
     })
   }

@@ -626,7 +626,14 @@ export class RequestService {
     return this.http.get(this.url);
   }
   public getdiscountpricefromdetail(b_id: any, P_id: any, var_value: any, qty: any,varpackage:any) {
-    this.url = `${this.endPoint1}/products/discountprice?id=` + P_id + `&variant=` + var_value +`-`+varpackage + `&quantity=` + qty + `&buyertype=` + b_id;
+
+    if(varpackage!==undefined && varpackage!==null ){
+      varpackage=varpackage.replace(/\s/g, "")
+      this.url = `${this.endPoint1}/products/discountprice?id=` + P_id + `&variant=` + var_value +`-`+varpackage + `&quantity=` + qty + `&buyertype=` + b_id;
+    }
+    else{
+      this.url = `${this.endPoint1}/products/discountprice?id=` + P_id + `&variant=` + var_value + `&quantity=` + qty + `&buyertype=` + b_id;
+    } 
     return this.http.get(this.url);
   }
   //related product
