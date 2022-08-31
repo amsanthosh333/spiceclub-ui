@@ -17,8 +17,6 @@ export class SharedService {
     this.subject.next(value)
   }
   getClickEvent():Observable<any>{
-    console.log("qty click");
-    
   return this.subject.asObservable()
   
 }

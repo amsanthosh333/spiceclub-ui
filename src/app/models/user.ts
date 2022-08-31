@@ -9,3 +9,8 @@ export class User {
       token_type:any;
     }
     
+    
+    export class temporaryId {
+
+        temp_user_id:any
+      }

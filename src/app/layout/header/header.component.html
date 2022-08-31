@@ -76,21 +76,30 @@
 									style="height:28px;width:29px;margin-bottom: -3px;
 										margin-right: 5px;" alt=""></span>
 								<span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
+
+								<button type="button" class="btn btn-outline-light" *ngIf="(userid==0)"
+									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
+									<span><img class="ion-ios-cart"  src="../../../assets/images/icons/trolley.png" style="height:18px;width:18px;margin-bottom: -4px;
+										margin-right: 7px;" alt=""></span>
+									<p style="display:contents;">Cart {{cartlength}}</p>
+								</button>
+								
 							</a>
-							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
+							<!-- <a   href="javascript:void(0)" id="offcanvas-cart-icon" class="loggin" *ngIf="(userid==0)"> -->
 								<!-- <button type="button" class="btn btn-outline-light" (click)="opensignup()"
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
 									<span><img src="../../../assets/images/icons/add-user.png" style="height:18px;width:18px;margin-bottom: -4px;
 										margin-right: 7px;" alt=""></span>
 									<p style="display:contents;">Signup</p>
 								</button> -->
-								<button type="button" class="btn btn-outline-light" (click)="opensignup()"
+								<!-- <button type="button" class="btn btn-outline-light" 
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
-									<span><img src="../../../assets/images/icons/trolley.png" style="height:18px;width:18px;margin-bottom: -4px;
+									<span><img class="ion-ios-cart"  src="../../../assets/images/icons/trolley.png" style="height:18px;width:18px;margin-bottom: -4px;
 										margin-right: 7px;" alt=""></span>
-									<p style="display:contents;">Cart</p>
-								</button>
-							</a>
+									<p style="display:contents;">Cart {{cartlength}}</p>
+								</button> -->
+								
+							<!-- </a> -->
 						</div>
 
 						<div class="single-icon drop">

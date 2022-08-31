@@ -221,6 +221,7 @@ export class HomeComponent implements OnInit {
   topfifthcat: any;
   currentpackagevalue: any;
   edata: any;
+  loaderflash: boolean=true;
   
 
 
@@ -277,7 +278,10 @@ export class HomeComponent implements OnInit {
     this.viewtodayoffer();
     // this.viewdata3();
     this.viewbestsellpro();
-    this.gethomeecat();
+     this.gethomeecat();
+    
+    // this.viewhomeFScategory();
+    // this.viewhome34category();
     // this.viewtopcategory();
     // this.viewdaydeal();
     // this.viewcategorydata();   
@@ -286,9 +290,6 @@ export class HomeComponent implements OnInit {
     // this.viewflashdeal();
     // this.viewbrands();
     // this.viewdata4();
-    setTimeout(() => {
-      this.loadingg = false;
-    }, 2000);
     this.register = this.fb.group({
       rating: [''],
       comment: [''],
@@ -304,57 +305,63 @@ export class HomeComponent implements OnInit {
   }
 
   banneronScrollDown(event: any) {
-    console.log("bannerscrolled");
     this.viewtopcategory();
+    
   }
+
   banneronScrollUp(event: any) {
-    console.log("bannerscrolled up");
   }
+
   bestsellScrollDown(event: any) {
-    console.log("bestsellScrolldown");
     this.viewdaydeal();
-    this.gethomeecat();
   }
+
   bestsellScrollUp(event: any) {
-    console.log("bestsellScrollUp up");
   }
+
   ExploreScrollDown(event: any) {
-    console.log("ExploreScrollDown");
     this.viewfuturedpro();
     this.viewflashdeal();
   }
+
   ExploreScrollUp(event: any) {
-    console.log("ExploreScrollUp up");
+  }
+  daydealScrollDown(event: any) {
+    // this.gethomeecat();
   }
 
-  daydealScrollDown(event: any) {
-    console.log("daydealScrollDown");
-    this.viewhomeFScategory();
-  }
   daydealScrollUp(event: any) {
-    console.log("daydealScrollUp up");
+
   }
-  flashScrollDown(event: any) {
-    console.log("flashScrollDown");
+
+  featuredScrollDown(event: any) {
+    
     this.viewbrands();
+  }
+
+  featuredScrollUp(event: any) {
+
+  }
+
+  flashScrollDown(event: any) {
+   
     this.viewdata4();
   }
+
   flashScrollUp(event: any) {
    
   }
-  top1ScrollDown(event: any) {
-    
-    this.viewhome34category();
+  top1ScrollDown(event: any) {   
+    // this.viewhome34category();
   }
+
   top1ScrollUp(event: any) {
     
   }
   top2ScrollUp(event: any) {
    
   }
-  top2ScrollDown(event: any) {
-    
-    this.viewhome5category();
+  top2ScrollDown(event: any) {    
   }
   
   onSubmit() {
@@ -580,6 +587,11 @@ export class HomeComponent implements OnInit {
   gethomeecat() {
     this.request.gethomecat().subscribe((response: any) => {
       this.Homecat = response.data;
+      this.loader8= false;
+      setTimeout(() => {
+        this.imgloader3 = false;
+      }, 500);
+      console.log("this.Homecat ", this.Homecat );
       this.top1id = this.Homecat[0].id
       this.top2id = this.Homecat[1].id
       this.top3id = this.Homecat[2].id
@@ -591,12 +603,11 @@ export class HomeComponent implements OnInit {
       this.top3name = this.Homecat[2].name;
       this.top4name = this.Homecat[3].name;
       this.top5name = this.Homecat[4].name;
-     
+ 
     });
   }
   
   viewhomeFScategory(){
-   
     this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
       console.log("topfirstcat response",response.data)
       this.topfirstcat = response.data
@@ -657,8 +668,8 @@ export class HomeComponent implements OnInit {
 
     });
   }
-  gotocategory() {
-    this.router.navigate(['category', this.top1id]);
+  gotocategory(id:any) {
+    this.router.navigate(['category', id]);
   }
   gotocategory2() {
     this.router.navigate(['category', this.top2id]);
@@ -685,7 +696,7 @@ export class HomeComponent implements OnInit {
     this.request.getflashdeals().subscribe((response: any) => {
       console.log("Flashdeal",response);    
       this.Flashdeal = response.data.slice(0, 4);
-      this.loader4 = false;
+      this.loaderflash = false;
     });
   }
 
@@ -736,14 +747,13 @@ export class HomeComponent implements OnInit {
   }
 
   viewbestsellpro() {
-    console.log("viewbestsellpro triggered");
     this.request.getbestsellpro().subscribe((response: any) => {
       console.log("viewbestsellpro",response);
       this.Bestsellpro = response.data;
       this.loader6 = false;
       setTimeout(() => {
         this.imgloader2 = false;
-      }, 1000);
+      }, 500);
     });
   }
   viewfuturedpro() {
@@ -754,7 +764,7 @@ export class HomeComponent implements OnInit {
       this.loader7 = false;
       setTimeout(() => {
         this.imgloader2 = false;
-      }, 1000);
+      }, 500);
     });
   }
   viewdaydeal() {
@@ -762,7 +772,7 @@ export class HomeComponent implements OnInit {
       this.Daydealpro = response.data.slice(0, 5);
       setTimeout(() => {
         this.imgloader = true;
-      }, 1000);
+      },500);
     });
   }
 
@@ -791,7 +801,7 @@ export class HomeComponent implements OnInit {
     });
   }
   proddetail(id: any) {
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
     this.router.navigate(['productdetail', id]);
   }
   viewproductrow(img: any) {
@@ -808,7 +818,7 @@ export class HomeComponent implements OnInit {
       this.colors = this.Peoduct.colors
       this.tags = this.Peoduct.tags
       this.varprise = this.Peoduct.main_price
-      window.scroll(0, 0);
+      // window.scroll(0, 0);
     },
       (error: any) => {
         console.log(error);
@@ -848,6 +858,9 @@ export class HomeComponent implements OnInit {
     if(varient.length>1){
   this.currentpackagevalue= varient[1].options[0]
     }
+    else{
+      this.currentpackagevalue=null
+    }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       console.log("res", res);
 
@@ -867,6 +880,9 @@ export class HomeComponent implements OnInit {
       if(varient.length>1){
     this.currentpackagevalue= varient[1].options[0]
       }
+      else{
+        this.currentpackagevalue=null
+      }
       this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
 
       this.Futuredpro[i].stroked_price = res.stroked_price
@@ -877,17 +893,20 @@ export class HomeComponent implements OnInit {
       console.log("error", error);
     });
   }
-  topcat1selectvar(weight: any, i: any, id: any,varient:any) {
+  topcat1selectvar(cat_index:any,weight: any, i: any, id: any,varient:any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     if(varient.length>1){
   this.currentpackagevalue= varient[1].options[0]
     }
+    else{
+      this.currentpackagevalue=null
+    }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-      this.topfirstcat[i].stroked_price = res.stroked_price
-      this.topfirstcat[i].main_price = res.price_string
-      this.topfirstcat[i].discount_amount = res.discount_amount;
-      this.topfirstcat[i].discount_percentage = res.discount_percentage;
+      this.Homecat[cat_index].products.data[i].stroked_price = res.stroked_price
+      this.Homecat[cat_index].products.data[i].main_price = res.price_string
+      this.Homecat[cat_index].products.data[i].discount_amount = res.discount_amount;
+      this.Homecat[cat_index].products.data[i].discount_percentage = res.discount_percentage;
     }, (error: any) => {
       console.log("error", error);
     });
@@ -897,6 +916,9 @@ export class HomeComponent implements OnInit {
     this.showaddbtn = i
     if(varient.length>1){
   this.currentpackagevalue= varient[1].options[0]
+    }
+    else{
+      this.currentpackagevalue=null
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       this.topsecondcat[i].stroked_price = res.stroked_price
@@ -913,6 +935,9 @@ export class HomeComponent implements OnInit {
     if(varient.length>1){
   this.currentpackagevalue= varient[1].options[0]
     }
+    else{
+      this.currentpackagevalue=null
+    }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       this.topthirdcat[i].stroked_price = res.stroked_price
       this.topthirdcat[i].main_price = res.price_string
@@ -928,6 +953,9 @@ export class HomeComponent implements OnInit {
     console.log("this.selectedvar",this.selectedvar);
     if(varient?.length>1){
   this.currentpackagevalue= varient[1].options[0]
+    }
+    else{
+      this.currentpackagevalue=null
     }
     this.request.addvarientfromdetail(id, this.selectedvar,this.currentpackagevalue).subscribe((res: any) => {
       this.topfourthcat[i].stroked_price = res.stroked_price
@@ -946,6 +974,9 @@ export class HomeComponent implements OnInit {
     if(varient?.length>1){
   this.currentpackagevalue= varient[1].options[0]
     }
+    else{
+      this.currentpackagevalue=null
+    }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       this.topfifthcat[i].stroked_price = res.stroked_price
       this.topfifthcat[i].main_price = res.price_string
@@ -957,10 +988,10 @@ export class HomeComponent implements OnInit {
   }
 
   prodaddtocart(img: any) {
-    if (this.userid == 0) {
-      this.openlogin()
-    }
-    else {
+    // if (this.userid == 0) {
+    //   this.openlogin()
+    // }
+    // else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         this.varient_value = ''
       }
@@ -1015,7 +1046,7 @@ export class HomeComponent implements OnInit {
           console.log("error", error);
 
         });
-    }
+    // }
   }
 
   backk() {
@@ -1025,15 +1056,15 @@ export class HomeComponent implements OnInit {
   }
   gotodeals() {
     this.router.navigate(['/daydeal']);
-    window.scroll(0, 0)
+    // window.scroll(0, 0)
   }
   addtocart(_id: any) {
 
-    if (this.userid == 0) {
-      // this.toastr.info('You need to login', '');
-      this.openlogin()
-    }
-    else {
+    // if (this.userid == 0) {
+    //   // this.toastr.info('You need to login', '');
+    //   this.openlogin()
+    // }
+    // else {
       let edata = {
         id: _id,
         variant: this.varient_value.replace(/\s/g, ""),
@@ -1061,7 +1092,7 @@ export class HomeComponent implements OnInit {
           this.toastr.error(error);
 
         });
-    }
+    // }
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
@@ -1119,7 +1150,7 @@ export class HomeComponent implements OnInit {
     });
   }
   brandnavigate(id: any) {
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
     this.router.navigate(['brands', id]);
 
   }
@@ -1154,7 +1185,7 @@ export class HomeComponent implements OnInit {
     });
   }
   catnavigate(id: any) {
-    window.scroll(0, 0);
+    // window.scroll(0, 0);
     this.router.navigate(['category', id]);
 
   }
@@ -1274,10 +1305,10 @@ export class HomeComponent implements OnInit {
   }
 
   addtocart2() {
-    if (this.userid == 0) {
-      this.openlogin()
-    }
-    else {
+    // if (this.userid == 0) {
+    //   this.openlogin()
+    // }
+    // else {
       let edata = {
         id: this.product_id,
         variant: this.varient_value.replace(/\s/g, ""),
@@ -1307,7 +1338,7 @@ export class HomeComponent implements OnInit {
 
 
         });
-    }
+    // }
   }
   addRecordSuccess() {
     this.toastr.success('Added Successfully', '');

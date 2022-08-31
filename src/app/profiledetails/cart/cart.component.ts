@@ -12,6 +12,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 
 import { SharedService } from 'src/app/services/shared.service'
+import { LoginComponent } from 'src/app/auth/login/login.component';
 
 
 // import{ SharedService} from 'src/app/services/shared.service'
@@ -99,19 +100,22 @@ export class CartComponent implements OnInit {
     
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
-    this.userid = this.currentdetail.user.id;
+    this.userid = this.currentdetail.user?.id;
     this.buyertypeid = this.currentdetail.user?.buyertypeid;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-    this.username = this.currentdetail.user.name;
-    this.userphone = this.currentdetail.user.phone;
-    this.useremail = this.currentdetail.user.email;
+    this.username = this.currentdetail.user?.name;
+    this.userphone = this.currentdetail.user?.phone;
+    this.useremail = this.currentdetail.user?.email;
 
-    if (this.userid !== 0) {
+   
       this.ClickEventSubscription = this.sharedService.getcartClickEvent().subscribe(() => {
         this.viewcart();
       })
-    }
+      if(this.userid == undefined){
+        this.userid = 0
+      }
+   
     
   }
 
@@ -134,6 +138,18 @@ export class CartComponent implements OnInit {
     this.search = this.fb.group({
       qtyyy: [''],
     });
+  }
+  proceed() {
+    if(this.userid == 0){
+      this.modalService.open(LoginComponent, {
+        ariaLabelledBy: 'modal-basic-title',
+        size: 'md',
+      });
+    }
+    else{
+      this.router.navigate(['checkout']);
+    }
+
   }
   viewcart() {
     this.request.fetchusercart(this.userid,0).subscribe((response: any) => {

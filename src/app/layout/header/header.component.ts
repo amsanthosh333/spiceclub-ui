@@ -94,12 +94,13 @@ export class HeaderComponent implements OnInit {
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
 
     if (this.userid !== 0) {
+      this.getprofile();
       this.ClickEventSubscription = this.sharedService.getClickEvent().subscribe(() => {
         // this.viewwishlist();
         this.viewcartcount();
         this.viewcart();
         this.viewcart3();
-        this.getprofile();
+       
       })
 
       this.ClickEventSubscription = this.sharedService.getWishlistEvent().subscribe(() => {
@@ -147,6 +148,9 @@ export class HeaderComponent implements OnInit {
    
     }
     else {
+      this.viewcartcount();
+      this.viewcart();
+      this.viewcart3();
       this.viewallcategory();
     }
 
@@ -1625,7 +1629,6 @@ export class HeaderComponent implements OnInit {
   }
   viewwishlist() {
     this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
-      console.log("this.Wishlist", response);
       this.Wishlist = response.data;
       this.Wlength = this.Wishlist.length;
       this.loader = false;
@@ -1634,7 +1637,7 @@ export class HeaderComponent implements OnInit {
   viewcart() {
     this.request.fetchusercart(this.userid,0).subscribe((response: any) => {
       this.Cart = response;
-      console.log("this.Cart", this.Cart);    
+    
     });
   }
   viewcartcount() {
@@ -1668,7 +1671,15 @@ export class HeaderComponent implements OnInit {
     $("#cart-overlay").removeClass("active-cart-overlay");
     $(".cart-overlay-close").addClass("inactive").removeClass("active");
     $("body").removeClass("active-body-search-overlay");
-    this.router.navigate(['/checkout']);
+      if(this.userid == 0){
+        this.modalService.open(LoginComponent, {
+          ariaLabelledBy: 'modal-basic-title',
+          size: 'md',
+        });
+      }
+      else{
+        this.router.navigate(['checkout']);
+      }
   }
   deleteRecord(id: any) {
     this.request.deletewishproud(id).subscribe((response: any) => {
@@ -1712,6 +1723,7 @@ export class HeaderComponent implements OnInit {
   }
   viewcart3() {
     this.request.fetchsummery(this.userid,0,null).subscribe((response: any) => {
+      console.log("summary",response); 
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
       this.subtot = this.Summery.sub_total
@@ -1769,8 +1781,7 @@ export class HeaderComponent implements OnInit {
 
   viewallcategory() {
     this.request.getallcat().subscribe((response: any) => {
-      this.Allcat = response.data;
-      console.log("alllcat", this.Allcat);
+      this.Allcat = response.data; 
       window.scroll(0, 0);
     },
       (error: any) => {

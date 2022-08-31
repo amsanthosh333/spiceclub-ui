@@ -511,10 +511,10 @@ export class ProductdetailComponent implements OnInit {
 
   // addtocart main
   addtocartmain(_id: any, content: any) {
-    if (this.userid == 0) {
-      this.openlogin()
-    }
-    else {
+    // if (this.userid == 0) {
+    //   this.openlogin()
+    // }
+    // else {
       if (this.quantityyy == 0) {
         let edata = {
           id: _id,
@@ -536,7 +536,7 @@ export class ProductdetailComponent implements OnInit {
         }
         this.addtoocarttmain(edata, content);
       }
-    }
+    // }
   }
   addtoocarttmain(edata: any, content: any) {
     if (this.Peoduct.choice_options.length > 1) {
@@ -1151,11 +1151,11 @@ export class ProductdetailComponent implements OnInit {
     });
   }
   prodaddtocart(img: any) {
-    console.log("img", img);
-    if (this.userid == 0) {
-      this.openlogin()
-    }
-    else {
+    // console.log("img", img);
+    // if (this.userid == 0) {
+    //   this.openlogin()
+    // }
+    // else {
 
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         console.log("empty");
@@ -1213,7 +1213,7 @@ export class ProductdetailComponent implements OnInit {
           console.log("error", error);
 
         });
-    }
+    // }
   }
   proddetail(id: any) {
     window.scroll(0, 0);

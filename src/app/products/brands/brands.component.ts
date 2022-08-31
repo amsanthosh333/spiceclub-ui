@@ -129,6 +129,7 @@ export class BrandsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    window.scroll(0, 0)
     this.detectPopState();
     this.prodloader = true;
     this.id = this.route.snapshot.params['id'];
@@ -507,11 +508,11 @@ export class BrandsComponent implements OnInit {
   }
 
   prodaddtocart(img: any) {
-    console.log("img", img);
-    if (this.userid == 0) {
-      this. openlogin()
-    }
-    else {
+    // console.log("img", img);
+    // if (this.userid == 0) {
+    //   this. openlogin()
+    // }
+    // else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         console.log("empty");
         this.varient_value = ''
@@ -564,7 +565,7 @@ export class BrandsComponent implements OnInit {
           console.log("error", error);
 
         });
-    }
+    // }
   }
   bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");

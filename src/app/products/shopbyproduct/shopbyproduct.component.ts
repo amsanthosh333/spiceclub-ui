@@ -179,7 +179,8 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // window.scroll(0, 0);
+    
+    window.scroll(0, 0);
     this.keyy = this.route.snapshot.params['key'];
     this.route.queryParams.subscribe((data2: Params) => {
       console.log("queryParams data", data2);
@@ -242,6 +243,7 @@ export class ShopbyproductComponent implements OnInit {
     });
   }
 
+  
   toggle(img: any, index: any): void {
     this.likeddd[index] = !this.likeddd[index];
     if (this.likeddd[index] == true) {
@@ -559,13 +561,6 @@ export class ShopbyproductComponent implements OnInit {
   }
   getprodofbrand2(id: any, i: any) {
     this.router.navigate(['/shopbyproduct'], { queryParams: { page: 1, brands: id, min: 0, max: this.maximumprize, } });
-    //   window.scroll(0,0);
-    //  this.brand_id=id;
-    //  this.subItem=i;
-    //  this.headItem=1
-
-    //  console.log("brand id","index",id , i);
-    //   this.getprodofbrand(id,1)
   }
 
   headactive(i: any) {
@@ -669,7 +664,7 @@ export class ShopbyproductComponent implements OnInit {
   }
   proddetail(id: any) {
     this.router.navigate(['productdetail', id]);
-    window.scroll(0, 0)
+   
   }
 
   firstDropDownChanged(data: any) {
@@ -1197,10 +1192,10 @@ export class ShopbyproductComponent implements OnInit {
   prodaddtocart(img: any) {
     console.log("img.varientlength",img.variants.length);
     
-    if (this.userid == 0) {
-      this. openlogin()
-    }
-    else {
+    // if (this.userid == 0) {
+    //   this. openlogin()
+    // }
+    // else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         console.log("empty");
         this.varient_value = ''
@@ -1242,7 +1237,7 @@ export class ShopbyproductComponent implements OnInit {
       }
 
       this.request.addtocart(this.edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
+        console.log("addtocart resssssssssssssss", res);
         if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
@@ -1258,7 +1253,7 @@ export class ShopbyproductComponent implements OnInit {
           console.log("error", error);
 
         });
-    }
+    // }
   }
   bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");

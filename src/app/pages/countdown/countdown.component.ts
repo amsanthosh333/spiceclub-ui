@@ -25,7 +25,7 @@ export class CountdownComponent implements OnInit  {
   constructor() { }
 
   ngOnInit() {
-    console.log("this,.interval",this.interval);
+    // console.log("this,.interval",this.interval);
   this.countDowndate =new Date(this.interval).getTime();
   
    const x=setInterval(()=>{

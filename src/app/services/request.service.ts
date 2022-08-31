@@ -3,7 +3,7 @@ import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { BehaviorSubject, Observable, ObservableInput, of, Subscriber } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpHeaders } from '@angular/common/http';
-import { User } from '../models/user';
+import { temporaryId, User } from '../models/user';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 import { retry } from 'rxjs/operators';
@@ -17,6 +17,8 @@ export class RequestService {
   endPoint1 = environment.baseURL1;
   url: string | undefined;
   currentUserSubject: BehaviorSubject<User>;
+  // temporaryIdSubject!: BehaviorSubject<temporaryId>;
+  // temp_Id!: Observable<User>;
   currentUser: Observable<User>;
 
   // private endPoint1 = "https://neophroncrm.com/spiceclubnew/api/v2"
@@ -27,6 +29,12 @@ export class RequestService {
   extractData: any;
   handleError!: (err: any, caught: Observable<Object>) => ObservableInput<any>;
   buyertypeid: any;
+
+  temporaryIdSubject: BehaviorSubject<temporaryId>;
+  temp_Id: Observable<temporaryId>;
+  temp_detail: temporaryId;
+  currrent_temp_Id: any;
+
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -47,6 +55,15 @@ export class RequestService {
     if (this.buyertypeid == undefined) {
       this.buyertypeid = 1
     }
+
+    this.temporaryIdSubject = new BehaviorSubject<temporaryId>(
+      JSON.parse(localStorage.getItem('temporaryId') || '{}')
+    );
+    this.temp_Id = this.temporaryIdSubject.asObservable();
+    this.temp_detail=this.temporaryIdSubject.value;
+    this.currrent_temp_Id=this.temp_detail.temp_user_id
+    console.log("this.temp_Id",this.temp_Id);   
+    console.log(" this.currrent_temp_Id", this.currrent_temp_Id);   
   }
 
   logout() {
@@ -119,8 +136,19 @@ export class RequestService {
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     // .set('Access-Control-Allow-Origin', '*')
-    this.url = `${this.endPoint1}/carts/add`;
-    return this.http.post(this.url, body, { headers: headers });
+    // this.url = `${this.endPoint1}/carts/add`;
+    this.url = `${this.endPoint1}/testcarts/add`;
+      body.temp_user_id=this.currrent_temp_Id
+     console.log("Add to cart body:",body);
+    return this.http.post(this.url, body, { headers: headers })
+    .pipe(    
+      map((temporaryId) => { 
+        localStorage.setItem('temporaryId', JSON.stringify(temporaryId));
+        // this.temporaryIdSubject.next(temporaryId); 
+        // // console.log("currentuser:",user);
+        return temporaryId;
+      })
+    );
 
   }
 
@@ -128,7 +156,10 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/cart-count/` + id;
+    // this.url = `${this.endPoint1}/cart-count/` + id;
+    this.url = `${this.endPoint1}/testcart-count/` + id +`?temp_user_id=`+ this.currrent_temp_Id;
+    console.log("cartcount",this.url);
+    
     return this.http.get(this.url, { headers: headers });
   }
 
@@ -143,14 +174,18 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/carts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid;
+    // this.url = `${this.endPoint1}/carts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid;
+    this.url = `${this.endPoint1}/testcarts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
+    console.log("testcars url",this.url);
+    
     return this.http.post(this.url, null, { headers: headers });
   }
   public fetchcartprocess(body: any) {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/carts/process`;
+    // this.url = `${this.endPoint1}/carts/process`;
+    this.url = `${this.endPoint1}/testcarts/process`;
     return this.http.post(this.url, body, { headers: headers });
 
   }
@@ -158,7 +193,8 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/carts/remove/` + id;
+    // this.url = `${this.endPoint1}/carts/remove/` + id;
+    this.url = `${this.endPoint1}/testcarts/remove/` + id;
     return this.http.get(this.url, { headers: headers });
   }
 
@@ -166,14 +202,16 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/carts/change-quantity`;
+    // this.url = `${this.endPoint1}/carts/change-quantity`;
+    this.url = `${this.endPoint1}/testcarts/change-quantity`;
     return this.http.post(this.url, body, { headers: headers });
   }
   fetchsummery(id: any, buynowid: any, paymenttype:any) {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    this.url = `${this.endPoint1}/cart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype;
+    // this.url = `${this.endPoint1}/cart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype;
+    this.url = `${this.endPoint1}/testcart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype+`&temp_user_id=`+ this.currrent_temp_Id;
    console.log(this.url);
    
     return this.http.get(this.url, { headers: headers });
@@ -526,7 +564,7 @@ export class RequestService {
     return this.http.get(this.url);
   }
   public gethomecat() {
-    this.url = `${this.endPoint1}/home-categories`;
+    this.url = `${this.endPoint1}/home-categories?user_id=` + this.userid + `&buyertype=` + this.buyertypeid;;
     return this.http.get(this.url);
   }
   public gettopcat() {

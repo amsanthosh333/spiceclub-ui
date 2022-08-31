@@ -454,7 +454,8 @@
         </div>
     </div>
     <!-- featured product  start-->
-    <div class="col-lg-12 mb-10 pb-0" class="listcard">
+    <div class="col-lg-12 mb-10 pb-0" class="listcard" infinite-scroll
+    [infiniteScrollDistance]="2" (scrolled)="featuredScrollDown($event)" (scrolledUp)="featuredScrollUp($event)">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
@@ -582,7 +583,7 @@
                         <div class="col-lg-2 col-md-6 col-12 mb-60">
                             <div class="single-category single-categow zoomIn">
                                 <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
+                                    style=" width:100%; height:260px;">
                                     <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -592,7 +593,7 @@
                         <div class="col-lg-2 col-md-6 col-12 mb-60">
                             <div class="single-category single-categow zoomIn">
                                 <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
+                                    style=" width:100%; height:260px;">
                                     <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -602,7 +603,7 @@
                         <div class="col-lg-2 col-md-6 col-12 mb-60">
                             <div class="single-category single-categow zoomIn">
                                 <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
+                                    style=" width:100%; height:260px;">
                                     <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -612,7 +613,7 @@
                         <div class="col-lg-2 col-md-6 col-12 mb-60">
                             <div class="single-category single-categow zoomIn">
                                 <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
+                                    style=" width:100%; height:260px;">
                                     <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -622,7 +623,7 @@
                         <div class="col-lg-2 col-md-6 col-12 mb-60">
                             <div class="single-category single-categow zoomIn">
                                 <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
+                                    style=" width:100%; height:260px;">
                                     <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -632,7 +633,7 @@
                         <div class="col-lg-2 col-md-6 col-12 mb-60">
                             <div class="single-category single-categow zoomIn">
                                 <div class="single-category__image single-category__image--one"
-                                    style=" width:100%; height:200px;">
+                                    style=" width:100%; height:260px;">
                                     <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                  'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -661,13 +662,6 @@
             </div>
         </div>
       <div class="carousall9">
-        <!-- <div class="sli mb-3" >       -->
-            <!-- <ng-image-slider style="padding-left: 7px; padding-right: 5px; margin-bottom: 20px;"
-                [images]="Flashdeal" [imageSize]="{width: 350, height: 200, space: 10}" [infinite]="true"
-                [imagePopup]="false" (imageClick)="imageClick($event)" [autoSlide]="false" [animationSpeed]="0"
-                #nav>
-            </ng-image-slider> 
-          </div>-->
             <div class="row">
                 <div class="col-lg-4 col-md-6 col-sm-12 "  *ngFor="let a of Flashdeal;let i=index" >
                     <app-countdown [interval]="a.date" (onComplete)="completed()"></app-countdown>
@@ -678,10 +672,7 @@
 
             </div>
 
-      
-
-      
-        <div class="hover-banner-area mb-10 mb-md-50 mb-sm-50 pt-15  " *ngIf="loader4">
+        <div class="hover-banner-area mb-10 mb-md-50 mb-sm-50 pt-15  " *ngIf="loaderflash">
             <div class="container wide">
                 <div class="row">
                     <div class="col-md-4 ">
@@ -716,17 +707,17 @@
 
     <!-- top 1 category -->
     <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;" infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="top1ScrollDown($event)" (scrolledUp)="top1ScrollUp($event)">
+    [infiniteScrollDistance]="2" (scrolled)="top1ScrollDown($event)" (scrolledUp)="top1ScrollUp($event)" *ngFor="let homecat of Homecat.slice(0,1);let cat_index = index">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
-                    {{top1name}}</h6>
-                <button class="btn btn-primary" id="viewall" (click)="gotocategory()">View all</button>
+                    {{homecat.name}}</h6>
+                <button class="btn btn-primary" id="viewall" (click)="gotocategory(homecat.id)">View all</button>
             </div>
         </div>
         <div class="carousall">
             <carousel style="height: 320px; z-index: unset;" *ngIf="!loader8">
-                <div class="carousel-cell" *ngFor="let img of topfirstcat ;let i = index">
+                <div class="carousel-cell" *ngFor="let img of homecat.products.data ;let i = index">
                     <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
                         <div class="single-product__image">
                             <div class="imglaz" style="position: relative;overflow: hidden;">
@@ -750,7 +741,7 @@
                             </div>
                             <div class="single-product__floating-badges" style="margin-left: 0px;">
                                 <span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
-                                <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
+                             
                             </div>
                             <div class="single-product__floating-icons">
                                 <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
@@ -768,11 +759,6 @@
                                             (click)='toggledelete1(img,i)'
                                             style="color: rgb(214, 5, 5);"></i></a></span>
 
-                                <!-- <span class="quickview" (click)="quickview(img.id,openRecord)"><a class="cd-trigger"
-                                        data-tippy="Quick View" data-tippy-inertia="true"
-                                        data-tippy-animation="shift-away" data-tippy-delay="50" data-tippy-arrow="true"
-                                        data-tippy-theme="sharpborder" data-tippy-placement="left"><i
-                                            class="bi bi-cart3"></i></a></span> -->
                             </div>
                         </div>
 
@@ -788,29 +774,15 @@
                                  margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>
                             </div>
 
-                            <!-- <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
-                        overflow: hidden;
-                        display: -webkit-box; 
-                        -webkit-line-clamp: 1;
-                        -webkit-box-orient: vertical;
-                        max-height: 1.7rem;
-                         font-size: 0.7rem;">
-                                <span class="discounted-price" *ngFor="let imgggg of imggg.options;">  {{imgggg}} &nbsp;
-                                </span>
-                            </div> -->
                             <div class="price" style="margin-top: 2px;">
                                 <span *ngIf="img?.stroked_price!==img?.main_price"
                                     class="main-price discounted">{{img.stroked_price}}</span>
                                 <span class="discounted-price">{{img.main_price}} </span>
                                 <a *ngIf="img.has_discount==true" style="font-size: 0.65rem;">You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                             </div>
-                            <!-- <div class="pri" style="text-align: center;" >
-                                <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
-                                 style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
-                            </div> -->
+
                         </div>
 
-                        <!--=======  End of single product content   =======-->
                         <div class="row"
                             *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
                             <div class="col-6 " style="padding-left:5px ; padding-right: 5px;">
@@ -830,7 +802,7 @@
                                         ngbDropdownToggle>Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="topcat1selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
+                                            (click)="topcat1selectvar(cat_index,imgggg,i,img.id,img.variants)">{{imgggg}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -907,7 +879,85 @@
             </div>
         </div>
     </div>
-    <!-- top 1 category -->
+    <!-- top 1 category  end-->
+    <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;"
+    *ngIf="loader8">
+        <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
+            <div class="section-title section-title--one  mb-0"> 
+                <h6 > &nbsp; </h6>
+                <button class="btn btn-primary" id="viewall" >View all</button>
+            </div>
+        </div>
+        <div class="carousall">
+            <div class="col-lg-12" *ngIf="loader8">
+                <div class="product-category-container--collectionhome-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!--top 1 category lazyloading end-->
 
     <!-- brands start -->
     <div class="col-lg-12 mb-10 pb-0" class="listcard" style="margin-top: 10px;">
@@ -1006,21 +1056,22 @@
 
     <!-- top 2 category -->
     <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;" infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="top2ScrollDown($event)" (scrolledUp)="top2ScrollUp($event)">
+    [infiniteScrollDistance]="2" (scrolled)="top2ScrollDown($event)" (scrolledUp)="top2ScrollUp($event)"
+    *ngFor="let homecat of Homecat.slice(1,2);let cat_index = index">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
-                    {{top2name}}</h6>
-                <button class="btn btn-primary" id="viewall" (click)="gotocategory2()">View all</button>
+                    {{homecat.name}}</h6>
+                <button class="btn btn-primary" id="viewall" (click)="gotocategory(homecat.id)">View all</button>
             </div>
         </div>
         <div class="carousall">
-            <carousel style="height: 320px; z-index: unset;" *ngIf="!loader9">
-                <div class="carousel-cell" *ngFor="let img of topsecondcat ;let i = index">
+            <carousel style="height: 320px; z-index: unset;" *ngIf="!loader8">
+                <div class="carousel-cell" *ngFor="let img of homecat.products.data ;let i = index">
                     <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
                         <div class="single-product__image">
                             <div class="imglaz" style="position: relative;overflow: hidden;">
-                                <ngx-skeleton-loader count="1" *ngIf="imgloader4"
+                                <ngx-skeleton-loader count="1" *ngIf="imgloader3"
                                     [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                 </ngx-skeleton-loader>
                                 <div *ngIf="img.iscertificated==1" class="like-button"
@@ -1030,7 +1081,7 @@
                                         <img src="assets/images/icons/green2.jpg" class="img-g" style="height: 15px;"
                                             alt=""></a>
                                 </div>
-                                <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader4">
+                                <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader3">
                                     <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                         class="img-fluid" alt="">
                                 </a>
@@ -1116,7 +1167,7 @@
                                         ngbDropdownToggle>Select Options&nbsp;</button>
                                     <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                         <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                            (click)="topcat2selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
+                                        (click)="topcat1selectvar(cat_index,imgggg,i,img.id,img.variants)">{{imgggg}}</button>
                                     </div>
                                 </div>
                             </div>
@@ -1125,7 +1176,7 @@
                     </div>
                 </div>
             </carousel>
-            <div class="col-lg-12" *ngIf="loader9">
+            <div class="col-lg-12" *ngIf="loader8">
                 <div class="product-category-container--collectionhome-wrapper">
                     <div class="row justify-content-center">
                         <div class="col-lg-2 col-md-6 col-12 mb-60">
@@ -1194,7 +1245,84 @@
         </div>
     </div>
     <!--top 2 category end-->
-
+    <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;"
+    *ngIf="loader8">
+        <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
+            <div class="section-title section-title--one  mb-0"> 
+                <h6 > &nbsp; </h6>
+                <button class="btn btn-primary" id="viewall" >View all</button>
+            </div>
+        </div>
+        <div class="carousall" >
+            <div class="col-lg-12" *ngIf="loader8">
+                <div class="product-category-container--collectionhome-wrapper">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-6 col-12 mb-60">
+                            <div class="single-category single-categow zoomIn">
+                                <div class="single-category__image single-category__image--one"
+                                    style=" width:100%; height:260px;">
+                                    <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                    </ngx-skeleton-loader>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ <!--top 2 category lazyloading end-->
 
     <!-- shipping, returns, testimoniyal -->
 
@@ -1255,30 +1383,25 @@
        
     </div>
 
-<!-- 
-    <div class="col-lg-12 mb-10 pb-0" class="listcard"
-        style="margin-top: 10px;padding: 2px; height: 150px; text-align: center;">
-        <div *ngFor="let img of Homecat ;let i = index">
-            <h6>{{img.name}}</h6>         
-        </div>    
-    </div> -->
 
-        <!-- top 3 category -->
-        <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;">
+
+        <!-- top 3,4,5 category -->
+        <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;"
+        *ngFor="let homecat of Homecat.slice(2,5);let cat_index = index">
             <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
                 <div class="section-title section-title--one  mb-0">
                     <h6 >
-                        {{top3name}}</h6>
-                    <button class="btn btn-primary" id="viewall" (click)="gotocategory3()">View all</button>
+                        {{homecat.name}}</h6>
+                    <button class="btn btn-primary" id="viewall" (click)="gotocategory(homecat.id)">View all</button>
                 </div>
             </div>
             <div class="carousall">
-                <carousel style="height: 320px; z-index: unset;" *ngIf="!loader10">
-                    <div class="carousel-cell" *ngFor="let img of topthirdcat ;let i = index">
+                <carousel style="height: 320px; z-index: unset;" *ngIf="!loader8">
+                    <div class="carousel-cell" *ngFor="let img of homecat.products.data ;let i = index">
                         <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
                             <div class="single-product__image">
                                 <div class="imglaz" style="position: relative;overflow: hidden;">
-                                    <ngx-skeleton-loader count="1" *ngIf="imgloader5"
+                                    <ngx-skeleton-loader count="1" *ngIf="imgloader3"
                                         [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
                                     <div *ngIf="img.iscertificated==1" class="like-button"
@@ -1288,7 +1411,7 @@
                                             <img src="assets/images/icons/green2.jpg" class="img-g" style="height: 15px;"
                                                 alt=""></a>
                                     </div>
-                                    <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader5">
+                                    <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader3">
                                         <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                             class="img-fluid" alt="">
                                     </a>
@@ -1374,7 +1497,7 @@
                                             ngbDropdownToggle>Select Options&nbsp;</button>
                                         <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
                                             <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                (click)="topcat3selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
+                                            (click)="topcat1selectvar(cat_index,imgggg,i,img.id,img.variants)">{{imgggg}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -1383,7 +1506,7 @@
                         </div>
                     </div>
                 </carousel>
-                <div class="col-lg-12" *ngIf="loader10">
+                <div class="col-lg-12" *ngIf="loader8">
                     <div class="product-category-container--collectionhome-wrapper">
                         <div class="row justify-content-center">
                             <div class="col-lg-2 col-md-6 col-12 mb-60">
@@ -1451,136 +1574,24 @@
                 </div>
             </div>
         </div>
-        <!--top 3 category end-->
 
-        
-        <!-- top 4 category -->
-        <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;">
+         <!--top 3,4,5 category end-->
+        <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;"
+        *ngIf="loader8" >
             <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
-                <div class="section-title section-title--one  mb-0">
-                    <h6 >
-                        {{top4name}}</h6>
-                    <button class="btn btn-primary" id="viewall" (click)="gotocategory4()">View all</button>
+                <div class="section-title section-title--one  mb-0"> 
+                    <h6 > &nbsp; </h6>
+                    <button class="btn btn-primary" id="viewall" >View all</button>
                 </div>
             </div>
             <div class="carousall">
-                <carousel style="height: 320px; z-index: unset;" *ngIf="!loader11">
-                    <div class="carousel-cell" *ngFor="let img of topfourthcat ;let i = index">
-                        <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
-                            <div class="single-product__image">
-                                <div class="imglaz" style="position: relative;overflow: hidden;">
-                                    <ngx-skeleton-loader count="1" *ngIf="imgloader6"
-                                        [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                    </ngx-skeleton-loader>
-                                    <div *ngIf="img.iscertificated==1" class="like-button"
-                                        style="text-align: end; margin-right: 20px;">
-                                        <a
-                                            style=" position: absolute;  z-index: 2; color: rgb(97, 216, 0); position: absolute;">
-                                            <img src="assets/images/icons/green2.jpg" class="img-g" style="height: 15px;"
-                                                alt=""></a>
-                                    </div>
-                                    <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader6">
-                                        <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                            class="img-fluid" alt="">
-                                    </a>
-                                    <span id="offtag2" *ngIf="img.deal_of_day!=0">Deal of the day</span>
-                                    <span id="offtag2" *ngIf="img.deal_of_month!=0">Deal of the month</span>
-                                    <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>
-                                </div>
-                                <div class="single-product__floating-badges" style="margin-left: 0px;">
-                                    <span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
-                                    <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
-                                </div>
-                                <div class="single-product__floating-icons">
-                                    <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
-                                            data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                            data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                            data-tippy-placement="left">
-                                            <i [ngClass]="{'ion-android-favorite':likesss[i]===true, 'ion-android-favorite-outline':likesss[i]===false}"
-                                                (click)='toggle1(img,i)' style="color: rgb(214, 5, 5);"></i></a></span>
-    
-                                    <span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
-                                            data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                            data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                            data-tippy-placement="left">
-                                            <i [ngClass]="{'ion-android-favorite':likess[i]===true, 'ion-android-favorite-outline':likess[i]===false}"
-                                                (click)='toggledelete1(img,i)'
-                                                style="color: rgb(214, 5, 5);"></i></a></span>
-    
-                                </div>
-                            </div>
-    
-    
-                            <div class="single-product__content" (click)=" proddetail(img.id)">
-                                <div class="title">
-                                    <h3> <a style="line-height: 1.2rem;
-                                    overflow: hidden;
-                                    display: -webkit-box; 
-                                    -webkit-line-clamp: 2;
-                                    -webkit-box-orient: vertical;
-                                    max-height: 3.2rem;
-                                    height: 2.4rem;
-                                     margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>
-                                </div>
-    
-                                <!-- <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
-                            overflow: hidden;
-                            display: -webkit-box; 
-                            -webkit-line-clamp: 1;
-                            -webkit-box-orient: vertical;
-                            max-height: 1.7rem;
-                             font-size: 0.7rem;">
-                                    <span class="discounted-price" *ngFor="let imgggg of imggg.options;">  {{imgggg}} &nbsp;
-                                    </span>
-                                </div> -->
-                                <div class="price" style="margin-top: 2px;">
-                                    <span *ngIf="img?.stroked_price!==img?.main_price"
-                                        class="main-price discounted">{{img.stroked_price}}</span>
-                                    <span class="discounted-price">{{img.main_price}} </span>
-                                    <a *ngIf="img.has_discount==true" style="font-size: 0.65rem;">You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
-                                </div>
-                                <!-- <div class="pri" style="text-align: center;" >
-                                    <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
-                                     style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
-                                </div> -->
-                            </div>
-    
-                            <!--=======  End of single product content   =======-->
-                            <div class="row"
-                                *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
-                                <div class="col-6 " style="padding-left:5px ; padding-right: 5px;">
-                                    <input (change)="qtyChange($event,i,img)" type="number" id="quantity" name="quantity"
-                                        value="1" style="width:100%;text-align: center;">
-                                </div>
-                                <div class="col-6 p-0">
-                                    <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                        (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i> Add</button>
-                                </div>
-                            </div>
-    
-                            <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
-                                <div class="col-12 ">
-                                    <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
-                                        <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                            ngbDropdownToggle>Select Options&nbsp;</button>
-                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
-                                            <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                (click)="topcat4selectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-    
-                        </div>
-                    </div>
-                </carousel>
-                <div class="col-lg-12" *ngIf="loader11">
+                <div class="col-lg-12" *ngIf="loader8">
                     <div class="product-category-container--collectionhome-wrapper">
                         <div class="row justify-content-center">
                             <div class="col-lg-2 col-md-6 col-12 mb-60">
                                 <div class="single-category single-categow zoomIn">
                                     <div class="single-category__image single-category__image--one"
-                                        style=" width:100%; height:200px;">
+                                        style=" width:100%; height:280px;">
                                         <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                      'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -1590,7 +1601,7 @@
                             <div class="col-lg-2 col-md-6 col-12 mb-60">
                                 <div class="single-category single-categow zoomIn">
                                     <div class="single-category__image single-category__image--one"
-                                        style=" width:100%; height:200px;">
+                                        style=" width:100%; height:280px;">
                                         <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                      'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -1600,7 +1611,7 @@
                             <div class="col-lg-2 col-md-6 col-12 mb-60">
                                 <div class="single-category single-categow zoomIn">
                                     <div class="single-category__image single-category__image--one"
-                                        style=" width:100%; height:200px;">
+                                        style=" width:100%; height:280px;">
                                         <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                      'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -1610,7 +1621,7 @@
                             <div class="col-lg-2 col-md-6 col-12 mb-60">
                                 <div class="single-category single-categow zoomIn">
                                     <div class="single-category__image single-category__image--one"
-                                        style=" width:100%; height:200px;">
+                                        style=" width:100%; height:280px;">
                                         <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                      'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -1620,7 +1631,7 @@
                             <div class="col-lg-2 col-md-6 col-12 mb-60">
                                 <div class="single-category single-categow zoomIn">
                                     <div class="single-category__image single-category__image--one"
-                                        style=" width:100%; height:200px;">
+                                        style=" width:100%; height:280px;">
                                         <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                      'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -1630,7 +1641,7 @@
                             <div class="col-lg-2 col-md-6 col-12 mb-60">
                                 <div class="single-category single-categow zoomIn">
                                     <div class="single-category__image single-category__image--one"
-                                        style=" width:100%; height:200px;">
+                                        style=" width:100%; height:280px;">
                                         <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
                                      'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -1642,197 +1653,7 @@
                 </div>
             </div>
         </div>
-        <!--top 4 category end-->
-
-            <!-- top 5 category -->
-            <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;">
-                <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
-                    <div class="section-title section-title--one  mb-0">
-                        <h6 >
-                            {{top5name}}</h6>
-                        <button class="btn btn-primary" id="viewall" (click)="gotocategory5()">View all</button>
-                    </div>
-                </div>
-                <div class="carousall">
-                    <carousel style="height: 320px; z-index: unset;" *ngIf="!loader12">
-                        <div class="carousel-cell" *ngFor="let img of topfifthcat ;let i = index">
-                            <div class="single-product" style="margin-top: 20px;padding-left: 25px; overflow: hidden; padding-right: 25px;">
-                                <div class="single-product__image">
-                                    <div class="imglaz" style="position: relative;overflow: hidden;">
-                                        <ngx-skeleton-loader count="1" *ngIf="imgloader7"
-                                            [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                        </ngx-skeleton-loader>
-                                        <div *ngIf="img.iscertificated==1" class="like-button"
-                                            style="text-align: end; margin-right: 20px;">
-                                            <a
-                                                style=" position: absolute;  z-index: 2; color: rgb(97, 216, 0); position: absolute;">
-                                                <img src="assets/images/icons/green2.jpg" class="img-g" style="height: 15px;"
-                                                    alt=""></a>
-                                        </div>
-                                        <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg" *ngIf="!imgloader7">
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="">
-                                        </a>
-                                        <span id="offtag2" *ngIf="img.deal_of_day!=0">Deal of the day</span>
-                                        <span id="offtag2" *ngIf="img.deal_of_month!=0">Deal of the month</span>
-                                        <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>
-                                    </div>
-                                    <div class="single-product__floating-badges" style="margin-left: 0px;">
-                                        <span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
-                                        <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
-                                    </div>
-                                    <div class="single-product__floating-icons">
-                                        <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
-                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                data-tippy-placement="left">
-                                                <i [ngClass]="{'ion-android-favorite':likesss[i]===true, 'ion-android-favorite-outline':likesss[i]===false}"
-                                                    (click)='toggle1(img,i)' style="color: rgb(214, 5, 5);"></i></a></span>
-        
-                                        <span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
-                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
-                                                data-tippy-delay="50" data-tippy-arrow="true" data-tippy-theme="sharpborder"
-                                                data-tippy-placement="left">
-                                                <i [ngClass]="{'ion-android-favorite':likess[i]===true, 'ion-android-favorite-outline':likess[i]===false}"
-                                                    (click)='toggledelete1(img,i)'
-                                                    style="color: rgb(214, 5, 5);"></i></a></span>
-        
-                                    </div>
-                                </div>
-        
-        
-                                <div class="single-product__content" (click)=" proddetail(img.id)">
-                                    <div class="title">
-                                        <h3> <a style="line-height: 1.2rem;
-                                        overflow: hidden;
-                                        display: -webkit-box; 
-                                        -webkit-line-clamp: 2;
-                                        -webkit-box-orient: vertical;
-                                        max-height: 3.2rem;
-                                        height: 2.4rem;
-                                         margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>
-                                    </div>
-        
-                                    <!-- <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
-                                overflow: hidden;
-                                display: -webkit-box; 
-                                -webkit-line-clamp: 1;
-                                -webkit-box-orient: vertical;
-                                max-height: 1.7rem;
-                                 font-size: 0.7rem;">
-                                        <span class="discounted-price" *ngFor="let imgggg of imggg.options;">  {{imgggg}} &nbsp;
-                                        </span>
-                                    </div> -->
-                                    <div class="price" style="margin-top: 2px;">
-                                        <span *ngIf="img?.stroked_price!==img?.main_price"
-                                            class="main-price discounted">{{img.stroked_price}}</span>
-                                        <span class="discounted-price">{{img.main_price}} </span>
-                                        <a *ngIf="img.has_discount==true" style="font-size: 0.65rem;">You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
-                                    </div>
-                                    <!-- <div class="pri" style="text-align: center;" >
-                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index" 
-                                         style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span *ngIf="i<2">{{b.name}}</span></span>
-                                    </div> -->
-                                </div>
-        
-                                <!--=======  End of single product content   =======-->
-                                <div class="row"
-                                    *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
-                                    <div class="col-6 " style="padding-left:5px ; padding-right: 5px;">
-                                        <input (change)="qtyChange($event,i,img)" type="number" id="quantity" name="quantity"
-                                            value="1" style="width:100%;text-align: center;">
-                                    </div>
-                                    <div class="col-6 p-0">
-                                        <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                            (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i> Add</button>
-                                    </div>
-                                </div>
-        
-                                <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
-                                    <div class="col-12 ">
-                                        <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
-                                            <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                                ngbDropdownToggle>Select Options&nbsp;</button>
-                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2" style="margin-left:-5px;">
-                                                <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                    (click)="topcat5selectvar(imgggg ,i,img.id,img.varients)">{{imgggg}}</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                            </div>
-                        </div>
-                    </carousel>
-                    <div class="col-lg-12" *ngIf="loader10">
-                        <div class="product-category-container--collectionhome-wrapper">
-                            <div class="row justify-content-center">
-                                <div class="col-lg-2 col-md-6 col-12 mb-60">
-                                    <div class="single-category single-categow zoomIn">
-                                        <div class="single-category__image single-category__image--one"
-                                            style=" width:100%; height:200px;">
-                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
-                                         'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                            </ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-6 col-12 mb-60">
-                                    <div class="single-category single-categow zoomIn">
-                                        <div class="single-category__image single-category__image--one"
-                                            style=" width:100%; height:200px;">
-                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
-                                         'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                            </ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-6 col-12 mb-60">
-                                    <div class="single-category single-categow zoomIn">
-                                        <div class="single-category__image single-category__image--one"
-                                            style=" width:100%; height:200px;">
-                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
-                                         'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                            </ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-6 col-12 mb-60">
-                                    <div class="single-category single-categow zoomIn">
-                                        <div class="single-category__image single-category__image--one"
-                                            style=" width:100%; height:200px;">
-                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
-                                         'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                            </ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-6 col-12 mb-60">
-                                    <div class="single-category single-categow zoomIn">
-                                        <div class="single-category__image single-category__image--one"
-                                            style=" width:100%; height:200px;">
-                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
-                                         'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                            </ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-2 col-md-6 col-12 mb-60">
-                                    <div class="single-category single-categow zoomIn">
-                                        <div class="single-category__image single-category__image--one"
-                                            style=" width:100%; height:200px;">
-                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
-                                         'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                            </ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--top 5 category end-->
+       <!--top 3,4,5 category lazyloading end-->
 
     <!-- recipe -->
     <div class="col-lg-12 mb-10 pb-0" class="listcard" id="recipelistcard" style="margin-top: 10px;">

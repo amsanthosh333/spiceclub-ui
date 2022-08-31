@@ -188,7 +188,7 @@ password2() {
             this.toastr.success('Your account is verified', '');
             this.modalService.dismissAll();
             // this.openlogin();
-            this.router.navigate(['/home']).then(() => {
+            this.router.navigate(['/home']).then(() => { 
               window.location.reload();
             });
           } else {

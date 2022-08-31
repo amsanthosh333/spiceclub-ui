@@ -1444,6 +1444,10 @@ li::-webkit-scrollbar {
 	display: none;
 }
 
+/* nav.site-nav > ul > li.menu-item-has-children .sub-menu {
+	visibility: visible;
+  } */
+
 /* .bi-caret-right-fill{
 color: red;
 } */

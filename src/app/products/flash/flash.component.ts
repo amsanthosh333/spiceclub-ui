@@ -111,6 +111,7 @@ export class FlashComponent implements OnInit {
      }
 
   ngOnInit(): void {
+    window.scroll(0,0);
     this.id = this.route.snapshot.params['id']; 
     console.log("FLASH id",this.id);
     if(this.id){
@@ -428,7 +429,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   }
   }
   proddetail(id:any){
-    window.scroll(0,0);
+    
     this.router.navigate(['productdetail', id]);
   }
   addRecordSuccess() {
@@ -464,11 +465,11 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   }
 
   prodaddtocart(img: any) {
-    console.log("img", img);
-    if (this.userid == 0) {
-      this. openlogin()
-    }
-    else {
+    // console.log("img", img);
+    // if (this.userid == 0) {
+    //   this. openlogin()
+    // }
+    // else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
         console.log("empty");
         this.varient_value = ''
@@ -522,7 +523,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
           console.log("error", error);
 
         });
-    }
+    // }
   }
   bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");

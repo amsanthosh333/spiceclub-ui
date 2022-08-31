@@ -69,32 +69,32 @@ export class FooterComponent implements OnInit {
   getfacebookurl() {
     this.request.fetchfacebookurl().subscribe((res: any) => {
       this.facebookurl = res.link;
-      console.log("this.facebookurl", this.facebookurl);
+      // console.log("this.facebookurl", this.facebookurl);
     });
   }
   getyoutubeurl() {
     this.request.fetchyoutubeurl().subscribe((res: any) => {
       this.youtubeurl = res.link;
-      console.log("this.youtubeurl", this.youtubeurl);
+      // console.log("this.youtubeurl", this.youtubeurl);
     });
   }
   getinstagramurl() {
     this.request.fetchinstagramurl().subscribe((res: any) => {
       this.instagramurl = res.link;
-      console.log("this.instagramurl", this.instagramurl);
+      // console.log("this.instagramurl", this.instagramurl);
     });
   }
 
   gettwitterurl() {
     this.request.fetchtwitterurl().subscribe((res: any) => {
       this.twitterurl = res.link;
-      console.log("this.twitterurl", this.twitterurl);
+      // console.log("this.twitterurl", this.twitterurl);
     });
   }
   getlinkedurl() {
     this.request.fetchlinkedurl().subscribe((res: any) => {
       this.linkedinurl = res.link;
-      console.log("this.instagramurl", this.instagramurl);
+      // console.log("this.instagramurl", this.instagramurl);
     });
   }
 }
