@@ -33,7 +33,7 @@ export class RequestService {
   temporaryIdSubject: BehaviorSubject<temporaryId>;
   temp_Id: Observable<temporaryId>;
   temp_detail: temporaryId;
-  currrent_temp_Id: any;
+  currrent_temp_Id: any="";
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -136,8 +136,8 @@ export class RequestService {
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     // .set('Access-Control-Allow-Origin', '*')
-    // this.url = `${this.endPoint1}/carts/add`;
-    this.url = `${this.endPoint1}/testcarts/add`;
+    this.url = `${this.endPoint1}/carts/add`;
+    // this.url = `${this.endPoint1}/testcarts/add`;
       body.temp_user_id=this.currrent_temp_Id
      console.log("Add to cart body:",body);
     return this.http.post(this.url, body, { headers: headers })
@@ -156,8 +156,8 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    // this.url = `${this.endPoint1}/cart-count/` + id;
-    this.url = `${this.endPoint1}/testcart-count/` + id +`?temp_user_id=`+ this.currrent_temp_Id;
+     this.url = `${this.endPoint1}/cart-count/` + id +`?temp_user_id=`+ this.currrent_temp_Id;
+    // this.url = `${this.endPoint1}/testcart-count/` + id +`?temp_user_id=`+ this.currrent_temp_Id;
     console.log("cartcount",this.url);
     
     return this.http.get(this.url, { headers: headers });
@@ -174,8 +174,8 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    // this.url = `${this.endPoint1}/carts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid;
-    this.url = `${this.endPoint1}/testcarts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
+     this.url = `${this.endPoint1}/carts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;;
+    //this.url = `${this.endPoint1}/testcarts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
     console.log("testcars url",this.url);
     
     return this.http.post(this.url, null, { headers: headers });
@@ -184,8 +184,8 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    // this.url = `${this.endPoint1}/carts/process`;
-    this.url = `${this.endPoint1}/testcarts/process`;
+     this.url = `${this.endPoint1}/carts/process`;
+   // this.url = `${this.endPoint1}/testcarts/process`;
     return this.http.post(this.url, body, { headers: headers });
 
   }
@@ -193,8 +193,8 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    // this.url = `${this.endPoint1}/carts/remove/` + id;
-    this.url = `${this.endPoint1}/testcarts/remove/` + id;
+   this.url = `${this.endPoint1}/carts/remove/` + id;
+   // this.url = `${this.endPoint1}/testcarts/remove/` + id;
     return this.http.get(this.url, { headers: headers });
   }
 
@@ -202,16 +202,16 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    // this.url = `${this.endPoint1}/carts/change-quantity`;
-    this.url = `${this.endPoint1}/testcarts/change-quantity`;
+     this.url = `${this.endPoint1}/carts/change-quantity`;
+  //  this.url = `${this.endPoint1}/testcarts/change-quantity`;
     return this.http.post(this.url, body, { headers: headers });
   }
   fetchsummery(id: any, buynowid: any, paymenttype:any) {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
-    // this.url = `${this.endPoint1}/cart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype;
-    this.url = `${this.endPoint1}/testcart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype+`&temp_user_id=`+ this.currrent_temp_Id;
+     this.url = `${this.endPoint1}/cart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype+`&temp_user_id=`+ this.currrent_temp_Id;
+   // this.url = `${this.endPoint1}/testcart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype+`&temp_user_id=`+ this.currrent_temp_Id;
    console.log(this.url);
    
     return this.http.get(this.url, { headers: headers });
@@ -479,7 +479,7 @@ export class RequestService {
   }
   // paymenttype
   public fetchpaytype(is_buynow:any) {
-    this.url = `${this.endPoint1}/payment-types?is_buynow=`+ is_buynow + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    this.url = `${this.endPoint1}/payment-types?is_buynow=`+ is_buynow + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
     console.log(this.url);
     return this.http.get(this.url);
   }

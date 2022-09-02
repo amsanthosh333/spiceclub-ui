@@ -320,7 +320,7 @@
                                         *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
                                         <div class="col-6 " style="padding-left:4px ; padding-right: 6px;">
                                             <input (change)="qtyChange($event,i,img)" type="number" id="quantity"
-                                                name="quantity" value="1" style="width:100%;text-align: center;">
+                                                name="quantity" value="1" min="1" style="width:100%;text-align: center;">
                                         </div>
                                         <div class="col-6 p-0" style="margin-left: -4px;">
                                             <button type="button" id="addcarrtbtn" class="btn btn-primary"

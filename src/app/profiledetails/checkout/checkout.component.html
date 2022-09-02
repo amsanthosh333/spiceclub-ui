@@ -398,7 +398,7 @@
 									<th>COD charges</th>
 									<td class="subtotal" >{{Summery?.codcharges}}</td>
 								</tr>
-								<tr >
+								<tr *ngIf="Summery?.roundoff!==  '0.00'">
 									<th>Rounded off</th>
 									<td class="subtotal" >Rs {{Summery?.roundoff}}</td>
 								</tr>

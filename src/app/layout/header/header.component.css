@@ -692,6 +692,9 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 }
 /* mobile */
 @media (max-width : 995px) {
+	#username{
+		display: none;
+	}
 	.main2{
 		padding: 0px 10px 3px 10px;
 	}

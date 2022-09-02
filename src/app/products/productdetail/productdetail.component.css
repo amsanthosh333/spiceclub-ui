@@ -4,6 +4,10 @@
 .variants{
   display: flex;
 }
+.pro-qty .qty-btn {
+ 
+  display: none;
+}
 #formdiv form{
   border: 1px solid #cbdae3;
     padding-left: 10px;
@@ -130,8 +134,11 @@
 
 #subcatdiv li{
   cursor: pointer;
+  padding-right:20px
 }
-
+/* .subcatmaindiv{
+  overflow-x: auto;
+} */
 #subcatdiv{
   display:flex;
   font-size: 0.7rem;
@@ -139,6 +146,7 @@
   margin-bottom: 10px;
   font-family: Arial, Helvetica, sans-serif;
   padding-left: 1rem;
+  width: max-content;
 }
 #nutrients{
   text-align: center;
@@ -395,6 +403,25 @@ input {
 
 /* mob */
 @media (max-width:992px){
+  #subcatdiv li{
+    cursor: pointer;
+    padding-right:15px;
+    
+  }
+
+.subcatmaindiv{
+  overflow: scroll;
+}
+  #subcatdiv{
+    display: flex;
+    font-size: 0.5rem;
+    padding-top: 7px;
+    margin-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 1rem;
+   width: max-content;
+}
+
   
   .shop-product__block__title{
     flex-basis: 22%;

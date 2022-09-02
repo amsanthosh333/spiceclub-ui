@@ -494,6 +494,7 @@ export class BestsellingComponent implements OnInit {
         }
    
         this.request.addtocart(this.edata).subscribe((res: any) => {
+          console.log("addtocart resssssssssssssss", res);
           if (res.result == true) { 
             this.addRecordSuccess()
             this.modalService.dismissAll();
