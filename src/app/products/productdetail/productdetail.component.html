@@ -1,9 +1,9 @@
 <div class="col-lg-12 mb-10 pb-0" class="listcard">
-    <div class="subcatmaindiv" >
+    <div class="subcatmaindiv">
         <ul id="subcatdiv" style="font-weight: 600;color: #3e3e3e;">
-            <li  *ngFor="let s of Peoduct?.subcategories.slice(0,9)" (click)="gotosubcategory(s.id)">
+            <li *ngFor="let s of Peoduct?.subcategories.slice(0,9)" (click)="gotosubcategory(s.id)">
                 {{s.name}}</li>
-               
+
         </ul>
 
     </div>
@@ -39,7 +39,7 @@
             </p>
         </a> -->
     </div>
-    <div id="fromm" style="border-top:1px solid #ededed" class="subcatmaindiv" >
+    <div id="fromm" style="border-top:1px solid #ededed" class="subcatmaindiv">
         <ul id="subcatdiv">
             <li style="padding-right:7px" *ngFor="let f of Peoduct?.breadcrumbs ;let i = index"
                 (click)="gotocategory(f.id,i)">{{f.name}}&nbsp;&nbsp; <span
@@ -110,8 +110,8 @@
 
                                 <div class="col-lg-2 slideimageshow2" id="sideslider">
                                     <ul style="padding:0px;display: flex;">
-                                        <li *ngFor="let p of allgalleryphotos;let i=index" style="padding-bottom:10px ;padding-right: 10px;"
-                                            (click)="blogClick(i)">
+                                        <li *ngFor="let p of allgalleryphotos;let i=index"
+                                            style="padding-bottom:10px ;padding-right: 10px;" (click)="blogClick(i)">
                                             <a [ngClass]="{'active': imgItem === i}">
                                                 <img src="{{p?.image}}" class="img-fluid" alt="">
                                             </a>
@@ -230,39 +230,46 @@
                                         </div>
                                         <div class="quick-view-other-info pb-0 pt-0" #target>
                                             <div class="shop-product__block shop-product__block--size  mt-10"
-                                                *ngIf="(choice.length!==0)" style="padding-bottom:4px;display: contents;">
-                                               <!-- varient -->
+                                                *ngIf="(choice.length!==0)"
+                                                style="padding-bottom:4px;display: contents;">
+                                                <!-- varient -->
                                                 <div style="display:flex;margin-top: 10px;">
-                                                    <div class="shop-product__block  " *ngFor="let a of choice.slice(0,1)"
-                                                    style="font-weight: 600;color: #727272;margin-right: 5px;">{{a.title}} :
-                                                </div>
-                                                <div class="shop-product__block__value" *ngFor="let a of choice.slice(0,1)">
-                                                    <div class="shop-product-size-list">
-                                                        <span class="single-size"
-                                                            *ngFor="let b of a.options;let i = index"
-                                                            [ngClass]="{'active': subItem === i}"
-                                                            (click)="selectvar(b,i)">{{b}}</span>
+                                                    <div class="shop-product__block  "
+                                                        *ngFor="let a of choice.slice(0,1)"
+                                                        style="font-weight: 600;color: #727272;margin-right: 5px;">
+                                                        {{a.title}} :
                                                     </div>
-                                                </div>
-                                                </div>
-                                                <!-- package -->
-                                                <div [ngStyle]="{'display':choice.length > 1 ? 'flex' : 'none'}" >
-                                                    <div style="margin-top: 10px;display: flex;">
-                                                        <div class="shop-product__block " *ngFor="let a of choice.slice(1,2)"
-                                                        style="font-weight: 600;color: #727272;margin-right: 5px;">{{a.title}} :
-                                                    </div>
-                                                    <div class="shop-product__block__value" *ngFor="let a of choice.slice(1,2)">
+                                                    <div class="shop-product__block__value"
+                                                        *ngFor="let a of choice.slice(0,1)">
                                                         <div class="shop-product-size-list">
                                                             <span class="single-size"
                                                                 *ngFor="let b of a.options;let i = index"
-                                                                [ngClass]="{'active': subItempackage === i}"
-                                                                (click)="selectvarpackage(b,i)">{{b}}</span>
+                                                                [ngClass]="{'active': subItem === i}"
+                                                                (click)="selectvar(b,i)">{{b}}</span>
                                                         </div>
                                                     </div>
-                                                    </div>
-                                                    
                                                 </div>
-                                               
+                                                <!-- package -->
+                                                <div [ngStyle]="{'display':choice.length > 1 ? 'flex' : 'none'}">
+                                                    <div style="margin-top: 10px;display: flex;">
+                                                        <div class="shop-product__block "
+                                                            *ngFor="let a of choice.slice(1,2)"
+                                                            style="font-weight: 600;color: #727272;margin-right: 5px;">
+                                                            {{a.title}} :
+                                                        </div>
+                                                        <div class="shop-product__block__value"
+                                                            *ngFor="let a of choice.slice(1,2)">
+                                                            <div class="shop-product-size-list">
+                                                                <span class="single-size"
+                                                                    *ngFor="let b of a.options;let i = index"
+                                                                    [ngClass]="{'active': subItempackage === i}"
+                                                                    (click)="selectvarpackage(b,i)">{{b}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
                                             </div>
                                             <div class="single-info mt-10" style="padding-bottom:7px;"
                                                 *ngIf="Peoduct?.stroked_price!== Peoduct?.main_price">
@@ -283,15 +290,16 @@
                                                 <span class="quickview" style="color: #727272">Excluding GST : </span>
                                                 <a style="font-weight: 600;color: #727272;">Rs {{Peoduct?.excl_gst}}
                                                 </a>
-                                            </div> -->                              
+                                            </div> -->
 
                                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px; margin-bottom: 0px;"
                                                 *ngIf="Peoduct?.discount_percentage!= 0">You save <span
                                                     style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
                                                     ({{Peoduct?.discount_percentage}}%)</span></p>
-                                                    <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
-                                                    *ngIf="Peoduct?.discount_percentage!= 0"> (Inclusive of all taxes - GST {{Peoduct?.gst_percentage}}%)
-                                                   </p>
+                                            <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
+                                                *ngIf="Peoduct?.discount_percentage!= 0"> (Inclusive of all taxes - GST
+                                                {{Peoduct?.gst_percentage}}%)
+                                            </p>
                                         </div>
 
 
@@ -446,8 +454,8 @@
                                     <div class="pro-qty d-inline-block mx-0 pt-0" id="mainqty"
                                         style="border-bottom: none !important;padding-bottom:1px;">
                                         <span>
-                                            <a class="dec " style="text-decoration: none;"
-                                                (click)="decreaseqty()" *ngIf="quantityyy!==0">-</a> </span>
+                                            <a class="dec " style="text-decoration: none;" (click)="decreaseqty()"
+                                                *ngIf="quantityyy!==0">-</a> </span>
 
                                         <!-- <input type="number" value="{{quantityyy}}" pInputText  maxlength="2"  > -->
                                         <input type="number" #box value="{{quantityyy}}" (keyup)="getValue(box.value)"
@@ -455,8 +463,8 @@
                                         <!-- <input type="text" value="{{quantityyy}}" pInputText (keypress)="onlyNumberKey($event)" maxlength="3" required size="10" > -->
 
                                         <span>
-                                            <a class="inc " style="text-decoration:none;"
-                                                (click)="increaseqty()" *ngIf="stocck!==1">+</a> </span>
+                                            <a class="inc " style="text-decoration:none;" (click)="increaseqty()"
+                                                *ngIf="stocck!==1">+</a> </span>
                                     </div>
                                 </div>
                             </form>
@@ -605,8 +613,8 @@
                                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                                 data-parent="#shippingInfo">
                                                 <div class="card-body" style=" margin-top: -17px;padding: 4px;">
-                                                    <div class="crdbdy" style="padding:10px;display: flex;">
-                                                        <div style="width:80%; padding-right: 20px;">
+                                                    <div class="crdbdy" >
+                                                        <div class="col-lg-8 col-mg-12 col-sm-12" >
                                                             <table class="overview">
                                                                 <tr>
                                                                     <th id="he" style="background-color: #f2f2f2;">
@@ -638,20 +646,31 @@
 
                                                             </table>
                                                         </div>
-                                                        <div>
+                                                        <div class="col-lg-4 col-mg-12 col-sm-12" id="nut">
                                                             <table class="overview"
                                                                 *ngIf="Peoduct?.nutrients.length!=0">
                                                                 <tr>
                                                                     <th id="nutrients" colspan="2">Nutrients</th>
                                                                 </tr>
-
-                                                                <tr *ngFor="let n of Peoduct?.nutrients">
+                                                                <table class="overview" *ngFor="let n of Peoduct?.nutrients">
+                                                                
+                                                                <tr>
                                                                     <th id="he" style="background-color: #f2f2f2;">
-                                                                        {{n.name}}</th>
-                                                                    <td style="padding-left: 30px;">{{n.value}}
+                                                                        {{n.name}}
+                                                                       
+                                                                    </th>
+                                                                    <td style="padding-left: 30px;background-color: #f2f2f2;">{{n.value}}                                                                 
                                                                     </td>
                                                                 </tr>
-
+                                                                <tr *ngFor="let Sd of n.subdata">
+                                                                    <th id="he" 
+                                                                        style="background-color:white;font-weight: 300;">
+                                                                        {{Sd.name}}</th>
+                                                                    <td style="padding-left: 30px;font-weight: 300;">{{Sd.value}}
+                                                                        <span  *ngIf="Sd.value ==null"  >-</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
 
 
                                                             </table>
@@ -707,7 +726,7 @@
                                                                         </td>
                                                                     </tr>
 
-                                                                    <tr  *ngIf="Peoduct?.package !==null">
+                                                                    <tr *ngIf="Peoduct?.package !==null">
                                                                         <th id="he" style="background-color: #f2f2f2;vertical-align: middle;
                                                                         text-align: center;">
                                                                             Package</th>
@@ -1074,9 +1093,8 @@
 
                     </div>
                 </div>
-                <div class="col-12" style="display:flex;justify-content: center;">
-                    <div class="6" id="reviewdiv"
-                        style="width: 64%;margin-left: 100px; max-height: 315px; overflow: auto; margin-top: 4px;">
+                <div class="col-12" id="revmaindiv">
+                    <div class="col-lg-6 col-md-12 col-sm-12" id="reviewdiv" >
                         <div *ngIf="Peoduct?.rating!==0">
                             <p style="line-height: 1.6rem;
                     overflow: hidden;
@@ -1132,7 +1150,7 @@
                         </div>
                     </div>
 
-                    <div class="6" style="padding-left:50px;margin-top: 4px;">
+                    <div id="rev" class="col-lg-6 col-md-12 col-sm-12" >
                         <!-- <h5 class="comment-title">Leave your thought here</h5> -->
                         <p style="font-weight:600;font-size:1rem ;margin-bottom: 5px;color: #626262;">Add a review</p>
                         <form [formGroup]="comment" (ngSubmit)="addcomment(comment)" id="ratingform">
@@ -1156,7 +1174,7 @@
                                             style="font-size: 0.8rem">*</span></p>
                                     <input type="text" name="" id="">
                                 </div>
-                                <div class="col-lg-12 ">
+                                <div class="col-lg-12 " id="submitdiv">
                                     <h6><span *ngIf="error1" style="color: red;">{{error1}}</span>
                                     </h6>
                                     <button type="submit" class="lezada-button lezada-button--medium"

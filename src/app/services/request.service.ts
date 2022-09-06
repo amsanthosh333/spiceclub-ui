@@ -424,6 +424,11 @@ export class RequestService {
     this.url = `${this.endPoint1}/products/best-seller?user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     return this.http.get(this.url);
   }
+  //newarrival
+  public getnewarrivalpro() {
+    this.url = `${this.endPoint1}/products/newarrivals?user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    return this.http.get(this.url);
+  }
   //subscribed products
   public getsubscribedpro() {
     const headers = new HttpHeaders()

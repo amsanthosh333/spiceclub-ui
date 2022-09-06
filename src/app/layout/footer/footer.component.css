@@ -95,8 +95,14 @@ p{
 }
 /* mob */
 @media (max-width : 995px) {
+  #cardss{
+    width: 100%;
+  }
+  #subscr{
+    width: 50%;
+  }
   #socialmedia{
-    width: 31%;
+    width: 85%;
   }
   #about{
     width: 18%;

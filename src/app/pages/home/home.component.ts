@@ -43,7 +43,6 @@ export class HomeComponent implements OnInit {
   countDown: any;
   counter = 1800;
   tick = 1000;
-
   registerForm!: FormGroup;
   mainloader: boolean = true;
   Slider: any;
@@ -222,6 +221,9 @@ export class HomeComponent implements OnInit {
   currentpackagevalue: any;
   edata: any;
   loaderflash: boolean=true;
+  Newarrivals: any;
+  loader6new: boolean=true;
+  imgloader2new: boolean=true;
   
 
 
@@ -277,7 +279,8 @@ export class HomeComponent implements OnInit {
     // this.viewsubscribebanner();
     this.viewtodayoffer();
     // this.viewdata3();
-    this.viewbestsellpro();
+this.viewnewarrival();
+// this.viewbestsellpro();
      this.gethomeecat();
     
     // this.viewhomeFScategory();
@@ -305,6 +308,7 @@ export class HomeComponent implements OnInit {
   }
 
   banneronScrollDown(event: any) {
+    this.viewbestsellpro();
     this.viewtopcategory();
     
   }
@@ -753,18 +757,27 @@ export class HomeComponent implements OnInit {
       this.loader6 = false;
       setTimeout(() => {
         this.imgloader2 = false;
-      }, 500);
+      }, 300);
+    });
+  }
+  viewnewarrival() {
+    this.request.getnewarrivalpro().subscribe((response: any) => {
+      console.log("Newarrivals",response);
+      this.Newarrivals = response.data;
+      this.loader6new = false;
+      setTimeout(() => {
+        this.imgloader2new = false;
+      }, 300);
     });
   }
   viewfuturedpro() {
     this.request.getfuturedpro().subscribe((response: any) => {
-      console.log("getfuturedpro",response);
-      
+      console.log("getfuturedpro",response);    
       this.Futuredpro = response.data;
       this.loader7 = false;
       setTimeout(() => {
         this.imgloader2 = false;
-      }, 500);
+      }, 300);
     });
   }
   viewdaydeal() {
@@ -772,7 +785,7 @@ export class HomeComponent implements OnInit {
       this.Daydealpro = response.data.slice(0, 5);
       setTimeout(() => {
         this.imgloader = true;
-      },500);
+      },300);
     });
   }
 
@@ -851,6 +864,30 @@ export class HomeComponent implements OnInit {
 
   selectbestsell() {
   }
+  newarrivalsselectvar(weight: any, i: any, id: any,varient:any) {  
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+   
+    if(varient.length>1){
+  this.currentpackagevalue= varient[1].options[0]
+    }
+    else{
+      this.currentpackagevalue=null
+    }
+    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
+      console.log("res", res);
+
+      this.Newarrivals[i].stroked_price = res.stroked_price;
+      this.Newarrivals[i].main_price = res.price_string;
+      this.Newarrivals[i].discount_amount = res.discount_amount;
+      this.Newarrivals[i].discount_percentage = res.discount_percentage;
+      // this.Bestsellpro[i].stroked_price = res.stroked_price;
+      // this.Bestsellpro[i].main_price = res.price_string;
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+
   bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i

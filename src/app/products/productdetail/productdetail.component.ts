@@ -412,10 +412,7 @@ export class ProductdetailComponent implements OnInit {
 
         console.log("this.currentpackage", this.currentpackage);
       }
-
-
       // array push photo
-
       this.newphotos = this.photoos.forEach((item: any) => {
         item.path.forEach((items: any) => {
           console.log("items", items);
@@ -426,7 +423,7 @@ export class ProductdetailComponent implements OnInit {
         })
       })
 
-      console.log("this.this.allgalleryphotos", this.allgalleryphotos);
+      // console.log("this.this.allgalleryphotos", this.allgalleryphotos);
       this.selectedimage = this.allgalleryphotos[0]?.image;
       console.log("this.selectedimage", this.selectedimage);
 
