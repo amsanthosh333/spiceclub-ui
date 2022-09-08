@@ -172,7 +172,22 @@ max-height: 3.2rem;
 }
 
 }
+#mainlistdiv{
+  margin-left: 10px;
+  
+}
+/* mob */
 @media (max-width: 992px) {
+  #sidenavg{
+    width: 100%;
+  }
+#productdiv{
+  margin-left: 0px;
+ 
+}
+  #mainlistdiv{
+    margin-left: 0px;
+  }
   .img-fluid {
     max-width: 100%;
     height: 200px;

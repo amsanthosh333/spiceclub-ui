@@ -6,6 +6,8 @@
 	border: none;
 	cursor: pointer;
   }
+
+ 
   
   .dropbtn:hover, .dropbtn:focus {
 	background-color: #3e8e41;
@@ -416,7 +418,7 @@ nav.site-nav>ul>li {
 .lispan {
 	/* display:block;padding-left: 8px; */
 	display: inline-block;
-	width: 225px;
+	width: 220px;
 	text-overflow: ellipsis;
 	color: #140f0f;
 	font-family: Arial, Helvetica, sans-serif;
@@ -453,7 +455,32 @@ a#listactive::after{
 .lii {
 	max-height: 300px;
 	overflow-y: auto;
+	overflow-x: hidden;
 	padding-left: 5px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.mega-sub-menu{
+	/* max-height: 300px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	padding-left: 5px;
+	-ms-overflow-style: none ;
+	scrollbar-width: none; */
+}
+.mega-sub-menu:hover {
+	scrollbar-width: thin !important;
+	-ms-overflow-style:thin !important;
+}
+
+.lii:hover {
+	scrollbar-width: thin !important;
+	-ms-overflow-style:thin !important;
+	/* -ms-overflow-style: none;  IE and Edge
+	scrollbar-width: none;  Firefox  */
+  }
+#listactive{
+	margin-bottom: 0px;
 }
 
 .bi-caret-right-fill {
@@ -683,13 +710,35 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 	}
 }
 @media (min-width : 1100px) {
-	
+	nav.site-nav>ul>li ul.mega-menu-column-4 {
+		right: 8% !important;		
+	}
 	.sitelogo {	
 		width: 50%;
 		margin-top: 3%;
 	} 
 
 }
+@media (min-width : 1500px) {
+	nav.site-nav>ul>li ul.mega-menu-column-4 {
+		right: 26% !important;
+		
+	}
+
+
+}
+@media (min-width: 1700px){
+.sitelogo {
+    width: 36% !important;
+    margin-top: 2%;
+}
+}
+@media (min-width: 2000px){
+	.sitelogo {
+		width: 37% !important;
+		margin-top: 2%;
+	}
+	}
 /* mobile */
 @media (max-width : 995px) {
 	#username{
@@ -812,6 +861,10 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 
  /* web */
 @media (min-width : 995px) {
+	nav.site-nav>ul>li ul.mega-menu-column-4 {
+		right: 10% ;
+		
+	}
 	.main2{
 		display:none;
 	}
@@ -914,8 +967,6 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 @media (min-width: 1200px){
 .container.wide {
     max-width: 100%;
-
-	
 }
 .sitelogo {
     width: 54% ;

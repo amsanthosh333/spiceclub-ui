@@ -6,7 +6,7 @@
                 <!--=======  breadcrumb list  =======-->
                 <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
                     <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
-                    <li class="breadcrumb-list__item ">Orders</li>
+                    <li class="breadcrumb-list__item " ><a routerLink="/orders">Orders</a></li>
                     <li class="breadcrumb-list__item breadcrumb-list__item--active">Order Details</li>
                 </ul>
                 <!--=======  End of breadcrumb list  =======-->
@@ -142,13 +142,14 @@
             <p style="margin-bottom: 10px;">{{img?.shipping_type}}</p>
             <div class="col-12 mb-1" style="padding: 0px;" id="col88">
                 <div class="check" id="carttotl" *ngFor="let a of Detail" style="padding: 0%;">
+                    <p class="headline2">Sub Total(Incl.tax) <span style="font-weight: bold;float: right;">{{a.subtotal}}</span>
+                    </p>
                     <p class="headline2">Discount <a *ngIf="a.coupan_code!=null">(Coupan used: {{a.coupon_code}})</a>
                         <span style="font-weight: bold;float: right;">{{a.coupon_discount}}</span></p>
                     <p class="headline2">Shipping Fee <span
                             style="font-weight: bold;float: right;">{{a.shipping_cost}}</span></p>
-                    <p class="headline2">Tax <span style="font-weight: bold;float: right;">{{a.tax}}</span></p>
-                    <p class="headline2">Sub Total <span style="font-weight: bold;float: right;">{{a.subtotal}}</span>
-                    </p>
+                    <!-- <p class="headline2">Tax <span style="font-weight: bold;float: right;">{{a.tax}}</span></p> -->
+                    <p class="headline2">Rounded off <span style="font-weight: bold;float: right;">{{a.roundoff}}</span></p>
                     <h6 class="headline">Grand Total <span
                             style="font-weight: bold;float: right;color: #126e10;font-weight: 800;">{{a.grand_total}}</span>
                     </h6>

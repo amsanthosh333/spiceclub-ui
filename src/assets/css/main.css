@@ -295,19 +295,15 @@ textarea:-ms-input-placeholder {
   display: block;
   visibility: hidden;
   overflow: hidden;
-
   max-width: 100%;
   height: 0;
-
   opacity: 0;
 }
 
 .tab-content .tab-pane.active {
   visibility: visible;
   overflow: visible;
-
   height: auto;
-
   opacity: 1;
 }
 
@@ -1202,9 +1198,7 @@ font {
 
 .offcanvas-cart-content-container .cart-product-wrapper .cart-product-container {
   position: relative;
-
   overflow: auto;
-
   max-height: 330px;
 }
 

@@ -69,6 +69,21 @@
                                     </ul>
                                 </li>
                             </ul>
+
+                            <ul id="ulsort" class="offersdiv">
+                                <li class="menu-item-has-children">
+                                    <a href="javascript:void(0)"  style="text-decoration: none;"><span
+                                            style="color: #6a6a6a;
+                                            font-weight: 600;text-decoration: none;">Offers</span></a>
+                                    <ul class="sub-menu single-column-menu" id="offersubmenu">
+                                        <li (click)="viewalldeal()" (click)="headactive(1)" ><a >All Products</a></li>
+                                        <li (click)="viewtodaysdeal()"(click)="headactive(2)"><a >Today's deal</a></li>
+                                        <li (click)="viewdealofday()"(click)="headactive(3)"><a>Deal of day</a></li>
+                                        <li (click)="viewdealofmonth()"(click)="headactive(4)"><a >Deal of month</a></li>
+                                        <li (click)="viewflashdeal()" (click)="headactive(5)"><a >Flash deal</a></li>                                    
+                                    </ul>
+                                </li>
+                            </ul>
                         </nav>
                         <!--=======  advance filter icon  =====    (click)="opensort(sortRecord)"  ==-->
 
@@ -100,7 +115,7 @@
     <div class="shop-page-content mt-10 mb-15">
         <div class="container mb-10">
             <div class="row" style="margin-right: -100px;">
-                <div id="sidenavg" class="col-lg-2 order-2 order-lg-1">
+                <div id="sidenavg" class="col-lg-2 col-md-12 col-sm-12 order-2 order-lg-1">
                     <!--=======  page sidebar  =======-->
                     <div class="page-sidebar">
                         <div class="single-sidebar-widget mb-10 mt-10" >
@@ -457,7 +472,6 @@
 
 <!-- sort poup -->
 <ng-template #sortRecord let-modal>
-
     <div class="modal-body" style="background-color: rgb(248, 250, 251);">
         <form class="register-form" [formGroup]="sortForm" (ngSubmit)="apply(sortForm)">
             <div class="row">
@@ -522,7 +536,6 @@
 </ng-template>
 <!--quickview poup -->
 <ng-template #openRecord let-modal>
-
     <div class="modal-body" style="background-color: rgb(248, 250, 251);">
         <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()" style="padding-right: 15px;">
             <span aria-hidden="true"><i class="ion-android-close"></i></span>

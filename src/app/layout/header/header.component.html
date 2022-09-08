@@ -178,7 +178,7 @@
 								</button>
 							</div>
 						</form>
-					</div>
+					</div> 
 				</div>
 			<!-- Mobile Navigation Start Here -->
 		</div>
@@ -198,13 +198,13 @@
 					<li class="menu-item-has-children"><i class="bi bi-list" style="font-weight:500;"></i>&nbsp;<a
 							style="font-weight:600;">Shop by Categories</a>
 						<ul class="sub-menu mega-menu mega-menu-column-4 center-menu">
-							<li class="lii" style="padding-left: 15px;">
-								<ul class="mega-sub-menu" *ngFor="let img of Allcat;let i=index">
-									<li style="margin-top: 10px;padding-left: 4px;" >
+							<li class="lii" style="padding-left: 10px;">
+								<ul class="mega-sub-menu" >
+									<li style="margin-top: 10px;padding-left: 4px;" *ngFor="let img of Allcat;let i=index">
 										<span class="lispan" style="text-decoration: underline" [ngClass]="{'active': subItem === i}"
 											(click)="gotocategory(img.id)" (click)="viewsubcat(img.id,i)" 
 											(mouseover)="viewsubcat(img.id,i)" (mouseout)="viewsubcatmoustout()">
-											<a id="listactive" style="text-decoration:none;"> 
+											<a id="listactive" style="text-decoration:none;margin-bottom: 0px;"> 
 												<span >{{img.name}}</span>
 									 		</a>
 											<i *ngIf="img.number_of_children!=0"
@@ -216,9 +216,9 @@
 									</li>
 								</ul>
 							</li>
-							<li class="lii" style="padding-left: 15px;">
-								<ul class="mega-sub-menu" *ngFor="let img of Subcat;let i=index">
-									<li style="margin-top: 10px;padding-left: 4px;" >
+							<li class="lii" style="padding-left: 10px;">
+								<ul class="mega-sub-menu" >
+									<li style="margin-top: 10px;padding-left: 4px;" *ngFor="let img of Subcat;let i=index">
 										<span class="lispan" [ngClass]="{'active': subItem1 === i}"
 											(click)="gotocategory2(img.id)" (click)="viewsubcat2(img.id,i)"
 											 (mouseover)="viewsubcat2(img.id,i)" (mouseout)="viewsubcat2moustout()">
@@ -236,9 +236,9 @@
 								</ul>
 							</li>
 
-							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 15px;">
-								<ul class="mega-sub-menu" *ngFor="let img of Subcat2;let i=index">
-									<li style="margin-top: 10px;padding-left: 4px;" >
+							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 10px;">
+								<ul class="mega-sub-menu" >
+									<li style="margin-top: 10px;padding-left: 4px;" *ngFor="let img of Subcat2;let i=index" >
 										<span class="lispan" [ngClass]="{'active': subItem2 === i}"
 											(click)="gotocategory3(img.id)" (click)="viewsubcat3(img.id,i)"
 											 (mouseover)="viewsubcat3(img.id,i)" (mouseout)="viewsubcat3moustout()">
@@ -254,9 +254,9 @@
 									</li>
 								</ul>
 							</li>
-							<li class="lii" *ngIf="Subcat3?.length!=0" style="padding-left: 15px;">
-								<ul class="mega-sub-menu" *ngFor="let img of Subcat3;let i=index">
-									<li style="margin-top: 10px;" >
+							<li class="lii" *ngIf="Subcat3?.length!=0" style="padding-left: 10px;">
+								<ul class="mega-sub-menu" >
+									<li style="margin-top: 10px;" *ngFor="let img of Subcat3;let i=index">
 
 										<span class="lispan" id="listactive" [ngClass]="{'active': subItem3 === i}"
 											(click)="gotocategory4(img.id)">
@@ -265,8 +265,6 @@
 											</a>
 										</span>
 									</li>
-
-
 								</ul>
 							</li>
 						</ul>
