@@ -44,6 +44,19 @@
                                     <li [ngClass]="{'active': headItem === 5}" (click)="viewflashdeal()"
                                     (click)="headactive(5)">Flash deal</li>
                             </ul>
+                            <!-- <ul id="ulsort" class="offersdiv">
+                                <li class="menu-item-has-children">
+                                    <a href="javascript:void(0)"  style="text-decoration: none;"><span
+                                            style="color: #6a6a6a;
+                                            font-weight: 600;text-decoration: none;">Offers</span></a>
+                                    <ul class="sub-menu single-column-menu" id="offersubmenu">  
+                                        <li (click)="viewtodaysdeal()"(click)="headactive(2)"><a >Today's deal</a></li>
+                                        <li (click)="viewdealofday()"(click)="headactive(3)"><a>Deal of day</a></li>
+                                        <li (click)="viewdealofmonth()"(click)="headactive(4)"><a >Deal of month</a></li>
+                                        <li (click)="viewflashdeal()" (click)="headactive(5)"><a >Flash deal</a></li>                                    
+                                    </ul>
+                                </li>
+                            </ul> -->
                         </div>
                         <!--=======  End of fitler titles  =======-->
                     </div>
@@ -55,7 +68,7 @@
         <div class="shop-page-content mt-10">
             <div class="container mb-10">
                 <div class="row">
-                    <div id="sidenavg" class="col-lg-2 order-2 order-lg-1" *ngIf="!sideloader">
+                    <div id="sidenavg" class="col-lg-2 order-1 order-lg-1" *ngIf="!sideloader">
                         <!--=======  page sidebar  =======-->
                         <div class="page-sidebar">
                             <div class="single-sidebar-widget mb-10" id="pricefilter" >
@@ -187,7 +200,7 @@
                     </div>
 
                     <!-- sidebarlazyloading -->
-                    <div class="col-lg-2 order-2 order-lg-1" *ngIf="sideloader" style="background-color:white;">
+                    <div class="col-lg-2 order-1 order-lg-1" *ngIf="sideloader" style="background-color:white;">
                         <div class="page-sidebar">
                            
                             <div class="single-filter-widget mt-20 mb-40">
@@ -218,7 +231,7 @@
                     </div>
                     <!-- sidebarlazyloading  end-->
 
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10" infinite-scroll
+                    <div  class="col-lg-9 order-2 order-lg-2 mb-md-30 mb-sm-10 ml-md-10 ml-sm-0" infinite-scroll
                     [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
                         <div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloadermain">
                             <!--=======  single product  =======-->
@@ -346,7 +359,6 @@
 
                                 </div>
                             </div>
-
                         </div>
 
                         <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;" *ngIf="prodloader">
@@ -403,11 +415,7 @@
 
     <!-- featuredcat -->
     <div class="shop-page-wrapper">
-    <div class="col-lg-12 mb-10 pb-0" class="listcard" style="background-color: white;
-    margin-left: 10px;
-    width: 98.5%;
-    padding: 0px;
-    border: 0px solid #e5e5e5;">
+    <div class="col-lg-12 mb-10 pb-0" class="listcard" >
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
@@ -417,7 +425,7 @@
         </div>
     <div class="col-lg-12 pl-0 pr-0"  style="background-color:white;">
         <div class="explore row">
-            <div class="col-2 " *ngFor="let img of Futurecatg; let i = index" style="text-align:center;padding-top: 5px;" (click)="viewctopcatprod4(img.id,i)">
+            <div id="featuredlist" class="col-lg-2 col-md-3 col-sm-4" *ngFor="let img of Futurecatg; let i = index" style="text-align:center;padding-top: 5px;" (click)="viewctopcatprod4(img.id,i)">
                 <div style="height:75px; width:75px;  display:block; margin:auto;">
                     <img src="https://neophroncrm.com/spiceclubnew/public/{{img.icon}}" style="height: 100%;width: 100%; object-fit: cover; display: block;
                 margin-left: auto;

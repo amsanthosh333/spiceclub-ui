@@ -688,3 +688,33 @@ text-decoration: none;
     text-decoration: underline;
     text-decoration-color: rgb(36, 36, 36);
   }
+#productmaindiv{
+  margin-left: 10px;
+}
+  /* mob */
+  @media (max-width:992px){
+    .shop-page-header
+    {
+      display: none ;
+    }
+    #featuredlist{
+      width: 32%;
+    }
+    .listcard {
+      background-color: white;
+      margin-left: 5px;
+      width: 97%;
+      padding: 0px;
+      border: 1px solid #e5e5e5;
+    }
+    #sidenavg{
+    width:100%;
+  
+  }
+    #productdiv{
+      margin-left: 0px;
+    }
+    #productmaindiv{
+      margin-left: 0px;
+    }
+  }
