@@ -33,7 +33,7 @@
                                    <a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray; margin-top: 8px;"
 											*ngIf="b.product.discount_amount!==0">
 											you save Rs.{{b.product.discount_amount}} ({{b.product.discount_percentage}}%) </a>
-                                    <br>
+                                    
                                    
                                      <!-- subscription important-->
                                      
@@ -45,18 +45,10 @@
                                     </a> -->
                                                          
                                 </td>
-                                <td class="product-price" style="padding: 10px;">
-
-                                    <!-- <span
-                                        class="price">{{b.product.base_price}}</span> -->
-                                </td>
-
-                                <td class="add-to-cart" style="vertical-align:bottom;">
-                                   
-                                </td>
+                             
                                 <td class="product-remove">
                                     <span *ngIf="b.product.stock!==0">
-                                        <button class="lezada-button lezada-button--small lezada-button--icon--left"
+                                        <button class="lezada-button lezada-button--small lezada-button--icon--left addcartbtn"
                                         (click)="addtocart1(b.product.id,openRecord)" (click)="openaddcart()" style="padding-top: 0px;
                                         padding-bottom: 0px;border-radius: 15px;text-transform: none;">
                                         <i class="ion-ios-cart-outline"></i>Add to Cart</button>
@@ -73,7 +65,7 @@
                                         font-size: 0.9rem;" (click)="deleteRecord(b.id)">Set alert,if stock arrives later</button></span>
                                    </span>
 
-                                     <span style="display:block;margin-top: 50px;"> <button id="deletebtn" class="btn btn-light sm"
+                                     <span class="deletebtn" > <button id="deletebtn" class="btn btn-light sm"
                                          (click)="deleteRecord(b.id)">Delete</button></span>  
                                 </td>
                             </tr>
@@ -323,7 +315,7 @@
                                     <div class="product-quantity d-flex align-items-center">
                                         <div class="pro-qty d-inline-block mx-0 pt-0" *ngIf="stk!==0">
                                             <a class="dec qty-btn" style="text-decoration: none;"
-                                                (click)="decreaseqty()" *ngIf="quantityyy!=0">-</a>
+                                                (click)="decreaseqty()">-</a>
                                             <input type="number" #box value="{{quantityyy}}"
                                                 (keyup)="getValue(box.value)" name="qqty"
                                                 style="background: transparent;">

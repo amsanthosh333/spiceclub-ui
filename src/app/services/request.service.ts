@@ -284,7 +284,8 @@ export class RequestService {
     return this.http.get(this.url);
   }
   public getflashdealpro(categoryid: any) {
-    this.url = `${this.endPoint1}/flash-deal-products/1?category=` + categoryid + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    this.url = `${this.endPoint1} /flash-deal-productslist`;
+    // this.url = `${this.endPoint1}/flash-deal-products/1?category=` + categoryid + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     return this.http.get(this.url);
   }
   public getflashdeals() {

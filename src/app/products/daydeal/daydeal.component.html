@@ -235,7 +235,7 @@
 					<!--=======  End of page sidebar  =======-->
 				</div>
 
-			    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 ml-10" infinite-scroll
+			    <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-20 mb-sm-0 ml-10 ml-sm-0" infinite-scroll
                     [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
                         <div class="row product-isotope shop-product-wrap four-column" *ngIf="!prodloader">
                             <!--=======  single product  =======-->
@@ -353,6 +353,18 @@
 
                                 </div>
                             </div>
+							
+							<div id="pggg" *ngIf="Daydealpro?.length==0" style=" display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: 200px;
+						border: 1px solid rgb(243 243 243);">
+							<div>
+								<h6>
+									There is no product
+								</h6>
+							</div>
+                        </div>
 
                         </div>
 
@@ -376,17 +388,7 @@
                             </ul>
                         </div> -->
                       
-                        <div id="pggg" *ngIf="Daydealpro?.length==0" style=" display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 200px;
-						border: 1px solid rgb(243 243 243);">
-							<div>
-								<h6>
-									There is no product
-								</h6>
-							</div>
-                        </div>
+                        
 
                     </div>
 		

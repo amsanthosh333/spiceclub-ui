@@ -165,7 +165,7 @@ input[type=number]::-webkit-inner-spin-button {
   max-height: 3.2rem;
   }
 
-  
+
   @media (min-width: 992px) {
   .img-fluid {
     max-width: 100%;
@@ -173,7 +173,15 @@ input[type=number]::-webkit-inner-spin-button {
   }
   
   }
+   /* mob */
   @media (max-width: 992px) {
+    #sidenavg{
+      width: 100%;
+    }
+  #productdiv{
+    margin-left: 0px;
+   
+  }
     .img-fluid {
       max-width: 100%;
       height: 200px;
@@ -221,7 +229,6 @@ input[type=number]::-webkit-inner-spin-button {
           overflow: hidden;
         }
         }
- 
         @media (min-width: 1700px){
         
           .imglazy{

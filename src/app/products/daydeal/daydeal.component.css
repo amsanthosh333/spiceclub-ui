@@ -351,3 +351,14 @@ input {
 
   font-family: Arial, Helvetica, sans-serif;
 }
+/* mob */
+@media (max-width: 992px) {
+  #sidenavg {
+    width: 100%;
+  }
+
+  #productdiv {
+    margin-left: 0px;
+
+  }
+}

@@ -15,7 +15,7 @@
 					</div>
 				</div>
 				<!--=======  cart table  =======-->
-				<div class="cart-table-container pl-10" *ngIf="!loader">
+				<div class="cart-table-container pl-lg-10 pl-sm-0" *ngIf="!loader">
 					<table id="producttable" class="cart-table" *ngIf="(Cart.length!==0)" style="border: none;">
 						<tbody *ngFor="let a of Cart">
 							<tr *ngFor="let b of a.cart_items">
@@ -77,7 +77,7 @@
                             
 
 								<td class="total-price" id="price">
-									<span class="price"
+									<span class="price" id="pricespan"
 										style="color: rgb(41, 41, 41);font-size: 1.2rem;padding-bottom: 4px;">Rs.{{b.total}}</span>
 									
 									  <!-- subscription important-->
@@ -90,7 +90,7 @@
 									</a> -->
 
 									<!-- style="margin-top:17px  ;" -->
-									<span style="margin-top:85%  ;">
+									<span class="deletespan" >
 										<button class="btn btn-light sm"  id="deletebtn" (click)="deleteRecord(b.id)">Delete</button>
 									</span>
 								</td>
@@ -123,7 +123,7 @@
 
 
 			<div class="col-xl-3 offset-xl-8 col-lg-5 offset-lg-7" 
-			style="margin-left:10px;width: 24%;">
+			id="sidebar_content">
 
 				<div  *ngIf="(Cart?.length!==0)" class="row mb-10" style="padding:6px;background-color: white;border: 1px solid #ededed;">
 								<div style="padding: 0px; border: 1px solid #ededed">

@@ -267,3 +267,36 @@ padding: 5px;
 .product-remove {
   width: 200px;
 }
+
+
+.deletebtn{
+  display:block;margin-top: 50px;
+}
+.pro-qty .qty-btn {
+  font-size: 20px;
+  font-weight: 500;
+  color: #333;
+  display: initial !important;
+}
+/* mob */
+@media (max-width: 992px) {
+  .deletebtn{
+    display:block;margin-top: 5px;
+  }
+  #sidenavg {
+    width: 100%;
+  }
+  .cart-table td.product-name a {
+    margin-top: 1px;
+  }
+  .product-remove{
+    display: contents;
+  }
+.cart-table tr {
+  padding: 15px 0;
+}
+.addcartbtn{
+  margin-right: 5px;
+}
+
+}

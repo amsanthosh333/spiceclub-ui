@@ -399,6 +399,8 @@ export class ShopbyproductComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.request.getflashdealpro('').subscribe((response: any) => {
+      console.log("flash deal",response);
+      
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
