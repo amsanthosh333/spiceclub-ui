@@ -62,7 +62,12 @@ export class RequestService {
     this.temp_Id = this.temporaryIdSubject.asObservable();
     this.temp_detail=this.temporaryIdSubject.value;
     this.currrent_temp_Id=this.temp_detail.temp_user_id
-    console.log("this.temp_Id",this.temp_Id);   
+
+    if(this.currrent_temp_Id == undefined ){
+      console.log("this.temp_Id_serser",);   
+      this.currrent_temp_Id = ""
+    }
+   
     console.log(" this.currrent_temp_Id", this.currrent_temp_Id);   
   }
 

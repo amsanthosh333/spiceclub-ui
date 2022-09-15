@@ -17,7 +17,7 @@
 
 
 
-<div class="col-lg-12 mb-15 mt-2">
+<div class="col-lg-12 mb-15 mt-2 maindiv">
     <div class="checkout-cart-total   mt-1" style="background-color:white;" *ngIf="!loader">
 
         <!-- <div class="addres1 mb-4" style="padding: 10px; background-color: white;" (click)="addaddresss(addRecord,map)">
@@ -39,11 +39,14 @@
                     <!-- *ngIf="((Connectdtls.set_default === '1') ? 'checked':'true')"   [checked]="(Connectdtls.set_default === 1)"   [(ngModel)]="radioSelected" id="shiping_address{{i}}"  *ngIf="(Connectdtls.set_default === 1 ? 'checked':'true')" -->
 
                     <p id="useaddress">
+                        
+<a >
+                      
                         <input type="radio" name="radiio" value="{{Connectdtls.id}} " data-shipping
                             [checked]="Connectdtls.set_default== 1" (click)="changeshippingaddress(Connectdtls.id)">
                         <label style="color: #ce2127;">&nbsp; Use this as shipping address</label>
-
-
+                    </a>
+<a  class="btns">
                         <span class="add-to-cart" style="margin-left: auto;">
 
                             <button id="editbtn" class="btn btn-danger sm" (click)="deleteRow(Connectdtls)">
@@ -56,11 +59,12 @@
                                 style="background-color: rgb(30, 121, 206);border: 1px solid rgb(30, 121, 206);
                                 text-transform: none;">
                                 <i class="bi bi-pencil-fill"></i> <span style="color: white;letter-spacing: 0px;">Edit</span> </button> -->
-                            <button id="editbtn" style="padding-left:20px;padding-right:20px;margin-right: 10px;"
-                                class="btn btn-primary sm" (click)="editRow(Connectdtls ,editRecord )">
+                            <button id="editbtn" 
+                                class="btn btn-primary sm editbtn" (click)="editRow(Connectdtls ,editRecord )">
                                 <i class="bi bi-pencil-fill"></i> <span>&nbsp; Edit</span>
                             </button>
                         </span>
+                    </a>   
                     </p>
                 </div>
             </form>

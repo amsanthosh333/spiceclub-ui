@@ -11,7 +11,7 @@ div{
     padding-bottom: 2px;
     background-color: #fb641b;
     border-color: #fb641b;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   
   #orderstatusbtn{
@@ -399,4 +399,54 @@ nav.site-nav > ul > li > a:after {
 	display: inline;
 	
 }
-	
+.site-nav{
+  height: 46px;
+}
+#headerviewdiv{
+  width:290px;margin-right:-290px;float:left;text-align: end;
+}
+.paynowdiv{
+  margin-left: auto;
+ 
+}
+	/* mob */
+  @media screen and (max-width: 992px) {
+    .site-nav{
+      height: 50px;
+    }
+  #headerdiv{
+    display: grid;
+  }
+  #headerdiv_one{
+    display: flex;
+    width: max-content;
+  }
+  .a-column{
+    width: 32%;
+  }
+  #headerviewdiv{
+    width:290px;margin-right:-290px;float:left;text-align: start;
+    margin-top: 10px;
+  }
+  #headerviewdiv ul{
+   padding-left: 0rem;
+  }
+  .paynowdiv{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #prodmain{
+    display: grid;
+  }
+  .filter-icons {
+    margin-right: 0px;
+  }
+  nav.site-nav > ul > li {
+    line-height: 60px;
+    position: static;
+    display: inline-block;
+    margin: 0 15px;
+    text-align: left;
+    padding-right: 0px;
+}
+}

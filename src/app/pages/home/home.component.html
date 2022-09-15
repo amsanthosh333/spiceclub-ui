@@ -8,7 +8,7 @@
     </div>
 
     <div class="row mb-10" id="sliderrow1" *ngIf="!loader1"  infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="banneronScrollDown($event)" (scrolledUp)="banneronScrollUp($event)">
+    [infiniteScrollDistance]="3" (scrolled)="banneronScrollDown($event)" (scrolledUp)="banneronScrollUp($event)">
         <div class="col-lg-12" id="slidermain">
             <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel"
                 data-interval="4000"
@@ -275,7 +275,7 @@
 
     <!-- bestsellers -->
     <div class="col-lg-12 mb-10 pb-0 " class="listcard" infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="bestsellScrollDown($event)" (scrolledUp)="bestsellScrollUp($event)">
+    [infiniteScrollDistance]="5" (scrolled)="bestsellScrollDown($event)" (scrolledUp)="bestsellScrollUp($event)">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
@@ -466,7 +466,7 @@
 
     <!-- Explore category -->
     <div class="row mt-10 mb-10" id="sliderrow4" infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="ExploreScrollDown($event)" (scrolledUp)="ExploreScrollUp($event)">
+    [infiniteScrollDistance]="5"  (scrolled)="ExploreScrollDown($event)" >
         <div class="col-lg-8 pl-0 pr-0" style="background-color:white;">
             <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
                 <div class="section-title section-title--one  mb-0">
@@ -541,7 +541,7 @@
 
     <!-- Deal of the day   routerLink="/daydeal"-->
     <div class="row " id="sliderrow5"  infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="daydealScrollDown($event)" (scrolledUp)="daydealScrollUp($event)">
+    [infiniteScrollDistance]="5" (scrolled)="daydealScrollDown($event)" (scrolledUp)="daydealScrollUp($event)">
         <div class="countdown-timer-area mb-10 countdown-background countdown-bg-2 pt-20 pb-20">
             <div class="container wide" style="margin-left:3px;">
                 <div class="row">
@@ -643,7 +643,7 @@
     </div>
     <!-- featured product  start-->
     <div class="col-lg-12 mb-10 pb-0" class="listcard" infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="featuredScrollDown($event)" (scrolledUp)="featuredScrollUp($event)">
+    [infiniteScrollDistance]="5" (scrolled)="featuredScrollDown($event)" (scrolledUp)="featuredScrollUp($event)">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
@@ -837,7 +837,7 @@
 
       <!-- Flash deal   routerLink="/daydeal"-->
       <div class="col-lg-12 mb-10  pb-0" *ngIf="Flashdeal?.length!==0" class="listcard mt-10" infinite-scroll
-      [infiniteScrollDistance]="2" (scrolled)="flashScrollDown($event)" (scrolledUp)="flashScrollUp($event)">
+      [infiniteScrollDistance]="5" (scrolled)="flashScrollDown($event)" (scrolledUp)="flashScrollUp($event)">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
@@ -895,7 +895,7 @@
 
     <!-- top 1 category -->
     <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;" infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="top1ScrollDown($event)" (scrolledUp)="top1ScrollUp($event)" *ngFor="let homecat of Homecat.slice(0,1);let cat_index = index">
+    [infiniteScrollDistance]="5" (scrolled)="top1ScrollDown($event)" (scrolledUp)="top1ScrollUp($event)" *ngFor="let homecat of Homecat.slice(0,1);let cat_index = index">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">
                 <h6 >
@@ -1244,7 +1244,7 @@
 
     <!-- top 2 category -->
     <div class="col-lg-12 mb-10 pb-0 mt-10" class="listcard" style="margin-top: 10px;" infinite-scroll
-    [infiniteScrollDistance]="2" (scrolled)="top2ScrollDown($event)" (scrolledUp)="top2ScrollUp($event)"
+    [infiniteScrollDistance]="5" (scrolled)="top2ScrollDown($event)" (scrolledUp)="top2ScrollUp($event)"
     *ngFor="let homecat of Homecat.slice(1,2);let cat_index = index">
         <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
             <div class="section-title section-title--one  mb-0">

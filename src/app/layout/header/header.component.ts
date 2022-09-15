@@ -1642,6 +1642,8 @@ export class HeaderComponent implements OnInit {
   }
   viewcartcount() {
     this.request.cartcount(this.userid).subscribe((response: any) => {
+      console.log("response",response);
+      
       this.cartlength = response.cartcount;
     });
   }

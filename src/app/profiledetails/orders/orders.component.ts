@@ -247,15 +247,12 @@ export class OrdersComponent implements OnInit {
     this.loadingg=true
     this.request.quickorder(id).subscribe((res:any)=>{
       if(res.result==true){
-        // this.spinner.hide();
-        
         this.toastr.success('Added to cart', '');
         this.sharedService.sendClickEvent();
         this.loadingg=false
         this.router.navigate(['cart']);
       }
       else{
-        // this.spinner.hide();
         this.toastr.info('', res.message);
       }
     });

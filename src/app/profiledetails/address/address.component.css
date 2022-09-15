@@ -212,3 +212,25 @@ strong{
     .checkout-cart-total p {
         padding: 0px;
     }
+    .editbtn{
+        padding-left:20px;padding-right:20px;margin-right: 10px;
+    }
+    .btns{
+        float: right;
+    }
+
+    /* mob */
+    @media (max-width: 992px) {
+        #useaddress{
+        display: flow-root;
+        
+        }
+        .editbtn{
+            padding-left:20px;padding-right:20px;margin-right: 10px;
+        }
+        .maindiv{
+            padding-left: 0px;
+            padding-right: 0px;
+        }
+
+    }

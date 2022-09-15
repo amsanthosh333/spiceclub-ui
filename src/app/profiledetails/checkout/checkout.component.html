@@ -251,7 +251,6 @@
 						<p class="headline">Payment Method  <span
 							style="color:rgb(12, 171, 245);">&nbsp; <i (click)="backtocheckpage()" class="bi bi-pencil-square"></i></span>
 						</p>
-
 						<p style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;">{{paymentmethod}}</p>
 					</div>
 					<div class="col-lg-4 col-sm-12">
@@ -383,15 +382,15 @@
 									<td class="subtotal">{{(Summery?.coupon_code)}}</td>
 								</tr>
 								<tr>
-									<th>Products(Incl.Tax)</th>
+									<th>Products (Incl.Tax)</th>
 									<td class="subtotal" >{{without_dis}}</td>
 								</tr>
 								<tr>
 									<th>Discount </th>
-									<td class="subtotal">Rs -{{Summery?.discount}}</td>
+									<td class="subtotal">Rs - {{Summery?.discount}}</td>
 								</tr>
 								<tr>
-									<th>Shipping Charges(Incl.Tax)</th>
+									<th>Shipping Charges (Incl.Tax)</th>
 									<td class="subtotal" >{{Summery?.shipping_cost}}</td>
 								</tr>
 								<tr *ngIf="showCod">

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -224,6 +224,11 @@ export class HomeComponent implements OnInit {
   Newarrivals: any;
   loader6new: boolean=true;
   imgloader2new: boolean=true;
+  ExploreScroll: boolean=true;
+  featuredScroll: boolean=true;
+  flashScroll: boolean=true;
+  bestsellScroll: boolean=true;
+  banneronScroll: boolean=true;
   
 
 
@@ -281,8 +286,7 @@ export class HomeComponent implements OnInit {
     // this.viewdata3();
 this.viewnewarrival();
 // this.viewbestsellpro();
-     this.gethomeecat();
-    
+this.viewbestsellpro(); 
     // this.viewhomeFScategory();
     // this.viewhome34category();
     // this.viewtopcategory();
@@ -303,13 +307,17 @@ this.viewnewarrival();
     })(jQuery);
 
   }
+
   ngOnDestroy() {
     this.countDown = null;
   }
-
   banneronScrollDown(event: any) {
-    this.viewbestsellpro();
+    if(this.banneronScroll==true){  
+      this.banneronScroll = false
+   
+    this.gethomeecat();
     this.viewtopcategory();
+    }
     
   }
 
@@ -317,6 +325,9 @@ this.viewnewarrival();
   }
 
   bestsellScrollDown(event: any) {
+    if(this.bestsellScroll==true){  
+      this.bestsellScroll = false
+    }
     this.viewdaydeal();
   }
 
@@ -324,8 +335,12 @@ this.viewnewarrival();
   }
 
   ExploreScrollDown(event: any) {
-    this.viewfuturedpro();
-    this.viewflashdeal();
+    
+    if(this.ExploreScroll==true){  
+      this.ExploreScroll = false
+      this.viewfuturedpro();
+      this.viewflashdeal();
+    }
   }
 
   ExploreScrollUp(event: any) {
@@ -339,8 +354,10 @@ this.viewnewarrival();
   }
 
   featuredScrollDown(event: any) {
-    
+    if(this.featuredScroll==true){  
+      this.featuredScroll = false
     this.viewbrands();
+    }
   }
 
   featuredScrollUp(event: any) {
@@ -348,8 +365,11 @@ this.viewnewarrival();
   }
 
   flashScrollDown(event: any) {
-   
+    if(this.flashScroll==true){  
+      this.flashScroll = false
     this.viewdata4();
+    }
+
   }
 
   flashScrollUp(event: any) {
@@ -805,6 +825,8 @@ this.viewnewarrival();
     });
   }
   viewdata4() {
+    console.log("Testimonial");
+    
     this.request.gettestimonial().subscribe((response: any) => {
       this.Testimonial = response.data;
       // this.loader4 = false;
