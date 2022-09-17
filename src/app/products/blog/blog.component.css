@@ -2,9 +2,11 @@ div {
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0;
 }
-.blog-page-wrapper{
+
+.blog-page-wrapper {
   background-color: #f1f3f6;
 }
+
 .content h3 {
   line-height: 1.2rem;
   overflow: hidden;
@@ -16,7 +18,8 @@ div {
   font-weight: 500;
   color: #4a4a4a !important;
 }
-.content h3 a{
+
+.content h3 a {
 
   color: #4a4a4a !important;
 }
@@ -206,6 +209,7 @@ div {
   background-color: white;
 
 }
+
 #categoriesblogs .single-post {
   width: 31.6%;
   /* float: left; */
@@ -219,24 +223,28 @@ div {
   background-color: white;
 
 }
+
 .single-post #imgdiv {
   height: 250px;
   width: 100%;
   position: relative;
   overflow: hidden;
 }
+
 #otherlargeimg .single-post #imgdiv {
   height: 200px;
   width: 100%;
   position: relative;
   overflow: hidden;
 }
+
 .largeimg .single-post #imgdiv {
   height: 450px;
   width: 100%;
   position: relative;
   overflow: hidden;
 }
+
 .largeimg .single-post h2 {
   font-size: 18px;
   text-transform: capitalize;
@@ -259,10 +267,11 @@ div {
   width: 100%;
 }
 
-#sidecategories{
+#sidecategories {
   background-color: white;
   border-radius: 8px;
 }
+
 /* .post-list-wrapper #bloglist{
 display: flex;
 } */
@@ -474,4 +483,80 @@ li a {
     text-align: -webkit-center;
   }
 
+}
+
+.mainblogdiv {
+  display: flex;
+}
+.viewallbtn1{
+  display: initial;
+}
+.viewallbtn2{
+  display: none;
+}
+.sideshow1{
+  display: none;
+}
+.sideshow2{
+  display: initial;
+}
+/* mob */
+@media (max-width : 992px) {
+  .sideshow1{
+    display: initial;
+  }
+  .sideshow2{
+    display: none;
+  }
+  .mainblogdiv {
+    display: initial;
+    padding-right: 0px;
+    padding-left: 0px;
+  }
+
+  .mainblog {
+    width: 100%;
+    max-width: 100%;
+  }
+  .mainsubblog{
+    width: 100%;
+    max-width: 100%;
+    /* padding-left: 0px;
+    padding-right: 0px; */
+  }
+  .post-list-wrapper .single-post {
+    width: 100%;  
+  }
+  #viewallbtn{
+    margin-right: auto;
+    margin-bottom: 10px;
+  }
+  .viewallbtn1{
+    display: none;
+  }
+  .viewallbtn2{
+    display: initial;
+  }
+  .mainsubblog{
+
+  }
+  #sidecategories{
+    position: relative;
+    width: 94%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: white;
+    border-radius: 8px;
+  }
+  .bloglist2{
+    width: 100%;
+  }
+  .bloglist2_blogs{
+    width: 95% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  
 }

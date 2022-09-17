@@ -32,8 +32,13 @@
             <form [formGroup]="address">
                 <div class="addresss" *ngFor="let Connectdtls of Address; let i=index">
                     <p> <strong>{{username}} </strong></p>
-                    <span> {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
-                        {{Connectdtls.country_name}} - {{Connectdtls.set_default}}{{radioSelected}}</span>
+                    <!-- <span> {{Connectdtls.address}} , {{Connectdtls.city_name}} , {{Connectdtls.state_name}} ,
+                        {{Connectdtls.country_name}} </span> -->
+                        <span>{{Connectdtls.address}} ,</span>
+                        <span>{{Connectdtls.city_name}} ,</span>
+                        <span>{{Connectdtls.state_name}} ,</span>
+                        <span> {{Connectdtls.country_name}}. </span>
+                       
                     <p> {{Connectdtls.postal_code}}</p>
                     <p> <strong> {{Connectdtls.phone}}</strong></p>
                     <!-- *ngIf="((Connectdtls.set_default === '1') ? 'checked':'true')"   [checked]="(Connectdtls.set_default === 1)"   [(ngModel)]="radioSelected" id="shiping_address{{i}}"  *ngIf="(Connectdtls.set_default === 1 ? 'checked':'true')" -->

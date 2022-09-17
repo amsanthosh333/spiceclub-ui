@@ -203,6 +203,7 @@ h6 {
     height: 130px;
     max-height: 130px;
     overflow: auto;
+    display: grid;
 }
 
 #addressdiv p {

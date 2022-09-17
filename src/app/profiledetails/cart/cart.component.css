@@ -261,6 +261,9 @@ input::placeholder{
 #sidebar_content{
   margin-left:10px;width: 24%;
 }
+/* .qty-btn{
+  margin-top: 0px;
+} */
 /* mob */
 @media (max-width: 992px) {
   #sidebar_content{

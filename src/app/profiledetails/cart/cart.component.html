@@ -47,21 +47,19 @@
 									<div class="pro-qty d-inline-block mx-0 " id="qty">
 										<span style="font-size: 0.8rem;" >Qty: </span>
 
-										<span style="display: inherit;"><a class="dec qty-btn"
+										<span style="display: inherit;"><a class="dec qty-btn mt-0"
 												 type="submit"
 												(click)="decreaseqty(b.id,b.quantity-1)"
 												(click)="b.quantity = b.quantity - 1"
-												*ngIf="b.quantity!>b.lower_limit">-</a></span>
+												*ngIf="b.quantity!>b.lower_limit" >-</a></span>
 										<!-- <input type="text" value="{{b.quantity}}"> -->
 										<input type="number" #box value="{{b.quantity}}"
 											(keyup)="getValue(box.value,b.id,b.upper_limit)" name="qqty"
 											style="background: transparent;padding: 0px; width: 40px;">
-										<span style="display: inherit;"> <a class="inc qty-btn"
+										<span style="display: inherit;"> <a class="inc qty-btn mt-0"
 												style="text-decoration: none;color: gray;" (click)="b.quantity = b.quantity + 1"
 												(click)="increaseqty(b.id,b.quantity)"
 												*ngIf="b.quantity!=b.upper_limit">+</a> </span>
-
-
 									</div>
 
 									

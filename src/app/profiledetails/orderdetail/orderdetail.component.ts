@@ -22,7 +22,7 @@ export class OrderdetailComponent implements OnInit {
  
 
   //Demo purpose only, Data might come from Api calls/service
-  public counts = ["Order Placed","Confirmed","Picked Up","On The Way","Delivered"];
+  public counts = ["Open","In Progress","Packing","Shipped","Delivered"];
   //  public orderStatus ="Delivered"
   currentRate = 0;
   currentUserSubject: BehaviorSubject<User>;
@@ -56,6 +56,7 @@ export class OrderdetailComponent implements OnInit {
   paymentdetails: any;
   combined_orderid: any;
   loadingg: boolean=false;
+  trackurl: any;
   constructor(private http: HttpClient,private router: Router,private modalService: NgbModal,
     private authService: AuthService,private fb: FormBuilder,private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService,private route: ActivatedRoute,
@@ -100,6 +101,7 @@ export class OrderdetailComponent implements OnInit {
       this.orderStatus=this.Detail[0].delivery_status_string;
       this.grandtotal_value=this.Detail[0].grand_total.replace(/[^0-9\.-]+/g,"");
       this.combined_orderid =this.Detail[0].combined_order_id
+      this.trackurl = 'https://www.thespiceclub.in/category/99?subcategory=112';
       console.log(" this.grandtotal_value", this.grandtotal_value);
 
       this.orderid=this.Detail[0].id;

@@ -71,13 +71,44 @@
 						</div>
 					</div>
 				</div> -->
+				<div class="col-lg-3 order-1 order-lg-1 order-md-12 sideshow1" id="sidecategories" >
+					<div class="page-sidebar">
+						<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
+							<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Categories </h5>
+							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+								style="padding-left: 0px;max-height: 250px;border-bottom: 1px solid #dfdfdf;overflow-y: auto;margin-bottom: 5px;">
+								<li *ngFor="let cat of Allcat;let i=index">
+									<label style="display: flex;"> <a (click)="getblogbycatg2(cat.id,i)"
+											style="padding-top: 3px;"><input [checked]="topItem === i"
+												type="checkbox"></a>
+										<div class="catname"> <span>{{cat.name}}</span></div>
+									</label>
+								</li>
+							</ul>		
+						</div>	
+						<div class="page-sidebar">
+							<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
+								<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Archives</h5>
+								<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+									style="padding-left: 0px;max-height: 250px;overflow-y: auto;margin-bottom: 5px;">
+									<li *ngFor="let cat of Years;let i=index">
+										<label style="display: flex;"> <a 
+												style="padding-top: 3px;"></a>
+											<div class="catname"> <span>{{cat.name}}</span></div>
+										</label>
+									</li>
+								</ul>		
+							</div>						
+						</div>					
+					</div>
+				</div>
 
-
-				<div class="col-lg-10 order-1 order-lg-2 mb-md-70 mb-sm-70 mt-30" *ngIf="!loader1" 
+				<div class="col-lg-10 order-2 order-lg-1 order-sm-1  mb-md-70 mb-sm-70 mt-30" *ngIf="!loader1" 
 				style="margin-left: auto; margin-right: auto;">
 
 				<div class="row" *ngIf="!catblogs" style="border-bottom:1px solid #dddddd;
 				padding-bottom: 20px;">
+				
 				<div class="post-list-wrapper col-lg-12">
 					<div class="section-title section-title--one  mb-0 p-0">
 						<h5
@@ -89,9 +120,8 @@
 						
 					</div>
 				</div>
-					<div class="col-12"  style="display: flex;">
-						
-						<div class="post-list-wrapper  col-4"  *ngFor="let img of Blogs| slice:0:1 ">
+					<div class="col-12 mainblogdiv">
+						<div class="post-list-wrapper mainblog  col-4"  *ngFor="let img of Blogs| slice:0:1 ">
 							<div class="largeimg" >	
 							<div class="single-post" style="width:100%;" (click)="getblogdetail(firstblog.id)">
 								<a id="imgdiv" (click)="getblogdetail(firstblog.id)">
@@ -116,7 +146,7 @@
 							</div>
 						</div>
 						</div>
-						<div class="post-list-wrapper col-5" id="">
+						<div class="post-list-wrapper mainsubblog col-5" id="">
 							<div class="row" id="bloglist">
 								<div class="col-6" id="otherlargeimg" *ngFor="let img of Blogs.slice(1,5); filter:term;let i=index " >
 									<div class="single-post" style="width:100%;" (click)="getblogdetail(img.id)" >
@@ -143,7 +173,7 @@
 							</div>
 							 
 						</div>
-						<div class="col-lg-3 order-2 order-lg-1" id="sidecategories" >
+						<div class="col-lg-3 order-1 order-lg-1 order-md-12 sideshow2" id="sidecategories" >
 							<div class="page-sidebar">
 								<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
 									<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Categories </h5>
@@ -179,22 +209,21 @@
 				</div>
 
 					<div class="row" *ngIf="!catblogs">
-						<div class="col-12" *ngFor="let cat of Allcat;let i=index">
-
+						<div class="col-12" *ngFor="let cat of Allcat;let i=index" style="border-bottom: 1px solid #dddddd;">
 							<div class="post-list-wrapper" >
 								<div class="col-lg-12">
 									<div class="section-title section-title--one  mb-0 ">
 										<h5
 											style="font-weight: 400;color: #151b39;margin-top: 10px;margin-bottom: 0px;letter-spacing: .25px;">
 											Best of {{cat.name}}
-											<span id="viewallbtn" (click)="getblogbycatg2(cat.id,i)" ><button class="btn btn-success sm">View all</button></span>
+											<span class="viewallbtn1" id="viewallbtn" (click)="getblogbycatg2(cat.id,i)" ><button class="btn btn-success sm">View all</button></span>
 											<p style="color: #6f7284; font-size: 11px">The way to your health is through your stomach with our delicious recipes and diet tips and health benefits of seasonal produce</p>
 										</h5>
-										
+										<span class="viewallbtn2" id="viewallbtn" (click)="getblogbycatg2(cat.id,i)" ><button class="btn btn-success sm">View all</button></span>
 									</div>
 								</div>
 								<div class="col-lg-12" id="bloglist">
-									<div class="single-post col-4 " *ngFor="let img of cat.bestof.data;let i=index" (click)="getblogdetail(img.id)">
+									<div class="single-post mainblog col-4 " *ngFor="let img of cat.bestof.data;let i=index" (click)="getblogdetail(img.id)">
 										<a id="imgdiv" (click)="getblogdetail(img.id)">
 											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}" 
 											style="object-fit:cover; height: 100%; width: 100%;">
@@ -318,13 +347,12 @@
 						</div>
 					</div> -->
 					<div *ngIf="catblogs">
-						<div class="row">
-							
-								<div class="col-9" >
+						<div class="row">						
+								<div class="col-9 bloglist2"  >
 								<div class="post-list-wrapper" id="categoriesblogs">
 
 									<div class="row" id="bloglist">
-										<div class="single-post " *ngFor="let img of Blogs;let i=index" (click)="getblogdetail(img.id)" >
+										<div class="single-post bloglist2_blogs" *ngFor="let img of Blogs;let i=index" (click)="getblogdetail(img.id)" >
 											<a  id="imgdiv">
 												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}">
 											</a>
@@ -346,7 +374,7 @@
 									</div>
 								</div>
 							</div>
-								<div class="col-lg-3 order-2 order-lg-1" id="sidecategories" >
+								<div class="col-lg-3 order-2 order-lg-1 sideshow2" id="sidecategories"  >
 									<div class="page-sidebar">
 										<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
 											<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Categories </h5>
@@ -459,7 +487,7 @@
 					</div>
 				</div> -->
 
-				<div class="col-lg-10 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-30 " *ngIf="loader1"
+				<div class="col-lg-10 order-1 order-lg-2 order-sm-2 mb-md-80 mb-sm-80 mt-30 " *ngIf="loader1"
 				style="margin-left: auto; margin-right: auto;">
 					<div class="row product-isotope shop-product-wrap four-column">
 						<div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">

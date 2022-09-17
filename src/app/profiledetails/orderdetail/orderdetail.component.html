@@ -64,10 +64,11 @@
                     <a id="addressdiv">
                         <p style="margin-top: 0px;"> <strong> {{img.shipping_address.name}}
                             </strong> </p>
-                        <span id="sssp">{{img.shipping_address.email}}</span>
-                        <span id="sssp"> {{img.shipping_address.address}} ,
-                            {{img.shipping_address.city}}, {{img.shipping_address.state}},
-                            {{img.shipping_address.country}} -</span>
+                        <span id="sssp">{{img.shipping_address.address}} ,</span>
+                        <span id="sssp">
+                            {{img.shipping_address.city}}, </span>
+                            <span id="sssp">   {{img.shipping_address.state}},</span>
+                            <span id="sssp">     {{img.shipping_address.country}} -</span>
                         <p style="font-size:0.8rem;"> {{img.shipping_address.postal_code}} </p>
                         <p><strong> {{img.shipping_address.phone}}</strong> </p>
                     </a>
@@ -136,6 +137,33 @@
                         style="color: rgb(209, 98, 7);;"></i>
                 </p>
             </span>
+            
+            <span id="paymentdiv" *ngIf="img.order_tracking_no !==null">
+                <p class="headline2">Order Tracking no:&nbsp;</p>
+                <p  style="font-size:0.8rem; font-weight:500; margin-bottom: 8px;">
+                    {{img.order_tracking_no}} </p>
+              
+            </span>
+            <span id="paymentdiv" *ngIf="img.order_tracking_link!==null">
+                <p class="headline2">Order Tracking Link:&nbsp;</p>
+                <p  style="    font-size: 0.8rem;
+                font-weight: 500;
+                margin-bottom: 8px;
+                width: 135px;
+                overflow: hidden;
+                text-decoration: underline;
+                color: #209cd4;">
+                 <a href="{{img.order_tracking_link}}" target="_blank" class="a-popover-trigger a-declarative tracklink"
+                  *ngIf="img.tax_invoice_number !== null">
+                 <span style="color: #209cd4;">{{img.order_tracking_link}}</span>
+                 </a>
+
+                   <!-- <a href="{{'/' + img.order_tracking_link }}"></a>   -->
+                </p>
+              
+            </span>
+            
+          
         </div>
         <div class="col-lg-4 col-sm-12" id="summarydiv">
             <p class="headline">Order Summary</p>

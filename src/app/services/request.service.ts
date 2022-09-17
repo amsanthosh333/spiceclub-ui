@@ -33,7 +33,7 @@ export class RequestService {
   temporaryIdSubject: BehaviorSubject<temporaryId>;
   temp_Id: Observable<temporaryId>;
   temp_detail: temporaryId;
-  currrent_temp_Id: any="";
+  currrent_temp_Id: any;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -55,7 +55,7 @@ export class RequestService {
     if (this.buyertypeid == undefined) {
       this.buyertypeid = 1
     }
-
+    //  localStorage.removeItem('temporaryId');
     this.temporaryIdSubject = new BehaviorSubject<temporaryId>(
       JSON.parse(localStorage.getItem('temporaryId') || '{}')
     );
@@ -64,18 +64,24 @@ export class RequestService {
     this.currrent_temp_Id=this.temp_detail.temp_user_id
 
     if(this.currrent_temp_Id == undefined ){
-      console.log("this.temp_Id_serser",);   
+      console.log("this.temp_Id_serser if",this.currrent_temp_Id);   
       this.currrent_temp_Id = ""
     }
    
     console.log(" this.currrent_temp_Id", this.currrent_temp_Id);   
   }
 
+  ngOnInit(): void {
+    console.log("service file oninit");
+    
+  }
   logout() {
     this.url = `${this.endPoint1}/auth/logout`;
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     localStorage.removeItem('currentUser');
+   
+    
 
     this.currentUserSubject.next(null!);
     return this.http.get(this.url, { headers: headers })
@@ -149,6 +155,13 @@ export class RequestService {
     .pipe(    
       map((temporaryId) => { 
         localStorage.setItem('temporaryId', JSON.stringify(temporaryId));
+
+        this.temporaryIdSubject = new BehaviorSubject<temporaryId>(
+          JSON.parse(localStorage.getItem('temporaryId') || '{}')
+        );
+        this.temp_Id = this.temporaryIdSubject.asObservable();
+        this.temp_detail=this.temporaryIdSubject.value;
+        this.currrent_temp_Id=this.temp_detail.temp_user_id  
         // this.temporaryIdSubject.next(temporaryId); 
         // // console.log("currentuser:",user);
         return temporaryId;
