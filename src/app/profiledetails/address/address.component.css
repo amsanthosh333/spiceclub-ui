@@ -219,7 +219,9 @@ strong{
     .btns{
         float: right;
     }
-
+.add_loadbtn{
+    padding: 3px 53px 2px 53px;
+}
     /* mob */
     @media (max-width: 992px) {
         #useaddress{

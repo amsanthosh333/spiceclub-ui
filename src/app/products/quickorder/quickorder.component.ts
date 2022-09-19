@@ -10,12 +10,12 @@ import { ToastrService } from 'ngx-toastr';
 import { SharedService } from 'src/app/services/shared.service';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 @Component({
-  selector: 'app-flash',
-  templateUrl: './flash.component.html',
-  styleUrls: ['./flash.component.css'],
+  selector: 'app-quickorder',
+  templateUrl: './quickorder.component.html',
+  styleUrls: ['./quickorder.component.css'],
   providers: [NgbRatingConfig,ToastrService],
 })
-export class FlashComponent implements OnInit {
+export class QuickorderComponent implements OnInit {
   p: number = 1;
   Sort = [
     { id: 'price_low_to_high', value: 'price_low_to_high' },
@@ -89,7 +89,6 @@ export class FlashComponent implements OnInit {
   edata:any;
   Bestsellpro: any;
   prodloader1: boolean=true;
-  Newarrivals: any;
 
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService
@@ -116,74 +115,39 @@ export class FlashComponent implements OnInit {
 
   ngOnInit(): void {
     window.scroll(0,0);
-    this.id = this.route.snapshot.params['id']; 
-    console.log("FLASH id",this.id);
-    if(this.id){
-      console.log("iffffffffffffff");
-      if(this.id==0){
-           console.log("quickorderproducts");    
-           this.viewQuickOrderPrd();     
-           this.noorder=true
-           this.subtitle="Ordered Products"
-      }
-      else{
-        this.viewprodbyflash(this.id,1);
-        this.noorder=false
-        this.subtitle="Flash deal products"
-      }
+    this.subtitle="Ordered Products"
+    this.noorder=true
+    this.viewQuickOrderPrd(); 
+    // this.id = this.route.snapshot.params['id']; 
+    // console.log("FLASH id",this.id);
+    // if(this.id){
+    //   console.log("iffffffffffffff");
+    //   if(this.id==0){
+    //        console.log("quickorderproducts");    
+    //        this.viewQuickOrderPrd();     
+    //        this.noorder=true
+    //        this.subtitle="Ordered Products"
+    //   }
+    //   else{
+    //     this.viewprodbyflash(this.id,1);
+    //     this.noorder=false
+    //     this.subtitle="Flash deal products"
+    //   }
       
     
-    }
-    else{
-      console.log("else");
-      this. getflashdealproducts();
+    // }
+    // else{
+    //   console.log("else");
+    //   this. getflashdealproducts();
 
-    }
-    this.viewnewarrival()
-    // this.viewprodbyflash(this.id,1); 
+    // }
+    // this.viewbestsellpro()
+     
    
   }
-  viewnewarrival() {
-    this.request.getnewarrivalpro().subscribe((response: any) => {
-      this.Newarrivals = response.data;
-      this.prodloader1=false;
-      setTimeout(() => {
-        this.imgloader = true;
-      }, 300);
-    });
-  }
 
 
 
-  getallflashdeal(){
-    this.request.getallflashdeal().subscribe((response: any) => {
-      this.Alldeal=response.data;
-      console.log("allflashdeal",this.Alldeal);
-    });
-  }
-  viewprodbyflash(id:any,page:any,){
-    this.request.getprodbyflash(id,page).subscribe((response: any) => {
-      this.Allproducts=response.data;
-      this.pagenation=response.meta   
-      this.pagess=this.pagenation?.links
-      this.prodloader=false
-      console.log("response",response);
-      console.log("allbrandproduct",this.Allproducts);
-      setTimeout(() => {
-        this.imgloader = true;
-      }, 500);
-    });
-  }
-  getflashdealproducts(){
-    this.request.getallflashdealproducts().subscribe((response: any) => {
-      this.Allproducts=response.data;
-      this.prodloader=false
-      console.log("Allproducts",this.Allproducts);
-      setTimeout(() => {
-        this.imgloader = true;
-      }, 500);
-    });
-  }
   getpage(url:any){
     this.request.getpage(url).subscribe((response:any)=>{
       this.Allproducts=response.data;
@@ -595,4 +559,5 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   }
 
 }
+
 

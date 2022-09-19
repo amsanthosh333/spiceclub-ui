@@ -391,7 +391,7 @@
         <h6 style="font-weight: 700;
         padding: 0px;
         margin-top: 5px;
-    margin-bottom: 5px;">Select options</h6>
+    margin-bottom: 5px;">Add to cart</h6>
         <div class="py-1">
             <div class="modal-body  c-scrollbar-light" style="border: 1px solid #e0e0e0;">
 
@@ -421,8 +421,8 @@
                                                     style="text-decoration: line-through;color:rgb(255, 142, 142); font-size: 0.8rem;">{{storked_pricee}}</span>
                                             </div>
                                             <div class="single-info" style="padding-bottom:7px;">
-                                                <span class="quickview-title"
-                                                    style="color: #727272;font-weight: 600">Price : </span>
+                                                <span class="hop-product__block mt-2" style="color: #727272;
+                                                font-weight: 600;">Price : </span>
                                                 <a
                                                     style="font-size: 1rem;color:brown;font-weight: 600;">{{prod_price}} </a>
                                                 <span style="font-size: 0.6rem;font-weight: 500;color: gray;"
@@ -439,7 +439,7 @@
                                                 *ngIf="Peoduct?.discount_percentage!= 0">You save <span
                                                     style="color:rgb(168, 0, 0);">Rs {{discount_price}}
                                                     ({{discount_percentage}}%)</span></p>
-                                                    <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
+                                                    <p style="font-size: 0.8rem;color: #727272;"
                                                     *ngIf="Peoduct?.discount_percentage!= 0"> (Inclusive of all taxes - GST {{gst_percentage}}%)
                                                    </p>
                             </td>
@@ -503,10 +503,10 @@
                     </div>
 
 
-                    <div class="row no-gutters ml-1">
+                    <div class="row no-gutters ml-1 mt-10">
                         <div class="col-3">
-                            <div class="quickview-title mt-2" style="color: rgb(56 56 56);
-                                    font-weight: 400;">Quantity:</div>
+                            <div class="hop-product__block mt-2" style="color: #727272;
+                                    font-weight: 600;">Quantity:</div>
                         </div>
                         <div class="col-9">
                             <div class="product-quantity d-flex align-items-center">
@@ -528,7 +528,8 @@
                     <hr>
                     <div class="row no-gutters pb-3 ml-1" id="chosen_price_div" *ngIf="quantityyy!==0">
                         <div class="col-3">
-                            <div class="quickview-title" style="font-weight:600 ;">Total Price:</div>
+                            <div class="hop-product__block mt-2" style="color: #727272;
+                            font-weight: 600;">Total Price:</div>
                         </div>
                         <div class="col-9">
                             <div class="product-price">

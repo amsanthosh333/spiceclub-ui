@@ -62,6 +62,8 @@ const routes: Routes = [
   { path: 'kyc', loadChildren: () => import('./profiledetails/kyc/kyc.module').then(m => m.KycModule) },
   { path: 'subscribedprod', loadChildren: () => import('./products/subscribedprod/subscribedprod.module').then(m => m.SubscribedprodModule) },
   { path: 'enquiry', loadChildren: () => import('./profiledetails/enquiry/enquiry.module').then(m => m.EnquiryModule) },
+
+  { path: 'quickorder', loadChildren: () => import('./products/quickorder/quickorder.module').then(m => m.QuickorderModule) },
  
   
 ];

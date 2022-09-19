@@ -24,8 +24,10 @@
             <span style="color: #2874f0;;"><strong style="padding-left: 20px;">+ Add a New Address</strong> </span>
         </div> -->
         <div id="addaddressdiv">
-            <button id="newaddbtn" class="btn btn-info" (click)="addaddresss(addRecord,map)">Create a new
+            <button id="newaddbtn" class="btn btn-info" (click)="addaddresss(addRecord)" *ngIf="addbtn_load">Create a new
                 address</button>
+            <button id="newaddbtn" class="btn btn-info add_loadbtn" *ngIf="!addbtn_load" > <i class="fa fa-spinner fa-spin" 
+                style="font-size: 1.1em;"></i></button>
         </div>
 
         <div class="addres1">
@@ -158,8 +160,6 @@
                         <h6 class="form-text text-danger"
                             *ngIf="!register.get('country')?.valid && register.get('country')?.touched">
                             *Select country</h6>
-
-
                     </div>
                 </div>
 
@@ -167,7 +167,6 @@
                     <div class="form-group position-relative">
                         <label>State<span class="text-danger">*</span></label>
                         <select class="form-control pl-5" formControlName="state" (change)="selectstate($event)">
-
                             <option *ngFor="let tab of State" [value]="tab.id">
                                 {{tab.name}}
                             </option>
@@ -175,7 +174,6 @@
                         <h6 class="form-text text-danger"
                             *ngIf="!register.get('state')?.valid && register.get('state')?.touched">
                             *Select state</h6>
-
                     </div>
                 </div>
 
@@ -187,19 +185,12 @@
                                 {{mem.name}}
                             </option>
                         </select>
-
                         <h6 class="form-text text-danger"
                             *ngIf="!register.get('city')?.valid && register.get('city')?.touched">
                             *Select city</h6>
                     </div>
                 </div>
 
-                <!-- <div class="col-md-6 col-12 mb-20">
-                    <label class="shipplable" >Town/City*</label>
-                    <ng-select class="nice-select" formControlName="city" [items]="City" bindLabel="name" bindValue="id"
-                    required placeholder="" >
-                  </ng-select>
-                </div> -->
 
                 <div class="col-md-6">
                     <div class="form-group position-relative">
@@ -219,7 +210,6 @@
                         <h6 class="form-text text-danger"
                             *ngIf="!register.get('phone')?.valid && register.get('phone')?.touched">
                             *Enter mobile number</h6>
-
                     </div>
                 </div>
 
@@ -283,7 +273,7 @@
                 <div class="col-md-6">
                     <div class="form-group position-relative">
                         <label>State<span class="text-danger">*</span></label>
-                        <select class="form-control pl-5" formControlName="state">
+                        <select class="form-control pl-5" formControlName="state" (change)="selectstate($event)">
                             <option *ngFor="let tab of State" [value]="tab.id">
                                 {{tab.name}}
                             </option>
@@ -332,7 +322,7 @@
     </div>
 </ng-template>
 
-<ng-template #map let-modal>
+<!-- <ng-template #map let-modal>
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="2" (mapClick)="addMarker($event.coords.lat, $event.coords.lng)">
         <agm-marker *ngFor="let marker of markers" [latitude]="marker.lat" [longitude]="marker.lng"
             [opacity]="marker.alpha" [markerDraggable]="true" (markerClick)="selectMarker($event)">
@@ -340,4 +330,4 @@
         <agm-rectangle [north]="max('lat')" [east]="max('lng')" [south]="min('lat')" [west]="min('lng')">
         </agm-rectangle>
     </agm-map>
-</ng-template>
+</ng-template> -->

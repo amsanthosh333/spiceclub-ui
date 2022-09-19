@@ -29,8 +29,8 @@ export class AddressComponent implements OnInit {
   tokentype: any;Proce: any;
   currentdetail: User;
   register!: FormGroup;
-  City: any;
-  Country: any;
+  City: any=[];
+  Country: any=[];
   State: any;
   Address: any;
   editForm!: FormGroup;
@@ -58,6 +58,7 @@ export class AddressComponent implements OnInit {
   indexx: any;
   address_id: any;
   radioSelected: any =21;
+  addbtn_load: boolean =true;
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, 
     private request: RequestService,
     private modalService: NgbModal,) {
@@ -144,7 +145,9 @@ export class AddressComponent implements OnInit {
     // this. processdata()    
     });
   }
-  addaddresss(content:any,content2:any){
+  addaddresss(content:any){
+    // this.addbtn_load=false
+    console.log("addaddresss");
     this.register.reset();
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
@@ -167,7 +170,6 @@ export class AddressComponent implements OnInit {
     this.country_id = event.target.value;
     this.request.fetchstatebycountry(this.country_id).subscribe((response: any) => {
       this.State = response.data;
-
     });
 
   }
@@ -179,6 +181,8 @@ export class AddressComponent implements OnInit {
   selectstate(event: any) {
     this.state_id = event.target.value;
     this.request.fetchcitybystate(this.state_id).subscribe((response: any) => {
+      console.log("selectstate response",response);
+      
       this.City = response.data;
 
     });
