@@ -101,18 +101,14 @@
         </div>
     </div>
 </div>
-<div id="pggg mt-40" *ngIf="(Orders.length==0)" style=" display: flex;
-justify-content: center;
-align-items: center;
-height: 200px;
-margin-right: 100px;
-margin-left: 100px;
-margin-top: 40px;
-border: 3px solid rgb(139, 139, 139);">
-    <div>
-        <h5>
-            There is no delivered order
-        </h5>
+
+<div id="pggg" *ngIf="(Orders?.length==0)" >
+    <div style="text-align: center;">
+        <div> <img src="assets/images/icons/empty-order.jpg" alt="" style="width:60% ;"></div>
+        <h6>
+            There is no delivered order &nbsp; <a style="text-decoration: underline; color: blue;" routerLink="/home">Buy
+                Now</a>
+        </h6>
     </div>
 </div>
 </div>

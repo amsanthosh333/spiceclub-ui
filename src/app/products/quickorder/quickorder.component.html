@@ -162,17 +162,7 @@
                             </div>
                         </div>
 
-                        <div id="pggg" *ngIf="Allproducts?.length==0 && !noorder" style=" display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 200px;
-                    border: 1px solid rgb(241 233 233);">
-                            <div>
-                                <h5>
-                                    No products in in Flash Deals
-                                </h5>
-                            </div>
-                        </div>
+                       
 
                         <div id="pggg" *ngIf="Allproducts?.length==0 && noorder" style=" display: flex;
                             justify-content: center;
@@ -180,12 +170,13 @@
                             height: 200px;
                            
                             border: 1px solid #d7d6d6;">
-                            <div>
-                                <h6>
-                                    There is no Order &nbsp; <a style="text-decoration: underline; color: blue;"
-                                        routerLink="/home">Buy Now</a>
-                                </h6>
-                            </div>
+                           <div style="text-align: center;">
+                            <div> <img src="assets/images/icons/empty-order.jpg" alt="" style="width:60% ;"></div>
+                            <h6>
+                                There is no Order &nbsp; <a style="text-decoration: underline; color: blue;" routerLink="/home">Buy
+                                    Now</a>
+                            </h6>
+                        </div>
                         </div>
 
                     </div>
@@ -226,19 +217,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div id="pggg" *ngIf="(Bestsellpro?.length==0)" style=" display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 200px;
-        margin-right: 100px;
-        margin-left: 100px;
-        border: 3px solid rgb(139, 139, 139);">
-                            <div>
-                                <h5>
-                                    No products in Subscription
-                                </h5>
-                            </div>
-                        </div> -->
+       
     </div>
 
     <!--=====  End of shop page content  ======-->

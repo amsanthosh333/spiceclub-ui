@@ -36,8 +36,10 @@
 									style="text-decoration:line-through"
 									*ngIf="b.stroked_price!==b.pricestring">{{b.stroked_price}}</span>          
 									<span class="price" style="font-weight: 600;
-										color: rgb(66, 66, 66);">  {{b.pricestring}}&nbsp;<span style="font-size: 0.7rem;font-weight: 100;" *ngIf="b.variation!==null">({{b.attribute[0]?.title}}: {{b.variation}} (pack of 1)) </span></span>
-							     <!-- <a class="yousave" *ngIf="b.has_discount==true" >
+										color: rgb(66, 66, 66);">  {{b.pricestring}}&nbsp;<span style="font-size: 0.7rem;font-weight: 100;"> (Incl.Tax) </span></span>
+						<span style=" color: gray;font-size: 0.7rem;	font-weight: 100;display: block;margin-top: 5px;margin-bottom: 10px;"
+						 *ngIf="b.variation!==null">({{b.attribute[0]?.title}}: {{b.variation}} (pack of 1)) </span>
+						<!-- <a class="yousave" *ngIf="b.has_discount==true" >
 									You save <span style="color:green">Rs {{b.discount_amount}}</span></a> -->
 									<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray; margin-top: 8px;"
 											*ngIf="b.discount!==0">
@@ -101,10 +103,12 @@
 						</tbody>
 					</table>
 					<div id="pggg" *ngIf="(Cart.length==0)" >
-						<div>
-							<h5>
-								Cart is Empty
-							</h5>
+
+
+						<div style="text-align: center;">
+							<div> <img src="assets/images/icons/empty-cart.jpg" alt="" style=" width:70%;"></div>
+				<h6 style=""> Empty Cart</h6>
+				<h6 style="font-size: 0.7rem;">You have no items in your cart. Start adding!</h6>
 						</div>
 					</div>
 				</div>

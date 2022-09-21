@@ -40,6 +40,7 @@ export class FormatTimePipe implements PipeTransform {
 
 })
 export class HomeComponent implements OnInit {
+  
   countDown: any;
   counter = 1800;
   tick = 1000;
@@ -235,7 +236,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private toastr: ToastrService, private modalService: NgbModal,
     config: NgbRatingConfig, private _location: Location, private sharedService: SharedService, private authService: AuthService) {
-
+       window.scroll(0, 0) 
     this.loader1 = true;
     this.loader2 = true;
 

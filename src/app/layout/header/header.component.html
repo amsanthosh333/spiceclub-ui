@@ -1,6 +1,6 @@
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<div id="marquetag" style="background:#000000; height: 15px;">
-		<span >
+		<span>
 			Do you have questions? Feel free to call us on +91 94427 33601. We are happy to help you.
 			<!-- <marquee behavior="scrol" direction="left" scrollamount=1>	<p id="headerbar">Do you have Questions? Fell free to call us on ********.We will help you immediately. </p></marquee> -->
 		</span>
@@ -39,27 +39,28 @@
 
 				<div class="header-right-container">
 					<!--=======  header right icons  =======-->
-					
+
 					<div class="header-right-icons d-flex justify-content-end align-items-center h-100">
 						<div class="single-icon user-login" *ngIf="(userid!==0)" id="username">
-							<h6 style="color:white;font-size: 0.9rem;" >Hi, {{currentdetail?.user?.name}}!</h6>
+							<h6 style="color:white;font-size: 0.9rem;font-family: 'Circular-Loom';">Hi,
+								{{currentdetail?.user?.name}}!</h6>
 						</div>
 
-						<div class="single-icon user-login">	
+						<div class="single-icon user-login">
 							<a href="javascript:void(0)" id="offcanvas-about-icon">
-								<span><img   class="ion-android-person" *ngIf="(userid!==0)" src="../../../assets/images/icons/user1.png" 
-									alt=""></span>
+								<span><img class="ion-android-person" *ngIf="(userid!==0)"
+										src="../../../assets/images/icons/user1.png" alt=""></span>
 							</a>
 						</div>
 
 						<div class="single-icon wishlist">
 							<a href="javascript:void(0)" id="offcanvas-wishlist-icon">
-								<span><img  class="ion-android-favorite-outline" *ngIf="(userid!==0)" src="../../../assets/images/icons/heart3.png" 
-									 alt=""></span>	
+								<span><img class="ion-android-favorite-outline" *ngIf="(userid!==0)"
+										src="../../../assets/images/icons/heart3.png" alt=""></span>
 
 								<span class="count" *ngIf="(userid!==0)">{{Wlength}}</span>
 							</a>
-		
+
 							<a id="offcanvashlist-icon" class="loggin" *ngIf="(userid==0)">
 								<button type="button" class="btn btn-outline-light" (click)="openlogin()"
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
@@ -72,38 +73,39 @@
 
 						<div class="single-icon cart">
 							<a href="javascript:void(0)" id="offcanvas-cart-icon">
-								<span><img class="ion-ios-cart" *ngIf="(userid!==0)" src="../../../assets/images/icons/shopping-cart (2).png" 
-									style="height:28px;width:29px;margin-bottom: -3px;
+								<span><img class="ion-ios-cart" *ngIf="(userid!==0)"
+										src="../../../assets/images/icons/shopping-cart (2).png" style="height:28px;width:29px;margin-bottom: -3px;
 										margin-right: 5px;" alt=""></span>
 								<span class="count" *ngIf="(userid!==0)">{{cartlength}}</span>
 
 								<button type="button" class="btn btn-outline-light" *ngIf="(userid==0)"
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
-									<span><img class="ion-ios-cart"  src="../../../assets/images/icons/trolley.png" style="height:18px;width:18px;margin-bottom: -4px;
+									<span><img class="ion-ios-cart" src="../../../assets/images/icons/trolley.png"
+											style="height:18px;width:18px;margin-bottom: -4px;
 										margin-right: 7px;" alt=""></span>
 									<p style="display:contents;">Cart {{cartlength}}</p>
 								</button>
-								
+
 							</a>
 							<!-- <a   href="javascript:void(0)" id="offcanvas-cart-icon" class="loggin" *ngIf="(userid==0)"> -->
-								<!-- <button type="button" class="btn btn-outline-light" (click)="opensignup()"
+							<!-- <button type="button" class="btn btn-outline-light" (click)="opensignup()"
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
 									<span><img src="../../../assets/images/icons/add-user.png" style="height:18px;width:18px;margin-bottom: -4px;
 										margin-right: 7px;" alt=""></span>
 									<p style="display:contents;">Signup</p>
 								</button> -->
-								<!-- <button type="button" class="btn btn-outline-light" 
+							<!-- <button type="button" class="btn btn-outline-light" 
 									style="width: 100px;border: 1px solid#f1efef ;background-color: whitesmoke;padding: 0px;color:#ce2127;font-size: 1rem;">
 									<span><img class="ion-ios-cart"  src="../../../assets/images/icons/trolley.png" style="height:18px;width:18px;margin-bottom: -4px;
 										margin-right: 7px;" alt=""></span>
 									<p style="display:contents;">Cart {{cartlength}}</p>
 								</button> -->
-								
+
 							<!-- </a> -->
 						</div>
 
 						<div class="single-icon drop">
-							
+
 							<a id="offcanart-icon">
 								<div class="dropdown" style="float:right;">
 									<i class="bi bi-three-dots-vertical"></i>
@@ -112,6 +114,8 @@
 										<a routerLink="/shopbyproduct">ShopByProduct</a>
 										<a routerLink="/category">ShopByCategory</a>
 										<a routerLink="/blog">Blog</a>
+										
+										<a routerLink="/quickorder">Quickorder</a>
 										<!-- <a routerLink="/recipe">Recipe</a> -->
 										<a *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0"
 											(click)="openkyc()">Kyc</a>
@@ -164,28 +168,29 @@
 				</div>
 				<!--=======  End of headeer right container  =======-->
 			</div>
-		<div class="main2">
-					<div class="inputroup">
-						<form class="input-group" [formGroup]="search" (ngSubmit)="search1(search)" style="width:100%;">
-							<input type="text" list="codes" class="form-control" placeholder="Search for a product"
-								formControlName="key" style="height: 30px;" (input)="inputHandle($event)">
-							<datalist id="codes" style="background-color:white;">
-								<option *ngFor="let c of searchList" [value]="c.name">{{c.name}}</option>
-							</datalist>
-							<div class="input-group-append" style="height: 30px;">
-								<button class="btn btn-dark" type="submit" id="searchbar" style="display:inline;z-index: auto;">
-									<i class="ion-ios-search-strong"></i><span></span>
-								</button>
-							</div>
-						</form>
-					</div> 
+			<div class="main2">
+				<div class="inputroup">
+					<form class="input-group" [formGroup]="search" (ngSubmit)="search1(search)" style="width:100%;">
+						<input type="text" list="codes" class="form-control" placeholder="Search for a product"
+							formControlName="key" style="height: 30px;" (input)="inputHandle($event)">
+						<datalist id="codes" style="background-color:white;">
+							<option *ngFor="let c of searchList" [value]="c.name">{{c.name}}</option>
+						</datalist>
+						<div class="input-group-append" style="height: 30px;">
+							<button class="btn btn-dark" type="submit" id="searchbar"
+								style="display:inline;z-index: auto;">
+								<i class="ion-ios-search-strong"></i><span></span>
+							</button>
+						</div>
+					</form>
 				</div>
+			</div>
 			<!-- Mobile Navigation Start Here -->
 		</div>
 	</div>
 
 	<div class="header-bottom-navigation">
-		<div class="site-main-nav d-none d-lg-block"  style="padding-left: 0%;height: 34px;background-color: #eee;">
+		<div class="site-main-nav d-none d-lg-block" style="padding-left: 0%;height: 34px;background-color: #eee;">
 			<nav class="site-nav" style="display: flex;">
 				<!-- <div class="wrapper" style="flex-direction: row; 
 						justify-content: center;
@@ -199,69 +204,72 @@
 							style="font-weight:600;">Shop by Categories</a>
 						<ul class="sub-menu mega-menu mega-menu-column-4 center-menu">
 							<li class="lii" style="padding-left: 10px;">
-								<ul class="mega-sub-menu" >
-									<li style="margin-top: 10px;padding-left: 4px;" *ngFor="let img of Allcat;let i=index">
-										<span class="lispan" style="text-decoration: underline" [ngClass]="{'active': subItem === i}"
-											(click)="gotocategory(img.id)" (click)="viewsubcat(img.id,i)" 
-											(mouseover)="viewsubcat(img.id,i)" (mouseout)="viewsubcatmoustout()">
-											<a id="listactive" style="text-decoration:none;margin-bottom: 0px;"> 
-												<span >{{img.name}}</span>
-									 		</a>
+								<ul class="mega-sub-menu">
+									<li style="margin-top: 10px;padding-left: 4px;"
+										*ngFor="let img of Allcat;let i=index">
+										<span class="lispan" style="text-decoration: underline"
+											[ngClass]="{'active': subItem === i}" (click)="gotocategory(img.id)"
+											(click)="viewsubcat(img.id,i)" (mouseover)="viewsubcat(img.id,i)"
+											(mouseout)="viewsubcatmoustout()">
+											<a id="listactive" style="text-decoration:none;margin-bottom: 0px;">
+												<span>{{img.name}}</span>
+											</a>
 											<i *ngIf="img.number_of_children!=0"
 												style="float: right;margin-top: 6px;color:#ce2127;"
 												(click)="viewsubcat(img.id,i)" class="bi bi-caret-right-fill"
-												[ngClass]="{'active': subItem === i}"
-												></i>
+												[ngClass]="{'active': subItem === i}"></i>
 										</span>
 									</li>
 								</ul>
 							</li>
 							<li class="lii" style="padding-left: 10px;">
-								<ul class="mega-sub-menu" >
-									<li style="margin-top: 10px;padding-left: 4px;" *ngFor="let img of Subcat;let i=index">
+								<ul class="mega-sub-menu">
+									<li style="margin-top: 10px;padding-left: 4px;"
+										*ngFor="let img of Subcat;let i=index">
 										<span class="lispan" [ngClass]="{'active': subItem1 === i}"
 											(click)="gotocategory2(img.id)" (click)="viewsubcat2(img.id,i)"
-											 (mouseover)="viewsubcat2(img.id,i)" (mouseout)="viewsubcat2moustout()">
-											<a style="width:190px;" id="listactive" [ngClass]="{'active': subItem1 === i}">
+											(mouseover)="viewsubcat2(img.id,i)" (mouseout)="viewsubcat2moustout()">
+											<a style="width:190px;" id="listactive"
+												[ngClass]="{'active': subItem1 === i}">
 												<span>{{img.name}}</span>
 											</a>
 
 											<i *ngIf="img.number_of_children!=0"
 												style="float: right;margin-top: 7px; color:#ce2127;"
 												(click)="viewsubcat2(img.id,i)" class="bi bi-caret-right-fill"
-												[ngClass]="{'active': subItem1 === i}"
-												></i>
+												[ngClass]="{'active': subItem1 === i}"></i>
 										</span>
 									</li>
 								</ul>
 							</li>
 
 							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 10px;">
-								<ul class="mega-sub-menu" >
-									<li style="margin-top: 10px;padding-left: 4px;" *ngFor="let img of Subcat2;let i=index" >
+								<ul class="mega-sub-menu">
+									<li style="margin-top: 10px;padding-left: 4px;"
+										*ngFor="let img of Subcat2;let i=index">
 										<span class="lispan" [ngClass]="{'active': subItem2 === i}"
 											(click)="gotocategory3(img.id)" (click)="viewsubcat3(img.id,i)"
-											 (mouseover)="viewsubcat3(img.id,i)" (mouseout)="viewsubcat3moustout()">
-											<a style="width:190px;" id="listactive" [ngClass]="{'active': subItem2 === i}">
+											(mouseover)="viewsubcat3(img.id,i)" (mouseout)="viewsubcat3moustout()">
+											<a style="width:190px;" id="listactive"
+												[ngClass]="{'active': subItem2 === i}">
 												<span>{{img.name}}</span>
 											</a>
 											<i *ngIf="img.number_of_children!=0"
 												style="float: right;margin-top:7px;color:#ce2127;"
 												(click)="viewsubcat3(img.id,i)" class="bi bi-caret-right-fill"
-												[ngClass]="{'active': subItem2 === i}"
-												></i>
+												[ngClass]="{'active': subItem2 === i}"></i>
 										</span>
 									</li>
 								</ul>
 							</li>
 							<li class="lii" *ngIf="Subcat3?.length!=0" style="padding-left: 10px;">
-								<ul class="mega-sub-menu" >
+								<ul class="mega-sub-menu">
 									<li style="margin-top: 10px;" *ngFor="let img of Subcat3;let i=index">
 
 										<span class="lispan" id="listactive" [ngClass]="{'active': subItem3 === i}"
 											(click)="gotocategory4(img.id)">
-											<a style="display:inline;" [ngClass]="{'active': subItem3 === i}"> <span
-													>{{img.name}}</span>
+											<a style="display:inline;" [ngClass]="{'active': subItem3 === i}">
+												<span>{{img.name}}</span>
 											</a>
 										</span>
 									</li>
@@ -280,12 +288,13 @@
 					style=" margin-left: 45px;"><a id="buttonsubscribe"><a class="btn btn-info" id="buttonkyc">Verify
 							Kyc</a></a></span> -->
 
-							<div class="wrapper" style="flex-direction: row; 
+				<div class="wrapper" style="flex-direction: row; 
 							justify-content: center;
-							align-items: center;display: block;margin-top: 3px;" *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0">
-							<span   class="wrapper1" style=" margin-left: 45px;" (click)="openkyc()"><a id="buttonsubscribe"
-								><a class="btn btn-danger" id="buttonkyc" >Verify KYC</a></a></span>
-						</div>
+							align-items: center;display: block;margin-top: 3px;"
+					*ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==0">
+					<span class="wrapper1" style=" margin-left: 45px;" (click)="openkyc()"><a id="buttonsubscribe"><a
+								class="btn btn-danger" id="buttonkyc">Verify KYC</a></a></span>
+				</div>
 				<!-- <span  *ngIf="buyertypereal===2 && kyc_verify_status==0 && iskycupload ==1" class="wrapper1" style=" margin-left: 45px;"><a id="buttonsubscribe"
 						><a class="btn btn-info" id="buttonkyc">Kyc verification inprogress</a></a></span> -->
 
@@ -394,7 +403,7 @@
 					<h6 class="col-2"><span><img class="ion-android-person" src="../../../assets/images/icons/arrow.png"
 								style="height:15px;width:15px;margin-bottom: 1px;
 							margin-right: 5px;" alt=""></span> </h6>
-					<h6 class="col-10" ><a>Logout</a></h6>
+					<h6 class="col-10"><a>Logout</a></h6>
 				</div>
 				<!-- <div class="row mb-2 ml-4" id="closeabout">
 						<h6 class="col-2"><i class="ion-android-exit 180deg"></i> </h6>
@@ -476,12 +485,17 @@
 			</div>
 
 			<!-- empty -->
-			<div class="cart-product-wrapper" *ngIf="Wlength==0" style=" padding: 70px 0;
-					text-align: center; height: 450px;">
 
-				<h6 style=" padding-top: 180px;"> Wishlist is empty</h6>
+			<div class="cart-product-wrapper" *ngIf="Wlength==0" style=" padding: 70px 0;
+				text-align: center; height: 450px;margin-top: 30%;">
+
+				<div> <img src="assets/images/icons/empty-wishlist.jpg" alt="" style="width:60% ;"></div>
+				<h6 style=""> Empty Wishlist</h6>
+				<h6 style="font-size: 0.7rem;">You have no items in your wishlist. Start adding!</h6>
 
 			</div>
+
+
 		</div>
 
 		<!--=======  End of offcanvas wishlist content container   =======-->
@@ -550,7 +564,7 @@
 					<span class="subtotal-title">Sub Total</span>
 					<span class="subtotal-amount">{{without_discount}}</span>
 				</p>
-				<p class="cart-subtotal" >
+				<p class="cart-subtotal">
 					<span class="subtotal-title">Discount</span>
 					<span class="subtotal-amount">Rs -{{discount}}</span>
 				</p>
@@ -573,9 +587,11 @@
 
 			<!-- empty -->
 			<div class="cart-product-wrapper" *ngIf="cartlength==0" style=" padding: 70px 0;
-				text-align: center; height: 450px;">
+				text-align: center; height: 450px;margin-top: 30%;">
 
-				<h6 style=" padding-top: 180px;"> Cart is empty</h6>
+				<div> <img src="assets/images/icons/empty-cart.jpg" alt="" style=" width:70%;"></div>
+				<h6 style=""> Empty Cart</h6>
+				<h6 style="font-size: 0.7rem;">You have no items in your cart. Start adding!</h6>
 
 			</div>
 		</div>

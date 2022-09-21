@@ -19,7 +19,7 @@
                 border-radius: 3px;">
                 <h6 class="form-text text-danger"
                 *ngIf="!registerForm.get('fname')?.valid && registerForm.get('fname')?.touched">
-              *Enter the name</h6>
+              *Enter correct Gst number</h6>
             </div>
             <div class="col-lg-12 mt-10" style="display: grid;">
                 <label >Gst Image </label>
@@ -44,7 +44,7 @@
                 border-radius: 3px;">
                 <h6 class="form-text text-danger"
                 *ngIf="!registerForm.get('email')?.valid && registerForm.get('email')?.touched">
-              *Enter the correct email</h6>
+              *Enter correct Pan number</h6>
             </div>
             <div class="col-lg-12 mt-10"  style="display: grid;">
                 <label >Pan Image </label>
@@ -52,6 +52,31 @@
                     <!-- {{imageError}}  (change)="fileChangeEvent($event)"-->
                     <div class="custom-file fileInputProfileWrap">
                         <input type="file"  formControlName="panimg"  class="fileInputProfile" (change)="fileChangeEvent2($event)">
+                        <div class="img-space">
+                            <!-- <ng-container *ngIf="isImageSaved; else elseTemplate">
+                            <img [src]="cardImageBase64" />
+                        </ng-container> -->
+                            <ng-template #elseTemplate>
+                                <!-- <img src="./../../assets/placeholder.png" class="img-responsive">   (click)="changeproimg()"-->
+                            </ng-template>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-lg-12 ">
+                <label >Udyog Aadhar Number </label>
+                <input type="text"   formControlName="ua"  required style="border: 1px solid #9d9d9d;
+                border-radius: 3px;text-transform:uppercase; ">
+                <h6 class="form-text text-danger"
+                *ngIf="!registerForm.get('fname')?.valid && registerForm.get('fname')?.touched">
+              *Enter correct Udyog Aadhar Number </h6>
+            </div>
+            <div class="col-lg-12 mt-10" style="display: grid;">
+                <label >Udyog Aadhar Image </label>
+                <fieldset class="form-group" style="display: inline;">
+                    <!-- {{imageError}}  (change)="fileChangeEvent($event)"-->               
+                    <div class="custom-file fileInputProfileWrap">
+                        <input type="file" formControlName="uaimg"  class="fileInputProfile" (change)="fileChangeEvent3($event)" >
                         <div class="img-space">
                             <!-- <ng-container *ngIf="isImageSaved; else elseTemplate">
                             <img [src]="cardImageBase64" />

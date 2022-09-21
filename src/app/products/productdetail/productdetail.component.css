@@ -1,3 +1,6 @@
+.overview td ul{
+  list-style-type: disc !important;
+}
 .card-header {
   padding: 0.5rem 0.3rem;
 }

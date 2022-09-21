@@ -64,6 +64,8 @@ const routes: Routes = [
   { path: 'enquiry', loadChildren: () => import('./profiledetails/enquiry/enquiry.module').then(m => m.EnquiryModule) },
 
   { path: 'quickorder', loadChildren: () => import('./products/quickorder/quickorder.module').then(m => m.QuickorderModule) },
+
+  { path: 'newarrival', loadChildren: () => import('./products/newarrival/newarrival.module').then(m => m.NewarrivalModule) },
  
   
 ];

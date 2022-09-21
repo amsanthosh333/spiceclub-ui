@@ -29,7 +29,7 @@
                                     <a *ngIf="b.product.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;padding-bottom: 4px;text-decoration: none;">In-stock</a>
                                     <a  *ngIf="b.product.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;padding-bottom: 4px;text-decoration: none;">Out of stock</a>
                                     <span  *ngIf="b.product.stroked_price!==b.product.main_price" class="strokprice" >{{b.product.stroked_price}}</span>
-                                   <span class="price ml-1" >{{b.product.base_price}} </span>
+                                   <span class="price ml-1" >{{b.product.base_price}}<span style="font-size: 0.7rem;font-weight: 100;"> (Incl.Tax) </span></span>
                                    <a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray; margin-top: 8px;"
 											*ngIf="b.product.discount_amount!==0">
 											you save Rs.{{b.product.discount_amount}} ({{b.product.discount_percentage}}%) </a>
@@ -73,15 +73,13 @@
                     </table>
 
                     <div id="pggg" *ngIf="(Wishlist?.length==0)" >
-                        <div>
-                            <h5>
-                                Wishlist is empty
-                            </h5>
+                        <div style="text-align: center;">
+                            <div> <img src="assets/images/icons/empty-wishlist.jpg" alt="" style="width:60%;"></div>
+                            <h6 style=""> Empty Wishlist</h6>
+                            <h6 style="font-size: 0.7rem;">You have no items in your wishlist. Start adding!</h6>
                         </div>
                     </div>
-                    <!-- <button type="button" class="btn btn-sm btn-block btn-primary ml-3" onclick="showAddToCartModal(21)">
-                            <i class="la la-shopping-cart mr-2"></i>Add to cart
-                        </button> -->
+                   
                 </div>
                 <div class="cart-table-container" *ngIf="loader">
                     <div id="tit" style="width: 100%;">

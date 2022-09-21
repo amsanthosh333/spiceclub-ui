@@ -2,6 +2,27 @@
 .shop-page-wrapper{
   background-color: #f1f3f6;
 }
+.cart-buttons{
+  width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+.cart-buttons .closewishlist{
+	font-size: 13px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 15px;
+    padding: 3px 10px;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #ffffff;
+    border: 1px solid #488ecc;
+    border-radius: 0;
+    background-color: #488ecc;
+    border-radius: 25px;
+    text-transform: none;
+}
 #sidenavg{
   background-color: white;
 }

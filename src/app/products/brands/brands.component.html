@@ -275,6 +275,20 @@
 
                                 </div>
                             </div>
+                            <div id="pggg" *ngIf="Product?.length==0" style=" display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        height: auto;
+						border: 1px solid rgb(243 243 243);">
+							<div style="text-align: center;">
+                                <div> <img src="assets/images/icons/empty-products.jpg" alt="" style="width:60%;"></div>
+                                <h6 style="">No products to show</h6>
+                                <h6 style="font-size: 0.7rem;">We regret to inform you that there is no products to show!.</h6>
+                                <div class="cart-buttons">
+                                    <a class="closewishlist" routerLink="/home">Explore More </a>
+                                </div>
+                            </div>
+                        </div>
 
                         </div>
 
@@ -299,17 +313,7 @@
                             </ul>
                         </div> -->
 
-                        <div id="pggg" *ngIf="Product?.length==0" style=" display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        height: 200px;
-                        border: 3px solid rgb(139, 139, 139);">
-                            <div>
-                                <h5>
-                                    There is no product
-                                </h5>
-                            </div>
-                        </div>
+                        
 
                     </div>
                     <!--  productslazyloading -->

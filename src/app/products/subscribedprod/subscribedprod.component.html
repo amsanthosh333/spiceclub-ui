@@ -164,16 +164,19 @@
                     </div>
 
                     <div id="pggg" *ngIf="Bestsellpro?.length==0" style=" display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    height: 200px;
-                    border: 1px solid rgb(241 233 233);">
-                        <div>
-                            <h5>
-                                No products in Subscription
-                            </h5>
+                     justify-content: center;
+                        align-items: center;
+                        height: auto;
+						border: 1px solid rgb(243 243 243);">
+							<div style="text-align: center;">
+                                <div> <img src="assets/images/icons/empty-products.jpg" alt="" style="width:60%;"></div>
+                                <h6 >No products to show</h6>
+                                <h6 style="font-size: 0.7rem;">You have no items in subscription. Start adding!</h6>
+                                <div class="cart-buttons">
+                                    <a class="closewishlist" routerLink="/home">Explore More </a>
+                                </div>
+                            </div>
                         </div>
-                    </div>
                 </div>
 
                  <!--  productslazyloading -->          

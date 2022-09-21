@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild ,ViewEncapsulation } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
 import { HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -21,6 +21,7 @@ import { LoginComponent } from 'src/app/auth/login/login.component';
   templateUrl: './productdetail.component.html',
   styleUrls: ['./productdetail.component.css'],
   providers: [NgbRatingConfig, ToastrService],
+  encapsulation: ViewEncapsulation.None,
 })
 
 export class ProductdetailComponent implements OnInit {

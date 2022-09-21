@@ -401,22 +401,17 @@
             </div>
         </div>
     </div>
-    <div id="pggg" *ngIf="(Orders.length==0)" style=" display: flex;
-justify-content: center;
-align-items: center;
-height: 200px;
-margin-right: 100px;
-margin-left: 100px;
-margin-top: 35px;
-margin-top: 25px;
-border: 1px solid #d7d6d6;">
-        <div>
+   
+    <div id="pggg" *ngIf="(Orders?.length==0)" >
+        <div style="text-align: center;">
+            <div> <img src="assets/images/icons/empty-order.jpg" alt="" style="width:60% ;"></div>
             <h6>
                 There is no Order &nbsp; <a style="text-decoration: underline; color: blue;" routerLink="/home">Buy
                     Now</a>
             </h6>
         </div>
     </div>
+
 </div>
 <div class="cart-table-container mb-2 ml-100 mr-100 mt-10" *ngIf="loader">
     <div id="tit" style="width: 100%;margin-left: 100px;">

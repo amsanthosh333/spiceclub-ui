@@ -551,8 +551,8 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
       console.log("selectvar res", res);
-      this.Allproducts[i].product.stroked_price = res.stroked_price
-      this.Allproducts[i].product.main_price = res.price_string;
+      this.Allproducts[i].stroked_price = res.stroked_price
+      this.Allproducts[i].main_price = res.price_string;
       this.Allproducts[i].discount_amount = res.discount_amount;
       this.Allproducts[i].discount_percentage = res.discount_percentage;
     }, (error: any) => {
