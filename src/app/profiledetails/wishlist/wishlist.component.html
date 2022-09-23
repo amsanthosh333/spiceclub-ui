@@ -29,7 +29,7 @@
                                     <a *ngIf="b.product.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;padding-bottom: 4px;text-decoration: none;">In-stock</a>
                                     <a  *ngIf="b.product.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;padding-bottom: 4px;text-decoration: none;">Out of stock</a>
                                     <span  *ngIf="b.product.stroked_price!==b.product.main_price" class="strokprice" >{{b.product.stroked_price}}</span>
-                                   <span class="price ml-1" >{{b.product.base_price}}<span style="font-size: 0.7rem;font-weight: 100;"> (Incl.Tax) </span></span>
+                                   <span class="price ml-1" >{{b.product.main_price}}<span style="font-size: 0.7rem;font-weight: 100;"> (Incl.Tax) </span></span>
                                    <a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray; margin-top: 8px;"
 											*ngIf="b.product.discount_amount!==0">
 											you save Rs.{{b.product.discount_amount}} ({{b.product.discount_percentage}}%) </a>
@@ -526,7 +526,7 @@
                     <hr>
                     <div class="row no-gutters pb-3 ml-1" id="chosen_price_div" *ngIf="quantityyy!==0">
                         <div class="col-3">
-                            <div class="hop-product__block mt-2" style="color: #727272;
+                            <div class="hop-product__block " style="color: #727272;
                             font-weight: 600;">Total Price:</div>
                         </div>
                         <div class="col-9">

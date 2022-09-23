@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { NavigationStart, Router } from '@angular/router';
 import { RequestService } from 'src/app/services/request.service';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from 'src/app/models/user';
@@ -28,7 +28,8 @@ import { SignupComponent } from 'src/app/auth/signup/signup.component';
 })
 
 export class HeaderComponent implements OnInit {
-
+ 
+  @Input() shownavbar :any = true ;
   checkedColumns = {};
   currentUserSubject: BehaviorSubject<User>;
   currentUser: Observable<User>;
@@ -92,7 +93,18 @@ export class HeaderComponent implements OnInit {
 
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
+      // router.events.forEach((event) => {
+       
+      //   if (event instanceof NavigationStart) {
+      //    console.log("header router",router.url);
+      //    console.log("header router", window.location.href);
+        
+         
+      //   }
 
+      // });
+      
+      
     if (this.userid !== 0) {
       this.getprofile();
       this.ClickEventSubscription = this.sharedService.getClickEvent().subscribe(() => {
@@ -1598,7 +1610,117 @@ export class HeaderComponent implements OnInit {
       });
 
     })(jQuery);
+
+//   $(".content").on('mouseover', '.description', function() {
+//   var $content = $(this).closest('.content');
+//   if ($content.hasClass('scrolling')) return;
+//   var maxscroll = $(this)[0].scrollHeight
+//   $content.animate({
+//     scrollTop: maxscroll
+//   }, 450);
+// });
+
+// $(".content").on('mouseout', '.description', function() {
+//   var $content = $(this).closest('.content');
+//   $content.stop();
+//   $content.addClass('scrolling');
+//   $content.animate({
+//     scrollTop: 0
+//   }, 425, "linear", function() {
+//     $content.removeClass('scrolling')
+//   });
+// });
+
+var i = 0;
+$( "#lii_two" )
+  .mouseenter(function() {
+    i += 1;
+    console.log("i",i);
+    
+    if(i<=1){
+     
+    if ($(this).hasClass('scrolling')) return;
+    var maxscroll = $(this)[0].scrollHeight
+    $(this).animate({
+      scrollTop: 150
+    },  'slow');
+    setTimeout(() => {
+      $(this).animate({
+        scrollTop: 0
+      },  'slow');
+      console.log("dfgdfg");
+      
+    }, 800);
   }
+
+  
+  })
+  .mouseleave(function() {
+    console.log("i eee",i);
+     i =0;
+  });
+ 
+  var i = 0;
+$( "#lii_one" )
+  .mouseenter(function() {
+
+    i += 1;
+    console.log("i",i);
+    
+    if(i<=1){
+     
+    if ($(this).hasClass('scrolling')) return;
+    var maxscroll = $(this)[0].scrollHeight
+    $(this).animate({
+      scrollTop: 150
+    },  'slow');
+    setTimeout(() => {
+      $(this).animate({
+        scrollTop: 0
+      },  'slow');
+      console.log("dfgdfg");
+      
+    }, 800);
+  }
+  })
+  .mouseleave(function() {
+    console.log("i eee",i);
+     i =0;
+  });
+
+
+  var i = 0;
+  $( "#lii_three" )
+    .mouseenter(function() {
+  
+      i += 1;
+      console.log("i",i);
+      
+      if(i<=1){
+       
+      if ($(this).hasClass('scrolling')) return;
+      var maxscroll = $(this)[0].scrollHeight
+      $(this).animate({
+        scrollTop: 150
+      },  'slow');
+      setTimeout(() => {
+        $(this).animate({
+          scrollTop: 0
+        },  'slow');
+        console.log("dfgdfg");
+        
+      }, 800);
+    }
+    })
+    .mouseleave(function() {
+      console.log("i eee",i);
+       i =0;
+    });
+
+    
+  }
+
+ 
 
   inputHandle(event:any){
     console.log("ComponentDefnHeadComponent2",event.target.value);

@@ -1,3 +1,5 @@
+
+
 .dropbtn {
 	background-color: #04AA6D;
 	color: white;
@@ -7,8 +9,11 @@
 	cursor: pointer;
   }
 
+ .lii{
+	scroll-behavior: smooth;
+	
+ }
  
-  
   .dropbtn:hover, .dropbtn:focus {
 	background-color: #3e8e41;
   }
@@ -453,21 +458,55 @@ a#listactive::after{
    }
 
 .lii {
-	max-height: 300px;
-	overflow-y: auto;
+	max-height: 270px;
+	height: 270px;
+	 overflow-y: auto; 
 	overflow-x: hidden;
 	padding-left: 5px;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
-.mega-sub-menu{
-	/* max-height: 300px;
-	overflow-y: auto;
+#lii_two{
+	max-height: 270px;
+	height: 270px;
+	 overflow-y: auto; 
 	overflow-x: hidden;
 	padding-left: 5px;
-	-ms-overflow-style: none ;
-	scrollbar-width: none; */
+	-ms-overflow-style: none;
+	scrollbar-width: none;
 }
+#lii_one{
+	max-height: 270px;
+	height: 270px;
+	 overflow-y: auto; 
+	overflow-x: hidden;
+	padding-left: 5px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+#lii_three{
+	max-height: 270px;
+	height: 270px;
+	 overflow-y: auto; 
+	overflow-x: hidden;
+	padding-left: 5px;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+/* .content {
+	max-height: 270px;
+	height: 270px;
+	overflow-y: scroll;
+	scrollbar-width: none;
+	-ms-overflow-style: none;
+	background-color: rgb(255, 255, 255);
+  }
+   */
+  .content::-webkit-scrollbar {
+	width: 0;
+	height: 0;
+  }
+
 .mega-sub-menu:hover {
 	scrollbar-width: thin !important;
 	-ms-overflow-style:thin !important;

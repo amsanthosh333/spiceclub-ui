@@ -1,3 +1,4 @@
+<script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 <header class="header header-wide-topbar header-sticky border-bottom-0">
 	<div id="marquetag" style="background:#000000; height: 15px;">
 		<span>
@@ -189,7 +190,7 @@
 		</div>
 	</div>
 
-	<div class="header-bottom-navigation">
+	<div class="header-bottom-navigation" >
 		<div class="site-main-nav d-none d-lg-block" style="padding-left: 0%;height: 34px;background-color: #eee;">
 			<nav class="site-nav" style="display: flex;">
 				<!-- <div class="wrapper" style="flex-direction: row; 
@@ -198,12 +199,12 @@
 					<a class="btn" id="buttonsub"  routerLink="/subscribedprod" 
 					style="border: 1px solid rgb(199 199 199);color: #000000;border-radius: 10px;">Subscription</a>
 				</div> -->
-				<ul style="margin-left: 5.7%;">
+				<ul style="margin-left: 5.7%;" >
 					<li class="menu-item"><a routerLink="/shopbyproduct">Shop by Products</a> </li>
 					<li class="menu-item-has-children"><i class="bi bi-list" style="font-weight:500;"></i>&nbsp;<a
 							style="font-weight:600;">Shop by Categories</a>
 						<ul class="sub-menu mega-menu mega-menu-column-4 center-menu">
-							<li class="lii" style="padding-left: 10px;">
+							<li class="lii" id="lii_one" style="padding-left: 10px;" #scrollMe1 [scrollTop]="scrollMe1.scrollHeight">
 								<ul class="mega-sub-menu">
 									<li style="margin-top: 10px;padding-left: 4px;"
 										*ngFor="let img of Allcat;let i=index">
@@ -222,8 +223,9 @@
 									</li>
 								</ul>
 							</li>
-							<li class="lii" style="padding-left: 10px;">
-								<ul class="mega-sub-menu">
+							
+							<li class="lii " style="padding-left: 10px;" id="lii_two">		
+								<ul class="mega-sub-menu " >
 									<li style="margin-top: 10px;padding-left: 4px;"
 										*ngFor="let img of Subcat;let i=index">
 										<span class="lispan" [ngClass]="{'active': subItem1 === i}"
@@ -241,9 +243,12 @@
 										</span>
 									</li>
 								</ul>
+
+								
 							</li>
 
-							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 10px;">
+							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 10px;"
+							  id="lii_three">
 								<ul class="mega-sub-menu">
 									<li style="margin-top: 10px;padding-left: 4px;"
 										*ngFor="let img of Subcat2;let i=index">

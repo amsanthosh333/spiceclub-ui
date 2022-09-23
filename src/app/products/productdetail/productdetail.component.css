@@ -1,3 +1,14 @@
+#zoomC {
+  /* (A) DIMENSIONS */
+  width: 600px;
+  height: 338px;
+ 
+  /* (B) BACKGROUND IMAGE */
+  
+  background-position: center;
+  background-size: cover;
+}
+
 .overview td ul{
   list-style-type: disc !important;
 }
@@ -321,7 +332,7 @@ input {
 }
 
 .single-product__content {
-  height: 100px;
+  height: 110px;
 }
 
 .section-title {

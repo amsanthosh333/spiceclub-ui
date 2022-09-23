@@ -36,16 +36,19 @@
             <div id="pggg" *ngIf="(Convertations?.length==0)" style=" display: flex;
   justify-content: center;
   align-items: center;
-  height: 200px;
+  height: auto;
   margin-left: auto;
     margin-right: auto;
-    margin-top: 200px;
+    margin-top: 30%;
     margin-bottom: auto;">
-              <div>
-                <h5>
-                  No conversation yet
-                </h5>
-              </div>
+              <div style="text-align: center;">
+                <div> <img src="assets/images/icons/empty-chat.jpg" alt="" style="width:60%;"></div>
+                <h6 >No Conversation Yet</h6>
+                <h6 style="font-size: 0.7rem;">Feel free to ask queries.start chat!</h6>
+                <div class="cart-buttons">
+                    <a class="closewishlist" routerLink="/home">Explore More </a>
+                </div>
+            </div>
             </div>
             <div class="chat_list active_chat" *ngFor="let Connectdtls of Convertations;let i=index"
               [ngClass]="{'active': subItemm === i}">

@@ -10,23 +10,34 @@ export class AppComponent {
   title = 'spiceclub';
   showHead:boolean = true;
   showFooter:boolean = true;
+  showHeadnav: boolean=true;
 
     showheader(){
-      this.showHead=true
-      this.showFooter=true  
+      // this.showHead=true
+       this.showFooter=true  
+      this.showHead=false
+       
     }
     hideheader(){
       this.showHead=false
       this.showFooter=false  
     }
+    hideheadernavbar(){
+      this.showHeadnav=false
+      this.showHead=false
+      
+    }
     
-    constructor(private router: Router) {
+    constructor(private router: Router) {   
       // on route change to '/login', set the variable showHead to false
         router.events.forEach((event) => {
           if (event instanceof NavigationStart) {
             this.showHead=true;
             this.showFooter=true ;
+            this.showHeadnav=true;
+           
           }
+
         });
       }
 }

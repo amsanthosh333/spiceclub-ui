@@ -173,6 +173,8 @@ export class ProductdetailComponent implements OnInit {
 
 
   ngOnInit(): void {
+
+    
     this.route.params.subscribe(val => {
       console.log('pressed params!', val);
       this.id = val['id']

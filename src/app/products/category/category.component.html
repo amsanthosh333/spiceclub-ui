@@ -1,12 +1,13 @@
-<div >
+<div>
     <div class="breadcrumb-area breadcrumb-bg-2">
         <div class="container" style="margin: 0px;">
             <div class="row">
                 <div class="col-lg-12">
-                   
-                    <ul class="breadcrumb-list"style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
+
+                    <ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
                         <li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
-                        <li  class="breadcrumb-list__item breadcrumb-list__item--active" style="content:'';">Shop by category</li>
+                        <li class="breadcrumb-list__item breadcrumb-list__item--active" style="content:'';">Shop by
+                            category</li>
                     </ul>
                 </div>
             </div>
@@ -27,21 +28,23 @@
                                                 style="border: 0px;border-bottom: 1px solid #dddada;">
                                             <button type="submit"><i class="ion-android-search"></i></button>
                                         </form>
-                                        <form [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)" *ngIf="search2">
-                                            <input type="search" formControlName="key" placeholder="Search sub products ..."
+                                        <form [formGroup]="subsearch" (ngSubmit)="searchform2(subsearch)"
+                                            *ngIf="search2">
+                                            <input type="search" formControlName="key"
+                                                placeholder="Search sub products ..."
                                                 style="border: 0px;border-bottom: 1px solid #dddada;">
                                             <button type="submit"><i class="ion-android-search"></i></button>
                                         </form>
                                     </div>
                                 </li>
-                             
+
                                 <li [ngClass]="{'active': headItem === 2}" (click)="viewtodaysdeal()"
                                     (click)="headactive(2)">Today's deal</li>
                                 <li [ngClass]="{'active': headItem === 3}" (click)="viewdealofday()"
                                     (click)="headactive(3)">Deal of day</li>
                                 <li [ngClass]="{'active': headItem === 4}" (click)="viewdealofmonth()"
                                     (click)="headactive(4)">Deal of month</li>
-                                    <li [ngClass]="{'active': headItem === 5}" (click)="viewflashdeal()"
+                                <li [ngClass]="{'active': headItem === 5}" (click)="viewflashdeal()"
                                     (click)="headactive(5)">Flash deal</li>
                             </ul>
                             <!-- <ul id="ulsort" class="offersdiv">
@@ -71,7 +74,53 @@
                     <div id="sidenavg" class="col-lg-2 order-1 order-lg-1" *ngIf="!sideloader">
                         <!--=======  page sidebar  =======-->
                         <div class="page-sidebar">
-                            <div class="single-sidebar-widget mb-10" id="pricefilter" >
+                            
+                            
+                            <div class="single-filter-widget">
+                                <h5 class="single-sidebar-widget--title mb-0" (click)="viewproducts()">{{catName}}</h5>
+                            </div>
+                            <div class="single-filter-widget  mb-10" *ngIf="(Subcat?.length!==0)"
+                                style="border-bottom: 1px solid #ededed;">
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
+                                    <li class="has-children cat" *ngFor="let cat of Subcat;let i = index"
+                                         [ngClass]="{'active': subItem === i}">
+                                        <label id="cat_name" style="display: flex;" (click)="viewsubcatprod2(cat.id,i)"> <a style="padding-top: 3px;"><input
+                                                    [checked]="subItem === i" type="radio"></a>
+                                            <div class="catname"> <span>{{cat.name}}</span> </div>
+                                        </label>
+
+                                        <!-- subcatrgory -->
+                                        <ul *ngIf="subItem === i && SubofSubcat.length !==0" style="position: relative;
+                                        top: -16px;"  class="single-sidebar-widget--list single-sidebar-widget--list--category subcat_one">
+                                            <li class="has-children cat2" *ngFor="let cat2 of SubofSubcat;let i_2 = index"
+                                                [ngClass]="{'active': topItem === i_2}" >
+                                                <label id="cat2_name" style="display: flex;"  (click)="viewctopcatprod3sub(cat2.id,i_2)">
+                                                    <!-- <a style="padding-top: 3px;"><input [checked]="topItem ===i_2" type="radio"></a> -->
+                                                    <div class="catname ml-20"><span>{{cat2.name}}</span> </div>
+                                                </label>
+
+                                                 <!-- subcatrgory 2-->
+                                                <ul *ngIf="topItem1 === i_2 && SubofSubcat1.length !==0" style="position: relative;
+                                                top: -16px;" class="single-sidebar-widget--list single-sidebar-widget--list--category">
+                                                    <li class="has-children cat3" *ngFor="let cat3 of SubofSubcat1;let i_3 = index"
+                                                        [ngClass]="{'active': topItem1 === i_3}">
+                                                        <label id="cat3_name" style="display: flex;" (click)="viewctopcatprod3sub1(cat3.id,i_3,$event)"> 
+                                                            <!-- <a style="padding-top: 3px;"><input
+                                                                    (change)="viewctopcatprod3sub1(cat3.id,i_3,$event)"
+                                                                    [checked]="topItem1 === i_3" type="checkbox"></a> -->
+                                                            <div class="catname ml-20"> <span>{{cat3.name}}</span></div>
+                                                        </label>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            
+                                        </ul>
+                                       
+                                    </li>     
+                                </ul>
+                            </div>
+
+                            <div class="single-sidebar-widget mb-10" id="pricefilter">
                                 <h2 class="single-sidebar-widget--title">Price Filter</h2>
                                 <p><a (click)="under200()">Under Rs.200 </a></p>
                                 <p><a (click)="uptoto500()">Rs.200 to Rs.500</a></p>
@@ -85,26 +134,11 @@
                                             oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"></span>
                                 </p>
                             </div>
-                            <div class="single-filter-widget" >
-                                <h5 class="single-sidebar-widget--title mb-0" (click)="viewproducts()">{{catName}}</h5>
-                            </div>
-                            <div class="single-filter-widget  mb-10" *ngIf="(Subcat?.length!==0)" style="border-bottom: 1px solid #ededed;">
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    >
-                                    <li class="has-children" *ngFor="let cat of Subcat;let i = index"
-                                        (click)="viewsubcatprod2(cat.id,i)" [ngClass]="{'active': subItem === i}">
-                                        <label style="display: flex;"> <a style="padding-top: 3px;"><input
-                                                  [checked]="subItem === i" type="checkbox"></a>
-                                            <div class="catname"> <span>{{cat.name}}</span></div>
-                                        </label>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat?.length!==0)" style="border-bottom: 1px solid #ededed;">
-                                <!-- <h5 class="single-sidebar-widget--title mb-2">Sub Category</h5> -->
+                            <!-- <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat?.length!==0)"
+                                style="border-bottom: 1px solid #ededed;">
+                                
                                 <h5 class="single-sidebar-widget--title mb-0">Sub Category </h5>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    >
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
                                     <li class="has-children" *ngFor="let cat of SubofSubcat;let i = index"
                                         [ngClass]="{'active': topItem === i}" (click)="viewctopcatprod3sub(cat.id,i)">
                                         <label style="display: flex;"> <a style="padding-top: 3px;"><input
@@ -113,31 +147,32 @@
                                         </label>
                                     </li>
                                 </ul>
-                            </div>
-                            <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat1?.length!==0)" style="border-bottom: 1px solid #ededed;">
-                                <!-- <h5 class="single-sidebar-widget--title mb-2">Sub Category</h5> -->
+                            </div> -->
+                            <!-- <div class="single-filter-widget  mb-10" *ngIf="(SubofSubcat1?.length!==0)"
+                                style="border-bottom: 1px solid #ededed;">
+                               
                                 <h5 class="single-sidebar-widget--title mb-0">Sub Category2 </h5>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    >
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
                                     <li class="has-children" *ngFor="let cat of SubofSubcat1;let i = index"
-                                        [ngClass]="{'active': topItem1 === i}" >
+                                        [ngClass]="{'active': topItem1 === i}">
                                         <label style="display: flex;"> <a style="padding-top: 3px;"><input
-                                            (change)="viewctopcatprod3sub1(cat.id,i,$event)"    [checked]="topItem1 === i" type="checkbox"></a>
-                                    <div class="catname"> <span>{{cat.name}}</span></div>
-                                </label>   
+                                                    (change)="viewctopcatprod3sub1(cat.id,i,$event)"
+                                                    [checked]="topItem1 === i" type="checkbox"></a>
+                                            <div class="catname"> <span>{{cat.name}}</span></div>
+                                        </label>
                                     </li>
                                 </ul>
-                            </div>
+                            </div> -->
                             <div class="single-filter-widget  mb-10" *ngIf="(Catbrand?.length!==0)">
                                 <!-- <h5 class="single-sidebar-widget--title mb-2">Sub Category</h5> -->
                                 <h5 class="single-sidebar-widget--title mb-0">Brands</h5>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    >
-                                    <li class="has-children" *ngFor="let cat of Catbrand;let i = index"  >
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
+                                    <li class="has-children" *ngFor="let cat of Catbrand;let i = index">
                                         <label style="display: flex;"> <a style="padding-top: 3px;">
-                                            <input (change)="viewcatbrandprod(cat.id,i,$event)" [checked]="brandItem === i" type="checkbox"></a>
-                                    <div class="catname"> <span>{{cat.name}}</span></div>
-                                    </label>   
+                                                <input (change)="viewcatbrandprod(cat.id,i,$event)"
+                                                    [checked]="brandItem === i" type="checkbox"></a>
+                                            <div class="catname"> <span>{{cat.name}}</span></div>
+                                        </label>
                                     </li>
                                 </ul>
                             </div>
@@ -202,12 +237,11 @@
                     <!-- sidebarlazyloading -->
                     <div class="col-lg-2 order-1 order-lg-1" *ngIf="sideloader" style="background-color:white;">
                         <div class="page-sidebar">
-                           
+
                             <div class="single-filter-widget mt-20 mb-40">
                                 <ngx-skeleton-loader count="1" animation="pulse"></ngx-skeleton-loader>
                                 <h5 class="single-title mb-2">Sub Category</h5>
-                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-                                    >
+                                <ul class="single-sidebar-widget--list single-sidebar-widget--list--category">
                                     <li>
                                         <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
                                     </li>
@@ -231,8 +265,9 @@
                     </div>
                     <!-- sidebarlazyloading  end-->
 
-                    <div  class="col-lg-9 order-2 order-lg-2 mb-md-30 mb-sm-10 ml-md-10 ml-10 ml-sm-0" infinite-scroll
-                    [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
+                    <div class="col-lg-9 order-2 order-lg-2 mb-md-30 mb-sm-10 ml-md-10 ml-10 ml-sm-0" infinite-scroll
+                        [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)"
+                        (scrolledUp)="onScrollUp($event)">
                         <div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloadermain">
                             <!--=======  single product  =======-->
                             <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
@@ -302,9 +337,10 @@
                                             -webkit-line-clamp: 2;
                                             -webkit-box-orient: vertical;
                                             max-height: 3.2rem;      
-                                             margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>    
+                                             margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a>
+                                            </h3>
                                         </div>
-            
+
                                         <!-- <div class="pri" *ngFor="let imggg of img.variants;" style="text-align: center;line-height: 1.6rem;
                                     overflow: hidden;
                                     display: -webkit-box; 
@@ -319,7 +355,7 @@
                                             <span *ngIf="img?.stroked_price!==img?.main_price"
                                                 class="main-price discounted">{{img.stroked_price}}</span>
                                             <span class="discounted-price">{{img.main_price}} </span>
-                                            <a class="yousave" *ngIf="img.has_discount==true" >
+                                            <a class="yousave" *ngIf="img.has_discount==true">
                                                 You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                                         </div>
                                         <!-- <div class="pri" >
@@ -333,15 +369,18 @@
                                         *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
                                         <div class="col-6 " style="padding-left:4px ; padding-right: 6px;">
                                             <input (change)="qtyChange($event,i,img)" type="number" id="quantity"
-                                                name="quantity" value="1" min="1" style="width:100%;text-align: center;">
+                                                name="quantity" value="1" min="1"
+                                                style="width:100%;text-align: center;">
                                         </div>
                                         <div class="col-6 p-0" style="margin-left: -4px;">
                                             <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                                (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
+                                                (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp;
+                                                Add</button>
                                         </div>
                                     </div>
 
-                                    <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
+                                    <div class="row"
+                                        *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
                                         <div class="col-12 ">
                                             <div ngbDropdown placement="top-end" class="d-inline-block"
                                                 style="width:100%;">
@@ -365,19 +404,22 @@
                         align-items: center;
                         height: auto;
 						border: 1px solid rgb(243 243 243);">
-							<div style="text-align: center;">
-                                <div> <img src="assets/images/icons/empty-products.jpg" alt="" style="width:60%;"></div>
-                                <h6 style="">No products to show</h6>
-                                <h6 style="font-size: 0.7rem;">We regret to inform you that there is no products to show!.</h6>
-                                <div class="cart-buttons">
-                                    <a class="closewishlist" routerLink="/home">Explore More </a>
+                                <div style="text-align: center;">
+                                    <div> <img src="assets/images/icons/empty-products.jpg" alt="" style="width:60%;">
+                                    </div>
+                                    <h6 style="">No products to show</h6>
+                                    <h6 style="font-size: 0.7rem;">We regret to inform you that there is no products to
+                                        show!.</h6>
+                                    <div class="cart-buttons">
+                                        <a class="closewishlist" routerLink="/home">Explore More </a>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-    
+
                         </div>
 
-                        <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;" *ngIf="prodloader">
+                        <div class="row product-isotope shop-product-wrap four-column" style="margin-right: -100px;"
+                            *ngIf="prodloader">
                             <div class="col-12 col-lg-3 col-md-6 col-sm-6 mb-45 hot sale" *ngFor="let c of prodcount">
                                 <div class="single-product" style="height: 250px; width: 200px;">
                                     <ngx-skeleton-loader count="1"
@@ -396,8 +438,8 @@
                                 </li>
                             </ul>
                         </div> -->
-                      
-                      
+
+
                     </div>
                     <!--  productslazyloading -->
                     <div class="col-lg-9 order-1 order-lg-2 mb-md-80 mb-sm-80 mt-40" *ngIf="prodloader">
@@ -412,7 +454,7 @@
                         </div>
                     </div>
                     <!--  productslazyloading  end-->
-                </div> 
+                </div>
             </div>
         </div>
         <!--=====  End of shop page content  ======-->
@@ -420,29 +462,31 @@
 
     <!-- featuredcat -->
     <div class="shop-page-wrapper">
-    <div class="col-lg-12 mb-10 pb-0" class="listcard" >
-        <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
-            <div class="section-title section-title--one  mb-0">
-                <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
-                    Featured Categories</h6>
+        <div class="col-lg-12 mb-10 pb-0" class="listcard">
+            <div class="col-lg-12" style="  border-bottom: 1px solid #d3d3d3;">
+                <div class="section-title section-title--one  mb-0">
+                    <h6 style="font-weight: 600; color: black;margin-left: 10px;margin-top: 10px;margin-bottom: 0px;">
+                        Featured Categories</h6>
                     <!-- <button class="btn btn-primary" id="viewall" >View all</button> -->
+                </div>
             </div>
-        </div>
-    <div class="col-lg-12 pl-0 pr-0"  style="background-color:white;">
-        <div class="explore row">
-            <div id="featuredlist" class="col-lg-2 col-md-3 col-sm-4" *ngFor="let img of Futurecatg; let i = index" style="text-align:center;padding-top: 5px;" (click)="viewctopcatprod4(img.id,i)">
-                <div style="height:75px; width:75px;  display:block; margin:auto;">
-                    <img src="https://neophroncrm.com/spiceclubnew/public/{{img.icon}}" style="height: 100%;width: 100%; object-fit: cover; display: block;
+            <div class="col-lg-12 pl-0 pr-0" style="background-color:white;">
+                <div class="explore row">
+                    <div id="featuredlist" class="col-lg-2 col-md-3 col-sm-4"
+                        *ngFor="let img of Futurecatg; let i = index" style="text-align:center;padding-top: 5px;"
+                        (click)="viewctopcatprod4(img.id,i)">
+                        <div style="height:75px; width:75px;  display:block; margin:auto;">
+                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.icon}}" style="height: 100%;width: 100%; object-fit: cover; display: block;
                 margin-left: auto;
                 margin-right: auto;border-radius: 50%;" class="img-fluid" alt="">
+                        </div>
+                        <p (click)="viewctopcatprod4(img.id,i)">{{img.name}}</p>
+                    </div>
                 </div>
-                <p (click)="viewctopcatprod4(img.id,i)">{{img.name}}</p>
+
             </div>
         </div>
-
     </div>
-    </div>
-</div>
     <!-- <div class="product-category-container mb-100 mb-md-80 mb-sm-70">
         <div class="container wide">
             <div class="row">

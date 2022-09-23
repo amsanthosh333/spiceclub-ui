@@ -1,6 +1,16 @@
 .shop-page-wrapper{
   background-color: #f1f3f6;
 }
+label {
+  margin-bottom: 0.4rem;
+}
+.subcat_one li{
+  padding-bottom: 0px;
+}
+.single-sidebar-widget--list--category li.has-children ul {
+  display: initial;
+  margin-top: 10px;
+}
 .cart-buttons{
   width: 50%;
     margin-right: auto;
@@ -31,7 +41,10 @@
   padding-top: 10px;
 }
 .single-sidebar-widget--list{
-  padding-left: 15px;max-height: 475px;overflow-y: auto;
+
+  padding-left: 8px;
+  /* max-height: 475px; */
+  overflow-y: auto;
 }
 .has-children a {
   text-decoration: none;
@@ -125,7 +138,7 @@ font-size: 0.7rem;
   }
 
 .catname{
-  margin-left: 15px;
+  margin-left: 10px;
   font-size: 13px;
 }
 /* productlist css */
@@ -401,9 +414,34 @@ input{
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
 li.has-children.active{
-    color: rgb(36, 35, 35);
+  color:  rgb(19, 19, 19);
+  
+} 
+li.cat.active #cat_name .catname{
+  color: rgb(19, 19, 19);
+  font-weight: 600
+  
+}
+li.cat2.active #cat2_name .catname{
+    color: rgb(27, 27, 27);
+    font-size: 13px !important;
+    font-weight: 600 !important;
+}
+li.cat2.active label{
+  margin-bottom: 0.4rem;
+ 
+  
+}
+
+li.cat3.active #cat3_name{
+  color: rgb(5, 5, 5);
+  font-weight: 600;
+}
+li.cat3.active label{
+margin-bottom: 0.4rem;
+
+
 }
 .imglazy{
     height: 240px;

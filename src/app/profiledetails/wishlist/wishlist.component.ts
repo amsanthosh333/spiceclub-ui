@@ -102,6 +102,8 @@ export class WishlistComponent implements OnInit {
       }
       viewwishlist(){
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
+          console.log("this.Wishlist",this.Wishlist);
+          
           this.Wishlist=response.data; 
           this.loader=false ;
         });

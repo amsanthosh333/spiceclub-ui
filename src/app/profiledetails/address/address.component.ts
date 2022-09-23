@@ -73,15 +73,15 @@ export class AddressComponent implements OnInit {
     this.tokentype = this.currentdetail.token_type;
     // console.log("currentuserid=", this.userid);
 
-    this.editForm = this.fb.group({
-      name:['',[Validators.required]],
-     password: ['', [Validators.required]],
-     confirm_password: ['', [Validators.required]],
-   },
-     {
-       validator: ConfirmedValidator('password', 'confirm_password')
-     }
-     );
+  //   this.editForm = this.fb.group({
+  //     name:['',[Validators.required]],
+  //    password: ['', [Validators.required]],
+  //    confirm_password: ['', [Validators.required]],
+  //  },
+  //    {
+  //      validator: ConfirmedValidator('password', 'confirm_password')
+  //    }
+  //    );
 
      this.address = this.fb.group({
       addresss: [''], 
@@ -97,7 +97,7 @@ export class AddressComponent implements OnInit {
       country: ['', [Validators.required]],
       state: ['',[Validators.required]],
       city: ['', [Validators.required]],
-      postal_code: ['', [Validators.required]],
+      postal_code: ['', [Validators.required,Validators.minLength(6), Validators.maxLength(6)]],
       phone: [ '',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$") ]],
     });
 
@@ -106,8 +106,8 @@ export class AddressComponent implements OnInit {
       country: ['', [Validators.required]],
       state: ['',[Validators.required]],
       city: ['', [Validators.required]],
-      postal_code: ['', [Validators.required]],
-      phone: [ '',],
+      postal_code: ['', [Validators.required,Validators.minLength(6), Validators.maxLength(6)]],
+      phone: [ '',[Validators.required,Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$") ]],
     });
   
   }
@@ -139,7 +139,7 @@ export class AddressComponent implements OnInit {
       this.Address=response.data;   
       this.loader=false
       this.indexx =this.Address.findIndex((x:any) => x.set_default ==1);
-      this.address_id=this.Address[this.indexx].id
+      this.address_id=this.Address[this.indexx]?.id
       this.radioSelected = this.Address[this.indexx].id;  
       window.scroll(0,0)   
     // this. processdata()    
@@ -279,6 +279,11 @@ changeshippingaddress(a_id:any){
 }
 
   onEditSave(form: FormGroup) {
+
+    if (this.register.invalid) {
+      this.error2 = '* Enter all details';
+      return;
+    } else {
     const edata2 = {
        id:this.rowiid,
       user_id: this.userid,
@@ -289,7 +294,11 @@ changeshippingaddress(a_id:any){
       postal_code:form.value.postal_code,
       phone:form.value.phone,  
   }
+  console.log("edata2",edata2);
+  
   this.request.updateaddress(edata2).subscribe((res: any) => {
+    console.log("res",res);
+    
     if (res.message == 'Shipping information has been updated successfully') {
       this.modalService.dismissAll();
       this.toastr.success('Updated Successfully','');
@@ -307,6 +316,6 @@ changeshippingaddress(a_id:any){
   });
 
   }
-
+  }
 
 }

@@ -177,17 +177,16 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     const queryParams = this.activatedRoute.snapshot.queryParams
         const routeParams = this.activatedRoute.snapshot.params;  
-        console.log("queryParams",queryParams);
-        console.log("routeParams",routeParams);   
         // do something with the parameters       
     this.activatedRoute.queryParams.subscribe((data2: Params) => {
-      console.log("activatedRoute",data2);
+   
       this.id = this.route.snapshot.params['id'];
       this.subcatedoryid = this.route.snapshot.queryParams['subcategory']
       this.catedory1id = this.route.snapshot.queryParams['category1']
       this.subcategory1id = this.route.snapshot.queryParams['subcategory1']  
       let locationPath = this.location.path();
       this.headItem =0;
+      console.log("this.catedory1id",this.catedory1id);
       if (locationPath.length) {
         this.locationSegments = locationPath.split('/');
       }
@@ -368,6 +367,7 @@ export class CategoryComponent implements OnInit {
   }
   getsubsubcategory(id: any) {
     this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+      console.log("SubofSubcat", res);
       this.SubofSubcat = res.data;
       this.sideloader = false;
     }, (error: any) => {
@@ -573,6 +573,7 @@ export class CategoryComponent implements OnInit {
 
   }
   viewctopcatprod3sub(id: any, i: any) {
+    console.log("id,i",id ,i)
     this.topItem = i
     this.category1_id = id
     this.router.navigate(['category', this.categorynameid], { queryParams: { subcategory: this.subcategory_id, category1: id, } });
@@ -642,6 +643,7 @@ export class CategoryComponent implements OnInit {
     });
   }
   subofsubcatprod(id: any) {
+    console.log("catedory1id", this.catedory1id);
     this.request.getsubcategoryofcat(id).subscribe((res: any) => {
       this.SubofSubcat = res.data;
       console.log("SubofSubcat", this.SubofSubcat);

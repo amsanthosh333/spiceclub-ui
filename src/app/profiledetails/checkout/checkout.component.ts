@@ -123,6 +123,9 @@ export class CheckoutComponent implements OnInit {
     private authService: AuthService, private fb: FormBuilder, private request: RequestService,
     private toastr: ToastrService, private toast: ToastrService, private activatedRoute: ActivatedRoute,
     private sharedService: SharedService, private payservice: PaymentService, private spinner: NgxSpinnerService) {
+
+      this.appcomp.hideheadernavbar();
+
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
@@ -155,6 +158,8 @@ export class CheckoutComponent implements OnInit {
     this.comment = this.fb.group({
       coupan: ['', [Validators.required]],
     });
+
+  
 
   }
   ngOnInit(): void {

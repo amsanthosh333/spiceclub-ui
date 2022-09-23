@@ -30,7 +30,7 @@
                 style="font-size: 1.1em;"></i></button>
         </div>
 
-        <div class="addres1">
+        <div class="addres1"  *ngIf="Address?.length!==0">
             <form [formGroup]="address">
                 <div class="addresss" *ngFor="let Connectdtls of Address; let i=index">
                     <p> <strong>{{username}} </strong></p>
@@ -89,14 +89,18 @@
         <div id="pggg" *ngIf="Address?.length==0" style=" display: flex;
         justify-content: center;
         align-items: center;
-        height: 200px;
-        border: 3px solid rgb(139, 139, 139);
+        height: auto;
+        border: 1px solid rgb(220 220 220);
         margin-left: 4%;
-        margin-right: 4%;">
-            <div>
-                <h5>
-                    Add your address
-                </h5>
+        margin-right: 4%; padding-bottom: 10px;"
+        >
+            <div style="text-align: center;">
+                <div> <img src="assets/images/icons/no-address.jpg" alt="" style="width:60%;"></div>
+                <h6 >No products to show</h6>
+                <h6 style="font-size: 0.7rem;">We regret to inform you that there is no products to show!.</h6>
+                <div class="cart-buttons">
+                    <a class="closewishlist" (click)="addaddresss(addRecord)">Create Address </a>
+                </div>
             </div>
         </div>
     </div>
@@ -255,6 +259,9 @@
                         <label>Address<span class="text-danger">*</span></label>
                         <textarea name="" class="form-control pl-2" formControlName="address" cols="30"
                             rows="2"></textarea>
+                            <h6 class="form-text text-danger"
+                            *ngIf="!editForm.get('address')?.valid && editForm.get('address')?.touched">
+                            *Enter address</h6>
                     </div>
                 </div>
 
@@ -266,6 +273,9 @@
                                 {{tab.name}}
                             </option>
                         </select>
+                        <h6 class="form-text text-danger"
+                        *ngIf="!editForm.get('country')?.valid && editForm.get('country')?.touched">
+                        *Select Country</h6>
 
                     </div>
                 </div>
@@ -278,7 +288,9 @@
                                 {{tab.name}}
                             </option>
                         </select>
-
+                        <h6 class="form-text text-danger"
+                        *ngIf="!editForm.get('state')?.valid && editForm.get('state')?.touched">
+                        *Select State</h6>
 
                     </div>
                 </div>
@@ -293,12 +305,18 @@
                                 {{mem.name}}
                             </option>
                         </select>
+                        <h6 class="form-text text-danger"
+                            *ngIf="!editForm.get('city')?.valid && editForm.get('city')?.touched">
+                            *Select City</h6>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group position-relative">
                         <label>Pin code<span class="text-danger">*</span></label>
                         <input type="text" class="form-control pl-5" formControlName="postal_code">
+                        <h6 class="form-text text-danger"
+                            *ngIf="!editForm.get('postal_code')?.valid && editForm.get('postal_code')?.touched">
+                            *Enter pin code</h6>
                         <!-- (change)="onPinChange($event.target.value)" -->
                     </div>
                 </div>
@@ -307,9 +325,15 @@
                     <div class="form-group position-relative">
                         <label>Mobile No <span class="text-danger">*</span></label>
                         <input type="text" class="form-control pl-5" formControlName="phone">
+                        <h6 class="form-text text-danger"
+                        *ngIf="!editForm.get('phone')?.valid && editForm.get('phone')?.touched">
+                        *Enter mobile number</h6>
                     </div>
                 </div>
                 <div class="col-md-12" id="savebtndiv">
+                    <h6 class="form-text text-danger" style="height: 12px;color: red;">
+                        <span *ngIf="error2">{{error2}}</span>
+                    </h6>
                     <span class="add-to-cart" style="margin-left: auto;">
                         <button class="lezada-button lezada-button--medium lezada-button--icon--left" type="submit">
                             Save</button>
