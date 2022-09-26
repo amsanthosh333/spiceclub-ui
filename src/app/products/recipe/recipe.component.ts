@@ -71,6 +71,21 @@ export class RecipeComponent implements OnInit {
   currentpage: any;
   pagee: any=1;
   categoryy_id: any;
+  catblogs: boolean=true;
+  loader: boolean=true;
+  loader1: boolean=true;
+  Years=[
+    {name: 2022 },
+    {name: 2021 },
+    {name: 2020 },
+    {name: 2019 },
+    {name: 2018 },
+    {name: 2017 },
+    {name: 2016 }
+   
+
+  ]
+  firstblog: any;
   constructor(private router: Router, private formBuilder: FormBuilder,private fb: FormBuilder,
     private request: RequestService,private modalService: NgbModal,private route: ActivatedRoute,
     private toastr: ToastrService,config: NgbRatingConfig, private activatedRoute: ActivatedRoute,
@@ -122,9 +137,12 @@ export class RecipeComponent implements OnInit {
     this.imgloader = false;
     this.request.getallrecipe(page).subscribe((res:any)=>{
     this.Blogs=res.data;
+    console.log(" this.recipe", this.Blogs);
+    
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     this.recipeloader=false;
+    this.loader1=false;
     this.topItem=-1
     setTimeout(() => {
       this.imgloader = true;
@@ -137,7 +155,11 @@ getallrecipecat(){
   this.sideloader1=true;
   this.request.getallrecipecat().subscribe((response: any) => {
     this.Allcat=response.data;
+    console.log("this.Allcat",this.Allcat);
+    this.loader=false
     this.sideloader1=false;
+    this.firstblog= this.Allcat[0].bestof.data[0]
+   
   },
   (error: any) => {
     console.log("error",error);
@@ -164,7 +186,7 @@ getrecipebycatg(id:any,page:any){
     console.log("error",error);
   });
 }
-getrecipebycatg2(id:any,i:any){
+getblogbycatg2(id:any,i:any){
   window.scroll(0,0);
   this.rec_id=id 
   this.topItem=i
@@ -220,7 +242,7 @@ getrecipedetaillold(id:any){
   });
   this.getcommentsss();
 }
-getrecipedetaill(id:any){
+getblogdetail(id:any){
   window.scroll(0,0);
   this.router.navigate(['recipedetails', id]);
 }
@@ -321,5 +343,10 @@ search2(form:FormGroup){
     }
     deleteRecordSuccess() {
       this.toastr.error(' Removed Successfully', '');
+    }
+    goback() {
+      this.catblogs = false;
+      this.topItem=-1
+  
     }
 }

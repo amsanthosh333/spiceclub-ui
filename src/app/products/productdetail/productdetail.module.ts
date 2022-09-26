@@ -15,6 +15,9 @@ import {ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons'
 import { ShareModule } from 'ngx-sharebuttons';
 import { FormsModule } from '@angular/forms';
+// import { NgxImageZoomModule } from 'ngx-image-zoom';
+
+// import { ImageZoomModule } from "angular2-image-zoom";
 @NgModule({
   declarations: [
     ProductdetailComponent,
@@ -24,7 +27,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     ProductdetailRoutingModule,ReactiveFormsModule,NgbModule,
     CarouselModule,IvyCarouselModule,NgxSkeletonLoaderModule,NgImageFullscreenViewModule,
-    ToastrModule.forRoot(),NgImageSliderModule,FormsModule,
+    ToastrModule.forRoot(),NgImageSliderModule ,FormsModule,
     ShareButtonsModule.withConfig({
          debug:true,
     }),ShareIconsModule,ShareModule

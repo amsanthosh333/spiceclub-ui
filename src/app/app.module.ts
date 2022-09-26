@@ -25,6 +25,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { CountdownComponent } from './pages/countdown/countdown.component';
 import { InfiniteScrollModule } from "ngx-infinite-scroll";
+// import { ImageZoomModule } from "angular2-image-zoom";
+import { NgxImageZoomModule } from 'ngx-image-zoom';
 @NgModule({
   declarations: [
     AppComponent, 
@@ -34,7 +36,7 @@ import { InfiniteScrollModule } from "ngx-infinite-scroll";
     CountdownComponent, 
   ],
   imports: [
-    BrowserModule,BrowserAnimationsModule,InfiniteScrollModule,
+    BrowserModule,BrowserAnimationsModule,InfiniteScrollModule,NgxImageZoomModule,
     AppRoutingModule,AuthModule,
     ReactiveFormsModule,NgbModule,
     FormsModule,IvyCarouselModule,

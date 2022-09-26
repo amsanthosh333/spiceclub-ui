@@ -1,12 +1,66 @@
 <!-- 
 
 <div id="zoomC" style="background-image:url('../../../assets/images/backgrounds/bg-testimonials.png') "></div> -->
+<!-- 
+    
+<ngx-img-zoom
+    [zoomImageSrc]="zoomImageSrc"
+    [previewImageSrc]="previewImageSrc" 
+    [imgStyle]="'width:515px; height:515px; bottom:0;  left:0;  right:0;  top:0;  margin:0 auto; border:1px solid #dcdcdc;'" 
+    [resultStyle]="`width:824px; height:824px; background-repeat: no-repeat; z-index: 2; position:absolute;
+                   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+                    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); top: 0;left: 100%;`"
+    [lensStyle]="'width:155px; height:155px"
+    [enableZoom] = "enableZoom"
+    [containerStyle]=""
+></ngx-img-zoom> -->
+
+<!-- <ngx-image-zoom
+    [thumbImage]=myThumbnail
+    [fullImage]=myFullresImage
+    [magnification]="1"
+    [enableScrollZoom]="true"
+    [enableLens]="true"
+    [lensWidth]="200"
+></ngx-image-zoom> -->
+
+<!-- <lib-ngx-image-zoom
+    [thumbImage]=myThumbnail
+    [fullImage]=myFullresImage
+></lib-ngx-image-zoom> -->
+
+<!-- <div>
+    
+    <img
+      [imageZoom]="myFullresImage"
+      [src]="myThumbnail"
+      [scrollZoom]="true"
+      [lensWidth]="200"
+      [lensHeight]="200"
+      [lensBorder]="2"
+      [style.width.px]="200"
+      [style.height.px]="200"
+    />
+  </div> -->
+
+<!-- <ngx-image-zoom
+    [thumbImage]=myThumbnail
+    [fullImage]=myFullresImage
+    [magnification]="1"
+    [enableScrollZoom]="true"
+    [enableLens]="true"
+    [lensWidth]="200"
+></ngx-image-zoom> -->
+
+
+
+
+
 <div class="col-lg-12 mb-10 pb-0" class="listcard">
     <div class="subcatmaindiv">
         <ul id="subcatdiv" style="font-weight: 600;color: #3e3e3e;">
             <li *ngFor="let s of Peoduct?.subcategories.slice(0,9)" (click)="gotosubcategory(s.id)">
                 {{s.name}}</li>
-
         </ul>
 
     </div>
@@ -60,7 +114,7 @@
                                 <div class="col-lg-2" id="sideslider" id="slideimageshow1">
                                     <ul style="padding:0px">
                                         <li *ngFor="let p of allgalleryphotos;let i=index" style="padding-bottom:10px ;"
-                                        (mouseover)="blogClick(i)" >
+                                            (mouseover)="blogClick(i)">
                                             <a [ngClass]="{'active': imgItem === i}">
                                                 <img src="{{p?.image}}" class="img-fluid" alt="">
                                             </a>
@@ -98,11 +152,29 @@
                                                     class="bi bi-heart-fill" style="color: red;"></i></a>
                                         </span>
                                     </div>
-                                    <div class="shop-product__big-image-gallery-slider" *ngIf=!photoloader>
+
+                                    <!-- <div style="width: 640px; height: 290px; overflow : hidden;  position: relative "
+                                        #container>
+                                        <img src="https://picsum.photos/1600/900/?random?4" (click)="onClick($event)"
+                                            (mousedown)="onMouseDown($event)" (mousemove)="mouseMoveHandler($event)"
+                                            #img
+                                            style="cursor : zoom-in; width:100%;max-width: 200%; transition: all .3s; position: absolute " />
+                                    </div> -->
+                                    <div class="shop-product__big-image-gallery-slider" *ngIf=!photoloader >
+                                        <div class="single-image"  
+                                         style=" overflow : hidden;  position: relative " #container>
+                                            <img src="{{selectedimage}}" id="mainimg" class="img-fluid" alt="" (click)="onClick($event)"
+                                            (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (mousemove)="mouseMoveHandler($event)"
+                                            #img (mouseleave)="onLeave()"
+                                            style="cursor : zoom-in; width:100%;max-width: 300%; transition: all .5s; position: absolute ">
+                                        </div>
+                                    </div>
+
+                                    <!-- <div class="shop-product__big-image-gallery-slider" *ngIf=!photoloader >
                                         <div class="single-image" (click)="showLightbox(selectedimg)">
                                             <img src="{{selectedimage}}" id="mainimg" class="img-fluid" alt="">
                                         </div>
-                                    </div>
+                                    </div> -->
 
                                     <ng-image-fullscreen-view [images]="allgalleryphotos"
                                         [imageIndex]="selectedImageIndex" [show]="showFlag"
@@ -617,8 +689,8 @@
                                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
                                                 data-parent="#shippingInfo">
                                                 <div class="card-body" style=" margin-top: -17px;padding: 4px;">
-                                                    <div class="crdbdy" >
-                                                        <div class="col-lg-8 col-mg-12 col-sm-12" >
+                                                    <div class="crdbdy">
+                                                        <div class="col-lg-8 col-mg-12 col-sm-12">
                                                             <table class="overview">
                                                                 <tr>
                                                                     <th id="he" style="background-color: #f2f2f2;">
@@ -656,25 +728,30 @@
                                                                 <tr>
                                                                     <th id="nutrients" colspan="2">Nutrients</th>
                                                                 </tr>
-                                                                <table class="overview" *ngFor="let n of Peoduct?.nutrients">
-                                                                
-                                                                <tr>
-                                                                    <th id="he" style="background-color: #f2f2f2;">
-                                                                        {{n.name}}
-                                                                       
-                                                                    </th>
-                                                                    <td style="padding-left: 30px;background-color: #f2f2f2;">{{n.value}}                                                                 
-                                                                    </td>
-                                                                </tr>
-                                                                <tr *ngFor="let Sd of n.subdata">
-                                                                    <th id="he" 
-                                                                        style="background-color:white;font-weight: 300;">
-                                                                        {{Sd.name}}</th>
-                                                                    <td style="padding-left: 30px;font-weight: 300;">{{Sd.value}}
-                                                                        <span  *ngIf="Sd.value ==null"  >-</span>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
+                                                                <table class="overview"
+                                                                    *ngFor="let n of Peoduct?.nutrients">
+
+                                                                    <tr>
+                                                                        <th id="he" style="background-color: #f2f2f2;">
+                                                                            {{n.name}}
+
+                                                                        </th>
+                                                                        <td
+                                                                            style="padding-left: 30px;background-color: #f2f2f2;">
+                                                                            {{n.value}}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr *ngFor="let Sd of n.subdata">
+                                                                        <th id="he"
+                                                                            style="background-color:white;font-weight: 300;">
+                                                                            {{Sd.name}}</th>
+                                                                        <td
+                                                                            style="padding-left: 30px;font-weight: 300;">
+                                                                            {{Sd.value}}
+                                                                            <span *ngIf="Sd.value ==null">-</span>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
 
 
                                                             </table>
@@ -861,7 +938,8 @@
                                 -webkit-line-clamp: 2;
                                 -webkit-box-orient: vertical;
                                 max-height: 3.2rem; height:3.2rem;
-                                 margin-bottom: 2px;font-weight: 600;color: #4a4a4a;font-size: 13px;">{{img.name}}</a> </h3>
+                                 margin-bottom: 2px;font-weight: 600;color: #4a4a4a;font-size: 13px;">{{img.name}}</a>
+                                        </h3>
                                         <a id="vieww"
                                             style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
                                             Details</a>
@@ -1098,7 +1176,7 @@
                     </div>
                 </div>
                 <div class="col-12" id="revmaindiv">
-                    <div class="col-lg-6 col-md-12 col-sm-12" id="reviewdiv" >
+                    <div class="col-lg-6 col-md-12 col-sm-12" id="reviewdiv">
                         <div *ngIf="Peoduct?.rating!==0">
                             <p style="line-height: 1.6rem;
                     overflow: hidden;
@@ -1154,7 +1232,7 @@
                         </div>
                     </div>
 
-                    <div id="rev" class="col-lg-6 col-md-12 col-sm-12" >
+                    <div id="rev" class="col-lg-6 col-md-12 col-sm-12">
                         <!-- <h5 class="comment-title">Leave your thought here</h5> -->
                         <p style="font-weight:600;font-size:1rem ;margin-bottom: 5px;color: #626262;">Add a review</p>
                         <form [formGroup]="comment" (ngSubmit)="addcomment(comment)" id="ratingform">

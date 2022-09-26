@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild ,ViewEncapsulation } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild ,ViewEncapsulation,VERSION } from '@angular/core';
 import { RequestService } from 'src/app/services/request.service';
 import { HttpHeaders } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -15,6 +15,7 @@ import { PlatformLocation } from '@angular/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 
+// import { NgxImgZoomService } from 'ngx-img-zoom';
 
 @Component({
   selector: 'app-productdetail',
@@ -25,7 +26,12 @@ import { LoginComponent } from 'src/app/auth/login/login.component';
 })
 
 export class ProductdetailComponent implements OnInit {
+  name = 'Angular ' + VERSION.major;
+  isZoomed = false;
+  pos = { top: 0, left: 0, x: 0, y: 0 };
 
+  @ViewChild('container') 'container': ElementRef;
+  @ViewChild('img') 'img': ElementRef;
   p: number = 1;
   Sort = [
     { id: 'price_low_to_high', value: 'price_low_to_high' },
@@ -85,7 +91,7 @@ export class ProductdetailComponent implements OnInit {
   likedd = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   likeddd = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
   iindex: any;
-  img: any;
+  // img: any;
   likesss = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
   likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
 
@@ -147,6 +153,20 @@ export class ProductdetailComponent implements OnInit {
   currentpackagevalue: any;
   edata: any;
 
+  title = "CodeSandbox";
+  zoomedImageSrc =
+    "https://ride-techonoloy-storage.s3.ap-south-1.amazonaws.com/images/1633930760711IMG_20211011_110909108.jpg";
+  smallImageSrc =
+    "https://ride-techonoloy-storage.s3.ap-south-1.amazonaws.com/images/1633930760711IMG_20211011_110909108.jpg";
+
+
+
+  myThumbnail="https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg";
+  myFullresImage="https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
+
+  enableZoom: Boolean = true;
+  previewImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg";
+  zoomImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
 
 
   constructor(private router: Router, private request: RequestService,
@@ -154,6 +174,8 @@ export class ProductdetailComponent implements OnInit {
     private modalService: NgbModal, config: NgbRatingConfig, private _location: PlatformLocation, private scroller: ViewportScroller,
     private toastr: ToastrService, private _sanitizer: DomSanitizer, private sharedService: SharedService, private activatedRoute: ActivatedRoute,) {
     config.max = 5;
+   
+
     config.readonly = true;
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
@@ -168,6 +190,8 @@ export class ProductdetailComponent implements OnInit {
     if (this.userid == undefined) {
       this.userid = 0;
     }
+
+
 
   }
 
@@ -192,6 +216,81 @@ export class ProductdetailComponent implements OnInit {
     });
     this.currenturl = this.router.url
   }
+
+  onClick(e: { clientY: any; clientX: any; }) {
+    console.log(e,e.clientY, e.clientX);
+    this.isZoomed = !this.isZoomed;
+    if (this.isZoomed) {
+      this.container.nativeElement.style.overflow = 'hidden';
+      this.img.nativeElement.style.width = '300%';  // adjust max with in html if need changes
+      this.img.nativeElement.style.height = '300%';  
+      this.img.nativeElement.style.cursor = 'zoom-out';
+      this.img.nativeElement.style.cursor = 'zoom-out';
+      this.img.nativeElement.style.left = `-${e.clientX}`;
+      this.img.nativeElement.style.top = `-${e.clientY}`;
+    } else {
+      this.container.nativeElement.style.overflow = 'hidden';
+      this.img.nativeElement.style.width = '100%';
+      this.img.nativeElement.style.height = '100%';
+      this.img.nativeElement.style.cursor = 'zoom-in';
+    }
+    // this.pos = {
+    //   // The current scroll
+    //   left:100,
+    //   top: 100,
+    //   // Get the current mouse position
+    //   x: e.clientX,
+    //   y: e.clientY,
+    // };
+
+    const dx = (e.clientX - this.pos.x) * 3;
+    const dy = (e.clientY - this.pos.y) * 6;
+
+    // Scroll the element
+    this.container.nativeElement.scrollTop = this.pos.top - dy;
+    this.container.nativeElement.scrollLeft = this.pos.left - dx;
+
+  }
+  onMouseDown(e: { clientX: any; clientY: any; }) {
+    console.log("e");
+    
+    this.pos = {
+      // The current scroll
+      left: this.container.nativeElement.scrollLeft,
+      top: this.container.nativeElement.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY
+    };
+  }
+  onMouseUp(e: { clientX: any; clientY: any; }) {
+    console.log("eup");
+    this.pos = {
+      // The current scroll
+      left: this.container.nativeElement.scrollLeft,
+      top: this.container.nativeElement.scrollTop,
+      // Get the current mouse position
+      x: e.clientX,
+      y: e.clientY,
+    };
+  }
+
+  mouseMoveHandler(e: { clientX: number; clientY: number; }) {
+    // How far the mouse has been moved
+    const dx = (e.clientX - this.pos.x) * 3;
+    const dy = (e.clientY - this.pos.y) * 6;
+
+    // Scroll the element
+    this.container.nativeElement.scrollTop = this.pos.top - dy;
+    this.container.nativeElement.scrollLeft = this.pos.left - dx;
+  }
+
+  onLeave() {
+    this.container.nativeElement.style.overflow = 'hidden';
+    this.img.nativeElement.style.transform = 'scale(1)';
+    this.img.nativeElement.style.cursor = 'zoom-in';
+  }
+
 
   toggleVideo() {
     this.videoplayer.nativeElement.play();
