@@ -54,174 +54,17 @@
 
 				<div class="col-lg-10 order-2 order-lg-1 order-sm-1  mb-md-70 mb-sm-70 mt-30" *ngIf="!loader1"
 					style="margin-left: auto; margin-right: auto;">
-
-					<div class="row" *ngIf="!catblogs" style="border-bottom:1px solid #dddddd;
-				padding-bottom: 20px;">
-
-						<div class="post-list-wrapper col-lg-12">
-							<div class="section-title section-title--one  mb-0 p-0">
-								<h5
-									style="margin-left: 15px;font-weight: 400;color: #151b39;margin-top: 0px;margin-bottom: 0px;letter-spacing: .25px;">
-									Best of All Blogs
-									<!-- <span id="viewallbtn"><button class="btn btn-success sm">View all</button></span> -->
-									<p style="color: #6f7284; font-size: 11px">The way to your health is through your
-										stomach with our delicious recipes and diet tips and health benefits of seasonal
-										produce</p>
-								</h5>
-
-							</div>
-						</div>
-						<div class="col-12 mainblogdiv">
-							<div class="post-list-wrapper mainblog  col-4" *ngFor="let img of Blogs| slice:0:1 ">
-								<div class="largeimg">
-									<div class="single-post" style="width:100%;" (click)="getblogdetail(firstblog.id)">
-										<a id="imgdiv" (click)="getblogdetail(firstblog.id)">
-											<img src="https://neophroncrm.com/spiceclubnew/public/{{firstblog?.thumbnail_image}}"
-												style="object-fit:cover; height: 100%; width: 100%;">
-										</a>
-										<a>
-											<h2 style="line-height: 1.5rem;
-						overflow: hidden;
-						display: -webkit-box;
-						-webkit-line-clamp: 2;
-						-webkit-box-orient: vertical;
-						max-height: 5.2rem;
-						">{{firstblog.name}} </h2>
-										</a>
-										<p style="line-height: 1.3rem;
-					overflow: hidden;
-					display: -webkit-box;
-					-webkit-line-clamp: 3;
-					-webkit-box-orient: vertical;
-					height: 10.3rem;">{{firstblog.short_description}} </p>
-									</div>
-								</div>
-							</div>
-							<div class="post-list-wrapper mainsubblog col-5" id="">
-								<div class="row" id="bloglist">
-									<div class="col-6" id="otherlargeimg"
-										*ngFor="let img of Blogs.slice(1,5); filter:term;let i=index ">
-										<div class="single-post" style="width:100%;" (click)="getblogdetail(img.id)">
-											<a id="imgdiv" (click)="getblogdetail(img.id)">
-												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
-													style="object-fit:cover; height: 100%; width: 100%;">
-											</a>
-											<a>
-												<h2 style="line-height: 1.2rem;
-								overflow: hidden;
-								display: -webkit-box;
-								-webkit-line-clamp: 2;
-								-webkit-box-orient: vertical;
-								max-height: 5.2rem;">{{img.name}} </h2>
-											</a>
-											<p style="line-height: 1.3rem;
-							overflow: hidden;
-							display: -webkit-box;
-							-webkit-line-clamp: 3;
-							-webkit-box-orient: vertical;
-							max-height: 5.2rem;">{{img.short_description}} </p>
-										</div>
-									</div>
-								</div>
-
-							</div>
-							<div class="col-lg-3 order-1 order-lg-1 order-md-12 sideshow2" id="sidecategories">
-								<div class="page-sidebar">
-									<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
-										<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Categories
-										</h5>
-										<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-											style="padding-left: 0px;max-height: 250px;border-bottom: 1px solid #dfdfdf;overflow-y: auto;margin-bottom: 5px;">
-											<li *ngFor="let cat of Allcat;let i=index">
-												<label style="display: flex;"> <a (click)="getblogbycatg2(cat.id,i)"
-														style="padding-top: 3px;"><input [checked]="topItem === i"
-															type="checkbox"></a>
-													<div class="catname"> <span>{{cat.name}}</span></div>
-												</label>
-											</li>
-										</ul>
-									</div>
-									<div class="page-sidebar">
-										<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
-											<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Archives
-											</h5>
-											<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-												style="padding-left: 0px;max-height: 250px;overflow-y: auto;margin-bottom: 5px;">
-												<li *ngFor="let cat of Years;let i=index">
-													<label style="display: flex;"> <a style="padding-top: 3px;"></a>
-														<div class="catname"> <span>{{cat.name}}</span></div>
-													</label>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</div>
-							</div>
-
-						</div>
-					</div>
-
-					<!-- <div class="row" *ngIf="!catblogs">
-						<div class="col-12" *ngFor="let cat of Allcat;let i=index"
-							style="border-bottom: 1px solid #dddddd;">
-							<div class="post-list-wrapper">
-								<div class="col-lg-12">
-									<div class="section-title section-title--one  mb-0 ">
-										<h5
-											style="font-weight: 400;color: #151b39;margin-top: 10px;margin-bottom: 0px;letter-spacing: .25px;">
-											Best of {{cat.name}}
-											<span class="viewallbtn1" id="viewallbtn"
-												(click)="getblogbycatg2(cat.id,i)"><button
-													class="btn btn-success sm">View all</button></span>
-											<p style="color: #6f7284; font-size: 11px">The way to your health is through
-												your stomach with our delicious recipes and diet tips and health
-												benefits of seasonal produce</p>
-										</h5>
-										<span class="viewallbtn2" id="viewallbtn"
-											(click)="getblogbycatg2(cat.id,i)"><button class="btn btn-success sm">View
-												all</button></span>
-									</div>
-								</div>
-								<div class="col-lg-12" id="bloglist" *ngIf="cat.bestof.data.length > 0">
-									<div class="single-post mainblog col-4 "
-										*ngFor="let img of cat.bestof.data;let i=index" (click)="getblogdetail(img.id)">
-										<a id="imgdiv" (click)="getblogdetail(img.id)">
-											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
-												style="object-fit:cover; height: 100%; width: 100%;">
-										</a>
-										<a>
-											<h2 style="line-height: 1.2rem;
-								overflow: hidden;
-								display: -webkit-box;
-								-webkit-line-clamp: 2;
-								-webkit-box-orient: vertical;
-								max-height: 5.2rem;">{{img.name}} </h2>
-										</a>
-										<p style="line-height: 1.3rem;
-							overflow: hidden;
-							display: -webkit-box;
-							-webkit-line-clamp: 3;
-							-webkit-box-orient: vertical;
-							max-height: 5.2rem;">{{img.short_description}} </p>
-									</div>
-								</div>
-
-							</div>
-						</div>
-					</div> -->
-
 					<!-- old blog ui -->
 					
 					<div *ngIf="catblogs">
 						<div class="row">
 							<div class="col-9 bloglist2">
 								<div class="post-list-wrapper" id="categoriesblogs" *ngIf="Blogs?.length!==0">
-
 									<div class="row" id="bloglist">
 										<div class="single-post bloglist2_blogs" *ngFor="let img of Blogs;let i=index"
 											(click)="getblogdetail(img.id)">
 											<a id="imgdiv">
-												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}">
+												<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}">
 											</a>
 											<a>
 												<h2 style="line-height: 1.2rem;
@@ -253,11 +96,11 @@
 									<div style="text-align: center;">
 										<div> <img src="assets/images/icons/empty-blog.jpg" alt="" style="width:60%;">
 										</div>
-										<h6>No Blogs to show</h6>
-										<h6 style="font-size: 0.7rem;">We regret to inform you that there is no blogs to
+										<h6>No Recipe to show</h6>
+										<h6 style="font-size: 0.7rem;">We regret to inform you that there is no Recipe to
 											show!.</h6>
 										<div class="cart-buttons">
-											<a class="closewishlist" routerLink="/blog">Explore More </a>
+											<a class="closewishlist" routerLink="/recipe">Explore More </a>
 										</div>
 									</div>
 								</div>

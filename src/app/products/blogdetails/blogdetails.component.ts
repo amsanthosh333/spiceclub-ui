@@ -241,7 +241,9 @@ this.getblogbycatg2(this.id)
   }
   getblogbycatg(id: any) {
     window.scroll(0, 0);
-    this.router.navigate(['blog', id]);
+    // this.router.navigate(['blog', id]);
+    this.router.navigate(['/blog'], { queryParams: { category: id, page: 1 } });
+    
   }
   backk() {
     this._location.back();

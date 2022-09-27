@@ -33,10 +33,11 @@
 								<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
 									style="padding-left: 0px;max-height: 250px;overflow-y: auto;margin-bottom: 5px;">
 									<li *ngFor="let cat of Allcat;let i=index">
-										<label style="display: flex;"> <a (click)="getblogbycatg(cat.id)"
+										<label style="display: flex;"> 
+											<!-- <a (click)="getblogbycatg(cat.id)"
 												style="padding-top: 3px;"><input [checked]="topItem === i"
-													type="checkbox"></a>
-											<div class="catname"> <span>{{cat.name}}</span></div>
+													type="checkbox"></a> -->
+											<div class="catname" (click)="getblogbycatg(cat.id)"> <span>{{cat.name}}</span></div>
 										</label>
 									</li>
 								</ul>
@@ -177,7 +178,6 @@
 
 
 							<div class="col-lg-12">
-
 								<!--=======  commenter info  =======-->
 								<ng-template #t let-fill="fill">
 									<span class="star" [class.full]="fill === 100">
@@ -255,8 +255,6 @@
 									</div>
 								</div>
 							</div>
-
-
 							<div class="12" style="margin-top: 20px;">
 								<!-- <h5 class="comment-title">Leave your thought here</h5> -->
 								<p style="font-weight:600;font-size:1rem ;margin-bottom: 5px;color: #626262;">Add a

@@ -3,85 +3,158 @@
 		<div class="container" style="margin: 0px;">
 			<div class="row">
 				<div class="col-lg-12">
-					<h4 class="breadcrumb-title" style="padding: 0px; margin: 0px; font-size: 1.5rem;">Spice club's
-						Recipes</h4>
-					<!--=======  breadcrumb list  =======-->
-					<ul class="breadcrumb-list" style="padding-left: 0px; margin-bottom: 5px;">
+					
+					<ul class="breadcrumb-list" style="padding-left: 0px;margin-bottom: 15px; margin-top: 15px;">
 						<li class="breadcrumb-list__item"><a routerLink="/home">Home</a></li>
-						<li class="breadcrumb-list__item breadcrumb-list__item--active" >Recipes Details</li>
+						<li class="breadcrumb-list__item breadcrumb-list__item--active">Recipe Details</li>
 					</ul>
 					<!--=======  End of breadcrumb list  =======-->
 				</div>
 			</div>
 		</div>
 	</div>
+
     <div>
-        <!--=============================================
-        =            checkout page content         =
-        =============================================-->
+		<div class="blog-page-wrapper mb-10">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-3 order-2 order-lg-1">
+						<div class="page-sidebar mt-30">
+							<div class="single-sidebar-widget mb-20 " *ngIf="!sideloader2">
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 0px;"
+									>Categories</h2>
+								<!-- <ul style="padding-left: 0px;max-height: 250px;overflow-y: auto;"
+									class="single-sidebar-widget--list single-sidebar-widget--list--category"
+									*ngFor="let cat of Allcat">
 
-        <div class="blog-page-wrapper mb-10">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-2 order-2 order-lg-1">
+									<li><a style="color: gray;" (click)="getblogbycatg(cat.id)" stty>{{cat.name}} </a>
+										<span class="quantity"></span>
+									</li>
 
-                        <!--=======  page sidebar  =======-->
+								</ul> -->
+								<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
+									style="padding-left: 0px;max-height: 250px;overflow-y: auto;margin-bottom: 5px;">
+									<li *ngFor="let cat of Allcat;let i=index">
+										<label style="display: flex;">
+                                             <!-- <a (click)="getrecipebycatg(cat.id)"
+												style="padding-top: 3px;"><input 
+													type="checkbox"></a> -->
+											<div class="catname" (click)="getrecipebycatg(cat.id)"> <span>{{cat.name}}</span></div>
+										</label>
+									</li>
+								</ul>
+							</div>
+							<div class="single-sidebar-widget mb-40" *ngIf="sideloader2">
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
+								<ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
+							</div>
+                            <div class="single-sidebar-widget mb-40">
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Related Recipes</h2>
 
-                        <div class="page-sidebar">
-                            <!--=======  single sidebar widget  =======-->
+								<!--=======  widget post wrapper  =======-->
 
-                            <!--=======  single sidebar widget  =======-->
+								<div class="widget-post-wrapper" 
+									style="max-height: 750px;overflow-y: auto;"  *ngIf="!loader2">
+									<div class="single-widget-post" *ngFor="let img of Relatedrecipes"
+										(click)="getblogdetail2(img.id)">
+										<div class="image">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+												class="img-fluid" alt="">
+										</div>
+										<div class="content">
+											<h3 class="widget-post-title"><a>{{img.name}}</a></h3>
+											<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+											</ngb-rating>
+											<p class="widget-post-date"></p>
+										</div>
+									</div>
+									
+								</div>
+								
+								<div class="widget-post-wrapper" *ngIf="loader2">
+									<div class="single-widgost">
+										<div class="imag" style="height: 120px; width: 160px;">
+											<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
+												 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"> </ngx-skeleton-loader>
+										</div>
+									</div>
+								</div>
 
-                            <div class="single-sidebar-widget mb-30 mt-40">
-                                <h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Categories</h2>
-                                <div class="widget-post-wrapper" *ngIf="!sideloader2"
-                                    style="max-height: 550px;overflow-y: auto;">
-                                    <!--=======  single widget post  =======-->
-                                    <div class="single-widgost" *ngFor="let cat of Allcat">
-                                        <div class="imag" (click)="getrecipebycatg(cat.id)">
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{cat.banner}}"
-                                                class="img-fluid" alt="" style="height: 100%; width: 100%; ">
-                                        </div>
-                                        <div class="con" (click)="getrecipebycatg(cat.id)" style="text-align: center;">
-                                            <h6 class="widget-positle" style="font-size: 0.9em;"><a>{{cat.name}}</a>
-                                            </h6>
-                                            <p class="widget-posate"></p>
-                                        </div>
-                                    </div>
-                                </div>
+								<!--=======  End of widget post wrapper  =======-->
+							</div>
 
-                                <!-- lazyloading -->
-                                <div class="widget-post-wrapper" *ngIf="sideloader2" >
-                                    <div class="single-widgost">
-                                        <div class="imag" style="height: 120px; width: 160px;">
-                                            <ngx-skeleton-loader count="3"
-                                                [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
-                                             'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'}"> </ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+							<!-- <div class="single-sidebar-widget mb-40">
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">Related Blogs</h2>
+								<div class="widget-post-wrapper" *ngIf="!loader2"
+									style="max-height: 750px;overflow-y: auto;">
+									<div class="single-widget-post" *ngFor="let img of CatBlogs"
+										(click)="getblogdetail2(img.id)">
+										<div class="image">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+												class="img-fluid" alt="">
+										</div>
+										<div class="content">
+											<h3 class="widget-post-title"><a>{{img.name}}</a></h3>
+											<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+											</ngb-rating>
+											<p class="widget-post-date"></p>
+										</div>
+									</div>
+									
+								</div>
+								
+								<div class="widget-post-wrapper" *ngIf="loader2">
+									<div class="single-widgost">
+										<div class="imag" style="height: 120px; width: 160px;">
+											<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
+												 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"> </ngx-skeleton-loader>
+										</div>
+									</div>
+								</div>
+							</div> -->
 
-                            <!--=======  End of single sidebar widget  =======-->
-                        </div>
 
-                        <!--=======  End of page sidebar  =======-->
-                    </div>
+							<!--=======  End of single sidebar widget  =======-->
+						</div>
 
-                    <div class="col-lg-9 order-1 order-lg-2 mb-md-20">
-                        <div class="row">
-                            <div class="col-lg-12" id="bacck" style="height: 40px;">
-                                <div class="shop-product__navigation " style="margin-bottom: 0px;">
-                                    <a><i class="ion-ios-arrow-thin-left" (click)="backk()" style="size: 0px;"></i></a>
-                                    <!-- <a ><i class="ion-ios-arrow-thin-right"></i></a> (click)="backk()" -->
-                                </div>
-                                <br>
-                                <br><br>
-                            </div>
+						<!--=======  End of page sidebar  =======-->
+					</div>
+
+					<div class="col-lg-6 order-1 order-lg-2 mb-md-70 mb-sm-70">
+                        <div class="row mt-30" >
+                           
                             <div class="col-md-12 mb-40">
                                 <div class="single-slider-post single-slider-post--sticky pb-0">
                                     <!--=======  image  =======-->
+                                    <div id="laazyy" *ngIf="!discrloading">
+                                        <h6 class="post-title"><a>{{Peoduct.name}}</a></h6> 
+                                    </div>
+                                    <div class="post-info d-flex flex-wrap align-items-center mb-10">
+                                        <div class="post-user">
+                                            <i class="ion-android-person"></i> 
+                                            <a class="textopacity">By {{Peoduct?.added_by}}</a>
+                                        </div>
+                                        <div class="post-user pl-30">
+                                            <i class="ion-android-star"></i>
+                                            <a class="textopacity"> {{Peoduct?.rating}} Ratings </a>
+                                        </div>
 
+                                        <div class="post-comment pl-30">
+                                            <i class="ion-ios-chatbubble-outline"></i>
+                                            <a class="textopacity"> {{commtotal}} Comments</a>
+                                        </div>
+
+                                    </div>
+                                    <div id="lazyy" *ngIf="discrloading">
+                                        <ngx-skeleton-loader count="1" [theme]="{ 
+                                        'border-radius': '5px',
+                                         height: '35px',
+                                         width: '80%',
+                                        'background-color': '##b9b8b8',
+                                        border: '1px solid white'
+                                      }" animation="pulse"></ngx-skeleton-loader>
+                                       
+                                    </div>
                                     <div class="single-slider-post__image single-slider-post--sticky__image mb-30"
                                         style="display: block;
                                     margin-left: auto;
@@ -91,7 +164,6 @@
                                                 style="width:100%;height: -webkit-fill-available;object-fit: cover; "
                                                 class="img-fluid" alt="">
                                         </a>
-
                                     </div>
 
                                     <!--=======  End of image  =======-->
@@ -113,21 +185,12 @@
                                     <div class="single-slider-post__content single-slider-post--sticky__content">
                                         <!--=======  post category  =======-->
                                         <div id="laazyy" *ngIf="!discrloading">
-                                            <h2 class="post-title"><a>{{Peoduct.name}}</a></h2>
-
-                                            <p class="mb-30" style="font-size:large" [innerHTML]="Peoduct.description">
+                                            <p class="mb-30" style="font-size:15px" [innerHTML]="Peoduct.description">
                                                 {{Peoduct.description}}</p>
                                         </div>
 
 
-                                        <div id="lazyy" *ngIf="discrloading">
-                                            <ngx-skeleton-loader count="1" [theme]="{ 
-                                            'border-radius': '5px',
-                                             height: '35px',
-                                             width: '80%',
-                                            'background-color': '##b9b8b8',
-                                            border: '1px solid white'
-                                          }" animation="pulse"></ngx-skeleton-loader>
+                                        <div id="lazyy" *ngIf="discrloading"> 
                                             <ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
                                             <ngx-skeleton-loader count="1" [theme]="{ 
                                             'border-radius': '5px',
@@ -138,39 +201,12 @@
                                           }" animation="pulse"></ngx-skeleton-loader>
                                         </div>
                                         <!--=======  End of post category  =======-->
-
-                                        <!--=======  post info  =======-->
-
-                                        <div class="post-info d-flex flex-wrap align-items-center mb-10">
-                                            <div class="post-user">
-                                                <i class="ion-android-person"></i> By
-                                                <a class="textopacity"> {{Peoduct?.added_by}}</a>
-                                            </div>
-                                            <div class="post-date mb-0 pl-30">
-                                                <i class="ion-android-star"></i>
-                                                <a class="textopacity"> {{Peoduct?.rating}} Ratings </a>
-                                            </div>
-
-                                            <div class="post-comment pl-30">
-                                                <i class="ion-ios-chatbubble-outline"></i>
-                                                <a class="textopacity"> {{commtotal}} Comments</a>
-                                            </div>
-
-                                        </div>
-
-                                        <!--=======  End of post info  =======-->
-
-
-                                        <!--=======  single blog post section  =======-->
-
-
                                         <div class="row">
                                             <div class="col-lg-12">
                                                 <!--=======  shop product description tab  =======-->
 
                                                 <div class="shop-product__description-tab pt-10">
                                                     <!--=======  tab navigation  =======-->
-
                                                     <div
                                                         class="tab-product-navigation tab-product-navigation--product-desc mb-20">
                                                         <div class="nav nav-tabs justify-content-center" id="nav-tab2"
@@ -183,7 +219,7 @@
                                                                 aria-selected="false">Nutritional Facts</a>
                                                             <a class="nav-item nav-link" id="product-tab-3"
                                                                 data-toggle="tab" href="#product-series-3" role="tab"
-                                                                aria-selected="false">Rating
+                                                                aria-selected="false">Ratings
                                                                 {{Peoduct?.rating_count}}</a>
                                                         </div>
                                                     </div>
@@ -348,8 +384,8 @@
                                                             aria-labelledby="product-tab-3">
                                                             <!--=======  shop product reviews  =======-->
 
-                                                            <div class="shop-product__review"
-                                                                style="text-align: start; margin: 0px;">
+                                                            <div class="col-lg-12">
+                                                                <!--=======  commenter info  =======-->
                                                                 <ng-template #t let-fill="fill">
                                                                     <span class="star" [class.full]="fill === 100">
                                                                         <span class="half" [style.width.%]="fill"><em
@@ -357,107 +393,111 @@
                                                                             class="fa fa-star-o text-warning cursor"></em>
                                                                     </span>
                                                                 </ng-template>
-                                                                <h2 class="comment-title mb-0">Ratings <span>
-                                                                        <ngb-rating [(rate)]="currentRatess"
-                                                                            [starTemplate]="t" [readonly]="true"
-                                                                            style="color: rgb(245, 153, 14);">
-                                                                        </ngb-rating>
+                                                                <h2 class="comment-title">Ratings <span>
+                                                                        <ngb-rating [(rate)]="currentRatess" [starTemplate]="t" [readonly]="true"
+                                                                            style="color: rgb(245, 153, 14);"></ngb-rating>
                                                                     </span></h2>
-                                                                <h2 class="review-title mb-0">{{commtotal}} comments
-                                                                    for
-                                                                    this
-                                                                    Product</h2>
-                                                                <div class="col-lg-12 mb-0">
-
-                                                                    <!--=======  commenter info  =======-->
-
-                                                                    <!--=======  single comment  =======-->
-
-                                                                    <div class="single-comment"
-                                                                        *ngFor="let comm of Comments" style="margin-bottom:0px ;padding-bottom: 0px;" >
-                                                                        <div class="single-comment__image"
-                                                                            *ngIf="(comm.avatar=='')">
-                                                                            <img src="assets/images/user-profile.png"
-                                                                                class="img-fluid" style="height: 70px;"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div class="single-comment__image"
-                                                                            *ngIf="(comm.avatar!=='')">
-                                                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
-                                                                                class="img-fluid"
-                                                                                style="height: 70px; width:70px;object-fit: cover;"
-                                                                                alt="">
-                                                                        </div>
-                                                                        <div class="single-comment__content" style="padding-top:5px ;">
-
-                                                                            <!--=======  username and date  =======-->
-
-                                                                            <p class="username">{{comm.user_name}}<span
-                                                                                    class="date">{{comm.time}}</span>
-                                                                            </p>
-
-                                                                            <!--=======  End of username and date  =======-->
-
-                                                                            <ngb-rating [rate]="comm.rating"
-                                                                                style="color: rgb(245, 153, 14);">
-                                                                            </ngb-rating>
-                                                                            <p class="message">{{comm.comment}} </p>
-
-                                                                            <!--=======  End of message  =======-->
-
-                                                                        </div>
-                                                                    </div>
-
-                                                                    <!--=======  End of single comment  =======-->
-
-                                                                </div>
-
-                                                                <div class="col-lg-12">
-
-                                                                    <h2 class="comment-title mb-30">Leave your thought
-                                                                        here
-                                                                    </h2>
-                                                                    <!--=======  comment form  =======-->
-
-                                                                    <div class="lezada-form comment-gorm">
-                                                                        <form [formGroup]="comment"
-                                                                            (ngSubmit)="addcomment(comment)">
-                                                                            <div class="row">
-
-                                                                                <div class="col-lg-12 mb-20">
-                                                                                    <span class="rating-title mr-30"
-                                                                                        style="opacity: 0.72;">YOUR
-                                                                                        RATING</span>
-                                                                                    <span class="product-rating">
-                                                                                        <ngb-rating [max]="5"
-                                                                                            [(rate)]="currentRate"
-                                                                                            [readonly]="false"
-                                                                                            formControlName="rating"
-                                                                                            style="font-size: 2rem; color: rgb(248, 141, 19);">
-                                                                                        </ngb-rating>
-                                                                                    </span>
-                                                                                </div>
-                                                                                <div class="col-lg-12 mb-20"
-                                                                                    style=" border: 2px solid  #ddd5d5;">
-                                                                                    <textarea cols="30" rows="10"
-                                                                                        formControlName="comment"
-                                                                                        placeholder="YOUR MESSAGE"></textarea>
-                                                                                </div>
-                                                                                <div class="col-lg-12 text-center">
-                                                                                    <h6><span *ngIf="error1"
-                                                                                            style="color: red;">{{error1}}</span>
-                                                                                    </h6>
-                                                                                    <button type="submit"
-                                                                                        class="lezada-button lezada-button--medium">submit</button>
-                                                                                </div>
+                                                                <h2 class="comment-title">Comments <span>{{commtotal}} </span></h2>
+                                
+                                
+                                                            </div>
+                                                            <div class="12" id="reviewdiv"
+                                                                style="width: 100%;max-height: 315px; overflow: auto; margin-top: 4px;">
+                                                                <div *ngIf="Peoduct?.rating!==0">
+                                
+                                                                    <div >
+                                                                        <div class="d-flex py-1" *ngFor="let comm of Comments">
+                                
+                                                                            <div class="v-avatar" style="height: 48px; min-width: 48px; width: 48px;"
+                                                                                *ngIf="(comm.avatar=='')">
+                                                                                <img src="assets/images/user-profile.png" alt="user profile"
+                                                                                    class="img-fluid"
+                                                                                    style="height: 50px; width:50px;object-fit: cover;border-radius: 50px;">
                                                                             </div>
-                                                                        </form>
+                                
+                                                                            <div class="v-avatar" style="height: 48px; min-width: 48px; width: 48px;"
+                                                                                *ngIf="(comm.avatar!=='')">
+                                                                                <img src="https://neophroncrm.com/spiceclubnew/public/{{comm.avatar}}"
+                                                                                    alt="user profile" class="img-fluid"
+                                                                                    style="height: 50px; width:50px;object-fit: cover;border-radius: 50px;">
+                                                                            </div>
+                                
+                                                                            <span class="ms-4"
+                                                                                style="border: 1px solid#d9d9d9;padding: 10px; width: 100%;">
+                                                                                <div class="fw-700 lh-1"><strong>
+                                                                                        {{comm.user_name}}</strong>
+                                                                                    <span
+                                                                                        style="color:rgb(0, 204, 255);font-weight: 500; font-size: 0.7rem; padding-left: 10px;">
+                                                                                        From verified purchase</span>
+                                                                                    <div class="v-rating lh-1-5 mb-2 v-rating--readonly"
+                                                                                        style="float: right;">
+                                                                                        <ngb-rating [rate]="comm.rating"
+                                                                                            style="color: rgb(245, 153, 14);">
+                                                                                        </ngb-rating>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="fs-11 opacity-50" style="font-size:0.7rem;">
+                                                                                    {{comm.time}}
+                                                                                </div>
+                                
+                                
+                                                                                <div class="fs-12 opacity-70" id="reviewcomment"
+                                                                                    style="max-height: 40px;overflow: auto;">
+                                                                                    <p class="message" style="font-size:0.8rem ;">{{comm.comment}}
+                                                                                    </p>
+                                                                                </div>
+                                                                            </span>
+                                                                        </div>
+                                
                                                                     </div>
-
-                                                                    <!--=======  End of comment form  =======-->
                                                                 </div>
-
-
+                                
+                                                                <div *ngIf="Peoduct?.rating==0" style="margin-top: 45px;">
+                                                                    <div style=" display: flex;height: 200px; border: 1px solid rgb(224, 224, 224);">
+                                                                        <div>
+                                                                            <h6 style="padding: 5px; font-size: 0.9rem;">
+                                                                                No reviews yet
+                                                                            </h6>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="12" style="margin-top: 20px;">
+                                                                <!-- <h5 class="comment-title">Leave your thought here</h5> -->
+                                                                <p style="font-weight:600;font-size:1rem ;margin-bottom: 5px;color: #626262;">Add a
+                                                                    review</p>
+                                                                <form [formGroup]="comment" (ngSubmit)="addcomment(comment)" id="ratingform">
+                                                                    <div class="row">
+                                                                        <div class="col-lg-12 mb-10">
+                                                                            <span style="font-size: 0.7rem;">Your Rating </span> <span
+                                                                                class="text-danger">*</span>
+                                                                            <span class="product-rating pl-10">
+                                                                                <ngb-rating [max]="5" [(rate)]="currentRate" [readonly]="false"
+                                                                                    formControlName="rating"
+                                                                                    style="font-size: 1rem; color: rgb(248, 141, 19);">
+                                                                                </ngb-rating>
+                                                                            </span>
+                                                                        </div>
+                                                                        <div class="col-lg-12 mb-10" style="display:grid;" id="textarea">
+                                                                            <p style="font-size: 0.7rem;margin-bottom: 0px;">Your Review <span
+                                                                                    class="text-danger" style="font-size: 0.8rem">*</span></p>
+                                                                            <textarea cols="50" rows="4" formControlName="comment"></textarea>
+                                                                        </div>
+                                                                        <!-- <div class="col-lg-12 mb-10" style="display:grid;">
+                                                                            <p style="font-size: 0.7rem;margin-bottom: 0px;">Your Name<span class="text-danger"
+                                                                                    style="font-size: 0.8rem">*</span></p>
+                                                                            <input type="text" name="" id="">
+                                                                        </div> -->
+                                                                        <div class="col-lg-12 p-0" style="text-align: center;">
+                                                                            <h6 style="padding: 0px;"><span *ngIf="error1" style="color: red; font-size: 0.8rem;">{{error1}}</span>
+                                                                            </h6>
+                                                                            <button type="submit" class="lezada-button lezada-button--medium"
+                                                                                style="padding: 2px 12px;">Submit</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </form>
+                                
+                                                                <!--=======  End of comment form  =======-->
                                                             </div>
 
                                                             <!--=======  End of shop product reviews  =======-->
@@ -470,8 +510,8 @@
 
                                                 <!--=======  End of shop product description tab  =======-->
                                             </div>
-                                            <div class="row mt-10 align-items-center">
-                                                <div class="col-md-4  text-md-left mb-sm-1">
+                                            <div class="row mt-10 align-items-center" style="display:block;">
+                                                <div class="col-lg-12 col-md-4  text-md-left mb-sm-1">
                                                     <div class="post-tags">
                                                         <i class="ion-ios-pricetags"></i>
                                                         <ul class="tag-list" *ngFor="let tag of Tags">
@@ -482,7 +522,7 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-8  text-md-right mb-sm-1">
+                                                <div class="col-lg-12 col-md-8  text-md-left mb-sm-1">
                                                     <div class="post-share">
                                                         <span style="color: rgb(111, 111, 112);">Share this post:</span>
                                                         <ul style="padding-left: 0px;">
@@ -493,12 +533,6 @@
                                                                     url="currenturl" [description]="productname"
                                                                     class="pt-0 mb-2">
                                                                 </share-buttons>
-
-                                                                <span >
-                                                                    <a  (click)="shareinstaUrl(currenturl)">
-                                                                    <img src="assets/images/icons/INSTA.png"
-                                                                    style="height:47px; width:47px; margin-bottom: 3px;margin-left:5px; "></a>
-                                                                </span>
                                                             </li>
 
                                                         </ul>
@@ -510,7 +544,7 @@
 
                                         <div class="col-lg-12">
                                             <div class="section-title section-title--one text-center">
-                                                <h1>Products Used</h1>
+                                                <h4>Products Used</h4>
                                             </div>
                                         </div>
                                         <carousel style="height: 220px; z-index: unset;">
@@ -542,22 +576,72 @@
 
                                                 </div>
                                             </div>
-                                        </carousel>
-
-                                      
+                                        </carousel>                                     
                                     </div>
-
-
                                     <!--=======  End of content  =======-->
                                 </div>
                             </div>
 
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+					</div>
 
-        <!--=====  End of checkout page content  ======-->
-    </div>
+					<div class="col-lg-3 order-3 order-lg-3">
+
+						<!--=======  page sidebar  =======-->
+                        <div class="page-sidebar mt-30">
+							<!--=======  single sidebar widget  =======-->
+
+							<!--=======  single sidebar widget  =======-->
+							<div class="single-sidebar-widget mb-40">
+								<h2 class="single-sidebar-widget--title" style="margin-bottom: 20px;">All Recipe</h2>
+
+								<!--=======  widget post wrapper  =======-->
+
+								<div class="widget-post-wrapper" *ngIf="!allloader1"
+									style="max-height: 750px;overflow-y: auto;">
+									<div class="single-widget-post" *ngFor="let img of Blogs"
+										(click)="getblogdetail2(img.id)">
+										<div class="image">
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+												class="img-fluid" alt="">
+										</div>
+										<div class="content">
+											<h3 class="widget-post-title"><a>{{img.name}}</a></h3>
+											<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);">
+											</ngb-rating>
+											<p class="widget-post-date"></p>
+										</div>
+									</div>
+									<!--=======  End of single widget post  =======-->
+								</div>
+								<!-- lazyloading  -->
+								<div class="widget-post-wrapper" *ngIf="allloader1">
+									<div class="single-widgost">
+										<div class="imag" style="height: 120px; width: 160px;">
+											<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
+												 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"> </ngx-skeleton-loader>
+										</div>
+									</div>
+								</div>
+
+								<!--=======  End of widget post wrapper  =======-->
+							</div>
+
+
+							<!--=======  End of single sidebar widget  =======-->
+						</div>
+
+					
+
+						<!--=======  End of page sidebar  =======-->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!--=====  End of checkout page content  ======-->
+	</div>
+
+    
+ 
 </div>

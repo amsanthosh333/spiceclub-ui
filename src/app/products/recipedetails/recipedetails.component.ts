@@ -70,6 +70,9 @@ export class RecipedetailsComponent implements OnInit {
   relatedrec: any;
   videoo: any;
   videourl!: SafeResourceUrl;
+  allloader1: boolean=true;
+  Relatedrecipes: any;
+  loader2: boolean=true;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private route: ActivatedRoute, private request: RequestService,
      private modalService: NgbModal, private toastr: ToastrService, config: NgbRatingConfig,
@@ -100,6 +103,7 @@ export class RecipedetailsComponent implements OnInit {
     this.getrecipedetaill(this.id)
     this.getallrecipe(1);
     this.getallrecipecat();
+    this.getrecipesbycatg(this.id,1)
 
     this.comment = this.fb.group({
       rating: ['', [Validators.required]],
@@ -110,12 +114,13 @@ export class RecipedetailsComponent implements OnInit {
   }
   getallrecipe(page: any) {
     this.recipeloader = true;
-    this.imgloader = false;
+    this.imgloader = false; 
     this.request.getallrecipe(page).subscribe((res: any) => {
       this.Blogs = res.data;
       this.pagenation = res.meta
       this.pagess = this.pagenation.links
       this.recipeloader = false;
+      this.allloader1 =false
       setTimeout(() => {
         this.imgloader = true;
       }, 2000);
@@ -132,7 +137,12 @@ export class RecipedetailsComponent implements OnInit {
   }
   getrecipebycatg(id: any) {
     window.scroll(0, 0);
-    this.router.navigate(['recipe', id]);
+    this.router.navigate(['/recipe'],{ queryParams:{ category:id, page: 1} });
+  }
+  getblogdetail2(id: any) {
+    window.scroll(0, 0);
+    this.router.navigate(['recipedetails', id]);
+    
   }
   getrecipedetaill(id: any) {
     this.page1 = false;
@@ -168,7 +178,30 @@ export class RecipedetailsComponent implements OnInit {
       });
     this.getcommentsss();
   }
-
+  getrecipesbycatg(id:any,page:any){
+    console.log("getrecipebycatg");
+    this.recipeloader=true;
+    this.imgloader = false; 
+    this.request.getrecipebycat(id,page).subscribe((response: any) => {
+      console.log("getrecipebycatg response",response);
+      this.Relatedrecipes=response.data;
+      this.pagenation=response.meta   
+      this.pagess=this.pagenation.links;
+      this.recipeloader=false; 
+      this.loader2=false
+      // this.page1=true;
+      // this.page2=false;
+      // console.log("this.Allcat",this.Allcat);
+      let index = this.Allcat?.findIndex((x:any ) => x.id == id );  
+      // this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: page} });
+      setTimeout(() => {
+        this.imgloader = true;
+      }, 2000);
+    },
+    (error: any) => {
+      console.log("error",error);
+    });
+  }
   getcommentsss() {
     this.request.getcomments(this.blog_id).subscribe((response: any) => {
       this.Comments = response.data;

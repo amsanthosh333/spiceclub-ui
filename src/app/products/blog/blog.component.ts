@@ -164,6 +164,8 @@ export class BlogComponent implements OnInit {
     this.request.getallblogcat().subscribe((response: any) => {
       this.Allcat = response.data;
       this.firstblog= this.Allcat[0].bestof.data[0]
+      let index = this.Allcat?.findIndex((x: any) => x.id == this.blogid);
+      this.topItem = index
       console.log(" this.firstblog",  this.firstblog);
       this.imgloader = true
       this.loader2 = false
@@ -185,6 +187,8 @@ export class BlogComponent implements OnInit {
       this.page2 = false;
       let index = this.Allcat?.findIndex((x: any) => x.id == id);
       this.topItem = index
+      console.log("this.topItem",this.topItem);
+      
       // this.router.navigate(['/blog'],{ queryParams:{ category:this.blogid, page: page} });
       setTimeout(() => {
         this.imgloader = true;
@@ -358,6 +362,7 @@ export class BlogComponent implements OnInit {
   goback() {
     this.catblogs = false;
     this.topItem=-1
+    this.router.navigate(['/blog'])
 
   }
 }

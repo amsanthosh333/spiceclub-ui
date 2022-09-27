@@ -108,6 +108,7 @@ export class RecipeComponent implements OnInit {
     window.scroll(0,0);
     // this.rec_id = this.route.snapshot.paramMap.get('id');
     this.getallrecipecat();
+    
     this.activatedRoute.queryParams.subscribe((data2: Params) => {
     this.rec_id = data2['category']
     this.pagee = data2['page']
@@ -117,7 +118,7 @@ export class RecipeComponent implements OnInit {
       this.getallrecipe(this.pagee);
       }
       else { 
-        console.log("rec!else");  
+         console.log("rec!else");  
         this.getrecipebycatg(this.rec_id,this.pagee); 
       }
     })
@@ -137,6 +138,9 @@ export class RecipeComponent implements OnInit {
     this.imgloader = false;
     this.request.getallrecipe(page).subscribe((res:any)=>{
     this.Blogs=res.data;
+    // this.Blogs.push(this.Blogs[0])
+    // this.Blogs.push(this.Blogs[0])
+    // this.Blogs.push(this.Blogs[0])
     console.log(" this.recipe", this.Blogs);
     
     this.pagenation=res.meta   
@@ -158,7 +162,7 @@ getallrecipecat(){
     console.log("this.Allcat",this.Allcat);
     this.loader=false
     this.sideloader1=false;
-    this.firstblog= this.Allcat[0].bestof.data[0]
+    this.firstblog= this.Allcat[0].bestof?.data[0]
    
   },
   (error: any) => {
@@ -166,18 +170,22 @@ getallrecipecat(){
   });
 }
 getrecipebycatg(id:any,page:any){
+  console.log("getrecipebycatg");
   this.recipeloader=true;
   this.imgloader = false; 
   this.request.getrecipebycat(id,page).subscribe((response: any) => {
+    console.log("getrecipebycatg response",response);
     this.Blogs=response.data;
     this.pagenation=response.meta   
     this.pagess=this.pagenation.links;
     this.recipeloader=false; 
-    this.page1=true;
-    this.page2=false;
-     let index = this.Allcat?.findIndex((x:any ) => x.id == id );
+    this.loader1=false
+    // this.page1=true;
+    // this.page2=false;
+    // console.log("this.Allcat",this.Allcat);
+    let index = this.Allcat?.findIndex((x:any ) => x.id == id );
     this.topItem=index 
-    this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: page} });
+    // this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: page} });
     setTimeout(() => {
       this.imgloader = true;
     }, 2000);
@@ -345,7 +353,8 @@ search2(form:FormGroup){
       this.toastr.error(' Removed Successfully', '');
     }
     goback() {
-      this.catblogs = false;
+      // this.catblogs = false;
+      this.router.navigate(['/recipe']),
       this.topItem=-1
   
     }

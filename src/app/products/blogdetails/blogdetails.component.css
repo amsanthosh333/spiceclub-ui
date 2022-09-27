@@ -91,10 +91,13 @@ li a {
 
 .single-slider-post--sticky .post-title a {
   font-size: 25px;
+
 }
 
 .single-slider-post--sticky .post-title {
   padding: 0px;
+  margin-bottom: 0px;
+
 }
 
 .breadcrumb-list__item {

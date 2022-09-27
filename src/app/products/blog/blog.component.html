@@ -21,56 +21,7 @@
 	<div class="blog-page-wrapper">
 		<div class="container">
 			<div class="row">
-				<!-- <div class="col-lg-3 order-2 order-lg-1">
-					<div class="page-sidebar">
-						<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
-							<h5 class="single-sidebar-widget--title mb-0" (click)="goback()">Category </h5>
-							<ul class="single-sidebar-widget--list single-sidebar-widget--list--category"
-								style="padding-left: 0px;max-height: 250px;overflow-y: auto;margin-bottom: 5px;">
-								<li *ngFor="let cat of Allcat;let i=index">
-									<label style="display: flex;"> <a (click)="getblogbycatg2(cat.id,i)"
-											style="padding-top: 3px;"><input [checked]="topItem === i"
-												type="checkbox"></a>
-										<div class="catname"> <span>{{cat.name}}</span></div>
-									</label>
-								</li>
-							</ul>
-
-						</div>
-						<div class="single-sidebar-widget mb-20" *ngIf="loader">
-							<h2 class="single-sidebar-widget--title" style="margin-bottom: 10px;">Categories</h2>
-							<ngx-skeleton-loader count="5" animation="pulse"></ngx-skeleton-loader>
-						</div>
-
-						<div class="single-sidebar-widget mb-0">
-							<h2 class="single-sidebar-widget--title" style="margin-bottom: 10px;">All Blogs</h2>
-							<div class="widget-post-wrapper" *ngIf="!loader1"
-								style="max-height: 650px;overflow-y: auto;">
-								<div class="single-widget-post" *ngFor="let img of Blogs"
-									(click)="getblogdetail(img.id)">
-									<div class="image">
-										<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
-											class="img-fluid" alt="">
-									</div>
-									<div class="content">
-										<h3 class="widget-post-title"><a>{{img.name}}</a></h3>
-										<ngb-rating [rate]="img.rating" style="color: rgb(245, 153, 14);"></ngb-rating>
-										<p class="widget-post-date"></p>
-									</div>
-								</div>
-							</div>
-						
-							<div class="widget-post-wrapper" *ngIf="loader1">
-								<div class="single-widgost">
-									<div class="imag" style="height: 120px; width: 160px;">
-										<ngx-skeleton-loader count="3" [theme]="{'border-radius': '4px',  height: '100%',  width:'100%',
-											 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }"> </ngx-skeleton-loader>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div> -->
+				
 				<div class="col-lg-3 order-1 order-lg-1 order-md-12 sideshow1" id="sidecategories">
 					<div class="page-sidebar">
 						<div class="single-sidebar-widget  mt-15" *ngIf="!loader">
