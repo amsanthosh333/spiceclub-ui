@@ -219,7 +219,7 @@ quickorder(){
       this.toastr.success('Added to cart', '');
       this.sharedService.sendClickEvent();
       this.loadingg=false;
-      this.router.navigate(['cart']);
+      this.router.navigate(['checkout']);
     }
     else{
       this.spinner.hide();

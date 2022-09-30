@@ -791,7 +791,7 @@ button{
   position: relative;
 }
 #mainimg{
-  position: absolute; top: 0; bottom: 0; margin: auto;height: 100%;
+  position: absolute; top: 0; bottom: 0; margin: auto;
   /* border: 1px solid#e3e2e2; */
 }
 .shop-product__big-image-gallery-slider{

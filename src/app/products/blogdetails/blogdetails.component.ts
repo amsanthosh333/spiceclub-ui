@@ -56,6 +56,7 @@ export class BlogdetailsComponent implements OnInit {
   CatBlogs: any;
   loader2: boolean=true;
   prdcomment: boolean=true;
+  recipecat: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private route: ActivatedRoute,
     private toastr: ToastrService, config: NgbRatingConfig, private _location: Location) {
@@ -149,6 +150,8 @@ this.getblogbycatg2(this.id)
       this.blogdate = this.Peoduct.created_at.split(/[T ]/i, 1)[0];
       this.currentRatess = this.Peoduct.rating;
       this.productname = this.Peoduct.name;
+      this.recipecat= this.Peoduct.category
+      this.getblogbycatg2(this.recipecat)
       this.sideloader2 = false;
       this.allloader1 = false;
       this.recipeloader = false;

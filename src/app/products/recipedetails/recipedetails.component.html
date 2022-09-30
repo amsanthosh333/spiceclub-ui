@@ -54,11 +54,11 @@
 								<!--=======  widget post wrapper  =======-->
 
 								<div class="widget-post-wrapper" 
-									style="max-height: 750px;overflow-y: auto;"  *ngIf="!loader2">
+									style="max-height: 1250px;overflow-y: auto;"  *ngIf="!loader2">
 									<div class="single-widget-post" *ngFor="let img of Relatedrecipes"
 										(click)="getblogdetail2(img.id)">
 										<div class="image">
-											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.banner}}"
+											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
 												class="img-fluid" alt="">
 										</div>
 										<div class="content">
@@ -598,7 +598,7 @@
 								<!--=======  widget post wrapper  =======-->
 
 								<div class="widget-post-wrapper" *ngIf="!allloader1"
-									style="max-height: 750px;overflow-y: auto;">
+									style="max-height: 1250px;overflow-y: auto;">
 									<div class="single-widget-post" *ngFor="let img of Blogs"
 										(click)="getblogdetail2(img.id)">
 										<div class="image">

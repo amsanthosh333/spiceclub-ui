@@ -49,6 +49,7 @@
     "ngx-owl-carousel-o": "^7.0.1",
     "ngx-pagination": "^5.1.1",
     "ngx-perfect-scrollbar": "^10.1.1",
+    "ngx-pinch-zoom": "^2.6.2",
     "ngx-sharebuttons": "^10.0.0",
     "ngx-skeleton-loader": "^4.0.0",
     "ngx-slick-carousel": "^0.5.1",

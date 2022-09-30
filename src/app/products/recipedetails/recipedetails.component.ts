@@ -73,6 +73,7 @@ export class RecipedetailsComponent implements OnInit {
   allloader1: boolean=true;
   Relatedrecipes: any;
   loader2: boolean=true;
+  recipecat: any;
   constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private route: ActivatedRoute, private request: RequestService,
      private modalService: NgbModal, private toastr: ToastrService, config: NgbRatingConfig,
@@ -160,6 +161,8 @@ export class RecipedetailsComponent implements OnInit {
       this.Tags = this.Peoduct.tags;
       this.currentRatess = this.Peoduct.rating;
       this.productname = this.Peoduct.name;
+      this.recipecat= this.Peoduct.category
+      this.getrecipesbycatg(this.recipecat,1)
       this.relatedrec =this.Peoduct.products;
       console.log("this.relatedrec",response);
       

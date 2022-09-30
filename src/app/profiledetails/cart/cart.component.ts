@@ -159,7 +159,7 @@ export class CartComponent implements OnInit {
       this.cartitems=this.Cart.cart_items
       this.loader = false;
 
-      this.owneriid = this.Cart[0].owner_id;
+      this.owneriid = this.Cart[0]?.owner_id;
       // setTimeout(() => {
       //   this.loadingIndicator = false;
       // }, 500);

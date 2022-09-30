@@ -101,50 +101,7 @@
 
                             <!--=======  End of single widget product  =======-->
                         </div>
-                        <!-- lazyloading -->
-                        <div class="widget-product-wrapper" *ngIf="prodloader">
-                            <!--=======  single widget product  =======-->
-                            <div class="single-widget-product-wrapper">
-                                <div class="single-widget-product" style="padding-bottom: 17px;">
-                                    <div class="single-widget-product__image" style="height: 120px; width:80px">
-                                        <ngx-skeleton-loader count="1"
-                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                        </ngx-skeleton-loader>
-                                    </div>
-                                    <div class="single-widget-product__content">
-                                        <div class="single-widget-product__content__top">
-                                            <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-widget-product" style="padding-bottom: 17px;">
-                                    <div class="single-widget-product__image" style="height: 120px; width:80px">
-                                        <ngx-skeleton-loader count="1"
-                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                        </ngx-skeleton-loader>
-                                    </div>
-                                    <div class="single-widget-product__content">
-                                        <div class="single-widget-product__content__top">
-                                            <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="single-widget-product" style="padding-bottom: 17px;">
-                                    <div class="single-widget-product__image" style="height: 120px; width:80px">
-                                        <ngx-skeleton-loader count="1"
-                                            [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                        </ngx-skeleton-loader>
-                                    </div>
-                                    <div class="single-widget-product__content">
-                                        <div class="single-widget-product__content__top">
-                                            <ngx-skeleton-loader count="3" animation="pulse"></ngx-skeleton-loader>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!--=======  End of single widget product  =======-->
-                        </div>
+                       
 
                         <!--=======  End of widget product wrapper  =======-->
                     </div>
@@ -153,7 +110,7 @@
 
                 <div id="mainlistdiv" class="col-lg-9 order-1 order-lg-2 mb-md-60 mb-sm-10"  infinite-scroll
                 [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
-                <div class="row product-isotope shop-product-wrap four-column"  *ngIf="!prodloader">
+                <div class="row product-isotope shop-product-wrap four-column"  >
                     <!--=======  single product   =======-->
                     <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
                         *ngFor="let img of Newarrivals;let i=index">

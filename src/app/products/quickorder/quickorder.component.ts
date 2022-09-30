@@ -117,33 +117,7 @@ export class QuickorderComponent implements OnInit {
     window.scroll(0,0);
     this.subtitle="Ordered Products"
     this.noorder=true
-    this.viewQuickOrderPrd(); 
-    // this.id = this.route.snapshot.params['id']; 
-    // console.log("FLASH id",this.id);
-    // if(this.id){
-    //   console.log("iffffffffffffff");
-    //   if(this.id==0){
-    //        console.log("quickorderproducts");    
-    //        this.viewQuickOrderPrd();     
-    //        this.noorder=true
-    //        this.subtitle="Ordered Products"
-    //   }
-    //   else{
-    //     this.viewprodbyflash(this.id,1);
-    //     this.noorder=false
-    //     this.subtitle="Flash deal products"
-    //   }
-      
-    
-    // }
-    // else{
-    //   console.log("else");
-    //   this. getflashdealproducts();
-
-    // }
-    // this.viewbestsellpro()
-     
-   
+    this.viewQuickOrderPrd();   
   }
 
 
@@ -154,37 +128,22 @@ export class QuickorderComponent implements OnInit {
       this.pagenation=response.meta;  
       this.pagess=this.pagenation.links;
       this.prodloader=false
-      console.log("response",response);
-      console.log("allproduct",this.Allproducts);
     })
   }
   viewQuickOrderPrd(){
+    window.scroll(0,0);
     this.request.getallQuickorderproducts().subscribe((response: any) => {
       this.Allproducts=response.data;
+      window.scroll(0,0);
       this.prodloader=false
-      console.log("Allproducts",this.Allproducts);
+      this.pagenation = response.meta;
+        this.pagess = this.pagenation.links;
+    
       setTimeout(() => {
         this.imgloader = true;
       },500);
     });
   }
- 
-  // search1(form:FormGroup,page=1){
-    
-  //   let key =form.value.key
-    
-  //   console.log(this.key);
-  //   this.request.getbrandsearchprod(this.id,page,key).subscribe((response:any)=>{
-  //     this.Product=response.data;
-  //     this.pagenation=response.meta   
-  //     this.pagess=this.pagenation.links
-  //     console.log("response",response);
-  //     console.log("allbrandproduct",this.Product);
-  //   }, (error: any) => {
-  //     console.log("error",error);
-  //   });
-
-  //   }
 
     toggle(img:any,index:any): void {
       this.likeddd[index] = !this.likeddd[index];   
@@ -526,32 +485,35 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
 
   onScrollDown(eve: any) {
     console.log("scroll down");
-    // this.pagenum += 1
-    // console.log("scroll down", this.pagess);
-    // console.log("scroll pagenum", this.pagenum);
-    // const pageurl = this.pagess[this.pagenum]
-    // console.log("pageurl", pageurl);
-    // if (pageurl?.url !== null && pageurl !== undefined) {
-    //   this.pageload = false;
-    //   this.prodloader = true;
-    //   this.sidepoploader = true;
-    //   this.request.getpage(pageurl?.url).subscribe((response: any) => {
-    //     this.newpageProduct = response.data;
-    //     this.pagenation = response.meta;
-    //     this.pagess = this.pagenation.links;
-    //     console.log("this.pagess", this.pagess);
-    //     this.pagee = this.pagenation.current_page;
-    //     this.Product.push(...this.newpageProduct)
-    //     this.pageload = true;
-    //     this.prodloader = false;
-    //     this.sidepoploader = false;
-    //     console.log("this.Product", this.Product);
+    this.pagenum += 1
+    const pageurl = this.pagess[this.pagenum] 
+    console.log("pageurl",pageurl);
+    if (pageurl?.url !== null && pageurl !== undefined) {
+      this.pageload = false;
+      this.prodloader = true;
+      this.sidepoploader = true;
+      this.request.getpageAuth(pageurl?.url).subscribe((response: any) => {
+        this.newpageProduct = response.data;
+        console.log("this.newpageProduct",this.newpageProduct);
+        this.pagenation = response.meta;
+        this.pagess = this.pagenation.links;
+        this.pagee = this.pagenation.current_page;
+        this.Allproducts.push(...this.newpageProduct)
+        this.pageload = true;
+        this.prodloader = false;
+        this.sidepoploader = false;
+        for (var i = 0; i <= this.Allproducts.length; i++) {
+          this.likeddd.push(true); 
+        } 
+        for (var i = 0; i <= this.Allproducts.length; i++) {
+          this.likedd.push(false); 
+        }
 
-    //     setTimeout(() => {
-    //       this.imgloader = true;
-    //     }, 2000);
-    //   })
-    // }
+        setTimeout(() => {
+          this.imgloader = true;
+        }, 2000);
+      })
+    }
   }
 
   onScrollUp(ev: any) {

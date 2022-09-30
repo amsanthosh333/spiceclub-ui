@@ -252,8 +252,12 @@ export class NewarrivalComponent implements OnInit {
 
     viewnewarrival() {
       this.request.getnewarrivalpro().subscribe((response: any) => {
+        console.log("viewnewarrival response",response)
+        
         this.Newarrivals = response.data;
         this.prodloader=false;
+        this.pagenation = response.meta;
+          this.pagess = this.pagenation.links;
         setTimeout(() => {
           this.imgloader = true;
         }, 300);
@@ -527,32 +531,37 @@ export class NewarrivalComponent implements OnInit {
   
     onScrollDown(eve: any) {
       console.log("scroll down");
-      // this.pagenum += 1
-      // console.log("scroll down", this.pagess);
-      // console.log("scroll pagenum", this.pagenum);
-      // const pageurl = this.pagess[this.pagenum]
-      // console.log("pageurl", pageurl);
-      // if (pageurl?.url !== null && pageurl !== undefined) {
-      //   this.pageload = false;
-      //   this.prodloader = true;
-      //   this.sidepoploader = true;
-      //   this.request.getpage(pageurl?.url).subscribe((response: any) => {
-      //     this.newpageProduct = response.data;
-      //     this.pagenation = response.meta;
-      //     this.pagess = this.pagenation.links;
-      //     console.log("this.pagess", this.pagess);
-      //     this.pagee = this.pagenation.current_page;
-      //     this.Product.push(...this.newpageProduct)
-      //     this.pageload = true;
-      //     this.prodloader = false;
-      //     this.sidepoploader = false;
-      //     console.log("this.Product", this.Product);
-  
-      //     setTimeout(() => {
-      //       this.imgloader = true;
-      //     }, 2000);
-      //   })
-      // }
+      this.pagenum += 1
+      console.log("scroll down", this.pagess);
+      console.log("scroll pagenum", this.pagenum);
+      const pageurl = this.pagess[this.pagenum]
+      console.log("pageurl", pageurl);
+      if (pageurl?.url !== null && pageurl !== undefined) {
+        this.pageload = false;
+        this.prodloader = true;
+        this.sidepoploader = true;
+        this.request.getpage(pageurl?.url).subscribe((response: any) => {
+          this.newpageProduct = response.data;
+          this.pagenation = response.meta;
+          this.pagess = this.pagenation.links;
+          console.log("this.pagess", this.pagess);
+          this.pagee = this.pagenation.current_page;
+          this.Newarrivals.push(...this.newpageProduct)
+          this.pageload = true;
+          this.prodloader = false;
+          this.sidepoploader = false;
+          console.log("this.Product", this.Product);
+          for (var i = 0; i <= this.Newarrivals.length; i++) {
+            this.likeddd.push(true); 
+          } 
+          for (var i = 0; i <= this.Newarrivals.length; i++) {
+            this.likedd.push(false); 
+          }
+          setTimeout(() => {
+            this.imgloader = true;
+          }, 2000);
+        })
+      }
     }
   
     onScrollUp(ev: any) {

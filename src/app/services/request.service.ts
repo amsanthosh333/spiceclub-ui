@@ -641,6 +641,15 @@ export class RequestService {
   public getpage(link: any) {
     return this.http.get(link);
   }
+  public getpageAuth(link: any) {
+    const headers = new HttpHeaders()
+    .set('content-type', 'application/json')
+    .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
+  // return this.http.get(this.url, { headers: headers });
+    this.url = link + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    return this.http.get(this.url, { headers: headers });
+  }
+
   public getpage3(link: any, deliveryy: any, paymentt: any) {
     this.url = link + `&delivery_status=` + deliveryy + `&payment_status=` + paymentt;
     console.log(this.url);

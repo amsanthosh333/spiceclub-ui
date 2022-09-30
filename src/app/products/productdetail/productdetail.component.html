@@ -1,58 +1,3 @@
-<!-- 
-
-<div id="zoomC" style="background-image:url('../../../assets/images/backgrounds/bg-testimonials.png') "></div> -->
-<!-- 
-    
-<ngx-img-zoom
-    [zoomImageSrc]="zoomImageSrc"
-    [previewImageSrc]="previewImageSrc" 
-    [imgStyle]="'width:515px; height:515px; bottom:0;  left:0;  right:0;  top:0;  margin:0 auto; border:1px solid #dcdcdc;'" 
-    [resultStyle]="`width:824px; height:824px; background-repeat: no-repeat; z-index: 2; position:absolute;
-                   -webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-                    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); top: 0;left: 100%;`"
-    [lensStyle]="'width:155px; height:155px"
-    [enableZoom] = "enableZoom"
-    [containerStyle]=""
-></ngx-img-zoom> -->
-
-<!-- <ngx-image-zoom
-    [thumbImage]=myThumbnail
-    [fullImage]=myFullresImage
-    [magnification]="1"
-    [enableScrollZoom]="true"
-    [enableLens]="true"
-    [lensWidth]="200"
-></ngx-image-zoom> -->
-
-<!-- <lib-ngx-image-zoom
-    [thumbImage]=myThumbnail
-    [fullImage]=myFullresImage
-></lib-ngx-image-zoom> -->
-
-<!-- <div>
-    
-    <img
-      [imageZoom]="myFullresImage"
-      [src]="myThumbnail"
-      [scrollZoom]="true"
-      [lensWidth]="200"
-      [lensHeight]="200"
-      [lensBorder]="2"
-      [style.width.px]="200"
-      [style.height.px]="200"
-    />
-  </div> -->
-
-<!-- <ngx-image-zoom
-    [thumbImage]=myThumbnail
-    [fullImage]=myFullresImage
-    [magnification]="1"
-    [enableScrollZoom]="true"
-    [enableLens]="true"
-    [lensWidth]="200"
-></ngx-image-zoom> -->
-
-
 
 
 
@@ -162,11 +107,12 @@
                                     </div> -->
                                     <div class="shop-product__big-image-gallery-slider" *ngIf=!photoloader >
                                         <div class="single-image"  
-                                         style=" overflow : hidden;  position: relative " #container>
-                                            <img src="{{selectedimage}}" id="mainimg" class="img-fluid" alt="" (click)="onClick($event)"
-                                            (mousedown)="onMouseDown($event)" (mouseup)="onMouseUp($event)" (mousemove)="mouseMoveHandler($event)"
-                                            #img (mouseleave)="onLeave()"
+                                         style=" overflow : hidden;  position: relative " #container> 
+                                            <img  src="{{selectedimage}}" id="mainimg" class="img-fluid" alt="" (click)="onClick($event)"
+                                          (mousedown)="onMouseDown($event)" (mousemove)="mouseMoveHandler($event)" 
+                                            #img (mouseleave)="onLeave()" (touchstart)="touchstart($event)" (touchmove)="touchmove($event)"
                                             style="cursor : zoom-in; width:100%;max-width: 300%; transition: all .5s; position: absolute ">
+                                        
                                         </div>
                                     </div>
 

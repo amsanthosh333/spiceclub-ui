@@ -29,6 +29,7 @@ export class ProductdetailComponent implements OnInit {
   name = 'Angular ' + VERSION.major;
   isZoomed = false;
   pos = { top: 0, left: 0, x: 0, y: 0 };
+  posM = { top: 0, left: 0, x: 0, y: 0 };
 
   @ViewChild('container') 'container': ElementRef;
   @ViewChild('img') 'img': ElementRef;
@@ -168,6 +169,7 @@ export class ProductdetailComponent implements OnInit {
   previewImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg";
   zoomImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
 
+  
 
   constructor(private router: Router, private request: RequestService,
     private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
@@ -223,74 +225,104 @@ export class ProductdetailComponent implements OnInit {
     if (this.isZoomed) {
       this.container.nativeElement.style.overflow = 'hidden';
       this.img.nativeElement.style.width = '300%';  // adjust max with in html if need changes
-      this.img.nativeElement.style.height = '300%';  
+     this.img.nativeElement.style.height = '230%';   
       this.img.nativeElement.style.cursor = 'zoom-out';
       this.img.nativeElement.style.cursor = 'zoom-out';
-      this.img.nativeElement.style.left = `-${e.clientX}`;
-      this.img.nativeElement.style.top = `-${e.clientY}`;
+       this.img.nativeElement.style.left = `-${e.clientX}`;
+       this.img.nativeElement.style.top = `260px`;   
     } else {
       this.container.nativeElement.style.overflow = 'hidden';
       this.img.nativeElement.style.width = '100%';
       this.img.nativeElement.style.height = '100%';
       this.img.nativeElement.style.cursor = 'zoom-in';
+      this.img.nativeElement.style.top = `0px`;  
+      
     }
     // this.pos = {
     //   // The current scroll
-    //   left:100,
-    //   top: 100,
+    //   left: this.container.nativeElement.scrollLeft,
+    //   top: this.container.nativeElement.scrollTop,
+     
     //   // Get the current mouse position
     //   x: e.clientX,
     //   y: e.clientY,
     // };
 
-    const dx = (e.clientX - this.pos.x) * 3;
-    const dy = (e.clientY - this.pos.y) * 6;
+    // const dx = (e.clientX - this.pos.x) * 3;
+    // const dy = (e.clientY - this.pos.y) * 6;
 
-    // Scroll the element
-    this.container.nativeElement.scrollTop = this.pos.top - dy;
-    this.container.nativeElement.scrollLeft = this.pos.left - dx;
+    // // Scroll the element
+    // this.container.nativeElement.scrollTop = this.pos.top - dy;
+    // this.container.nativeElement.scrollLeft = this.pos.left - dx;
 
   }
-  onMouseDown(e: { clientX: any; clientY: any; }) {
+  onMouseDown(e: any) {
     console.log("e");
     
     this.pos = {
-      // The current scroll
+   
       left: this.container.nativeElement.scrollLeft,
       top: this.container.nativeElement.scrollTop,
-      // Get the current mouse position
+ 
       x: e.clientX,
       y: e.clientY
     };
   }
-  onMouseUp(e: { clientX: any; clientY: any; }) {
+  onMouseUp(e:any) {
     console.log("eup");
     this.pos = {
       // The current scroll
       left: this.container.nativeElement.scrollLeft,
       top: this.container.nativeElement.scrollTop,
+     
       // Get the current mouse position
       x: e.clientX,
       y: e.clientY,
     };
   }
 
-  mouseMoveHandler(e: { clientX: number; clientY: number; }) {
+  mouseMoveHandler(e:any) {
+    console.log("mouseMoveHandler",e);
     // How far the mouse has been moved
     const dx = (e.clientX - this.pos.x) * 3;
-    const dy = (e.clientY - this.pos.y) * 6;
+    const dy = (e.clientY - this.pos.y) * 10;
+
 
     // Scroll the element
     this.container.nativeElement.scrollTop = this.pos.top - dy;
     this.container.nativeElement.scrollLeft = this.pos.left - dx;
+  }
+  touchstart(e: any) {
+    this.posM = { 
+      left: this.container.nativeElement.scrollLeft,
+      top: this.container.nativeElement.scrollTop,
+ 
+      x: e.changedTouches[0].clientX,
+      y: e.changedTouches[0].clientY
+    };
+  }
+
+  touchmove(e:any){
+    console.log("touchmove",e);
+    
+    console.log("e.changedTouches.clientX",e.changedTouches[0].clientX);
+
+    const dx = (e.changedTouches[0].clientX - this.posM.x) * 3;
+    const dy = (e.changedTouches[0].clientY - this.posM.y) * 10;
+
+    this.container.nativeElement.scrollTop = this.posM.top - dy;
+    this.container.nativeElement.scrollLeft = this.posM.left - dx;
   }
 
   onLeave() {
     this.container.nativeElement.style.overflow = 'hidden';
     this.img.nativeElement.style.transform = 'scale(1)';
     this.img.nativeElement.style.cursor = 'zoom-in';
+      this.img.nativeElement.style.width = '100%';
+      this.img.nativeElement.style.height = '100%';
+      this.img.nativeElement.style.cursor = 'zoom-in';
+      this.img.nativeElement.style.top = `0px`; 
   }
-
 
   toggleVideo() {
     this.videoplayer.nativeElement.play();

@@ -149,9 +149,16 @@ export class BestsellingComponent implements OnInit {
          
     viewfuturedpro(){
       this.imgloader = false;
-      this.request.getbestsellpro().subscribe((response: any) => {
+      this.request.getbestsellpro().subscribe((response: any) => {    
         this.Bestsellpro=response.data;
         this.prodloader=false;  
+
+        for (var i = 0; i <= this.Bestsellpro.length; i++) {
+          this.likeddd.push(true); 
+        } 
+        for (var i = 0; i <= this.Bestsellpro.length; i++) {
+          this.likedd.push(false); 
+        }
         setTimeout(() => {
           this.imgloader = true;
         }, 500);
