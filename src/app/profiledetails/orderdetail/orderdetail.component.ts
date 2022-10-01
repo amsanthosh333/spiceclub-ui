@@ -255,10 +255,10 @@ paynow1(){
 }
 
 billdesk(edata1: any) {
-  console.log("billdest called");
+  console.log("billdest called",edata1 );
+
   this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,"repayment").subscribe(
     (response: any) => {
-      
       response.json()
       console.log("billdesktype", response.json());
       console.log("billresponse", response);

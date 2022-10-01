@@ -201,6 +201,7 @@ export class OrdersComponent implements OnInit {
   }
 
   paynow1(order_detail:any){
+    console.log("razorpay1 retry response", order_detail);
     let edata1 = {
       combined_order_id: order_detail.combined_order_id,
       payment_type:"cart_payment"
@@ -214,10 +215,11 @@ export class OrdersComponent implements OnInit {
         let edata1 = {
           payment_type: "cart_payment",
           combined_order_id: order_detail.combined_order_id,
-          amount: order_detail.grand_total,
+          amount: order_detail.grand_totalrepay,
           user_id: this.userid,
         }
-        this.billdesk(edata1)
+        console.log("edata1", edata1);
+         this.billdesk(edata1)
       }
       else{
         this.toastr.info('',response.message);
@@ -227,9 +229,12 @@ export class OrdersComponent implements OnInit {
   }
   
   billdesk(edata1: any) {
+    console.log("billdest called",edata1);
     this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,"repayment").subscribe(
-      (response: any) => {   
+      (response: any) => {
         response.json()
+        console.log("billdesktype", response.json());
+        console.log("billresponse", response);
       },
     );
   }
