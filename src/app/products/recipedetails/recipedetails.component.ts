@@ -8,6 +8,8 @@ import { RequestService } from 'src/app/services/request.service';
 import { Location } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
+import { SharedService } from 'src/app/services/shared.service'
+import { LoginComponent } from 'src/app/auth/login/login.component';
 @Component({
   selector: 'app-recipedetails',
   templateUrl: './recipedetails.component.html',
@@ -74,7 +76,25 @@ export class RecipedetailsComponent implements OnInit {
   Relatedrecipes: any;
   loader2: boolean=true;
   recipecat: any;
-  constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
+  Bestsellpro: any;
+  varient_value: any;
+  selectedvar: any;
+  public quantityarray: any[] = [];
+  showaddbtn: any;
+  currentpackagevalue: any;
+  totalqty: any;
+  edata: any;
+  buyertypeid: any;
+  loader6: boolean=true;
+  likedd = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  likeddd = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  iindex: any;
+  // img: any;
+  likesss = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
+  likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
+  imgloader2: boolean=true;
+
+  constructor(private sharedService: SharedService,private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private route: ActivatedRoute, private request: RequestService,
      private modalService: NgbModal, private toastr: ToastrService, config: NgbRatingConfig,
       private _location: Location,public sanitizer:DomSanitizer) {
@@ -90,6 +110,7 @@ export class RecipedetailsComponent implements OnInit {
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
+    this.buyertypeid = this.currentdetail.user?.buyertypeid;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
 
@@ -105,6 +126,7 @@ export class RecipedetailsComponent implements OnInit {
     this.getallrecipe(1);
     this.getallrecipecat();
     this.getrecipesbycatg(this.id,1)
+    this.viewfuturedpro()
 
     this.comment = this.fb.group({
       rating: ['', [Validators.required]],
@@ -113,6 +135,23 @@ export class RecipedetailsComponent implements OnInit {
     });
     this.currenturl = this.router.url
   }
+
+  viewfuturedpro(){
+  
+    this.request.getbestsellpro().subscribe((response: any) => { 
+
+      this.Bestsellpro=response.data.slice(0,4);  
+      this.loader6=false
+    
+      console.log("Bestsellpro",this.Bestsellpro);
+      setTimeout(() => {
+        this.imgloader2 = false;
+      }, 1000);
+
+    })
+
+  }
+
   getallrecipe(page: any) {
     this.recipeloader = true;
     this.imgloader = false; 
@@ -167,7 +206,8 @@ export class RecipedetailsComponent implements OnInit {
       console.log("this.relatedrec",response);
       
       this.videoo =this.Peoduct.video_link;
-      this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);     
+      this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);   
+      console.log("tthis.videourl",this.videourl);  
       this.sideloader2 = false;
 
       this.discrloading = false;
@@ -267,10 +307,194 @@ export class RecipedetailsComponent implements OnInit {
 
   }
 
+
   viewproductrow2(id: any) {
     // window.scroll(0, 0);
     // console.log("viewprod2", id);
   this.router.navigate(['/productdetail', id])
+  }
+  deleteRecord(id: any) {
+    this.request.deletewishproud2(id).subscribe((response: any) => {
+      if (response.message == "Product is removed from wishlist") {
+
+        this.deleteRecordSuccess();
+        this.sharedService.sendWishlistEvent();
+      }
+      else {
+        this.toastr.error(response.message);
+      }
+    }, (error: any) => {
+      console.log(error);
+    });
+  }
+  proddetail(id:any){
+    window.scroll(0,0);
+    this.router.navigate(['productdetail', id]);
+  }
+
+  openlogin() {
+    this.modalService.open(LoginComponent, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'md',
+    });
+  }
+
+  addtowishlist(prd_id: any) {
+    if (this.userid == 0) {
+      this.openlogin()
+    }
+    else {
+      let edata4 = {
+        user_id: this.userid,
+        product_id: prd_id
+      }
+      this.request.addtowishlist(edata4).subscribe((res: any) => {
+        if (res.message == 'Product is successfully added to your wishlist') {
+          // this.iswishlist(prd_id)
+          this.addRecordSuccess();
+          this.sharedService.sendWishlistEvent();
+        }
+        else {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        console.log("error", error);
+
+      });
+    }
+  }
+
+  toggle1(img: any, index: any): void {
+    console.log(this.userid);
+
+    this.likesss[index] = !this.likesss[index];
+    if (this.likesss[index] == true) {
+      this.addtowishlist(img.id);
+    }
+    else if (this.likesss[index] == false) {
+      this.deleteRecord(img.id);
+    }
+  }
+  toggledelete1(img: any, index: any): void {
+
+    if (this.userid !== 0) {
+      this.likess[index] = !this.likess[index];
+
+      if (this.likess[index] == true) {
+        this.addtowishlist(img.id);
+      }
+      else if (this.likedd[index] == false) {
+        this.deleteRecord(img.id);
+      }
+    }
+    else {
+      this.openlogin()
+    }
+  }
+
+  qtyChange(event: any, i: any, img: any) {
+
+    if (this.quantityarray.length == 0) {
+      this.quantityarray.push({ "id": img.id, "value": event.target.value });
+    }
+    else {
+      console.log(" this.quantityarray", this.quantityarray);
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+      console.log("obj", index);
+      if (index > -1) {
+        console.log("if", index);
+
+        this.quantityarray[index].value = event.target.value;
+      }
+      else {
+        console.log("else", index);
+        this.quantityarray.push({ "id": img.id, "value": event.target.value });
+      }
+
+    }
+
+    console.log("this.quantityarray", this.quantityarray);
+  }
+  prodselectvar(weight: any, i: any, id: any, varient: any) {
+    this.selectedvar = weight.replace(/\s/g, "");
+    this.showaddbtn = i
+    if (varient.length > 1) {
+      this.currentpackagevalue = varient[1].options[0]
+    }
+    this.request.addvarientfromdetail(id, weight, this.currentpackagevalue).subscribe((res: any) => {
+      console.log("selectvar res", res);
+      this.Bestsellpro[i].stroked_price = res.stroked_price
+      this.Bestsellpro[i].main_price = res.price_string
+      this.Bestsellpro[i].discount_amount = res.discount_amount;
+      this.Bestsellpro[i].discount_percentage = res.discount_percentage;
+    }, (error: any) => {
+      console.log("error", error);
+    });
+  }
+  prodaddtocart(img: any) {
+    // console.log("img", img);
+    // if (this.userid == 0) {
+    //   this.openlogin()
+    // }
+    // else {
+
+      if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
+        console.log("empty");
+        this.varient_value = ''
+      }
+      else if (img.variants[0]?.options?.length == 1) {
+        this.varient_value = img.variants[0]?.options[0];
+      }
+      else {
+        this.varient_value = this.selectedvar;
+      }
+
+
+      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+      if (index > -1) {
+        this.totalqty = this.quantityarray[index].value;
+      }
+      else {
+        this.totalqty = 1
+      }
+
+      if (img.variants?.length > 1) {
+        this.currentpackagevalue = img?.variants[1]?.options[0]
+        this.edata = {
+          id: img.id,
+          variant: (this.varient_value?.replace(/\s/g, "") + "-" + this.currentpackagevalue.replace(/\s/g, "")),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+      }
+      else {
+        this.edata = {
+          id: img.id,
+          variant: this.varient_value?.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: this.totalqty,
+          buyertype: this.buyertypeid,
+        }
+      }
+      this.request.addtocart(this.edata).subscribe((res: any) => {
+        console.log("resssssssssssssss", res);
+        if (res.result == true) {
+          this.addRecordSuccess();
+          this.modalService.dismissAll();
+          this.sharedService.sendClickEvent();
+        }
+        else {
+          this.toastr.info(res.message);
+        }
+
+      },
+        (error: any) => {
+          this.toastr.error(error);
+          console.log("error", error);
+
+        });
+    // }
   }
 
   addRecordSuccess() {

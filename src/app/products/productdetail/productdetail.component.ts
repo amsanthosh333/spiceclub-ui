@@ -168,6 +168,7 @@ export class ProductdetailComponent implements OnInit {
   enableZoom: Boolean = true;
   previewImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg";
   zoomImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
+  Alsoboughtprod: any;
 
   
 
@@ -585,7 +586,19 @@ export class ProductdetailComponent implements OnInit {
       this.Relatedprod = response.data;
       this.loader6 = false;
       this.viewbulkdiscount(this.product_id);
-      this.viewdiscount(this.product_id)
+      this.viewdiscount(this.product_id);
+      this.alsobought();
+    },
+    
+      (error: any) => {
+        console.log(error);
+      });
+  }
+  alsobought(){
+
+    this.request.getalsoboughtprod(this.product_id).subscribe((response: any) => {
+      console.log("getalsoboughtprod", response);
+      this.Alsoboughtprod = response.data;
     },
       (error: any) => {
         console.log(error);

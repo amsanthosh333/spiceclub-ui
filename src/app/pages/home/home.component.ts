@@ -16,6 +16,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { LoginComponent } from 'src/app/auth/login/login.component';
 import { SignupComponent } from 'src/app/auth/signup/signup.component';
 import { Pipe, PipeTransform } from "@angular/core";
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 
 declare var jQuery: any;
 @Pipe({
@@ -114,8 +115,9 @@ export class HomeComponent implements OnInit {
   loadingg: boolean = true;
   myCompOneObj: any;
   Todaysoffer: any;
+ 
 
-
+  videourl!: SafeResourceUrl;
   photooobann: any = [
     { image: 'assets/images/banners/ban1.jpeg' },
     { image: 'assets/images/banners/ban2.jpeg' },
@@ -230,10 +232,11 @@ export class HomeComponent implements OnInit {
   flashScroll: boolean=true;
   bestsellScroll: boolean=true;
   banneronScroll: boolean=true;
+  videourl1!: SafeResourceUrl;
   
 
 
-  constructor(private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
+  constructor(public sanitizer:DomSanitizer,private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private toastr: ToastrService, private modalService: NgbModal,
     config: NgbRatingConfig, private _location: Location, private sharedService: SharedService, private authService: AuthService) {
        window.scroll(0, 0) 
@@ -279,7 +282,7 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit(): void {
-
+    this.videourl1 = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/Dm9DfT0Jcbw");  
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
     this.viewdata();
     // this.viewsubscribebanner();

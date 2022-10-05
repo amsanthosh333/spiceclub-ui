@@ -712,6 +712,12 @@ export class RequestService {
     this.url = `${this.endPoint1}/products/related/` + id + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     return this.http.get(this.url);
   }
+
+  public getalsoboughtprod(id: string) {
+    this.url = `${this.endPoint1}/products/boughtpro/` + id + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
+    return this.http.get(this.url);
+  }
+
   public addvarient(id: string, varient: any,) {
     this.url = `${this.endPoint1}/products/variant/price?id=` + id + `&color=` + `&variants=` + varient + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     console.log("varient url", this.url);

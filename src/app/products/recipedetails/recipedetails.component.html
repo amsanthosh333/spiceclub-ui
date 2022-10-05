@@ -57,6 +57,7 @@
 									style="max-height: 1250px;overflow-y: auto;"  *ngIf="!loader2">
 									<div class="single-widget-post" *ngFor="let img of Relatedrecipes"
 										(click)="getblogdetail2(img.id)">
+                                         
 										<div class="image">
 											<img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
 												class="img-fluid" alt="">
@@ -145,42 +146,13 @@
                                         </div>
 
                                     </div>
-                                    <div id="lazyy" *ngIf="discrloading">
-                                        <ngx-skeleton-loader count="1" [theme]="{ 
-                                        'border-radius': '5px',
-                                         height: '35px',
-                                         width: '80%',
-                                        'background-color': '##b9b8b8',
-                                        border: '1px solid white'
-                                      }" animation="pulse"></ngx-skeleton-loader>
-                                       
+                                
+                                    <div class="videoo mt-10" style="text-align: center;">
+                                        <iframe width="100%" height="350" [src]="videourl"
+                                            title="YouTube video player" frameborder="0"
+                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                            allowfullscreen></iframe>
                                     </div>
-                                    <div class="single-slider-post__image single-slider-post--sticky__image mb-30"
-                                        style="display: block;
-                                    margin-left: auto;
-                                    margin-right: auto;" *ngIf="!photoloader1">
-                                        <a id="iimg">
-                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{photoss[0].path}}"
-                                                style="width:100%;height: -webkit-fill-available;object-fit: cover; "
-                                                class="img-fluid" alt="">
-                                        </a>
-                                    </div>
-
-                                    <!--=======  End of image  =======-->
-                                    <div class="single-slider-post__image single-slider-post--sticky__image mb-30"
-                                        style="display: block;
-                                    margin-left: auto;
-                                    margin-right: auto;" *ngIf="photoloader1">
-                                        <div id="rev_slider_4_1_wrapper"
-                                            class="rev_slider_wrapper fullwidthbanner-container" data-alias="homepage-6"
-                                            data-source="gallery">
-                                            <ngx-skeleton-loader count="1"
-                                                [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
-                                            </ngx-skeleton-loader>
-                                        </div>
-
-                                    </div>
-                                    <!--=======  content  =======-->
 
                                     <div class="single-slider-post__content single-slider-post--sticky__content">
                                         <!--=======  post category  =======-->
@@ -214,6 +186,9 @@
                                                             <a class="nav-item nav-link active" id="product-tab-1"
                                                                 data-toggle="tab" href="#product-series-1" role="tab"
                                                                 aria-selected="true">Guidance</a>
+                                                            <a class="nav-item nav-link" id="product-tab-4"
+                                                                data-toggle="tab" href="#product-series-4" role="tab"
+                                                                aria-selected="false">Product Usage</a>
                                                             <a class="nav-item nav-link" id="product-tab-2"
                                                                 data-toggle="tab" href="#product-series-2" role="tab"
                                                                 aria-selected="false">Nutritional Facts</a>
@@ -313,21 +288,58 @@
                                                                         border: '1px solid white'
                                                                       }" animation="pulse"></ngx-skeleton-loader>
                                                                     </div>
-                                                                </div>
-                                                                <div class="videoo mt-10" style="text-align: center;">
-                                                                    <iframe width="427" height="309" [src]="videourl"
-                                                                        title="YouTube video player" frameborder="0"
-                                                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                                                        allowfullscreen></iframe>
-                                                                </div>
-<!--            
-                                                                <iframe width="420" height="315"
-                                                                    src="https://www.youtube.com/embed/Dm9DfT0Jcbw">
-                                                                </iframe> -->
+                                                                </div>                                     
                                                             </div>
 
                                                             <!--=======  End of shop product long description  =======-->
                                                         </div>
+
+                                                        <div class="tab-pane fade" id="product-series-4" role="tabpanel"
+                                                        aria-labelledby="product-tab-4">
+                                                        <!--=======  shop product additional information  =======-->
+
+                                                        <div class="shop-product__additional-info">
+
+                                                            <!-- <h2 class="comment-title mb-30">Nutritional Facts</h2> -->
+                                                            <table class="shop-attributes"
+                                                                style="text-align: start; margin: 0px;">
+                                                                <tbody class="ordernowtable">
+                                                                    <tr class="tableheader">
+                                                                        <th>Products</th>
+                                                                        <td>For 3 members</td>
+                                                                        <td>For 5 members</td>
+                                                                        <td>For 10 members</td>
+                                                                        <td style="width:23% ;">For 10 + members</td>
+                                                                    </tr>
+                                                                    <tr *ngFor="let img of Bestsellpro;let i = index" class="tabledatas">
+                                                                        <th style="font-size: large;text-align: center;" ><img
+                                                                            class="prodimgicon"
+                                                                            src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}">
+                                                                       </th>
+                                                                        <td>-</td>
+                                                                        <td>-</td>
+                                                                        <td>-</td>
+                                                                        <td *ngIf="i === 0" [attr.rowspan]="Bestsellpro.length">Increase the quantity based on mentioned weight calculation </td>
+                                                                    </tr>
+                                                                    <tr class="orderbuttons" >
+                                                                        <th></th>
+                                                                        <td><button>Order now</button></td>
+                                                                        <td><button>Order now</button></td>
+                                                                        <td><button>Order now</button></td>
+                                                                        <td><button>Order now</button></td>
+                                                                    </tr>
+
+
+                                                                
+
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                        <!--=======  End of shop product additional information  =======-->
+                                                    </div>
+
                                                         <div class="tab-pane fade" id="product-series-2" role="tabpanel"
                                                             aria-labelledby="product-tab-2">
                                                             <!--=======  shop product additional information  =======-->
@@ -511,72 +523,250 @@
                                                 <!--=======  End of shop product description tab  =======-->
                                             </div>
                                             <div class="row mt-10 align-items-center" style="display:block;">
-                                                <div class="col-lg-12 col-md-4  text-md-left mb-sm-1">
-                                                    <div class="post-tags">
-                                                        <i class="ion-ios-pricetags"></i>
-                                                        <ul class="tag-list" *ngFor="let tag of Tags">
-                                                            <li style="padding: 0; color: rgb(111, 111, 112);">
-                                                                <a>{{tag}}</a>,
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                <div id="lazyy" *ngIf="discrloading">
+                                                    <ngx-skeleton-loader count="1" [theme]="{ 
+                                                    'border-radius': '5px',
+                                                     height: '35px',
+                                                     width: '80%',
+                                                    'background-color': '##b9b8b8',
+                                                    border: '1px solid white'
+                                                  }" animation="pulse"></ngx-skeleton-loader>
+                                                   
                                                 </div>
+                                                <div class="single-slider-post__image single-slider-post--sticky__image mt-20 mb-30"
+                                                style="display: block;
+                                            margin-left: auto;
+                                            margin-right: auto;" *ngIf="!photoloader1">
+                                                <a id="iimg">
+                                                    <img src="https://neophroncrm.com/spiceclubnew/public/{{photoss[0].path}}"
+                                                        style="width:100%;height: -webkit-fill-available;object-fit: cover; "
+                                                        class="img-fluid" alt="">
+                                                </a>
+                                            </div>
 
-                                                <div class="col-lg-12 col-md-8  text-md-left mb-sm-1">
-                                                    <div class="post-share">
-                                                        <span style="color: rgb(111, 111, 112);">Share this post:</span>
-                                                        <ul style="padding-left: 0px;">
-                                                            <li style="display:inline-block;">
-                                                                <share-buttons theme="circles-dark"
-                                                                    [include]="['facebook','whatsapp', 'email','twitter', 'telegram','copy' ]"
-                                                                    [showIcon]="true" [showText]="false"
-                                                                    url="currenturl" [description]="productname"
-                                                                    class="pt-0 mb-2">
-                                                                </share-buttons>
-                                                            </li>
-
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                
                                             </div>
                                         </div>
                                         <!--=======  End of single blog post section  =======-->
 
-                                        <div class="col-lg-12">
-                                            <div class="section-title section-title--one text-center">
-                                                <h4>Products Used</h4>
+                                   
+
+                                             <!-- customer also likes -->
+            <div class="questions row"  >
+                <h5>Products Used</h5>
+
+                <div class="carousall">
+                    <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
+                        <div class="carousel-cell" *ngFor="let img of Bestsellpro;let i = index">
+                            <div class="single-product"
+                                style="padding-left: 20px; overflow: hidden; padding-right: 20px;background-color: whitesmoke;padding-bottom:3px;">
+                                <div class="single-product__image pt-10">
+                                    <div class="imglaz" style="position: relative;overflow: hidden;">
+                                        <ngx-skeleton-loader count="1" *ngIf="imgloader2"
+                                            [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                        </ngx-skeleton-loader>
+                                        <div *ngIf="img.iscertificated==1" class="like-button"
+                                            style="text-align: end; margin-right: 20px;">
+                                            <a
+                                                style=" position: absolute;  z-index: 2; color: rgb(97, 216, 0); position: absolute;">
+                                                <img src="assets/images/icons/green2.jpg" class="img-g"
+                                                    style="height: 15px;" alt=""></a>
+                                        </div>
+                                        <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg"
+                                            *ngIf="!imgloader2">
+                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
+                                                class="img-fluid" alt="">
+                                        </a>
+                                        <span id="offtag2" *ngIf="img.deal_of_day!=0">Deal of the day</span>
+                                        <span id="offtag2" *ngIf="img.deal_of_month!=0">Deal of the month</span>
+                                        <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>
+                                    </div>
+                                    <div class="single-product__floating-badges" style="margin-left: 0px;">
+                                        <span class="hot"
+                                            *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                        <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
+                                    </div>
+                                    <div class="single-product__floating-icons">
+                                        <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
+                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                data-tippy-delay="50" data-tippy-arrow="true"
+                                                data-tippy-theme="sharpborder" data-tippy-placement="left">
+                                                <i [ngClass]="{'ion-android-favorite':likesss[i]===true, 'ion-android-favorite-outline':likesss[i]===false}"
+                                                    (click)='toggle1(img,i)'
+                                                    style="color: rgb(214, 5, 5);"></i></a></span>
+
+                                        <span class="wishlist" *ngIf="(img.wishlist==0)"><a data-tippy="Add to wishlist"
+                                                data-tippy-inertia="true" data-tippy-animation="shift-away"
+                                                data-tippy-delay="50" data-tippy-arrow="true"
+                                                data-tippy-theme="sharpborder" data-tippy-placement="left">
+                                                <i [ngClass]="{'ion-android-favorite':likess[i]===true, 'ion-android-favorite-outline':likess[i]===false}"
+                                                    (click)='toggledelete1(img,i)'
+                                                    style="color: rgb(214, 5, 5);"></i></a></span>
+                                    </div>
+                                </div>
+
+                                <div class="single-product__content" (click)=" proddetail(img.id)">
+                                    <div class="title">
+                                        <h3 style="padding: 0px;"> <a style="    line-height: 1.6rem;
+                                            overflow: hidden;
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 2;
+                                            -webkit-box-orient: vertical;
+                                            max-height: 3.2rem;
+                                            height: 3.2rem;
+                                            margin-bottom: 2px;
+                                            font-weight: 600;
+                                            color: #4a4a4a;
+                                            font-size: 13px;">{{img.name}}</a> </h3>
+                                        <a id="vieww"
+                                            style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
+                                            Details</a>
+                                    </div>
+
+                                    <div class="price" style="margin-top: -4px;">
+                                        <span *ngIf="img?.stroked_price!==img?.main_price"
+                                            class="main-price discounted">{{img.stroked_price}}</span>
+                                        <span class="discounted-price">{{img.main_price}} </span>
+                                        <a class="yousave" *ngIf="img.has_discount==true">
+                                            You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
+                                    </div>
+                                    <!-- <div class="pri" style="text-align: center;">
+                                        <span class="discounted-price" *ngFor="let b of img?.usp;let i =index"
+                                            style="color:#363636;font-size: 0.65rem; margin-right: 5px;"><span
+                                                *ngIf="i<2">{{b.name}}</span></span>
+                                    </div> -->
+                                </div>
+
+                                <!--=======  End of single product content   =======-->
+                                <div class="row" id="addcartbtn"
+                                    *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
+                                    <div class="col-6 " style="padding-left:5px ; padding-right: 5px;">
+                                        <input (change)="qtyChange($event,i,img)" type="number" id="quantity"
+                                            name="quantity" value="1" style="width:100%;text-align: center;">
+                                    </div>
+                                    <div class="col-6 p-0">
+                                        <button type="button" id="addcarrtbtn" class="btn btn-primary"
+                                            (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
+                                    </div>
+                                </div>
+
+                                <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
+                                    <div class="col-12 ">
+                                        <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
+                                            <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
+                                                ngbDropdownToggle>Select Options&nbsp;</button>
+                                            <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
+                                                style="margin-left:-5px;">
+                                                <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
+                                                    (click)="prodselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
                                             </div>
                                         </div>
-                                        <carousel style="height: 220px; z-index: unset;">
-                                            <div class="carousel-cell" *ngFor="let img of relatedrec; let i =index">
-                                                <div class="single-product" style="padding-left: 25px; overflow: hidden; padding-right: 25px;">
-                                                  
-                                                    <div class="single-product__image" (click)="viewproductrow2(img.product_id)">
-                                                        <a class="image-wrap">
-                                                            <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_img}}" class="img-fluid"
-                                                            alt="">
-                                                        </a>
+                                    </div>
+                                </div>
 
-                                                        <div class="single-product__floating-badges">
-                                                          
-                                                            <span class="hot" *ngIf="img.has_discount==true">hot</span>
-                                                        </div>
+                            </div>
+                        </div>
+                    </carousel>
+                    <div class="col-lg-12" *ngIf="loader6">
+                        <div class="product-category-container--collectionhome-wrapper">
+                            <div class="row justify-content-center">
+                                <!-- Allcat   Homecat -->
+                                <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                    <div class="single-category single-categow zoomIn">
+                                        <div class="single-category__image single-category__image--one"
+                                            style=" width:100%; height:200px;">
+                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                    <div class="single-category single-categow zoomIn">
+                                        <div class="single-category__image single-category__image--one"
+                                            style=" width:100%; height:200px;">
+                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                    <div class="single-category single-categow zoomIn">
+                                        <div class="single-category__image single-category__image--one"
+                                            style=" width:100%; height:200px;">
+                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                    <div class="single-category single-categow zoomIn">
+                                        <div class="single-category__image single-category__image--one"
+                                            style=" width:100%; height:200px;">
+                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                    <div class="single-category single-categow zoomIn">
+                                        <div class="single-category__image single-category__image--one"
+                                            style=" width:100%; height:200px;">
+                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2 col-md-6 col-12 mb-60">
+                                    <div class="single-category single-categow zoomIn">
+                                        <div class="single-category__image single-category__image--one"
+                                            style=" width:100%; height:200px;">
+                                            <ngx-skeleton-loader count="1" [theme]="{  'border-radius': '4px',  height: '100%',  width:'100%',
+                                 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
+                                            </ngx-skeleton-loader>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-                                                    </div>
-                                                    <div class="title" >
-                                                        <h6> <a style="line-height: 1.6rem;
-                                                            overflow: hidden;
-                                                            display: -webkit-box; 
-                                                            -webkit-line-clamp: 2;
-                                                            -webkit-box-orient: vertical;
-                                                            max-height: 3.2rem;" >{{img.title}}</a> </h6>
-                                                            <a id="vieww" style="font-size: small;color: red;font-size: small; margin-left: 10px;">View Details</a>
-                                                    </div>
-                             
+            <div class="col-lg-12 col-md-4  text-md-left mb-sm-1">
+                                                    
+                <div class="post-tags">
+                   <span style="padding-right:20px ;"><i class="ion-ios-pricetags"></i></span>
+                    <span class="review-link " id="offer"
+                    *ngFor="let tag of Tags">
+                    <a style="color: rgb(83, 83, 83);">{{tag}}</a>
+                </span>
 
-                                                </div>
-                                            </div>
-                                        </carousel>                                     
+                </div>
+
+               
+            </div>
+
+            <div class="col-lg-12 col-md-8  text-md-left mb-sm-1">
+                <div class="post-share">
+                    <span style="color: rgb(111, 111, 112);">Share this post:</span>
+                    <ul style="padding-left: 0px;">
+                        <li style="display:inline-block;">
+                            <share-buttons theme="circles-dark"
+                                [include]="['facebook','whatsapp', 'email','twitter', 'telegram','copy' ]"
+                                [showIcon]="true" [showText]="false"
+                                url="currenturl" [description]="productname"
+                                class="pt-0 mb-2">
+                            </share-buttons>
+                        </li>
+
+                    </ul>
+                </div>
+            </div>                                      
                                     </div>
                                     <!--=======  End of content  =======-->
                                 </div>

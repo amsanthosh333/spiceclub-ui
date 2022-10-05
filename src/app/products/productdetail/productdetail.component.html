@@ -1218,13 +1218,13 @@
 
 
             <!-- customer also likes -->
-            <div class="questions row">
+            <div class="questions row" *ngIf="Alsoboughtprod?.length!==0">
                 <h5>Customers
                     also bought</h5>
 
                 <div class="carousall">
                     <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
-                        <div class="carousel-cell" *ngFor="let img of Relatedprod ;let i = index">
+                        <div class="carousel-cell" *ngFor="let img of Alsoboughtprod ;let i = index">
                             <div class="single-product"
                                 style="padding-left: 20px; overflow: hidden; padding-right: 20px;background-color: whitesmoke;padding-bottom:3px;">
                                 <div class="single-product__image pt-10">
