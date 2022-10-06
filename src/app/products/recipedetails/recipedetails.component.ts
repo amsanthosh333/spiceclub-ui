@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal, NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
@@ -93,6 +93,10 @@ export class RecipedetailsComponent implements OnInit {
   likesss = [true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true];
   likess = [false, false, false, false, false, false, false, false, false, false, false, false, false, false, false];
   imgloader2: boolean=true;
+  Slider: any;
+  photoo: any = [];
+  allgalleryphotos: any = [];
+  buybtn:boolean=false
 
   constructor(private sharedService: SharedService,private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private route: ActivatedRoute, private request: RequestService,
@@ -126,7 +130,8 @@ export class RecipedetailsComponent implements OnInit {
     this.getallrecipe(1);
     this.getallrecipecat();
     this.getrecipesbycatg(this.id,1)
-    this.viewfuturedpro()
+    this.viewfuturedpro();
+    this.viewdata();
 
     this.comment = this.fb.group({
       rating: ['', [Validators.required]],
@@ -136,6 +141,12 @@ export class RecipedetailsComponent implements OnInit {
     this.currenturl = this.router.url
   }
 
+
+  showbuybtn(){
+    console.log("showbuybtn");
+    
+    this.buybtn=true
+  }
   viewfuturedpro(){
   
     this.request.getbestsellpro().subscribe((response: any) => { 
@@ -151,6 +162,20 @@ export class RecipedetailsComponent implements OnInit {
     })
 
   }
+  viewdata() {
+    this.request.getslider().subscribe((response: any) => {
+      this.Slider = response.data;
+      this.photoo = this.Slider.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.photo);
+      console.log("photooo",this.photoo);
+      
+      // this.loader1 = false;
+      // this.mainloader = false;
+      setTimeout(() => {
+        // this.loadingIndicator = false;
+      }, 500);
+    });
+  }
+  
 
   getallrecipe(page: any) {
     this.recipeloader = true;
@@ -194,6 +219,7 @@ export class RecipedetailsComponent implements OnInit {
     this.discriptloader = true;
     this.blog_id = id;
     this.request.getrecipedetail(id).subscribe((response: any) => {
+    console.log("rec detail respoonse",response);
       this.Peoduct = response.data[0];
       this.photoss = this.Peoduct.photos;
       this.nutritional = this.Peoduct.nutritional_fact;
@@ -203,15 +229,27 @@ export class RecipedetailsComponent implements OnInit {
       this.recipecat= this.Peoduct.category
       this.getrecipesbycatg(this.recipecat,1)
       this.relatedrec =this.Peoduct.products;
-      console.log("this.relatedrec",response);
+   
       
       this.videoo =this.Peoduct.video_link;
-      this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);   
-      console.log("tthis.videourl",this.videourl);  
+      this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);    
       this.sideloader2 = false;
 
       this.discrloading = false;
       this.discriptloader = false;
+
+      this.allgalleryphotos = this.photoss.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path);
+      console.log("this.allgalleryphotos", this.allgalleryphotos);
+      //  this.photoss.forEach((item: any) => {
+      //   console.log("items", item);
+    
+      //     this.allgalleryphotos.push({
+      //      'https://neophroncrm.com/spiceclubnew/public/' + item.path,
+          
+      //     })
+       
+      // })
+
       setTimeout(() => {
         this.photoloader1 = false;
       }, 3000);
@@ -222,11 +260,9 @@ export class RecipedetailsComponent implements OnInit {
     this.getcommentsss();
   }
   getrecipesbycatg(id:any,page:any){
-    console.log("getrecipebycatg");
     this.recipeloader=true;
     this.imgloader = false; 
     this.request.getrecipebycat(id,page).subscribe((response: any) => {
-      console.log("getrecipebycatg response",response);
       this.Relatedrecipes=response.data;
       this.pagenation=response.meta   
       this.pagess=this.pagenation.links;

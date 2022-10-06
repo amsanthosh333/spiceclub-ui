@@ -325,7 +325,33 @@ font-size: 24px;
   flex-wrap: inherit;
 }
 }
+@media (min-width: 992px) {
+  .buyusedprodbtn{
+    position: relative;
+    left: 200px;
+    top: 300px;
+    background-color: #00000063;
+    color: white;
+  }
+
+  :host ::ng-deep .active.carousel-item
+{
+  width:100%; height: inherit;
+
+}
+:host ::ng-deep .carousel-inner{
+  height: 400px;
+}
+}
 @media (max-width : 992px) {  
+  :host ::ng-deep .active.carousel-item
+{
+  width:100%; height: auto;
+
+}
+:host ::ng-deep .carousel-inner{
+  height: 200px;
+}
  
 .imag{
   height: 105px; 
@@ -338,6 +364,24 @@ iframe {
   height: 209px;
  
 }
+
+.orderbuttons td{
+  padding: 0px;
+}
+
+
+.tabledatas td{
+  padding: 0px;
+}
+.tableheader th{
+  font-weight: 600;
+  padding-right: 0px;
+  padding-left: 0px;
+}
+.tableheader td{
+  padding: 0px;
+}
+
     } 
   
     .imgicon{

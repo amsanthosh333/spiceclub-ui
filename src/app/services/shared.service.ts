@@ -8,9 +8,6 @@ export class SharedService {
   private logoutsubject = new Subject<any>();
   private cartdata = new Subject<any>();
   private wishlistData = new Subject<any>();
-  
-
-
   // header cart,wishlist,profile auto update
 
   sendClickEvent(){

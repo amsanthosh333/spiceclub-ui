@@ -233,6 +233,10 @@ export class HomeComponent implements OnInit {
   bestsellScroll: boolean=true;
   banneronScroll: boolean=true;
   videourl1!: SafeResourceUrl;
+  videourl2!: SafeResourceUrl;
+  recipevideo: any;
+  recipe_vid1: any;
+  recipe_vid2: any;
   
 
 
@@ -282,7 +286,7 @@ export class HomeComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.videourl1 = this.sanitizer.bypassSecurityTrustResourceUrl("https://www.youtube.com/embed/Dm9DfT0Jcbw");  
+   
     this.countDown = timer(0, this.tick).subscribe(() => --this.counter);
     this.viewdata();
     // this.viewsubscribebanner();
@@ -369,9 +373,13 @@ this.viewbestsellpro();
   }
 
   flashScrollDown(event: any) {
+    console.log("flashScrollDown");
+    
     if(this.flashScroll==true){  
       this.flashScroll = false
+      this.viewvideos();
     this.viewdata4();
+    
     }
 
   }
@@ -828,15 +836,27 @@ this.viewbestsellpro();
       }, 500);
     });
   }
+  viewvideos(){
+     
+    this.request.getrecipevideos().subscribe((response: any) => {
+      this.recipevideo = response.data;
+      this.recipe_vid1= this.recipevideo[0].video_link
+      this.recipe_vid2= this.recipevideo[1]?.video_link
+      this.videourl1 = this.sanitizer.bypassSecurityTrustResourceUrl(this.recipe_vid1); 
+      this.videourl2 = this.sanitizer.bypassSecurityTrustResourceUrl(this.recipe_vid2);  
+
+
+      // this.loader4 = false;
+     
+    });
+  };
   viewdata4() {
-    console.log("Testimonial");
-    
     this.request.gettestimonial().subscribe((response: any) => {
       this.Testimonial = response.data;
       // this.loader4 = false;
-      // setTimeout(() => {
-      //   this.loadingIndicator = false;
-      // }, 500);
+      setTimeout(() => {
+        this.loadingIndicator = false;
+      }, 500);
     });
   }
   proddetail(id: any) {

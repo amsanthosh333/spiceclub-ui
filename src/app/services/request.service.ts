@@ -137,6 +137,12 @@ export class RequestService {
     this.url = `${this.endPoint1}/banners`;
     return this.http.get(this.url);
   }
+
+  public getrecipevideos() {
+    this.url = `${this.endPoint1}/recipe/videos?page=1`;
+    return this.http.get(this.url);
+  }
+
   //testimonial
   public gettestimonial() {
     this.url = `${this.endPoint1}/testimonial`;
@@ -176,7 +182,6 @@ export class RequestService {
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
      this.url = `${this.endPoint1}/cart-count/` + id +`?temp_user_id=`+ this.currrent_temp_Id;
     // this.url = `${this.endPoint1}/testcart-count/` + id +`?temp_user_id=`+ this.currrent_temp_Id;
-    console.log("cartcount",this.url);
     
     return this.http.get(this.url, { headers: headers });
   }
@@ -194,7 +199,6 @@ export class RequestService {
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
      this.url = `${this.endPoint1}/carts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;;
     //this.url = `${this.endPoint1}/testcarts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
-    console.log("testcars url",this.url);
     
     return this.http.post(this.url, null, { headers: headers });
   }
@@ -230,7 +234,7 @@ export class RequestService {
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
      this.url = `${this.endPoint1}/cart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype+`&temp_user_id=`+ this.currrent_temp_Id;
    // this.url = `${this.endPoint1}/testcart-summary/`+ id +`?buyertype=` + this.buyertypeid+ `&is_buynow=` + buynowid + `&payment_type=` + paymenttype+`&temp_user_id=`+ this.currrent_temp_Id;
-   console.log(this.url);
+ 
    
     return this.http.get(this.url, { headers: headers });
   }

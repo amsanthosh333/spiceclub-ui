@@ -257,9 +257,7 @@ export class ProductdetailComponent implements OnInit {
     // this.container.nativeElement.scrollLeft = this.pos.left - dx;
 
   }
-  onMouseDown(e: any) {
-    console.log("e");
-    
+  onMouseDown(e: any) {   
     this.pos = {
    
       left: this.container.nativeElement.scrollLeft,
@@ -270,7 +268,6 @@ export class ProductdetailComponent implements OnInit {
     };
   }
   onMouseUp(e:any) {
-    console.log("eup");
     this.pos = {
       // The current scroll
       left: this.container.nativeElement.scrollLeft,
@@ -283,12 +280,9 @@ export class ProductdetailComponent implements OnInit {
   }
 
   mouseMoveHandler(e:any) {
-    console.log("mouseMoveHandler",e);
     // How far the mouse has been moved
     const dx = (e.clientX - this.pos.x) * 3;
     const dy = (e.clientY - this.pos.y) * 10;
-
-
     // Scroll the element
     this.container.nativeElement.scrollTop = this.pos.top - dy;
     this.container.nativeElement.scrollLeft = this.pos.left - dx;

@@ -47,10 +47,8 @@ export class MessageComponent implements OnInit {
 
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService,private modalService: NgbModal,) { 
     this.currentUserSubject = new BehaviorSubject<User>(
-      JSON.parse(localStorage.getItem('currentUser')||'{}')
-      
+      JSON.parse(localStorage.getItem('currentUser')||'{}')     
     );
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user.id; 
@@ -80,14 +78,14 @@ export class MessageComponent implements OnInit {
     });
   }
   viewrow(row:any,i:any){
-    this.conv_id=row.id
-    this.currentname=row.shop_name;
-    this.currentlogo=row.shop_logo;
-    this.tittlee=row.title;
-    this.convdatee=row.date
+    this.conv_id=row?.id
+    this.currentname=row?.shop_name;
+    this.currentlogo=row?.shop_logo;
+    this.tittlee=row?.title;
+    this.convdatee=row?.date
     this.subItemm=i
     this.convdatee = new Date().toLocaleDateString();
-    this.request.getallmessages(row.id).subscribe((response: any) => {
+    this.request.getallmessages(row?.id).subscribe((response: any) => {
       // this.page2=true;this.page1=false;
       this.Messages=response.data.reverse();   
       this.message.reset();
@@ -122,6 +120,8 @@ export class MessageComponent implements OnInit {
   }
   }
   lastmessage(){
+    console.log("lastmessage");
+    
     this.request.getnewmessages(this.conv_id,this.lastmessage_id,).subscribe((response: any) => {  
       if(response.success==true){
         this.Messages=response.data.reverse(); 
