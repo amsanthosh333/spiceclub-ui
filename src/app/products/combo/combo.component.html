@@ -107,15 +107,22 @@
                     </div>
                     <!--=======  End of page sidebar  =======-->
                 </div>
-
                 <div id="mainlistdiv" class="col-lg-9 order-1 order-lg-2 mb-md-60 mb-sm-10"  infinite-scroll
                 [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)" (scrolledUp)="onScrollUp($event)">
                 <div class="row product-isotope shop-product-wrap four-column"  >
-                    <div id="productdiv" class="col-12 col-lg-4 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
+
+                    <div>
+                        <img src="https://neophroncrm.com/spiceclubnew/public/uploads/all/Banners/ei61XpXpZ5yJXHpSWFksH6MzDsKuzToTREXLyraT.jpg" class="img-g"
+                                                style="height: 270px; width: 100%;" alt="">
+                    </div>
+                    <!--=======  single product   =======-->
+                    <div id="productdiv" class="col-12 col-lg-3 col-md-6 col-sm-6 mb-10 pt-10 pb-10 hot sale"
                         *ngFor="let img of Newarrivals;let i=index">
-                        <div class="single-product"> 
+                        <!-- <span class="electric">Electric</span> -->
+                        <div class="single-product">
+                            <!--=======  single product image  =======-->
                             <div class="single-product__image" style="overflow: hidden;">
-                                <div class="imglazy" style=" text-align: center;">
+                                <div class="imglazy" >
                                     <ngx-skeleton-loader count="1" *ngIf="!imgloader"
                                         [theme]="{'margin-left':'10px',  'border-radius': '4px',  height: '100%',  width:'100%', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                     </ngx-skeleton-loader>
@@ -127,7 +134,7 @@
                                             <img src="assets/images/icons/green2.jpg" class="img-g"
                                                 style="height: 15px;" alt=""></a>
                                     </div>
-                                    <!-- https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}} -->
+
                                     <img *ngIf="imgloader" (click)="proddetail(img.id)"
                                         src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
                                         class="img-fluid" alt="" style="height: -webkit-fill-available;">
@@ -140,12 +147,14 @@
                                 </div>
 
                                 <div class="single-product__floating-badges">
+                                    <!-- <span class="onsale">-10%</span> -->
                                     <span class="hot"
                                         *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
-                               </div>
+                                    <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
+                                </div>
 
 
-                                <div class="single-product__floating-icons">
+                                <!-- <div class="single-product__floating-icons">
 
 
                                     <span class="wishlist" *ngIf="(img.wishlist==1)"><a data-tippy="Add to wishlist"
@@ -163,10 +172,13 @@
                                             <i [ngClass]="{'ion-android-favorite':likedd[i]===true, 'ion-android-favorite-outline':likedd[i]===false}"
                                                 (click)='toggledelete(img,i)'
                                                 style="color: rgb(214, 5, 5);"></i></a></span>
-                                </div>
+                                </div> -->
 
                             </div>
-                            <!-- <div class="single-product__content" (click)=" proddetail(img.id)">
+                            <!--=======  End of single product image  =======-->
+
+                            <!--=======  single product content  routerLink="/productdetail"=======-->
+                            <div class="single-product__content" (click)=" proddetail(img.id)">
                                 <div class="title">
                                     <h3  style="padding-bottom:2px;"> <a style="line-height: 1.2rem;
                                     overflow: hidden;
@@ -176,7 +188,7 @@
                                     max-height: 3.2rem;
                                      margin-bottom: 2px;font-weight: 600;color: #4a4a4a;">{{img.name}}</a> </h3>    
                                 </div>
-    
+            
                                 <div class="price" style="margin-top: 2px;">
                                     <span *ngIf="img?.stroked_price!==img?.main_price"
                                         class="main-price discounted">{{img.stroked_price}}</span>
@@ -184,37 +196,24 @@
                                     <a class="yousave" *ngIf="img.has_discount==true" >
                                         You save <span style="color:green">Rs {{img.discount_amount}}</span></a>
                                 </div>
-                  
-                            </div>
-                            <div class="row"
-                                *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
-                                <div class="col-6 " style="padding-left:4px ; padding-right: 6px;">
-                                    <input (change)="qtyChange($event,i,img)" type="number" id="quantity"
-                                        name="quantity" value="1" min="1" style="width:100%;text-align: center;">
-                                </div>
-                                <div class="col-6 p-0" style="margin-left: -4px;">
-                                    <button type="button" id="addcarrtbtn" class="btn btn-primary"
-                                        (click)="prodaddtocart(img)"><i class="ion-ios-cart"></i>&nbsp; Add</button>
-                                </div>
+                              
                             </div>
 
-                            <div class="row" *ngIf="!(img.variants[0]?.options?.length <= 1 || showaddbtn == i)">
+                        
+                            <div class="row" >
                                 <div class="col-12 ">
                                     <div ngbDropdown placement="top-end" class="d-inline-block" style="width:100%;">
-                                        <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2"
-                                            ngbDropdownToggle>Select Options&nbsp;</button>
-                                        <div ngbDropdownMenu aria-labelledby="dropdownBasic2"
-                                            style="margin-left:-5px;">
-                                            <button ngbDropdownItem *ngFor="let imgggg of img.variants[0]?.options;"
-                                                (click)="bestsellingselectvar(imgggg ,i,img.id,img.variants)">{{imgggg}}</button>
-                                        </div>
+                                        <button type="button" class="btn  addcarrtbtn" id="dropdownBasic2" 
+                                        (click)="prodaddtocart(img)"
+                                            >Buy Now</button>
+                                       
                                     </div>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
 
-                    <div id="pggg" *ngIf="Newarrivals?.length==0" style=" display: flex;
+                    <div id="pggg" *ngIf="Bestsellpro?.length==0" style=" display: flex;
                   justify-content: center;
                         align-items: center;
                         height: auto;
@@ -274,6 +273,7 @@
                     </div>
                 </div> -->
             </div>
+           
            
 
             </div>

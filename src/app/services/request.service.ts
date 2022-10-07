@@ -452,6 +452,12 @@ export class RequestService {
     this.url = `${this.endPoint1}/products/newarrivals?user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     return this.http.get(this.url);
   }
+  //combo offer   /products/combo?page=1&buyertype=2&user_id=8
+  public getcombopro() {
+    this.url = `${this.endPoint1}/products/combo?page=1&` + this.userid + `&buyertype=` + this.buyertypeid;
+    return this.http.get(this.url);
+  }
+
   //subscribed products
   public getsubscribedpro() {
     const headers = new HttpHeaders()

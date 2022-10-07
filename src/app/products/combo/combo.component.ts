@@ -253,9 +253,8 @@ export class ComboComponent implements OnInit {
 
 
     viewnewarrival() {
-      this.request.getnewarrivalpro().subscribe((response: any) => {
-        console.log("viewnewarrival response",response)
-        
+      this.request.getcombopro().subscribe((response: any) => {
+        console.log("getcombopro response",response)  
         this.Newarrivals = response.data;
         this.prodloader=false;
         this.pagenation = response.meta;
@@ -499,6 +498,7 @@ export class ComboComponent implements OnInit {
           console.log("addtocart resssssssssssssss", res);
           if (res.result == true) { 
             this.addRecordSuccess()
+            this.router.navigate(['cart']);
             this.modalService.dismissAll();
             this.sharedService.sendClickEvent();
           }

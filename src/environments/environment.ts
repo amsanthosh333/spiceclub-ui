@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  baseURL1:'https://neophroncrm.com/spiceclubnew/api/v2',
+ // baseURL1:'https://neophroncrm.com/spiceclubnew/api/v2',   // production url
+  baseURL1:'https://neophroncrm.com/spiceclub_staging/api/v2', // stage url
+
+  // https://neophroncrm.com/spiceclub_staging/api/v2/products/combo?page=1&buyertype=2&user_id=8
+
 };
 
 export const firebaseConfig = {

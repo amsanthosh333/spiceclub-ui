@@ -201,9 +201,7 @@ export class ProductdetailComponent implements OnInit {
 
   ngOnInit(): void {
 
-    
     this.route.params.subscribe(val => {
-      console.log('pressed params!', val);
       this.id = val['id']
       this.viewproductrow(this.id);
       this.iswishlist(this.id);
@@ -498,7 +496,6 @@ export class ProductdetailComponent implements OnInit {
   }
   viewproductrow(id: any) {
     window.scroll(0, 0)
-    console.log("proddetail",);
     this.totalprice = 0.00
     this.product_id = id
     this.quantityyy = 0
@@ -543,8 +540,7 @@ export class ProductdetailComponent implements OnInit {
       }
       // array push photo
       this.newphotos = this.photoos.forEach((item: any) => {
-        item.path.forEach((items: any) => {
-          console.log("items", items);
+        item.path.forEach((items: any) => {  
           this.allgalleryphotos.push({
             image: 'https://neophroncrm.com/spiceclubnew/public/' + items,
             thumbImage: 'https://neophroncrm.com/spiceclubnew/public/' + items, variant: item.variant
@@ -554,17 +550,15 @@ export class ProductdetailComponent implements OnInit {
 
       // console.log("this.this.allgalleryphotos", this.allgalleryphotos);
       this.selectedimage = this.allgalleryphotos[0]?.image;
-      console.log("this.selectedimage", this.selectedimage);
+     
 
       this.getcommentsss()
-      console.log(" this.Peoduct.main_price", this.Peoduct.main_price);
       if (this.Peoduct.choice_options.length == 0) {
         this.varient_value = ''
         this.varprise = this.Peoduct.main_price;
         this.varstrokedprice = this.Peoduct.stroked_price;
       }
       else {
-        console.log("elllllllse");
         this.varient_value = this.choice[0]?.options[0];
         this.checkvarientprice();
       }
@@ -576,7 +570,6 @@ export class ProductdetailComponent implements OnInit {
         console.log("error", error.message);
       });
     this.request.getrelatedprod(this.product_id).subscribe((response: any) => {
-      console.log("getrelatedprod", response);
       this.Relatedprod = response.data;
       this.loader6 = false;
       this.viewbulkdiscount(this.product_id);
@@ -591,7 +584,6 @@ export class ProductdetailComponent implements OnInit {
   alsobought(){
 
     this.request.getalsoboughtprod(this.product_id).subscribe((response: any) => {
-      console.log("getalsoboughtprod", response);
       this.Alsoboughtprod = response.data;
     },
       (error: any) => {
@@ -635,7 +627,6 @@ export class ProductdetailComponent implements OnInit {
   viewdiscount(id: any) {
     this.request.getdisc(this.buyertypeid, id).subscribe((response: any) => {
       this.discount = response.data;
-      console.log("this.discount", this.discount);
 
     },
       (error: any) => {
@@ -710,11 +701,11 @@ export class ProductdetailComponent implements OnInit {
   }
 
   // for buynow
-  addtocartbuy(_id: any) {
+  addtocartbuy(_id: any,) {
     if (this.userid == 0) {
       this.openlogin()
     }
-    else {
+    else {  
       if (this.quantityyy == 0) {
         let edata = {
           id: _id,
@@ -733,6 +724,37 @@ export class ProductdetailComponent implements OnInit {
           variant: this?.varient_value.replace(/\s/g, ""),
           user_id: this.userid,
           quantity: this.quantityy,
+          buyertype: this.buyertypeid,
+          is_buynow: 1
+        }
+        this.addtoocartt2(edata);
+      }
+    }
+  }
+
+  addtocartbuy_two(_id: any,) {
+    if (this.userid == 0) {
+      this.openlogin()
+    }
+    else {  
+      if (this.quantityyy == 0) {
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: 1,
+          buyertype: this.buyertypeid,
+          is_buynow: 1
+        }
+        this.toastr.info('minimun 1 product should be selected', '');
+      }
+      else {
+        this.quantityy = this.quantityyy
+        let edata = {
+          id: _id,
+          variant: this?.varient_value.replace(/\s/g, ""),
+          user_id: this.userid,
+          quantity: 1,
           buyertype: this.buyertypeid,
           is_buynow: 1
         }
