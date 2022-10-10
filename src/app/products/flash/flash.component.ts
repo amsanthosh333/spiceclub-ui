@@ -95,6 +95,8 @@ export class FlashComponent implements OnInit {
 
     );
 
+    config.max = 5;
+    config.readonly = true;
 
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
@@ -190,6 +192,7 @@ export class FlashComponent implements OnInit {
   }
   viewnewarrival() {
     this.request.getnewarrivalpro().subscribe((response: any) => {
+      console.log("getnewarrivalpro",response);
       this.Newarrivals = response.data;
       this.prodloader1=false;
       setTimeout(() => {

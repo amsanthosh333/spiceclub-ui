@@ -169,6 +169,7 @@ export class ProductdetailComponent implements OnInit {
   previewImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/thumb.jpg";
   zoomImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
   Alsoboughtprod: any;
+  discount_price: any;
 
   
 
@@ -531,6 +532,7 @@ export class ProductdetailComponent implements OnInit {
       this.quantityyy = 1;
       this.videoURL = this._sanitizer.bypassSecurityTrustResourceUrl(this.Peoduct.video_link)
       this.totalprice = this.Peoduct.calculable_price
+      this.discount_price = this.Peoduct.discount_amount
       this.offers = this.Peoduct.offers.length;
 
       if (this.Peoduct.choice_options.length > 1) {
@@ -548,10 +550,24 @@ export class ProductdetailComponent implements OnInit {
         })
       })
 
-      // console.log("this.this.allgalleryphotos", this.allgalleryphotos);
-      this.selectedimage = this.allgalleryphotos[0]?.image;
-     
+      if(this.Peoduct?.compoproducts.length > 0){
+        this.newphotos = this.Peoduct?.compoproducts.forEach((item: any) => {
+          item.photos.forEach((items: any) => {  
+           
+            this.allgalleryphotos.push({
+              image: 'https://neophroncrm.com/spiceclubnew/public/' +  items.path[0],
+              thumbImage: 'https://neophroncrm.com/spiceclubnew/public/' +  items.path[0], name:item.name
 
+            })
+          })
+        })
+
+      }
+      
+      this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[0])
+      this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[1])
+
+      this.selectedimage = this.allgalleryphotos[0]?.image;   
       this.getcommentsss()
       if (this.Peoduct.choice_options.length == 0) {
         this.varient_value = ''
@@ -793,7 +809,14 @@ export class ProductdetailComponent implements OnInit {
     });
   }
   // buynow add cart end
-
+  comboprodimg(name:any){
+    const index = this.allgalleryphotos.findIndex((object: any) => {
+      return object.name == name;
+    });
+    this.selectedimage = this.allgalleryphotos[index]?.image;
+    this.selectedimg = index;
+    this.imgItem = index
+  }
 
   // main quantity selection
   increaseqty() {
@@ -813,6 +836,8 @@ export class ProductdetailComponent implements OnInit {
       if (res.result == true) {
         this.totalprice = res.price.toFixed(2);
         // this.totalprice = this.dec.toFixed(2) 
+        this.discount_price = res.discount_amount
+
       }
       else {
         this.toastr.info('', res.message);
@@ -827,6 +852,7 @@ export class ProductdetailComponent implements OnInit {
       console.log(res);
       if (res.result == true) {
         this.totalprice = res.price.toFixed(2);
+        this.discount_price = res.discount_amount
         // this.totalprice = this.dec.toFixed(2) 
       }
       else {
@@ -856,6 +882,7 @@ export class ProductdetailComponent implements OnInit {
     }
     this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage).subscribe((res: any) => {
       this.totalprice = res.price.toFixed(2);
+      this.discount_price = res.discount_amount
     })
   }
   selectvar(weight: any, i: any) {
@@ -875,6 +902,7 @@ export class ProductdetailComponent implements OnInit {
       this.Peoduct.main_price = res?.price_string;
       this.Peoduct.stroked_price = res?.stroked_price;
       this.Peoduct.excl_gst = res?.excl_gst;
+     
       this.Peoduct.discount_amount = res?.discount_amount;
       this.Peoduct.discount_percentage = res?.discount_percentage;
       this.Peoduct.current_stock = res?.stock;
@@ -887,6 +915,7 @@ export class ProductdetailComponent implements OnInit {
       console.log("this.stk", this.stk);
       this.quantityyy = 1;
       this.totalprice = res?.price;
+      this.discount_price = res?.discount_amount
       this.varphotoos = res.image
     }, (error: any) => {
       console.log("error", error);
@@ -913,6 +942,7 @@ export class ProductdetailComponent implements OnInit {
       console.log("this.stk", this.stk);
       this.quantityyy = 1;
       this.totalprice = res?.price;
+      this.discount_price = res?.discount_amount
       this.varphotoos = res.image
     }, (error: any) => {
       console.log("error", error);
@@ -1116,6 +1146,7 @@ export class ProductdetailComponent implements OnInit {
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
       this.prod_price = res?.price_string;
       this.totalprice = (res?.price_string).replace('Rs', '');
+      this.discount_price = res?.discount_amount
       this.varprise = res?.price_string;
       this.stk = res?.stock;
       if (res?.stock == 0) {

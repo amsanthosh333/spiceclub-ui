@@ -41,10 +41,9 @@
                 </div> -->
                 <div class="row">
                     <div class="col-3"  *ngFor="let a of Todaysoffer;let i=index" >
-                        <div class="todaybanner" (click)="bannerClick(a.product_id,i,a.category_id)"> 
+                        <div class="todaybanner" (click)="bannerClick(a,i)"> 
                             <img src="{{a.thumbImage}}" >
-                        </div>
-                       
+                        </div>                      
                     </div>
 
                 </div>

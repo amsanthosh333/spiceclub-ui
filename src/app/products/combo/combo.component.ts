@@ -150,9 +150,8 @@ export class ComboComponent implements OnInit {
          
     viewfuturedpro(){
       this.imgloader = false;
-      // this.request.getprodbyflash(id,page).subscribe((response: any) => {
-      this.request.getbestsellpro().subscribe((response: any) => {
-        // this.request.getallflashdealproducts().subscribe((response: any) => {
+    //   this.request.getbestsellpro().subscribe((response: any) => {
+        this.request.getallflashdealproducts().subscribe((response: any) => {
         this.Bestsellpro=response.data;
         this.prodloader1=false;  
         setTimeout(() => {

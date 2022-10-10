@@ -488,12 +488,19 @@
                             </form>
                         </div>
 
-                        <div class="shop-product__block shop-product__block--size " style="justify-content: center;">
+                        <div class="shop-product__block shop-product__block--size " style="display: block;
+                        text-align: center;">
                             <span class="shop-product__block__value ">
                                 <span style="font-size:0.8rem ;"> You Pay </span><strong><span style="color: red;">
                                         Rs {{totalprice}} </span></strong>
                                 <!-- <p > (Including all taxes) </p> -->
+                                
                             </span>
+                            <p style="font-size: 0.7rem;color: #727272;padding-bottom: 7px; margin-bottom: 0px;"
+                            *ngIf="Peoduct?.discount_amount!= 0">You save <span
+                                style="color:rgb(95, 168, 0);">Rs {{discount_price}}
+                              </span></p>
+                           
                         </div>
 
                         <div style="text-align:center ;">
@@ -554,15 +561,15 @@
             <!-- combo offer products -->
             <div class="col-12 mb-20" *ngIf="Peoduct?.compoproducts.length!==0">
                 <div class="together ">
-                    <h5>You are Buying Together</h5>
+                    <h5>With this Combo,You are Buying Together</h5>
                     <div style="display: flex;">                
                     <div class="togetherdiv row col-10">                                         
                         <div class="col-12 col-lg-2 col-md-3 col-sm-6"
                             *ngFor="let img of Peoduct?.compoproducts;let i = index" style="display: contents;">
                             <div class="single-product"
-                                style="padding-left: 20px; overflow: hidden; padding-right: 20px;padding-bottom:3px;">
+                                style="padding-left: 12px; overflow: hidden; padding-right: 10px;padding-bottom:3px;">
                                 <div class="single-product__image pt-10">
-                                    <div class="imglaz" style="position: relative;overflow: hidden;text-align: center;">
+                                    <div class="imglaz imglazcombo" style="position: relative;overflow: hidden;text-align: center;">
                                         <ngx-skeleton-loader count="1" *ngIf="imgloader2"
                                             [theme]="{ 'margin-left':'10px' ,'border-radius': '4px',  height: '152px',  width:'220px', 'opacity':.6, 'background-color': '##b9b8b8',   border: '1px solid white'  }">
                                         </ngx-skeleton-loader>
@@ -573,10 +580,10 @@
                                                 <img src="assets/images/icons/green2.jpg" class="img-g"
                                                     style="height: 15px;" alt=""></a>
                                         </div>
-                                        <a class="image-wrap" (click)=" proddetail(img.id)" id="bestimg"
+                                        <a class="image-wrap" (click)="comboprodimg(img.name)" id="bestimg"
                                             *ngIf="!imgloader2">
                                             <img src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}"
-                                                class="img-fluid" alt="" style="max-width:150px;">
+                                                class="img-fluid" alt="" style="max-width:165px;">
                                         </a>
                                     </div>
                                 </div>

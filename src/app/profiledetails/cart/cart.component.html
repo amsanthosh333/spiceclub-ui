@@ -28,7 +28,7 @@
 								<td class="product-name">
 									<a style="text-decoration: none;color: #5e5e5e;padding-bottom: 7px;"
 										(click)="proddetail(b.product_id)">{{b.product_name}}</a>
-									<a style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;padding-bottom: 7px;margin-bottom: 0px;">{{b.brand_name}}</a>
+									<a *ngIf="b.brand_name !== ''" style="color:rgb(2, 183, 207);font-size: 0.8rem;font-weight: 400;padding-bottom: 7px;margin-bottom: 0px;">{{b.brand_name}}</a>
 									<a *ngIf="b.stock!==0" style="color:rgb(4, 167, 4);font-size: 0.8rem;font-weight: 400;margin-top: 2px;padding-bottom: 7px;text-decoration: none;">In-stock</a>
                                     <a  *ngIf="b.stock==0" style="color:rgb(218, 17, 3);font-size: 0.8rem;font-weight: 400;margin-top: 2px;padding-bottom: 7px;text-decoration: none;">Out of stock</a>
 									

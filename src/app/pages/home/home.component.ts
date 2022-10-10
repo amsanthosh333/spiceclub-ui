@@ -724,6 +724,8 @@ this.viewbestsellpro();
   }
   viewtodayoffer() {
     this.request.gettodaysoffer().subscribe((response: any) => {
+      console.log("Todaysoffer",response);
+      
       this.Todaysoffer = response.data.slice(0, 4);
       this.loader4 = false;
     });
@@ -753,29 +755,25 @@ this.viewbestsellpro();
       this.proddetail(this.prd_id)
 
   }
-  bannerClick(id: any, i: any,category_id:any) {
-    if (i == 0) {
-      this.router.navigate(['flash']);
-    }
-    else if (i == 1) {
-      if(category_id!==null){
-        this.router.navigate(['category', category_id]);
-      }
-      else{
-        this.proddetail(id)
-      }  
-    }
-    else if (i == 2) {
-      if(category_id!==null){
-        this.router.navigate(['category', category_id]);
-      }
-      else{
-        this.proddetail(id)
-      }
-    }
-    else {
-      this.proddetail(id)
-    }
+  bannerClick(data: any, i: any,) { 
+    console.log("bannerClick",data.product_id);
+    if(data.category_id){
+           this.router.navigate(['category', data.category_id]);
+         }
+         else if(data.product_id && data.product_id!=="" && data.product_id!==''){
+          console.log("redirection to product",data.product_id);
+          this.proddetail(data.product_id)
+         }
+         else if(data.redirecturl){
+          console.log("data.redirecturl",data.redirecturl);
+           window.location.href= data.redirecturl;
+        //  window.location.replace(data.redirecturl);
+          // window.open(data.redirecturl);
+         }
+         else{
+console.log("no redirection");
+
+         }
   }
   blogClick(i: any) {
     this.brnd_id = this.Allbrands[i].id
