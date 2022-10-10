@@ -71,7 +71,7 @@
                                     <div
                                         class="single-product__floating-badges single-product__floating-badges--shop-product">
                                         <span class="hot" style=" background-color: #76c045; border: 1px solid #ce2127;"
-                                            *ngIf="Peoduct?.has_discount==true">{{Peoduct.discount_percentage}}%</span>
+                                        *ngIf="Peoduct?.discount_percentage!== 0">{{Peoduct.discount_percentage}}%</span>
                                     </div>
                                     <div class="shop-product-rightside-icons" style="top:5px;"  *ngIf="Peoduct?.compoproducts.length==0">
                                         <span class="wishlist-icon" *ngIf="(iswishlistt?.is_in_wishlist==false)">
@@ -311,9 +311,9 @@
                                             </div> -->
 
                                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px; margin-bottom: 0px;"
-                                                *ngIf="Peoduct?.discount_percentage!== 0">You save <span
+                                                *ngIf="Peoduct?.discount_amount!== '0.00'">You save <span
                                                     style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
-                                                    ({{Peoduct?.discount_percentage}}%)</span></p>
+                                                    <span  *ngIf="Peoduct?.discount_percentage!== 0" > ({{Peoduct?.discount_percentage}}% )</span></span></p>
                                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
                                                 *ngIf="Peoduct?.gst_percentage!==0"> (Inclusive of all taxes - GST
                                                 {{Peoduct?.gst_percentage}}%)
@@ -649,13 +649,13 @@
                             </div> -->
 
                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px; margin-bottom: 0px;"
-                                *ngIf="Peoduct?.discount_percentage!== 0">You save <span
-                                    style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
-                                    ({{Peoduct?.discount_percentage}}%)</span></p>
-                            <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
-                                *ngIf="Peoduct?.gst_percentage!== 0"> (Inclusive of all taxes - GST
-                                {{Peoduct?.gst_percentage}}%)
-                            </p>
+                            *ngIf="Peoduct?.discount_amount!== '0.00'">You save <span
+                                style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
+                                <span  *ngIf="Peoduct?.discount_percentage!== 0" > ({{Peoduct?.discount_percentage}}% )</span></span></p>
+                        <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
+                            *ngIf="Peoduct?.gst_percentage!==0"> (Inclusive of all taxes - GST
+                            {{Peoduct?.gst_percentage}}%)
+                        </p>
 
                             <button *ngIf="stk > 0" type="button" class="btn btn-primary" id="addcart2"
                                 (click)="addtocartbuy_two(Peoduct.id)">
@@ -963,7 +963,7 @@
                                     </div>
                                     <div class="single-product__floating-badges" style="margin-left: 0px;">
                                         <span class="hot"
-                                            *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                        *ngIf="img.discount_percentage!==0">{{img.discount_percentage}}%</span>
                                         <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
                                     </div>
                                     <div class="single-product__floating-icons">
@@ -1365,7 +1365,7 @@
                                     </div>
                                     <div class="single-product__floating-badges" style="margin-left: 0px;">
                                         <span class="hot"
-                                            *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                        *ngIf="img.discount_percentage!==0">{{img.discount_percentage}}%</span>
                                         <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
                                     </div>
                                     <div class="single-product__floating-icons">
@@ -1810,7 +1810,7 @@
                                 <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>
                             </div>
                             <div class="single-product__floating-badges" style="margin-left: 0px;">
-                                <span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                <span class="hot" *ngIf="img.discount_percentage!==0">{{img.discount_percentage}}%</span>
                                 <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
                             </div>
                             <div class="single-product__floating-icons">
@@ -1969,7 +1969,7 @@
                                 <span id="offtag2" *ngIf="img.todays_deal!=0">Today's deal</span>
                             </div>
                             <div class="single-product__floating-badges" style="margin-left: 0px;">
-                                <span class="hot" *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                <span class="hot" *ngIf="img.discount_percentage!==0">{{img.discount_percentage}}%</span>
                                 <!-- <span class="hot"  *ngIf="(img.wishlist==1)" ><i class="bi bi-heart-fill"></i></span>  -->
                             </div>
                             <div class="single-product__floating-icons">

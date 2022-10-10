@@ -269,7 +269,7 @@
                                         </div>
                                         <div class="single-product__floating-badges">
                                             <span class="hot"
-                                                *ngIf="img.has_discount==true">{{img.discount_percentage}}%</span>
+                                            *ngIf="img.discount_percentage!==0">{{img.discount_percentage}}%</span>
                                         </div>
 
                                         <div class="single-product__floating-icons">

@@ -43,7 +43,7 @@
 									You save <span style="color:green">Rs {{b.discount_amount}}</span></a> -->
 									<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray; margin-top: 8px;"
 											*ngIf="b.discount !== '0.00'">
-											you save Rs.{{b.discount}} ({{b.discount_percentage}}%) </a>
+											you save Rs.{{b.discount}} <span  *ngIf="b.discount_percentage!=='0.00' && b.discount_percentage!==0 ">({{b.discount_percentage}}%)</span>  </a>
 						
 
 									<div class="pro-qty d-inline-block mx-0 " id="qty">
