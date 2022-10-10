@@ -564,8 +564,8 @@ export class ProductdetailComponent implements OnInit {
 
       }
       
-      this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[0])
-      this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[1])
+      // this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[0])
+      // this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[1])
 
       this.selectedimage = this.allgalleryphotos[0]?.image;   
       this.getcommentsss()

@@ -288,7 +288,7 @@
 					</div>
 				</div>
 				<div class="col-lg-12 pl-0 mt-10" style=" padding: 15px;border: 1px solid rgb(214, 214, 214);padding-bottom: 0px;">
-					<p style="font-size:0.8rem; font-weight: 600;color: brown;margin: 0px; padding-left: 15px;">
+					<p *ngIf="Summery?.expected_delivery_date !== '' && Summery?.expected_delivery_date !== null" style="font-size:0.8rem; font-weight: 600;color: brown;margin: 0px; padding-left: 15px;">
 						Expected Delivery date: {{Summery?.expected_delivery_date}}</p>
 					<div class="cart-table-container pl-lg-40 pl-sm-15" *ngIf="!cartloader">
 						<table id="producttable" class="cart-table" *ngIf="(Cart.length!==0)" style="border: none;">

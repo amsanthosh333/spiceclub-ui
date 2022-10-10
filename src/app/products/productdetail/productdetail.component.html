@@ -311,11 +311,11 @@
                                             </div> -->
 
                                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px; margin-bottom: 0px;"
-                                                *ngIf="Peoduct?.discount_percentage!= 0">You save <span
+                                                *ngIf="Peoduct?.discount_percentage!== 0">You save <span
                                                     style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
                                                     ({{Peoduct?.discount_percentage}}%)</span></p>
                                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
-                                                *ngIf="Peoduct?.discount_percentage!= 0"> (Inclusive of all taxes - GST
+                                                *ngIf="Peoduct?.gst_percentage!==0"> (Inclusive of all taxes - GST
                                                 {{Peoduct?.gst_percentage}}%)
                                             </p>
                                         </div>
@@ -649,11 +649,11 @@
                             </div> -->
 
                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px; margin-bottom: 0px;"
-                                *ngIf="Peoduct?.discount_percentage!= 0">You save <span
+                                *ngIf="Peoduct?.discount_percentage!== 0">You save <span
                                     style="color:rgb(168, 0, 0);">Rs {{Peoduct?.discount_amount}}
                                     ({{Peoduct?.discount_percentage}}%)</span></p>
                             <p style="font-size: 0.8rem;color: #727272;padding-bottom: 7px;"
-                                *ngIf="Peoduct?.discount_percentage!= 0"> (Inclusive of all taxes - GST
+                                *ngIf="Peoduct?.gst_percentage!== 0"> (Inclusive of all taxes - GST
                                 {{Peoduct?.gst_percentage}}%)
                             </p>
 

@@ -253,6 +253,7 @@ export class CheckoutComponent implements OnInit {
       this.grandtotal_value = this.Summery.grand_total_value;
       this.codcharge = this.Summery.codcharges
       this.couponn = this.Summery.coupon_applied;
+
       this.Summeryload = false;
       if (this.couponn == true) {
         this.removecou = true;
