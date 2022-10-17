@@ -1,8 +1,15 @@
-<div *ngIf="page2"> <script>
-    $(window).load(function(){
-       document.getElementById('iframetest').contentWindow.blahblah();
-    });
+
+<script>
+    window.onload = function() {
+    document.querySelector("iframe").onload = function() {
+        console.log("iframe content loaded");
+    } 
+}
+
 </script>
+
+<div *ngIf="page2">
+   
     <div class="breadcrumb-area breadcrumb-bg-2">
         <div class="container" style="margin: 0px;">
             <div class="row">
@@ -43,7 +50,8 @@
 												style="padding-top: 3px;"><input 
 													type="checkbox"></a> -->
                                             <div class="catname" (click)="getrecipebycatg(cat.id)">
-                                                <span>{{cat.name}}</span></div>
+                                                <span>{{cat.name}}</span>
+                                            </div>
                                         </label>
                                     </li>
                                 </ul>
@@ -128,7 +136,7 @@
 
                     <div class="col-lg-6 order-1 order-lg-2 mb-md-70 mb-sm-70">
                         <div class="row mt-30">
-
+ 
                             <div class="col-md-12 mb-40">
                                 <div class="single-slider-post single-slider-post--sticky pb-0">
                                     <!--=======  image  =======-->
@@ -154,11 +162,12 @@
 
                                     <div class="videoo mt-10" style="text-align: center;">
 
-                                        <button class="buyusedprodbtn" *ngIf="buybtn">Buy used products</button>
-                                        <iframe id=iframetest width="100%" height="350" [src]="videourl" title="YouTube video player"
-                                            frameborder="0" 
+                                        <button class="buyusedprodbtn" *ngIf="buybtn" (click)="scrollToElement(target)">Buy used products</button>
+                                        <iframe id=iframetest width="100%" height="350" [src]="videourl"
+                                            title="YouTube video player" frameborder="0" (load)="uploadDone()"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                            allowfullscreen ></iframe>
+                                            allowfullscreen my-directive></iframe>
+                                       
                                     </div>
 
                                     <div class="single-slider-post__content single-slider-post--sticky__content">
@@ -168,27 +177,31 @@
                                                 {{Peoduct.description}}</p>
                                         </div>
 
-                                        
-                                        <div id="carouselExampleControls" data-interval="false" class="carousel slide" data-ride="carousel"
-                                        data-interval="2500"
-                                        style="background-image:url('../../../assets/images/backgrounds/bg-testimonials.png') ;padding: 0px;margin-top: 10px;">
-                                        <div class="carousel-inner" style=" width:100%;object-fit:cover ; ">
-                                            <div class="carousel-item" *ngFor="let img of allgalleryphotos; let i = index" [ngClass]="{'active': i == 0 }"
-                                               style="height: inherit;" >
-                                                <img src="{{img}}" class="d-block" style=" width: 100%;  height:100%;">
-                                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button"
-                                                    data-slide="prev">
-                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Previous</span>
-                                                </a>
-                                                <a class="carousel-control-next" href="#carouselExampleControls" role="button"
-                                                    data-slide="next">
-                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                                    <span class="sr-only">Next</span>
-                                                </a>
+
+                                        <div id="carouselExampleControls" data-interval="false" class="carousel slide"
+                                            data-ride="carousel" data-interval="2500"
+                                            style="background-image:url('../../../assets/images/backgrounds/bg-testimonials.png') ;padding: 0px;margin-top: 10px;">
+                                            <div class="carousel-inner" style=" width:100%;object-fit:cover ; ">
+                                                <div class="carousel-item"
+                                                    *ngFor="let img of allgalleryphotos; let i = index"
+                                                    [ngClass]="{'active': i == 0 }" style="height: inherit;">
+                                                    <img src="{{img}}" class="d-block"
+                                                        style=" width: 100%;  height:100%;">
+                                                    <a class="carousel-control-prev" href="#carouselExampleControls"
+                                                        role="button" data-slide="prev">
+                                                        <span class="carousel-control-prev-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="sr-only">Previous</span>
+                                                    </a>
+                                                    <a class="carousel-control-next" href="#carouselExampleControls"
+                                                        role="button" data-slide="next">
+                                                        <span class="carousel-control-next-icon"
+                                                            aria-hidden="true"></span>
+                                                        <span class="sr-only">Next</span>
+                                                    </a>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
 
                                         <div id="lazyy" *ngIf="discrloading">
@@ -607,11 +620,10 @@
 
 
                                             </div> -->
-                                            <div class="shop-product__additional-info mt-20">
+                                            <div class="shop-product__additional-info mt-20" #target>
 
                                                 <!-- <h2 class="comment-title mb-30">Nutritional Facts</h2> -->
-                                                <table class="shop-attributes"
-                                                    style="text-align: start; margin: 0px;">
+                                                <table class="shop-attributes" style="text-align: start; margin: 0px;">
                                                     <tbody class="ordernowtable">
                                                         <tr class="tableheader">
                                                             <th>Products</th>
@@ -623,16 +635,14 @@
                                                         </tr>
                                                         <tr *ngFor="let img of Bestsellpro;let i = index"
                                                             class="tabledatas">
-                                                            <th
-                                                                style="font-size: large;text-align: center;">
+                                                            <th style="font-size: large;text-align: center;">
                                                                 <img class="prodimgicon"
                                                                     src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}">
                                                             </th>
                                                             <td>-</td>
                                                             <td>-</td>
                                                             <td>-</td>
-                                                            <td *ngIf="i === 0"
-                                                                [attr.rowspan]="Bestsellpro.length">
+                                                            <td *ngIf="i === 0" [attr.rowspan]="Bestsellpro.length">
                                                                 Increase the quantity based on mentioned
                                                                 weight calculation </td>
                                                         </tr>

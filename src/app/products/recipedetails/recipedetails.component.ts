@@ -10,6 +10,13 @@ import { ToastrService } from 'ngx-toastr';
 import {DomSanitizer,SafeResourceUrl,} from '@angular/platform-browser';
 import { SharedService } from 'src/app/services/shared.service'
 import { LoginComponent } from 'src/app/auth/login/login.component';
+import { ScrollService } from 'src/app/services/scroll.service';
+declare var jQuery: any;
+
+// declare var $: any;
+// import 'jqueryui';
+// import  $ from 'jquery';
+import * as $ from 'jquery';
 @Component({
   selector: 'app-recipedetails',
   templateUrl: './recipedetails.component.html',
@@ -97,8 +104,11 @@ export class RecipedetailsComponent implements OnInit {
   photoo: any = [];
   allgalleryphotos: any = [];
   buybtn:boolean=false
+  elem1 = ".page-iframe";
+ 
 
-  constructor(private sharedService: SharedService,private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
+
+  constructor(private scrollService: ScrollService,private sharedService: SharedService,private router: Router, private formBuilder: FormBuilder, private fb: FormBuilder,
     private route: ActivatedRoute, private request: RequestService,
      private modalService: NgbModal, private toastr: ToastrService, config: NgbRatingConfig,
       private _location: Location,public sanitizer:DomSanitizer) {
@@ -138,14 +148,65 @@ export class RecipedetailsComponent implements OnInit {
       comment: ['', [Validators.required]],
 
     });
-    this.currenturl = this.router.url
+    this.currenturl = this.router.url;
+
+    
+    (($) => {
+      $('.esg-youtube-frame').each(() =>{ 
+        var src = $(this).data('src'); 
+        src += "&autoplay=1"; 
+        $(this).data('src',src); 
+    });
+    
+      $('.esg-click-to-play-video').first().click() 
+      // $("#offcanvas-about-icon").on("click", function () {
+
+      //  )};
+        $(' .ytp-button:not([aria-disabled=true]):not([disabled]):not([aria-hidden=true])').on("click",function(){
+          console.log("query");
+          alert('Does this work?');
+          console.log("query");
+          
+      });
+
+
+      $('.ytp-button').on("click",function(){
+        console.log("query");
+        alert('Does this work?');
+        console.log("query");
+        
+    });
+    
+    $('.ytp-large-play-button').on("click",function(){
+      console.log("query");
+      alert('Does this work?');
+      console.log("query");
+      
+  });
+
+    })(jQuery);
+  }
+
+ 
+
+
+
+
+  scrollToElement(element: HTMLElement) {
+    console.log("scroll");
+    
+    this.scrollService.scrollToElement(element);
   }
 
 
-  showbuybtn(){
+  uploadDone(){
     console.log("showbuybtn");
-    
-    this.buybtn=true
+    setTimeout(() => {
+      this.buybtn=true
+    }, 2000);
+  }
+  play(){
+    console.log("showbuybtn play");
   }
   viewfuturedpro(){
   

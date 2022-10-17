@@ -141,6 +141,10 @@ export class RecipeComponent implements OnInit {
     // this.Blogs.push(this.Blogs[0])
     // this.Blogs.push(this.Blogs[0])
     // this.Blogs.push(this.Blogs[0])
+
+    // this.Blogs.push(this.Blogs[0])
+    // this.Blogs.push(this.Blogs[0])
+    // this.Blogs.push(this.Blogs[0])
     console.log(" this.recipe", this.Blogs);
     
     this.pagenation=res.meta   
@@ -160,6 +164,7 @@ getallrecipecat(){
   this.request.getallrecipecat().subscribe((response: any) => {
     this.Allcat=response.data;
     console.log("this.Allcat",this.Allcat);
+
     this.loader=false
     this.sideloader1=false;
     this.firstblog= this.Allcat[0].bestof?.data[0]

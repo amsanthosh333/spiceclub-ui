@@ -266,7 +266,7 @@
                     <!-- sidebarlazyloading  end-->
 
                     <div class="col-lg-9 order-2 order-lg-2 mb-md-30 mb-sm-10 ml-md-10 ml-10 ml-sm-0" infinite-scroll
-                        [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)"
+                    [infiniteScrollThrottle]="throttle" [infiniteScrollDistance]="2" (scrolled)="onScrollDown($event)"
                         (scrolledUp)="onScrollUp($event)">
                         <div class="row product-isotope shop-product-wrap four-column" *ngIf="prodloadermain">
                             <!--=======  single product  =======-->

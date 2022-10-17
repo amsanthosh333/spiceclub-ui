@@ -153,7 +153,7 @@ export class CategoryComponent implements OnInit {
   brandItem: any;
   currentpackagevalue: any;
   edata: any;
-
+  throttle = 1000;
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private toastr: ToastrService,
     config: NgbRatingConfig, private _location: Location,
@@ -178,14 +178,17 @@ export class CategoryComponent implements OnInit {
     const queryParams = this.activatedRoute.snapshot.queryParams
         const routeParams = this.activatedRoute.snapshot.params;  
         // do something with the parameters       
-    this.activatedRoute.queryParams.subscribe((data2: Params) => {
-   
+     
+    this.activatedRoute.queryParams.subscribe((data2: Params) => {  
+     
       this.id = this.route.snapshot.params['id'];
       this.subcatedoryid = this.route.snapshot.queryParams['subcategory']
       this.catedory1id = this.route.snapshot.queryParams['category1']
       this.subcategory1id = this.route.snapshot.queryParams['subcategory1']  
       let locationPath = this.location.path();
       this.headItem =0;
+      this.pagenum=1;
+      this.pagess= null
       console.log("this.catedory1id",this.catedory1id);
       if (locationPath.length) {
         this.locationSegments = locationPath.split('/');
@@ -223,7 +226,10 @@ export class CategoryComponent implements OnInit {
           // this.viewfeatured();
           this.categorybrand(this.catedory1id);
         }
-        else if (this.subcatedoryid !== undefined) {      
+        else if (this.subcatedoryid !== undefined) {  
+          
+          // console.log("subcatedoryid sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",this.subcatedoryid );
+          
           this.page2 = true;
           this.categoryy_id = this.subcatedoryid
           this.viewsubcatprod(this.subcatedoryid, 1, 0)
@@ -620,6 +626,7 @@ export class CategoryComponent implements OnInit {
     this.viewctopcatprod2(id, 1, i)
   }
   viewsubcatprod(id: any, page: any, i: any) {
+    console.log("subcatprod viewsubcatprod", id);
     // this.subsearch.reset();
     this.prodloadermain = false
     this.prodloader = true;
@@ -649,8 +656,7 @@ export class CategoryComponent implements OnInit {
       console.log("SubofSubcat", this.SubofSubcat);
       this.sideloader = false;
       let index = this.SubofSubcat?.findIndex((x: any) => x.id == this.catedory1id);
-      console.log("index", index);
-      console.log("catedory1id", this.catedory1id);
+      console.log("index", index); 
       this.topItem = index
     }, (error: any) => {
       console.log("error", error);

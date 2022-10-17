@@ -327,9 +327,9 @@ font-size: 24px;
 }
 @media (min-width: 992px) {
   .buyusedprodbtn{
-    position: relative;
-    left: 200px;
-    top: 300px;
+    position: absolute; 
+    left: 65%;
+    top: 320px;
     background-color: #00000063;
     color: white;
   }
