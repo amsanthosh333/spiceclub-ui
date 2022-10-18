@@ -597,6 +597,13 @@ a {
 	text-transform: none;
 	letter-spacing: 0;
 }
+.menu-item-has-children:hover >#childrendiv{
+	display:initial ;
+}
+#childrendiv{
+	display:none ;
+}
+
 
 nav.site-nav>ul>li>a:after {
 	position: absolute;
@@ -613,7 +620,7 @@ nav.site-nav>ul>li>a:after {
 }
 
 nav.site-nav>ul>li.menu-item-has-children:hover .sub-menu {
-	margin-top: 10px;
+	margin-top: 20px;
 }
 
 /* nav.site-nav>ul>li ul.sub-menu {
@@ -751,6 +758,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 @media (min-width : 1100px) {
 	nav.site-nav>ul>li ul.mega-menu-column-4 {
 		right: 8% !important;		
+		/* top: 90%; */
 	}
 	.sitelogo {	
 		width: 50%;

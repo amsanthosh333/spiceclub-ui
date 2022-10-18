@@ -153,7 +153,9 @@ export class CategoryComponent implements OnInit {
   brandItem: any;
   currentpackagevalue: any;
   edata: any;
-  throttle = 1000;
+  throttle = 100;
+  immediateCheck:boolean=true
+  data_loaded: boolean= false;
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private toastr: ToastrService,
     config: NgbRatingConfig, private _location: Location,
@@ -175,20 +177,22 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("ngOnInit()");
+    
     const queryParams = this.activatedRoute.snapshot.queryParams
         const routeParams = this.activatedRoute.snapshot.params;  
         // do something with the parameters       
      
     this.activatedRoute.queryParams.subscribe((data2: Params) => {  
-     
       this.id = this.route.snapshot.params['id'];
       this.subcatedoryid = this.route.snapshot.queryParams['subcategory']
       this.catedory1id = this.route.snapshot.queryParams['category1']
       this.subcategory1id = this.route.snapshot.queryParams['subcategory1']  
       let locationPath = this.location.path();
       this.headItem =0;
-      this.pagenum=1;
+      this.pagenum =1;
       this.pagess= null
+      this.data_loaded=false
       console.log("this.catedory1id",this.catedory1id);
       if (locationPath.length) {
         this.locationSegments = locationPath.split('/');
@@ -393,6 +397,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -481,6 +486,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -510,6 +516,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -541,6 +548,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -566,6 +574,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -605,6 +614,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -641,6 +651,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -710,6 +721,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -730,6 +742,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -901,8 +914,6 @@ export class CategoryComponent implements OnInit {
   }
 
   viewproducts() {
-    console.log("huh");
-
     this.viewctopcatprod4(this.categorynameid, 0)
   }
 
@@ -1020,6 +1031,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -1029,45 +1041,50 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  onScrollDown(eve: any) {
-    console.log("scroll down");
-    this.pagenum += 1
-    console.log("scroll down", this.pagess);
-    console.log("scroll pagenum", this.pagenum);
-    const pageurl = this.pagess[this.pagenum]
-    console.log("pageurl", pageurl);
-    if (pageurl?.url !== null && pageurl !== undefined) {
-      this.pageload = false;
-      this.prodloader = true;
-      this.sidepoploader = true;
-      // this.imgloader = false;
-      this.request.getpage(pageurl?.url).subscribe((response: any) => {
-        this.newpageProduct = response.data;
-        this.pagenation = response.meta;
-        this.pagess = this.pagenation.links;
-        console.log("this.pagess", this.pagess);
-        this.pagee = this.pagenation.current_page;
-        // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
-        // window.scroll(0, 0);
-        this.Product.push(...this.newpageProduct)
-        this.pageload = true;
-        this.prodloader = false;
-        this.sidepoploader = false;
+ 
 
-        for (var i = 0; i <= this.Product.length; i++) {
-          this.likeddd.push(true); 
-        } 
-        for (var i = 0; i <= this.Product.length; i++) {
-          this.likedd.push(false); 
-        }
-        
-        console.log("this.Product", this.Product);
+  onScrollDown(eve:any){
 
-        setTimeout(() => {
-          this.imgloader = true;
-        },500);
-      })
+    if(this.data_loaded ==true){
+      this.pagenum += 1
+      // console.log("scroll down", this.pagess);
+      // console.log("scroll pagenum", this.pagenum);
+      const pageurl = this.pagess[this.pagenum]
+      // console.log("pageurl", pageurl);
+      if (pageurl?.url !== null && pageurl !== undefined) {
+        this.pageload = false;
+        this.prodloader = true;
+        this.sidepoploader = true;
+        // this.imgloader = false;
+        this.request.getpage(pageurl?.url).subscribe((response: any) => {
+          this.newpageProduct = response.data;
+          this.pagenation = response.meta;
+          this.pagess = this.pagenation.links;
+          console.log("this.pagess", this.pagess);
+          this.pagee = this.pagenation.current_page;
+          // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
+          // window.scroll(0, 0);
+          this.Product.push(...this.newpageProduct)
+          this.pageload = true;
+          this.prodloader = false;
+          this.sidepoploader = false;
+  
+          for (var i = 0; i <= this.Product.length; i++) {
+            this.likeddd.push(true); 
+          } 
+          for (var i = 0; i <= this.Product.length; i++) {
+            this.likedd.push(false); 
+          }
+          
+          console.log("this.Product", this.Product);
+  
+          setTimeout(() => {
+            this.imgloader = true;
+          },500);
+        })
+      }
     }
+   
   }
 
   onScrollUp(ev: any) {
@@ -1082,6 +1099,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
       this.minValue = 0;
@@ -1105,6 +1123,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
+      this.data_loaded=true
       this.prodloadermain = true
       this.prodloader = false;
 
@@ -1129,6 +1148,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
+      this.data_loaded=true
       this.prodloadermain = true;
       this.prodloader = false;
 
@@ -1153,6 +1173,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
+      this.data_loaded=true
       this.prodloadermain=true
       this.prodloader = false;
       
@@ -1211,6 +1232,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
+      this.data_loaded=true
       this.prodloadermain = true
       window.scroll(0, 0);
       this.prodloader = false;
