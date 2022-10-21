@@ -135,12 +135,14 @@ export class RecipedetailsComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.getrecipedetaill(this.id)
+    console.log("id on ng oninit");
+    this.route.params.subscribe(val => {
+      this.id = val['id']
+      this.getrecipedetaill(this.id);
     this.getallrecipe(1);
     this.getallrecipecat();
     this.getrecipesbycatg(this.id,1)
-    this.viewfuturedpro();
+    // this.viewfuturedpro();
     this.viewdata();
 
     this.comment = this.fb.group({
@@ -149,6 +151,22 @@ export class RecipedetailsComponent implements OnInit {
 
     });
     this.currenturl = this.router.url;
+    });
+
+    // this.id = this.route.snapshot.params['id'];
+    // this.getrecipedetaill(this.id);
+    // this.getallrecipe(1);
+    // this.getallrecipecat();
+    // this.getrecipesbycatg(this.id,1)
+    // this.viewfuturedpro();
+    // this.viewdata();
+
+    // this.comment = this.fb.group({
+    //   rating: ['', [Validators.required]],
+    //   comment: ['', [Validators.required]],
+
+    // });
+    // this.currenturl = this.router.url;
 
     
     (($) => {
@@ -214,6 +232,7 @@ export class RecipedetailsComponent implements OnInit {
 
       this.Bestsellpro=response.data.slice(0,4);  
       this.loader6=false
+
     
       console.log("Bestsellpro",this.Bestsellpro);
       setTimeout(() => {
@@ -266,8 +285,11 @@ export class RecipedetailsComponent implements OnInit {
     this.router.navigate(['/recipe'],{ queryParams:{ category:id, page: 1} });
   }
   getblogdetail2(id: any) {
+    console.log("id",id);
+    
     window.scroll(0, 0);
     this.router.navigate(['recipedetails', id]);
+    
     
   }
   getrecipedetaill(id: any) {
@@ -281,6 +303,7 @@ export class RecipedetailsComponent implements OnInit {
     this.blog_id = id;
     this.request.getrecipedetail(id).subscribe((response: any) => {
     console.log("rec detail respoonse",response);
+    this.allgalleryphotos = [];
       this.Peoduct = response.data[0];
       this.photoss = this.Peoduct.photos;
       this.nutritional = this.Peoduct.nutritional_fact;
@@ -290,15 +313,15 @@ export class RecipedetailsComponent implements OnInit {
       this.recipecat= this.Peoduct.category
       this.getrecipesbycatg(this.recipecat,1)
       this.relatedrec =this.Peoduct.products;
-   
-      
+  
       this.videoo =this.Peoduct.video_link;
       this.videourl = this.sanitizer.bypassSecurityTrustResourceUrl(this.videoo);    
       this.sideloader2 = false;
 
       this.discrloading = false;
       this.discriptloader = false;
-
+      this.loader6=false
+      this.imgloader2 = false;
       this.allgalleryphotos = this.photoss.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path);
       console.log("this.allgalleryphotos", this.allgalleryphotos);
       //  this.photoss.forEach((item: any) => {
@@ -594,6 +617,25 @@ export class RecipedetailsComponent implements OnInit {
     // }
   }
 
+  addtocartprod(members:any){
+    console.log("members",members);
+    this.request.addcart_recipeprod(members,this.id).subscribe((res: any) => {
+      console.log("addcart_recipeprod res", res);
+      if (res.result == true) {
+        this.addRecordSuccess();
+        this.sharedService.sendClickEvent();
+        this.router.navigate(['/cart'])
+      }
+      else{
+        this.toastr.success('', res.essage);
+      }
+     
+    }, (error: any) => {
+      console.log("error", error);
+    });
+    
+
+  }
   addRecordSuccess() {
     this.toastr.success('Added Successfully', '');
   }

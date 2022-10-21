@@ -176,6 +176,18 @@ export class RequestService {
 
   }
 
+  // recipe prod add ca
+  public addcart_recipeprod(members: any,id:any){
+
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
+     this.url = `${this.endPoint1}/recipe/addtocart/` + id + `?people=` + members +`&user_id=` + this.userid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;;
+    //this.url = `${this.endPoint1}/testcarts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
+    console.log("this.url",this.url);
+    
+    return this.http.post(this.url, null, { headers: headers });
+  }
   public cartcount(id: any,) {
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
@@ -862,7 +874,8 @@ export class RequestService {
     return this.http.get(this.url);
   }
   public getrecipedetail(id: string) {
-    this.url = `${this.endPoint1}/recipe/` + id;
+   this.url = `${this.endPoint1}/recipe/` + id;
+    // this.url =` https://neophroncrm.com/spiceclub_staging/api/v2/recipe/5`
     return this.http.get(this.url);
   }
   public getcomments(id: string) {

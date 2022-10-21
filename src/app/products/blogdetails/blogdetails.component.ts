@@ -90,7 +90,6 @@ this.getblogbycatg2(this.id)
     this.comment = this.fb.group({
       rating: ['', [Validators.required]],
       comment: ['', [Validators.required]],
-
     });
     this.currenturl = this.router.url
   }

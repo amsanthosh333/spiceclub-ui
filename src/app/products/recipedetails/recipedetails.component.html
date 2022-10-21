@@ -162,7 +162,7 @@
 
                                     <div class="videoo mt-10" style="text-align: center;">
 
-                                        <button class="buyusedprodbtn" *ngIf="buybtn" (click)="scrollToElement(target)">Buy used products</button>
+                                        <button class="buyusedprodbtn" *ngIf="buybtn && videourl" (click)="scrollToElement(target)">Buy used products</button>
                                         <iframe id=iframetest width="100%" height="350" [src]="videourl"
                                             title="YouTube video player" frameborder="0" (load)="uploadDone()"
                                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -333,58 +333,6 @@
                                                             </div>
 
                                                             <!--=======  End of shop product long description  =======-->
-                                                        </div>
-
-                                                        <div class="tab-pane fade" id="product-series-4" role="tabpanel"
-                                                            aria-labelledby="product-tab-4">
-                                                            <!--=======  shop product additional information  =======-->
-
-                                                            <div class="shop-product__additional-info">
-
-                                                                <!-- <h2 class="comment-title mb-30">Nutritional Facts</h2> -->
-                                                                <table class="shop-attributes"
-                                                                    style="text-align: start; margin: 0px;">
-                                                                    <tbody class="ordernowtable">
-                                                                        <tr class="tableheader">
-                                                                            <th>Products</th>
-                                                                            <td>For 3 members</td>
-                                                                            <td>For 5 members</td>
-                                                                            <td>For 10 members</td>
-                                                                            <td style="width:23% ;">For 10 + members
-                                                                            </td>
-                                                                        </tr>
-                                                                        <tr *ngFor="let img of Bestsellpro;let i = index"
-                                                                            class="tabledatas">
-                                                                            <th
-                                                                                style="font-size: large;text-align: center;">
-                                                                                <img class="prodimgicon"
-                                                                                    src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}">
-                                                                            </th>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td>-</td>
-                                                                            <td *ngIf="i === 0"
-                                                                                [attr.rowspan]="Bestsellpro.length">
-                                                                                Increase the quantity based on mentioned
-                                                                                weight calculation </td>
-                                                                        </tr>
-                                                                        <tr class="orderbuttons">
-                                                                            <th></th>
-                                                                            <td><button>Order now</button></td>
-                                                                            <td><button>Order now</button></td>
-                                                                            <td><button>Order now</button></td>
-                                                                            <td><button>Order now</button></td>
-                                                                        </tr>
-
-
-
-
-
-                                                                    </tbody>
-                                                                </table>
-                                                            </div>
-
-                                                            <!--=======  End of shop product additional information  =======-->
                                                         </div>
 
                                                         <div class="tab-pane fade" id="product-series-2" role="tabpanel"
@@ -633,30 +581,29 @@
                                                             <td style="width:23% ;">For 10 + members
                                                             </td>
                                                         </tr>
-                                                        <tr *ngFor="let img of Bestsellpro;let i = index"
+                                                        <tr *ngFor="let img of Peoduct?.recipeproducts;let i = index"
                                                             class="tabledatas">
                                                             <th style="font-size: large;text-align: center;">
                                                                 <img class="prodimgicon"
                                                                     src="https://neophroncrm.com/spiceclubnew/public/{{img.thumbnail_image}}">
+                                                                    <br>
+
+                                                                    <span style="font-size: 0.7rem;">{{img.name}}</span>
                                                             </th>
-                                                            <td>-</td>
-                                                            <td>-</td>
-                                                            <td>-</td>
-                                                            <td *ngIf="i === 0" [attr.rowspan]="Bestsellpro.length">
+                                                            <td>{{img.people3}}</td>
+                                                            <td>{{img.people5}}</td>
+                                                            <td>{{img.people10}}</td>
+                                                            <td *ngIf="i === 0" [attr.rowspan]="Peoduct.recipeproducts.length">
                                                                 Increase the quantity based on mentioned
                                                                 weight calculation </td>
                                                         </tr>
                                                         <tr class="orderbuttons">
                                                             <th></th>
-                                                            <td><button>Order now</button></td>
-                                                            <td><button>Order now</button></td>
-                                                            <td><button>Order now</button></td>
-                                                            <td><button>Order now</button></td>
+                                                            <td><button (click)="addtocartprod('people3')" >Order now</button></td>
+                                                            <td><button (click)="addtocartprod('people5')">Order now</button></td>
+                                                            <td><button (click)="addtocartprod('people10')">Order now</button></td>
+                                                            <td><button (click)="addtocartprod('peopleplus')">Order now</button></td>
                                                         </tr>
-
-
-
-
 
                                                     </tbody>
                                                 </table>
@@ -675,8 +622,8 @@
 
                                             <div class="carousall">
                                                 <carousel style="height: 323px; z-index: unset;" *ngIf="!loader6">
-                                                    <div class="carousel-cell"
-                                                        *ngFor="let img of Bestsellpro;let i = index">
+                                                    <div class="carousel-cell" 
+                                                        *ngFor="let img of  Peoduct?.recipeproducts;let i = index"> 
                                                         <div class="single-product"
                                                             style="padding-left: 20px; overflow: hidden; padding-right: 20px;background-color: whitesmoke;padding-bottom:3px;">
                                                             <div class="single-product__image pt-10">
@@ -753,9 +700,7 @@
                                             font-weight: 600;
                                             color: #4a4a4a;
                                             font-size: 13px;">{{img.name}}</a> </h3>
-                                                                    <a id="vieww"
-                                                                        style="font-size: small;color: red;font-size: small; margin-left: 10px;">View
-                                                                        Details</a>
+                                                                    
                                                                 </div>
 
                                                                 <div class="price" style="margin-top: -4px;">
@@ -776,7 +721,7 @@
 
                                                             <!--=======  End of single product content   =======-->
                                                             <div class="row" id="addcartbtn"
-                                                                *ngIf="img.variants.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
+                                                                *ngIf="img.variants?.length ==0 || img.variants[0]?.options?.length == 1 || showaddbtn== i">
                                                                 <div class="col-6 "
                                                                     style="padding-left:5px ; padding-right: 5px;">
                                                                     <input (change)="qtyChange($event,i,img)"
