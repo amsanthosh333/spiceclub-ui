@@ -186,7 +186,21 @@ export class RequestService {
     //this.url = `${this.endPoint1}/testcarts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
     console.log("this.url",this.url);
     
-    return this.http.post(this.url, null, { headers: headers });
+    return this.http.post(this.url, null, { headers: headers })
+    .pipe( map((temporaryId) => { 
+        localStorage.setItem('temporaryId', JSON.stringify(temporaryId));
+
+        this.temporaryIdSubject = new BehaviorSubject<temporaryId>(
+          JSON.parse(localStorage.getItem('temporaryId') || '{}')
+        );
+        this.temp_Id = this.temporaryIdSubject.asObservable();
+        this.temp_detail=this.temporaryIdSubject.value;
+        this.currrent_temp_Id=this.temp_detail.temp_user_id  
+        // this.temporaryIdSubject.next(temporaryId); 
+        // // console.log("currentuser:",user);
+        return temporaryId;
+      })
+    );;
   }
   public cartcount(id: any,) {
     const headers = new HttpHeaders()

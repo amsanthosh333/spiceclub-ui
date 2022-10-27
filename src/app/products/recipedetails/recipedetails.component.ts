@@ -627,7 +627,7 @@ export class RecipedetailsComponent implements OnInit {
         this.router.navigate(['/cart'])
       }
       else{
-        this.toastr.success('', res.essage);
+        this.toastr.info('', res.message);
       }
      
     }, (error: any) => {
