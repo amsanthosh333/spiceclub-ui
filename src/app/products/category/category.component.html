@@ -170,7 +170,7 @@
                                     <li class="has-children" *ngFor="let cat of Catbrand;let i = index">
                                         <label style="display: flex;"> <a style="padding-top: 3px;">
                                                 <input (change)="viewcatbrandprod(cat.id,i,$event)"
-                                                    [checked]="brandItem === i" type="checkbox"></a>
+                                                    [checked]="brandItem === i" type="radio"></a>
                                             <div class="catname"> <span>{{cat.name}}</span></div>
                                         </label>
                                     </li>

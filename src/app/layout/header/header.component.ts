@@ -1635,8 +1635,6 @@ var i = 0;
 $( "#lii_two" )
   .mouseenter(function() {
     i += 1;
-    console.log("i",i);
-    
     if(i<=1){
      
     if ($(this).hasClass('scrolling')) return;
@@ -1647,16 +1645,13 @@ $( "#lii_two" )
     setTimeout(() => {
       $(this).animate({
         scrollTop: 0
-      },  'slow');
-      console.log("dfgdfg");
-      
+      },  'slow'); 
     }, 800);
   }
 
   
   })
-  .mouseleave(function() {
-    console.log("i eee",i);
+  .mouseleave(function() {  
      i =0;
   });
  
@@ -1677,14 +1672,11 @@ $( "#lii_one" )
     setTimeout(() => {
       $(this).animate({
         scrollTop: 0
-      },  'slow');
-      console.log("dfgdfg");
-      
+      },  'slow');   
     }, 800);
   }
   })
-  .mouseleave(function() {
-    console.log("i eee",i);
+  .mouseleave(function() {  
      i =0;
   });
 
@@ -1694,7 +1686,6 @@ $( "#lii_one" )
     .mouseenter(function() {
   
       i += 1;
-      console.log("i",i);
       
       if(i<=1){
        
@@ -1707,13 +1698,11 @@ $( "#lii_one" )
         $(this).animate({
           scrollTop: 0
         },  'slow');
-        console.log("dfgdfg");
         
       }, 800);
     }
     })
     .mouseleave(function() {
-      console.log("i eee",i);
        i =0;
     });
 
@@ -1913,7 +1902,6 @@ $( "#lii_one" )
       });
   }
   viewsubcat(id: any, i: any) {
-    console.log("viewsubcat");
     this.viewsubcat1var =setTimeout(() => {   
       this.cat_id = id
       this.subItem = i
@@ -1925,15 +1913,13 @@ $( "#lii_one" )
       this.Subcat3 = []
       this.request.getsubcategoryofcat(id).subscribe((res: any) => {
         this.Subcat = res.data;
-        console.log("this.Subcat", this.Subcat);
       }, (error: any) => {
         console.log("error", error);
       });
     }, 700); 
   }
   viewsubcatmoustout(){
-    console.log("viewsubcatmoustout");
-    
+
     clearTimeout(this.viewsubcat1var);
   }
 

@@ -154,8 +154,8 @@ export class CategoryComponent implements OnInit {
   currentpackagevalue: any;
   edata: any;
   throttle = 100;
-  immediateCheck:boolean=true
-  data_loaded: boolean= false;
+  immediateCheck: boolean = true
+  data_loaded: boolean = false;
   constructor(private router: Router, private route: ActivatedRoute, private formBuilder: FormBuilder, private fb: FormBuilder,
     private request: RequestService, private modalService: NgbModal, private toastr: ToastrService,
     config: NgbRatingConfig, private _location: Location,
@@ -177,23 +177,37 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log("ngOnInit()");
-    
-    const queryParams = this.activatedRoute.snapshot.queryParams
-        const routeParams = this.activatedRoute.snapshot.params;  
-        // do something with the parameters       
-     
+    this.activatedRoute.params.subscribe((data2: Params) => {
+      const queryParams = this.activatedRoute.snapshot.queryParams
+      const routeParams = this.activatedRoute.snapshot.params;
+      this.id = this.route.snapshot.params['id'];
+      if (queryParams['subcategory'] == null) {
+        console.log("params");
+        this.viewallcategory();
+        this.categorydetail(this.id);
+        this.getprodofcategory(this.id, 1);
+        this.getsubcategory(this.id);
+        this.SubofSubcat = []
+        this.SubofSubcat1 = []
+        this.viewtopcategory();
+        // this.viewfeatured();
+        this.categorybrand(this.id);
+        this.page2 = true;
+        this.selectedItem = this.id;
+        this.categoryy_id = this.id;
+      }
+    })
+
     this.activatedRoute.queryParams.subscribe((data2: Params) => {  
       this.id = this.route.snapshot.params['id'];
       this.subcatedoryid = this.route.snapshot.queryParams['subcategory']
       this.catedory1id = this.route.snapshot.queryParams['category1']
-      this.subcategory1id = this.route.snapshot.queryParams['subcategory1']  
+      this.subcategory1id = this.route.snapshot.queryParams['subcategory1']
       let locationPath = this.location.path();
-      this.headItem =0;
-      this.pagenum =1;
-      this.pagess= null
-      this.data_loaded=false
-      console.log("this.catedory1id",this.catedory1id);
+      this.headItem = 0;
+      this.pagenum = 1;
+      this.pagess = null
+      this.data_loaded = false
       if (locationPath.length) {
         this.locationSegments = locationPath.split('/');
       }
@@ -203,7 +217,9 @@ export class CategoryComponent implements OnInit {
         this.page2 = false;
       }
       else {
-        if (this.subcategory1id !== undefined) { 
+
+        if (this.subcategory1id !== undefined) {
+          console.log("this.subcategory1id !");
           this.page2 = true;
           this.categoryy_id = this.subcategory1id
           this.viewctopcatprodsub1(this.subcategory1id, 1, 0)
@@ -217,6 +233,7 @@ export class CategoryComponent implements OnInit {
           this.categorybrand(this.subcategory1id);
         }
         else if (this.catedory1id !== undefined) {
+          console.log("this.catedory1id !");
           this.page2 = true;
           this.categoryy_id = this.catedory1id
           this.viewctopcatprodsub(this.catedory1id, 1, 0)
@@ -230,10 +247,10 @@ export class CategoryComponent implements OnInit {
           // this.viewfeatured();
           this.categorybrand(this.catedory1id);
         }
-        else if (this.subcatedoryid !== undefined) {  
-          
+        else if (this.subcatedoryid !== undefined) {
+          console.log("this.subcatedoryid !");
           // console.log("subcatedoryid sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",this.subcatedoryid );
-          
+
           this.page2 = true;
           this.categoryy_id = this.subcatedoryid
           this.viewsubcatprod(this.subcatedoryid, 1, 0)
@@ -244,54 +261,53 @@ export class CategoryComponent implements OnInit {
           this.viewallcategory();
           this.categorydetail(this.id);
           this.viewtopcategory();
-          // this.viewfeatured();
           this.categorybrand(this.subcatedoryid);
         }
 
         else {
-          this.viewallcategory();
-          this.categorydetail(this.id);
-          this.getprodofcategory(this.id, 1);
-          this.getsubcategory(this.id);
-          this.SubofSubcat = []
-          this.SubofSubcat1 = []
-          this.viewtopcategory();
-          // this.viewfeatured();
-          this.categorybrand(this.id);
-          this.page2 = true;
-          this.selectedItem = this.id;
-          this.categoryy_id = this.id;
-        
+          console.log("else");
+          // this.viewallcategory();
+          // this.categorydetail(this.id);
+          // this.getprodofcategory(this.id, 1);
+          // this.getsubcategory(this.id);
+          // this.SubofSubcat = []
+          // this.SubofSubcat1 = []
+          // this.viewtopcategory();
+          // this.categorybrand(this.id);
+          // this.page2 = true;
+          // this.selectedItem = this.id;
+          // this.categoryy_id = this.id;
+
         }
       }
     }),
 
-  //   this.router.events.subscribe(event =>{
-  //     if (event instanceof NavigationStart){
-  //        console.log(event.url)
-        
-  //     }
-  //  })
-    // this.activatedRoute.params.subscribe((data2: Params) => {
-    //   this.id = this.route.snapshot.params['id']; 
-    //   this.headItem =0;
-    //   this.viewallcategory();
-    //       this.categorydetail(this.id);
-    //       this.getprodofcategory(this.id, 1);
-    //       this.getsubcategory(this.id);
-    //       this.SubofSubcat = []
-    //       this.SubofSubcat1 = []
-    //       this.viewtopcategory(); 
-    //       this.categorybrand(this.id);
-    //       this.page2 = true;
-    //       this.selectedItem = this.id;
-    //       this.categoryy_id = this.id; 
-    // });
+      //   this.router.events.subscribe(event =>{
+      //     if (event instanceof NavigationStart){
+      //        console.log(event.url)
 
-    this.maximunprice();
-      this.search = this.fb.group({
-        key: [''],
-      });
+      //     }
+      //  })
+      // this.activatedRoute.params.subscribe((data2: Params) => {
+      //   this.id = this.route.snapshot.params['id']; 
+      //   this.headItem =0;
+      //   this.viewallcategory();
+      //       this.categorydetail(this.id);
+      //       this.getprodofcategory(this.id, 1);
+      //       this.getsubcategory(this.id);
+      //       this.SubofSubcat = []
+      //       this.SubofSubcat1 = []
+      //       this.viewtopcategory(); 
+      //       this.categorybrand(this.id);
+      //       this.page2 = true;
+      //       this.selectedItem = this.id;
+      //       this.categoryy_id = this.id; 
+      // });
+
+      this.maximunprice();
+    this.search = this.fb.group({
+      key: [''],
+    });
 
     this.subsearch = this.fb.group({
       key: [''],
@@ -313,17 +329,17 @@ export class CategoryComponent implements OnInit {
   toggledelete(img: any, index: any): void {
     if (this.userid !== 0) {
       this.likedd[index] = !this.likedd[index];
-    if (this.likedd[index] == true) {
-      this.addtowishlist(img.id);
-    }
-    else if (this.likedd[index] == false) {
-      this.deleteRecord(img.id);
-    }
+      if (this.likedd[index] == true) {
+        this.addtowishlist(img.id);
+      }
+      else if (this.likedd[index] == false) {
+        this.deleteRecord(img.id);
+      }
     }
     else {
-      this. openlogin()
+      this.openlogin()
     }
-    
+
   }
   openlogin() {
     this.modalService.open(LoginComponent, {
@@ -335,8 +351,6 @@ export class CategoryComponent implements OnInit {
   categorybrand(id: any) {
     this.request.getcatbrands(id).subscribe((response: any) => {
       this.Catbrand = response.data;
-      console.log("this.Catbrand", this.Catbrand);
-      // this.loader2 = false
     },
       (error: any) => {
         console.log("error", error);
@@ -363,9 +377,7 @@ export class CategoryComponent implements OnInit {
       });
   }
   getsubcategory(id: any) {
-    console.log("getsubcategory");
     this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-      
       this.Subcat = res.data;
       this.sideloader = false;
       let index = this.Subcat?.findIndex((x: any) => x.id == this.subcatedoryid);
@@ -390,14 +402,13 @@ export class CategoryComponent implements OnInit {
     this.imgloader = false;
     this.selectedItem = this.id;
     this.brandItem = ''
-    this.topItem=''
+    this.topItem = ''
     this.subItem = ''
     this.request.getcatprod(id, page).subscribe((response: any) => {
-      console.log(response);
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -411,7 +422,6 @@ export class CategoryComponent implements OnInit {
   categorydetail(id: any) {
     this.categorynameid = id
     this.request.getcatdetail(id).subscribe((response: any) => {
-      console.log("categorydetail", response);
       this.catName = response.data[0].name
     })
   }
@@ -438,7 +448,7 @@ export class CategoryComponent implements OnInit {
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       let edata4 = {
@@ -486,12 +496,12 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      },500);
+      }, 500);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -516,7 +526,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -548,7 +558,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -574,7 +584,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -588,12 +598,12 @@ export class CategoryComponent implements OnInit {
 
   }
   viewctopcatprod3sub(id: any, i: any) {
-    console.log("id,i",id ,i)
+    console.log("id,i", id, i)
     this.topItem = i
     this.category1_id = id
     this.router.navigate(['category', this.categorynameid], { queryParams: { subcategory: this.subcategory_id, category1: id, } });
   }
-  viewctopcatprod3sub1(id: any, i: any,event:any) {
+  viewctopcatprod3sub1(id: any, i: any, event: any) {
     this.topItem1 = i
     this.router.navigate(['category', this.categorynameid], { queryParams: { subcategory: this.subcategory_id, category1: this.category1_id, subcategory1: id } });
   }
@@ -614,12 +624,12 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
         this.imgloader = true;
-      },500);
+      }, 500);
       this.search.reset();
       this.searchh1 = true;
       this.search2 = false;
@@ -636,7 +646,6 @@ export class CategoryComponent implements OnInit {
     this.viewctopcatprod2(id, 1, i)
   }
   viewsubcatprod(id: any, page: any, i: any) {
-    console.log("subcatprod viewsubcatprod", id);
     // this.subsearch.reset();
     this.prodloadermain = false
     this.prodloader = true;
@@ -647,11 +656,10 @@ export class CategoryComponent implements OnInit {
     this.topItem = '';
     this.brandItem = '';
     this.request.getsubcatprod(id, page).subscribe((response: any) => {
-      console.log("subcatprod response", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -661,13 +669,10 @@ export class CategoryComponent implements OnInit {
     });
   }
   subofsubcatprod(id: any) {
-    console.log("catedory1id", this.catedory1id);
     this.request.getsubcategoryofcat(id).subscribe((res: any) => {
       this.SubofSubcat = res.data;
-      console.log("SubofSubcat", this.SubofSubcat);
       this.sideloader = false;
       let index = this.SubofSubcat?.findIndex((x: any) => x.id == this.catedory1id);
-      console.log("index", index); 
       this.topItem = index
     }, (error: any) => {
       console.log("error", error);
@@ -677,10 +682,8 @@ export class CategoryComponent implements OnInit {
     this.category1_id = id
     this.request.getsubcategoryofcat(id).subscribe((res: any) => {
       this.SubofSubcat1 = res.data;
-      console.log("SubofSubcat1", this.SubofSubcat1);
       let index = this.SubofSubcat1?.findIndex((x: any) => x.id == this.subcategory1id);
       this.topItem1 = index
-      console.log("this.topItem1", this.subcategory1id, this.topItem1);
       this.sideloader = false;
     }, (error: any) => {
       console.log("error", error);
@@ -697,7 +700,6 @@ export class CategoryComponent implements OnInit {
 
   }
   viewsubcatprodformpage(catid: any, id: any, i: any) {
-    console.log("subcatprooduct");
     this.router.navigate(['category', catid], { queryParams: { subcategory: id } });
 
     window.scroll(0, 0);
@@ -716,12 +718,12 @@ export class CategoryComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.brandItem = '';
-    this.headItem ='';
+    this.headItem = '';
     this.request.getcatsearchprod(this.categoryy_id, page, key).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -737,12 +739,12 @@ export class CategoryComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.brandItem = '';
-    this.headItem ='';
+    this.headItem = '';
     this.request.getsubcatsearchprod(this.categoryy_id, page, key).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -862,7 +864,7 @@ export class CategoryComponent implements OnInit {
   }
   addtocart2() {
     if (this.userid == 0) {
-      this. openlogin()
+      this.openlogin()
     }
     else {
       let edata = {
@@ -947,68 +949,68 @@ export class CategoryComponent implements OnInit {
     //   this. openlogin()
     // }
     // else {
-      if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-        console.log("empty");
-        this.varient_value = ''
-      }
-      else if (img.variants[0]?.options?.length == 1) {
-        this.varient_value = img.variants[0]?.options[0];
-      }
-      else {
-        this.varient_value = this.selectedvar;
-      }
-      const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      if (index > -1) {
-        this.totalqty = this.quantityarray[index].value;
-      }
-      else {
-        this.totalqty = 1
-      }
-      
-      if( img.variants?.length > 1){
-        this.currentpackagevalue= img?.variants[1]?.options[0]
-        this.edata = {
-          id: img.id,
-          variant: (this.varient_value?.replace(/\s/g, "")+"-"+ this.currentpackagevalue.replace(/\s/g, "")),
-          user_id: this.userid,
-          quantity: this.totalqty,
-          buyertype: this.buyertypeid,
-        }
-      }
-      else{
-        this.edata = {
-          id: img.id,
-          variant: this.varient_value?.replace(/\s/g, ""),
-          user_id: this.userid,
-          quantity: this.totalqty,
-          buyertype: this.buyertypeid,
-        }
-      }
-      this.request.addtocart(this.edata).subscribe((res: any) => {
-        if (res.result == true) { 
-          this.addRecordSuccess();
-          this.modalService.dismissAll();
-          this.sharedService.sendClickEvent();
-        }
-        else  {
-          this.toastr.info(res.message);
-        }
-       
-      },
-        (error: any) => {
-          this.toastr.error(error);
-          console.log("error", error);
+    if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
+      console.log("empty");
+      this.varient_value = ''
+    }
+    else if (img.variants[0]?.options?.length == 1) {
+      this.varient_value = img.variants[0]?.options[0];
+    }
+    else {
+      this.varient_value = this.selectedvar;
+    }
+    const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
+    if (index > -1) {
+      this.totalqty = this.quantityarray[index].value;
+    }
+    else {
+      this.totalqty = 1
+    }
 
-        });
+    if (img.variants?.length > 1) {
+      this.currentpackagevalue = img?.variants[1]?.options[0]
+      this.edata = {
+        id: img.id,
+        variant: (this.varient_value?.replace(/\s/g, "") + "-" + this.currentpackagevalue.replace(/\s/g, "")),
+        user_id: this.userid,
+        quantity: this.totalqty,
+        buyertype: this.buyertypeid,
+      }
+    }
+    else {
+      this.edata = {
+        id: img.id,
+        variant: this.varient_value?.replace(/\s/g, ""),
+        user_id: this.userid,
+        quantity: this.totalqty,
+        buyertype: this.buyertypeid,
+      }
+    }
+    this.request.addtocart(this.edata).subscribe((res: any) => {
+      if (res.result == true) {
+        this.addRecordSuccess();
+        this.modalService.dismissAll();
+        this.sharedService.sendClickEvent();
+      }
+      else {
+        this.toastr.info(res.message);
+      }
+
+    },
+      (error: any) => {
+        this.toastr.error(error);
+        console.log("error", error);
+
+      });
     // }
   }
-  bestsellingselectvar(weight: any, i: any, id: any,varient:any) {  
+  bestsellingselectvar(weight: any, i: any, id: any, varient: any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    if(varient.length>1){
-  this.currentpackagevalue= varient[1].options[0]
+    if (varient.length > 1) {
+      this.currentpackagevalue = varient[1].options[0]
     }
-    this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
+    this.request.addvarientfromdetail(id, weight, this.currentpackagevalue).subscribe((res: any) => {
       console.log("selectvar res", res);
       this.Product[i].stroked_price = res.stroked_price
       this.Product[i].main_price = res.price_string;
@@ -1022,8 +1024,8 @@ export class CategoryComponent implements OnInit {
   pricerange() {
     this.prodloadermain = false;
     this.prodloader = true;
-    
-    if (this.brandd_id == null||this.brandd_id == undefined ) {
+
+    if (this.brandd_id == null || this.brandd_id == undefined) {
       this.brandd_id = ''
       this.brandItem = '';
     }
@@ -1031,7 +1033,7 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       setTimeout(() => {
@@ -1041,11 +1043,11 @@ export class CategoryComponent implements OnInit {
     });
   }
 
- 
 
-  onScrollDown(eve:any){
 
-    if(this.data_loaded ==true){
+  onScrollDown(eve: any) {
+
+    if (this.data_loaded == true) {
       this.pagenum += 1
       // console.log("scroll down", this.pagess);
       // console.log("scroll pagenum", this.pagenum);
@@ -1068,23 +1070,23 @@ export class CategoryComponent implements OnInit {
           this.pageload = true;
           this.prodloader = false;
           this.sidepoploader = false;
-  
+
           for (var i = 0; i <= this.Product.length; i++) {
-            this.likeddd.push(true); 
-          } 
-          for (var i = 0; i <= this.Product.length; i++) {
-            this.likedd.push(false); 
+            this.likeddd.push(true);
           }
-          
+          for (var i = 0; i <= this.Product.length; i++) {
+            this.likedd.push(false);
+          }
+
           console.log("this.Product", this.Product);
-  
+
           setTimeout(() => {
             this.imgloader = true;
-          },500);
+          }, 500);
         })
       }
     }
-   
+
   }
 
   onScrollUp(ev: any) {
@@ -1099,13 +1101,13 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
       this.minValue = 0;
       this.maxValue = this.maximumprize;
       this.subItem = ''
-      this.brandd_id='';
+      this.brandd_id = '';
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
@@ -1123,14 +1125,14 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       this.prodloader = false;
 
       this.minValue = 0;
       this.maxValue = this.maximumprize;
       this.subItem = ''
-      this.brandd_id='';
+      this.brandd_id = '';
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
@@ -1148,39 +1150,39 @@ export class CategoryComponent implements OnInit {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true;
       this.prodloader = false;
 
       this.minValue = 0;
       this.maxValue = this.maximumprize;
       this.subItem = '';
-      this.brandd_id='';
+      this.brandd_id = '';
       // this.categoryItem=''
       setTimeout(() => {
         this.imgloader = true;
-      },500);
+      }, 500);
     },
       (error: any) => {
         console.log("error", error);
       });
   }
   viewflashdeal() {
-    this.prodloadermain=false
+    this.prodloadermain = false
     this.prodloader = true;
     this.imgloader = false;
     this.request.getflashdealpro(this.categoryy_id).subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
-      this.data_loaded=true
-      this.prodloadermain=true
+      this.data_loaded = true
+      this.prodloadermain = true
       this.prodloader = false;
-      
+
       this.minValue = 0;
       this.maxValue = this.maximumprize;
       this.subItem = ''
-      this.brandd_id='';
+      this.brandd_id = '';
       setTimeout(() => {
         this.imgloader = true;
       }, 500);
@@ -1192,7 +1194,6 @@ export class CategoryComponent implements OnInit {
 
   maximunprice() {
     this.request.getmaximumprice().subscribe((response: any) => {
-      console.log(response);
       this.maximumprize = response.price;
       // this.maxValue=this.maximumprize
       let opts: Options = {
@@ -1215,8 +1216,8 @@ export class CategoryComponent implements OnInit {
     this.headItem = i
 
   }
-  viewcatbrandprod(id: any, i: any ,event:any) {
-    
+  viewcatbrandprod(id: any, i: any, event: any) {
+
     this.brandItem = i
     this.prodloadermain = false;
     this.prodloader = true;
@@ -1225,14 +1226,14 @@ export class CategoryComponent implements OnInit {
       this.minValue = 0
     this.maxValue = this.maximumprize
     if (!event.target.checked) {
-      this.brandd_id='' 
+      this.brandd_id = ''
     }
 
     this.request.filterdataa3(1, this.categoryy_id, this.brandd_id, this.minValue, this.maxValue, '').subscribe((response: any) => {
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
-      this.data_loaded=true
+      this.data_loaded = true
       this.prodloadermain = true
       window.scroll(0, 0);
       this.prodloader = false;
@@ -1241,14 +1242,14 @@ export class CategoryComponent implements OnInit {
       }, 500);
     });
   }
-  under200(){
-    this.minValue=0;
-    this.maxValue=200;
+  under200() {
+    this.minValue = 0;
+    this.maxValue = 200;
     this.pricerange()
   }
-  uptoto500(){
-    this.minValue=200;
-    this.maxValue=500;
+  uptoto500() {
+    this.minValue = 200;
+    this.maxValue = 500;
     this.pricerange()
   }
 

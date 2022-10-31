@@ -633,13 +633,10 @@ export class RequestService {
   }
   public getcatprod(id: any, page: any) {
     this.url = `${this.endPoint1}/products/category/` + id + '?page=' + page + '&name=&user_id=' + this.userid;
-    console.log(this.url);
     return this.http.get(this.url);
   }
   public getcatdetail(id: any) {
     this.url = `${this.endPoint1}/categories/detail/` + id;
-    console.log(this.url);
-
     return this.http.get(this.url);
   }
   public getcatsearchprod(id: any, page: any, key: any) {
@@ -652,9 +649,7 @@ export class RequestService {
 
   }
   public getsubcatprod(id: any, page: any) {
-    this.url = `${this.endPoint1}/products/sub-category/` + id + '?page=' + page;
-    console.log(this.url );
-    
+    this.url = `${this.endPoint1}/products/sub-category/` + id + '?page=' + page;  
     return this.http.get(this.url);
   }
   public getsubcatsearchprod(id: any, page: any, key: any) {
