@@ -127,6 +127,7 @@ export class ProductdetailComponent implements OnInit {
   btnItemm: boolean = false;
   desbtnItemm: boolean = false;
   varphotoos: Array<object> = [];
+  varphotooswith_Url: Array<object> = [];
   newvarphotos: any;
   vargalleryphotos: any = [];
   varstrokedprice: any;
@@ -170,6 +171,7 @@ export class ProductdetailComponent implements OnInit {
   zoomImageSrc = "https://wittlock.github.io/ngx-image-zoom/assets/fullres.jpg";
   Alsoboughtprod: any;
   discount_price: any;
+  selectedvarientimage: any;
 
   
 
@@ -889,20 +891,19 @@ export class ProductdetailComponent implements OnInit {
     this.varient_value = weight.replace(/\s/g, "")
     this.currentvarient = weight
     this.subItem = i
-    const index = this.allgalleryphotos.findIndex((object: any) => {
-      console.log("object", object);
-      console.log("object", this.varient_value);
-      return object.variant == this.varient_value;
-    });
-    this.selectedimage = this.allgalleryphotos[index]?.image;
-    this.selectedimg = index;
-    this.imgItem = index
+    // const index = this.allgalleryphotos.findIndex((object: any) => {
+    //   return object.variant == this.varient_value;
+    // });
+    // this.selectedimage = this.allgalleryphotos[index]?.image;
+    // this.selectedimg = index;
+    // this.imgItem = index
+   
     this.request.addvarientfromdetail(this.product_id, weight, this.currentpackage).subscribe((res: any) => {
-      console.log("selectvar", res);
+      console.log("selectvarresponse" ,res );
+      
       this.Peoduct.main_price = res?.price_string;
       this.Peoduct.stroked_price = res?.stroked_price;
       this.Peoduct.excl_gst = res?.excl_gst;
-     
       this.Peoduct.discount_amount = res?.discount_amount;
       this.Peoduct.discount_percentage = res?.discount_percentage;
       this.Peoduct.current_stock = res?.stock;
@@ -912,11 +913,25 @@ export class ProductdetailComponent implements OnInit {
       this.stocck = res?.stock;
       this.stocckkk = res?.stock;
       this.stk = res?.stock;
-      console.log("this.stk", this.stk);
       this.quantityyy = 1;
       this.totalprice = res?.price;
       this.discount_price = res?.discount_amount
+      this.varphotoos =[]
+      this.varphotooswith_Url=[]
       this.varphotoos = res.image
+      this.varphotoos.forEach((items: any) => {  
+        this.varphotooswith_Url.push({
+          image: 'https://neophroncrm.com/spiceclubnew/public/' + items,
+         
+        })
+      })
+      this.selectedvarientimage= this.varphotooswith_Url[0]
+      const index = this.allgalleryphotos.findIndex((object: any) => {
+        return object.image === this.selectedvarientimage.image;
+      });
+      this.selectedimage = this.allgalleryphotos[index]?.image;
+      this.selectedimg = index;
+      this.imgItem = index
     }, (error: any) => {
       console.log("error", error);
 
@@ -925,8 +940,9 @@ export class ProductdetailComponent implements OnInit {
   selectvarpackage(varpackage: any, i: any) {
     this.currentpackage = varpackage
     this.subItempackage = i
-    this.request.addvarientfromdetail(this.product_id, this.currentvarient, varpackage,).subscribe((res: any) => {
-      console.log("selectvar", res);
+
+    this.request.addvarientfromdetail(this.product_id, this.currentvarient, varpackage,).subscribe((res: any) => { 
+      console.log("selectvarpackage" ,res );
       this.Peoduct.main_price = res?.price_string;
       this.Peoduct.stroked_price = res?.stroked_price;
       this.Peoduct.excl_gst = res?.excl_gst;
@@ -939,11 +955,26 @@ export class ProductdetailComponent implements OnInit {
       this.stocck = res?.stock;
       this.stocckkk = res?.stock;
       this.stk = res?.stock;
-      console.log("this.stk", this.stk);
       this.quantityyy = 1;
       this.totalprice = res?.price;
       this.discount_price = res?.discount_amount
+      this.varphotoos =[]
+      this.varphotooswith_Url=[]
       this.varphotoos = res.image
+      this.varphotoos.forEach((items: any) => {  
+        this.varphotooswith_Url.push({
+          image: 'https://neophroncrm.com/spiceclubnew/public/' + items,
+         
+        })
+      })
+      this.selectedvarientimage= this.varphotooswith_Url[0]
+      const index = this.allgalleryphotos.findIndex((object: any) => {
+        return object.image === this.selectedvarientimage.image;
+      });
+      this.selectedimage = this.allgalleryphotos[index]?.image;
+      this.selectedimg = index;
+      this.imgItem = index
+
     }, (error: any) => {
       console.log("error", error);
 

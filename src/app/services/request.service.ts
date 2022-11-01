@@ -751,21 +751,16 @@ export class RequestService {
 
   public addvarient(id: string, varient: any,) {
     this.url = `${this.endPoint1}/products/variant/price?id=` + id + `&color=` + `&variants=` + varient + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
-    console.log("varient url", this.url);
     return this.http.get(this.url);
   }
   public addvarientfromdetail(id: string, varient: any,varpackage:any) {
-    console.log("varpackage url", varpackage);
-    if(varpackage!==undefined && varpackage!==null ){
-      console.log("varient url if",varpackage);
+    
+    if(varpackage!==undefined && varpackage!==null ){  
       this.url = `${this.endPoint1}/products/variant/price?id=` + id + `&color=` + `&variants=` + varient +`,`+varpackage + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     } 
-    else{
-      console.log("varient url else",varpackage);
+    else{  
       this.url = `${this.endPoint1}/products/variant/price?id=` + id + `&color=` + `&variants=` + varient + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
     }
-   
-    console.log("varient url", this.url);
     return this.http.get(this.url);
   }
   public getsortprod(sort: string, min: any, max: any) {
