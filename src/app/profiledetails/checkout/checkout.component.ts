@@ -795,24 +795,36 @@ export class CheckoutComponent implements OnInit {
     })
   }
 
-  //  testing billdesk
-  billdesk2() {
-    window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78')
-    this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78').subscribe(
-      data => {
-        console.log("billdesk2 data", data);
-      },
-      (err: HttpErrorResponse) => {
-        console.log("err", err);
-        if (err.error instanceof Error) {
-          console.log("Client side error");
-        }
-        else {
-          console.log("Sever side error");
-        }
-      });
-  }
+  // //  testing billdesk
+  // billdesk2() {
+  //   window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78')
+  //   this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78').subscribe(
+  //     data => {
+  //       console.log("billdesk2 data", data);
+  //     },
+  //     (err: HttpErrorResponse) => {
+  //       console.log("err", err);
+  //       if (err.error instanceof Error) {
+  //         console.log("Client side error");
+  //       }
+  //       else {
+  //         console.log("Sever side error");
+  //       }
+  //     });
+  // }
 
+   // (   data: { [x: string]: any; }) => {
+  //   console.log('------', data)
+  //     console.log('-------', data['response'])
+  //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
+  //     console.log('formmmm',payhere_checkout_form)
+  //     console.log('-----------', data)
+  //     this.encRequestRes = data['response']; 
+  //         // setTimeout(()=>{
+  //         //     this.form.nativeElement.submit();
+  //         // },1000)
+  //     },
+  
 
   // (response: any) => { 
   //   this.encRequest = response.encRequest;
@@ -825,18 +837,25 @@ export class CheckoutComponent implements OnInit {
   //   console.log("billdesktype",response);        
   // },
 
-  // (   data: { [x: string]: any; }) => {
-  //   console.log('------', data)
-  //     console.log('-------', data['response'])
-  //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
-  //     console.log('formmmm',payhere_checkout_form)
-  //     console.log('-----------', data)
-  //     this.encRequestRes = data['response']; 
-  //         // setTimeout(()=>{
-  //         //     this.form.nativeElement.submit();
-  //         // },1000)
-  //     },
+ 
 
+    //  testing billdesk
+    billdesk2() {
+      window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78')
+      this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78').subscribe(
+        data => {
+          console.log("billdesk2 data", data);
+        },
+        (err: HttpErrorResponse) => {
+          console.log("err", err);
+          if (err.error instanceof Error) {
+            console.log("Client side error");
+          }
+          else {
+            console.log("Sever side error");
+          }
+        });
+    }
 
 }
 

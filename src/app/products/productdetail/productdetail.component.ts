@@ -1439,7 +1439,12 @@ export class ProductdetailComponent implements OnInit {
   }
   proddetail(id: any) {
     window.scroll(0, 0);
-    this.router.navigate(['productdetail', id]);
+       
+    // this.router.navigate(['productdetail', id]);  
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+      this.router.navigate(['productdetail', id]);
+  });
+   
   }
   toggle1(img: any, index: any): void {
     console.log(this.userid);
