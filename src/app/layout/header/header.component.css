@@ -507,17 +507,16 @@ a#listactive::after{
 	height: 0;
   }
 
-.mega-sub-menu:hover {
+/* .mega-sub-menu:hover {
 	scrollbar-width: thin !important;
 	-ms-overflow-style:thin !important;
-}
+} */
 
-.lii:hover {
+/* .lii:hover {
 	scrollbar-width: thin !important;
 	-ms-overflow-style:thin !important;
-	/* -ms-overflow-style: none;  IE and Edge
-	scrollbar-width: none;  Firefox  */
-  }
+	
+  } */
 #listactive{
 	margin-bottom: 0px;
 }
