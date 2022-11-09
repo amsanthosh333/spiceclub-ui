@@ -34,6 +34,7 @@ export class RequestService {
   temp_Id: Observable<temporaryId>;
   temp_detail: temporaryId;
   currrent_temp_Id: any;
+  addcartresult: any;
 
   constructor(private http: HttpClient) {
     this.currentUserSubject = new BehaviorSubject<User>(
@@ -146,6 +147,8 @@ export class RequestService {
     return this.http.get(this.url);
   }
   public addtocart(body: any) {
+    console.log("this.temp_detail",this.temp_detail);
+    
     const headers = new HttpHeaders()
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
@@ -156,14 +159,18 @@ export class RequestService {
     return this.http.post(this.url, body, { headers: headers })
     .pipe(    
       map((temporaryId) => { 
-        localStorage.setItem('temporaryId', JSON.stringify(temporaryId));
-
-        this.temporaryIdSubject = new BehaviorSubject<temporaryId>(
-          JSON.parse(localStorage.getItem('temporaryId') || '{}')
-        );
-        this.temp_Id = this.temporaryIdSubject.asObservable();
-        this.temp_detail=this.temporaryIdSubject.value;
-        this.currrent_temp_Id=this.temp_detail.temp_user_id  
+        this.addcartresult=temporaryId
+        if(this.addcartresult.temp_user_id ){
+          localStorage.setItem('temporaryId', JSON.stringify(temporaryId));
+          this.temporaryIdSubject = new BehaviorSubject<temporaryId>(
+            JSON.parse(localStorage.getItem('temporaryId') || '{}')
+          );
+          this.temp_Id = this.temporaryIdSubject.asObservable();
+            this.temp_detail=this.temporaryIdSubject.value;
+            this.currrent_temp_Id=this.temp_detail.temp_user_id    
+        }
+       
+         
         // this.temporaryIdSubject.next(temporaryId); 
         // // console.log("currentuser:",user);
         return temporaryId;

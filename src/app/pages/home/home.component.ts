@@ -1083,7 +1083,8 @@ this.viewbestsellpro();
         }
       }
 
-      this.request.addtocart(this.edata).subscribe((res: any) => {      
+      this.request.addtocart(this.edata).subscribe((res: any) => {   
+        console.log("addtocart res",res);
          if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
