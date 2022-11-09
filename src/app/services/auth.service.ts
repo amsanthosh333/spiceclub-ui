@@ -48,12 +48,9 @@ export class AuthService {
     this.userid = this.currentdetail?.user?.id;
    this.accesstoken = this.currentdetail.access_token;
    this.tokentype = this.currentdetail.token_type;
-   console.log("current user",this.currentUser);
-   
    }
 
   public get currentUserValue(): User {
-    console.log("currentUserValue");
     return this.currentdetail
   }
 
@@ -83,10 +80,6 @@ export class AuthService {
 
      this.date=new Date();
      this.latest_date =this.datepipe.transform(this.date, 'yyyy-MM-dd h:MM:ss');
-     console.log("this.expires_at", this.expires_at );
-     console.log("isloogedin", this.latest_date );
-
-     
      return this.expires_at > this.latest_date // check if token is expired
 
   }
@@ -97,7 +90,6 @@ export class AuthService {
         map((user) => {
           localStorage.setItem('currentUser', JSON.stringify(user));
           this.currentUserSubject.next(user);
-          // console.log("currentuser:",user);
           return user;
         })
       );
@@ -105,16 +97,9 @@ export class AuthService {
   reqotplogin(body: any) { 
     this.url = `${this.endPoint1}/auth/loginwithotp`;
     return this.http.post<any>(this.url, body)
-      
   }
 
   logout() { 
-    // this.url = `${this.endPoint1}/auth/logout`;
-    
-    // localStorage.removeItem('currentUser');
-    // this.currentUserSubject.next(null!);
-    // return this.http.get<any>(this.url)
-
     this.url = `${this.endPoint1}/auth/logout`;
     const headers = new HttpHeaders()
     .set('Authorization', 'Bearer'+' '+ this.accesstoken) 

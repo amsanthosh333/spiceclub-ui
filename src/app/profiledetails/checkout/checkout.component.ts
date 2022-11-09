@@ -166,9 +166,7 @@ export class CheckoutComponent implements OnInit {
 
     window.scroll(0, 0)
     this.buyvalue = this.activatedRoute.snapshot.params['id'];
-    console.log("this.buyvalue ", this.buyvalue);
     if (this.buyvalue == undefined || this.buyvalue == null) {
-      console.log("rec!undefined", this.buyvalue);
       this.buynowvalue = 0;
       // this.viewsummery();
       this.viewcart();
@@ -181,7 +179,6 @@ export class CheckoutComponent implements OnInit {
 
     }
     else {
-      console.log("rec!else", this.buyvalue);
       this.buynowvalue = this.buyvalue;
       // this.viewsummery();
       this.viewcart();
@@ -220,14 +217,9 @@ export class CheckoutComponent implements OnInit {
     this.getSelecteditem();
   }
   viewcart() {
-    console.log("buynowvalue", this.buynowvalue);
-
     this.request.fetchusercart(this.userid, this.buynowvalue).subscribe((response: any) => {
-      console.log("Cart", response);
       this.Cart = response;
       this.cartloader = false;
-      console.log(this.Cart);
-
       this.owneriid = this.Cart[0]?.owner_id;
       setTimeout(() => {
         this.loadingIndicator = false;
@@ -237,7 +229,6 @@ export class CheckoutComponent implements OnInit {
   }
   viewsummery() {
     this.request.fetchsummery(this.userid, this.buynowvalue, this.payytype).subscribe((response: any) => {
-      console.log("fetchsummery", response);
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total;
       this.dis = this.Summery.discount;
@@ -270,7 +261,6 @@ export class CheckoutComponent implements OnInit {
   }
   changecoupan(e: any) {
     if (e.target.checked) {
-      console.log(e.target.value);
       this.comment.value.coupan = e.target.value
       this.comment.setValue({
         coupan: e.target.value,
@@ -278,7 +268,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     else {
-      console.log("no");
       this.comment.value.coupan = ''
       this.comment.setValue({
         coupan: '',
@@ -292,11 +281,9 @@ export class CheckoutComponent implements OnInit {
     this.request.fetchaddress(this.userid).subscribe((response: any) => {
       this.Address = response.data;
       this.loadaddress = false
-      console.log("address", this.Address);
       this.loader = false;
       if (this.Address.length === 0) {
         this.shipadds = false
-        console.log("add some address");
         this.opennewaddress();
       }
       else {
@@ -304,18 +291,13 @@ export class CheckoutComponent implements OnInit {
         this.indexx = this.Address.findIndex((x: any) => x.set_default == 1);
         this.address_id = this.Address[this.indexx]?.id
         this.curshipaddress = this.Address[this.indexx]
-        console.log("this.address_id", this.address_id);
         if (this.address_id == undefined) {
-          console.log("if undefined");
           this.address_id = this.Address[0]?.id
           this.curshipaddress = this.Address[0]
-          console.log("curshipaddress", this.curshipaddress);
           this.shippingcost(this.curshipaddress)
           this.getaddress();
         }
         else {
-          console.log("else",);
-          console.log("shipping address id", this.address_id);
           // this.shippingcost(this.curshipaddress)
           let edata2 = {
             user_id: this.userid,
@@ -324,7 +306,6 @@ export class CheckoutComponent implements OnInit {
 
           this.request.updateshippingaddress(edata2).subscribe((response: any) => {
             if (response.result == true) {
-              console.log("shipping address updated")
             }
           });
         }
@@ -363,8 +344,6 @@ export class CheckoutComponent implements OnInit {
 
     this.request.makeshipingaddress(edata5).subscribe((res: any) => {
       if (res.result == true) {
-        console.log("make_default shipping address")
-
         this.request.fetchaddress(this.userid).subscribe((response: any) => {
           this.Address = response.data;
           this.toastr.success('Address Updated Successfully', '');
@@ -372,26 +351,15 @@ export class CheckoutComponent implements OnInit {
         // this.getaddress();
         this.request.updateshippingaddress(edata2).subscribe((response: any) => {
           if (response.result == true) {
-            console.log("shipping address updated")
           }
         });
 
       }
       else {
         console.log("error");
-
       }
     });
 
-    // this.request.fetchcost(edata).subscribe((response: any) => {
-    //   console.log("fetchcost ===========",edata)
-    //   console.log("fetchcost", response)
-    //   this.Scost = response;
-    //   this.cost = this.Scost.value_string
-    //   if (response.result == true) {
-    //     this.viewsummery();
-    //   }
-    // });
 
   }
   deleteRow(row: any) {
@@ -437,7 +405,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   billdesk(edata1: any) {
-    console.log("billdest called");
     this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id, null).subscribe(
       (response: any) => {
         response.json()
@@ -446,7 +413,6 @@ export class CheckoutComponent implements OnInit {
   }
 
   finallyplaceorder() {
-    console.log(" finallyplaceorder");
     this.loadingg = true
     let edata = {
       owner_id: this.owneriid,
@@ -454,8 +420,6 @@ export class CheckoutComponent implements OnInit {
       payment_type: this.payytype,
       is_buynow: this.buynowvalue
     }
-    console.log("finallyplaceorder", edata);
-
     if (this.payytype == "billdesk") {
       this.paymentmethod = "Billdesk"
       this.request.placeorder(edata).subscribe((response: any) => {
@@ -468,7 +432,6 @@ export class CheckoutComponent implements OnInit {
             amount: this.grandtotal_value,
             user_id: this.userid,
           }
-          console.log("billdesk edata", edata1);
           this.billdesk(edata1)
         }
         else {
@@ -478,9 +441,7 @@ export class CheckoutComponent implements OnInit {
     }
     else if (this.payytype == "razorpay") {
       this.paymentmethod = "Razorpay"
-      console.log("elseif razorpay");
       this.request.placeorder(edata).subscribe((response: any) => {
-        console.log("placeorder response", response);
         this.combined_orderid = response.combined_order_id
         if (response.result == true) {
           this.sharedService.sendClickEvent();
@@ -494,20 +455,15 @@ export class CheckoutComponent implements OnInit {
           this.initPay(edata1);
         }
         else {
-          console.log("fail", response.message);
           this.toastr.error(response.message);
         }
       });
     }
     else {
-      console.log("else cashondelivery");
       this.paymentmethod = "Cash On Delivery"
       this.request.placeorder(edata).subscribe((response: any) => {
-        console.log("cod response", response);
-
         this.combined_orderid = response.combined_order_id
         if (response.result == true) {
-          console.log("if  response");
           this.toastr.success('Order placed');
           this.sharedService.sendClickEvent();
           this.loadingg = false
@@ -534,7 +490,6 @@ export class CheckoutComponent implements OnInit {
     }
 
     this.request.appycoupan(edata2).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Coupon Applied') {
         this.removecou = true;
         this.applycou = false;
@@ -563,7 +518,6 @@ export class CheckoutComponent implements OnInit {
       owner_id: this.owneriid,
     }
     this.request.removecoupan(edata2).subscribe((res: any) => {
-      console.log("res", res);
       if (res.result == true) {
         this.removecou = false;
         this.applycou = true;
@@ -660,7 +614,6 @@ export class CheckoutComponent implements OnInit {
         postal_code: form.value.postal_code,
         phone: form.value.phone,
       }
-      console.log("edata", edata);
 
       this.request.addaddress(edata).subscribe((res: any) => {
         if (res.message == 'Shipping information has been added successfully') {
@@ -728,14 +681,10 @@ export class CheckoutComponent implements OnInit {
     options.handler = ((response: any, error: any) => {
       options.response = response;
       this.razpaysuccess = response
-      console.log(response);
-      console.log(options);
       this.razorpaypayment();
       // call your backend api to verify payment signature & capture transaction
     });
     options.modal.ondismiss = (() => {
-      // handle the case when user closes the form while transaction is in progress
-      console.log('Transaction cancelled.');
       this.paymentfailed();
       this.loadingg = false;
 
@@ -746,11 +695,8 @@ export class CheckoutComponent implements OnInit {
 
   razorpaypayment() {
     this.loadingg = true
-    ////////****//  this.spinner.show();
-    console.log("razorpay1 response process");
-    this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
-      console.log("razorpay1 response", response);
 
+    this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
       if (response.result == true) {
         this.paymentdetails = response.payment_details
         this.razorpaysuccess();
@@ -766,10 +712,7 @@ export class CheckoutComponent implements OnInit {
       amount: this.grandtotal_value,
       user_id: this.userid,
     }
-    console.log("edata4", edata4);
     this.request.razsuccess(edata4).subscribe((response: any) => {
-      console.log("razsuccess response", response);
-
       if (response.result == true) {
         this.sharedService.sendClickEvent();
         this.loadingg = false
@@ -790,8 +733,6 @@ export class CheckoutComponent implements OnInit {
       combined_order_id: this.combined_orderid,
     }
     this.request.razfailure(edata5).subscribe((response: any) => {
-      console.log("razfailure response", response);
-
     })
   }
 
@@ -844,7 +785,6 @@ export class CheckoutComponent implements OnInit {
       window.open('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78')
       this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=2&amount=135.69&user_id=78').subscribe(
         data => {
-          console.log("billdesk2 data", data);
         },
         (err: HttpErrorResponse) => {
           console.log("err", err);

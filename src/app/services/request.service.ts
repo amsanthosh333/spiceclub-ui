@@ -63,16 +63,13 @@ export class RequestService {
     this.temp_detail=this.temporaryIdSubject.value;
     this.currrent_temp_Id=this.temp_detail.temp_user_id
 
-    if(this.currrent_temp_Id == undefined ){
-      console.log("this.temp_Id_serser if",this.currrent_temp_Id);   
+    if(this.currrent_temp_Id == undefined ){  
       this.currrent_temp_Id = ""
-    }
-   
-    console.log(" this.currrent_temp_Id", this.currrent_temp_Id);   
+    }  
   }
 
   ngOnInit(): void {
-    console.log("service file oninit");
+  
     
   }
   logout() {
@@ -156,7 +153,6 @@ export class RequestService {
     this.url = `${this.endPoint1}/carts/add`;
     // this.url = `${this.endPoint1}/testcarts/add`;
       body.temp_user_id=this.currrent_temp_Id
-     console.log("Add to cart body:",body);
     return this.http.post(this.url, body, { headers: headers })
     .pipe(    
       map((temporaryId) => { 
@@ -184,8 +180,6 @@ export class RequestService {
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
      this.url = `${this.endPoint1}/recipe/addtocart/` + id + `?people=` + members +`&user_id=` + this.userid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;;
     //this.url = `${this.endPoint1}/testcarts/` + id + `?is_buynow=` + buynowid+ `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
-    console.log("this.url",this.url);
-    
     return this.http.post(this.url, null, { headers: headers })
     .pipe( map((temporaryId) => { 
         localStorage.setItem('temporaryId', JSON.stringify(temporaryId));
@@ -196,8 +190,6 @@ export class RequestService {
         this.temp_Id = this.temporaryIdSubject.asObservable();
         this.temp_detail=this.temporaryIdSubject.value;
         this.currrent_temp_Id=this.temp_detail.temp_user_id  
-        // this.temporaryIdSubject.next(temporaryId); 
-        // // console.log("currentuser:",user);
         return temporaryId;
       })
     );;
@@ -294,7 +286,6 @@ export class RequestService {
     this.url = `${this.endPoint1}/wishlists`;
     
     body.buyertypeid =this.buyertypeid
-    console.log("wishlists body",body);
     return this.http.post(this.url, body, { headers: headers });
 
   }
@@ -315,7 +306,6 @@ export class RequestService {
       .set('X-Requested-With', 'XMLHttpRequest')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/subscribes-remove-product?product_id=` + prdid + `&user_id=` + userid;
-    console.log("this.url", this.url);
     return this.http.get(this.url, { headers: headers });
   }
   // deals
@@ -369,8 +359,6 @@ export class RequestService {
   public fetchuserprofile(id: any) {
 
     this.url = `${this.endPoint1}/profile/getprofile/` + id;
-    // console.log(this.url);
-
     return this.http.get(this.url);
   }
   // kyc
@@ -388,7 +376,6 @@ export class RequestService {
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/b2benquery/submit`;
-    console.log(this.url);
     return this.http.post(this.url, body, { headers: headers });
   }
   // address
@@ -489,7 +476,6 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/subscribes/` + this.userid;
-    console.log(this.url);
     return this.http.get(this.url, { headers: headers });
   }
   // orders
@@ -503,7 +489,6 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/purchase-history/` + id + `?page=` + page + `&delivery_status=` + delivery + `&payment_status=` + payment;
-    console.log(this.url);
     return this.http.get(this.url, { headers: headers });
   }
 
@@ -511,16 +496,12 @@ export class RequestService {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/purchase-history/` + id + `?delivery_status=` + delivery;
-    console.log(this.url);
-
     return this.http.get(this.url, { headers: headers });
   }
   public fetchOrders2(id: any, delivery: any, payment: any) {
     const headers = new HttpHeaders()
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/purchase-history/` + id + `?delivery_status=` + delivery + `&payment_status=` + payment;
-    console.log(this.url);
-
     return this.http.get(this.url, { headers: headers });
   }
   public vieworderdetail(id: any) {
@@ -540,7 +521,6 @@ export class RequestService {
   // paymenttype
   public fetchpaytype(is_buynow:any) {
     this.url = `${this.endPoint1}/payment-types?is_buynow=`+ is_buynow + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid+`&temp_user_id=`+ this.currrent_temp_Id;
-    console.log(this.url);
     return this.http.get(this.url);
   }
   // placeorder
@@ -591,13 +571,11 @@ export class RequestService {
   // paymentstatus api 
   razorpayment(id: any) {
     this.url = `${this.endPoint1}/razorpay/payment?razorpay_payment_id=` + id;
-    console.log(this.url);
-
+    
     return this.http.get(this.url);
   }
   razsuccess(body: any) {
     this.url = `${this.endPoint1}/razorpay/success`;
-    console.log(this.url);
     return this.http.post(this.url, body);
   }
   razfailure(body: any) {
@@ -605,7 +583,6 @@ export class RequestService {
       .set('content-type', 'application/json')
       .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/order/paymentfailed`;
-    console.log(this.url);
     return this.http.post(this.url, body, { headers: headers });
 
 
@@ -666,7 +643,6 @@ export class RequestService {
   // shopbyproducts
   public getallproducts(page: any) {
     this.url = `${this.endPoint1}/products?page=` + page + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
-    console.log(this.url);
     return this.http.get(this.url);
   }
   public getpage(link: any) {
@@ -683,20 +659,16 @@ export class RequestService {
 
   public getpage3(link: any, deliveryy: any, paymentt: any) {
     this.url = link + `&delivery_status=` + deliveryy + `&payment_status=` + paymentt;
-    console.log(this.url);
-
     return this.http.get(this.url);
   }
   public getpage2(link: any, categoryy_id: any, brandd_id: any, sort: string, min: any, max: any) {
     this.url = link + `&categories=` + categoryy_id + `&brands=` + brandd_id + `&min=` + min + `&max=` + max + `&sort_key=` + sort + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
-    console.log("page url", this.url);
     return this.http.get(this.url);
   }
   // productbybrand
 
   public getbrandprod(id: string, page: any,) {
     this.url = `${this.endPoint1}/products/brand/` + id + '?page=' + page + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
-    console.log("brand url", this.url);
     return this.http.get(this.url);
   }
   public getbrandsearchprod(id: string, page: any, key: any) {
@@ -707,7 +679,6 @@ export class RequestService {
   //prod detail
   public getproddetail(id: string) {
     this.url = `${this.endPoint1}/products/` + id + `?buyertype=` + this.buyertypeid;
-    console.log("product call url", this.url);
     return this.http.get(this.url);
   }
   public getcatprodbyid(id: string) {
@@ -773,7 +744,6 @@ export class RequestService {
   }
   public filterdataa(category: any, brand: any, name: any, sort: any, min: any, max: any) {
     this.url = `${this.endPoint1}/products/search?categories=` + category + `&brands=` + brand + `&name=` + name + `&sort_key=` + sort + `&name=` + `&min=` + min + `&max=` + max + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
-    console.log("price url", this.url);
     return this.http.get(this.url);
   }
   public filterdataa2(min: any, max: any) {
@@ -782,7 +752,6 @@ export class RequestService {
   }
   public filterdataa3(page: any, category: any, brand: any, min: any, max: any, sort: any) {
     this.url = `${this.endPoint1}/products/search?page=` + page + `&categories=` + category + `&brands=` + brand + `&name=` + `&min=` + min + `&max=` + max + `&sort_key=` + sort + `&user_id=` + this.userid + `&buyertype=` + this.buyertypeid;
-    console.log(this.url);
     return this.http.get(this.url);
   }
   public filtersearchdataa(name: any) {
@@ -799,7 +768,6 @@ export class RequestService {
   //flashdeal
   public getprodbyflash(id: any, page: any) {
     this.url = `${this.endPoint1}/flash-deal-products/` + id ;
-    console.log(this.url);
     return this.http.get(this.url);
   }
   public getallflashdeal() {
@@ -809,7 +777,6 @@ export class RequestService {
 
   public getallflashdealproducts() {
     this.url = `${this.endPoint1}/flash-deal-productslist`;
-    console.log(this.url);
     return this.http.get(this.url);
   }
   public gettodaysoffer() {
@@ -898,8 +865,6 @@ export class RequestService {
   //blog
   public getallblog(page: any) {
     this.url = `${this.endPoint1}/blog` + `?page=` + page;
-    console.log("this.url",this.url);
-    
     return this.http.get(this.url);
   }
   public getbestblog(id: any) {
@@ -1046,7 +1011,6 @@ export class RequestService {
     .set('Authorization', 'Bearer' + ' ' + this.accesstoken)
     this.url = `${this.endPoint1}/billdesk/pay-with-billdesk?requestfrom=`+ repayment +`&payment_type=cart_payment&combined_order_id=` + combined_order_id + `&amount=` + amount + `&user_id=` + user_id;
      window.open(this.url,'_self');
-    console.log("billdeskpay service file,",this.url);
     return this.http.get(this.url, { headers: headers });
 
 

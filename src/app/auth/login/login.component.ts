@@ -131,7 +131,6 @@ export class LoginComponent implements OnInit {
   }
 
   openloginn(content: any) {
-    console.log("open");
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'sm',
@@ -175,7 +174,6 @@ export class LoginComponent implements OnInit {
       this.logbtnloading = true;
       this.authService
         .login(this.loginForm.controls['username'].value, this.loginForm.controls['password'].value,).subscribe((res) => {
-          console.log("res", res);
 
           if (res) {
             this.logbtnloading = false;
@@ -184,7 +182,6 @@ export class LoginComponent implements OnInit {
               return;
             }
             else if (res.message == "Unauthorized") {
-              console.log("res Unauthorized in onsubmit", res.message);
               this.error1 = '* Invalid credentials';
             }
             else if (res.message == "Please verify your account") {
@@ -211,7 +208,6 @@ export class LoginComponent implements OnInit {
             if (error.error.message == "User not found") {
               this.error1 = '* User not found';
             } else if (error.error.message == "Unauthorized") {
-              console.log("res Unauthorized in onsubmit", error.error.message);
               this.error1 = '* Invalid credentials';
             }
             else if (error.error.message == "Please verify your account") {
@@ -249,7 +245,6 @@ export class LoginComponent implements OnInit {
     }
     this.authService.resendotp(edata2).subscribe(
       (res) => {
-        console.log("resend response", res);
         if (res.result == true) {
           this.toastr.success('Verification code is sent', '');
         }
@@ -273,10 +268,8 @@ export class LoginComponent implements OnInit {
         user_id: this.useer_id,
         verification_code: "" + this.otpform.controls['otp'].value,
       }
-      console.log("edata1", edata1);
       this.authService.registerotpverification(edata1).subscribe(
         (res) => {
-          console.log("verification res", res);
           if (res.result == false) {
             this.error2 = 'Code does not match';
           }
@@ -325,8 +318,6 @@ export class LoginComponent implements OnInit {
       let edata1 = {
         phone: "" + this.loginForm.controls['username'].value,
       }
-      console.log("edata1", edata1);
-
       this.authService.reqotplogin(edata1).subscribe((res) => {
         this.otpuserid = res.user_id
         if (res) {
@@ -367,25 +358,19 @@ export class LoginComponent implements OnInit {
         user_id: this.otpuserid,
         otp_code: "" + this.loginForm.controls['password'].value,
       }
-      console.log("edata otp", edata1);
-
       this.loginloading = true
       this.authService.otplogin(edata1).subscribe((res) => {
         this.loginloading = false
-        console.log("res", res);
 
         if (res) {
           if (res.message == "User not found") {
-            console.log("res User not found", res);
             this.error1 = '* User not found';
             return;
           }
           else if (res.message == "Unauthorized") {
-            console.log("res Unauthorized", res);
             this.error1 = '* Invalid credentials';
           }
           else if (res.message == "Please verify your account") {
-            console.log("res Please verify your account", res);
             this.toastr.info('verify your account', '');
             this.resend();
             this.otpSubmit(content)
@@ -404,7 +389,6 @@ export class LoginComponent implements OnInit {
         }
       },
         (error: any) => {
-          console.log("test", "", error.error);
           this.error1 = '*Some thing went wrong';
         }
       );
@@ -479,7 +463,6 @@ export class LoginComponent implements OnInit {
         }
       },
         (error: any) => {
-          console.log("test", "", error.error);
           if (error.error.message == "User not found") {
             this.error5 = 'User not found';
           } else if (error.error.message == "Unauthorized") {
@@ -531,8 +514,7 @@ export class LoginComponent implements OnInit {
     const auth = getAuth();
     signInWithPopup(auth, provider)
       .then((result) => {
-        const credential = FacebookAuthProvider.credentialFromResult(result);
-        console.log("facebook",result);     
+        const credential = FacebookAuthProvider.credentialFromResult(result);    
         const token = credential?.accessToken;
         const user = result.user;
         this.s_username = user.displayName;
@@ -567,9 +549,7 @@ export class LoginComponent implements OnInit {
     }
     this.authService.sociallogin3(edata1).subscribe(
       (res) => {
-        console.log("social response", res);
         if (res.result = true) {
-          console.log("social response if ");
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
           this.toastr.success('logged in Successfully', '');
@@ -578,7 +558,6 @@ export class LoginComponent implements OnInit {
             window.location.reload();
           });
         } else {
-          console.log("social response else");
           this.toastr.error('', res.message);
         }
       },
@@ -601,9 +580,7 @@ export class LoginComponent implements OnInit {
     this.spinner.show();
     this.authService.sociallogin(edata1).subscribe(
       (res) => {
-        console.log("social response", res);
         if (res.result = true) {
-          console.log("social response if ");
           if (res.count == 0) {
             this.spinner.hide();
             this.modalService.open(content, {
@@ -621,8 +598,7 @@ export class LoginComponent implements OnInit {
             }
             this.authService.sociallogin3(edata1).subscribe(
               (res) => {
-                this.spinner.hide();
-                console.log("social response", res);
+                this.spinner.hide();     
                 if (res.result = true) {
                   this.sharedService.sendClickEvent();
                   this.toastr.success('logged in Successfully', '');
@@ -631,7 +607,6 @@ export class LoginComponent implements OnInit {
                     window.location.reload();
                   });
                 } else {
-                  console.log("social response else");
                   this.toastr.error('', res.message);
                 }
               },
@@ -641,7 +616,6 @@ export class LoginComponent implements OnInit {
             );
           }
         } else {
-          console.log("social response else");
           this.toastr.error('', res.message);
         }
       },
@@ -687,16 +661,13 @@ export class LoginComponent implements OnInit {
       }
       return;
     } else {
-      console.log("reskkkk");
       let edata1 = {
         email_or_phone: "" + this.forgotForm.controls['Mobile'].value,
         send_code_by: "" + this.forgotForm.controls['Type'].value,
       }
-      console.log(edata1);
       this.fpassloading = true
       this.authService.conformforgot(edata1).subscribe(
         (res) => {
-          console.log("res", res);
           this.fpassloading = false
           if (res) {
             if (res.message == "A code is sent") {
@@ -729,8 +700,6 @@ export class LoginComponent implements OnInit {
         this.error7 = '* Enter OTP';
       }
       else if (!this.passwordForm.get('newpassword')?.valid) {
-        console.log("passs");
-
         this.error7 = '* Enter password';
       }
       return;
@@ -742,9 +711,7 @@ export class LoginComponent implements OnInit {
       }
       // current user by login is stored in local storage -see authservice
       this.authService.resetpassword(edata3).subscribe(
-        (res) => {
-          console.log("reset response",res);
-          
+        (res) => {      
           this.fpassotploading = false
           if (res) {
             if (res.result == true) {
@@ -787,7 +754,6 @@ export class LoginComponent implements OnInit {
         }
       },
       (error) => {
-        console.log("fail");
         this.error7 = '* Something went wrong';
       }
     );

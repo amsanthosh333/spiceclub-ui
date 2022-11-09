@@ -139,8 +139,6 @@ password2() {
         passowrd_confirmation: "" + this.registerForm.controls['confirmpassword'].value,
         buyer_type: "" + this.registerForm.controls['buyer_type'].value,
       }
-      console.log("edta", edata);
-
       this.authService.adduser(edata).subscribe(
         (res: any) => {
           this.userid = res.user_id
@@ -181,10 +179,8 @@ password2() {
       this.verloading = true;
       this.authService.registerotpverification(edata1).subscribe(
         (res) => {
-          console.log(res);
           this.verloading = false;
           if (res.result == true) {
-            console.log("iffff");
             this.toastr.success('Your account is verified', '');
             this.modalService.dismissAll();
             // this.openlogin();
@@ -192,7 +188,6 @@ password2() {
               window.location.reload();
             });
           } else {
-            console.log("elseee");
             this.error3 = '*Code does not match,you can request for resending the code';
 
             // this.error1 = 'Invalid Login';
@@ -219,10 +214,8 @@ password2() {
       email_or_phone: this.registerForm.controls['email'].value,
 
     }
-    console.log("edata2", edata2);
     this.authService.resendotp(edata2).subscribe(
       (res) => {
-        console.log("resend response", res);
         this.resendloading = false;
         if (res.result == true) {
           this.toastr.success(res.message);
@@ -234,7 +227,7 @@ password2() {
       },
       (error1) => {
         this.resendloading = false
-        console.log("fail");
+        console.log("fail",error1);
         this.submitted = false;
       }
     );
@@ -307,9 +300,7 @@ password2() {
     }
     this.authService.sociallogin3(edata1).subscribe(
       (res) => {
-        console.log("social response", res);
         if (res.result = true) {
-          console.log("social response if ");
           this.modalService.dismissAll();
           this.sharedService.sendClickEvent();
           this.toastr.success('logged in Successfully', '');
@@ -318,7 +309,6 @@ password2() {
               window.location.reload();
             });
         } else {
-          console.log("social response else");
           this.toastr.error('', res.message);
         }
       },
@@ -338,9 +328,7 @@ password2() {
     this.spinner.show();
     this.authService.sociallogin(edata1).subscribe(
       (res) => {
-        console.log("social response", res);
         if (res.result = true) {
-          console.log("social response if ");
           if (res.count == 0) {
             this.spinner.hide();
             this.modalService.dismissAll();
@@ -360,7 +348,6 @@ password2() {
             this.authService.sociallogin3(edata1).subscribe(
               (res) => {
                 this.spinner.hide();
-                console.log("social response", res);
                 if (res.result = true) {
                   this.sharedService.sendClickEvent();
                   this.toastr.success('logged in Successfully', '');
@@ -369,7 +356,6 @@ password2() {
                       window.location.reload();
                     });
                 } else {
-                  console.log("social response else");
                   this.toastr.error('', res.message);
                 }
               },
@@ -379,7 +365,6 @@ password2() {
             );
           }
         } else {
-          console.log("social response else");
           this.toastr.error('', res.message);
         }
       },

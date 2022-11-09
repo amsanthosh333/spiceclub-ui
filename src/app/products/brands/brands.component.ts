@@ -117,15 +117,6 @@ export class BrandsComponent implements OnInit {
     this.search = this.fb.group({
       key: [''],
     });
-    //   this.id = this.route.snapshot.params['id'];
-    //   this.pagee = this.route.snapshot.params['page'];
-    //   location.onPopState(() => {
-    //     console.log('pressed back!');
-    //     // this.id = this.route.snapshot.params['id'];
-    //     // this.pagee = this.route.snapshot.params['page'];
-    //     this.viewdata(this.id,this.pagee)
-    // });
-
   }
 
   ngOnInit(): void {
@@ -134,7 +125,6 @@ export class BrandsComponent implements OnInit {
     this.prodloader = true;
     this.id = this.route.snapshot.params['id'];
     this.pagee = this.activatedRoute.snapshot.params['page'];
-    console.log("this.id ngOnInit", this.id);
     this.viewbrands(this.id);
     this.viewdata(this.id, this.pagee);
     this.viewtopbrands();
@@ -145,11 +135,8 @@ export class BrandsComponent implements OnInit {
       if (popStateEvent.type === 'popstate') {
         const eventSubscription = this.router.events.subscribe((event: any) => {
           if (event instanceof NavigationEnd) {
-            console.log("detectPopState if");
             this.id = this.activatedRoute.snapshot.params['id'];
             this.pagee = this.activatedRoute.snapshot.params['page'];
-            console.log("queryParams this.id", this.id);
-            console.log("queryParams data", this.pagee);
             this.viewdata(this.id, this.pagee);
             eventSubscription.unsubscribe();
           }
@@ -195,7 +182,6 @@ export class BrandsComponent implements OnInit {
     this.imgloader = false;
 
     this.request.getbrandprod(id, page).subscribe((response: any) => {
-      console.log("response", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;     
@@ -230,13 +216,11 @@ export class BrandsComponent implements OnInit {
       this.prodloader = true;
       window.scroll(0, 0);
       this.imgloader = false;
-      console.log("this.id", this.id);
       this.request.getpage(url).subscribe((response: any) => {
         this.Product = response.data;
         this.pagenation = response.meta;
         this.pagess = this.pagenation.links;
         this.currentpage = response.meta.current_page
-        // console.log("this.currentpage",this.currentpage);
         this.router.navigate(['brands', this.id, this.currentpage],
           // this.router.navigate(['brands',this.id],{  queryParams: { page: this.currentpage }},
         );
@@ -491,30 +475,18 @@ export class BrandsComponent implements OnInit {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
     else {
-      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
-
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
     }
-    console.log("this.quantityarray", this.quantityarray);
   }
 
   prodaddtocart(img: any) {
-    // console.log("img", img);
-    // if (this.userid == 0) {
-    //   this. openlogin()
-    // }
-    // else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else if (img.variants[0]?.options?.length == 1) {
@@ -574,7 +546,6 @@ export class BrandsComponent implements OnInit {
   this.currentpackagevalue= varient[1].options[0]
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.Product[i].stroked_price = res.stroked_price
       this.Product[i].main_price = res.price_string;
       this.Product[i].discount_amount = res.discount_amount;
@@ -585,12 +556,8 @@ export class BrandsComponent implements OnInit {
   }
 
   onScrollDown(eve: any) {
-    console.log("scroll down");
     this.pagenum += 1
-    console.log("scroll down", this.pagess);
-    console.log("scroll pagenum", this.pagenum);
     const pageurl = this.pagess[this.pagenum]
-    console.log("pageurl", pageurl);
     if (pageurl?.url !== null && pageurl !== undefined) {
       this.pageload = false;
       this.prodloader = true;
@@ -600,7 +567,6 @@ export class BrandsComponent implements OnInit {
         this.newpageProduct = response.data;
         this.pagenation = response.meta;
         this.pagess = this.pagenation.links;
-        console.log("this.pagess", this.pagess);
         this.pagee = this.pagenation.current_page;
         // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
         // window.scroll(0, 0);
@@ -614,8 +580,6 @@ export class BrandsComponent implements OnInit {
         for (var i = 0; i <= this.Product.length; i++) {
           this.likedd.push(false); 
         }
-        console.log("this.Product", this.Product);
-
         setTimeout(() => {
           this.imgloader = true;
         }, 500);
@@ -624,7 +588,6 @@ export class BrandsComponent implements OnInit {
   }
 
   onScrollUp(ev: any) {
-    console.log("scrolled up!",);
   }
   
 }

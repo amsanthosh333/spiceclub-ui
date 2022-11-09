@@ -98,8 +98,6 @@ password2() {
   getprofile(){
     this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
       this.profiledetail = response;
-      console.log("this.profiledetail",this.profiledetail);
-      
       this.loader=false;
       setTimeout(() => {
         this.loaderimage=false;
@@ -265,12 +263,9 @@ password2() {
             const image = new Image();
             image.src = e.target.result;
             image.onload = rs => {             
-                // console.log(img_height, img_width);
                     const imgBase64Path = e.target.result.split(',')[1];  
                     this.cardImageBase64 = imgBase64Path;
-                    this.isImageSaved = true;
-                    // this.previewImagePath = imgBase64Path;
-                    console.log("imgBase64Path", imgBase64Path);               
+                    this.isImageSaved = true;               
             };
         };
         reader.readAsDataURL(fileInput.target.files[0]);
@@ -288,7 +283,6 @@ changeproimg(){
     filename:this.filename,
     image:this.cardImageBase64
   }
-  console.log("edata",edata);
   this.request.changeimg(edata).subscribe((response: any) => {
     this.profilee=response.path;
     if(response.result==true){

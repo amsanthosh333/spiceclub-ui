@@ -99,8 +99,6 @@ export class QuickorderComponent implements OnInit {
   
       config.max = 5;
       config.readonly = true;
-  
-      // console.log("currentuser details=", this.currentUserSubject);
       this.currentUser = this.currentUserSubject.asObservable();
        this.currentdetail = this.currentUserSubject.value;
        this.userid=this.currentdetail.user?.id;
@@ -260,8 +258,6 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
 });
 
   }
-
-
  
   getValue(val: any) {
       
@@ -277,12 +273,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
     this.stocck = this.stocckkk - val
   
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-      
       this.totalprice = res.price.toFixed(2);
-      
-    // this.totalprice = this.dec.toFixed(2) 
-   
     })
 
   }
@@ -290,35 +281,22 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
     this.quantityyy++;
     this.stocck--;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-      
       this.totalprice = res.price.toFixed(2);
-      
-    // this.totalprice = this.dec.toFixed(2) 
-   
     })
       }
       decreaseqty(){
-
         this.quantityyy--;
         this.stocck++;    
         this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-          console.log(res);
-          
-          this.totalprice = res.price.toFixed(2);
-          
-        // this.totalprice = this.dec.toFixed(2) 
-       
+          this.totalprice = res.price.toFixed(2); 
         })   
       }
       selectvar(weight:any,i:any){
         this.varient_value=weight.replace(/\s/g, "")
         this.subItem=i
-        this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-          
+        this.request.addvarient(this.product_id,weight).subscribe((res: any) => {  
           this.prod_price = res?.price_string;
           this.storked_pricee=res?.stroked_price;
-          
           this.totalprice=(res?.price_string).replace('Rs','');
           this.varprise=res?.price_string;
           this.stk=res?.stock;
@@ -347,8 +325,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
       user_id: this.userid,
       quantity: this.quantityyy,
       buyertype:this.buyertypeid,  
-    } 
-      
+    }    
     this.request.addtocart(edata).subscribe((res: any) => {
       if (res.message == 'Product added to cart successfully') {    
         this.addRecordSuccess();
@@ -357,7 +334,6 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
       }
       else if (res.message=='Minimum 1 item(s) should be ordered'){
         this.toastr.info( res.message);
-       
       }
       else if(res.message== 'Stock out'){
         this.toastr.error(res.message);
@@ -369,8 +345,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
     });
   }
   }
-  proddetail(id:any){
-    
+  proddetail(id:any){ 
     this.router.navigate(['productdetail', id]);
   }
   addRecordSuccess() {
@@ -389,30 +364,18 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
     else {
-      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
-
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
     }
-    console.log("this.quantityarray", this.quantityarray);
   }
 
   prodaddtocart(img: any) {
-    // console.log("img", img);
-    // if (this.userid == 0) {
-    //   this. openlogin()
-    // }
-    // else {
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else if (img.variants[0]?.options?.length == 1) {
@@ -448,7 +411,6 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
         }
       }
       this.request.addtocart(this.edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
         if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
@@ -473,7 +435,6 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   this.currentpackagevalue= varient[1].options[0]
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.Allproducts[i].product.stroked_price = res.stroked_price
       this.Allproducts[i].product.main_price = res.price_string;
       this.Allproducts[i].discount_amount = res.discount_amount;
@@ -484,17 +445,14 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   }
 
   onScrollDown(eve: any) {
-    console.log("scroll down");
     this.pagenum += 1
     const pageurl = this.pagess[this.pagenum] 
-    console.log("pageurl",pageurl);
     if (pageurl?.url !== null && pageurl !== undefined) {
       this.pageload = false;
       this.prodloader = true;
       this.sidepoploader = true;
       this.request.getpageAuth(pageurl?.url).subscribe((response: any) => {
         this.newpageProduct = response.data;
-        console.log("this.newpageProduct",this.newpageProduct);
         this.pagenation = response.meta;
         this.pagess = this.pagenation.links;
         this.pagee = this.pagenation.current_page;
@@ -517,7 +475,7 @@ this.request.filtersearchdataa(this.searchh).subscribe((response: any) => {
   }
 
   onScrollUp(ev: any) {
-    console.log("scrolled up!",);
+
   }
 
 }

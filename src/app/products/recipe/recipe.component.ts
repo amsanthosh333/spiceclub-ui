@@ -96,7 +96,6 @@ export class RecipeComponent implements OnInit {
         JSON.parse(localStorage.getItem('currentUser')||'{}')
      
       );
-      // console.log("currentuser details=", this.currentUserSubject);
       this.currentUser = this.currentUserSubject.asObservable();
        this.currentdetail = this.currentUserSubject.value;
        this.userid=this.currentdetail.user?.id; 
@@ -112,13 +111,10 @@ export class RecipeComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe((data2: Params) => {
     this.rec_id = data2['category']
     this.pagee = data2['page']
-      console.log("queryParams data", this.rec_id);
       if (this.rec_id ==undefined || this.rec_id ==null ) {
-        console.log("rec!undefined",this.rec_id);  
       this.getallrecipe(this.pagee);
       }
       else { 
-         console.log("rec!else");  
         this.getrecipebycatg(this.rec_id,this.pagee); 
       }
     })
@@ -137,16 +133,7 @@ export class RecipeComponent implements OnInit {
     this.recipeloader=true;
     this.imgloader = false;
     this.request.getallrecipe(page).subscribe((res:any)=>{
-    this.Blogs=res.data;
-    // this.Blogs.push(this.Blogs[0])
-    // this.Blogs.push(this.Blogs[0])
-    // this.Blogs.push(this.Blogs[0])
-
-    // this.Blogs.push(this.Blogs[0])
-    // this.Blogs.push(this.Blogs[0])
-    // this.Blogs.push(this.Blogs[0])
-    console.log(" this.recipe", this.Blogs);
-    
+    this.Blogs=res.data;  
     this.pagenation=res.meta   
     this.pagess=this.pagenation.links
     this.recipeloader=false;
@@ -163,8 +150,6 @@ getallrecipecat(){
   this.sideloader1=true;
   this.request.getallrecipecat().subscribe((response: any) => {
     this.Allcat=response.data;
-    console.log("this.Allcat",this.Allcat);
-
     this.loader=false
     this.sideloader1=false;
     this.firstblog= this.Allcat[0].bestof?.data[0]
@@ -175,19 +160,14 @@ getallrecipecat(){
   });
 }
 getrecipebycatg(id:any,page:any){
-  console.log("getrecipebycatg");
   this.recipeloader=true;
   this.imgloader = false; 
   this.request.getrecipebycat(id,page).subscribe((response: any) => {
-    console.log("getrecipebycatg response",response);
     this.Blogs=response.data;
     this.pagenation=response.meta   
     this.pagess=this.pagenation.links;
     this.recipeloader=false; 
     this.loader1=false
-    // this.page1=true;
-    // this.page2=false;
-    // console.log("this.Allcat",this.Allcat);
     let index = this.Allcat?.findIndex((x:any ) => x.id == id );
     this.topItem=index 
     // this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: page} });
@@ -215,9 +195,6 @@ getpage(url:any,label:any){
     this.pagenation=response.meta;
     this.pagess=this.pagenation.links;
     this.currentpage=response.meta.current_page;
-    // console.log("this.currentpage",this.currentpage);
-    // this.router.navigate(['recipe',this.rec_id,this.currentpage]);
-        // this.router.navigate(['recipe'] ,{ queryParams: { page: page} });
     this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page:this.currentpage} });
     this.recipeloader=false;
  

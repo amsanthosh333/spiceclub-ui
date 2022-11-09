@@ -92,7 +92,6 @@ export class BlogComponent implements OnInit {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -103,7 +102,6 @@ export class BlogComponent implements OnInit {
   ngOnInit(): void {
     window.scroll(0, 0);
     this.viewblogcat();
-    console.log("blllloggg");
     this.activatedRoute.queryParams.subscribe((data2: Params) => {
       this.blogid = data2['category']
       this.pagee = data2['page']
@@ -116,7 +114,6 @@ export class BlogComponent implements OnInit {
         this.catblogs = true
         this.getblogbycatg(this.blogid, this.pagee);
       }
-      console.log("blllloggg");
     });
 
     this.comment = this.fb.group({
@@ -135,7 +132,6 @@ export class BlogComponent implements OnInit {
     this.loader1 = true;
     this.imgloader = false;
     this.request.getallblog(page).subscribe((res: any) => {
-      console.log("Blogs", this.Blogs);
       this.Blogs = res.data;
       this.Firstblog = this.Blogs[0];
       this.loader1 = false;
@@ -150,23 +146,18 @@ export class BlogComponent implements OnInit {
     });
   }
   bestblogs(data: any) {
-    console.log("bestblog sta", data);
-    // return  this.Blogs
     this.request.getbestblog(data).subscribe((res: any) => {
       this.Bestblog = res.data;
-      console.log("bestblog", this.Bestblog);
     });
     return this.Bestblog
   }
   viewblogcat() {
     this.imgloader = false
-    console.log("viewblogcat");
     this.request.getallblogcat().subscribe((response: any) => {
       this.Allcat = response.data;
       this.firstblog= this.Allcat[0].bestof.data[0]
       let index = this.Allcat?.findIndex((x: any) => x.id == this.blogid);
       this.topItem = index
-      console.log(" this.firstblog",  this.firstblog);
       this.imgloader = true
       this.loader2 = false
       this.loader = false;
@@ -186,9 +177,7 @@ export class BlogComponent implements OnInit {
       this.page1 = true;
       this.page2 = false;
       let index = this.Allcat?.findIndex((x: any) => x.id == id);
-      this.topItem = index
-      console.log("this.topItem",this.topItem);
-      
+      this.topItem = index   
       // this.router.navigate(['/blog'],{ queryParams:{ category:this.blogid, page: page} });
       setTimeout(() => {
         this.imgloader = true;
@@ -252,9 +241,7 @@ export class BlogComponent implements OnInit {
       });
     this.getcommentsss();
   }
-  getblogdetail(id: any) {
-    console.log("blogid",id);
-    
+  getblogdetail(id: any) {   
     window.scroll(0, 0);
     this.router.navigate(['blogdetails', id]);
 

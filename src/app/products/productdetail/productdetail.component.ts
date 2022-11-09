@@ -222,7 +222,6 @@ export class ProductdetailComponent implements OnInit {
   }
 
   onClick(e: { clientY: any; clientX: any; }) {
-    console.log(e,e.clientY, e.clientX);
     this.isZoomed = !this.isZoomed;
     if (this.isZoomed) {
       this.container.nativeElement.style.overflow = 'hidden';
@@ -299,10 +298,6 @@ export class ProductdetailComponent implements OnInit {
   }
 
   touchmove(e:any){
-    console.log("touchmove",e);
-    
-    console.log("e.changedTouches.clientX",e.changedTouches[0].clientX);
-
     const dx = (e.changedTouches[0].clientX - this.posM.x) * 3;
     const dy = (e.changedTouches[0].clientY - this.posM.y) * 10;
 
@@ -348,7 +343,6 @@ export class ProductdetailComponent implements OnInit {
   }
 
   scrolll() {
-    console.log("dfgs");
     window.scrollTo({ top: 900, behavior: 'smooth' });
   }
   scroll(el: HTMLElement) {
@@ -356,7 +350,6 @@ export class ProductdetailComponent implements OnInit {
   }
 
   showLightbox(index: number) {
-    console.log("indexxx", index);
     this.selectedImageIndex = index;
     this.showFlag = true;
   }
@@ -366,7 +359,6 @@ export class ProductdetailComponent implements OnInit {
     this.currentIndex = -1;
   }
   blogClick(event: any) {
-    console.log(event);
     this.imgItem = event
     this.selectedimg = event;
     this.selectedimage = this.allgalleryphotos[event].image;
@@ -404,7 +396,6 @@ export class ProductdetailComponent implements OnInit {
     });
   }
   video() {
-    console.log('im Play!');
     this.videoplayer?.nativeElement.play();
   }
   addtowishlist(prd_id: any) {
@@ -418,7 +409,6 @@ export class ProductdetailComponent implements OnInit {
       }
       this.request.addtowishlist(edata4).subscribe((res: any) => {
         if (res.message == 'Product is successfully added to your wishlist') {
-          // this.iswishlist(prd_id)
           this.addRecordSuccess();
           this.sharedService.sendWishlistEvent();
         }
@@ -432,12 +422,10 @@ export class ProductdetailComponent implements OnInit {
     }
   }
   addtowishlistmain(prd_id: any, content: any) {
-
     if (this.userid == 0) {
       this.openlogin()
     }
     else {
-      // this.iswishlistt?.is_in_wishlist==true
       let edata4 = {
         user_id: this.userid,
         product_id: prd_id
@@ -449,7 +437,6 @@ export class ProductdetailComponent implements OnInit {
             ariaLabelledBy: 'modal-basic-title',
             size: 'lg',
           });
-          // this.addRecordSuccess();
           this.sharedService.sendWishlistEvent();
         }
         else {
@@ -508,7 +495,6 @@ export class ProductdetailComponent implements OnInit {
     // this.router.navigate(['productdetail', id]);
 
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-      console.log("proddetail", response);
       this.allgalleryphotos = [];
       this.Peoduct = response.data[0];
       this.choice = this.Peoduct.choice_options;
@@ -539,8 +525,6 @@ export class ProductdetailComponent implements OnInit {
 
       if (this.Peoduct.choice_options.length > 1) {
         this.currentpackage = this.varprise0[1]?.options[0]
-
-        console.log("this.currentpackage", this.currentpackage);
       }
       // array push photo
       this.newphotos = this.photoos.forEach((item: any) => {
@@ -565,9 +549,6 @@ export class ProductdetailComponent implements OnInit {
         })
 
       }
-      
-      // this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[0])
-      // this.Peoduct?.compoproducts.push(this.Peoduct?.compoproducts[1])
 
       this.selectedimage = this.allgalleryphotos[0]?.image;   
       this.getcommentsss()
@@ -610,7 +591,6 @@ export class ProductdetailComponent implements OnInit {
   }
   viewproductrow2(id: any) {
     window.scroll(0, 0);
-    console.log("viewprod2", id);
     this.allgalleryphotos = []
     this.totalprice = 0.00
     this.product_idd = id
@@ -618,25 +598,17 @@ export class ProductdetailComponent implements OnInit {
     this.photoloader = true;
     this.contentloader = true;
     this.discriptloader = true;
-    console.log("viewprod2", this.product_idd);
     this.router.navigate(['/productdetail', this.product_idd]);
   }
   viewbulkdiscount(id: any) {
     this.request.getbulckdisc(this.buyertypeid, id).subscribe((response: any) => {
-      console.log("getbulckdiscresponse", response);
-
       this.Bulckdis = response.data;
-      console.log("this.Bulckdis", this.Bulckdis);
       if (this.Bulckdis[0]?.discount_percentage == 0) {
-
         this.showbulkoffer = true
       }
       else {
         this.showbulkoffer = false
       }
-
-      // console.log(" this.Bulckdis", this.Bulckdis);
-
     },
       (error: any) => {
         console.log(error);
@@ -658,10 +630,6 @@ export class ProductdetailComponent implements OnInit {
 
   // addtocart main
   addtocartmain(_id: any, content: any) {
-    // if (this.userid == 0) {
-    //   this.openlogin()
-    // }
-    // else {
       if (this.quantityyy == 0) {
         let edata = {
           id: _id,
@@ -689,10 +657,7 @@ export class ProductdetailComponent implements OnInit {
     if (this.Peoduct.choice_options.length > 1) {
       edata.variant = edata.variant + "-" + this.currentpackage.replace(/\s/g, "")
     }
-
-    console.log("edata addtoocarttmain", edata);
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log("addtoocarttmain res", res);
       if (res.result == true) {
         this.modalService.open(content, {
           ariaLabelledBy: 'modal-basic-title',
@@ -784,10 +749,7 @@ export class ProductdetailComponent implements OnInit {
     if (this.Peoduct.choice_options.length > 1) {
       edata.variant = edata.variant + "-" + this.currentpackage.replace(/\s/g, "")
     }
-    console.log("edata", edata);
     this.request.addtocart(edata).subscribe((res: any) => {
-      console.log("buyres", res);
-
       if (res.result == true) {
         this.addRecordSuccess();
         this.sharedService.sendClickEvent();
@@ -822,7 +784,6 @@ export class ProductdetailComponent implements OnInit {
 
   // main quantity selection
   increaseqty() {
-    console.log("dataa", this.varient_value);
     this.quantityyy++;
     this.stocck--;
 
@@ -832,9 +793,7 @@ export class ProductdetailComponent implements OnInit {
       c: this.varient_value.replace(/\s/g, ""),
       d: this.quantityyy
     }
-    console.log("dataa", dataa);
     this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage).subscribe((res: any) => {
-      console.log(res);
       if (res.result == true) {
         this.totalprice = res.price.toFixed(2);
         // this.totalprice = this.dec.toFixed(2) 
@@ -851,7 +810,6 @@ export class ProductdetailComponent implements OnInit {
     this.quantityyy--;
     this.stocck++;
     this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy, this.currentpackage).subscribe((res: any) => {
-      console.log(res);
       if (res.result == true) {
         this.totalprice = res.price.toFixed(2);
         this.discount_price = res.discount_amount
@@ -865,8 +823,6 @@ export class ProductdetailComponent implements OnInit {
     })
   }
   getValue(val: any) {
-    console.log("getValue");
-
     if (val <= 0) {
       val = 1
     }
@@ -899,8 +855,6 @@ export class ProductdetailComponent implements OnInit {
     // this.imgItem = index
    
     this.request.addvarientfromdetail(this.product_id, weight, this.currentpackage).subscribe((res: any) => {
-      console.log("selectvarresponse" ,res );
-      
       this.Peoduct.main_price = res?.price_string;
       this.Peoduct.stroked_price = res?.stroked_price;
       this.Peoduct.excl_gst = res?.excl_gst;
@@ -942,7 +896,6 @@ export class ProductdetailComponent implements OnInit {
     this.subItempackage = i
 
     this.request.addvarientfromdetail(this.product_id, this.currentvarient, varpackage,).subscribe((res: any) => { 
-      console.log("selectvarpackage" ,res );
       this.Peoduct.main_price = res?.price_string;
       this.Peoduct.stroked_price = res?.stroked_price;
       this.Peoduct.excl_gst = res?.excl_gst;
@@ -981,12 +934,9 @@ export class ProductdetailComponent implements OnInit {
     });
   }
   checkvarientprice() {
-    console.log("varienttt", this.varienttt);
     this.request.addvarientfromdetail(this.product_id, this.varienttt, this.currentpackage).subscribe((res: any) => {
-      console.log(res);
       this.varprise = res?.price_string;
       this.varstrokedprice = res?.stroked_price;
-      console.log("varprise", this.varprise);
     }, (error: any) => {
       console.log("error", error);
     });
@@ -1019,13 +969,11 @@ export class ProductdetailComponent implements OnInit {
     });
   }
   addtosubscribe(id: any) {
-    console.log("addtosubscribe");
     if (this.userid == 0) {
       this.openlogin()
     }
     else {
       this.request.addtosubscribe(this.userid, id).subscribe((res: any) => {
-        console.log("res", res);
         if (res.message == 'Product added to subscribe') {
           this.toastr.success('Subscribed Successfully', '');
           // this.sharedService.sendClickEvent();
@@ -1041,13 +989,11 @@ export class ProductdetailComponent implements OnInit {
     }
   }
   removefromsubscribe(id: any) {
-    console.log("addtosubscribe", id);
     if (this.userid == 0) {
       this.openlogin()
     }
     else {
       this.request.removefromsubscribe(this.userid, id).subscribe((res: any) => {
-        console.log("res", res);
         if (res.message == 'Product is removed from subscribe') {
           this.toastr.error('Removed Successfully', '');
           this.issubscribed = res.is_in_subscribe
@@ -1091,10 +1037,8 @@ export class ProductdetailComponent implements OnInit {
         return;
       }
       else {
-        console.log("ratingg", form.value.rating);
 
         if (isNaN(form.value.rating)) {
-          console.log("ratinggsss", form.value.rating);
           form.value.rating = 0
         }
         let edata2 = {
@@ -1103,10 +1047,7 @@ export class ProductdetailComponent implements OnInit {
           rating: form.value.rating,
           comment: form.value.comment,
         }
-        console.log("edata2", edata2);
         this.request.addreview(edata2).subscribe((res: any) => {
-          console.log(" comment submit res", res);
-
           if (res.result == true) {
             this.toastr.success('Comment  Submitted', '');
             const currentRoute = this.router.url;
@@ -1130,8 +1071,6 @@ export class ProductdetailComponent implements OnInit {
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
       this.Peoduct = response.data[0];
-      console.log("Peoduct", this.Peoduct);
-
       this.prod_price = this.Peoduct.main_price;
       this.choice = this.Peoduct.choice_options;
       this.stk = this.Peoduct.current_stock;
@@ -1150,8 +1089,6 @@ export class ProductdetailComponent implements OnInit {
       }
       else {
         this.varient_value = this.choice[0]?.options[0];
-        console.log("varient_value", this.varient_value);
-
       }
       this.modalService.open(content, {
         ariaLabelledBy: 'modal-basic-title',
@@ -1276,7 +1213,6 @@ export class ProductdetailComponent implements OnInit {
 
   iswishlist(prodid: any) {
     this.request.checkwishlist(prodid, this.userid).subscribe((response: any) => {
-      console.log("this.iswishlistt", this.iswishlistt);
       this.iswishlistt = response;
     },
       (error: any) => {
@@ -1296,36 +1232,28 @@ export class ProductdetailComponent implements OnInit {
     this.router.navigate(['brands', id]);
   }
   collapsebtn() {
-    // console.log("collapsebtn");
     this.btnItemm = !this.btnItemm
     this.desbtnItemm = false
     this.ingItemm = false
     this.addinfobtnItemm = false
-    // console.log("collapsebtn",this.btnItemm);
-
   }
   collapsebtn1() {
-    // console.log("collapsebtn1");
     this.desbtnItemm = !this.desbtnItemm
     this.btnItemm = false
     this.ingItemm = false
     this.addinfobtnItemm = false
-    // console.log("collapsebtn1",this.desbtnItemm);
   }
   collapsebtn2() {
     this.ingItemm = !this.ingItemm
     this.btnItemm = false
     this.desbtnItemm = false
     this.addinfobtnItemm = false
-    // console.log("collapsebtn1",this.desbtnItemm);
   }
   collapsebtn3() {
     this.addinfobtnItemm = !this.addinfobtnItemm
     this.btnItemm = false
     this.desbtnItemm = false
     this.ingItemm = false
-
-    // console.log("collapsebtn1",this.desbtnItemm);
   }
   shareinstaUrl(foodid: any) {
     window.open('https://instagram.com/accounts/login/?text=%20Check%20up%20this%20awesome%20content' + encodeURIComponent(document.title) + ':%20 ' +
@@ -1338,23 +1266,15 @@ export class ProductdetailComponent implements OnInit {
     if (this.quantityarray.length == 0) {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
-    else {
-      console.log(" this.quantityarray", this.quantityarray);
+    else { 
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
-
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
-
     }
-
-    console.log("this.quantityarray", this.quantityarray);
   }
   prodselectvar(weight: any, i: any, id: any, varient: any) {
     this.selectedvar = weight.replace(/\s/g, "");
@@ -1373,14 +1293,7 @@ export class ProductdetailComponent implements OnInit {
     });
   }
   prodaddtocart(img: any) {
-    // console.log("img", img);
-    // if (this.userid == 0) {
-    //   this.openlogin()
-    // }
-    // else {
-
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else if (img.variants[0]?.options?.length == 1) {
@@ -1389,8 +1302,6 @@ export class ProductdetailComponent implements OnInit {
       else {
         this.varient_value = this.selectedvar;
       }
-
-
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
       if (index > -1) {
         this.totalqty = this.quantityarray[index].value;
@@ -1419,7 +1330,6 @@ export class ProductdetailComponent implements OnInit {
         }
       }
       this.request.addtocart(this.edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
         if (res.result == true) {
           this.addRecordSuccess();
           this.modalService.dismissAll();
@@ -1439,16 +1349,12 @@ export class ProductdetailComponent implements OnInit {
   }
   proddetail(id: any) {
     window.scroll(0, 0);
-       
-    // this.router.navigate(['productdetail', id]);  
     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
       this.router.navigate(['productdetail', id]);
   });
    
   }
   toggle1(img: any, index: any): void {
-    console.log(this.userid);
-
     this.likesss[index] = !this.likesss[index];
     if (this.likesss[index] == true) {
       this.addtowishlist(img.id);
@@ -1458,10 +1364,8 @@ export class ProductdetailComponent implements OnInit {
     }
   }
   toggledelete1(img: any, index: any): void {
-
     if (this.userid !== 0) {
       this.likess[index] = !this.likess[index];
-
       if (this.likess[index] == true) {
         this.addtowishlist(img.id);
       }

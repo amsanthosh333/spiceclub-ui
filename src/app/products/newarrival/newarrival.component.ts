@@ -94,8 +94,6 @@ export class NewarrivalComponent implements OnInit {
 
     config.max = 5;
     config.readonly = true;
-
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user?.id;
@@ -252,8 +250,6 @@ export class NewarrivalComponent implements OnInit {
 
     viewnewarrival() {
       this.request.getnewarrivalpro().subscribe((response: any) => {
-        console.log("viewnewarrival response",response)
-        
         this.Newarrivals = response.data;
         this.prodloader=false;
         this.pagenation = response.meta;
@@ -307,26 +303,18 @@ export class NewarrivalComponent implements OnInit {
         });
   
     }
-    getValue(val: any) {
-        
+    getValue(val: any) {     
       if (val<= 0) {
-        val = 1
-       
+        val = 1    
       }
       else if (val > this.stocckkk) {
-        val = this.stocckkk
-        
+        val = this.stocckkk  
       }
       this.quantityyy = val
       this.stocck = this.stocckkk - val
     
       this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-        console.log(res);
-        
         this.totalprice = res.price.toFixed(2);
-        
-      // this.totalprice = this.dec.toFixed(2) 
-     
       })
   
     }
@@ -334,8 +322,6 @@ export class NewarrivalComponent implements OnInit {
       this.quantityyy++;
       this.stocck--;
       this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-        console.log(res);
-        
         this.totalprice = res.price.toFixed(2);
         
       // this.totalprice = this.dec.toFixed(2) 
@@ -347,12 +333,7 @@ export class NewarrivalComponent implements OnInit {
           this.quantityyy--;
           this.stocck++;    
           this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-            console.log(res);
-            
             this.totalprice = res.price.toFixed(2);
-            
-          // this.totalprice = this.dec.toFixed(2) 
-         
           })   
         }
         selectvar(weight:any,i:any){
@@ -408,7 +389,6 @@ export class NewarrivalComponent implements OnInit {
         }
       },
        (error: any) => {
-        // this.toastr.error(error);
         console.log("error",error);
       
       });
@@ -433,30 +413,18 @@ export class NewarrivalComponent implements OnInit {
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
       else {
-        console.log(" this.quantityarray", this.quantityarray);
         const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
-        console.log("obj", index);
         if (index > -1) {
-          console.log("if", index);
-  
           this.quantityarray[index].value = event.target.value;
         }
         else {
-          console.log("else", index);
           this.quantityarray.push({ "id": img.id, "value": event.target.value });
         }
       }
-      console.log("this.quantityarray", this.quantityarray);
     }
   
     prodaddtocart(img: any) {
-      // console.log("img", img);
-      // if (this.userid == 0) {
-      //   this. openlogin()
-      // }
-      // else {
         if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-          console.log("empty");
           this.varient_value = ''
         }
         else if (img.variants[0]?.options?.length == 1) {
@@ -494,7 +462,6 @@ export class NewarrivalComponent implements OnInit {
         }
    
         this.request.addtocart(this.edata).subscribe((res: any) => {
-          console.log("addtocart resssssssssssssss", res);
           if (res.result == true) { 
             this.addRecordSuccess()
             this.modalService.dismissAll();
@@ -530,12 +497,8 @@ export class NewarrivalComponent implements OnInit {
     }
   
     onScrollDown(eve: any) {
-      console.log("scroll down");
       this.pagenum += 1
-      console.log("scroll down", this.pagess);
-      console.log("scroll pagenum", this.pagenum);
       const pageurl = this.pagess[this.pagenum]
-      console.log("pageurl", pageurl);
       if (pageurl?.url !== null && pageurl !== undefined) {
         this.pageload = false;
         this.prodloader = true;
@@ -544,13 +507,11 @@ export class NewarrivalComponent implements OnInit {
           this.newpageProduct = response.data;
           this.pagenation = response.meta;
           this.pagess = this.pagenation.links;
-          console.log("this.pagess", this.pagess);
           this.pagee = this.pagenation.current_page;
           this.Newarrivals.push(...this.newpageProduct)
           this.pageload = true;
           this.prodloader = false;
           this.sidepoploader = false;
-          console.log("this.Product", this.Product);
           for (var i = 0; i <= this.Newarrivals.length; i++) {
             this.likeddd.push(true); 
           } 
@@ -565,7 +526,6 @@ export class NewarrivalComponent implements OnInit {
     }
   
     onScrollUp(ev: any) {
-      console.log("scrolled up!",);
     }
 
     

@@ -140,7 +140,6 @@ export class HeaderComponent implements OnInit {
     this.buyertypeid = this.currentdetail.user?.buyertypeid;
     
     // this.buyertypereal = this.currentdetail.buyertypereal;
-     console.log("buyertypereal",this.buyertypereal)
     if (this.userid == undefined) {
       this.userid = 0;
     } 
@@ -1660,8 +1659,7 @@ $( "#lii_one" )
   .mouseenter(function() {
 
     i += 1;
-    console.log("i",i);
-    
+
     if(i<=1){
      
     if ($(this).hasClass('scrolling')) return;
@@ -1712,12 +1710,10 @@ $( "#lii_one" )
  
 
   inputHandle(event:any){
-    console.log("ComponentDefnHeadComponent2",event.target.value);
     setTimeout(() => {
      
         this.request.getsearchlist(event.target.value).subscribe((response: any) => {
           this.searchList = response.data;
-          console.log("alllcat", this.searchList);
         },
           (error: any) => {
             console.log("error", error);
@@ -1731,7 +1727,6 @@ $( "#lii_one" )
   getprofile() {
     this.request.fetchuserprofile(this.userid).subscribe((response: any) => {
       this.profiledetail = response;
-      console.log("this.profiledetail", this.profiledetail);
       setTimeout(() => {
         this.loaderimage = false;
       }, 2000);
@@ -1752,9 +1747,7 @@ $( "#lii_one" )
     });
   }
   viewcartcount() {
-    this.request.cartcount(this.userid).subscribe((response: any) => {
-      console.log("response",response);
-      
+    this.request.cartcount(this.userid).subscribe((response: any) => {     
       this.cartlength = response.cartcount;
     });
   }
@@ -1796,8 +1789,6 @@ $( "#lii_one" )
   }
   deleteRecord(id: any) {
     this.request.deletewishproud(id).subscribe((response: any) => {
-      console.log("response",response);
-      
       if (response.result == true) {
         this.viewwishlist();
         this.deleteRecordSuccess();
@@ -1835,8 +1826,7 @@ $( "#lii_one" )
     });
   }
   viewcart3() {
-    this.request.fetchsummery(this.userid,0,null).subscribe((response: any) => {
-      console.log("summary",response); 
+    this.request.fetchsummery(this.userid,0,null).subscribe((response: any) => { 
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
       this.subtot = this.Summery.sub_total
@@ -1877,8 +1867,6 @@ $( "#lii_one" )
   }
 
   logout1() {
-    console.log("logout1");
-    
     this.authService.logout().subscribe(res => {
       this.toastr.success('Logout Successfully', '');
       this.router.navigate(['/home'])
@@ -1976,7 +1964,6 @@ $( "#lii_one" )
     this.router.navigate(['/productdetail', id]);
   }
   gotocategory(id: any) {
-    console.log("goto");
     this.router.navigate(['category', id]);
   }
 
@@ -1989,7 +1976,6 @@ $( "#lii_one" )
   }
 
   gotocategory4(id: any) {
-    console.log("id", id);
     this.router.navigate(['category', this.cat_id], { queryParams: { subcategory: this.subcat_id, category1: this.catid1_id, subcategory1: id } });
   }
 
@@ -2007,8 +1993,6 @@ $( "#lii_one" )
     });
   }
   gotosubscribe(){
-    console.log("sdfxdgs");
-    
   }
   // openkyc(){
   //   $("#about-overlay").toggleClass("active-about-overlay");

@@ -180,51 +180,33 @@ export class RecipedetailsComponent implements OnInit {
       // $("#offcanvas-about-icon").on("click", function () {
 
       //  )};
-        $(' .ytp-button:not([aria-disabled=true]):not([disabled]):not([aria-hidden=true])').on("click",function(){
-          console.log("query");
-          alert('Does this work?');
-          console.log("query");
-          
+        $(' .ytp-button:not([aria-disabled=true]):not([disabled]):not([aria-hidden=true])').on("click",function(){   
+          alert('Does this work?');     
       });
 
 
       $('.ytp-button').on("click",function(){
-        console.log("query");
-        alert('Does this work?');
-        console.log("query");
-        
+        alert('Does this work?');       
     });
     
     $('.ytp-large-play-button').on("click",function(){
-      console.log("query");
-      alert('Does this work?');
-      console.log("query");
-      
+      alert('Does this work?');     
   });
 
     })(jQuery);
   }
 
- 
-
-
-
-
   scrollToElement(element: HTMLElement) {
-    console.log("scroll");
-    
     this.scrollService.scrollToElement(element);
   }
 
 
   uploadDone(){
-    console.log("showbuybtn");
     setTimeout(() => {
       this.buybtn=true
     }, 2000);
   }
   play(){
-    console.log("showbuybtn play");
   }
   viewfuturedpro(){
   
@@ -232,9 +214,6 @@ export class RecipedetailsComponent implements OnInit {
 
       this.Bestsellpro=response.data.slice(0,4);  
       this.loader6=false
-
-    
-      console.log("Bestsellpro",this.Bestsellpro);
       setTimeout(() => {
         this.imgloader2 = false;
       }, 1000);
@@ -246,10 +225,6 @@ export class RecipedetailsComponent implements OnInit {
     this.request.getslider().subscribe((response: any) => {
       this.Slider = response.data;
       this.photoo = this.Slider.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.photo);
-      console.log("photooo",this.photoo);
-      
-      // this.loader1 = false;
-      // this.mainloader = false;
       setTimeout(() => {
         // this.loadingIndicator = false;
       }, 500);
@@ -285,8 +260,6 @@ export class RecipedetailsComponent implements OnInit {
     this.router.navigate(['/recipe'],{ queryParams:{ category:id, page: 1} });
   }
   getblogdetail2(id: any) {
-    console.log("id",id);
-    
     window.scroll(0, 0);
     this.router.navigate(['recipedetails', id]);
     
@@ -302,7 +275,6 @@ export class RecipedetailsComponent implements OnInit {
     this.discriptloader = true;
     this.blog_id = id;
     this.request.getrecipedetail(id).subscribe((response: any) => {
-    console.log("rec detail respoonse",response);
     this.allgalleryphotos = [];
       this.Peoduct = response.data[0];
       this.photoss = this.Peoduct.photos;
@@ -323,17 +295,6 @@ export class RecipedetailsComponent implements OnInit {
       this.loader6=false
       this.imgloader2 = false;
       this.allgalleryphotos = this.photoss.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.path);
-      console.log("this.allgalleryphotos", this.allgalleryphotos);
-      //  this.photoss.forEach((item: any) => {
-      //   console.log("items", item);
-    
-      //     this.allgalleryphotos.push({
-      //      'https://neophroncrm.com/spiceclubnew/public/' + item.path,
-          
-      //     })
-       
-      // })
-
       setTimeout(() => {
         this.photoloader1 = false;
       }, 3000);
@@ -352,9 +313,6 @@ export class RecipedetailsComponent implements OnInit {
       this.pagess=this.pagenation.links;
       this.recipeloader=false; 
       this.loader2=false
-      // this.page1=true;
-      // this.page2=false;
-      // console.log("this.Allcat",this.Allcat);
       let index = this.Allcat?.findIndex((x:any ) => x.id == id );  
       // this.router.navigate(['/recipe'],{ queryParams:{ category:this.rec_id, page: page} });
       setTimeout(() => {
@@ -429,8 +387,6 @@ export class RecipedetailsComponent implements OnInit {
 
 
   viewproductrow2(id: any) {
-    // window.scroll(0, 0);
-    // console.log("viewprod2", id);
   this.router.navigate(['/productdetail', id])
   }
   deleteRecord(id: any) {
@@ -485,8 +441,6 @@ export class RecipedetailsComponent implements OnInit {
   }
 
   toggle1(img: any, index: any): void {
-    console.log(this.userid);
-
     this.likesss[index] = !this.likesss[index];
     if (this.likesss[index] == true) {
       this.addtowishlist(img.id);
@@ -518,22 +472,14 @@ export class RecipedetailsComponent implements OnInit {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
     else {
-      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
-
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
-
     }
-
-    console.log("this.quantityarray", this.quantityarray);
   }
   prodselectvar(weight: any, i: any, id: any, varient: any) {
     this.selectedvar = weight.replace(/\s/g, "");
@@ -542,7 +488,6 @@ export class RecipedetailsComponent implements OnInit {
       this.currentpackagevalue = varient[1].options[0]
     }
     this.request.addvarientfromdetail(id, weight, this.currentpackagevalue).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.Bestsellpro[i].stroked_price = res.stroked_price
       this.Bestsellpro[i].main_price = res.price_string
       this.Bestsellpro[i].discount_amount = res.discount_amount;
@@ -552,14 +497,7 @@ export class RecipedetailsComponent implements OnInit {
     });
   }
   prodaddtocart(img: any) {
-    // console.log("img", img);
-    // if (this.userid == 0) {
-    //   this.openlogin()
-    // }
-    // else {
-
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else if (img.variants[0]?.options?.length == 1) {
@@ -568,8 +506,6 @@ export class RecipedetailsComponent implements OnInit {
       else {
         this.varient_value = this.selectedvar;
       }
-
-
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
       if (index > -1) {
         this.totalqty = this.quantityarray[index].value;
@@ -577,7 +513,6 @@ export class RecipedetailsComponent implements OnInit {
       else {
         this.totalqty = 1
       }
-
       if (img.variants?.length > 1) {
         this.currentpackagevalue = img?.variants[1]?.options[0]
         this.edata = {
@@ -598,7 +533,6 @@ export class RecipedetailsComponent implements OnInit {
         }
       }
       this.request.addtocart(this.edata).subscribe((res: any) => {
-        console.log("resssssssssssssss", res);
         if (res.result == true) {
           this.addRecordSuccess();
           this.modalService.dismissAll();
@@ -618,9 +552,7 @@ export class RecipedetailsComponent implements OnInit {
   }
 
   addtocartprod(members:any){
-    console.log("members",members);
     this.request.addcart_recipeprod(members,this.id).subscribe((res: any) => {
-      console.log("addcart_recipeprod res", res);
       if (res.result == true) {
         this.addRecordSuccess();
         this.sharedService.sendClickEvent();

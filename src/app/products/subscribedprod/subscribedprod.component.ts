@@ -94,8 +94,6 @@ export class SubscribedprodComponent implements OnInit {
 
     config.max = 5;
     config.readonly = true;
-
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
      this.currentdetail = this.currentUserSubject.value;
      this.userid=this.currentdetail.user?.id;
@@ -149,7 +147,6 @@ export class SubscribedprodComponent implements OnInit {
     viewfuturedpro(){
       this.imgloader = false;
       this.request.getsubscribedpro().subscribe((response: any) => {
-        console.log("this.subscribedpro response",response);
         this.Bestsellpro=response.data;  
         this.prodloader=false;  
         setTimeout(() => {
@@ -321,8 +318,6 @@ export class SubscribedprodComponent implements OnInit {
       this.stocck = this.stocckkk - val
     
       this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-        console.log(res);
-        
         this.totalprice = res.price.toFixed(2);
         
       // this.totalprice = this.dec.toFixed(2) 
@@ -333,9 +328,7 @@ export class SubscribedprodComponent implements OnInit {
     increaseqty(){
       this.quantityyy++;
       this.stocck--;
-      this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-        console.log(res);
-        
+      this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => { 
         this.totalprice = res.price.toFixed(2);
         
       // this.totalprice = this.dec.toFixed(2) 
@@ -346,9 +339,7 @@ export class SubscribedprodComponent implements OnInit {
   
           this.quantityyy--;
           this.stocck++;    
-          this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-            console.log(res);
-            
+          this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {    
             this.totalprice = res.price.toFixed(2);
             
           // this.totalprice = this.dec.toFixed(2) 
@@ -433,30 +424,18 @@ export class SubscribedprodComponent implements OnInit {
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
       else {
-        console.log(" this.quantityarray", this.quantityarray);
         const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
-        console.log("obj", index);
         if (index > -1) {
-          console.log("if", index);
-  
           this.quantityarray[index].value = event.target.value;
         }
         else {
-          console.log("else", index);
           this.quantityarray.push({ "id": img.id, "value": event.target.value });
         }
       }
-      console.log("this.quantityarray", this.quantityarray);
     }
   
     prodaddtocart(img: any) {
-      // console.log("img", img);
-      // if (this.userid == 0) {
-      //   this. openlogin();
-      // }
-      // else {
         if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-          console.log("empty");
           this.varient_value = ''
         }
         else if (img.variants[0]?.options?.length == 1) {
@@ -493,7 +472,6 @@ export class SubscribedprodComponent implements OnInit {
           }
         }
         this.request.addtocart(this.edata).subscribe((res: any) => {
-          console.log("resssssssssssssss", res);
           if (res.result == true) { 
             this.addRecordSuccess();
             this.modalService.dismissAll();
@@ -518,7 +496,6 @@ export class SubscribedprodComponent implements OnInit {
     this.currentpackagevalue= varient[1].options[0]
       }
       this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-        console.log("selectvar res", res);
         this.Bestsellpro[i].product.stroked_price = res.stroked_price
         this.Bestsellpro[i].product.main_price = res.price_string;
         this.Bestsellpro[i].discount_amount = res.discount_amount;
@@ -529,37 +506,9 @@ export class SubscribedprodComponent implements OnInit {
     }
   
     onScrollDown(eve: any) {
-      console.log("scroll down");
-      // this.pagenum += 1
-      // console.log("scroll down", this.pagess);
-      // console.log("scroll pagenum", this.pagenum);
-      // const pageurl = this.pagess[this.pagenum]
-      // console.log("pageurl", pageurl);
-      // if (pageurl?.url !== null && pageurl !== undefined) {
-      //   this.pageload = false;
-      //   this.prodloader = true;
-      //   this.sidepoploader = true;
-      //   this.request.getpage(pageurl?.url).subscribe((response: any) => {
-      //     this.newpageProduct = response.data;
-      //     this.pagenation = response.meta;
-      //     this.pagess = this.pagenation.links;
-      //     console.log("this.pagess", this.pagess);
-      //     this.pagee = this.pagenation.current_page;
-      //     this.Product.push(...this.newpageProduct)
-      //     this.pageload = true;
-      //     this.prodloader = false;
-      //     this.sidepoploader = false;
-      //     console.log("this.Product", this.Product);
-  
-      //     setTimeout(() => {
-      //       this.imgloader = true;
-      //     }, 2000);
-      //   })
-      // }
     }
   
     onScrollUp(ev: any) {
-      console.log("scrolled up!",);
     }
 
 

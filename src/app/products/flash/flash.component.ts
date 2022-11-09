@@ -192,7 +192,6 @@ export class FlashComponent implements OnInit {
   }
   viewnewarrival() {
     this.request.getnewarrivalpro().subscribe((response: any) => {
-      console.log("getnewarrivalpro",response);
       this.Newarrivals = response.data;
       this.prodloader1=false;
       setTimeout(() => {
@@ -206,7 +205,6 @@ export class FlashComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.request.getprodbyflash(id,page).subscribe((response: any) => {
-      console.log("response", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;     
@@ -224,7 +222,6 @@ export class FlashComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.request.getallflashdealproducts().subscribe((response: any) => {
-      console.log("response", response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links;     
@@ -258,15 +255,12 @@ export class FlashComponent implements OnInit {
       this.prodloader = true;
       window.scroll(0, 0);
       this.imgloader = false;
-      console.log("this.id", this.id);
       this.request.getpage(url).subscribe((response: any) => {
         this.Product = response.data;
         this.pagenation = response.meta;
         this.pagess = this.pagenation.links;
         this.currentpage = response.meta.current_page
-        // console.log("this.currentpage",this.currentpage);
         this.router.navigate(['brands', this.id, this.currentpage],
-          // this.router.navigate(['brands',this.id],{  queryParams: { page: this.currentpage }},
         );
         this.prodloadermain = true
         this.prodloader = false;
@@ -280,7 +274,6 @@ export class FlashComponent implements OnInit {
   }
   addtowishlist(prd_id: any) {
     if (this.userid == 0) {
-      // this.toastr.info('You need to login', '');
       this. openlogin()
       
     }
@@ -409,8 +402,6 @@ export class FlashComponent implements OnInit {
     this.stocck = this.stocckkk - val
   
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-      
       this.totalprice = res.price.toFixed(2);
       
     // this.totalprice = this.dec.toFixed(2) 
@@ -422,12 +413,7 @@ export class FlashComponent implements OnInit {
     this.quantityyy++;
     this.stocck--;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-      
       this.totalprice = res.price.toFixed(2);
-      
-    // this.totalprice = this.dec.toFixed(2) 
-   
     })
       }
       decreaseqty(){
@@ -435,22 +421,15 @@ export class FlashComponent implements OnInit {
         this.quantityyy--;
         this.stocck++;    
         this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-          console.log(res);
-          
           this.totalprice = res.price.toFixed(2);
-          
-        // this.totalprice = this.dec.toFixed(2) 
-       
         })   
       }
       selectvar(weight:any,i:any){
         this.varient_value=weight.replace(/\s/g, "")
         this.subItem=i
-        this.request.addvarient(this.product_id,weight).subscribe((res: any) => {
-          
+        this.request.addvarient(this.product_id,weight).subscribe((res: any) => {      
           this.prod_price = res?.price_string;
-          this.storked_pricee=res?.stroked_price;
-          
+          this.storked_pricee=res?.stroked_price;        
           this.totalprice=(res?.price_string).replace('Rs','');
           this.varprise=res?.price_string;
           this.stk=res?.stock;
@@ -519,30 +498,20 @@ export class FlashComponent implements OnInit {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
     else {
-      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
 
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
     }
-    console.log("this.quantityarray", this.quantityarray);
   }
 
   prodaddtocart(img: any) {
-    // console.log("img", img);
-    // if (this.userid == 0) {
-    //   this. openlogin()
-    // }
-    // else {
+
       if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-        console.log("empty");
         this.varient_value = ''
       }
       else if (img.variants[0]?.options?.length == 1) {
@@ -602,7 +571,6 @@ export class FlashComponent implements OnInit {
   this.currentpackagevalue= varient[1].options[0]
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.Product[i].stroked_price = res.stroked_price
       this.Product[i].main_price = res.price_string;
       this.Product[i].discount_amount = res.discount_amount;
@@ -613,12 +581,8 @@ export class FlashComponent implements OnInit {
   }
 
   onScrollDown(eve: any) {
-    console.log("scroll down");
     this.pagenum += 1
-    console.log("scroll down", this.pagess);
-    console.log("scroll pagenum", this.pagenum);
     const pageurl = this.pagess[this.pagenum]
-    console.log("pageurl", pageurl);
     if (pageurl?.url !== null && pageurl !== undefined) {
       this.pageload = false;
       this.prodloader = true;
@@ -628,7 +592,6 @@ export class FlashComponent implements OnInit {
         this.newpageProduct = response.data;
         this.pagenation = response.meta;
         this.pagess = this.pagenation.links;
-        console.log("this.pagess", this.pagess);
         this.pagee = this.pagenation.current_page;
         // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
         // window.scroll(0, 0);
@@ -642,8 +605,6 @@ export class FlashComponent implements OnInit {
         for (var i = 0; i <= this.Product.length; i++) {
           this.likedd.push(false); 
         }
-        console.log("this.Product", this.Product);
-
         setTimeout(() => {
           this.imgloader = true;
         }, 500);
@@ -652,7 +613,6 @@ export class FlashComponent implements OnInit {
   }
 
   onScrollUp(ev: any) {
-    console.log("scrolled up!",);
   }
   
 }

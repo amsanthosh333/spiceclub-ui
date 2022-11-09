@@ -163,7 +163,6 @@ export class CategoryComponent implements OnInit {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -182,7 +181,6 @@ export class CategoryComponent implements OnInit {
       const routeParams = this.activatedRoute.snapshot.params;
       this.id = this.route.snapshot.params['id'];
       if (queryParams['subcategory'] == null) {
-        console.log("params");
         this.viewallcategory();
         this.categorydetail(this.id);
         this.getprodofcategory(this.id, 1);
@@ -219,7 +217,6 @@ export class CategoryComponent implements OnInit {
       else {
 
         if (this.subcategory1id !== undefined) {
-          console.log("this.subcategory1id !");
           this.page2 = true;
           this.categoryy_id = this.subcategory1id
           this.viewctopcatprodsub1(this.subcategory1id, 1, 0)
@@ -233,7 +230,6 @@ export class CategoryComponent implements OnInit {
           this.categorybrand(this.subcategory1id);
         }
         else if (this.catedory1id !== undefined) {
-          console.log("this.catedory1id !");
           this.page2 = true;
           this.categoryy_id = this.catedory1id
           this.viewctopcatprodsub(this.catedory1id, 1, 0)
@@ -248,9 +244,6 @@ export class CategoryComponent implements OnInit {
           this.categorybrand(this.catedory1id);
         }
         else if (this.subcatedoryid !== undefined) {
-          console.log("this.subcatedoryid !");
-          // console.log("subcatedoryid sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",this.subcatedoryid );
-
           this.page2 = true;
           this.categoryy_id = this.subcatedoryid
           this.viewsubcatprod(this.subcatedoryid, 1, 0)
@@ -265,44 +258,9 @@ export class CategoryComponent implements OnInit {
         }
 
         else {
-          console.log("else");
-          // this.viewallcategory();
-          // this.categorydetail(this.id);
-          // this.getprodofcategory(this.id, 1);
-          // this.getsubcategory(this.id);
-          // this.SubofSubcat = []
-          // this.SubofSubcat1 = []
-          // this.viewtopcategory();
-          // this.categorybrand(this.id);
-          // this.page2 = true;
-          // this.selectedItem = this.id;
-          // this.categoryy_id = this.id;
-
         }
       }
     }),
-
-      //   this.router.events.subscribe(event =>{
-      //     if (event instanceof NavigationStart){
-      //        console.log(event.url)
-
-      //     }
-      //  })
-      // this.activatedRoute.params.subscribe((data2: Params) => {
-      //   this.id = this.route.snapshot.params['id']; 
-      //   this.headItem =0;
-      //   this.viewallcategory();
-      //       this.categorydetail(this.id);
-      //       this.getprodofcategory(this.id, 1);
-      //       this.getsubcategory(this.id);
-      //       this.SubofSubcat = []
-      //       this.SubofSubcat1 = []
-      //       this.viewtopcategory(); 
-      //       this.categorybrand(this.id);
-      //       this.page2 = true;
-      //       this.selectedItem = this.id;
-      //       this.categoryy_id = this.id; 
-      // });
 
       this.maximunprice();
     this.search = this.fb.group({
@@ -389,7 +347,6 @@ export class CategoryComponent implements OnInit {
   }
   getsubsubcategory(id: any) {
     this.request.getsubcategoryofcat(id).subscribe((res: any) => {
-      console.log("SubofSubcat", res);
       this.SubofSubcat = res.data;
       this.sideloader = false;
     }, (error: any) => {
@@ -598,7 +555,6 @@ export class CategoryComponent implements OnInit {
 
   }
   viewctopcatprod3sub(id: any, i: any) {
-    console.log("id,i", id, i)
     this.topItem = i
     this.category1_id = id
     this.router.navigate(['category', this.categorynameid], { queryParams: { subcategory: this.subcategory_id, category1: id, } });
@@ -692,24 +648,18 @@ export class CategoryComponent implements OnInit {
   viewsubcatprod2(id: any, i: any) {
     this.subItem = i
     this.subcategory_id = id
-
-    // window.scroll(0,0);
     this.router.navigate(['category', this.categorynameid], { queryParams: { subcategory: id } });
-    //   this.viewsubcatprod(id,1,i)
-    //  this.subofsubcatprod(id)
+
 
   }
   viewsubcatprodformpage(catid: any, id: any, i: any) {
     this.router.navigate(['category', catid], { queryParams: { subcategory: id } });
-
     window.scroll(0, 0);
     this.page2 = true
     this.getsubcategory(catid);
     this.viewsubcatprod(id, 1, i)
-
     this.subofsubcatprod(id)
     this.categorydetail(catid)
-
   }
 
   search1(form: FormGroup, page = 1) {
@@ -766,7 +716,6 @@ export class CategoryComponent implements OnInit {
     this.quantityyy = 0
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-      console.log("proddetaill", response);
       this.Peoduct = response.data[0];
       this.prod_price = this.Peoduct.main_price;
       this.storked_pricee = this.Peoduct.stroked_price;
@@ -814,7 +763,6 @@ export class CategoryComponent implements OnInit {
     this.quantityyy = val
     this.stocck = this.stocckkk - val
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
       this.totalprice = res.price.toFixed(2);
       // this.totalprice = this.dec.toFixed(2)  
     })
@@ -824,7 +772,6 @@ export class CategoryComponent implements OnInit {
     this.quantityyy++;
     this.stocck--;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
       this.totalprice = res.price.toFixed(2);
       // this.totalprice = this.dec.toFixed(2) 
 
@@ -834,7 +781,6 @@ export class CategoryComponent implements OnInit {
     this.quantityyy--;
     this.stocck++;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
       this.totalprice = res.price.toFixed(2);
       // this.totalprice = this.dec.toFixed(2)      
     })
@@ -925,32 +871,19 @@ export class CategoryComponent implements OnInit {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
     else {
-      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
-
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
-
     }
 
-    console.log("this.quantityarray", this.quantityarray);
   }
 
   prodaddtocart(img: any) {
-    // console.log("img", img);
-    // if (this.userid == 0) {
-    //   this. openlogin()
-    // }
-    // else {
     if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-      console.log("empty");
       this.varient_value = ''
     }
     else if (img.variants[0]?.options?.length == 1) {
@@ -1011,7 +944,6 @@ export class CategoryComponent implements OnInit {
       this.currentpackagevalue = varient[1].options[0]
     }
     this.request.addvarientfromdetail(id, weight, this.currentpackagevalue).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.Product[i].stroked_price = res.stroked_price
       this.Product[i].main_price = res.price_string;
       this.Product[i].discount_amount = res.discount_amount;
@@ -1049,10 +981,7 @@ export class CategoryComponent implements OnInit {
 
     if (this.data_loaded == true) {
       this.pagenum += 1
-      // console.log("scroll down", this.pagess);
-      // console.log("scroll pagenum", this.pagenum);
       const pageurl = this.pagess[this.pagenum]
-      // console.log("pageurl", pageurl);
       if (pageurl?.url !== null && pageurl !== undefined) {
         this.pageload = false;
         this.prodloader = true;
@@ -1062,7 +991,6 @@ export class CategoryComponent implements OnInit {
           this.newpageProduct = response.data;
           this.pagenation = response.meta;
           this.pagess = this.pagenation.links;
-          console.log("this.pagess", this.pagess);
           this.pagee = this.pagenation.current_page;
           // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
           // window.scroll(0, 0);
@@ -1078,8 +1006,6 @@ export class CategoryComponent implements OnInit {
             this.likedd.push(false);
           }
 
-          console.log("this.Product", this.Product);
-
           setTimeout(() => {
             this.imgloader = true;
           }, 500);
@@ -1090,7 +1016,6 @@ export class CategoryComponent implements OnInit {
   }
 
   onScrollUp(ev: any) {
-    console.log("scrolled up!",);
   }
 
   viewtodaysdeal() {
@@ -1211,8 +1136,6 @@ export class CategoryComponent implements OnInit {
 
   }
   headactive(i: any) {
-    console.log("iiii", i);
-
     this.headItem = i
 
   }

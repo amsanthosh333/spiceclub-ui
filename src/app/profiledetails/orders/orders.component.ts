@@ -98,13 +98,9 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
 
     this.pagee = this.route.snapshot.params['page'];
-    console.log("pagee data",this.pagee);
     this.route.queryParams.subscribe((data2:Params)=>{
-      console.log("queryParams data",data2);
       this.deliveryy=data2['delivery_status']
       this.paymentt=data2['payment_status']
-      console.log("this.deliveryy data",this.deliveryy);
-      console.log(" this.paymentt data", this.paymentt);
           })
 
     if (this.pagee === undefined) {
@@ -117,8 +113,6 @@ export class OrdersComponent implements OnInit {
     if (this.paymentt === undefined) {
       this.paymentt = ''
     }
-    console.log("this.deliveryy data",this.deliveryy);
-    console.log(" this.paymentt data", this.paymentt);
 
     window.scroll(0, 0)
     this.getorders();
@@ -134,10 +128,7 @@ export class OrdersComponent implements OnInit {
 
   }
   getorders() {
-    console.log("getorders");
-
     this.request.fetchOrders4(this.userid, this.pagee,this.deliveryy,this.paymentt).subscribe((response: any) => {
-      console.log("getorders response ",response);
       this.Orders = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
@@ -149,8 +140,6 @@ export class OrdersComponent implements OnInit {
   getpage(url: any) {
     // this.loader=true;
     this.request.getpage3(url, this.deliveryy, this.paymentt).subscribe((response: any) => {
-      console.log(response);
-
       this.Orders = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
@@ -167,14 +156,11 @@ export class OrdersComponent implements OnInit {
     this.loader = true;
     this.paymentt = val
     this.label1 = label1
-    console.log(this.paymentt);
-
     this.request.fetchOrders2(this.userid, this.deliveryy, this.paymentt).subscribe((response: any) => {
       this.Orders = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      this.loader = false;
-      console.log(response); 
+      this.loader = false; 
        this.router.navigate(['/orders', 1], {queryParams:{delivery_status:this.deliveryy,payment_status:this.paymentt}});
     });
 
@@ -183,13 +169,11 @@ export class OrdersComponent implements OnInit {
     this.loader = true;
     this.deliveryy = val
     this.label2 = label2
-    console.log(this.deliveryy);
     this.request.fetchOrders2(this.userid, this.deliveryy, this.paymentt).subscribe((response: any) => {
       this.Orders = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
       this.loader = false;
-      console.log(response);
       this.router.navigate(['/orders', 1], {queryParams:{delivery_status:this.deliveryy,payment_status:this.paymentt}});
 
     });
@@ -201,15 +185,11 @@ export class OrdersComponent implements OnInit {
   }
 
   paynow1(order_detail:any){
-    console.log("razorpay1 retry response", order_detail);
     let edata1 = {
       combined_order_id: order_detail.combined_order_id,
       payment_type:"cart_payment"
-    }
-    console.log(edata1);
-    
+    }  
     this.request.retrypayment(edata1).subscribe((response: any) => {
-      console.log("razorpay1 retry response", response);
       if (response.result == true) {
         this.toastr.success('',response.message);
         let edata1 = {
@@ -218,7 +198,6 @@ export class OrdersComponent implements OnInit {
           amount: order_detail.grand_totalrepay,
           user_id: this.userid,
         }
-        console.log("edata1", edata1);
          this.billdesk(edata1)
       }
       else{
@@ -229,12 +208,9 @@ export class OrdersComponent implements OnInit {
   }
   
   billdesk(edata1: any) {
-    console.log("billdest called",edata1);
     this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,"repayment").subscribe(
       (response: any) => {
         response.json()
-        console.log("billdesktype", response.json());
-        console.log("billresponse", response);
       },
     );
   }
@@ -251,8 +227,6 @@ export class OrdersComponent implements OnInit {
     // this.spinner.show();
     this.loadingg=true
     this.request.quickorder(id).subscribe((res:any)=>{
-      console.log("quickorder res",res);
-      
       if(res.result==true){
         this.toastr.success('Added to cart', '');
         this.sharedService.sendClickEvent();
@@ -298,8 +272,6 @@ export class OrdersComponent implements OnInit {
           comment:form.value.comment,
         }
     this.request.addreview(edata2).subscribe((res: any) => {
-      console.log("addreview",res);
-      
       if (res.result == true) { 
         this.toastr.success('Review  Submitted', '');    
         this.modalService.dismissAll();   

@@ -71,18 +71,6 @@ export class AddressComponent implements OnInit {
     this.username = this.currentdetail.user?.name;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-    // console.log("currentuserid=", this.userid);
-
-  //   this.editForm = this.fb.group({
-  //     name:['',[Validators.required]],
-  //    password: ['', [Validators.required]],
-  //    confirm_password: ['', [Validators.required]],
-  //  },
-  //    {
-  //      validator: ConfirmedValidator('password', 'confirm_password')
-  //    }
-  //    );
-
      this.address = this.fb.group({
       addresss: [''], 
    })
@@ -112,8 +100,6 @@ export class AddressComponent implements OnInit {
   
   }
   addMarker(lat: number, lng: number) {
-    console.log("addmarker",lat , lng );
-    
     this.markers.push({ lat, lng, alpha: 0.4 });
   }
 
@@ -130,8 +116,6 @@ export class AddressComponent implements OnInit {
       lat: event.latitude,
       lng: event.longitude
     };
-    console.log("selectedMarker",this.selectedMarker );
-
   }
 
   getaddress(){
@@ -146,18 +130,11 @@ export class AddressComponent implements OnInit {
     });
   }
   addaddresss(content:any){
-    // this.addbtn_load=false
-    console.log("addaddresss");
     this.register.reset();
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'md',
-    });
-    // this.modalService.open(content2, {
-    //   ariaLabelledBy: 'modal-basic-title',
-    //   size: 'lg',
-    // });
-     
+    });  
   }
 
   viewcountry(){
@@ -180,9 +157,7 @@ export class AddressComponent implements OnInit {
   }
   selectstate(event: any) {
     this.state_id = event.target.value;
-    this.request.fetchcitybystate(this.state_id).subscribe((response: any) => {
-      console.log("selectstate response",response);
-      
+    this.request.fetchcitybystate(this.state_id).subscribe((response: any) => {  
       this.City = response.data;
 
     });
@@ -269,11 +244,8 @@ changeshippingaddress(a_id:any){
   }
   this.request.makeshipingaddress(edata).subscribe((res: any) => {
     if (res.result == true) {       
-      // this.toastr.success('shipping address updated','');    
-      // console.log("shipping address updated"); 
     }
     else  {
-      console.log("something went wrong");
     }
   },);
 }
@@ -294,11 +266,7 @@ changeshippingaddress(a_id:any){
       postal_code:form.value.postal_code,
       phone:form.value.phone,  
   }
-  console.log("edata2",edata2);
-  
   this.request.updateaddress(edata2).subscribe((res: any) => {
-    console.log("res",res);
-    
     if (res.message == 'Shipping information has been updated successfully') {
       this.modalService.dismissAll();
       this.toastr.success('Updated Successfully','');

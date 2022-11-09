@@ -102,8 +102,6 @@ export class WishlistComponent implements OnInit {
       }
       viewwishlist(){
         this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
-          console.log("this.Wishlist",this.Wishlist);
-          
           this.Wishlist=response.data; 
           this.loader=false ;
         });
@@ -112,7 +110,6 @@ export class WishlistComponent implements OnInit {
 
       viewfuturedpro() {
         this.request.getfuturedpro().subscribe((response: any) => {
-          console.log("Futuredpro",response);  
           this.Futuredpro = response.data;
           this.poploader = false;
           this.Summeryload=false
@@ -147,8 +144,6 @@ export class WishlistComponent implements OnInit {
         this.product_id=_id,
         this.subItempackage = 0  
         this.request.getproddetail(this.product_id).subscribe((response: any) => {
-          console.log("response",response);
-          
                this.Peoduct=response.data[0];
               
                this.prod_price = this.Peoduct.main_price;
@@ -221,20 +216,14 @@ this.buynowbtn=false
         this.stocck = this.stocckkk - val
       
         this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue).subscribe((res: any) => {
-          console.log(res);
-          
           this.totalprice = res.price.toFixed(2);
-          
-        // this.totalprice = this.dec.toFixed(2) 
-       
         })
     
       }
       increaseqty(){
         this.quantityyy++;
         this.stocck--;   
-        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue).subscribe((res: any) => {
-          console.log(res);         
+        this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue).subscribe((res: any) => {        
           this.totalprice = res.price?.toFixed(2);         
         // this.totalprice = this.dec.toFixed(2)      
         })
@@ -243,7 +232,6 @@ this.buynowbtn=false
             this.quantityyy--;
             this.stocck++;    
             this.request.getdiscountpricefromdetail(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,this.currentpackagevalue).subscribe((res: any) => {
-              console.log(res);
               this.totalprice = res.price.toFixed(2);      
             // this.totalprice = this.dec.toFixed(2) 
            
@@ -253,8 +241,6 @@ this.buynowbtn=false
             this.varient_value=weight.replace(/\s/g, "")
             this.subItem=i
             this.request.addvarientfromdetail(this.product_id,weight,this.currentpackagevalue).subscribe((res: any) => {     
-            console.log("responnnnn",res);
-            
               this.prod_price = res?.price_string;
               this.storked_pricee=res?.stroked_price;      
               this.totalprice=(res?.price_string).replace('Rs','');
@@ -283,8 +269,6 @@ this.buynowbtn=false
             this.currentpackagevalue=this.currentpackage
             this.subItempackage = i  
             this.request.addvarientfromdetail(this.product_id,this.currentvarient, varpackage,).subscribe((res: any) => {
-              console.log("selectvar",res);
-              
               this.prod_price = res?.price_string;
               this.storked_pricee=res?.stroked_price;      
               this.totalprice=(res?.price_string).replace('Rs','');
@@ -309,9 +293,7 @@ this.buynowbtn=false
           }
           
           
-      addtocart2(){
-        console.log("addtocart2");
-        
+      addtocart2(){ 
         let edata={
           id : this.product_id,
           variant:this.varient_value.replace(/\s/g, ""),
@@ -327,11 +309,7 @@ this.buynowbtn=false
         else{
           this.currentpackagevalue =null
         }
-        console.log("edata-addtocart2",edata);
-        
         this.request.addtocart(edata).subscribe((res: any) => {
-
-       console.log("edatares",res);
           if (res.result == true) {    
             this.addRecordSuccess();
                this.modalService.dismissAll();
@@ -361,8 +339,6 @@ this.buynowbtn=false
           edata.variant= edata.variant + "-" + this.currentpackagevalue.replace(/\s/g, "")
         }
         this.request.addtocart(edata).subscribe((res: any) => {
-          console.log("buyres",res);
-          
           if (res.result == true) {
             this.addRecordSuccess();
             this.modalService.dismissAll()

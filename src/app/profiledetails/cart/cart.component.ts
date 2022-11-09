@@ -155,7 +155,6 @@ export class CartComponent implements OnInit {
     this.request.fetchusercart(this.userid,0).subscribe((response: any) => {
 
       this.Cart = response;
-      console.log("this.Cart",this.Cart)
       this.cartitems=this.Cart.cart_items
       this.loader = false;
 
@@ -211,11 +210,7 @@ export class CartComponent implements OnInit {
       quantity: qty,
       buyertype: this.buyertypeid
     }
-
- console.log("edata2",edata2);
     this.request.updatecart(edata2).subscribe((response: any) => {
-      console.log("response",response);
-      
       if(response.result==true){
         // this.toastr.success('Cart updated', '');
         this.viewcart();
@@ -232,13 +227,11 @@ export class CartComponent implements OnInit {
   availabecoupan(){
     this.request.availablecoupan().subscribe((response: any) => {    
       this.availcoupan = response.data;
-      console.log(" this.availcoupan");
     });
 
   }
   changecoupan(e:any) {
     if(e.target.checked){ 
-      console.log(e.target.value);
       this.comment.value.coupan= e.target.value
       this.comment.setValue({
         coupan: e.target.value,    
@@ -246,7 +239,6 @@ export class CartComponent implements OnInit {
     }
 
     else{
-      console.log("no");
       this.comment.value.coupan= ''
       this.comment.setValue({
         coupan:'',    
@@ -309,7 +301,6 @@ export class CartComponent implements OnInit {
   }
   viewcart3() {
     this.request.fetchsummery(this.userid,0,null).subscribe((response: any) => {
-      console.log("summery",response); 
       this.Summery = response;
       this.Grandtot = this.Summery.grand_total
       this.subtot = this.Summery.sub_total
@@ -326,8 +317,7 @@ export class CartComponent implements OnInit {
   }
 
   viewfuturedpro() {
-    this.request.getfuturedpro().subscribe((response: any) => {
-      console.log("Futuredpro",response);  
+    this.request.getfuturedpro().subscribe((response: any) => {  
       this.Futuredpro = response.data;
       this.poploader = false;
      
@@ -358,14 +348,11 @@ export class CartComponent implements OnInit {
       city_name: row.city_name
     }
 
-    this.request.updateshippingaddress(edata2).subscribe((response: any) => {
-      console.log("address changed res", response);
-      // this. processdata()    
+    this.request.updateshippingaddress(edata2).subscribe((response: any) => { 
     });
     this.request.fetchcost(edata).subscribe((response: any) => {
       this.Scost = response;
-      this.cost = this.Scost.value_string
-      // this. processdata()    
+      this.cost = this.Scost.value_string   
     });
 
   }
@@ -459,45 +446,19 @@ export class CartComponent implements OnInit {
       .subscribe(
         (response: any) => {
           response.json()
-          console.log("billdesktype", response.json());
+ 
         },
 
-        // (   data: { [x: string]: any; }) => {
-        //   console.log('------', data)
-        //     console.log('-------', data['response'])
-        //     var payhere_checkout_form =  document.getElementById('billdesk-checkout-form');
-        //     console.log('formmmm',payhere_checkout_form)
-        //     console.log('-----------', data)
-        //     this.encRequestRes = data['response']; 
-        //         // setTimeout(()=>{
-        //         //     this.form.nativeElement.submit();
-        //         // },1000)
         //     },
         (error: any) => {
           console.log(error);
         });
   }
 
-  // billdesk2(){
-  //   console.log("billdest called"); 
-  //   this.request.billdeskpayment()
-  //   .subscribe(
-  //     (response: any) =>{ response.json()   
-  //       console.log("billdesktypeEEEE",response); 
-  //       console.log("billdesktype",response.json());        
-  //     },
-  //     (error: any) => {
-  //       console.log(error);
-  //     });   
-  // }
 
   billdesk2() {
     this.http.get<any>('https://neophroncrm.com/spiceclubnew/api/v2/billdesk/pay-with-billdesk?payment_type=cart_payment&combined_order_id=74&amount=188.00&user_id=8').subscribe(
       data => {
-        console.log(data);
-        console.log("User Login: " + data.login);
-        console.log("Bio: " + data.bio);
-        console.log("Company: " + data.company);
       },
       (err: HttpErrorResponse) => {
         console.log("err", err);
@@ -549,7 +510,6 @@ export class CartComponent implements OnInit {
     }
 
     this.request.appycoupan(edata2).subscribe((res: any) => {
-      console.log(res);
       if (res.message == 'Coupon Applied') {
         this.removecou = true;
         this.applycou = false;
@@ -577,8 +537,6 @@ export class CartComponent implements OnInit {
       owner_id: this.owneriid,
     }
     this.request.removecoupan(edata2).subscribe((res: any) => {
-      console.log("res",res);
-      
       if (res.result == true) {
         this.removecou = false;
         this.applycou = true;

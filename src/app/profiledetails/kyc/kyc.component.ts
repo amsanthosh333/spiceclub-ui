@@ -95,10 +95,7 @@ export class KycComponent implements OnInit {
             aadhar_number: form.value.ua,
             aadhar_image: this.uaImageBase64,
           }
-          console.log("form valuessss", edata);
           this.request.addkyc(edata).subscribe((res: any) => {
-            console.log("kyc response", res);
-
             if (res.result == true) {
               form.reset()
               this.toastr.success('Submited Successfully', '');
@@ -116,49 +113,15 @@ export class KycComponent implements OnInit {
           });
         }
 
-        // else {
-        //   this.error2 = '* Upload image';
-        // }
+
       }
       else {
         this.error2 = '* Enter correct GST or PAN or UA number';
       }
 
-      //   if(this.registerForm.get('gstimg')?.valid || this.registerForm.get('panimg')?.valid){
-      //     this.error2 = '* valid image';
-      //   }
-      // else {
-      //     this.error2 = '* Upload image';
-      //   }
       return;
     }
-    // else {
-    //   const edata = { 
-    //     user_id: this.userid,
-    //     gst_number:form.value.gst,
-    //     gst_image:this.gstImageBase64,
-    //     pan_number:form.value.pan,
-    //     pan_image:this.panImageBase64,
-    //   }
-    //   console.log("form valuessss",edata);
-    //   this.request.addkyc(edata).subscribe((res: any) => {
-    //     console.log("kyc response", res);
-
-    //     if (res.result == true) {       
-    //       form.reset() 
-    //       this.toastr.success('Submited Successfully','');
-    //     this.modalService.dismissAll();  
-    //     }
-    //     else  {
-    //   this.toastr.info('Something went wrong','');
-    //     }
-    //   }, (error: any) => {
-    //     console.log("error",error);
-    //     this.toastr.info('Something went wrong','');  
-    //   });
-    //    }
-
-
+  
   }
   fileChangeEvent(fileInput: any) {
     this.filename = fileInput.target.files[0].name;
@@ -178,7 +141,6 @@ export class KycComponent implements OnInit {
           this.gstImageBase64 = imgBase64Path;
           this.isImageSaved = true;
           // this.previewImagePath = imgBase64Path;
-          console.log("imgBase64Path", imgBase64Path);
         };
       };
       reader.readAsDataURL(fileInput.target.files[0]);
@@ -212,8 +174,6 @@ export class KycComponent implements OnInit {
           const imgBase64Path = e.target.result.split(',')[1];
           this.panImageBase64 = imgBase64Path;
           this.isImageSaved = true;
-          // this.previewImagePath = imgBase64Path;
-          console.log("imgBase64Path pan", imgBase64Path);
         };
       };
       reader.readAsDataURL(fileInput.target.files[0]);
@@ -247,8 +207,6 @@ export class KycComponent implements OnInit {
           const imgBase64Path = e.target.result.split(',')[1];
           this.uaImageBase64 = imgBase64Path;
           this.isImageSaved = true;
-          // this.previewImagePath = imgBase64Path;
-          console.log("imgBase64Path ua", imgBase64Path);
         };
       };
       reader.readAsDataURL(fileInput.target.files[0]);

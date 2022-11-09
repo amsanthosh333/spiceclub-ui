@@ -90,15 +90,9 @@ export class PurchasedComponent implements OnInit {
         this.Orders=response.data;  
         this.pagenation = response.meta
         this.pagess = this.pagenation.links
-        // this.History =this.Orders.find((x:any) => x.payment_status == "unpaid");
-        // console.log(" this.History",  this.History);
-    //  let Historyy=this.Orders.find((x:any) => x.payment_status == "unpaid");
-    //       this.paidhistory.push({ Historyy});
-    //       console.log("unpaid history", this.paidhistory);
           let paidhistory =  this.Orders.filter(function(Orderss: any) {
             return Orderss.payment_status == "unpaid";
           });
-          console.log("unpaid history", paidhistory);
         this.loader=false;         
       });
     }

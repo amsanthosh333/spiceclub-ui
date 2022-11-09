@@ -95,15 +95,11 @@ export class OrderdetailComponent implements OnInit {
 
   viewdetail(){
     this.request.vieworderdetail(this.ord_id).subscribe((response: any) => {
-      console.log("response deatail",response);
-      
       this.Detail=response.data;
       this.orderStatus=this.Detail[0].delivery_status_string;
       this.grandtotal_value=this.Detail[0].grand_total.replace(/[^0-9\.-]+/g,"");
       this.combined_orderid =this.Detail[0].combined_order_id
       this.trackurl = 'https://www.thespiceclub.in/category/99?subcategory=112';
-      console.log(" this.grandtotal_value", this.grandtotal_value);
-
       this.orderid=this.Detail[0].id;
     }
     ); 
@@ -112,8 +108,6 @@ export class OrderdetailComponent implements OnInit {
   viewitem(){
 
     this.request.vieworderitems(this.ord_id).subscribe((response: any) => {
-      console.log("ITEMS",response);
-      
     this.Items=response.data;   
     this.loader=false;  
       
@@ -134,7 +128,6 @@ export class OrderdetailComponent implements OnInit {
     } 
     else{
       if (isNaN(form.value.rating)) {
-        console.log("ratinggsss", form.value.rating);
         form.value.rating = 0
       }
         let edata2={
@@ -144,8 +137,6 @@ export class OrderdetailComponent implements OnInit {
           comment:form.value.comment,
         }
     this.request.addreview(edata2).subscribe((res: any) => {
-      console.log(res);
-      
       if (res.result == true) { 
         this.toastr.success('Comment  Submitted', '');      
         // this.getcommentsss();
@@ -190,8 +181,7 @@ export class OrderdetailComponent implements OnInit {
         comment:form.value.comment,
       }
   this.request.addreview(edata2).subscribe((res: any) => {
-    console.log("addreview",res);
-    
+
     if (res.result == true) { 
       this.toastr.success('Review  Submitted', '');    
       this.modalService.dismissAll();   
@@ -233,10 +223,8 @@ paynow1(){
     combined_order_id: this.combined_orderid,
     payment_type:"cart_payment"
   }
-  console.log(edata1);
-  
+
   this.request.retrypayment(edata1).subscribe((response: any) => {
-    console.log("razorpay1 response", response);
     if (response.result == true) {
       this.toastr.success('',response.message);
       let edata1 = {
@@ -255,13 +243,9 @@ paynow1(){
 }
 
 billdesk(edata1: any) {
-  console.log("billdest called",edata1 );
-
   this.request.billdeskpay(edata1.combined_order_id, edata1.amount, edata1.user_id,"repayment").subscribe(
     (response: any) => {
       response.json()
-      console.log("billdesktype", response.json());
-      console.log("billresponse", response);
     },
   );
 }
@@ -309,13 +293,10 @@ initPay(edata: any) {
     },
     "handler": (response: any) => {
       this.razpaysuccess = response
-      console.log(this.razpaysuccess);
       this.spinner.show();
       this.razorpaypayment();
     }
   };
-  console.log("options,", options)
-
   let rzp1 = new this.authService.nativeWindow.Razorpay(options);
   rzp1.open();
   // console.log("works");
@@ -324,7 +305,6 @@ initPay(edata: any) {
 razorpaypayment() {
   //  this.spinner.show();
   this.request.razorpayment(this.razpaysuccess.razorpay_payment_id).subscribe((response: any) => {
-    console.log("razorpay1 response", response);
     if (response.result == true) {
       this.paymentdetails = response.payment_details
       this.razorpaysuccess();
@@ -342,7 +322,6 @@ razorpaysuccess() {
     amount: this.grandtotal_value,
     user_id: this.userid,
   }
-  console.log("razorpaysuccess method ");
   this.request.razsuccess(edata4).subscribe((response: any) => {
     if (response.message == "Payment is successful") {
       this.sharedService.sendClickEvent();

@@ -251,7 +251,6 @@ export class HomeComponent implements OnInit {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
@@ -374,8 +373,6 @@ this.viewbestsellpro();
   }
 
   flashScrollDown(event: any) {
-    console.log("flashScrollDown");
-    
     if(this.flashScroll==true){  
       this.flashScroll = false
       this.viewvideos();
@@ -594,11 +591,7 @@ this.viewbestsellpro();
   viewdata() {
     this.request.getslider().subscribe((response: any) => {
       this.Slider = response.data;
-      console.log("this.photoo",this.Slider);
       this.photoo = this.Slider.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.photo); 
-      console.log("this.photoo",this.photoo);
-      
-
       this.sliderData=[
         {photo: 'uploads/all/enCSntCC8EDj5CM074qgxvHxAolNjJc7oZaGRFOZ.jpg', redirecturl:'cart'},
          
@@ -622,24 +615,10 @@ this.viewbestsellpro();
   }
   mainbannerClick(i:any){
   var mainredirect=  this.sliderData[i].redirecturl
-    console.log("mainredirect",mainredirect);
-    
-
   }
   viewtopcategory() {
     this.request.gettopcat().subscribe((response: any) => {
       this.Topcat = response.data;
-      // this.top1id = this.Topcat[10].id
-      // this.top2id = this.Topcat[5].id
-      // this.top1name = this.Topcat[10].name;
-      // this.top2name = this.Topcat[5].name;
-      // this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
-      //   this.topfirstcat = response.data
-
-      // });
-      // this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
-      //   this.topsecondcat = response.data
-      // });
     },
       (error: any) => {
         console.log("error", error);
@@ -652,7 +631,6 @@ this.viewbestsellpro();
       setTimeout(() => {
         this.imgloader3 = false;
       }, 500);
-      console.log("this.Homecat ", this.Homecat );
       this.top1id = this.Homecat[0].id
       this.top2id = this.Homecat[1].id
       this.top3id = this.Homecat[2].id
@@ -670,7 +648,6 @@ this.viewbestsellpro();
   
   viewhomeFScategory(){
     this.request.getcatprod(this.top1id, 1).subscribe((response: any) => {
-      console.log("topfirstcat response",response.data)
       this.topfirstcat = response.data
       this.loader8= false;
       setTimeout(() => {
@@ -679,7 +656,6 @@ this.viewbestsellpro();
 
     });
     this.request.getcatprod(this.top2id, 1).subscribe((response: any) => {
-    console.log("topsecondcat response",response.data)
       this.topsecondcat = response.data
       this.loader9= false;
       setTimeout(() => {
@@ -687,18 +663,10 @@ this.viewbestsellpro();
       }, 1000);
 
     });
-   
-    // for (let i = 0; i <this.Homecat?.length; i++) {
-    //   console.log ("execution no." + i, this.Homecat[i]);
-    //   this.request.getcatprod(this.Homecat[i]?.id, 1).subscribe((response: any) => {
-    //     this.Homecat[i]?.homecatProducts.push(  response.data);
-    //     console.log ("this.tophomecat" +  this.Homecat);
-    //   });
-    // }
+
   }
   viewhome34category(){
     this.request.getcatprod(this.top3id, 1).subscribe((response: any) => {
-      console.log("topthirdcat response",response.data)
       this.topthirdcat = response.data
       this.loader10= false;
       setTimeout(() => {
@@ -707,7 +675,6 @@ this.viewbestsellpro();
     });
 
     this.request.getcatprod(this.top4id, 1).subscribe((response: any) => {
-      console.log("top4id response",response.data)
       this.topfourthcat = response.data
       this.loader11= false;
       setTimeout(() => {
@@ -720,7 +687,6 @@ this.viewbestsellpro();
 
   viewhome5category(){
     this.request.getcatprod(this.top5id, 1).subscribe((response: any) => {
-      console.log("topfifthcat response",response.data)
       this.topfifthcat = response.data
       this.loader12= false;
       setTimeout(() => {
@@ -748,16 +714,13 @@ this.viewbestsellpro();
     this.router.navigate(['category', id]);
   }
   viewtodayoffer() {
-    this.request.gettodaysoffer().subscribe((response: any) => {
-      console.log("Todaysoffer",response);
-      
+    this.request.gettodaysoffer().subscribe((response: any) => {  
       this.Todaysoffer = response.data.slice(0, 4);
       this.loader4 = false;
     });
   }
   viewflashdeal() {
-    this.request.getflashdeals().subscribe((response: any) => {
-      console.log("Flashdeal",response);    
+    this.request.getflashdeals().subscribe((response: any) => {   
       this.Flashdeal = response.data.slice(0, 4);
       this.loaderflash = false;
     });
@@ -767,7 +730,6 @@ this.viewbestsellpro();
     this.router.navigate(['flash',id]);
   }
   completed() {
-    console.log('teste');
   }
   viewsubscribebanner() {
     this.request.getsubscribebanner().subscribe((response: any) => {
@@ -781,22 +743,18 @@ this.viewbestsellpro();
 
   }
   bannerClick(data: any, i: any,) { 
-    console.log("bannerClick",data.product_id);
     if(data.category_id){
            this.router.navigate(['category', data.category_id]);
          }
          else if(data.product_id && data.product_id!=="" && data.product_id!==''){
-          console.log("redirection to product",data.product_id);
           this.proddetail(data.product_id)
          }
          else if(data.redirecturl){
-          console.log("data.redirecturl",data.redirecturl);
            window.location.href= data.redirecturl;
         //  window.location.replace(data.redirecturl);
           // window.open(data.redirecturl);
          }
          else{
-console.log("no redirection");
 
          }
   }
@@ -807,7 +765,6 @@ console.log("no redirection");
 
   viewbestsellpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
-      console.log("viewbestsellpro",response);
       this.Bestsellpro = response.data;
       this.loader6 = false;
       setTimeout(() => {
@@ -817,7 +774,6 @@ console.log("no redirection");
   }
   viewnewarrival() {
     this.request.getnewarrivalpro().subscribe((response: any) => {
-      console.log("Newarrivals",response);
       this.Newarrivals = response.data;
       this.loader6new = false;
       setTimeout(() => {
@@ -826,8 +782,7 @@ console.log("no redirection");
     });
   }
   viewfuturedpro() {
-    this.request.getfuturedpro().subscribe((response: any) => {
-      console.log("getfuturedpro",response);    
+    this.request.getfuturedpro().subscribe((response: any) => {   
       this.Futuredpro = response.data;
       this.loader7 = false;
       setTimeout(() => {
@@ -944,8 +899,6 @@ console.log("no redirection");
       this.currentpackagevalue=null
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-      console.log("res", res);
-
       this.Newarrivals[i].stroked_price = res.stroked_price;
       this.Newarrivals[i].main_price = res.price_string;
       this.Newarrivals[i].discount_amount = res.discount_amount;
@@ -968,8 +921,6 @@ console.log("no redirection");
       this.currentpackagevalue=null
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-      console.log("res", res);
-
       this.Bestsellpro[i].stroked_price = res.stroked_price;
       this.Bestsellpro[i].main_price = res.price_string;
       this.Bestsellpro[i].discount_amount = res.discount_amount;
@@ -1056,7 +1007,6 @@ console.log("no redirection");
   topcat4selectvar(weight: any, i: any, id: any,varient:any) {
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
-    console.log("this.selectedvar",this.selectedvar);
     if(varient?.length>1){
   this.currentpackagevalue= varient[1].options[0]
     }
@@ -1074,7 +1024,6 @@ console.log("no redirection");
   }
 
   topcat5selectvar(weight: any, i: any, id: any,varient:any) {
-    console.log("weight",weight);
     this.selectedvar = weight.replace(/\s/g, "");
     this.showaddbtn = i
     if(varient?.length>1){
@@ -1123,7 +1072,6 @@ console.log("no redirection");
           quantity: this.totalqty,
           buyertype: this.buyertypeid,
         }
-        console.log("edata",this.edata);
       }
       else{
         this.edata = {
@@ -1133,11 +1081,9 @@ console.log("no redirection");
           quantity: this.totalqty,
           buyertype: this.buyertypeid,
         }
-        console.log("edata else",this.edata);
       }
 
-      this.request.addtocart(this.edata).subscribe((res: any) => {
-        console.log("addtocart response",res);       
+      this.request.addtocart(this.edata).subscribe((res: any) => {      
          if (res.result == true) { 
           this.addRecordSuccess();
           this.modalService.dismissAll();
@@ -1264,26 +1210,6 @@ console.log("no redirection");
   viewcategorydata() {
     this.request.getallcat().subscribe((response: any) => {
       this.Allcat = response.data;
-      //     var Arr1 = this.Allcat,
-      //     Arr2 = [],
-      //     Arr3 = [];
-
-      // for (var i=0;i<Arr1.length;i++){
-      //     if ((i+2)%2==0) {
-      //         Arr3.push(Arr1[i]);
-      //         console.log("odd",Arr3);
-      //         this.Alloddcat=Arr3
-      //     }
-      //     else {
-      //         Arr2.push(Arr1[i]);
-      //         this.Allevencat=Arr2
-      //         console.log("even",Arr2);
-      //     }
-      // }
-
-      // console.log(Arr2);
-      // this.page1=true,
-      // this.page2=false,
 
       setTimeout(() => {
         this.loadingIndicator = false;
@@ -1368,9 +1294,6 @@ console.log("no redirection");
     this.stocck--;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
       this.totalprice = res.price.toFixed(2);
-
-      // this.totalprice = this.dec.toFixed(2) 
-
     })
   }
   decreaseqty() {

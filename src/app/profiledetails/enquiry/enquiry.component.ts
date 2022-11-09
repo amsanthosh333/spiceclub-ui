@@ -80,12 +80,7 @@ if (this.registerForm.invalid) {
     image3:"",
     imagename3: ""
   }
-  console.log("form valuessss",edata);
   this.request.sendenquiry(edata).subscribe((res: any) => {
-    console.log("sendenquirysendenquirysendenquiry");
-    
-    console.log("sendenquiry response", res);
-    
     if (res.result == true) {       
       form.reset() 
       this.toastr.success('Submited Successfully','');
@@ -120,8 +115,7 @@ if (this.registerForm.invalid) {
                     const imgBase64Path = e.target.result.split(',')[1];  
                     this.gstImageBase64 = imgBase64Path;
                     this.isImageSaved = true;
-                    // this.previewImagePath = imgBase64Path;
-                    console.log("imgBase64Path", imgBase64Path);               
+                    // this.previewImagePath = imgBase64Path;              
             };
         };
         reader.readAsDataURL(fileInput.target.files[0]);
@@ -155,8 +149,7 @@ fileChangeEvent2(fileInput: any) {
                   const imgBase64Path = e.target.result.split(',')[1];  
                   this.panImageBase64 = imgBase64Path;
                   this.isImageSaved = true;
-                  // this.previewImagePath = imgBase64Path;
-                  console.log("imgBase64Path pan", imgBase64Path);               
+                  // this.previewImagePath = imgBase64Path;              
           };
       };
       reader.readAsDataURL(fileInput.target.files[0]);

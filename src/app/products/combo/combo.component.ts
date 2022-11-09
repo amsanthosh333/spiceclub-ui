@@ -252,8 +252,7 @@ export class ComboComponent implements OnInit {
 
 
     viewnewarrival() {
-      this.request.getcombopro().subscribe((response: any) => {
-        console.log("getcombopro response",response)  
+      this.request.getcombopro().subscribe((response: any) => { 
         this.Newarrivals = response.data;
         this.prodloader=false;
         this.pagenation = response.meta;
@@ -321,8 +320,6 @@ export class ComboComponent implements OnInit {
       this.stocck = this.stocckkk - val
     
       this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-        console.log(res);
-        
         this.totalprice = res.price.toFixed(2);
         
       // this.totalprice = this.dec.toFixed(2) 
@@ -334,8 +331,6 @@ export class ComboComponent implements OnInit {
       this.quantityyy++;
       this.stocck--;
       this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-        console.log(res);
-        
         this.totalprice = res.price.toFixed(2);
         
       // this.totalprice = this.dec.toFixed(2) 
@@ -347,8 +342,6 @@ export class ComboComponent implements OnInit {
           this.quantityyy--;
           this.stocck++;    
           this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-            console.log(res);
-            
             this.totalprice = res.price.toFixed(2);
             
           // this.totalprice = this.dec.toFixed(2) 
@@ -433,30 +426,19 @@ export class ComboComponent implements OnInit {
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
       else {
-        console.log(" this.quantityarray", this.quantityarray);
         const index = this.quantityarray.findIndex((fruit: { id: any; }) => fruit.id == img.id);
-        console.log("obj", index);
         if (index > -1) {
-          console.log("if", index);
-  
           this.quantityarray[index].value = event.target.value;
         }
         else {
-          console.log("else", index);
           this.quantityarray.push({ "id": img.id, "value": event.target.value });
         }
       }
-      console.log("this.quantityarray", this.quantityarray);
     }
   
     prodaddtocart(img: any) {
-      // console.log("img", img);
-      // if (this.userid == 0) {
-      //   this. openlogin()
-      // }
-      // else {
+
         if (img.variants.length == 0 || img.variants[0]?.options?.length == 0) {
-          console.log("empty");
           this.varient_value = ''
         }
         else if (img.variants[0]?.options?.length == 1) {
@@ -494,7 +476,6 @@ export class ComboComponent implements OnInit {
         }
    
         this.request.addtocart(this.edata).subscribe((res: any) => {
-          console.log("addtocart resssssssssssssss", res);
           if (res.result == true) { 
             this.addRecordSuccess()
             this.router.navigate(['cart']);
@@ -520,7 +501,6 @@ export class ComboComponent implements OnInit {
     this.currentpackagevalue= varient[1].options[0]
       }
       this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-        console.log("selectvar res", res);
         this.Newarrivals[i].stroked_price = res.stroked_price
         this.Newarrivals[i].main_price = res.price_string;
         this.Newarrivals[i].discount_amount = res.discount_amount;
@@ -531,12 +511,8 @@ export class ComboComponent implements OnInit {
     }
   
     onScrollDown(eve: any) {
-      console.log("scroll down");
       this.pagenum += 1
-      console.log("scroll down", this.pagess);
-      console.log("scroll pagenum", this.pagenum);
       const pageurl = this.pagess[this.pagenum]
-      console.log("pageurl", pageurl);
       if (pageurl?.url !== null && pageurl !== undefined) {
         this.pageload = false;
         this.prodloader = true;
@@ -545,13 +521,11 @@ export class ComboComponent implements OnInit {
           this.newpageProduct = response.data;
           this.pagenation = response.meta;
           this.pagess = this.pagenation.links;
-          console.log("this.pagess", this.pagess);
           this.pagee = this.pagenation.current_page;
           this.Newarrivals.push(...this.newpageProduct)
           this.pageload = true;
           this.prodloader = false;
           this.sidepoploader = false;
-          console.log("this.Product", this.Product);
           for (var i = 0; i <= this.Newarrivals.length; i++) {
             this.likeddd.push(true); 
           } 
@@ -566,7 +540,6 @@ export class ComboComponent implements OnInit {
     }
   
     onScrollUp(ev: any) {
-      console.log("scrolled up!",);
     }
 
     

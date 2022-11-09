@@ -12,15 +12,6 @@ export class OrderstrackComponent implements OnInit {
   constructor(private request:RequestService) { }
   ngOnInit(): void {
     window.scroll(0,0)
-  }
-
-  // getaboutus(){
-  //   this.request.getaboutus().subscribe((res:any)=>{
-  // console.log("res",res);
-  // this.description=res.data[0].content
-  // console.log("this.description",this.description);
-  // this.desload=false
-  //    });
-  // }
+  } 
 }
 

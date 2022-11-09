@@ -25,7 +25,6 @@ export class CountdownComponent implements OnInit  {
   constructor() { }
 
   ngOnInit() {
-    // console.log("this,.interval",this.interval);
   this.countDowndate =new Date(this.interval).getTime();
   
    const x=setInterval(()=>{
@@ -42,58 +41,4 @@ export class CountdownComponent implements OnInit  {
   time(){
 
   }
- 
-
 }
-
-//     @Input()
-//   interval!: number;
-
-//   @Output() onComplete = new EventEmitter();
-
-//   public countdown!: string;
-
-//   private completed!: boolean;
-
-//   constructor() { }
-
-//   ngOnInit() {
-
-//     this.countdown = this.getTime();
-//     const countdownObservable = timer(1000, 1000).subscribe(val => {
-//       this.manipulateInterval();
-//       this.countdown = this.getTime();
-//       if (this.interval === 0) {
-//         this.countdownCompleted();
-//       }
-//     });    
-//   }
-
-//   private getTime(): string {
-//     if (this.interval < 0) {
-//       this.interval = Math.abs(this.interval);
-//       this.completed = true;
-//     }
-//     const days = Math.floor(this.interval / 86400);
-//     const hours = Math.floor(this.interval / 3600);
-//     const minutes = Math.floor((this.interval - (hours * 3600)) / 60);
-//     const seconds = (this.interval - (hours * 3600) - (minutes * 60));
-//     return `${days.toString().padStart(2, '0')}:${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-//   }
-
-//   private manipulateInterval() {
-//     if (this.completed) {
-//       this.interval++;
-//     } else {
-//       this.interval--;
-//     }
-//   }
-
-//   countdownCompleted() {
-//     this.completed = true;
-//     this.onComplete.emit();
-//   }
-  
-
-// }
-

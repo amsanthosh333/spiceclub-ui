@@ -69,8 +69,6 @@ export class MessageComponent implements OnInit {
   viewdata(){
     this.request.getallconv(this.userid).subscribe((response: any) => {
       this.Convertations=response.data;  
-      console.log("this.Convertations",this.Convertations);
-       
       this.viewrow(this.Convertations[0],0)
     },
     (error: any) => {
@@ -111,7 +109,6 @@ export class MessageComponent implements OnInit {
         this.lastmessage();
       }
       else{
-     console.log("err Messages",response);
       }  
     },
     (error: any) => {
@@ -119,9 +116,7 @@ export class MessageComponent implements OnInit {
     });
   }
   }
-  lastmessage(){
-    console.log("lastmessage");
-    
+  lastmessage(){ 
     this.request.getnewmessages(this.conv_id,this.lastmessage_id,).subscribe((response: any) => {  
       if(response.success==true){
         this.Messages=response.data.reverse(); 
@@ -130,7 +125,6 @@ export class MessageComponent implements OnInit {
 
       }
       else{
-     console.log("err Messages",response);
       }  
     },
     (error: any) => {

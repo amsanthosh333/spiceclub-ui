@@ -15,9 +15,7 @@ export class ReturnComponent implements OnInit {
   }
   getaboutus(){
     this.request.getreturn().subscribe((res:any)=>{
-  console.log("res",res);
   this.description=res.data[0].content
-  console.log("this.description",this.description);
   this.desload=false
      });
   }

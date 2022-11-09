@@ -152,14 +152,12 @@ export class ShopbyproductComponent implements OnInit {
     this.currentUserSubject = new BehaviorSubject<User>(
       JSON.parse(localStorage.getItem('currentUser') || '{}')
     );
-    // console.log("currentuser details=", this.currentUserSubject);
     this.currentUser = this.currentUserSubject.asObservable();
     this.currentdetail = this.currentUserSubject.value;
     this.userid = this.currentdetail.user?.id;
     this.buyertypeid = this.currentdetail.user?.buyertypeid;
     this.accesstoken = this.currentdetail.access_token;
     this.tokentype = this.currentdetail.token_type;
-
 
     if (this.userid == undefined) {
       this.userid = 0;
@@ -183,7 +181,6 @@ export class ShopbyproductComponent implements OnInit {
     window.scroll(0, 0);
     this.keyy = this.route.snapshot.params['key'];
     this.route.queryParams.subscribe((data2: Params) => {
-      console.log("queryParams data", data2);
       this.categoryy_id = data2['categories']
       this.brandd_id = data2['brands']
       this.minValue = data2['min']
@@ -195,10 +192,8 @@ export class ShopbyproductComponent implements OnInit {
 
     if (this.keyy !== undefined || this.categoryy_id !== undefined || this.brandd_id !== undefined ||
        this.minValue !== undefined || this.maxValue !== undefined) {
-      console.log("if ", this.keyy);
       this.directpage=false
       if (this.keyy !== undefined) {
-        console.log("filterDatatable1");
         this.minValue = 0
         this.maxValue = 10000
         
@@ -206,13 +201,11 @@ export class ShopbyproductComponent implements OnInit {
         
       }
       else {
-        console.log("filterDatatable2");
         this.filterDatatable2();
       }
 
     }
     else {
-      console.log("else");
       if (this.minValue == undefined) {
         this.minValue = 0
       }
@@ -340,13 +333,10 @@ export class ShopbyproductComponent implements OnInit {
   viewdata(page: any) {
     this.prodloadermain=false
     this.prodloader = true;
-    console.log("viewdataaaaaaaaaaaaa");
     this.request.getallproducts(page).subscribe((response: any) => {
-      console.log("getallproducts response",response);
       this.Product = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links
-      console.log("viewdata response",this.pagess);
       this.prodloadermain=true
       this.prodloader = false;
     
@@ -363,8 +353,6 @@ export class ShopbyproductComponent implements OnInit {
     for (var i = 0; i <= this.Product.length; i++) {
       this.likedd.push(false); 
     }
-    console.log("sub_array",this.likeddd)
-      // console.log("brnd,category", this.brand_id, this.categoryy_id);
       setTimeout(() => {
         this.imgloader = true;
       }, 500);
@@ -374,9 +362,7 @@ export class ShopbyproductComponent implements OnInit {
 
   viewbestpro() {
     this.request.getbestsellpro().subscribe((response: any) => {
-      console.log("Bestsellpro",);
       this.Bestsellpro = response.data.slice(0, 6);
-      console.log("Bestsellpro",this.Bestsellpro );
       this.rating = this.Bestsellpro.rating;
       this.poploader = false;
     });
@@ -399,7 +385,6 @@ export class ShopbyproductComponent implements OnInit {
     this.prodloader = true;
     this.imgloader = false;
     this.request.getallflashdealproducts().subscribe((response: any) => {
-      console.log("flash deal",response);
       this.Product = response.data;
       this.pagenation = response?.meta;
       this.pagess = this.pagenation?.links;
@@ -496,7 +481,6 @@ export class ShopbyproductComponent implements OnInit {
  
   maximunprice() {
     this.request.getmaximumprice().subscribe((response: any) => {
-      console.log(response);
       this.maximumprize = response.price;
       // this.maxValue=this.maximumprize
       let opts: Options = {
@@ -520,20 +504,6 @@ export class ShopbyproductComponent implements OnInit {
     this.page2 = false;
   }
   getprodofcategory(id: any, page: any) {
-    // this.prodloader = true;
-    // this.imgloader = false;
-    // this.request.getcatprod(id, page).subscribe((response: any) => {
-    //   this.Product = response.data;
-    //   this.pagenation = response.meta;
-    //   this.pagess = this.pagenation.links;
-    //   this.prodloader = false;
-    //   setTimeout(() => {
-    //     this.imgloader = true;
-    //   }, 2000);
-    // },
-    //   (error: any) => {
-    //     console.log("error", error);
-    //   });
       this.router.navigate(['/shopbyproduct'], { queryParams: { page: 1,categories: id, min: 0, max: this.maximumprize, } });
 
   }
@@ -543,8 +513,6 @@ export class ShopbyproductComponent implements OnInit {
     this.imgloader = false;
     this.headItem = 1
     this.request.getbrandprod(id, page).subscribe((response: any) => {
-      console.log("brand prod", response);
-
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
@@ -564,25 +532,18 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   headactive(i: any) {
-    console.log("iiii", i);
-
     this.headItem = i
 
   }
   searchWithCode(event: any) {
-    console.log("index", event)
     let index = event.target["selectedIndex"] - 1;
-    console.log("index", index)
     this.subbbItem = index
   }
 
   findSso(selectedVendor: any, i: any) {
-    console.log("index", i)
-    console.log('Got the selectedVendor as : ', JSON.parse(selectedVendor));
+
   }
   getpage(url: any) {
-    console.log("urll page",url);
-    
     if(url!==null){
       this.prodloadermain=false
     this.prodloader = true;
@@ -604,7 +565,6 @@ export class ShopbyproductComponent implements OnInit {
   }
   }
   getpage1(url: any) {
-    console.log("urll page",url);
     if(url!==null){
       this.prodloadermain=false
     this.prodloader = true;
@@ -696,7 +656,6 @@ export class ShopbyproductComponent implements OnInit {
         this.toastr.error(res.message);
       }
       else {
-        console.log("error", res);
       }
     }, (error: any) => {
       console.log("error", error);
@@ -841,8 +800,6 @@ export class ShopbyproductComponent implements OnInit {
       this.categoryy_id = form.value.category
     this.minValue = form.value.min
     this.maxValue = form.value.max
-    console.log("form.value.category", form.value.category);
-
     if (form.value.brand == null) {
       form.value.brand = ''
       this.brandd_id = ''
@@ -927,8 +884,6 @@ export class ShopbyproductComponent implements OnInit {
     }
  
     this.request.filterdataa3(this.pagee, this.categoryy_id, this.brandd_id, this.minValue, this.maxValue, this.sortvalue).subscribe((response: any) => {
-      // this.request.filtersearchdataa(key).subscribe((response: any) => {
-      // console.log("filterdataa3", response);
       this.Product = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
@@ -981,15 +936,6 @@ export class ShopbyproductComponent implements OnInit {
   onsortChange(val: any) {
     this.prodloader = true;
     this.sortval = val
-    //  this.request.filterdataa(this.categoryy_id,this.brandd_id,this.searchh,val,this.minValue,this.maxValue).subscribe((response: any) => {
-    //   this.Product = response.data;
-    //   this.pagenation = response.meta
-    //   this.pagess = this.pagenation.links
-    //   this.prodloader = false;
-    //   setTimeout(() => {
-    //     this.imgloader = true;
-    //   }, 2000);
-    // });
     this.router.navigate(['/shopbyproduct'], {
       queryParams: {
         page: 1, categories: this.categoryy_id,
@@ -1002,8 +948,6 @@ export class ShopbyproductComponent implements OnInit {
     this.quantityyy = 0
     this.product_id = id
     this.request.getproddetail(this.product_id).subscribe((response: any) => {
-      console.log("quickview response",response);
-      
       this.Peoduct = response.data[0];
   
       this.prod_price = this.Peoduct.main_price;
@@ -1055,8 +999,7 @@ export class ShopbyproductComponent implements OnInit {
     }
     this.quantityyy = val
     this.stocck = this.stocckkk - val
-    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,).subscribe((res: any) => {
-      console.log(res);   
+    this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy,).subscribe((res: any) => { 
       this.totalprice = res.price.toFixed(2);
    // this.totalprice = this.dec.toFixed(2) 
    
@@ -1067,41 +1010,23 @@ export class ShopbyproductComponent implements OnInit {
     this.quantityyy++;
     this.stocck--;
     this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-      console.log(res);
-      
       this.totalprice = res.price.toFixed(2);
-      
-    // this.totalprice = this.dec.toFixed(2) 
-   
     })
       }
       decreaseqty(){
 
         this.quantityyy--;
         this.stocck++;    
-        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {
-          console.log(res);
-          
+        this.request.getdiscountprice(this.buyertypeid, this.product_id, this.varient_value.replace(/\s/g, ""), this.quantityyy).subscribe((res: any) => {  
           this.totalprice = res.price.toFixed(2);
-          
-        // this.totalprice = this.dec.toFixed(2) 
-       
         })   
       }
   selectvar(weight: any, i: any) {
     this.varient_value = weight.replace(/\s/g, "")
     this.subItemm = i
     this.request.addvarient(this.product_id, weight).subscribe((res: any) => {
-      console.log("selectvarient",res); 
-
       this.prod_price = res?.price_string;
-      this.storked_pricee=res?.stroked_price;
-
-      // console.log("this.prod_price",this.prod_price); 
-      // console.log("this.storked_pricee",this.storked_pricee); 
-
-
-      
+      this.storked_pricee=res?.stroked_price; 
       this.totalprice = (res?.price_string).replace('Rs', '');
       this.varprise = res?.price_string;
       this.stk = res?.stock;
@@ -1171,22 +1096,15 @@ export class ShopbyproductComponent implements OnInit {
       this.quantityarray.push({ "id": img.id, "value": event.target.value });
     }
     else {
-      console.log(" this.quantityarray", this.quantityarray);
       const index = this.quantityarray.findIndex(fruit => fruit.id == img.id);
-      console.log("obj", index);
       if (index > -1) {
-        console.log("if", index);
-
         this.quantityarray[index].value = event.target.value;
       }
       else {
-        console.log("else", index);
         this.quantityarray.push({ "id": img.id, "value": event.target.value });
       }
 
     }
-
-    console.log("this.quantityarray", this.quantityarray);
   }
 
   prodaddtocart(img: any) {
@@ -1262,7 +1180,6 @@ export class ShopbyproductComponent implements OnInit {
   this.currentpackagevalue= varient[1].options[0]
     }
     this.request.addvarientfromdetail(id, weight,this.currentpackagevalue).subscribe((res: any) => {
-      console.log("selectvar res", res);
       this.Product[i].stroked_price= res.stroked_price
        this.Product[i].main_price = res.price_string;
        this.Product[i].discount_amount = res.discount_amount;
@@ -1272,12 +1189,8 @@ export class ShopbyproductComponent implements OnInit {
     });
   }
   onScrollDown(eve: any) {
-    console.log("scrolled down!!",this.pagenum );
     this.pagenum+=1
-    console.log("scrolled down!!",this.pagenum );
   const pageurl =  this.pagess[this.pagenum]
-  console.log("scrolled down url!!",pageurl );
-
     if(pageurl.url!==null && pageurl!==undefined ){
       this.pageload=false;
     this.prodloader = true;
@@ -1287,7 +1200,6 @@ export class ShopbyproductComponent implements OnInit {
       this.newpageProduct = response.data;
       this.pagenation = response.meta;
       this.pagess = this.pagenation.links;
-      console.log("this.pagess",this.pagess);
       this.pagee = this.pagenation.current_page;
       // this.router.navigate(['/shopbyproduct'], { queryParams: { page: this.pagee } });
       // window.scroll(0, 0);
@@ -1295,8 +1207,6 @@ export class ShopbyproductComponent implements OnInit {
       this.pageload=true;
       this.prodloader = false;
       this.sidepoploader=false;
-      console.log("this.Product",this.Product);
-      
       for (var i = 0; i <= this.Product.length; i++) {
         this.likeddd.push(true); 
       } 
@@ -1314,8 +1224,6 @@ export class ShopbyproductComponent implements OnInit {
   }
 
   onScrollUp(ev: any) {
-    console.log("scrolled up!",);
-
   }
 
 }

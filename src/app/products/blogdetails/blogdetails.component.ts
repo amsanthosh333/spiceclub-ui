@@ -125,7 +125,6 @@ this.getblogbycatg2(this.id)
     
     this.request.getblogbycat(id, 1).subscribe((response: any) => {
       this.CatBlogs = response.data;
-      console.log("CatBlogs", this.CatBlogs);
       this.loader2 = false;
     },
       (error: any) => {
@@ -143,8 +142,6 @@ this.getblogbycatg2(this.id)
     this.recipeloader = true;
     this.blog_id = id;
     this.request.getblogdetail(id).subscribe((response: any) => {
-      console.log("blog",response);
-      
       this.Peoduct = response.data[0];
       this.blogdate = this.Peoduct.created_at.split(/[T ]/i, 1)[0];
       this.currentRatess = this.Peoduct.rating;
@@ -183,17 +180,13 @@ this.getblogbycatg2(this.id)
       });
   }
   addcomment(form: FormGroup) {
-    console.log(form.value.rating)
-    console.log("edata2");
     if (this.userid == 0) {
       this.toastr.info('You need to login', '');
     }
     else {
       this.error1 = '';
       if (this.comment.invalid) {
-        console.log("invalid")
         if (!this.comment.get('rating')?.valid) {
-          console.log("give")
           this.error1 = '*Give star';
         }
         else if (!this.comment.get('comment')?.valid) {
@@ -202,13 +195,8 @@ this.getblogbycatg2(this.id)
         return;
       }
       else {
-        console.log("give else")
-        console.log(form.value.rating)
         if (isNaN(form.value.rating)) {
-          console.log("give iff")
-          form.value.rating = 0
-          console.log(form.value.rating)
-          
+          form.value.rating = 0     
         }
      
           let edata2 = {
@@ -217,8 +205,7 @@ this.getblogbycatg2(this.id)
             rating: form.value.rating,
             comment: form.value.comment,
           }
-    console.log(edata2);
-    
+  
           this.request.addblogcomment(edata2).subscribe((res: any) => {
 
             if (res.result == true) {
@@ -243,7 +230,6 @@ this.getblogbycatg2(this.id)
   }
   getblogbycatg(id: any) {
     window.scroll(0, 0);
-    // this.router.navigate(['blog', id]);
     this.router.navigate(['/blog'], { queryParams: { category: id, page: 1 } });
     
   }
