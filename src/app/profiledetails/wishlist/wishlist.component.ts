@@ -65,6 +65,8 @@ export class WishlistComponent implements OnInit {
   discount_price: any;
   discount_percentage: any;
   gst_percentage: any;
+  varienttt: any;
+  varprise0: any;
   
   constructor(private router: Router,private fb: FormBuilder,private request: RequestService, 
     private modalService: NgbModal,private toastr: ToastrService, private toast: ToastrService,
@@ -144,11 +146,13 @@ export class WishlistComponent implements OnInit {
         this.product_id=_id,
         this.subItempackage = 0  
         this.request.getproddetail(this.product_id).subscribe((response: any) => {
+          console.log("response",response);
+          
                this.Peoduct=response.data[0];
               
                this.prod_price = this.Peoduct.main_price;
                this.storked_pricee=this.Peoduct.stroked_price;
-
+ 
                this.choice=this.Peoduct.choice_options;
               //  this.stocck=(this.Peoduct.current_stock)-1;
                this.stk=this.Peoduct.current_stock;
@@ -157,6 +161,11 @@ export class WishlistComponent implements OnInit {
                this.colors=this.Peoduct.colors;
                this.tags=this.Peoduct.tags;
                this.varprise=this.Peoduct.main_price;
+               this.varprise0 = this.choice
+               this.varienttt = this.varprise0[0]?.options[0]
+               this.currentvarient = this.varienttt
+               // this.currentpackage = varpackage
+               this.pervarient = this.varienttt;
                this.discount_price=this.Peoduct.discount_amount;
                this.discount_percentage=this.Peoduct.discount_percentage;
                this.gst_percentage=this.Peoduct.gst_percentage
@@ -245,6 +254,7 @@ this.buynowbtn=false
               this.storked_pricee=res?.stroked_price;      
               this.totalprice=(res?.price_string).replace('Rs','');
               this.varprise=res?.price_string;
+              this.pervarient = res?.variant;
               this.stk=res?.stock;
               this.stocckkk=res?.stock;
               this.discount_price=res?.discount_amount;

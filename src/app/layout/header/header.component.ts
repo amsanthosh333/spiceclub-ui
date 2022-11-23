@@ -1736,6 +1736,8 @@ $( "#lii_one" )
   viewwishlist() {
     this.request.fetchuserwishlist(this.userid).subscribe((response: any) => {
       this.Wishlist = response.data;
+      console.log("this.Wishlist",this.Wishlist);
+      
       this.Wlength = this.Wishlist.length;
       this.loader = false;
     });
