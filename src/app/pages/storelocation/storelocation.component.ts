@@ -18,6 +18,7 @@ export class StorelocationComponent implements OnInit {
 
   getaboutus(){
     this.request.getstorelocation().subscribe((res:any)=>{
+      console.log("store location res",res);
   this.description=res.data[0].content
   this.desload=false
      });

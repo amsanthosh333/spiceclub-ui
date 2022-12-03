@@ -2278,7 +2278,7 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li .mega-sub-menu li:last-child a {
 }
 
 .header-right-icons .single-icon a {
-  position: relative;
+  position: relative; 
 }
 
 .header-right-icons .single-icon a i {
@@ -2290,7 +2290,7 @@ nav.site-nav>ul>li ul.mega-menu-column-5>li .mega-sub-menu li:last-child a {
 .header-right-icons .single-icon a span.count {
   font-size: 14px;
   font-weight: 500;
-  line-height: 16px;
+  line-height: 18px;
 
   position: absolute;
   top: -8px;

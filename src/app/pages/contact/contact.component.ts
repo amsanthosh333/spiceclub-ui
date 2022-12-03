@@ -18,6 +18,8 @@ export class ContactComponent implements OnInit {
 
   getaboutus(){
     this.request.getcontact().subscribe((res:any)=>{
+      console.log("contact res",res);
+      
   this.description=res.data[0].content
   this.desload=false
      });

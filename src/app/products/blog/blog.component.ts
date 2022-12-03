@@ -190,7 +190,7 @@ export class BlogComponent implements OnInit {
   getblogbycatg2(id: any, i: any) {
     window.scroll(0, 0);
     // this.router.navigate(['blog', id]);
-    this.router.navigate(['/blog'], { queryParams: { category: id, page: 1 } });
+    this.router.navigate(['/tips&facts'], { queryParams: { category: id, page: 1 } });
     this.topItem = i
     // this.getblogbycatg(id)
 
@@ -207,7 +207,7 @@ export class BlogComponent implements OnInit {
         this.pagenation = response.meta
         this.pagess = this.pagenation.links
         this.currentpage = response.meta.current_page;
-        this.router.navigate(['/blog'], { queryParams: { category: this.blogid, page: this.currentpage } });
+        this.router.navigate(['/tips&facts'], { queryParams: { category: this.blogid, page: this.currentpage } });
         setTimeout(() => {
           this.imgloader = true;
         }, 1000);
@@ -349,7 +349,7 @@ export class BlogComponent implements OnInit {
   goback() {
     this.catblogs = false;
     this.topItem=-1
-    this.router.navigate(['/blog'])
+    this.router.navigate(['/tips&facts'])
 
   }
 }

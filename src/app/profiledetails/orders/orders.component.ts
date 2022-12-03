@@ -129,6 +129,7 @@ export class OrdersComponent implements OnInit {
   }
   getorders() {
     this.request.fetchOrders4(this.userid, this.pagee,this.deliveryy,this.paymentt).subscribe((response: any) => {
+      console.log("response",response);     
       this.Orders = response.data;
       this.pagenation = response.meta
       this.pagess = this.pagenation.links

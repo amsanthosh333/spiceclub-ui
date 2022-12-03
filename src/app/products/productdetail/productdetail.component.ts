@@ -551,6 +551,7 @@ export class ProductdetailComponent implements OnInit {
       }
 
       this.selectedimage = this.allgalleryphotos[0]?.image;   
+      this.selectedvarientimage = this.allgalleryphotos[0]; 
       this.getcommentsss()
       if (this.Peoduct.choice_options.length == 0) {
         this.varient_value = ''

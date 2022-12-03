@@ -153,7 +153,6 @@ export class CartComponent implements OnInit {
   }
   viewcart() {
     this.request.fetchusercart(this.userid,0).subscribe((response: any) => {
-
       this.Cart = response;
       this.cartitems=this.Cart.cart_items
       this.loader = false;

@@ -144,10 +144,10 @@
                                                                     {{img.shipping_address.phone}}
                                                                 </p>
                                                             </ng-template>
-                                                            <button style="border: 0px;padding-left:0px"
+                                                            <button style="border: 0px;padding-left:0px ;width: max-content;"
                                                                 [tooltip]="$any(HtmlContent)" trigger='hover'
                                                                 theme='light' contentType="template" placement="bottom">
-                                                                {{img.shipping_address.name}} &nbsp;<i
+                                                                {{img.shipping_address.address}}... &nbsp;<i
                                                                     class="bi bi-chevron-down" style="color:gray;font-size: 0.5rem;
                                            position: absolute;"></i>
                                                             </button>
@@ -255,6 +255,13 @@
                                                             <span style="color: #565959">Quantity
                                                             </span>{{pro.quantity}}
                                                         </div>
+                                                        <div class="a-row a-size-small" *ngIf="pro.variation"
+                                                            style="color: #3b3b3b;font-size:0.7rem;">
+                                                            <span style="color: #565959">
+                                                            </span>{{pro.variation}} pack of 1
+                                                        </div>
+                                                        
+
                                                     </span>
                                                 </div>
                                                 <div class="a-row">
