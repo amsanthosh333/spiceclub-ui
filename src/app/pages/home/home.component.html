@@ -519,6 +519,29 @@
                                     formControlName="comments"></textarea>
                             </div>
                             <div class="col-lg-4 text-center mb-10 pl-0" id="tellussubmit">
+                                <!-- <fieldset class="form-group" style="display: inline;">               
+                                    <div class="custom-file fileInputProfileWrap">
+                                        <input type="file" formControlName="image"  class="fileInputProfile" (change)="fileChangeEvent($event)" >
+                                        <div class="img-space">   
+                                            <ng-template #elseTemplate>                                     
+                                            </ng-template>
+                                        </div>
+                                    </div>
+                                </fieldset> -->
+                                <div style="text-align:center;padding:3%;
+                                border: 1px solid #d3d3d3;border-radius: 4px;margin-bottom: 5px;max-height: 3.4rem;">
+                                    <label for="inputTag" style="cursor:pointer;" (change)="fileChangeEvent($event)" >
+                                     <span *ngIf="filename1 =='' || filename1 == undefined "> Select Image  <br/></span>
+                                      <i class="bi bi-camera-fill"></i>
+                                      <input id="inputTag" style="display: none;" type="file"/>
+                                      <br/>
+                                      <span id="imageName" *ngIf="filename1" style="color:green; display: inline-block;
+                                      width: 100px;
+                                      white-space: nowrap;
+                                      overflow: hidden;
+                                      text-overflow: ellipsis;">{{filename1}}</span>
+                                    </label>
+                                  </div>
                                 <button id="requirment" class="btn btn-warning" *ngIf="!btnloading1">Submit</button>
                                 <button id="requirment" class="btn btn-warning" *ngIf="btnloading1">
                                     <i class="fa fa-spinner fa-spin"

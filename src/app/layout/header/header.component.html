@@ -474,9 +474,12 @@
 									class="main-price discounted">{{img.product?.stroked_price}}</span> &nbsp;
 								<span class="discounted-price" style="color: red;">{{img.product.main_price}}</span>
 							</p>
-							<p style="font-size: 12px;">
+							<!-- <p style="font-size: 12px;">
 								You save <span style="color:green">Rs {{img.product.discount_amount}}</span>
-							</p>
+							</p> -->
+							<a style="font-size: 0.7rem;font-weight: 100;text-decoration: none;color: gray; margin-top: 8px;"
+											*ngIf="img.product.discount_amount !== '0.00'">
+											you save Rs.{{img.product.discount_amount}} <span  *ngIf="img.product.discount_percentage!=='0.00' && img.product.discount_percentage!==0 ">({{img.product.discount_percentage}}%)</span>  </a>
 						</div>
 					</div>
 

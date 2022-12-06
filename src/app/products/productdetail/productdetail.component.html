@@ -751,7 +751,7 @@
                                                 data-parent="#shippingInfo">
                                                 <div class="card-body" style=" margin-top: -17px;padding: 4px;">
                                                     <div class="crdbdy">
-                                                        <div class="col-lg-8 col-mg-12 col-sm-12">
+                                                        <div class="col-lg-9 col-mg-12 col-sm-12">
                                                             <table class="overview">
                                                                 <tr>
                                                                     <th id="he" style="background-color: #f2f2f2;">
@@ -783,7 +783,7 @@
 
                                                             </table>
                                                         </div>
-                                                        <div class="col-lg-4 col-mg-12 col-sm-12" id="nut">
+                                                        <div class="col-lg-3 col-mg-12 col-sm-12" id="nut">
                                                             <table class="overview"
                                                                 *ngIf="Peoduct?.nutrients.length!=0">
                                                                 <tr>
@@ -798,16 +798,16 @@
 
                                                                         </th>
                                                                         <td
-                                                                            style="padding-left: 30px;background-color: #f2f2f2;">
+                                                                            style="text-align: center;;background-color: #ffffff;">
                                                                             {{n.value}}
                                                                         </td>
                                                                     </tr>
                                                                     <tr *ngFor="let Sd of n.subdata">
                                                                         <th id="he"
-                                                                            style="background-color:white;font-weight: 300;width: 75%;">
-                                                                            {{Sd.name}}</th>
+                                                                            style="background-color:f2f2f2;width: 75%;padding-left: 25px;padding-bottom: 5px;">
+                                                                           {{Sd.name}}</th>
                                                                         <td
-                                                                            style="padding-left: 30px;font-weight: 300;">
+                                                                            style="padding:0px;text-align: center;">
                                                                             {{Sd.value}}
                                                                             <span *ngIf="Sd.value ==null">-</span>
                                                                         </td>

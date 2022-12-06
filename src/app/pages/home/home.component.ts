@@ -238,6 +238,9 @@ export class HomeComponent implements OnInit {
   recipe_vid1: any;
   recipe_vid2: any;
   sliderData: any=[];
+  filename1: any;
+  gstImageBase64: any;
+  isImageSaved!: boolean;
   
 
 
@@ -277,6 +280,7 @@ export class HomeComponent implements OnInit {
       mobile: ['', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]],
       email: ['', [Validators.required, Validators.email, Validators.minLength(5)],],
       comments: ['', Validators.required],
+      image:['']
     },
     );
 
@@ -435,6 +439,31 @@ this.viewbestsellpro();
       );
     }
   }
+
+  fileChangeEvent(fileInput: any) {
+    this.filename1=fileInput.target.files[0].name;
+    if (fileInput.target.files && fileInput.target.files[0]) {
+        // Size Filter Bytes
+        const max_size = 20971520;
+        const allowed_types = ['image/png', 'image/jpeg'];
+        const max_height = 15200;
+        const max_width = 25600;
+        const reader = new FileReader();
+        reader.onload = (e: any) => {
+            const image = new Image();
+            image.src = e.target.result;
+            image.onload = rs => {             
+                // console.log(img_height, img_width);
+                    const imgBase64Path = e.target.result.split(',')[1];  
+                    this.gstImageBase64 = imgBase64Path;
+                    this.isImageSaved = true;
+                    // this.previewImagePath = imgBase64Path;              
+            };
+        };
+        reader.readAsDataURL(fileInput.target.files[0]);
+    }
+}
+
   enqueryonSubmit() {
     this.btnloading1 = true;
     this.error2 = '';
@@ -447,6 +476,9 @@ this.viewbestsellpro();
       }
       else if (!this.enquiryForm.get('email')?.valid) {
         this.error2 = '* Enter valid emailid ';
+      }
+      else if(!this.gstImageBase64 ) {
+        this.error2 = '* Select image';
       }
       else {
         this.error2 = '* Enter all details';
@@ -465,17 +497,20 @@ this.viewbestsellpro();
         phone: "" + this.enquiryForm.controls['mobile'].value,
         comments: "" + this.enquiryForm.controls['comments'].value,
         product_description: null,
-        image: null,
+        image:this.gstImageBase64,
         imagename: null,
         image2: null,
         imagename2: null,
         image3: null,
         imagename3: null
       }
+      console.log("edata",edata);
+      
       this.request.sendenquiry(edata).subscribe((res: any) => {
         if (res.result == true) {
           this.btnloading1 = false;
           this.enquiryForm.reset()
+          this.filename1=''
           this.toastr.success('Submited Successfully', '');
           this.modalService.dismissAll();
         }
