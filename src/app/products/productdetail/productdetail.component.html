@@ -345,15 +345,27 @@
                                                 *ngFor="let t of Peoduct?.tags;let i = index">
                                                 <a style="color: rgb(83, 83, 83);">{{t}}</a>
                                             </span>
-                                            <!-- <span class="review-link ml-20" id="offer"
-                                                style="background-color:rgb(121, 121, 121);">
-                                                <a>No Taxin</a>
-                                            </span>
-                                            <span class="review-link ml-20" id="offer"
-                                                style="background-color:rgb(112, 214, 245);">
-                                                <a>Nutrients</a>
-                                            </span> -->
+                                           
                                         </div>
+
+                                        <!-- price slab -->
+                                        <!-- <div class="row mt-20" >
+                                            <h6 style="font-weight: 600;color: #727272;margin-bottom: 0px;">Buy in packs save more..</h6>
+                                            <div class="col-4 packs">
+                                                <div class="packs_1">
+                                                    <div class="packs_2"> 
+                                                        <a><input type="radio"></a>
+                                                        <p><label style="font-weight: 600;">1 pack 10  (pieces)</label>
+                                                            <span id="rate">RS 1234 &nbsp;<span style="font-size: small;
+                                                                font-weight: 600;">Rs 543</span></span>
+                                                        </p>
+                                                    </div>
+                                                    <p class="pack_botom">
+                                                        <span >48% offer(you save Rs 123</span>
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div> -->
 
 
                                     </div>
@@ -699,7 +711,8 @@
                                                         </h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-md-12 col-sm-12">
+                                                <div class="col-lg-3 col-md-12 col-sm-12"
+                                                    *ngIf="!(Peoduct?.ingredients == '' || Peoduct?.ingredients == null) ">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn()">
                                                             <button id="btndiv" class="btn btn-link"
@@ -714,7 +727,8 @@
                                                         </h5>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-3 col-md-12 col-sm-12">
+                                                <div class="col-lg-3 col-md-12 col-sm-12"
+                                                    *ngIf="!(Peoduct?.benifits == '' || Peoduct?.benifits == null || Peoduct?.benifits == ' ') ">
                                                     <div class="card-header" id="headingTwo">
                                                         <h5 class="mb-0" (click)="collapsebtn1()">
                                                             <button id="btndiv" class="btn btn-link collapsed"
@@ -760,7 +774,8 @@
                                                                         {{Peoduct?.product_id}}
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
+                                                                <tr
+                                                                    *ngIf="!(Peoduct?.description == '' || Peoduct?.description == null)">
                                                                     <th style="background-color: #f2f2f2;"> Description
                                                                     </th>
                                                                     <td>
@@ -773,11 +788,15 @@
                                                                         </div>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <th style="background-color: #f2f2f2;">Attributes
+                                                                <tr
+                                                                    *ngFor="let attr of Peoduct?.attributes;let A=index">
+                                                                    <th style="background-color: #f2f2f2;">
+                                                                        <span>{{attr.title}} <a
+                                                                                *ngIf="Peoduct?.attributes.length >A+1">,</a></span>
                                                                     </th>
                                                                     <td style="padding-left: 30px;"><span
-                                                                            *ngFor="let attr of Peoduct?.attributes">{{attr.title}}</span>
+                                                                            *ngFor="let vari of attr?.options;let i=index">{{vari}}<a
+                                                                                *ngIf="attr?.options.length > i+1">,</a></span>
                                                                     </td>
                                                                 </tr>
 
@@ -804,7 +823,7 @@
                                                                     </tr>
                                                                     <tr *ngFor="let Sd of n.subdata">
                                                                         <th id="he"
-                                                                            style="background-color:f2f2f2;width: 75%;padding-left: 25px;padding-bottom: 5px;">
+                                                                            style="background-color:f2f2f2;width: 75%;padding-left: 30px;padding-bottom: 5px;">
                                                                            {{Sd.name}}</th>
                                                                         <td
                                                                             style="padding:0px;text-align: center;">

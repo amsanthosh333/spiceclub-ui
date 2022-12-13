@@ -493,6 +493,7 @@ a#listactive::after{
 	-ms-overflow-style: none;
 	scrollbar-width: none;
 }
+
 /* .content {
 	max-height: 270px;
 	height: 270px;

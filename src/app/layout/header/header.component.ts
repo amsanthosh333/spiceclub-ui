@@ -90,6 +90,9 @@ export class HeaderComponent implements OnInit {
   viewsubcat3var: any;
   discount: any;
   without_discount: any;
+  current_cat_id: any;
+  current_subcat_id: any;
+  current_subcat3_id: any;
 
   constructor(private router: Router, private fb: FormBuilder, private toastr: ToastrService, private request: RequestService,
     private modalService: NgbModal, private sharedService: SharedService, private authService: AuthService) {
@@ -1630,30 +1633,55 @@ export class HeaderComponent implements OnInit {
 //   });
 // });
 
-var i = 0;
-$( "#lii_two" )
-  .mouseenter(function() {
-    i += 1;
-    if(i<=1){
-     
-    if ($(this).hasClass('scrolling')) return;
-    var maxscroll = $(this)[0].scrollHeight
-    $(this).animate({
-      scrollTop: 150
-    },  'slow');
-    setTimeout(() => {
-      $(this).animate({
-        scrollTop: 0
-      },  'slow'); 
-    }, 800);
-  }
+// $( "#lii_one,.mega-sub-menu,#lii_onetwo" )
+//   .mouseup(function() {
+//     console.log("maxscrolltttttttt");
+//   })
+//   .mousedown(function() {
+//     console.log("maxscrolltttttttt down");
+//   })
+
+
+  // $( "#activename" )
+  // .mouseenter(function(event) {
+  //   console.log("event.type",event.type);
+  //   if (event.type == 'mouseover') {
+  //     console.log("maxscrolltttttttt mouseover");
+  //   }
+  //   console.log("maxscrolltttttttt");
+  // })
+  // .mouseleave(function() {
+  //   console.log("maxscrolltttttttt down");
+  // })
 
   
-  })
-  .mouseleave(function() {  
-     i =0;
-  });
+
+// var i = 0;
+// $( "#lii_one" )
+//   .mouseenter(function() {
+//     // i += 1;
+//     // if(i<=1){
+//     //   console.log("this",this);   
+//      if ($(this).hasClass('scrolling')) return;
+//     var maxscroll = $("#lii_two")[0].scrollHeight
+//     console.log("maxscroll",maxscroll);
+//     $("#lii_two").animate({
+//       scrollTop: 150
+//     },  'slow');
+//     setTimeout(() => {
+//       $("#lii_two").animate({
+//         scrollTop: 0
+//       },  'slow'); 
+//     }, 800);
+//   // }
+//   })
+//   .mouseleave(function() {  
+//      i =0;
+//   });
  
+
+
+
   var i = 0;
 $( "#lii_one" )
   .mouseenter(function() {
@@ -1678,6 +1706,29 @@ $( "#lii_one" )
      i =0;
   });
 
+  var i = 0;
+  $( "#lii_two" )
+    .mouseenter(function() {
+  
+      i += 1;
+  
+      if(i<=1){
+       
+      if ($(this).hasClass('scrolling')) return;
+      var maxscroll = $(this)[0].scrollHeight
+      $(this).animate({
+        scrollTop: 150
+      },  'slow');
+      setTimeout(() => {
+        $(this).animate({
+          scrollTop: 0
+        },  'slow');   
+      }, 800);
+    }
+    })
+    .mouseleave(function() {  
+       i =0;
+    });
 
   var i = 0;
   $( "#lii_three" )
@@ -1890,7 +1941,8 @@ $( "#lii_one" )
       });
   }
   viewsubcat(id: any, i: any) {
-    this.viewsubcat1var =setTimeout(() => {   
+    if(this.current_cat_id !== id){
+      this.viewsubcat1var =setTimeout(() => { 
       this.cat_id = id
       this.subItem = i
       this.subItem1 = -1;
@@ -1904,7 +1956,33 @@ $( "#lii_one" )
       }, (error: any) => {
         console.log("error", error);
       });
-    }, 700); 
+    
+      this.current_cat_id = id
+    },200)
+      }
+    
+    else{
+      // console.log("outside");
+    
+    }
+
+    // console.log("viewsubcat");
+    // this.viewsubcat1var =setTimeout(() => {   
+    //   console.log("viewsubcat inside");
+    //   this.cat_id = id
+    //   this.subItem = i
+    //   this.subItem1 = -1;
+    //   this.subItem2 = -1;
+    //   this.subItem3 = -1;
+    //   this.Subcat = this.Allcat[i].children;
+    //   this.Subcat2 = []
+    //   this.Subcat3 = []
+    //   this.request.getsubcategoryofcat(id).subscribe((res: any) => {
+    //     this.Subcat = res.data;
+    //   }, (error: any) => {
+    //     console.log("error", error);
+    //   });
+    // }, 100); 
   }
   viewsubcatmoustout(){
 
@@ -1912,6 +1990,7 @@ $( "#lii_one" )
   }
 
   viewsubcat2(id: any, i: any) {
+    if(this.current_subcat_id !== id){
     this.viewsubcat2var =setTimeout(() => {
     this.subcat_id = id
     this.subItem1 = i;
@@ -1924,7 +2003,9 @@ $( "#lii_one" )
     }, (error: any) => {
       console.log("error", error);
     }); 
-  },700);
+    this.current_subcat_id = id
+  },200);
+}
   }
 
   viewsubcat2moustout(){
@@ -1932,6 +2013,7 @@ $( "#lii_one" )
   }
 
   viewsubcat3(id: any, i: any) {
+    if(this.current_subcat3_id !== id){
     this.viewsubcat3var =setTimeout(() => {
     this.catid1_id = id
     this.subItem2 = i;
@@ -1942,7 +2024,9 @@ $( "#lii_one" )
     }, (error: any) => {
       console.log("error", error);
     });
-  },700);
+    this.current_subcat3_id = id
+  },200);
+}
   }
 
   viewsubcat3moustout(){

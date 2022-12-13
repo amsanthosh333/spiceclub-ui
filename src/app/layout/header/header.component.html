@@ -204,16 +204,16 @@
 					<li class="menu-item-has-children"><i class="bi bi-list" style="font-weight:500;"></i>&nbsp;<a
 							style="font-weight:600;">Shop by Categories</a>
 						<ul class="sub-menu mega-menu mega-menu-column-4 center-menu" id="childrendiv">
-							<li class="lii" id="lii_one" style="padding-left: 10px;" #scrollMe1 [scrollTop]="scrollMe1.scrollHeight">
+							<li class="lii" id="lii_one" style="padding-left: 10px;" >
 								<ul class="mega-sub-menu">
-									<li style="margin-top: 10px;padding-left: 4px;"
-										*ngFor="let img of Allcat;let i=index">
-										<span class="lispan" style="text-decoration: underline"
+									<li style="margin-top: 10px;padding-left: 4px;" id="lii_onetwo" #scrollMe1 [scrollTop]="scrollMe1.scrollHeight"
+										*ngFor="let img of Allcat;let i=index" >
+										<span class="lispan" style="text-decoration: underline" 
 											[ngClass]="{'active': subItem === i}" (click)="gotocategory(img.id)"
-											(click)="viewsubcat(img.id,i)" (mouseover)="viewsubcat(img.id,i)"
+											(click)="viewsubcat(img.id,i)"  (mouseover)="viewsubcat(img.id,i)"
 											(mouseout)="viewsubcatmoustout()">
 											<a id="listactive" style="text-decoration:none;margin-bottom: 0px;">
-												<span>{{img.name}}</span>
+												<span id="activename">{{img.name}}</span>
 											</a>
 											<i *ngIf="img.number_of_children!=0"
 												style="float: right;margin-top: 6px;color:#ce2127;"
@@ -222,8 +222,7 @@
 										</span>
 									</li>
 								</ul>
-							</li>
-							
+							</li>							
 							<li class="lii " style="padding-left: 10px;" id="lii_two">		
 								<ul class="mega-sub-menu " >
 									<li style="margin-top: 10px;padding-left: 4px;"
@@ -242,11 +241,9 @@
 												[ngClass]="{'active': subItem1 === i}"></i>
 										</span>
 									</li>
+									
 								</ul>
-
-								
 							</li>
-
 							<li class="lii" *ngIf="Subcat2?.length!=0" style="padding-left: 10px;"
 							  id="lii_three">
 								<ul class="mega-sub-menu">
