@@ -265,13 +265,26 @@
 
                                                 <span class="a-size-small">
                                                     <div class="a-row a-size-small"
-                                                        style="color: #ce2127;font-size:0.7rem;">
-                                                        <span style="color: #565959">Price </span>{{pro.price}}
+                                                        style="color: #ce2127;font-size:0.8rem;">
+                                                        <span style="color: #565959 ;font-size:0.7rem;">Price </span>{{pro.price}}
+                                                        <span *ngIf="pro.price !== pro.mrp" class="main-price discounted"
+                                                        style="text-decoration:line-through;color: #da2f34;font-size:0.7rem;"> {{pro.mrp}}</span>
+                                                    </div>
+                                                    <div class="a-row a-size-small" *ngIf="pro.discount !== 'Rs 0.00'"
+                                                        style="color: #0a8615;font-size:0.7rem;">
+                                                        <span style="color: #565959">Discount </span>{{pro.discount}}
                                                     </div>
                                                     <div class="a-row a-size-small"
                                                         style="color: #3b3b3b;font-size:0.7rem;">
                                                         <span style="color: #565959">Quantity </span>{{pro.quantity}}
                                                     </div>
+
+                                                    <div class="a-row a-size-small" *ngIf="pro.variation"
+                                                    style="color: #3b3b3b;font-size:0.7rem;">
+                                                    <span style="color: #565959">
+                                                    </span>{{pro.variation}} pack of 1
+                                                </div>
+                                                
                                                     <div class="a-row a-size-small"
                                                         style="color: #3b3b3b;font-size:0.7rem;">
                                                         <span style="color: #565959">

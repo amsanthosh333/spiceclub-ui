@@ -219,6 +219,9 @@ export class CheckoutComponent implements OnInit {
   viewcart() {
     this.request.fetchusercart(this.userid, this.buynowvalue).subscribe((response: any) => {
       this.Cart = response;
+      if(this.Cart.length==0){
+         this.router.navigate(['/home']);
+      }
       this.cartloader = false;
       this.owneriid = this.Cart[0]?.owner_id;
       setTimeout(() => {
