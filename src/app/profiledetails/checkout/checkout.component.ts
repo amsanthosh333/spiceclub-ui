@@ -181,7 +181,7 @@ export class CheckoutComponent implements OnInit {
     else {
       this.buynowvalue = this.buyvalue;
       // this.viewsummery();
-      this.viewcart();
+      this.viewcartbuynow();
       this.paymettype();
       this.viewcountry();
       this.viewstate();
@@ -222,6 +222,17 @@ export class CheckoutComponent implements OnInit {
       if(this.Cart.length==0){
          this.router.navigate(['/home']);
       }
+      this.cartloader = false;
+      this.owneriid = this.Cart[0]?.owner_id;
+      setTimeout(() => {
+        this.loadingIndicator = false;
+      }, 500);
+    });
+
+  }
+  viewcartbuynow() {
+    this.request.fetchusercart(this.userid, this.buynowvalue).subscribe((response: any) => {
+      this.Cart = response;
       this.cartloader = false;
       this.owneriid = this.Cart[0]?.owner_id;
       setTimeout(() => {
