@@ -241,6 +241,7 @@ export class HomeComponent implements OnInit {
   filename1: any;
   gstImageBase64: any;
   isImageSaved!: boolean;
+  SliderUrl: any;
   
 
 
@@ -627,19 +628,6 @@ this.viewbestsellpro();
     this.request.getslider().subscribe((response: any) => {
       this.Slider = response.data;
       this.photoo = this.Slider.map((item: any) => 'https://neophroncrm.com/spiceclubnew/public/' + item.photo); 
-      this.sliderData=[
-        {photo: 'uploads/all/enCSntCC8EDj5CM074qgxvHxAolNjJc7oZaGRFOZ.jpg', redirecturl:'cart'},
-         
-        {photo: 'uploads/all/HLqzkiVPCtLdAK9TpDGzkJtvWKyB6UHVqNTX2Xz6.jpg',redirecturl:'wishlist'}
-        , 
-        {photo: 'uploads/all/5b9gt3Th8KtyCAHEQxaFb3IxyRrg7Y6w4dUZMaRI.jpg',redirecturl:'flash'}
-       ,
-        {photo: 'uploads/all/g6LFGMTezuc338PwnQWDBXmQpUJhKGXjvpDuS4hG.jpg',redirecturl:'combo'}
-       ,
-        {photo: 'uploads/all/Luf3f0zAQZB9u1ZDeEj5sWOOqV9INCbY8Ntl3TRz.jpg',redirecturl:'cart'}
-       ,
-        {photo: 'uploads/all/Banners/ei61XpXpZ5yJXHpSWFksH6MzDsKuzToTREXLyraT.jpg',redirecturl:'cart'}
-      ]
     
       this.loader1 = false;
       this.mainloader = false;
@@ -647,9 +635,22 @@ this.viewbestsellpro();
         this.loadingIndicator = false;
       }, 500);
     });
+    this.request.getsliderUrl().subscribe((response: any) => {
+      this.SliderUrl = response.data; 
+    this.sliderData = this.SliderUrl.map((item: any) => {
+        return {
+          redirecturl: item.url // Add your desired description here
+        };
+      });
+    });
   }
   mainbannerClick(i:any){
   var mainredirect=  this.sliderData[i].redirecturl
+  if(mainredirect){
+  window.location.href= mainredirect;
+  //this.router.navigate([mainredirect]);
+  }
+
   }
   viewtopcategory() {
     this.request.gettopcat().subscribe((response: any) => {

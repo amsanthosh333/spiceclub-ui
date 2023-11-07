@@ -116,6 +116,12 @@ export class RequestService {
     this.url = `${this.endPoint1}/sliders`;
     return this.http.get(this.url);
   }
+  
+  public getsliderUrl() {
+    this.url = `${this.endPoint1}/slidersurl`;
+    return this.http.get(this.url);
+  }
+
   public getfuturedcat() {
     this.url = `${this.endPoint1}/categories/featured`;
     return this.http.get(this.url);
