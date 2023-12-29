@@ -559,7 +559,7 @@ input::placeholder {
 @media (min-width: 992px) {
   :host ::ng-deep .active.carousel-item
 {
-  width:100%; height: 620px;
+  width:100%; 
 
 }
 
@@ -811,8 +811,8 @@ input::placeholder {
     padding: 0px;
     height: auto;
     margin: 10px;
-    margin-left: 22px;
-    width: 88%;
+    margin-left: 13px;
+    width: 92%;
 }
 .carousall9 { 
   
@@ -1030,7 +1030,31 @@ input::placeholder {
     margin-top: 10px;
   }
 }
+/* web */
+@media (min-width: 1200px) {
+  :host ::ng-deep .active.carousel-item
+{
+  width:100%;
 
+}
+.todaybanner {
+  /* height: 340px !important; */
+  height: 100% !important;
+ }
+
+}
+@media (min-width: 1400px) {
+  :host ::ng-deep .active.carousel-item
+{
+  width:100%;
+
+}
+.todaybanner {
+  /* height: 380px !important; */
+  height: 100% !important ;
+ }
+
+}
 body {
   background-color: #93939338;
   ;
@@ -1336,7 +1360,7 @@ a.next.icons.next-icon {
     max-width: 98%;
   }
   .todaybanner {
-   height: 300px;
+   /* height: 380px; */
   }
 
 }
@@ -1518,7 +1542,7 @@ input[type=number] {
   }
 
   .col-3 {
-    width: 25%;
+    width: 24%;
   }
 }
 
@@ -1581,12 +1605,13 @@ input[type=number] {
     width: 100%;
   }
   .todaybanner {
-    height: 280px;
+    /* height: 280px; */
+    height: 80% !important ;
   }
 
   .todaybanner img {
     height: 100%;
-     object-fit: contain; 
+    /* object-fit: cover; */
     width: 100%;
   }
 
@@ -1638,10 +1663,10 @@ input[type=number] {
     padding: 0px;
     height: auto;
     margin: 10px;
-    margin-left: 40px;
+    margin-left: 3%;
     width: 93%;
     position: absolute;
-    top: 51%;
+    top: 50%;
 
   }
   .carousall9 {
