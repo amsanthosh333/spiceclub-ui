@@ -813,6 +813,9 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 	}
 /* mobile */
 @media (max-width : 995px) {
+	#marquetag{
+		height: 10px;
+	}
 	
 	.infodiv{
 		display: flex;background-color: white; height: 1rem;
@@ -913,7 +916,7 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 	#marquetag span{
 		background: #000000;
 		color: white;
-		font-size: 0.5rem;
+		font-size: 0.35rem;
 		position: absolute;
 		
 	
@@ -971,10 +974,9 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 
 	#marquetag span{
 		background:#000000; color: white;
-		font-size: 0.7rem;
+		font-size: 0.6rem;
 		position: absolute;
 		right: 16%;
-		top:1px
 	}
 	.infodiv{
 		width:25%;
@@ -1060,13 +1062,19 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 
 }
 @media (min-width: 1200px){
+	#marquetag span{
+		background:#000000; color: white;
+		font-size: 0.6rem;
+		position: absolute;
+		right: 16%;
+	}
 	#headerbar{
 		color: rgb(255, 255, 255);
 		font-size: 0.8rem;
 		font-weight: 600;
 	}
 	#marquetag{
-		height: 19px;
+		height: 15px;
 	}
 	#main2{
 		display:none;
@@ -1097,13 +1105,19 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 }
 
 @media (min-width: 1350px){
+	#marquetag span{
+		background:#000000; color: white;
+		font-size: 0.6rem;
+		position: absolute;
+		right: 16%;
+	}
 	#headerbar{
 		color: rgb(255, 255, 255);
 		font-size: 0.8rem;
 		font-weight: 600;
 	}
 	#marquetag{
-		height: 19px;
+		height: 16px;
 	}
 	#main2{
 		display:none;
@@ -1131,6 +1145,12 @@ nav.site-nav>ul>li.menu-item-has-children:hover nav.site-nav>ul>li ul.sub-menu {
 	
 	}
 	@media (min-width: 1500px){
+		#marquetag span{
+			background:#000000; color: white;
+			font-size: 0.75rem;
+			position: absolute;
+			right: 16%;
+		}
 		#marquetag{
 			height: 19px;
 		}
