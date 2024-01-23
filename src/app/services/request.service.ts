@@ -1096,7 +1096,12 @@ export class RequestService {
     return this.http.get(this.url);
   }
   public fetchlinkedurl() {
-    this.url = `${this.endPoint1}/social/getlink/twitter`;
+    this.url = `${this.endPoint1}/social/getlink/linkedin`;
+    return this.http.get(this.url);
+  }
+  
+  public fetchpinteresturl() {
+    this.url = `${this.endPoint1}/social/getlink/pinterest`;
     return this.http.get(this.url);
   }
 

@@ -28,6 +28,7 @@ export class FooterComponent implements OnInit {
   accesstoken: any;
   tokentype: any; Proce: any;
   currentdetail: User;
+  pinteresturl: any;
   
 
   constructor(private router: Router,private modalService: NgbModal,private fb: FormBuilder,
@@ -63,6 +64,7 @@ export class FooterComponent implements OnInit {
       this.getyoutubeurl();
       // this.getpayment();
       this.getlinkedurl();
+      this.getpinteresturl();
   
     }, 5000);
    
@@ -139,6 +141,13 @@ export class FooterComponent implements OnInit {
     this.request.fetchlinkedurl().subscribe((res: any) => {
       this.linkedinurl = res.link;
       // console.log("this.instagramurl", this.instagramurl);
+    });
+  }
+  getpinteresturl() {
+   // this.pinteresturl = null;
+    this.request.fetchpinteresturl().subscribe((res: any) => {
+      this.pinteresturl = res.link;
+     
     });
   }
 }
