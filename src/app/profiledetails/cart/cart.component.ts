@@ -502,32 +502,38 @@ export class CartComponent implements OnInit {
     // });
   }
   applycoupan(form: FormGroup) {
-    let edata2 = {
-      user_id: this.userid,
-      owner_id: this.owneriid,
-      coupon_code: form.value.coupan,
+    if(!this.userid){
+      this.toastr.error('Please login to apply coupon', '');
     }
-
-    this.request.appycoupan(edata2).subscribe((res: any) => {
-      if (res.message == 'Coupon Applied') {
-        this.removecou = true;
-        this.applycou = false;
-        this.toastr.success('Coupon Applied', '');
-        
-        this.updatecart();
+    else{
+      let edata2 = {
+        user_id: this.userid,
+        owner_id: this.owneriid,
+        coupon_code: form.value.coupan,
       }
-      else if (res.message == 'Invalid coupon code!') {
-        this.toastr.error('Invalid coupon code!', '');
-
-      }
-      else {
-        this.toastr.error(res.message);
-      }
-    }, (error: any) => {
-      this.toastr.error(error);
-      console.log("error", error);
-
-    });
+  
+      this.request.appycoupan(edata2).subscribe((res: any) => {
+        if (res.message == 'Coupon Applied') {
+          this.removecou = true;
+          this.applycou = false;
+          this.toastr.success('Coupon Applied', '');
+          
+          this.updatecart();
+        }
+        else if (res.message == 'Invalid coupon code!') {
+          this.toastr.error('Invalid coupon code!', '');
+  
+        }
+        else {
+          this.toastr.error(res.message);
+        }
+      }, (error: any) => {
+        this.toastr.error(error);
+        console.log("error", error);
+  
+      });
+  
+    }
 
   }
   removecoupon() {
