@@ -134,7 +134,7 @@
 					
 						<div class="cart-calculation-area" *ngIf="(Cart?.length!==0)" style="background-color: white;">
 							<p class="mb-0 pb-10" style="font-size: 0.9rem;font-weight: 600;color:rgb(199, 15, 15)">Available Coupons for you</p>
-							<span id="coupondiv" *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan"
+							<span id="coupondiv" *ngFor="let a of availcoupan"><input type="radio" name="availcoupan"
 									value="{{a.code}}" (change)="changecoupan($event)">
 								<p style="font-size: 0.8rem;display: contents;"> {{a.code}}</p>
 							</span>

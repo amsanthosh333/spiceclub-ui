@@ -262,7 +262,7 @@
 					<div class="col-lg-4 col-sm-12">
 						<p class="headline" >Apply Coupons</p>
 						<p class="mb-0" style="font-size: 0.8rem;font-weight: 500;">Available coupons for you</p>
-						<span *ngFor="let a of availcoupan"><input type="checkbox" name="availcoupan" value="{{a.code}}"
+						<span *ngFor="let a of availcoupan"><input type="radio" name="availcoupan" value="{{a.code}}"
 								(change)="changecoupan($event)" style="vertical-align: middle;">
 							<p style="font-size: 0.8rem;display: contents;"> {{a.code}}</p>
 						</span>
